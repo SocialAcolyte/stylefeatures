@@ -1,0 +1,91 @@
+/* ─── Mimosa toggle: a switch that is a frond of Mimosa pudica (mimosa-toggle.js) ───
+   Namespace .mt-. Without JS, input[data-mimosa-toggle] is a plain pill switch
+   (a role=switch checkbox drawn with gradients, no pseudo-elements needed).
+   With JS the input is wrapped in .mt, made transparent and laid over the box,
+   so the label, Space, forms and screen readers all still talk to the real
+   checkbox; a canvas behind it draws the frond and its shadow, bleeding past
+   the box like a sprig lying across a settings row.
+
+   Theme on the wrapper (.mt) or any parent; the defaults are fallbacks,
+   so a value set higher up the page inherits:
+     --mt-w, --mt-h      compact box size (the hit area)
+     --mt-leaf           upper (adaxial) leaflet green
+     --mt-under          lower (abaxial) leaflet green, paler
+     --mt-glow           light coming through a leaflet from behind
+     --mt-stalk          petiole and rachis green
+     --mt-pulvinus       colour of the swollen motor joints
+     --mt-stem           stem colour (reddish, as in life)
+     --mt-shadow         shadow colour on the page
+     --mt-ring           focus ring colour                                       */
+
+/* ── no JS: a plain switch ── */
+input[type="checkbox"][data-mimosa-toggle] {
+  --mt-plain-off: var(--rule, #cfcac0);
+  --mt-on: #4f7a35;
+  -webkit-appearance: none; appearance: none;
+  position: relative; display: inline-block; vertical-align: middle; flex: none;
+  width: 42px; height: 24px; margin: 0; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--ink-3, #8a857d);
+  background: radial-gradient(circle at 11px 50%, var(--paper, #f3f0e8) 0 7px, transparent 7.6px), var(--mt-plain-off);
+  transition: background-color .25s ease;
+}
+input[type="checkbox"][data-mimosa-toggle]:checked {
+  background: radial-gradient(circle at calc(100% - 11px) 50%, var(--paper, #f3f0e8) 0 7px, transparent 7.6px), var(--mt-on);
+  border-color: var(--mt-on);
+}
+input[type="checkbox"][data-mimosa-toggle]:focus-visible { outline: 1.5px solid var(--ink, #141312); outline-offset: 3px; }
+input[type="checkbox"][data-mimosa-toggle]:disabled { opacity: .45; cursor: not-allowed; }
+
+/* ── enhanced ── */
+.mt {
+  /* colours are read by the script with these same defaults: --mt-leaf #335c22,
+     --mt-under #a3b98e, --mt-glow #b4cf54, --mt-stalk #6f8a3c,
+     --mt-pulvinus #9a6a3e, --mt-stem #7a4532, --mt-shadow #2a2216 */
+  position: relative; display: inline-block; vertical-align: middle; flex: none;
+  width: var(--mt-w, 92px); height: var(--mt-h, 40px);
+  -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+}
+.mt-canvas {
+  position: absolute; pointer-events: none; display: block;
+  /* bleed: the frond and its shadow overhang the box; JS sets the exact inset */
+  left: -20%; top: -60%; width: 140%; height: 220%;
+}
+.mt > input[type="checkbox"][data-mimosa-toggle] {
+  position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%;
+  margin: 0; padding: 0; border: 0; border-radius: 12px; opacity: 0;
+  background: none; cursor: pointer; touch-action: manipulation;
+}
+.mt > input[type="checkbox"][data-mimosa-toggle]:focus-visible { outline: none; }
+/* the track: the switch's footprint, a pale pill the sprig lies across */
+.mt:not(.mt--hero)::before {
+  content: ""; position: absolute; inset: 0; border-radius: 999px; pointer-events: none;
+  background: var(--mt-track, #e5e6d8); border: 1px solid var(--mt-track-line, var(--rule, #cfcac0));
+  transition: background-color .6s ease;
+}
+.mt.is-off:not(.mt--hero)::before { background: var(--mt-track-off, transparent); }
+.mt::after {
+  content: ""; position: absolute; inset: -5px -6px; border-radius: 14px; pointer-events: none;
+  outline: 1.5px solid var(--mt-ring, var(--ink, #141312)); outline-offset: 0; opacity: 0; transition: opacity .2s ease;
+}
+.mt.is-focus::after { opacity: 1; }
+.mt.is-disabled .mt-canvas { filter: grayscale(.75) contrast(.85); opacity: .55; }
+.mt.is-disabled > input { cursor: not-allowed; }
+
+/* the large frond: a plate the frond lies across */
+.mt--hero {
+  width: 100%; height: auto;
+  display: block; aspect-ratio: var(--mt-aspect, 5 / 4);
+  border-radius: 0;
+}
+.mt--hero .mt-canvas { left: 0; top: 0; width: 100%; height: 100%; }
+.mt--hero::after { inset: 6px; border-radius: 4px; }
+.mt--hero > input[type="checkbox"][data-mimosa-toggle] { border-radius: 0; }
+
+/* decorative (no input): only the frond, which you may brush */
+.mt--still { touch-action: pan-y; cursor: default; }
+.mt--still .mt-canvas { pointer-events: none; }
+
+@media (forced-colors: active) {
+  .mt > input[type="checkbox"][data-mimosa-toggle] { opacity: 1; appearance: auto; -webkit-appearance: auto; width: 20px; height: 20px; inset: auto 0 0 auto; }
+}

@@ -1,0 +1,31 @@
+[
+ {
+  "file": "assets/sensitive-plant-edgar-1808.webp",
+  "title": "The Sensitive Plant",
+  "artist": "Maria Edgar",
+  "date": "1808",
+  "medium": "Watercolor and graphite on off-white wove paper",
+  "source": "The Metropolitan Museum of Art, object 10838, accession 11.60.179 (Bequest of Maria P. James, 1910)",
+  "url": "https://www.metmuseum.org/art/collection/search/10838",
+  "image": "https://images.metmuseum.org/CRDImages/ad/original/ap11.60.179.jpg",
+  "license": "CC0 (The Metropolitan Museum of Art, Open Access)",
+  "note": "Resized from 1576 x 2037 to 900px wide, webp q82. Shown in the demo only; the component uses no images."
+ },
+ {
+  "file": "assets/sounds/rustle.wav, assets/sounds/rustle-soft.wav",
+  "title": "Leaflet rustle (full and weak fold)",
+  "source": "Synthesised for Taste in numpy: band-passed noise grains (2.2 to 9 kHz) over a soft air bed, crowded toward the start like the arriving wave",
+  "license": "Original, made for this component (no recording)",
+  "note": "Script kept in the builder's scratch folder; 44.1 kHz mono 16-bit.",
+  "date": "2026"
+ },
+ {
+  "file": "(not shipped) mj/mimosa-toggle/b0201920_0..3.png",
+  "title": "Mimosa pudica frond, specimen photograph",
+  "source": "Generated with Midjourney for Taste",
+  "prompt": "a single fresh frond of Mimosa pudica sensitive plant, bipinnate leaf with four pinnae of many small paired leaflets fully open, photographed flat from directly above on plain white paper, botanical specimen photograph, crisp even light, isolated --ar 1:1 --style raw",
+  "license": "Generated for the owner",
+  "note": "Used only as a colour reference: leaflet greens were sampled from its pixels (10th/50th/90th percentile of leaf pixels, roughly #2e4c1d, #4b6a1d, #748f3a) and the reddish pulvini and paler rachis were matched by eye. Its leaf architecture is wrong (eight pinnae; the real plant has one or two pairs held digitately at the petiole tip), so none of its geometry or pixels is used.",
+  "date": "2026"
+ }
+]
