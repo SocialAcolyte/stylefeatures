@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "wing-roar",
+      "file": "assets/sounds/wing-roar.wav",
+      "on": "event:murmuration:scatter",
+      "target": "[data-murmuration]",
+      "volume": 0.45,
+      "vary": 1.5,
+      "cooldown": 900,
+      "credit": "Synthesised for this component (numpy): 260 overlapping bursts of ~12 Hz wingbeats over pink noise, band-passed 300-4200 Hz. No recording."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "tick",
+      "file": "assets/sounds/tick.mp3",
+      "on": "event:lotus-leaf:land",
+      "target": "body",
+      "volume": 0.08,
+      "vary": 2,
+      "cooldown": 120,
+      "source": {
+        "kind": "file",
+        "file": "library/sounds/originals/water-drops-bowl.ogg",
+        "clip": "1.91-2.21 s of the original, raised about 7 semitones"
+      },
+      "credit": "\"Water drops dripping\" by ZooFari, CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:Water_drops_dripping.ogg"
+    },
+    {
+      "name": "runoff",
+      "file": "assets/sounds/runoff.mp3",
+      "on": "event:lotus-leaf:runoff",
+      "target": "body",
+      "volume": 0.14,
+      "vary": 1.5,
+      "cooldown": 200,
+      "source": {
+        "kind": "file",
+        "file": "library/sounds/originals/water-drops-bowl.ogg",
+        "clip": "5.41-5.91 s of the original"
+      },
+      "credit": "\"Water drops dripping\" by ZooFari, CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:Water_drops_dripping.ogg"
+    }
+  ]
+}

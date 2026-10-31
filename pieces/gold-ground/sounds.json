@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "glint",
+      "file": "assets/sounds/glint.wav",
+      "on": "enter",
+      "target": "[data-gold-ground]",
+      "volume": 0.25,
+      "vary": 1.0,
+      "source": {
+        "kind": "bank",
+        "id": "pro_shimmer/m3",
+        "seed": 7,
+        "pitch_st": 0,
+        "dur_x": 1.0
+      },
+      "credit": "earshot sound bank pro_shimmer/m3 (seed 7), synthesized in code: github.com/Leonxlnx/earshot (MIT), no recording"
+    }
+  ]
+}

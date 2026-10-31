@@ -1,0 +1,14 @@
+[
+ {
+  "file": "pomegranate.webp",
+  "also": ["pomegranate-bare.webp", "pomegranate-flat.webp", "pomegranate-map.webp", "pomegranate.json"],
+  "title": "Pomegranate with blue morpho butterfly (plate 9), from Metamorphosis insectorum Surinamensium",
+  "artist": "Maria Sibylla Merian (design); engraved by Joseph Mulder; hand-coloured",
+  "date": "1705 (Amsterdam, Dutch edition)",
+  "source": "https://archive.org/details/Metamorphosisin00Meri",
+  "source_also": "https://www.biodiversitylibrary.org/item/129308",
+  "holder": "Smithsonian Libraries, digitised for the Biodiversity Heritage Library (scan leaf n35)",
+  "license": "Public domain",
+  "notes": "Cropped to the sheet around the plate mark and white-balanced (the scan reads pink). The -bare (uncoloured impression), -flat and -map files are derived from it by the processing described in the README."
+ }
+]

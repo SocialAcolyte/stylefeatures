@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>raking-light</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..600;1,300..600&family=EB+Garamond:ital,wght@0,400..600;1,400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="raking-light.css"><style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--accent:#c96f4a;
+    --serif:'Cormorant Garamond',Georgia,serif;--text:'EB Garamond',Georgia,serif;--gutter:clamp(18px,4vw,40px)}
+  *{box-sizing:border-box}
+  html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--text);font-size:clamp(18px,1.25vw,20.5px);line-height:1.62;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;font-kerning:normal;hanging-punctuation:first}
+  .col{max-width:33em;margin:0 auto;padding:0 var(--gutter)}
+  h1{font-family:var(--serif);font-weight:300;font-size:clamp(46px,7vw,92px);line-height:.98;letter-spacing:-.012em;margin:0 0 .7em;color:var(--ink)}
+  h1 em{font-style:italic;font-weight:300}
+  header.col{padding-top:clamp(64px,15vh,160px)}
+  p{margin:0 0 1.05em;hyphens:auto;-webkit-hyphens:auto;text-wrap:pretty}
+  p:first-of-type::first-line{font-variant:small-caps;letter-spacing:.04em}
+
+  /* the round tablet lies in the text; the words keep clear of its outline */
+  .tablet{float:left;width:min(56%,290px);margin:.35em 1.4em .6em -5.5em;
+    shape-outside:circle(49%) border-box;shape-margin:1.1em}
+  .fragment{float:right;width:min(72%,390px);margin:.6em -6.5em .8em 1.2em;
+    shape-outside:polygon(100% 0%, 54% 6%, 42% 12%, 36% 19%, 33% 25%, 27% 31%, 21% 37%, 16% 44%, 10% 50%, 3% 56%, 2% 62%, 6% 69%, 12% 75%, 5% 81%, 4% 87%, 11% 94%, 30% 100%, 100% 100%) border-box;shape-margin:.9em}
+  .clear{clear:both}
+
+  /* the relief: a band of wall right across the page */
+  .band{width:100%;margin:clamp(48px,8vh,96px) 0}
+  .band>img{width:100%;height:auto}
+  footer{height:22vh}
+
+  @media (max-width:1100px){ .tablet{margin-left:0} .fragment{margin-right:0} }
+  @media (max-width:640px){
+    .tablet{float:none;width:72%;margin:1.6em auto 1.9em}
+    .fragment{float:none;width:92%;margin:1.8em auto 1.9em}
+    .band{height:66svh}
+    .band>img{height:100%;object-fit:cover;object-position:71% 50%}
+  }
+</style></head><body>
+
+<header class="col"><h1>By a low <em>lamp</em></h1></header>
+
+<figure class="band" data-raking-light data-kind="surface" data-height="32.33" data-material="stone" data-light="-55 11" data-ambient=".5" data-falloff="4.4"
+        data-normal="assets/nimrud-relief-normal.png" data-albedo="assets/nimrud-relief-albedo.webp">
+  <img src="assets/nimrud-relief.webp" width="2400" height="977" alt="" aria-hidden="true">
+</figure>
+
+<article class="col">
+  <p>The kings of Assyria wrote on their walls. Ashurnasirpal&nbsp;II rebuilt Kalhu on the Tigris, the mound now called Nimrud, and moved his court there around 879&nbsp;BCE. He lined the rooms of his new palace with slabs of gypsum carved in low relief: the king with his bowl and his bow, attendants with daggers and fly-whisks, winged spirits with a bucket of holy water. Across every slab, straight through the robes and the beards, the masons cut the same text: his names and his titles, his wars, the building of the palace, over and over, room after room. Scholars call it the Standard Inscription. It was not put there to be read so much as to be there, like a name woven into the hem of a cloth.</p>
+  <div class="clear"></div>
+</article>
+
+<article class="col">
+  <figure class="tablet" data-raking-light data-height="63.74" data-material="clay"
+          data-normal="assets/round-tablet-normal.png" data-albedo="assets/round-tablet-albedo.webp">
+    <img src="assets/round-tablet.webp" width="956" height="958" alt="" aria-hidden="true">
+  </figure>
+  <p>A scribe in Babylon wrote with a reed. He cut the end square, or nearly, pressed its corner into a pad of damp clay held in the other hand, and lifted it out again. That was a wedge, and the wedge was the whole of the alphabet: every sign was a small cluster of them, upright, lying down, slanting, or a hook made with the corner alone, and a practised hand could set down three or four a second without looking, turning the tablet a little at the end of each line. Children learned it the same way, on round tablets the size of a palm like this one. The teacher wrote a line, the pupil copied it underneath, and the clay, as long as it had not been fired, could always be wetted, smoothed with the thumb and written on again.</p>
+  <p>That is why so much of it is lost, and why so much survives. A tablet dried in the sun is only hard mud, and rain or a damp floor will take it back. The ones that last are very often the ones that burned. When the Medes and the Babylonians sacked Nineveh in 612&nbsp;BCE, the palace fell in on the library of Ashurbanipal, and the fire that ended the Assyrian empire baked thousands of its tablets hard under the rubble, where Layard&rsquo;s diggers found them in the winter of 1850. Ebla, Mari, Ugarit: the archives we can read are, more often than not, the ones somebody&rsquo;s enemies set alight.</p>
+  <div class="clear"></div>
+</article>
+
+<article class="col">
+  <figure class="fragment" data-raking-light data-height="53.96" data-material="clay" data-light="-40 13"
+          data-normal="assets/omen-fragment-normal.png" data-albedo="assets/omen-fragment-albedo.webp">
+    <img src="assets/omen-fragment.webp" width="1150" height="728" alt="" aria-hidden="true">
+  </figure>
+  <p>Under the soft, even light of a museum, worn carving goes flat. A wedge is a small three-sided pit, and in light from everywhere at once each face is as bright as the next, so the sign dissolves into the grain of the clay. The people who read these things carry a lamp, or wait for the sun to go low, and hold the light nearly level with the surface and move it. Now one face of every wedge catches the light and another falls into black; each sign becomes a little constellation of bright and dark triangles, and a line that could not be seen a moment ago can be read from across the room. Turn the lamp and other marks come up. A stroke that runs along the light disappears and a stroke across it leaps out, so the reader turns it again, and again, and writes down what all the lights agree on.</p>
+  <p>Reflectance transformation imaging does the same thing with a camera. The tablet is fixed beneath it and photographed forty or fifty times, each time lit by a flash from a different point on an imaginary dome above, and the software works out, for every pixel, how its brightness changes as the light moves, and so how the surface there is turned. Afterwards anyone can sit at a screen and draw a virtual lamp across a tablet in London or Philadelphia, often more legibly than in the hand, and signs that defeated generations of readers have come up out of the clay this way. This page does it with one photograph and a good deal of guesswork: the shape of each object was estimated from the way the studio light fell on it, then the studio light was taken away, and your hand put in its place.</p>
+  <div class="clear"></div>
+</article>
+<footer></footer>
+
+<script type="module" src="raking-light.js"></script>
+</body></html>

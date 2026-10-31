@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>koi-pond</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="koi-pond.css"><style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;--serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:clamp(19px,1.35vw,21px);line-height:1.55;overflow-x:hidden}
+  .essay{max-width:34em;margin:0 auto;padding:0 var(--gutter)}
+  .head{padding:clamp(56px,12svh,128px) var(--gutter) clamp(8px,2svh,20px);text-align:center}
+  h1{margin:0;font-weight:400;font-size:clamp(44px,6.4vw,84px);line-height:1;letter-spacing:-.01em}
+  h1 em{font-style:italic;font-weight:300}
+  .kicker{margin:0 0 18px;font-family:var(--sans);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  p{margin:0 0 1.05em;hyphens:auto;-webkit-hyphens:auto}
+  .lede{font-size:1.12em;color:var(--ink-2)}
+  .pond{width:100%;height:clamp(520px,80svh,780px);margin:clamp(6px,2svh,24px) 0 0}
+  .hint{margin:0 0 clamp(40px,8svh,72px);text-align:center;font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+  .end{height:22svh}
+  @media (max-width:600px){ .pond{height:min(74svh,640px)} }
+</style></head><body>
+<main>
+  <header class="head">
+    <p class="kicker">Nishikigoi</p>
+    <h1>The <em>brocade</em> carp</h1>
+  </header>
+  <section class="essay">
+    <p class="lede">The first koi were food. In the mountain villages above Ojiya, in Niigata, the snow comes in November and lies three and four metres deep until April, and for the winter the farmers kept black carp in the ponds that fed their terraced rice, to eat when the roads were shut.</p>
+  </section>
+
+  <figure class="pond" data-koi-pond>
+    <img src="assets/koi-pond-still.webp" alt="" width="1600" height="800">
+  </figure>
+
+  <section class="essay">
+    <p>Now and then one of those carp came out of the egg with a patch of red on it, or a white belly, and somebody kept it instead of eating it, and paired it the next spring with another odd one. That went on quietly for most of the nineteenth century, village to village, in ponds no bigger than a room. By the 1880s there were fish white as rice paper with red laid over the back like lacquer, the kohaku. Fish with spots of ink on the white and the red came in the 1910s, and after the war plain gold ones that take the light like a coin. They were shown in Tokyo in 1914, and after that every garden that could afford a pond wanted them. The villages still breed them, and still bring the fish indoors for the winter.</p>
+    <p>A koi grows slowly and lives a long time. Thirty or forty years is ordinary for a fish that is looked after, and the old ones grow as long as a man's arm and become tame enough to take food from the hand. The oldest on record was a scarlet fish called Hanako, kept in a pond in the hills of Gifu. When she died in 1977 a scientist took two of her scales and counted the rings laid down in them, a ring for each winter, like the rings of a tree, and made her two hundred and twenty-six years old. Nobody has been able to check it. But she had been passed down through a family for as long as anyone remembered, and fed by each of them in turn.</p>
+    <p>In China the carp swims up the Yellow River every spring to the gorge called the Dragon Gate, where the water comes down over the rocks so hard that almost none can climb it. The one that leaps the falls turns into a dragon. Scholars sitting the imperial examinations were said to be leaping the Dragon Gate, and in Japan the carp became the fish of boys and of courage: on the fifth of May the families with sons fly carp of cloth and paper from poles, and the wind fills their mouths so that they swim in the air. Painters drew them climbing waterfalls for a thousand years. In a garden pond they do nothing so dramatic. They cruise along the edge and back through the middle, hang in the shade at noon, and come up slowly, as if they had all the time in the world, when a crumb lands on the water.</p>
+  </section>
+  <div class="end"></div>
+</main>
+<script type="module" src="koi-pond.js"></script>
+<script type="module" src="sound.js"></script>
+</body></html>

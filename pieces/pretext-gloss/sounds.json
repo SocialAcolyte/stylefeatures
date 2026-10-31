@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "pin",
+      "file": "assets/sounds/pin.wav",
+      "on": "click",
+      "target": "[data-gloss]",
+      "volume": 0.25,
+      "vary": 1.0,
+      "source": {
+        "kind": "bank",
+        "id": "pro_click/soft",
+        "seed": 267885885,
+        "pitch_st": 0,
+        "dur_x": 1.0
+      },
+      "credit": "earshot sound bank pro_click/soft (seed 267885885), synthesized in code: github.com/Leonxlnx/earshot (MIT), no recording"
+    },
+    {
+      "name": "page-width",
+      "file": "assets/sounds/page-width.wav",
+      "on": "drag",
+      "target": ".grip",
+      "volume": 0.2,
+      "vary": 1.5,
+      "source": {
+        "kind": "bank",
+        "id": "swipe/paper",
+        "seed": 1264633460,
+        "pitch_st": 0,
+        "dur_x": 1.0
+      },
+      "credit": "earshot sound bank swipe/paper (seed 1264633460), synthesized in code: github.com/Leonxlnx/earshot (MIT), no recording"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>crt-ident</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="crt-ident.css"><style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;--serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%;background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:20px;max-width:1120px;margin:0 auto;padding:18px var(--gutter)}
+  .top .home{display:block;width:76px;border-radius:3px;outline-offset:4px;--ci-radius:3px}
+  .top .home.is-live{box-shadow:0 1px 1px rgba(20,16,10,.2),0 4px 10px -6px rgba(20,16,10,.5)}
+  .top .home:focus-visible{outline:1px solid var(--ink-3)}
+  .top .home:not(.is-live) svg{display:block;width:76px;height:auto}
+  .top nav{display:flex;gap:clamp(14px,3vw,28px);font:500 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase}
+  .top nav a{color:var(--ink-3);text-decoration:none}
+  .top nav a:hover,.top nav a:focus-visible{color:var(--ink-2)}
+  .prose{max-width:33em;margin:0 auto;padding:0 var(--gutter);font-size:clamp(19px,1.5vw,22px);line-height:1.55;font-weight:500;color:var(--ink-2);text-wrap:pretty;hyphens:auto}
+  .prose p{margin:0 0 1.1em}
+  .lead{padding-top:18svh;padding-bottom:10svh}
+  .set{padding:clamp(24px,6svh,64px) var(--gutter) clamp(48px,10svh,104px)}
+  .set > [data-crt-ident]{margin:0 auto}
+  .hero{width:min(100%,1040px,calc(84svh * 4 / 3))}
+  .arcade{width:min(100%,560px)}
+  /* without JS the logo is just the logo, on the paper */
+  .hero > svg,.arcade > svg{display:block;width:min(100%,520px);height:auto;margin:0 auto}
+  .end{padding-top:4svh;padding-bottom:30svh}
+  .rule{width:28px;height:1px;background:var(--ink-3);opacity:.5;margin:0 auto 3.2em}
+  @media (max-width:520px){ .set{padding-left:10px;padding-right:10px} .top .home,.top .home svg{width:64px} }
+</style></head><body>
+
+<header class="top">
+  <a class="home" href="#" data-crt-ident data-interactive="off" data-fit=".7"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 491 100" width="491" height="100" role="img" aria-labelledby="tn-t"><title id="tn-t">Taste</title><defs><linearGradient id="tn-g" x1="0" y1="0" x2="0" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffe066"/><stop offset=".3" stop-color="#ff9b38"/><stop offset=".58" stop-color="#f2455a"/><stop offset=".8" stop-color="#b53ca6"/><stop offset="1" stop-color="#4f63ea"/></linearGradient></defs><path fill="url(#tn-g)" fill-rule="evenodd" d="M0,0 h88 v25 h-30.5 v75 h-27 v-75 h-30.5 z M94,100 L129,0 H159 L194,100 H165 L156.25,75 H131.75 L123,100 Z M144,40 L151.88,62.5 H136.12 Z M293,0 H240.25 A31.25,31.25 0 0 0 240.25,62.5 H261.75 A6.25,6.25 0 0 1 261.75,75 H209 V100 H261.75 A31.25,31.25 0 0 0 261.75,37.5 H240.25 A6.25,6.25 0 0 1 240.25,25 H293 Z M308,0 h88 v25 h-30.5 v75 h-27 v-75 h-30.5 z M411,0 h80 v25 h-53 v12.5 h43 v25 h-43 v12.5 h53 v25 h-80 z"/></svg></a>
+  <nav aria-label="Sections"><a href="#">Index</a><a href="#">Notes</a><a href="#">About</a></nav>
+</header>
+
+<main>
+  <div class="prose lead">
+    <p>A colour television of the nineteen-eighties makes its picture with three beams of electrons, one for each of red, green and blue, fired from the neck of the tube at a glass face twenty-five thousand volts away. Coils round the neck swing the beams across the face fifteen thousand seven hundred and thirty-four times a second and down it sixty times, so they write the picture as lines, left to right and top to bottom: five hundred and twenty-five of them a frame in America and Japan, of which about four hundred and eighty carry picture, written as two fields, the second laid between the lines of the first. The signal sets the current in each beam, and the current sets the light. It also sets the size of the spot. A bright line is a fat one, a dark line is thin, and in the dark parts of a picture the black between the lines shows.</p>
+    <p>Between programmes a station showed its ident, and in the eighties more and more of them came out of a computer or a character generator, which did not interlace: it sent the same two hundred and forty-odd lines in every field, so each line was written sixty times a second in the same place and the black between them never filled in. That is the picture below, our wordmark in the warm-to-cool gradient of the period, on a Trinitron of about 1985. It comes on the first time it comes into view. The glass is the switch.</p>
+  </div>
+
+  <section class="set">
+    <div class="hero" data-crt-ident><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 491 100" width="491" height="100" role="img" aria-labelledby="ti-t"><title id="ti-t">Taste</title><defs><linearGradient id="ti-g" x1="0" y1="0" x2="0" y2="100" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#ffe066"/><stop offset=".3" stop-color="#ff9b38"/><stop offset=".58" stop-color="#f2455a"/><stop offset=".8" stop-color="#b53ca6"/><stop offset="1" stop-color="#4f63ea"/></linearGradient></defs><path fill="url(#ti-g)" fill-rule="evenodd" d="M0,0 h88 v25 h-30.5 v75 h-27 v-75 h-30.5 z M94,100 L129,0 H159 L194,100 H165 L156.25,75 H131.75 L123,100 Z M144,40 L151.88,62.5 H136.12 Z M293,0 H240.25 A31.25,31.25 0 0 0 240.25,62.5 H261.75 A6.25,6.25 0 0 1 261.75,75 H209 V100 H261.75 A31.25,31.25 0 0 0 261.75,37.5 H240.25 A6.25,6.25 0 0 1 240.25,25 H293 Z M308,0 h88 v25 h-30.5 v75 h-27 v-75 h-30.5 z M411,0 h80 v25 h-53 v12.5 h43 v25 h-43 v12.5 h53 v25 h-80 z"/></svg></div>
+  </section>
+
+  <div class="prose">
+    <p>Close up there is no picture, only stripes. Every colour tube lays its three phosphors side by side on the inside of the glass and arranges for each beam to reach only its own. The first colour sets, in 1954, did it with a shadow mask, a steel sheet with a hole for every trio of phosphor dots, set just behind the face so that each gun saw only its own dots through the holes, from its own angle. It stopped most of the beam. Sony’s Trinitron, from 1968, fired its three beams from one gun with three cathodes in a row, through a grille of fine vertical wires onto unbroken vertical stripes of phosphor, and stopped far less of it. The wires had to be stretched taut, so the face could curve only from side to side: a Trinitron is a slice of a cylinder, flat from top to bottom. Taut wires ring when they are struck, and the grille is held still by one or two hair-thin wires run across it, which throw a shadow. On a big Trinitron there are two faint horizontal lines on the picture, a third of the way down and a third of the way up, and anyone who owned one can find them still.</p>
+    <p>The phosphors are the ones called P22. The blue is zinc sulphide with a trace of silver, the green zinc sulphide with copper and aluminium, and the red, from the late sixties, europium in yttrium oxysulphide, the rare-earth red that made colour sets bright. The zinc sulphides let go of their light within a fraction of a millisecond of the beam passing. The red glows on for a few milliseconds, so anything bright that moves leaves a faint red edge behind it, more of one lower down the screen, where the beam writes later in the field and the next picture comes sooner. Light from the phosphor also bounces about inside the thick glass of the face and comes out again round bright things as a soft halo, and the face itself is never black: switched off, or showing black, it is the grey of the phosphor seen through tinted glass, with the room reflected in it.</p>
+  </div>
+
+  <section class="set">
+    <div class="arcade" data-crt-ident data-mode="vector"><svg width="491" height="100" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 491 100" role="img" aria-labelledby="tv-t"><title id="tv-t">Taste</title><path fill="#ffd84a" fill-rule="evenodd" d="M0,0 h88 v25 h-30.5 v75 h-27 v-75 h-30.5 z"/><path fill="#3fd0ff" fill-rule="evenodd" d="M94,100 L129,0 H159 L194,100 H165 L156.25,75 H131.75 L123,100 Z M144,40 L151.88,62.5 H136.12 Z"/><path fill="#ff4a8a" fill-rule="evenodd" d="M293,0 H240.25 A31.25,31.25 0 0 0 240.25,62.5 H261.75 A6.25,6.25 0 0 1 261.75,75 H209 V100 H261.75 A31.25,31.25 0 0 0 261.75,37.5 H240.25 A6.25,6.25 0 0 1 240.25,25 H293 Z"/><path fill="#7cff6a" fill-rule="evenodd" d="M308,0 h88 v25 h-30.5 v75 h-27 v-75 h-30.5 z"/><path fill="#ffd84a" fill-rule="evenodd" d="M411,0 h80 v25 h-53 v12.5 h43 v25 h-43 v12.5 h53 v25 h-80 z"/></svg></div>
+  </section>
+
+  <div class="prose end">
+    <div class="rule"></div>
+    <p>Not every tube was scanned. Atari’s <i>Tempest</i>, in 1981, and its <i>Star Wars</i> two years later drew on colour X-Y monitors, where the beam went straight from point to point as a pen plots and drew only the lines it was given, and the rest of the screen was left dark. The light builds up wherever the beam goes slowly, so every corner and the end of every stroke burns brighter than the stroke itself, and a curve, made of short straight pieces, is strung with bright beads.</p>
+    <p>Switch a set off and the scanning stops before the beam does. The tube’s glass bulb, coated inside and out with graphite, is itself a capacitor holding the twenty-five thousand volts, and the cathode is still hot, so for a moment the beam keeps coming with nowhere to go. The vertical sweep dies first and the picture folds into a bright line across the middle; then the line shrinks to a point, which holds all the light of the picture in one place and fades over a second or two as the charge bleeds away. Left to itself it burned a mark into the phosphor, and later sets carried a spot-killer circuit to stop it. When the set comes on again a coil round the front of the tube is given a burst of mains current that dies away in about a second, to wipe the steel of any magnetism it has picked up. While it dies the colours drift across the picture, and settle.</p>
+  </div>
+</main>
+<script type="module" src="crt-ident.js"></script>
+</body></html>

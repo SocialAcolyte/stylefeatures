@@ -1,0 +1,49 @@
+/* ─── shadow-puppet // wayang kulit on a lit cotton screen (shadow-puppet.js)
+   The element is the screen (the kelir). Give it a size; the script draws the
+   lit cloth and the shadow into a canvas that fills it. Without JS or WebGL
+   it is a warm panel with a sharp shadow made from the puppet image itself
+   (`.sp-still`, turned black by a filter: the punched holes stay open). */
+
+.sp {
+  position: relative;
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  /* the screen without the script: lamp-lit cotton, a hot spot high in the middle */
+  background:
+    linear-gradient(#5e1a10 0 4.5%, transparent 4.5% 93.8%, #1d0f0a 93.8% 97%, #4a160e 97%),
+    radial-gradient(ellipse 70% 62% at var(--sp-lamp-x, 50%) var(--sp-lamp-y, 30%),
+      #ffe6b0 0%, #f6c27a 30%, #e2964a 62%, #b8662c 100%);
+  touch-action: pan-y;                 /* a vertical swipe still scrolls the page */
+  -webkit-user-select: none; user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  cursor: grab;
+}
+.sp.is-dragging { cursor: grabbing; }
+.sp:focus-visible { outline: 2px solid var(--accent, #c96f4a); outline-offset: 4px; }
+
+.sp-canvas {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  display: block;
+  pointer-events: none;
+}
+
+/* the no-script shadow: the puppet at the screen, crisp. Match --sp-at,
+   --sp-top and --sp-height to the data- attributes. */
+.sp-still {
+  position: absolute;
+  left: calc(var(--sp-at, .5) * 100%);
+  top: calc(var(--sp-top, .06) * 100%);
+  height: calc(var(--sp-height, 1) * 100%);
+  width: auto; max-width: none;
+  transform: translateX(-50%);
+  filter: brightness(0) opacity(.86);
+  pointer-events: none;
+}
+.sp.is-live .sp-still { visibility: hidden; }
+
+@media print {
+  .sp-canvas { display: none; }
+  .sp.is-live .sp-still { visibility: visible; }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>pretext-rain</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&family=Homemade+Apple&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pretext-rain.css"><style>
+  :root{--paper:#f3f0e8;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box}
+  html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  .prose{max-width:34rem;margin:0 auto;padding:22svh var(--gutter) 14svh;font-size:clamp(19px,2.1vw,22px);line-height:1.55;font-weight:500;color:#2a2724;text-wrap:pretty}
+  .prose.after{padding:12svh var(--gutter) 30svh}
+  .prose p{margin:0}
+  .prose p + p{margin-top:1em}
+  .mark{display:block;margin:0 0 2.2em;font-family:var(--sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-3)}
+</style></head><body>
+
+<div class="prose">
+  <span class="mark" aria-hidden="true">Rain on paper</span>
+  <p>A raindrop is three or four millimetres across, about a twentieth of a teaspoon of water. Let one fall on a sheet of good writing paper and for a moment it stands up as a bead, held off by the size the papermaker put into the sheet; then it sinks, and the water runs out between the fibres as a widening grey disc, quickly at first and then more and more slowly, a little further along the grain than across it. Wet paper is darker and half transparent, because the water has filled the air between the fibres that used to scatter the light back, and the writing on the other side comes through. Iron-gall ink, the old black, would barely move: its iron is bound into the paper. But the blue sold for fountain pens for most of the last century is a dye, made to wash out of a shirt cuff, and the rain takes it up again and carries it along.</p>
+</div>
+
+<section data-pretext-rain>
+  <div class="pr-stage" aria-label="A letter left out in the rain. Tap the letter, or press Enter, to let a drop fall on it.">
+    <article class="pr-letter">
+      <p class="pr-date">Roundstone, 14th August</p>
+      <p class="pr-greet">Dear Una,</p>
+      <p>I am writing this at the table under the fuchsia, between showers, because your father has the kitchen full of onions drying on the Connacht Tribune. It has rained on all but four days since you left. It comes in off the Atlantic in grey sheets over Inishnee, and you can stand at the gate and watch one cross the bay like somebody walking, and count to forty before it reaches the hedge.</p>
+      <p>The garden doesn't mind. The gunnera by the stream is up past the shed roof, the montbretia is through the wall again, and the Kerr's Pinks in the lazy beds are the best in years, floury, they break in the pot. The slugs are the size of your thumb. I go out at night with the torch and a jar of salt water and I am not one bit sorry.</p>
+      <p>Tell me what the heat is like. Tell me the colour of the ground. I can't picture a place where you have to water a garden.</p>
+      <p class="pr-close">Your loving mother,</p>
+      <p class="pr-sign">Maura</p>
+      <p class="pr-ps">P.S. There's another one coming in over the island now, I can see it on the water. I'll bring this in.</p>
+      <p class="pr-verso">P.P.S. Mrs Joyce asks were you anywhere near the fires. I told her it is a very big country. Your father says to tell you the hay is in, all of it, dry, which he calls a miracle and I call the four days.</p>
+    </article>
+  </div>
+</section>
+
+<div class="prose after">
+  <p>Washable blue is not one dye but two or three, and they let go of the paper at different rates. As the wet spreads, the most loosely held runs on ahead and the edge of the stain goes turquoise, while the line it came from is left a shade more violet: the separation a chemistry class makes with a strip of filter paper standing in a jar of water. When the shower passes, the water leaves from the thin edges first, and more flows outward from the middle to replace it, bringing whatever it has dissolved: dye, dust, the paper's own size. All of it is set down at the last line to dry, the tide line, the same ring a cup leaves on a table. Conservators read the history of a damp archive in them, one ring inside another, each a shower or a leaking roof, and the ink feathered sideways along the fibres, still blue.</p>
+</div>
+
+<script type="module" src="pretext-rain.js"></script>
+<script type="module" src="sound.js"></script>
+</body></html>

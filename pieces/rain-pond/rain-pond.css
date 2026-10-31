@@ -1,0 +1,57 @@
+/* ─── rain-pond // a painted bank over still water, rain arriving with scroll ───
+   The section is the runway (480svh by default); the stage inside it stays
+   pinned while you scroll through it. The figure is a full-bleed band holding
+   the painting above its waterline; the module sizes it and makes the water
+   below. Without JS or WebGL the painting stays, its sky fading into the paper. */
+
+[data-rain-pond] {
+  position: relative;
+  height: var(--rpd-runway, 480svh);
+}
+.rpd-stage {
+  position: sticky; top: 0;
+  height: 100svh;
+  display: grid; place-items: center;
+  overflow: hidden;
+}
+.rpd-pic {
+  position: relative; margin: 0;
+  width: 100%;
+  touch-action: pan-y;                       /* a vertical swipe always scrolls */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none; user-select: none;
+}
+.rpd-pic > img {
+  display: block; width: 100%; height: auto;
+  -webkit-mask-image: linear-gradient(transparent, #000 12%);
+  mask-image: linear-gradient(transparent, #000 12%);
+}
+[data-rain-pond].is-live .rpd-pic > img {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: var(--rpd-hb, 60%);
+  object-fit: cover; opacity: 0;
+}
+.rpd-canvas, .rpd-air {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  display: block; pointer-events: none;
+}
+.rpd-pic:focus { outline: none; }
+.rpd-pic:focus-visible { outline: 2px solid var(--accent, #c96f4a); outline-offset: 4px; }
+.rpd-live {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* Reduced motion: no runway; the scene just after the rain, in place. */
+@media (prefers-reduced-motion: reduce) {
+  [data-rain-pond] { height: auto; }
+  .rpd-stage { position: relative; }
+}
+
+@media print {
+  [data-rain-pond] { height: auto; }
+  .rpd-stage { position: relative; height: auto; }
+  .rpd-canvas, .rpd-air { display: none; }
+  [data-rain-pond].is-live .rpd-pic > img { position: static; opacity: 1; height: auto; }
+}

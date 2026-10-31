@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>window-pane</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="window-pane.css"><style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;--serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box}
+  html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:clamp(19px,1.25vw + 12px,22px);line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  .label{font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+  article{padding:clamp(56px,14svh,140px) var(--gutter) clamp(48px,9svh,96px)}
+  article.after{padding-top:clamp(48px,9svh,96px)}
+  .col{max-width:36rem;margin:0 auto}
+  .masthead{text-align:center;margin-bottom:clamp(40px,8svh,80px)}
+  .masthead h1{font-weight:400;font-size:clamp(46px,7.4vw,96px);line-height:.98;letter-spacing:-.012em;margin:.35em 0 .3em}
+  .masthead h1 em{font-weight:300}
+  .masthead .dek{font-style:italic;color:var(--ink-2);font-size:1.12em;margin:0 auto;max-width:28rem}
+  article p{margin:0 0 1.05em;hyphens:auto;-webkit-hyphens:auto}
+  article p.first::first-letter{float:left;font-size:4.1em;line-height:.8;padding:.06em .08em 0 0;font-weight:400}
+  .end{text-align:center;color:var(--ink-3);margin:2.4em 0 0}
+  .window img{object-position:50% 42%}
+  @media (max-aspect-ratio:1/1){.window img{object-position:56% 50%}}
+  .tail{height:16svh}
+</style></head><body>
+<main>
+  <article>
+    <div class="col">
+      <header class="masthead">
+        <div class="label">On a cold window</div>
+        <h1>The Weather <em>on the</em> Glass</h1>
+        <p class="dek">Condensation, rain, and the street beyond going soft.</p>
+      </header>
+
+      <p class="first">Glass in winter is the coldest thing in a warm room. The air that touches it is chilled below its dew point and has to let go of some of the water it was carrying, and the water comes out on the pane as droplets, hundreds of thousands to the square centimetre, each far too small to see. Every one of them is a little lens. Light passing through is bent off at a slant, and with so many lenses bending it every way at once the street outside turns into a soft, bright weather of its own: still lit, no longer drawn.</p>
+      <p>The mist is never even. It lies thickest along the bottom of the pane and into the corners, where the frame holds the cold, and thins toward the top, where the warm air of the room rises past it. Low down the droplets grow until they touch and run together, and now and then one becomes heavy enough to slide, cutting a clean channel down to the sill.</p>
+      <p>Outside it is raining, and the rain sits on the glass in separate drops, big enough to see and smooth enough to be lenses in earnest. Each holds the whole street in miniature and upside down, the pale sky pooled in its lower half and the roofs hanging from the top. A drop clings until it is heavy enough, then lets go all at once, stops, slips again, and gathers up every smaller drop in its way, leaving a clean track behind it that the drizzle slowly fills.</p>
+    </div>
+  </article>
+
+  <section class="window">
+    <figure data-window-pane class="wp-bleed"><img src="assets/caillebotte-paris-street-rainy-day.webp" alt="" width="2968" height="2297"></figure>
+  </section>
+
+  <article class="after">
+    <div class="col">
+      <p>Gustave Caillebotte painted this crossing in 1877, when it was barely ten years old. The quarter behind the Gare Saint-Lazare had gone up in a hurry, its streets laid out like the spokes of a wheel and named after the capitals of Europe: here the rue de Turin and the rue de Saint-Pétersbourg meet, and the corner building stands at the point between them like the prow of a ship. Everything is new and grey and wet. The paving stones shine. A man in a top hat and a woman with a pearl at her ear come toward us under one umbrella, so close and so large on a canvas more than two and a half metres wide that they seem about to walk out of it.</p>
+      <p>Caillebotte lived not far away, and few painters looked at Paris through glass as often as he did: his brother standing at the window of the family flat, a man on a balcony over the boulevard, the street seen straight down from above with its trees and its benches. Here he is down in the rain with everyone else, but the picture keeps the cool, even light of a window on a wet day, and the far end of the street goes into the same pale grey as the sky.</p>
+      <p>Write on a pane with a finger and the words stay longer than you would think. The fingertip leaves a film of oil behind it, too thin to see, and the next time the window fogs the water gathers differently on that film, in fewer and larger drops, so the letters come back as a ghost in the mist, weeks later, for someone else to find. Wipe a clear patch and the cold starts at once to take it back, from the edges inward.</p>
+      <p class="end label">draw on the glass</p>
+    </div>
+  </article>
+  <div class="tail"></div>
+</main>
+<script type="module" src="window-pane.js"></script>
+</body></html>

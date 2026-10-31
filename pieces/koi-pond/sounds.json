@@ -1,0 +1,21 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "sip",
+      "file": "assets/sounds/sip.mp3",
+      "on": "event:koi-pond:rise",
+      "target": "body",
+      "volume": 0.16,
+      "vary": 1.5,
+      "cooldown": 120,
+      "source": {
+        "kind": "file",
+        "file": "library/sounds/originals/bathtub-splashes.ogg",
+        "clip": "15.71-16.16 s of the original"
+      },
+      "credit": "\"Bathtub water splashes\" by gradha, public domain, https://commons.wikimedia.org/wiki/File:Bathtub_water_splashes.ogg"
+    }
+  ]
+}

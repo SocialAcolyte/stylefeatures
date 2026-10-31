@@ -1,0 +1,12 @@
+[
+  {
+    "files": ["athlete.webp", "athlete-albedo.webp", "athlete-normal.png", "athlete-aux.png"],
+    "title": "Marble head of an athlete",
+    "maker": "Roman, copy of a Greek work",
+    "date": "Mid-Imperial, Antonine, ca. 138–192 CE",
+    "source": "https://www.metmuseum.org/art/collection/search/248579",
+    "image": "https://images.metmuseum.org/CRDImages/gr/original/DP-14287-138.jpg (left profile view)",
+    "licence": "CC0 (The Metropolitan Museum of Art, Open Access)",
+    "notes": "Cut out from its backdrop and post; the albedo, normal/height and aux (wide normal, thickness, polish) maps were derived offline from this single photograph, with Depth Anything V2 Small (Apache-2.0) for the large form."
+  }
+]

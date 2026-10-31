@@ -1,0 +1,46 @@
+/* ─── temper-run: a ground steel chisel tempered as a progress bar (temper-run.js) ───
+   Namespace .tr-. Without JS, [data-temper-run] holds a plain native <progress>.
+   With JS a canvas draws the chisel over the element's box, with a little room
+   around it for its shadow on the page (and, above the full bar, for the one wisp
+   of steam at the quench) that overflows the box.
+
+   Theme on the element or any parent:
+     --tr-h          bar height (the element's height)
+     --tr-fallback   the native bar's colour without JS                      */
+
+[data-temper-run], .tr {
+  --tr-h: 40px;
+  --tr-fallback: #7d7a74;
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  height: var(--tr-h);
+  -webkit-tap-highlight-color: transparent;
+}
+[data-temper-run][data-variant="thin"], .tr--thin { --tr-h: 7px; }
+
+/* no JS: the native element, quietly styled */
+[data-temper-run] > progress {
+  display: block;
+  width: 100%;
+  height: 100%;
+  accent-color: var(--tr-fallback);
+}
+
+/* JS: the native element stays for its value, out of sight and out of the a11y tree
+   (the wrapper is the progressbar) */
+.tr--live > progress, .tr-live {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.tr-canvas {
+  position: absolute;
+  pointer-events: none;
+  display: block;
+}

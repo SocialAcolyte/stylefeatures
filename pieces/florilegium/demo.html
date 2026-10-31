@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>florilegium</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="florilegium.css"><style>
+  :root{--paper:#f3f0e8;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--serif:'Cormorant Garamond',Georgia,serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box} html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  .prose{max-width:33em;margin:0 auto;padding:0 var(--gutter);font-size:clamp(19px,1.5vw,22px);line-height:1.55;font-weight:500;color:var(--ink-2);text-wrap:pretty;hyphens:auto}
+  .prose p{margin:0 0 1.1em}
+  .lead{padding-top:28svh;padding-bottom:14svh}
+  .end{padding-top:14svh;padding-bottom:30svh}
+  .rule{width:28px;height:1px;background:var(--ink-3);opacity:.5;margin:0 auto 3.2em}
+</style></head><body>
+
+<div class="prose lead">
+  <p>In February 1787 William Curtis, an apothecary who kept a botanic garden in the marshes at Lambeth, put out the first number of <i>The Botanical Magazine</i>: three plates of flowers and a page of text about each, stitched in a paper wrapper, for a shilling. His great work, the <i>Flora Londinensis</i>, had been admired and had lost him money. The magazine sold three thousand copies a month, and it was said of the two that one had brought him praise and the other pudding.</p>
+  <p>Every plate began as a drawing from a living plant, most of them in the first years by Sydenham Edwards, who was nineteen when his first was published and drew more than seventeen hundred in the next twenty-seven. The drawing was etched and engraved on a small copper plate, by Edwards himself at first and from 1792 by Francis Sansom, and printed in black on octavo sheets. Then each one had to be coloured. Three plates in three thousand copies is nine thousand sheets of watercolour a month, every one of them laid in by hand.</p>
+</div>
+
+<section data-florilegium data-src="assets/florilegium.json">
+  <div class="fl-stage">
+    <div class="fl-row">
+      <img class="fl-plate" src="assets/passiflora.webp" alt="" aria-hidden="true">
+      <img class="fl-plate" src="assets/camellia.webp" alt="" aria-hidden="true">
+      <img class="fl-plate" src="assets/fuchsia.webp" alt="" aria-hidden="true">
+      <img class="fl-plate" src="assets/iris.webp" alt="" aria-hidden="true">
+      <img class="fl-plate" src="assets/rose.webp" alt="" aria-hidden="true">
+      <img class="fl-plate" src="assets/amaryllis.webp" alt="" aria-hidden="true">
+      <img class="fl-plate" src="assets/poppy.webp" alt="" aria-hidden="true">
+    </div>
+  </div>
+</section>
+
+<div class="prose end">
+  <div class="rule"></div>
+  <p>The colouring was done by a team, at one time some thirty of them, sitting side by side, many of them young women, some working in their own rooms and bringing the sheets back by the bundle. Each copied a pattern plate, one impression coloured as the artist meant it, kept on the table and followed sheet by sheet: the greens first, then the flower, then its small bright parts, a flat wash brought up to the engraved line and left to dry before the next went down beside it. They were paid by the piece, not by the hour, and not well, and the copies show it. Set two of the same plate side by side and one rose is pinker, one leaf a cooler green; here a wash has run over a stem, there a petal was missed and touched in afterwards.</p>
+  <p>The magazine outlived Curtis and every one of his artists. From 1834 Walter Hood Fitch, a calico designer’s apprentice from Glasgow, drew for it for more than forty years, some two thousand seven hundred plates, and drew them straight on the lithographic stone, which had taken over from copper by 1845. The prints were still coloured by hand, by colourists working from his patterns, for another century. It stopped only in 1948, when there were no longer enough people left who would do it, and the plates began to be printed in colour.</p>
+</div>
+
+<script type="module" src="florilegium.js"></script>
+</body></html>

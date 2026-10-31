@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>excavation</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="excavation.css"><style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;--serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%} body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:20px;line-height:1.5;overflow-x:hidden}
+  .top{height:22svh}
+  .dig{max-width:1320px;margin:0 auto;padding:0 var(--gutter)}
+  .dig h2{margin:0 auto clamp(18px,3svh,34px);max-width:30ch;text-align:center;font-weight:400;font-size:clamp(34px,5.4vw,64px);line-height:1.02;letter-spacing:-.01em}
+  .dig h2 em{font-style:italic;font-weight:300}
+  .trench{aspect-ratio:16/9;width:100%}
+  .trench > img{object-position:50% 42%}
+  .label{margin:clamp(22px,4svh,40px) 0 0;text-align:center;font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+  .notes{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,64px);max-width:1040px;margin:clamp(30px,6svh,64px) auto 0;padding:0 var(--gutter)}
+  .notes p{margin:0;font-size:clamp(19px,1.5vw,21px);color:var(--ink-2);hyphens:auto}
+  .notes p::first-line{color:var(--ink)}
+  .end{height:28svh}
+  @media (max-width:720px){
+    .dig{padding:0 6px}
+    .trench{aspect-ratio:4/5}
+    .notes{grid-template-columns:1fr;gap:18px}
+  }
+</style></head><body>
+<div class="top"></div>
+<section class="dig">
+  <h2>The floor <em>under the sand</em></h2>
+  <figure class="trench" data-excavation>
+    <img src="assets/lod-floor.webp" alt="" width="2880" height="3640">
+    <button class="ex-sponge" type="button" aria-label="Wet the floor with the sponge"><img src="assets/sponge.webp" alt="" width="520" height="377"></button>
+  </figure>
+  <div class="notes">
+    <p>The last few centimetres never come off with a spade. They come off with a trowel held almost flat, and then with brushes: a soft paintbrush, a hand brush with its bristles cut short, a pastry brush, anything that will not scratch. The sand is not swept away so much as pushed, a stroke at a time, into a low ridge at the side that someone lifts out with a dustpan and a bucket. The tesserae come up one by one, little cubes of limestone and marble and glass a centimetre across, set in lime mortar on a bed of crushed tile. Where the mortar has rotted they lie loose, and a careless stroke can lift them out of their places for good.</p>
+    <p>Dry, a floor is a disappointment. A film of dust lies in every joint, the stone is chalky, the reds come up pink and the blacks grey. So before the photographer climbs the ladder, someone goes over it with a sponge and a bucket, or a garden sprayer, and for a few minutes the floor looks as it did when it was new and polished: the colours come up dark and deep, the glass glints, and the picture can be read. Then it dries from the edges in. If the floor is to be lifted, its face is glued to cloth, the bedding is cut away beneath it in sections, and each piece is turned over, cleaned from the back and laid on a new support before it is turned face up again and the cloth is soaked off.</p>
+  </div>
+</section>
+<div class="end"></div>
+<script type="module" src="excavation.js"></script>
+</body></html>

@@ -1,0 +1,49 @@
+/* ─── woodblock-print — a colour woodblock print, printed as you scroll ────
+   Without JS the stage shows the original print as an <img> on a sheet.
+   Live, a canvas takes over: the stage is pinned while the section scrolls
+   past (the runway), and each block is printed in turn. */
+
+[data-woodblock-print], .wb {
+  position: relative;
+  background: var(--paper, #f3f0e8);
+}
+.wb-stage {
+  display: grid;
+  place-items: center;
+  padding: clamp(20px, 5svh, 56px) var(--gutter, clamp(16px, 3vw, 32px));
+  box-sizing: border-box;
+  touch-action: pan-y;
+}
+.wb-img {
+  grid-area: 1 / 1;
+  display: block;
+  width: min(100%, 1100px);
+  height: auto;
+  max-height: 84svh;
+  object-fit: contain;
+  padding: clamp(10px, 3.4%, 40px);
+  padding-bottom: clamp(16px, 5.2%, 62px);
+  background: #f4e4cc;
+  box-shadow: 1px 2px 8px rgba(40, 30, 20, .14);
+  box-sizing: border-box;
+}
+.wb-canvas { grid-area: 1 / 1; display: none; touch-action: pan-y; }
+
+.wb.is-live .wb-canvas { display: block; }
+.wb.is-live .wb-img { display: none; }
+
+/* Scroll: the runway is set by the script (about 100svh + 72svh per block). */
+.wb.wb-scroll.is-live { height: var(--wb-runway, 600svh); }
+.wb.wb-scroll.is-live .wb-stage {
+  position: sticky; top: 0; height: 100svh; overflow: hidden;
+}
+.wb:not(.wb-scroll) .wb-stage { min-height: min(100svh, 900px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .wb.wb-scroll.is-live { height: auto; }
+  .wb.wb-scroll.is-live .wb-stage { position: relative; }
+}
+@media print {
+  .wb.wb-scroll.is-live { height: auto; }
+  .wb.wb-scroll.is-live .wb-stage { position: static; height: auto; }
+}

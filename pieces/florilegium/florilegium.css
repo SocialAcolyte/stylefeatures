@@ -1,0 +1,61 @@
+/* ─── florilegium — a colourist's bench ────────────────────────────────────
+   Without JS (and with reduced motion) the finished set lies in a row, the
+   real coloured plates. Live, the stage is pinned while the section scrolls
+   past: a canvas draws the plate being coloured, the finished ones are the
+   same <img>s, moved by transform onto the pile and, at the end, into the set. */
+
+[data-florilegium], .fl {
+  position: relative;
+  background: var(--paper, #f3f0e8);
+}
+.fl-stage {
+  position: relative;
+  box-sizing: border-box;
+  padding: clamp(28px, 7svh, 72px) var(--gutter, clamp(12px, 3vw, 32px));
+}
+.fl-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(10px, 1.4vw, 20px);
+}
+.fl-plate {
+  display: block;
+  height: auto;
+  width: calc((min(100%, 1400px) - 6 * clamp(10px, 1.4vw, 20px)) / 7);
+  min-width: 120px;
+  /* each plate is a page of the magazine: a trimmed sheet lying on the bench */
+  box-shadow: 0 1px 2px rgba(40, 30, 18, .10), 0 6px 22px -8px rgba(40, 30, 18, .22);
+}
+@media (max-width: 640px) {
+  .fl-plate { width: calc((100% - 2 * 10px) / 3); min-width: 0; }
+}
+
+.fl-canvas, .fl-under, .fl-pattern { display: none; }
+
+/* live */
+.fl.fl-scroll.is-live { height: var(--fl-runway, 600svh); }
+.fl.is-live .fl-stage {
+  position: sticky; top: 0; height: 100svh; overflow: hidden; padding: 0;
+}
+.fl.is-live .fl-row { position: absolute; inset: 0; display: block; }
+.fl.is-live .fl-plate, .fl.is-live .fl-under, .fl.is-live .fl-pattern {
+  position: absolute; left: 0; top: 0; transform-origin: 0 0;
+  min-width: 0; max-width: none; visibility: hidden;
+  will-change: transform;
+}
+.fl.is-live .fl-canvas { display: block; position: absolute; inset: 0; z-index: 2; }
+.fl.is-live .fl-under {
+  display: block; z-index: 1;
+  background: #e9dfc9;
+  box-shadow: 0 1px 2px rgba(40, 30, 18, .10), 0 6px 22px -8px rgba(40, 30, 18, .22);
+}
+.fl.is-live .fl-pattern {
+  display: block; z-index: 2;
+  box-shadow: 0 1px 2px rgba(40, 30, 18, .10), 0 4px 14px -6px rgba(40, 30, 18, .2);
+}
+
+@media print {
+  .fl.fl-scroll.is-live { height: auto; }
+}

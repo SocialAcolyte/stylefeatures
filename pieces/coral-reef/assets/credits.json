@@ -1,0 +1,33 @@
+[
+ {
+  "file": "assets/reef.webp",
+  "title": "Great Barrier Reef Corals (Chromo V)",
+  "artist": "William Saville-Kent (drawn and painted from life); chromolithograph printed by Riddle & Couchman, London",
+  "date": "1893",
+  "source": "W. Saville-Kent, The Great Barrier Reef of Australia: its products and potentialities (London: W. H. Allen & Co., 1893). Smithsonian Libraries copy, digitised by the Internet Archive / Biodiversity Heritage Library.",
+  "url": "https://archive.org/details/GreatBarrierRee00Kent",
+  "image": "https://archive.org/download/GreatBarrierRee00Kent/GreatBarrierRee00Kent_jp2.zip/GreatBarrierRee00Kent_jp2%2FGreatBarrierRee00Kent_0090.jp2",
+  "license": "Public domain (published 1893; the artist died in 1908)",
+  "note": "Leaf 0090 JP2, 5751x7581. Cropped to the sheet inside the binding (the gutter, ribbon and page curl removed; a sliver of the toned fore-edge trimmed), about 4734x6991, resampled to 1800x2658 (Lanczos), WebP q90. This file is the finished state, and the last frame of the piece equals it."
+ },
+ {
+  "file": "assets/reef-g0.webp ... reef-g12.webp",
+  "title": "The thirteen stones (coverage maps)",
+  "source": "Derived from reef.webp's source scan",
+  "license": "Public domain (derivative of a public-domain work)",
+  "note": "The scan unmixed in optical density against its own paper into twelve inks (sparse dictionary learning, at most two inks per pixel), plus a key stone split from the dark inks' line work and the margin lettering. One 8-bit greyscale WebP per stone (q62); each stone's ink colour and scale are in reef.json."
+ },
+ {
+  "file": "assets/reef-time.webp",
+  "title": "The scraper's line and the ink's drying (time map)",
+  "source": "Made for this component",
+  "license": "Public domain dedication",
+  "note": "Lossless WebP, half size. R: when the scraper's line reaches each point (down the sheet, slightly bowed, with the damp sheet's cockle). G: how long the fresh ink stays wet there (heavier deposits longer)."
+ },
+ {
+  "file": "assets/reef.json",
+  "title": "Stone list, ink colours, paper field, timings",
+  "source": "Made for this component",
+  "license": "Public domain dedication"
+ }
+]

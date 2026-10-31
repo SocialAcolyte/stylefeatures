@@ -1,0 +1,14 @@
+[
+  {
+    "file": "caillebotte-paris-street-rainy-day.webp",
+    "title": "Paris Street; Rainy Day",
+    "author": "Gustave Caillebotte, 1877",
+    "source": "The Art Institute of Chicago, Charles H. and Mary F. S. Worcester Collection, 1964.336 (API artwork 20684)",
+    "url": "https://www.artic.edu/artworks/20684/paris-street-rainy-day",
+    "image": "https://www.artic.edu/iiif/2/f8fd76e9-c396-5678-36ed-6a348c904d27/full/3000,/0/default.jpg",
+    "license": "Public domain (is_public_domain: true); image released under CC0 by the Art Institute of Chicago",
+    "width": 2968,
+    "height": 2297,
+    "changes": "IIIF 3000 px wide rendition, 16 px trimmed from each edge, re-encoded as webp"
+  }
+]

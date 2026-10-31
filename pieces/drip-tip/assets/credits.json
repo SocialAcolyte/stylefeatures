@@ -1,0 +1,30 @@
+[
+  {
+    "file": "rousseau-the-equatorial-jungle.webp",
+    "title": "The Equatorial Jungle",
+    "artist": "Henri Rousseau",
+    "date": "1909",
+    "collection": "National Gallery of Art, Washington",
+    "source": "https://commons.wikimedia.org/wiki/File:Henri_Rousseau,_The_Equatorial_Jungle,_1909,_NGA_46688.jpg",
+    "licence": "CC0 (NGA Open Access)",
+    "notes": "3681 x 4000; greyed in the rain at runtime; shown cropped to its upper half"
+  },
+  {
+    "file": "leaf-masks.png",
+    "title": "The Equatorial Jungle: outlines of fourteen of its leaves",
+    "artist": "Henri Rousseau (outlines traced for this component)",
+    "date": "1909",
+    "source": "derived from the file above",
+    "licence": "CC0",
+    "notes": "alpha of each cut-out leaf, with a 5 px collar of the surrounding paint and a fine wedge past the tip"
+  },
+  {
+    "file": "leaf-under.webp",
+    "title": "The Equatorial Jungle: the paint behind those leaves, filled in",
+    "artist": "Henri Rousseau (inpainted for this component)",
+    "date": "1909",
+    "source": "derived from the file above",
+    "licence": "CC0",
+    "notes": "Telea inpainting of each leaf's area plus 4 px, from the paint around it; only seen in slivers while a leaf swings"
+  }
+]

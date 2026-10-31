@@ -1,0 +1,49 @@
+/* ─── coral-reef — Saville-Kent's Chromo V printed stone by stone as you scroll ──
+   Without JS (or with reduced motion) the stage shows the finished plate as an <img>,
+   a sheet lying on the page. Live, a canvas covers the stage and draws the sheet itself
+   while the section scrolls past (the runway): each stone is pulled through the press in
+   turn, one ink at a time, until the last frame is the plate. */
+
+[data-coral-reef], .cr {
+  position: relative;
+  background: var(--paper, #f3f0e8);
+}
+.cr-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: clamp(14px, 5svh, 56px) var(--cr-gutter, var(--gutter, clamp(12px, 3vw, 32px)));
+  box-sizing: border-box;
+}
+.cr-img {
+  grid-area: 1 / 1;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(100%, 900px);
+  max-height: 90svh;
+  /* a sheet of plate paper lying on the page */
+  box-shadow: 0 1px 2px rgba(40, 30, 18, .10), 0 6px 22px -10px rgba(40, 30, 18, .22);
+}
+.cr-canvas { display: none; position: absolute; inset: 0; }
+
+.cr.is-live .cr-canvas { display: block; }
+.cr.is-live .cr-img { visibility: hidden; }
+
+.cr.cr-scroll.is-live { height: var(--cr-runway, 520svh); }
+.cr.cr-scroll.is-live .cr-stage {
+  position: sticky; top: 0; height: 100svh; overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cr.cr-scroll.is-live { height: auto; }
+  .cr.cr-scroll.is-live .cr-stage { position: relative; height: auto; }
+  .cr.is-live .cr-canvas { display: none; }
+  .cr.is-live .cr-img { visibility: visible; }
+}
+@media print {
+  .cr.cr-scroll.is-live { height: auto; }
+  .cr.cr-scroll.is-live .cr-stage { position: static; height: auto; }
+  .cr.is-live .cr-canvas { display: none; }
+  .cr.is-live .cr-img { visibility: visible; }
+}

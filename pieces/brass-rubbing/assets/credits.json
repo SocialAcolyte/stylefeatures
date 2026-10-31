@@ -1,0 +1,50 @@
+[
+  {
+    "file": "aubernoun-1277-relief.webp",
+    "title": "Brass of Sir John D'Aubernoun, Stoke D'Abernon Church, Surrey, A.D. 1277",
+    "author": "Wood engraving signed Utting, from the Surrey Archaeological Collections (19th century)",
+    "source": "Wikimedia Commons, File:Brass of Sir John D'Aubernoun, 1277 (Surrey Archaeological Collections).png",
+    "url": "https://commons.wikimedia.org/wiki/File:Brass_of_Sir_John_D%27Aubernoun,_1277_(Surrey_Archaeological_Collections).png",
+    "license": "Public domain",
+    "width": 1055,
+    "height": 2722,
+    "changes": "cropped to the slab; turned into a height map: the engraved lines are cut (0), the figure, shields and inscription letters raised brass (1), the rest rough stone; worn and pitted; alpha holds the grip (metal 1, stone 0.3)"
+  },
+  {
+    "file": "aubernoun-1277-rubbed.webp",
+    "title": "Rubbing of the same, made by this component",
+    "author": "rendered by brass-rubbing.js from aubernoun-1277-relief.webp",
+    "license": "Public domain (derived from the above)",
+    "width": 880,
+    "height": 2273,
+    "changes": "the picture shown without JavaScript"
+  },
+  {
+    "file": "aubernoun-1327-relief.webp",
+    "title": "Brass of Sir John D'Aubernoun, Stoke D'Abernon Church, Surrey, A.D. 1327",
+    "author": "Wood engraving signed Utting, from the Surrey Archaeological Collections (19th century)",
+    "source": "Wikimedia Commons, File:Brass of Sir John D'Aubernoun, 1327 (Surrey Archaeological Collections).png",
+    "url": "https://commons.wikimedia.org/wiki/File:Brass_of_Sir_John_D%27Aubernoun,_1327_(Surrey_Archaeological_Collections).png",
+    "license": "Public domain",
+    "width": 1015,
+    "height": 2634,
+    "changes": "as above"
+  },
+  {
+    "file": "aubernoun-1327-rubbed.webp",
+    "title": "Gold rubbing of the same, made by this component",
+    "author": "rendered by brass-rubbing.js from aubernoun-1327-relief.webp",
+    "license": "Public domain (derived from the above)",
+    "width": 880,
+    "height": 2286,
+    "changes": "the picture shown without JavaScript"
+  },
+  {
+    "file": "paper-tooth.webp",
+    "title": "Paper tooth",
+    "author": "procedural, made for this component (fibres, formation and grain, tileable)",
+    "license": "Public domain",
+    "width": 1024,
+    "height": 1024
+  }
+]

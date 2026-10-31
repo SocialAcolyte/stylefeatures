@@ -1,0 +1,44 @@
+[
+  {
+    "file": "ink-texture.png",
+    "title": "Plum blossoms (album of twelve leaves), leaf dated 1757",
+    "author": "Jin Nong (1687–1773)",
+    "source": "The Metropolitan Museum of Art, Open Access, object 36432",
+    "url": "https://www.metmuseum.org/art/collection/search/36432",
+    "image": "https://images.metmuseum.org/CRDImages/as/original/DP160540.jpg",
+    "license": "CC0 (public domain)",
+    "width": 256,
+    "height": 64,
+    "changes": "data texture, not a picture: R = ink density of an 86 x 256 px patch of the painted trunk (paper level 222, ink 40), normalised to mean 1 and turned to run along x; G = high-pass grain of a blank patch of the same paper (two 128 x 64 crops); B = R blurred 2.2 px"
+  },
+  {
+    "file": "moss-dots.png",
+    "title": "Plum blossoms (album of twelve leaves), leaf dated 1757",
+    "author": "Jin Nong (1687–1773)",
+    "source": "The Metropolitan Museum of Art, Open Access, object 36432",
+    "url": "https://www.metmuseum.org/art/collection/search/36432",
+    "image": "https://images.metmuseum.org/CRDImages/as/original/DP160540.jpg",
+    "license": "CC0 (public domain)",
+    "width": 256,
+    "height": 256,
+    "changes": "fourteen of the painter's moss dots, each cut out as its own connected dark blob and stored as ink density (grey = alpha) in a 4 x 4 grid of 64 px cells"
+  },
+  {
+    "file": "(reference, not shipped)",
+    "title": "Blossoming plum, dated 1759",
+    "author": "Jin Nong (1687–1773)",
+    "source": "The Metropolitan Museum of Art, Open Access, object 49243",
+    "url": "https://www.metmuseum.org/art/collection/search/49243",
+    "license": "CC0 (public domain)",
+    "changes": "studied for the outline blossoms, stamens and young shoots; nothing copied"
+  },
+  {
+    "file": "(reference, not shipped)",
+    "title": "Fragrant Snow at Broken Bridge",
+    "author": "Wang Mian (1287–1359)",
+    "source": "The Metropolitan Museum of Art, Open Access, object 40080",
+    "url": "https://www.metmuseum.org/art/collection/search/40080",
+    "license": "CC0 (public domain)",
+    "changes": "studied for the hanging old wood and rising whips; nothing copied"
+  }
+]

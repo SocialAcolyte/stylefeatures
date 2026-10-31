@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>vellum-study</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vellum-study.css"><style>
+  :root{--paper:#f3f0e8;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--serif:'Cormorant Garamond',Georgia,serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box} html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  .prose{max-width:33em;margin:0 auto;padding:0 var(--gutter);font-size:clamp(19px,1.5vw,22px);line-height:1.55;font-weight:500;color:var(--ink-2);text-wrap:pretty;hyphens:auto}
+  .prose p{margin:0 0 1.1em}
+  .lead{padding-top:28svh;padding-bottom:14svh}
+  .end{padding-top:12svh;padding-bottom:30svh}
+  .rule{width:28px;height:1px;background:var(--ink-3);opacity:.5;margin:0 auto 3.2em}
+  @media (max-width:520px){ [data-vellum-study]{--vs-gutter:6px} }
+</style></head><body>
+
+<div class="prose lead">
+  <p>Around 1650 Gaston d’Orléans, the king’s uncle, kept a botanical garden at Blois and paid a young engraver from Langres, Nicolas Robert, to paint its plants as they flowered: one plant to a sheet, life size where it would fit, in watercolour on vellum. When Gaston died the young Louis XIV took the sheets for himself and kept the painter on, and for nearly two centuries afterwards there was always someone at the Jardin du Roi in Paris whose work was to add to the king’s vellums. They are still there, almost seven thousand of them, in the library of the Muséum. Every collector of flowers who could afford it wanted the same thing for his own garden: a florilegium, a book of its rarest plants, painted on skin, to be turned over in the hand.</p>
+  <p>Pancrace Bessa was born in Paris in 1772 and learned the trade in the studio of Gerard van Spaendonck, the professor of flower painting at the Jardin, alongside Pierre-Joseph Redouté. He drew most of the plates for the <i>Herbier général de l’amateur</i>, and for the Duchesse de Berry he painted hundreds of flowers on vellum, for albums of her own. This one is a waratah from the sandstone country around Sydney, a plant few people in Paris had ever seen in flower.</p>
+  <p>Vellum is calfskin, soaked in lime until the hair slips, scraped, stretched on a frame and dried taut, then rubbed with pumice and chalk until it takes a brush. It is smooth, warm white and very slightly translucent, and nothing sinks into it. Paint stays on top, as bright as it went on, which is why patrons paid for it; and it stays soluble, which is what made it so hard to paint.</p>
+</div>
+
+<section data-vellum-study data-src="assets/waratah.json">
+  <div class="vs-stage">
+    <img class="vs-img" src="assets/waratah.webp" alt="" aria-hidden="true" width="2048" height="3118">
+  </div>
+</section>
+
+<div class="prose end">
+  <div class="rule"></div>
+  <p>The drawing came first, in a hard, sharp graphite, light enough to disappear: the outline of the head, every floret in it, the edge of each leaf. Then the colour went on in thin transparent washes, one area at a time. On paper a wash soaks in and stays put. On vellum it stands on the skin as a pool, beads where it meets the dry surface, and dries with its pigment drawn to the rim; and a second wash brushed over it lifts the first. So the washes were kept few and pale, just the broad colour of the head, the bracts, the leaves and the stem.</p>
+  <p>The lights were not left as bare skin, as a watercolourist on paper would leave them. They were painted on top in body colour, pigment ground with lead white, which covers what is under it and dries pale and matte: the pink tips of the florets, the bloom on the leaves. Everything else was built with the point of a very small brush, nearly dry, in thousands of strokes laid side by side and across each other along the curve of every form, the way the miniature painters worked up a face. A stroke that small dries before it can disturb the paint beneath it. Done well, the hatching cannot be seen from a step away. There is only a flower.</p>
+  <p>What looks like one flower is a head of more than a hundred, packed on a cone and ringed by red bracts. Along the bottom of the sheet Bessa laid out a single one, taken apart for a botanist to read. The gold frame was ruled last, round all four sides, and the signature written under it in the same gold. The sheet is almost two hundred years old, and on vellum the red is as fierce as the day it dried.</p>
+</div>
+
+<script type="module" src="vellum-study.js"></script>
+</body></html>

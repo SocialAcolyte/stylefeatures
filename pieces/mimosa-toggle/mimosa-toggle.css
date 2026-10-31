@@ -1,0 +1,82 @@
+/* ─── mimosa-toggle — the great leaf of a botanical plate as a switch ─────────────
+   The plate is an <img> lying on the page as a sheet (its trimmed edge and a tight
+   shadow). The switch is the real checkbox, laid over the leaf and cut to its outline.
+   While the leaf moves or stays closed, a canvas over the plate draws it; open and at
+   rest, what you see is the <img>. */
+
+.mt {
+  position: relative;
+  display: block;
+  margin: 0;
+  width: var(--mt-width, 100%);
+  max-width: 100%;
+  line-height: 0;
+  background: var(--mt-sheet, #f4ecc9);
+  /* a sheet of laid paper lying on the page: a tight contact shadow, a soft one under it */
+  box-shadow: 0 .5px 1px rgba(40, 30, 18, .16), 0 6px 22px -12px rgba(40, 30, 18, .30);
+  -webkit-tap-highlight-color: transparent;
+}
+.mt-plate {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.mt-canvas {
+  display: none;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.mt.mt-moving .mt-canvas { display: block; }
+
+/* the switch: the leaf itself (placed and outlined by the script) */
+.mt.mt-ready .mt-switch {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  z-index: 1;
+}
+.mt.mt-ready .mt-switch:focus { outline: none; }
+.mt-ring {
+  position: absolute;
+  display: none;
+  pointer-events: none;
+  box-sizing: border-box;
+  border-radius: 50%;
+  border: 1px solid var(--mt-ring, var(--ink-3, #8a857d));
+  transform: scale(1.04);
+}
+.mt.mt-ready .mt-switch:focus-visible + .mt-ring { display: block; }
+.mt.mt-ready .mt-switch:disabled { cursor: default; }
+
+/* no script, or no WebGL2: a plain pill switch under the plate, so the control still works
+   and still looks like what it is */
+.mt:not(.mt-ready) .mt-switch {
+  position: absolute;
+  right: 4%;
+  bottom: 3%;
+  appearance: none;
+  -webkit-appearance: none;
+  width: 44px;
+  height: 24px;
+  margin: 0;
+  border-radius: 12px;
+  border: 1px solid var(--ink-3, #8a857d);
+  background: radial-gradient(circle at 11px 50%, var(--paper, #f3f0e8) 8px, transparent 9px), var(--mt-off, #cfcac0);
+  cursor: pointer;
+}
+.mt:not(.mt-ready) .mt-switch:checked {
+  background: radial-gradient(circle at 31px 50%, var(--paper, #f3f0e8) 8px, transparent 9px), var(--mt-on, #6d8a3e);
+}
+.mt:not(.mt-ready) .mt-switch:focus-visible { outline: 2px solid var(--ink-2, #4a4744); outline-offset: 2px; }
+
+@media (forced-colors: active) {
+  .mt.mt-ready .mt-switch { appearance: auto; -webkit-appearance: auto; background: Canvas; }
+}

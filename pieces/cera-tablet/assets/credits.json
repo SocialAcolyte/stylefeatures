@@ -1,0 +1,64 @@
+[
+ {
+  "file": "assets/leaf-l.webp, assets/leaf-land.webp",
+  "title": "Wooden Writing Tablets (leaf 14.2.4b, written face)",
+  "date": "500–700",
+  "culture": "Coptic, Byzantine Egypt",
+  "medium": "Wood and wax",
+  "source": "The Metropolitan Museum of Art, object 473393, accession 14.2.4a–d, Rogers Fund, 1914",
+  "url": "https://www.metmuseum.org/art/collection/search/473393",
+  "image": "https://images.metmuseum.org/CRDImages/md/original/LC_14_2_4bs1.jpg",
+  "license": "CC0 (The Metropolitan Museum of Art, Open Access)",
+  "note": "2655x4000 museum photograph. Cut off the studio grey by colour (tools/cut-leaves.py), a crisp antialiased edge 2px inside the keyed one, scaled to 1752px, a tight drawn shadow (lamp at the upper left) in a 26px margin; leaf-land is the same turned a quarter clockwise. The Greek writing is the tablet's own. WebP q86."
+ },
+ {
+  "file": "assets/leaf-r.webp, assets/leaf-land-r.webp",
+  "title": "Wooden Writing Tablets (leaf 14.2.4d, smooth face)",
+  "date": "500–700",
+  "culture": "Coptic, Byzantine Egypt",
+  "medium": "Wood and wax",
+  "source": "The Metropolitan Museum of Art, object 473393, accession 14.2.4a–d, Rogers Fund, 1914",
+  "url": "https://www.metmuseum.org/art/collection/search/473393",
+  "image": "https://images.metmuseum.org/CRDImages/md/original/LC_14_2_4ds1.jpg",
+  "license": "CC0 (The Metropolitan Museum of Art, Open Access)",
+  "note": "2674x4000 museum photograph, processed as above. The wax panel is the albedo under the lit heightfield."
+ },
+ {
+  "file": "assets/leaf-one.webp",
+  "title": "Wooden Writing Tablets (leaf 14.2.4d, other face)",
+  "date": "500–700",
+  "culture": "Coptic, Byzantine Egypt",
+  "medium": "Wood and wax",
+  "source": "The Metropolitan Museum of Art, object 473393, accession 14.2.4a–d, Rogers Fund, 1914",
+  "url": "https://www.metmuseum.org/art/collection/search/473393",
+  "image": "https://images.metmuseum.org/CRDImages/md/original/LC_14_2_4ds2.jpg",
+  "license": "CC0 (The Metropolitan Museum of Art, Open Access)",
+  "note": "2644x4000 museum photograph, processed as above and turned a quarter clockwise to lie landscape."
+ },
+ {
+  "file": null,
+  "title": "Bronze stylus",
+  "date": "4th–1st century BCE",
+  "culture": "Cypriot, Classical or Hellenistic",
+  "medium": "Bronze",
+  "source": "The Metropolitan Museum of Art, object 244374, accession 74.51.5495, The Cesnola Collection",
+  "url": "https://www.metmuseum.org/art/collection/search/244374",
+  "image": "https://images.metmuseum.org/CRDImages/gr/original/DP9125.jpg",
+  "license": "CC0 (The Metropolitan Museum of Art, Open Access)",
+  "note": "Reference for the drawn stylus (point, banded shaft, flat spatula end).",
+  "use": "Reference only; not shipped with the component"
+ },
+ {
+  "file": "assets/cera-metrics.woff, assets/glyphs.json",
+  "title": "The incised hand and its metrics font",
+  "source": "Drawn for this component; font built by tools/build-font.py with fontTools",
+  "license": "Same as the component",
+  "note": "Single-stroke letterforms after the cursive scratched into wax tablets (the Met tablet's own Greek leaf, Vindolanda stylus tablets, the Pompeian tablets of Caecilius Iucundus): angular turns, long ascenders and descenders, each stroke entering blunt and lifting to a hairline. Kept legible as English. The font has no outlines, only advances."
+ },
+ {
+  "file": "assets/sounds/spatula.wav, assets/sounds/warm.wav",
+  "title": "Spatula rub, warming hiss",
+  "source": "Synthesised in code (tools/make-sounds.py), no recordings",
+  "license": "Same as the component"
+ }
+]

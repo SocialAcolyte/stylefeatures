@@ -1,0 +1,30 @@
+/* ─── marble-relight // a marble head lit by a candle you carry (marble-relight.js) ───
+   The figure is the head. Its <img> (the cut-out photograph) sets the size and is
+   what shows without JS or WebGL. Two canvases are added: the head itself, exactly
+   over the img, and under it a larger one for the shadow it throws on the paper
+   (it reaches past the figure, over the text, but never past the page's sides and
+   never takes input). */
+
+[data-marble-relight] {
+  position: relative; margin: 0;
+  -webkit-tap-highlight-color: transparent;
+  /* a sideways drag carries the candle round; a vertical one still scrolls the page */
+  touch-action: pan-y;
+}
+[data-marble-relight] > img {
+  display: block; width: 100%; height: auto;
+  -webkit-user-select: none; user-select: none;
+}
+.mr-cast, .mr-head {
+  position: absolute; left: 0; top: 0; display: block;
+  pointer-events: none;
+}
+[data-marble-relight].is-live > img { opacity: 0; }
+
+[data-marble-relight]:focus { outline: none; }
+[data-marble-relight]:focus-visible { outline: 2px solid var(--accent, #c96f4a); outline-offset: 8px; border-radius: 2px; }
+
+@media print {
+  .mr-cast, .mr-head { display: none; }
+  [data-marble-relight].is-live > img { opacity: 1; }
+}

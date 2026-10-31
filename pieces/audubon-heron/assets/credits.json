@@ -1,0 +1,15 @@
+[
+  {
+    "file": "heron.webp",
+    "also": ["heron-bare.webp", "heron-flat.webp", "heron-map.webp", "heron.json"],
+    "title": "Great Blue Heron (Plate 211, The Birds of America)",
+    "maker": "John James Audubon (1785–1851); engraved by Robert Havell Jr.",
+    "date": "1827–1838 (publication); this impression lettered R. Havell, 1834",
+    "medium": "Hand-coloured engraving and aquatint on Whatman paper",
+    "source": "https://commons.wikimedia.org/wiki/File:211_Great_blue_Heron.jpg",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/211_Great_blue_Heron.jpg/3840px-211_Great_blue_Heron.jpg",
+    "institution": "University of Pittsburgh (scan), via Wikimedia Commons",
+    "licence": "Public domain",
+    "notes": "Fetched as the 3840 px Commons thumbnail (original 11152 x 15992), cropped just inside the trimmed sheet and resized to 1600 x 2379 in linear light. Colours are the scan's own (no white balance). The -bare (uncoloured impression), -flat and -map files are derived from it by the processing described in the README."
+  }
+]

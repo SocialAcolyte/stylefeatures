@@ -1,0 +1,58 @@
+/* ─── pretext-vine — a passionflower climbs a paragraph (pretext-vine.js) ──
+   The <p> is the real text and stays in the DOM. Without JS it is a quiet
+   paragraph. Once the script has set it, the words are laid out by pretext
+   as positioned spans (still real, selectable text) sandwiched between two
+   canvases: the vine behind the letters, and the parts of it that pass in
+   front of them (a tendril's coil, the flower). Scroll mode is a tall
+   runway with a pinned stage. */
+
+[data-pretext-vine], .pv {
+  position: relative;
+  background: var(--paper, #f3f0e8);
+  color: var(--ink, #141312);
+}
+.pv-stage {
+  position: relative;
+  padding: clamp(40px, 10svh, 120px) var(--gutter, clamp(16px, 3vw, 32px));
+  touch-action: pan-y;
+}
+.pv-text {
+  max-width: 30em;
+  margin: 0 auto;
+  font-family: var(--pv-serif, var(--serif, "EB Garamond", Georgia, serif));
+  font-weight: 400;
+  font-size: clamp(18px, 1.6vw + 6px, 26px);
+  line-height: 1.75;
+  color: var(--ink, #141312);
+  text-wrap: pretty;
+}
+
+.pv-back, .pv-front, .pv-words {
+  position: absolute; left: 0; top: 0;
+  pointer-events: none;
+}
+.pv-words { width: 100%; height: 100%; pointer-events: auto; }
+.pv-w {
+  position: absolute; left: 0; top: 0;
+  white-space: pre;
+  will-change: transform;
+  color: var(--ink, #141312);
+}
+.pv-front { z-index: 2; }
+.pv-words { z-index: 1; }
+
+/* Live: the stage is pinned while the runway scrolls past. */
+.pv.is-live { height: var(--pv-runway, 280svh); }
+.pv.is-live .pv-stage {
+  position: sticky; top: 0; height: 100svh; box-sizing: border-box;
+  overflow: hidden; padding: 0;
+}
+.pv.is-live .pv-text {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap; padding: 0; margin: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pv.is-live { height: auto; }
+  .pv.is-live .pv-stage { position: relative; height: 100svh; }
+}

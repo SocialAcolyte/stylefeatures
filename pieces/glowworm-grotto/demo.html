@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>glowworm-grotto</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="glowworm-grotto.css"><style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;--serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box} html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:clamp(19px,1.35vw + 13px,22px);line-height:1.5;overflow-x:hidden}
+  .essay{max-width:34em;margin:0 auto;padding:0 var(--gutter)}
+  .essay p{margin:0 0 1.05em;text-wrap:pretty;hyphens:auto}
+  .opening{padding-top:clamp(64px,16svh,160px)}
+  h1{font-weight:400;font-size:clamp(40px,6vw,72px);line-height:1;letter-spacing:-.01em;margin:0 0 clamp(28px,5svh,48px)}
+  .kicker{font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 18px}
+  .cave{max-width:1180px;margin:clamp(40px,8svh,88px) auto;padding:0 var(--gutter)}
+  .end{height:28svh}
+</style></head><body>
+<main>
+  <article class="essay opening">
+    <p class="kicker">Waitomo · Aotearoa New Zealand</p>
+    <h1>The roof of the grotto</h1>
+    <p>The lights on a glowworm cave's ceiling are not worms. Each is the larva of a small fly, <i>Arachnocampa luminosa</i>, found only in New Zealand, lying in a slung tube of mucus and silk on the rock. Its tail end holds a light organ, the swollen tips of its excretory tubules, where luciferin burns with oxygen and gives a cold blue-green light. Below the tube the larva lets down dozens of silk threads, each beaded along its length with droplets of sticky mucus, and waits. Midges, mayflies and caddisflies hatch from the stream below, fly up toward what looks like a night sky, and are caught on the lines; the larva hauls the thread in and eats.</p>
+    <p>A photographer in Waitomo leaves the shutter open for half a minute or more, in a darkness so complete that nothing else registers: only the points themselves, the threads catching their light in the droplets, and the same points again, upside down, in the still water. The rock they hang from never appears.</p>
+  </article>
+
+  <section class="cave">
+    <figure data-glowworm-grotto role="img" aria-label="A glowworm cave ceiling: thousands of blue-green points and their hanging threads, mirrored in a still stream. Move a torch over it with the pointer, a finger or the arrow keys."><img src="assets/grotto.webp" alt="" width="2912" height="1632"></figure>
+  </section>
+
+  <article class="essay">
+    <p>Bring a torch, and you see what the photograph cannot: wet limestone, close overhead, the threads hanging in front of it like a curtain of glass beads, and a colony that does not like it. The larvae are sensitive to light, blue most of all. Lit, they turn their own light down until it goes out, and when the torch moves on they come back one at a time, each when it is ready, so a patch you have lit fills in slowly and unevenly long after you have looked away. Here the dimming takes a second or two and the return under a minute; in the laboratory a larva of a related species took five to ten minutes to switch off, and longer to recover. That is why the guides ask for no torches and no flash.</p>
+    <p>In the dark, the colony keeps its own time. Maynard and Merritt, working with the cave-dwelling glowworms of Tasmania, found that these larvae have a daily clock that runs the opposite way to a night insect's: their urge to glow peaks in the daytime outside, though no daylight reaches them, and individuals that can see one another fall into step. Deep in a cave, a whole colony brightens and fades together through the day. The ceiling is at its fullest while the sun is up on the hills above.</p>
+  </article>
+  <div class="end"></div>
+</main>
+<script type="module" src="glowworm-grotto.js"></script>
+<script type="module" src="sound.js"></script>
+</body></html>

@@ -1,0 +1,23 @@
+/* haeckel-radiolaria — forms ink in radially, faint depth parallax settles out. */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#f2eee1;overflow-x:hidden}
+.hr-runway{height:380vh;position:relative}
+.hr-stage{position:sticky;top:0;height:100svh;display:grid;place-items:center;background:#f2eee1;overflow:hidden}
+.hr-frame{position:relative;height:min(94svh,1180px);aspect-ratio:1920/2737;max-width:94vw;touch-action:pan-y}
+.hr-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.hr-base{filter:grayscale(1) contrast(1.13) brightness(1.07) sepia(.22);
+  transform:scale(calc(1 + (1 - var(--p,0))*.035));transform-origin:50% 50%}
+.hr-mid{filter:saturate(1.05);
+  transform:scale(calc(1 + (1 - var(--p,0))*.018));transform-origin:50% 50%;
+  -webkit-mask-image:radial-gradient(circle at 50% 46%,#000 calc(var(--p,0)*72%),transparent calc(var(--p,0)*72% + 10%));
+  mask-image:radial-gradient(circle at 50% 46%,#000 calc(var(--p,0)*72%),transparent calc(var(--p,0)*72% + 10%))}
+.hr-top{transform:scale(calc(1 + (1 - var(--p,0))*.006));transform-origin:50% 50%;
+  -webkit-mask-image:radial-gradient(circle at 50% 46%,#000 calc(var(--p,0)*128%),transparent calc(var(--p,0)*128% + 9%));
+  mask-image:radial-gradient(circle at 50% 46%,#000 calc(var(--p,0)*128%),transparent calc(var(--p,0)*128% + 9%))}
+@media (prefers-reduced-motion: reduce){
+  .hr-runway{height:auto}
+  .hr-stage{position:static;height:auto;padding:4svh 0}
+  .hr-base,.hr-mid,.hr-top{transform:none}
+  .hr-mid,.hr-top{-webkit-mask-image:none;mask-image:none}
+}

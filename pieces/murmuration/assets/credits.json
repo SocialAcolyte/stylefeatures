@@ -1,0 +1,20 @@
+[
+ {
+  "file": "assets/winter-sky.webp, assets/winter-sky-1800.webp",
+  "title": "A Winter Sky",
+  "artist": "George Inness (American, 1825-1894)",
+  "date": "1866",
+  "source": "The Cleveland Museum of Art, Bequest of John Huntington, 1927.388",
+  "url": "https://www.clevelandart.org/art/1927.388",
+  "image": "https://openaccess-cdn.clevelandart.org/1927.388/1927.388_print.jpg",
+  "license": "CC0 (Cleveland Museum of Art Open Access)",
+  "note": "3400x2476 print scan converted to webp (q92), plus an 1800px copy (q90). Not otherwise altered."
+ },
+ {
+  "file": "assets/winter-land.png",
+  "title": "Land mask for A Winter Sky",
+  "source": "Derived from the scan above by assets/bake-land.py",
+  "license": "CC0",
+  "note": "One channel, half size: white where the painting's copse, far treeline and marsh stand in front of the sky. The line between land and sky was traced by hand on the full scan and refined within 40px of it by the paint itself (the crowns are darker than the cloud bank behind them). The birds are drawn through it; it is never drawn over the painting."
+ }
+]

@@ -1,0 +1,15 @@
+[
+  {
+    "file": "primavera.webp",
+    "also": ["primavera-under.webp", "primavera-lines.webp", "primavera-map.webp", "primavera-flow.webp", "primavera.json"],
+    "title": "La Primavera (Spring)",
+    "maker": "Sandro Botticelli (Italian, 1445–1510)",
+    "date": "c. 1482",
+    "medium": "Tempera on panel, 203 × 314 cm",
+    "source": "https://commons.wikimedia.org/wiki/File:Sandro_Botticelli_-_La_Primavera_-_Google_Art_Project.jpg",
+    "image": "https://commons.wikimedia.org/wiki/Special:FilePath/Sandro%20Botticelli%20-%20La%20Primavera%20-%20Google%20Art%20Project.jpg?width=3840",
+    "institution": "Uffizi Gallery, Florence (via Wikimedia Commons / Google Art Project)",
+    "licence": "Public domain",
+    "notes": "Commons thumbnail 3840 px wide (original 5084 × 3377), cropped to the painted panel inside the gilt frame and resized to 2560 × 1688. The -under, -lines, -map and -flow files are derived from it by the processing described in the README."
+  }
+]

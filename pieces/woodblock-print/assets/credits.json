@@ -1,0 +1,24 @@
+[
+  {
+    "files": ["red-fuji.webp", "red-fuji-blocks.webp", "red-fuji.json"],
+    "title": "South Wind, Clear Sky (Gaifū kaisei), also known as Red Fuji, from the series Thirty-six Views of Mount Fuji (Fugaku sanjūrokkei)",
+    "artist": "Katsushika Hokusai",
+    "date": "ca. 1830–32",
+    "source": "https://www.metmuseum.org/art/collection/search/55736",
+    "image": "https://images.metmuseum.org/CRDImages/as/original/DP141053.jpg",
+    "credit": "The Metropolitan Museum of Art, Henry L. Phillips Collection, Bequest of Henry L. Phillips, 1939 (JP2960)",
+    "license": "CC0 (Met Open Access, public domain)",
+    "notes": "Cropped inside the trimmed sheet edge and resized to 2000 px; the blocks file is our own separation of this image into six coverage maps (key, pale ground, red, sky, forest, summit)."
+  },
+  {
+    "files": ["sudden-shower.webp", "sudden-shower-blocks.webp", "sudden-shower.json"],
+    "title": "Sudden Shower over Shin-Ōhashi Bridge and Atake (Ōhashi Atake no yūdachi), from the series One Hundred Famous Views of Edo (Meisho Edo hyakkei)",
+    "artist": "Utagawa Hiroshige",
+    "date": "1857",
+    "source": "https://www.metmuseum.org/art/collection/search/55433",
+    "image": "https://images.metmuseum.org/CRDImages/as/original/DP130156.jpg",
+    "credit": "The Metropolitan Museum of Art (JP2522)",
+    "license": "CC0 (Met Open Access, public domain)",
+    "notes": "Cropped to the sheet with its seals and resized to 1600 px wide; the blocks file is our own separation into twelve coverage maps (key, yellow, red, green, river, sky, far shore, piers, deep water, dusk bokashi, two rain blocks)."
+  }
+]

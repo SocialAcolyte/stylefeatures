@@ -1,0 +1,17 @@
+[
+ {
+  "file": "assets/grotto-albedo.webp, assets/grotto-maps.png, assets/grotto-poster.webp",
+  "title": "Glowworm cave ceiling over an underground stream",
+  "source": "Generated with Midjourney for Taste (job 3c0ae3bd, variant 1 of 4)",
+  "prompt": "a glowworm cave ceiling with hanging threads and an underground stream (Waitomo-style long exposure); see /home/claude/taste/mj/glowworm/",
+  "license": "Generated with Midjourney for Taste",
+  "note": "The photo's own glowworms and threads were found with a median top-hat filter (blue-green, small, bright) and inpainted (OpenCV Telea); under the dense glow, where no rock survived, the plate is smoothed and the shader adds limestone relief. Its lighting was flattened into a neutral limestone albedo and the warm light in the far tunnel removed (grotto-albedo.webp, 1456x816). grotto-maps.png (728x408) holds, in R, the density of the photo's glow points (local maxima, Gaussian sigma 7 px), which is where the procedural larvae are placed; in G, a hand-drawn water mask; in B, the photo's diffuse blue-green haze; in A, a soft ceiling mask. grotto-poster.webp is a render of the component at rest, used as the no-JS background."
+ },
+ {
+  "file": "assets/sounds/cave-drip.mp3, assets/sounds/stream.mp3",
+  "title": "Cave drip; faint stream",
+  "source": "Synthesised for Taste (numpy, ffmpeg libmp3lame)",
+  "license": "Original, no recording",
+  "note": "See sounds.json for how each was made."
+ }
+]

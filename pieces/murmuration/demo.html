@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>murmuration</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="murmuration.css"><style>
+  :root{--paper:#f3f0e8;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--serif:'Cormorant Garamond',Georgia,serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box} html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  .prose{max-width:33em;margin:0 auto;padding:0 var(--gutter);font-size:clamp(19px,1.5vw,22px);line-height:1.55;font-weight:500;color:var(--ink-2);text-wrap:pretty;hyphens:auto}
+  .prose p{margin:0 0 1.1em}
+  .lead{padding-top:28svh;padding-bottom:14svh}
+  .end{padding-top:12svh;padding-bottom:30svh}
+  .rule{width:28px;height:1px;background:var(--ink-3);opacity:.5;margin:0 auto 3.2em}
+  .plate{width:min(100%,calc(94svh * 3400 / 2476));margin:0 auto}
+  @media (max-width:700px){.plate{width:100%;aspect-ratio:auto;height:84svh}}
+</style></head><body>
+
+<div class="prose lead">
+  <p>On winter evenings in Rome, over the reedbeds of the Somerset Levels, at the piers of Brighton and Aberystwyth, starlings coming in to roost gather above the place where they will sleep and fly together for half an hour before they go down. The flocks run to tens of thousands of birds, sometimes far more. They do not follow a leader. Each bird watches a handful of those nearest to it and keeps with them, and the whole cloud turns, stretches into ribbons, folds over itself and pours across the sky as one thing.</p>
+  <p>In 2008 a team in Rome filmed the flocks over Termini station with synchronised cameras and rebuilt them in three dimensions, bird by bird. Each starling, they found, keeps track of six or seven neighbours whatever the distance between them, a fixed number of birds rather than a fixed radius, and that is what lets a flock stretch thin and dense again without breaking apart.</p>
+</div>
+
+<section class="plate" data-murmuration><img src="assets/winter-sky.webp" srcset="assets/winter-sky-1800.webp 1800w, assets/winter-sky.webp 3400w" sizes="(max-width: 700px) 250vw, min(100vw, 130svh)" width="3400" height="2476" alt="" aria-hidden="true"></section>
+
+<div class="prose end">
+  <div class="rule"></div>
+  <p>A peregrine changes everything. When a falcon dives at the flock, the birds nearest to it bank hard away, rolling almost onto their side for a quarter of a second and back again, and their neighbours copy the roll a fraction of a second later, and theirs after them. From the ground it is a band of darkness sweeping across the cloud, because a starling seen from below and to the side is a thin dark line when it flies level, and a whole wing when it banks.</p>
+  <p>Nothing here is drawn as a wave. Every bird is flown on its own, steering by its seven nearest neighbours, banking to turn as a bird must, and drawn as its own silhouette, two wings and a body, from a camera standing in the field. Click or tap the sky and a peregrine stoops through the flock there, on its own line, and is gone. The dark bands that follow it are only many birds, one after another, turning their wings toward you. Leave the sky alone for a while and the flock comes down into the copse, and the evening is as the painter left it.</p>
+</div>
+
+<script type="module" src="murmuration.js"></script>
+</body></html>

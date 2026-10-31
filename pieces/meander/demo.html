@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>meander</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="meander.css"><style>
+  :root{--paper:#f3f0e8;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--serif:'Cormorant Garamond',Georgia,serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box} html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  .prose{max-width:33em;margin:0 auto;padding:0 var(--gutter);font-size:clamp(19px,1.5vw,22px);line-height:1.55;font-weight:500;color:var(--ink-2);text-wrap:pretty;hyphens:auto}
+  .prose p{margin:0 0 1.1em}
+  .prose blockquote{margin:1.6em 0 1.8em;padding:0 0 0 1.1em;border-left:1px solid color-mix(in srgb,var(--ink-3) 60%,transparent);font-style:italic;color:var(--ink-2)}
+  .lead{padding-top:30svh;padding-bottom:14svh}
+  .mid{padding-top:12svh;padding-bottom:6svh}
+  .end{padding-top:2svh;padding-bottom:12svh}
+  .rule{width:28px;height:1px;background:var(--ink-3);opacity:.5;margin:0 auto 3.2em}
+  .plate{display:block;margin:0 auto;padding:0 var(--gutter) 22svh;max-width:calc(820px + 2 * var(--gutter))}
+  .plate img{display:block;width:100%;height:auto;box-shadow:1px 2px 10px rgba(40,30,20,.13)}
+</style></head><body>
+
+<div class="prose lead">
+  <p>On the first of December 1944 the Mississippi River Commission at Vicksburg received a report from Harold Fisk, a geologist from Louisiana State University, on how the valley of the lower Mississippi had been made. Most of it is sections, borings and argument. At the back is a set of fifteen sheets, Plate 22, that follow the river down from Cape Girardeau in Missouri to Donaldsonville in Louisiana, and on them the river is drawn not once but twenty times. The present channel runs pale down each sheet between banks in heavy ink. Around it, overlapping like spilled ribbon, are the places it used to be: rose, straw, sage and sky blue, flat or hatched or stippled, each colour a stage, numbered from one, the oldest, to twenty, the river as it stood that year.</p>
+  <p>The last three stages Fisk could copy from surveys made in 1765, 1820 and 1880. The others he reconstructed from aerial photographs, in which an old channel shows through the fields as a curving band of darker soil and the banks of an old bend as faint concentric lines, and from borings that found the clay of vanished lakes beneath the cotton. Later geologists have redrawn his dates. The maps are still the ones people know.</p>
+</div>
+
+<section data-meander aria-label="A river meandering across its floodplain over centuries">
+  <div class="mr-stage">
+    <img class="mr-still" src="assets/fisk-detail.webp" alt="" aria-hidden="true" width="1200" height="800">
+  </div>
+</section>
+
+<div class="prose mid">
+  <div class="rule"></div>
+  <p>A river on a flat plain cannot run straight for long. Where it bends, the water on the outside of the curve is thrown against the bank, faster and deeper, while a corkscrew current along the bed carries sand toward the inside. The outer bank is undercut and slumps in, a slab at a time, at high water; the sand is dropped where the current slackens on the inside of the bend, as a point bar. So every bend eats outward and builds inward at once, and because the hardest scour comes a little below the sharpest part of the turn, the whole loop leans and creeps down the valley. Each flood adds a low ridge along the inside bank, and the old ones stay behind it as ridge and swale, the growth rings of the bend.</p>
+  <p>A loop that grows long enough doubles back until only a neck of land divides it from its own course downstream. In some flood the water goes across the neck instead of around, and within days the river has a new channel. Sand settles in both mouths of the old loop, which is left as a crescent lake; over the centuries it fills with clay and turns to cypress swamp, then to a damp field with a curve in it. The clay is tougher than the sand around it, and when the river returns it bends around the old plug, which is why Fisk's channels buckle where they meet. Mark Twain, who had been a pilot on the river, counted its cut-offs and did the arithmetic:</p>
+  <blockquote>In the space of one hundred and seventy-six years the Lower Mississippi has shortened itself two hundred and forty-two miles. That is an average of a trifle over one mile and a third per year. Therefore, any calm person, who is not blind or idiotic, can see that in the Old Oolitic Silurian Period, just a million years ago next November, the Lower Mississippi River was upwards of one million three hundred thousand miles long, and stuck out over the Gulf of Mexico like a fishing-rod. And by the same token any person can see that seven hundred and forty-two years from now the Lower Mississippi will be only a mile and three-quarters long, and Cairo and New Orleans will have joined their streets together, and be plodding comfortably along under a single mayor and a mutual board of aldermen. There is something fascinating about science. One gets such wholesale returns of conjecture out of such a trifling investment of fact.</blockquote>
+  <p>The Corps of Engineers had less patience with the wandering. In 1831 Henry Shreve dug across the neck of Turnbull's Bend, above Baton Rouge, to shorten the trip for steamboats, and the river took his cut. The upper arm of the abandoned loop, Old River, became a short channel to the Atchafalaya, which offered the Mississippi a shorter and steeper way to the Gulf. In 1952 Fisk reported that the Atchafalaya was taking more of the flow every decade and would capture the river within a generation. The Corps' answer, finished in 1963, was the Old River Control Structure: gates that let the Atchafalaya have three tenths of the water and hold the rest in its bed past Baton Rouge and New Orleans. The flood of 1973 nearly tore it out of the ground. It holds, for now, and the river leans on it.</p>
+</div>
+
+<div class="plate"><img src="assets/fisk-plate-22-sheet-07.webp" alt="" aria-hidden="true" width="1800" height="2599" loading="lazy"></div>
+
+<script type="module" src="meander.js"></script>
+</body></html>

@@ -1,0 +1,14 @@
+[
+  {
+    "file": "corot-pond-in-picardy.webp",
+    "title": "A Pond in Picardy",
+    "author": "Camille Corot, ca. 1867",
+    "source": "The Metropolitan Museum of Art, Open Access, object 435979",
+    "url": "https://www.metmuseum.org/art/collection/search/435979",
+    "image": "https://images.metmuseum.org/CRDImages/ep/original/DP-16065-001.jpg",
+    "license": "CC0 (public domain)",
+    "width": 3775,
+    "height": 1802,
+    "changes": "cropped to the canvas (black photographic border removed) and cut at the far waterline (the lower third, the painted water and the woman gathering, is not used; the component makes its own water); full resolution kept; re-encoded as webp"
+  }
+]

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>shadow-puppet</title><link rel="icon" href="data:,">
+<meta name="color-scheme" content="light">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shadow-puppet.css"><style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;--serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px);
+    --dusk:#d6c9b3;--dusk-2:#c9b99f}
+  *{box-sizing:border-box}
+  html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:clamp(19px,1.1vw + 13px,22px);line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  .label{font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+
+  .masthead{text-align:center;padding:clamp(64px,14svh,140px) var(--gutter) clamp(28px,6svh,56px)}
+  .masthead h1{font-weight:400;font-size:clamp(46px,7.2vw,96px);line-height:.98;letter-spacing:-.012em;margin:.35em 0 .3em}
+  .masthead h1 em{font-weight:300}
+  .masthead .dek{font-style:italic;color:var(--ink-2);font-size:1.12em;margin:0 auto;max-width:27rem}
+
+  /* the performance: a tall section, the screen pinned while scroll brings the puppet in */
+  .scene{position:relative;background:linear-gradient(var(--paper),var(--dusk) 18%,var(--dusk) 82%,var(--paper))}
+  .scene.opening{height:300svh}
+  .scene.figure{height:240svh}
+  .pin{position:sticky;top:0;height:100svh;display:grid;place-items:center;padding:0 var(--gutter)}
+  /* the warm light coming through the cloth onto the room */
+  .pin::before{content:"";position:absolute;inset:8% 4%;background:radial-gradient(ellipse 60% 55% at 50% 45%,rgba(236,170,92,.38),rgba(236,170,92,0) 70%);pointer-events:none}
+  .kelir{width:min(100%,1440px);height:min(74svh,62vw);min-height:420px;
+    box-shadow:0 0 0 1px #2c1a12,0 0 0 clamp(4px,.5vw,7px) #5a3a26,0 0 0 calc(clamp(4px,.5vw,7px) + 1px) #2c1a12,0 40px 80px -40px rgba(60,30,10,.55)}
+  @media (max-width:640px){.kelir{height:66svh;min-height:0}}
+
+  article{padding:clamp(56px,12svh,120px) var(--gutter)}
+  .col{max-width:35rem;margin:0 auto}
+  article h2{font-weight:500;font-size:1.5em;line-height:1.15;margin:0 0 .6em}
+  article p{margin:0 0 1.05em;hyphens:auto;-webkit-hyphens:auto}
+  article p.first::first-letter{float:left;font-size:4.1em;line-height:.8;padding:.06em .08em 0 0;font-weight:400}
+  .plate{float:right;width:min(40%,250px);margin:0;shape-outside:polygon(100% 0%, 17.3% 0.0%, 9.5% 2.1%, 1.7% 4.2%, 1.7% 6.2%, 7.3% 8.3%, 11.7% 10.4%, 21.8% 12.5%, 19.6% 14.6%, 19.0% 16.7%, 15.6% 18.8%, 12.8% 20.8%, 12.8% 22.9%, 12.8% 25.0%, 12.8% 27.1%, 15.1% 29.2%, 14.5% 31.2%, 14.5% 33.3%, 14.5% 35.4%, 14.5% 37.5%, 14.5% 39.6%, 14.0% 41.7%, 13.4% 43.8%, 11.7% 45.8%, 4.5% 47.9%, 1.1% 50.0%, 0.6% 52.1%, 0.6% 54.2%, 26.8% 56.2%, 17.9% 58.3%, 17.9% 60.4%, 18.4% 62.5%, 37.4% 64.6%, 49.7% 66.7%, 49.7% 68.8%, 50.3% 70.8%, 50.3% 72.9%, 50.3% 75.0%, 50.3% 77.1%, 50.3% 79.2%, 49.7% 81.2%, 49.7% 83.3%, 49.7% 85.4%, 49.7% 87.5%, 49.7% 89.6%, 49.7% 91.7%, 49.7% 93.8%, 49.7% 95.8%, 49.7% 97.9%, 51.4% 100.0%, 100% 100%);shape-margin:16px}
+  .plate img{display:block;width:100%;height:auto}
+  @media (max-width:560px){.plate{width:44%}}
+  .end{text-align:center;color:var(--ink-3);margin-top:2.4em;clear:both}
+
+  @media (prefers-reduced-motion:reduce){
+    .scene.opening,.scene.figure{height:auto}
+    .pin{position:relative;height:auto;padding:clamp(40px,10svh,96px) var(--gutter)}
+  }
+</style></head><body>
+<main>
+  <header class="masthead">
+    <div class="label">Wayang kulit</div>
+    <h1>The Shadow <em>Side</em></h1>
+    <p class="dek">A night of puppets cut from buffalo hide, and the lamp that makes them breathe.</p>
+  </header>
+
+  <section class="scene opening" id="opening">
+    <div class="pin">
+      <figure class="sp kelir" data-shadow-puppet data-src="assets/kayon.webp" data-scroll="#opening"
+        data-height=".98" data-top=".07" data-at=".5" data-far=".62" data-seed="3"
+        style="--sp-height:.98;--sp-top:.07;--sp-at:.5">
+        <img class="sp-still" src="assets/kayon.webp" alt="" aria-hidden="true" width="1024" height="2048">
+      </figure>
+    </div>
+  </section>
+
+  <article>
+    <div class="col">
+      <p class="first">Every performance opens and closes with the gunungan, the mountain, which is also called the kayon, the tree. It is a tall leaf of hide, pointed at the top, cut through with a tree of life in which birds perch and monkeys climb, with a bull and a tiger facing each other below and, at its foot, a gate kept by two giants. Before the first scene it stands planted in the middle of the screen. The dalang lifts it, makes it tremble, draws it back toward the lamp until its shadow fills the cloth like a cloud, and brings it in again until every cut is sharp; only then does he lay it aside for the first king to enter. Through the night it returns for whatever the story needs that is not a person: a forest, the sea, a wind, a fire.</p>
+      <p>The one on this screen comes from Bali, where the kayon is a leaf of flames with a demon’s face at its foot. Javanese gunungan carry the same fire painted red on their backs, and turn it to the audience when a kingdom burns.</p>
+
+      <h2>A few centimetres of flame</h2>
+      <p>The lamp, the blencong, hangs above the dalang’s head an arm’s length behind the cloth: a bronze vessel of coconut oil, often cast as the bird Garuda, with a fat cotton wick. Its flame is a few centimetres across, and that width is the whole art of the shadow. Pressed to the screen, a figure throws a shadow its own size, and every hole punched in it is a point of light. Drawn back toward the lamp it grows, and its edges spread into a penumbra as wide as the flame, multiplied by the figure’s distance from the screen and divided by its distance from the lamp. A demon held close to the flame fills the screen like weather. And because the flame is never still, the shadow breathes.</p>
+    </div>
+  </article>
+
+  <section class="scene figure" id="figure">
+    <div class="pin">
+      <figure class="sp kelir" data-shadow-puppet data-src="assets/figure.webp" data-scroll="#figure"
+        data-height="1.12" data-top=".09" data-at=".42" data-far=".5" data-seed="8"
+        style="--sp-height:1.12;--sp-top:.09;--sp-at:.42">
+        <img class="sp-still" src="assets/figure.webp" alt="" aria-hidden="true" width="1024" height="2048">
+      </figure>
+    </div>
+  </section>
+
+  <article>
+    <div class="col">
+      <h2>Hide, chisel, gold</h2>
+      <figure class="plate"><img src="assets/figure-painted.webp" alt="" aria-hidden="true" width="716" height="1600"></figure>
+      <p>A puppet begins as the skin of a water buffalo, soaked, stretched on a frame and dried in the sun, then scraped with a blade until it is as thin and stiff as card and lets the light through like horn. The maker draws the figure on it and cuts the outline, then sits with the hide on a block of hardwood and punches it, hour after hour, with a set of small chisels struck by a mallet. Each chisel has its own mouth, a round one for dots, a crescent, a short flat blade, and the patterns they make have names: a chain of tiny diamonds is <em>inten-intenan</em>, little jewels; the saw-toothed fringe along a border is <em>untu walang</em>, grasshopper’s teeth. A fine figure can take weeks of punching before anyone paints it.</p>
+      <p>Then it is painted on both sides, in layers: a white ground, colours laid on in fine gradations, black lines, gold leaf on the crown, the jewellery and sometimes the skin. A face painted black, gold or red tells the audience the character’s temper before he speaks. A split rod of buffalo horn, warmed and bent, is stitched along the figure from crown to foot and runs on below it as a handle; the arms are jointed at shoulder and elbow and worked by thinner rods from the hands. On the far side of the screen none of the colour shows. What shows is the cutting.</p>
+
+      <h2>All night</h2>
+      <p>The dalang sits cross-legged behind the screen from about nine in the evening until the sky pales, eight or nine hours, and does not leave it. He works every puppet and speaks every voice: the slow, high courtesy of a knight, the roar of a giant, the jokes of the clown-servants everyone has been waiting for. Between scenes he sings the <em>suluk</em> that set the mood. The puppets not in play stand in ranks along the foot of the screen, their horn rods pushed into the trunks of banana trees, the noble on his right and the wicked on his left. With a wooden mallet in his left hand he knocks on the puppet chest beside him, and with his foot he strikes small metal plates hung on its side; the gamelan behind him takes its cues from both, when to quicken, when to stop, when the fight begins.</p>
+      <p>Old descriptions disagree about who sat where. Some put the men among the musicians on the dalang’s side, watching the painted figures, and the women on the far side watching shadows; others reverse them. Today most people watch from the dalang’s side, where the colour and the music are, and most performances light the screen with an electric bulb, whose small filament throws a steadier, harder shadow. The oil lamp’s shadow was never still. It brightened and dimmed with the wick, it shivered when the night air moved, and a figure drawn back toward it never quite kept its edges.</p>
+      <p>At dawn the dalang plants the gunungan in the middle of the screen again, and the play is over.</p>
+      <p class="end label">Tancep kayon</p>
+    </div>
+  </article>
+</main>
+<script type="module" src="shadow-puppet.js"></script>
+</body></html>

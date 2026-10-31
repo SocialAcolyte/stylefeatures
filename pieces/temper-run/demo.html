@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>temper-run</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="temper-run.css"><style>
+  :root{--paper:#f3f0e8;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box} html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  .col{max-width:33em;margin:0 auto;padding:0 var(--gutter);font-size:clamp(19px,1.5vw,22px);line-height:1.55;font-weight:500;color:var(--ink-2);text-wrap:pretty;hyphens:auto}
+  .col p{margin:0 0 1.1em}
+  .lead{padding-top:22svh}
+  .end{padding-bottom:26svh}
+  .col figure.plate[data-kind]{margin:2.6em 0 2.2em}
+  .divide{margin:2.2em 0 2.4em}
+  /* the small working parts of a page: one line of sans, quiet */
+  .ui{font:400 14px/1.45 var(--sans);color:var(--ink-2);letter-spacing:.005em}
+  .ui b{font-weight:500;color:var(--ink)}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:20px 28px;flex-wrap:wrap;margin:0 0 2.4em}
+  .row .ui{flex:1 1 15em;min-width:0}
+  .ui small{display:block;color:var(--ink-3);font-size:13px;margin-top:2px}
+  .job{margin:-1.2em 0 2.8em}
+  .job [data-temper-run]{--tr-h:18px}
+  .job .ui{display:flex;justify-content:space-between;margin-top:14px;color:var(--ink-3);font-size:13px}
+  .job[hidden]{display:none}
+  .gone{color:var(--ink-3)}
+</style></head><body>
+
+<div class="col lead">
+  <p>A chisel straight out of the quench is as hard as steel gets and nearly as brittle as glass, so it is let down: warmed again, gently, to somewhere between two and three hundred degrees. The smith has no thermometer for this. He rubs one face bright on a stone, puts the heat in, and watches. As the steel warms it takes a skin of oxide, and the skin shows as colour, running ahead of the heat: pale straw, straw, brown, a bronzy purple, blue.</p>
+  <p>The colours are not a stain. The film is a few tens of millionths of a millimetre thick, thinner than a wavelength of light, and the colour is interference between the light reflected from the top of the film and from the steel beneath it. It only ever thickens. Grind the face and it is gone; leave it, and it keeps the record of where the heat has been.</p>
+</div>
+
+<div class="col">
+  <figure class="plate" data-temper-run data-kind="frame" data-temper=".3" data-at="bottom-left">
+    <img src="assets/smith.webp" alt="" aria-hidden="true" width="1800" height="1262">
+  </figure>
+
+  <p>Asher Durand engraved this smith for the corner of a banknote, a little over three inches across. Vignettes like it were cut in soft steel and then hardened and tempered, so that the picture could be rolled into printing plates hundreds of times without wearing. Too hard, and the die cracks under the roller; too soft, and it spreads. The colour on its face told the man hardening it <a href="#chart" data-temper-run data-kind="rule">where to stop the heat</a>. The frame round it was run the same way, from one corner, until the straw had gone a little under halfway.</p>
+
+  <div class="divide" data-temper-run data-kind="rule" role="separator"></div>
+
+  <p id="chart">Each colour has its trades. Pale straw, a little over two hundred degrees, is left on razors and engravers, which must hold the finest edge and are never struck. Darker straws and browns go to chisels and punches, purple to axes, and blue, near three hundred degrees, to springs and saws, which must bend and come back.</p>
+
+  <div class="row">
+    <p class="ui"><b>The temper chart</b><small>One page, the colours with their heats and trades</small></p>
+    <button data-temper-run id="save" type="button">Save as PDF</button>
+  </div>
+  <div class="job" id="job" hidden>
+    <div data-temper-run data-shape="chisel" data-done="Saved"><progress value="0" max="100" aria-label="Saving the temper chart">0%</progress></div>
+    <p class="ui"><span>temper-chart.pdf</span><span id="jobtext">Preparing</span></p>
+  </div>
+
+  <div class="divide" data-temper-run data-kind="rule" role="separator"></div>
+
+  <div class="row end-row">
+    <p class="ui" id="draft"><b>Draft: On letting down</b><small>Last edited three days ago</small></p>
+    <button data-temper-run data-hold="1400" data-to="blue" id="discard" type="button">Hold to discard</button>
+  </div>
+</div>
+<div class="col end"></div>
+
+<script type="module">
+  import './temper-run.js';
+  const calm = matchMedia('(prefers-reduced-motion: reduce)');
+  const job = document.getElementById('job'), jobtext = document.getElementById('jobtext');
+  const bar = job.querySelector('[data-temper-run]');
+  let timer = 0;
+  // a save that takes a few seconds, reported in uneven steps as real work is
+  document.getElementById('save').addEventListener('click', () => {
+    const b = bar.__temperRun;
+    if (!b || (b.value > 0 && b.value < 100)) return;
+    job.hidden = false; b.reset(); jobtext.textContent = 'Preparing';
+    const steps = calm.matches ? [[0, 100]] : [[350, 8], [900, 21], [1500, 34], [2300, 52], [2800, 61], [3700, 78], [4400, 90], [5200, 100]];
+    clearTimeout(timer);
+    const t0 = performance.now();
+    const next = () => {
+      const [at, v] = steps.shift();
+      timer = setTimeout(() => { b.value = v; jobtext.textContent = v < 100 ? `${v}%` : 'Saved'; if (steps.length) next(); }, Math.max(0, at - (performance.now() - t0)));
+    };
+    next();
+  });
+  // discarding needs a held press; the row says so, and comes back after a while
+  const draft = document.getElementById('draft'), keep = draft.innerHTML;
+  document.getElementById('discard').addEventListener('click', () => {
+    draft.innerHTML = '<span class="gone">Draft discarded.</span><small>It will be back in a moment, for the next visitor.</small>';
+    setTimeout(() => { draft.innerHTML = keep; }, 6000);
+  });
+</script>
+</body></html>

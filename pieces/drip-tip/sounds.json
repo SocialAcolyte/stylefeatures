@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "drip",
+      "file": "assets/sounds/drip.mp3",
+      "on": "event:drip-tip:drip",
+      "target": "body",
+      "volume": 0.08,
+      "vary": 1.5,
+      "cooldown": 900,
+      "match": {
+        "kind": "drip"
+      },
+      "source": {
+        "kind": "file",
+        "file": "library/sounds/originals/water-drops-bowl.ogg",
+        "clip": "9.09-9.49 s of the original"
+      },
+      "credit": "\"Water drops dripping\" by ZooFari, CC BY-SA 3.0, https://commons.wikimedia.org/wiki/File:Water_drops_dripping.ogg"
+    },
+    {
+      "name": "rustle",
+      "file": "assets/sounds/rustle.mp3",
+      "on": "event:drip-tip:shake",
+      "target": "body",
+      "volume": 0.15,
+      "vary": 1,
+      "cooldown": 400,
+      "source": {
+        "kind": "file",
+        "file": "library/sounds/originals/rustling-leaves-gravity.ogg",
+        "clip": "4.90-6.30 s of the original"
+      },
+      "credit": "\"Rustling leaves (Gravity Sound)\" by Gravity Sound, CC BY 4.0, https://commons.wikimedia.org/wiki/File:Rustling_leaves_(Gravity_Sound).wav"
+    }
+  ]
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>cera-tablet</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="cera-tablet.css">
+<style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;
+    --serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  .tag{font-family:var(--sans);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  main{max-width:1180px;margin:0 auto;padding:clamp(40px,9svh,110px) var(--gutter) 120px;display:grid;gap:clamp(40px,7svh,88px)}
+  .head{display:grid;gap:14px;justify-items:center;text-align:center}
+  .head h1{margin:0;font-weight:300;font-style:italic;font-size:clamp(34px,5vw,58px);line-height:1;color:var(--ink)}
+  .prose{max-width:34em;margin:0 auto;font-size:clamp(18px,1.6vw,20.5px);line-height:1.55;color:var(--ink-2)}
+  .prose p{margin:0 0 .9em}
+  .prose p:last-child{margin:0}
+  form{display:grid;gap:18px;width:100%}
+  .send{display:flex;justify-content:center;align-items:center;gap:16px;min-height:44px}
+  .send button{min-height:44px;padding:0 28px;border-radius:999px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);
+    font:500 13px/1 var(--sans);letter-spacing:.04em;cursor:pointer}
+  .send button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .send output{font-style:italic;font-size:18px;color:var(--ink-2)}
+  .one{display:grid;gap:clamp(24px,4vw,56px);align-items:center;border-top:1px solid var(--rule);padding-top:clamp(40px,7svh,80px)}
+  @media (min-width:860px){.one{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}}
+  .one .cera-tablet{--ct-max:600px}
+  .one .prose{margin:0}
+</style></head><body>
+<main>
+  <header class="head">
+    <span class="tag">correspondence</span>
+    <h1>Leave a note</h1>
+  </header>
+
+  <form id="note-form" action="#" autocomplete="on">
+    <div class="cera-tablet" data-cera-tablet>
+      <div class="ct-leaf" data-leaf="l" data-name="written leaf"></div>
+      <div class="ct-leaf" data-leaf="r" data-name="note">
+        <div class="ct-wax">
+          <label class="ct-sr" for="note">Your note</label>
+          <textarea id="note" name="note" placeholder="Write here…" required></textarea>
+          <label class="ct-sr" for="from">Signed</label>
+          <input id="from" name="from" autocomplete="name" placeholder="Signed…">
+        </div>
+      </div>
+    </div>
+    <div class="send"><button type="submit">Send</button><output id="sent" aria-live="polite"></output></div>
+  </form>
+
+  <div class="prose">
+    <p>These are two leaves of a set of four, made in Egypt some time between 500 and 700 and now in the Metropolitan Museum. Each is a board of wood a hand and a half tall, hollowed to a shallow tray and filled with wax darkened with soot, so that a line scratched into it shows pale. The holes down one side took the cord that bound the set into a little book.</p>
+    <p>The left leaf still carries its last lesson, a Greek cursive in a quick hand, one line struck through with a single long stroke. The right leaf was levelled and left blank. Write on it with the keys: a bronze point ploughs each letter, and Backspace turns the stylus over so its flat end smooths the wax again.</p>
+  </div>
+
+  <section class="one" aria-label="A used leaf">
+    <textarea data-cera-tablet aria-label="A used leaf" data-palimpsest="abcdefghiklmnopqrstvx. Litterarum radices amarae, fructus dulces.">Dimidium facti qui coepit habet.</textarea>
+    <div class="prose">
+      <p>A tablet was never new for long. Wax is levelled with the flat of the stylus or warmed and smoothed, and a pupil writes again. But a hard hand goes through the wax into the wood, and the wood keeps it. Most surviving Roman tablets, at Vindolanda and in the London Walbrook, have lost their wax entirely and are read from those scratches alone, several texts crossing one another.</p>
+      <p>This leaf has been used before. Hold it to the light: under the line in the wax are the alphabet and a maxim a child copied out and rubbed away.</p>
+    </div>
+  </section>
+</main>
+<script type="module" src="cera-tablet.js"></script>
+<script type="module" src="sound.js"></script>
+<script type="module">
+  const form = document.getElementById('note-form'), out = document.getElementById('sent');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const who = form.from.value.trim();
+    out.textContent = who ? `Sent. Thank you, ${who}.` : 'Sent. Thank you.';
+    // the note stays as written, set in the wax; writing again smooths it away
+    form.querySelector('[data-cera-tablet]').__ct?.seal();
+    setTimeout(() => { out.textContent = ''; }, 5000);
+  });
+</script>
+</body></html>

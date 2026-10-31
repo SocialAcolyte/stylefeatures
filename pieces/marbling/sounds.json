@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "ink-drop",
+      "file": "assets/sounds/ink-drop.wav",
+      "on": "press",
+      "target": "[data-marbling]",
+      "volume": 0.3,
+      "vary": 3.0,
+      "source": {
+        "kind": "bank",
+        "id": "fit/pop/mouth_plop",
+        "seed": 0,
+        "pitch_st": 0,
+        "dur_x": 1.0
+      },
+      "credit": "earshot sound bank fit/pop/mouth_plop (seed 0), synthesized in code: github.com/Leonxlnx/earshot (MIT), no recording"
+    },
+    {
+      "name": "stylus-pull",
+      "file": "assets/sounds/stylus-pull.wav",
+      "on": "drag",
+      "target": "[data-marbling]",
+      "volume": 0.2,
+      "vary": 1.5,
+      "source": {
+        "kind": "bank",
+        "id": "swipe/velvet",
+        "seed": 968699985,
+        "pitch_st": 0,
+        "dur_x": 1.0
+      },
+      "credit": "earshot sound bank swipe/velvet (seed 968699985), synthesized in code: github.com/Leonxlnx/earshot (MIT), no recording"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "glass-slide",
+      "file": "assets/sounds/glass-slide.wav",
+      "on": "drag",
+      "target": "[data-loupe]",
+      "volume": 0.15,
+      "vary": 2.0,
+      "source": {
+        "kind": "bank",
+        "id": "swipe/glide",
+        "seed": 1378931225,
+        "pitch_st": 0,
+        "dur_x": 1.0
+      },
+      "credit": "earshot sound bank swipe/glide (seed 1378931225), synthesized in code: github.com/Leonxlnx/earshot (MIT), no recording"
+    }
+  ]
+}

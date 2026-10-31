@@ -1,0 +1,109 @@
+/* ─── page-turn // an old herbal lying open (page-turn.js) ────────────────
+   Without JS (or WebGL2) the articles are the book's pages, one after
+   another: text pages on a paper ground, plates as images. With it, they are
+   kept in the DOM for screen readers, find-in-page and print, and the book is
+   drawn on a canvas. The stage is sized by the script; the canvas reaches
+   past it so a lifted leaf and its shadow can leave the book's rectangle. */
+
+[data-page-turn] {
+  --pt-paper: #ece3ce;
+  --pt-ink: #1e1914;
+  --pt-rubric: #8f2c1c;
+  --pt-font: "IM Fell English", "EB Garamond", Georgia, serif;
+  --pt-font-sc: "IM Fell English SC", "IM Fell English", Georgia, serif;
+  --pt-font-display: "IM Fell French Canon", "IM Fell English", Georgia, serif;
+  position: relative;
+  display: block;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ── no script: the pages in order ──────────────────────────────────── */
+[data-page-turn]:not(.pt-on) {
+  display: grid;
+  gap: 28px;
+  justify-items: center;
+}
+[data-page-turn]:not(.pt-on) > article {
+  width: min(100%, 560px);
+  min-height: calc(min(100vw, 560px) * 1.27);
+  box-sizing: border-box;
+  background: var(--pt-paper);
+  color: var(--pt-ink);
+  font: clamp(14px, 3.6vw, 17px)/1.36 var(--pt-font);
+  padding: 8% 13% 10% 11%;
+  box-shadow: 0 1px 2px rgba(40, 28, 14, .18), 0 10px 28px -12px rgba(40, 28, 14, .3);
+}
+[data-page-turn]:not(.pt-on) > article.pt-plate { padding: 6% 8%; display: grid; place-items: center; }
+[data-page-turn]:not(.pt-on) > article.pt-plate img { display: block; width: 100%; height: auto; mix-blend-mode: multiply; }
+[data-page-turn]:not(.pt-on) > article h1,
+[data-page-turn]:not(.pt-on) > article h2 { font: 400 1.35em/1.2 var(--pt-font-display); text-align: center; margin: 0 0 .3em; }
+[data-page-turn]:not(.pt-on) > article h1 span,
+[data-page-turn]:not(.pt-on) > article h2 span { display: block; }
+[data-page-turn]:not(.pt-on) > article h2 span { font: italic .7em var(--pt-font); }
+[data-page-turn]:not(.pt-on) > article .pt-latin { text-align: center; font-style: italic; color: var(--pt-rubric); margin: 0 0 1em; }
+[data-page-turn]:not(.pt-on) > article p { margin: 0 0 .5em; text-align: justify; hyphens: manual; }
+[data-page-turn]:not(.pt-on) > article.pt-title { display: grid; align-content: center; text-align: center; }
+[data-page-turn]:not(.pt-on) > article.pt-title p { text-align: center; font-style: italic; }
+[data-page-turn]:not(.pt-on) > article.pt-title p span { display: block; }
+
+/* ── the book ───────────────────────────────────────────────────────── */
+.pt-stage {
+  position: relative;
+  margin: 0 auto;
+  touch-action: pan-y pinch-zoom;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+}
+.pt-single .pt-stage { margin: 0 auto; }
+.pt-canvas {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .5s ease;
+}
+.pt-live .pt-canvas { opacity: 1; }
+[data-page-turn].pt-over .pt-stage { cursor: grab; }
+[data-page-turn].pt-grabbing .pt-stage { cursor: grabbing; }
+
+/* the source pages: there for readers and search, not seen */
+.pt-src {
+  position: absolute !important;
+  width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: normal;
+}
+
+/* small and quiet: for keyboards and anyone who would rather press */
+.pt-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 18px auto 0;
+  min-height: 32px;
+}
+.pt-status {
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); margin: 0;
+}
+.pt-btn {
+  appearance: none;
+  width: 32px; height: 32px;
+  display: grid; place-items: center;
+  border: 0; border-radius: 50%;
+  background: transparent;
+  color: var(--ink-3, #8a857d);
+  cursor: pointer;
+  transition: color .2s, background-color .2s, opacity .2s;
+}
+.pt-btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 1.4; stroke-linecap: round; stroke-linejoin: round; }
+.pt-btn:hover { color: var(--ink, #141312); background: rgba(20, 19, 18, .05); }
+.pt-btn:disabled { opacity: .3; cursor: default; background: transparent; }
+.pt-btn:focus-visible { outline: 2px solid var(--accent, #c96f4a); outline-offset: 2px; }
+[data-page-turn]:focus { outline: none; }
+[data-page-turn]:focus-visible .pt-stage { outline: 2px solid var(--accent, #c96f4a); outline-offset: 10px; border-radius: 4px; }
+
+@media print {
+  .pt-stage, .pt-nav { display: none; }
+  .pt-src { position: static !important; width: auto; height: auto; margin: 0; overflow: visible; clip: auto; clip-path: none; }
+  .pt-src > article { break-after: page; }
+  .pt-src img { max-width: 100%; }
+}

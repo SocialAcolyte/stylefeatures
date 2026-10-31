@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "drop",
+      "file": "assets/sounds/drop.mp3",
+      "on": "event:pretext-rain:drop",
+      "target": "body",
+      "volume": 0.16,
+      "vary": 1.5,
+      "cooldown": 80,
+      "match": {
+        "tap": true
+      },
+      "source": {
+        "kind": "file",
+        "file": "library/sounds/originals/light-rainfall.ogg",
+        "clip": "32.97-33.32 s of the original"
+      },
+      "credit": "\"Sound of light rainfall\" by Mijesty, CC BY-SA 4.0, https://commons.wikimedia.org/wiki/File:Sound_of_light_rainfall.ogg"
+    }
+  ]
+}

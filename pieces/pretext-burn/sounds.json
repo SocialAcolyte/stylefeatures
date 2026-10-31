@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "catch",
+      "file": "assets/sounds/catch.wav",
+      "on": "enter",
+      "target": "[data-pretext-burn]",
+      "volume": 0.22,
+      "vary": 0.0,
+      "source": {
+        "kind": "bank",
+        "id": "whoosh_big/swell",
+        "seed": 696394185,
+        "pitch_st": -7.0,
+        "dur_x": 1.0
+      },
+      "credit": "earshot sound bank whoosh_big/swell (seed 696394185, pitch -7 st), synthesized in code: github.com/Leonxlnx/earshot (MIT), no recording"
+    }
+  ]
+}

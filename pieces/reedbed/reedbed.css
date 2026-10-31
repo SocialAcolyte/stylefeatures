@@ -1,0 +1,78 @@
+/* ─── Reedbed — a common reed bed at dusk that the wind moves (reedbed.js) ───
+   Namespace .rb-. Without JS, [data-reedbed] is the dusk photograph, cropped
+   to the band. With JS a canvas covers it: the same photograph, with the near
+   and middle reeds drawn over it, moving.
+
+   Theme on the element or any parent:
+     --rb-aspect         the band's shape (and --rb-aspect-narrow on phones)
+     --rb-bg             what shows before the photograph has loaded
+     --rb-radius         corner radius
+     --rb-ink            the wind control's text
+     --rb-focus          focus ring colour                                    */
+
+[data-reedbed], .rb {
+  --rb-bg: #2b2522;
+  --rb-ink: rgba(243, 240, 232, .78);
+  position: relative;
+  display: block;
+  width: 100%; min-width: 0; margin: 0;
+  contain: inline-size;
+  aspect-ratio: var(--rb-aspect, 21 / 9);
+  overflow: hidden;
+  background: var(--rb-bg);
+  border-radius: var(--rb-radius, 0);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none; user-select: none; -webkit-touch-callout: none;
+  touch-action: pan-y;          /* a sideways drag is wind; an upward swipe still scrolls */
+  cursor: grab;
+}
+.rb:active { cursor: grabbing; }
+@media (max-width: 640px) {
+  [data-reedbed], .rb { aspect-ratio: var(--rb-aspect-narrow, 1 / 1); }
+}
+[data-reedbed] > img, .rb > img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 50%;
+  display: block;
+  -webkit-user-drag: none;
+}
+.rb.is-live > img { visibility: hidden; }
+.rb-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  display: block;
+}
+
+/* the breeze: a quiet native range in the corner */
+.rb-wind {
+  position: absolute;
+  left: max(14px, var(--gutter, 16px));
+  bottom: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-family: var(--sans, Inter, system-ui, sans-serif);
+  font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--rb-ink);
+  cursor: default;
+  opacity: .62;
+  transition: opacity .4s ease;
+}
+.rb-wind:hover, .rb-wind:focus-within { opacity: 1; }
+.rb-wind-val { letter-spacing: .08em; text-transform: none; font-variant-numeric: tabular-nums; min-width: 15ch; }
+.rb-wind input {
+  -webkit-appearance: none; appearance: none;
+  width: clamp(72px, 14vw, 120px); height: 22px; margin: 0;
+  background: transparent; cursor: pointer;
+  touch-action: pan-y;
+}
+.rb-wind input::-webkit-slider-runnable-track { height: 1px; background: var(--rb-ink); }
+.rb-wind input::-moz-range-track { height: 1px; background: var(--rb-ink); }
+.rb-wind input::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 9px; height: 9px; margin-top: -4px;
+  border-radius: 50%; background: var(--paper, #f3f0e8); border: 0;
+}
+.rb-wind input::-moz-range-thumb { width: 9px; height: 9px; border-radius: 50%; background: var(--paper, #f3f0e8); border: 0; }
+.rb-wind input:focus { outline: none; }
+.rb-wind input:focus-visible { outline: 1.5px solid var(--rb-focus, var(--accent, #c96f4a)); outline-offset: 3px; border-radius: 2px; }
+@media (max-width: 420px) { .rb-wind-val { min-width: 0; } }
+/* without the canvas there is nothing for the control to move */
+.rb:not(.is-live) .rb-wind { display: none; }

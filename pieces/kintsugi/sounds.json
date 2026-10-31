@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "porcelain-tap",
+      "file": "assets/sounds/porcelain-tap.wav",
+      "on": "press",
+      "target": "[data-kintsugi]",
+      "volume": 0.35,
+      "vary": 2.0,
+      "source": {
+        "kind": "bank",
+        "id": "tap/glass",
+        "seed": 409276250,
+        "pitch_st": 5.0,
+        "dur_x": 1.0
+      },
+      "credit": "earshot sound bank tap/glass (seed 409276250, pitch +5 st), synthesized in code: github.com/Leonxlnx/earshot (MIT), no recording"
+    }
+  ]
+}

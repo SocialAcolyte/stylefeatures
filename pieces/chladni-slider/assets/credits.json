@@ -1,0 +1,34 @@
+[
+ {
+  "file": "assets/tab8.webp",
+  "title": "Tab. VIII (figures 87-106), from Entdeckungen über die Theorie des Klanges",
+  "maker": "Ernst Florens Friedrich Chladni (figures); engraved by Capieux (\"Capieux sculps. 1786\")",
+  "date": "1787 (Leipzig: Weidmanns Erben und Reich); plate dated 1786",
+  "source": "Getty Research Institute copy, digitised by the Internet Archive",
+  "url": "https://archive.org/details/entdeckungenuber00chla",
+  "image": "https://archive.org/download/entdeckungenuber00chla/page/n106.jpg",
+  "license": "Public domain (published 1787)",
+  "note": "Leaf n106 of the 500 ppi scan, 3170 x 3961, unaltered apart from re-encoding as WebP q90. This is the finished sheet the piece ends on."
+ },
+ {
+  "file": "assets/tab8-paper.webp",
+  "title": "The same sheet before printing (derived)",
+  "source": "Derived from tab8.webp",
+  "license": "Public domain (derivative of a public-domain scan)",
+  "note": "Every ink pixel (and an 11 px halo) replaced by real paper texture copied from a clean offset nearby, colour-matched to the local paper by a normalised Gaussian estimate and feathered into the scan. Outside the ink it is the scan."
+ },
+ {
+  "file": "assets/tab8-times.webp",
+  "title": "Ink classes and arrival times (derived, lossless)",
+  "source": "Derived from tab8.webp",
+  "license": "Public domain (derivative)",
+  "note": "Half resolution. R: time inside its stage (0-254). G: class (1-20 nodal lines of figs 87-106, 21-40 the plate squares, 41-60 numbers and letters, 61 border, 62 title and engraver's line, 0 paper)."
+ },
+ {
+  "file": "assets/tab8-sand.webp",
+  "title": "Sand fields for the twenty plates (derived, lossless)",
+  "source": "Derived from tab8.webp",
+  "license": "Public domain (derivative)",
+  "note": "5 x 4 tiles of 128 x 128 over each plate's interior. R: vibration amplitude stand-in (0 on Chladni's lines, 1 on the ridges between them and at the free edge). G: arrival time of the nearest line ink. B: the line mask at tile resolution."
+ }
+]

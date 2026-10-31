@@ -1,0 +1,65 @@
+/* hohmann-loader: an engraved plate of a Hohmann transfer, in one warm ink.
+ * Theme with --paper, --paper-2, --ink. Everything is prefixed .hl-. */
+
+.hl { --hl-paper: var(--paper, #f3f0e8); --hl-ink: var(--ink, #141312); }
+.hl-svg { display: block; width: 100%; height: auto; overflow: visible; shape-rendering: geometricPrecision; }
+.hl-ink { fill: var(--hl-ink); stroke: none; }
+.hl-paper { fill: var(--hl-paper); stroke: none; }
+.hl-limb { fill: none; stroke: var(--hl-ink); }
+.hl-ring { stroke: var(--hl-ink); }
+.hl-orbit { fill: none; stroke: var(--hl-ink); stroke-opacity: .62; }
+.hl-plan { fill: none; stroke: var(--hl-ink); stroke-opacity: .7; stroke-linecap: round; }
+.hl-mark { fill: none; stroke: var(--hl-ink); stroke-opacity: .7; }
+
+/* ---- the full-page plate ------------------------------------------------
+ * Visible from the first paint, before any script runs, as long as <html>
+ * carries .hl-loading (one inline line in <head> adds it; see README). If the
+ * script never arrives, the same line takes the class away after a few
+ * seconds and the page is simply there.                                    */
+.hl-page { display: none; }
+.hl-loading { overflow: hidden; }
+.hl-loading .hl-page, .hl-page.hl-leaving {
+    display: grid; place-items: center;
+    position: fixed; inset: 0; z-index: 2147483000;
+    background: var(--hl-paper, var(--paper, #f3f0e8));
+    --hl-paper: var(--paper, #f3f0e8); --hl-ink: var(--ink, #141312);
+    transition: opacity .75s cubic-bezier(.4, 0, .2, 1);
+}
+.hl-page.hl-leaving { opacity: 0; pointer-events: none; }
+
+/* the plate: the copper's own rectangle pressed into the sheet. Inside it the
+ * paper keeps the faint tone of ink the wiping left behind; its edge is the
+ * plate mark, a shallow step with a lit side and a shadowed side.          */
+.hl-plate {
+    position: relative;
+    --hl-w: min(88vw, 70svh, 600px);
+    width: var(--hl-w);
+    aspect-ratio: 1 / 1.08;
+    padding: calc(var(--hl-w) * .05) calc(var(--hl-w) * .045) calc(var(--hl-w) * .08);
+    box-sizing: border-box;
+    border-radius: 3px;
+    background:
+        radial-gradient(120% 95% at 50% 46%, transparent 58%, rgba(70, 58, 40, .045) 100%),
+        url(assets/plate-tone.webp) 0 0 / 256px 256px,
+        color-mix(in srgb, var(--hl-ink) .8%, var(--hl-paper));
+    box-shadow:
+        inset 0 0 0 .5px rgba(30, 24, 16, .16),
+        inset 1px 1.5px 0 rgba(255, 253, 247, .7),
+        inset -1px -1px 0 rgba(30, 24, 16, .06),
+        0 0 0 .5px rgba(30, 24, 16, .14),
+        1px 1.5px 0 .5px rgba(255, 253, 247, .65),
+        -1px -1px 1px rgba(30, 24, 16, .05);
+}
+.hl-plate .hl-svg { width: 100%; }
+
+/* ---- the inline loader ------------------------------------------------- */
+.hl-inline {
+    display: inline-block; vertical-align: -.32em;
+    width: var(--hl-size, 1.45em); height: var(--hl-size, 1.45em);
+    position: relative;
+}
+.hl-inline .hl-svg { width: 100%; height: 100%; }
+.hl-inline progress {          /* still there for screen readers */
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip-path: inset(50%); white-space: nowrap; margin: -1px; border: 0; padding: 0;
+}

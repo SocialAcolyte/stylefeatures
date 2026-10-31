@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>audubon-heron</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="audubon-heron.css">
+<style>
+  :root{--paper:#f3efe6}
+  html,body{margin:0;padding:0;background:var(--paper)}
+  @media (max-width:520px){ [data-audubon-heron]{--ah-gutter:5px} }
+</style>
+</head>
+<body>
+<section data-audubon-heron data-src="assets/heron.json">
+  <div class="ah-stage">
+    <img class="ah-img" src="assets/heron.webp" alt="" aria-hidden="true" width="1600" height="2379">
+  </div>
+</section>
+<script type="module" src="audubon-heron.js"></script>
+</body>
+</html>

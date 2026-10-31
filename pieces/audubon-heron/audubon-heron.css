@@ -1,0 +1,46 @@
+/* ─── audubon-heron — Audubon's Great Blue Heron coloured by hand as you scroll ──
+   Without JS the stage shows the finished plate as an <img> on a sheet. Live, a
+   canvas covers the stage and draws the sheet (and its shadow) itself: the stage is
+   pinned while the section scrolls past (the runway) and the washes go down one area
+   at a time; on a phone it follows them close up. */
+
+[data-audubon-heron], .ah {
+  position: relative;
+  background: var(--paper, #f3efe6);
+}
+.ah-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: clamp(14px, 4.5svh, 52px) var(--ah-gutter, var(--gutter, clamp(12px, 3vw, 32px)));
+  box-sizing: border-box;
+}
+.ah-img {
+  grid-area: 1 / 1;
+  display: block;
+  width: min(100%, 640px);
+  height: auto;
+  max-height: 90svh;
+  object-fit: contain;
+  /* a trimmed sheet lying on the paper */
+  box-shadow: 0 1px 2px rgba(40, 30, 18, .10), 0 6px 22px -8px rgba(40, 30, 18, .22);
+}
+.ah-canvas { display: none; position: absolute; inset: 0; }
+
+.ah.is-live .ah-canvas { display: block; }
+.ah.is-live .ah-img { visibility: hidden; }
+
+.ah.ah-scroll.is-live { height: var(--ah-runway, 400svh); }
+.ah.ah-scroll.is-live .ah-stage {
+  position: sticky; top: 0; height: 100svh; overflow: hidden;
+}
+.ah:not(.ah-scroll) .ah-stage { min-height: min(100svh, 980px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .ah.ah-scroll.is-live { height: auto; }
+  .ah.ah-scroll.is-live .ah-stage { position: relative; }
+}
+@media print {
+  .ah.ah-scroll.is-live { height: auto; }
+  .ah.ah-scroll.is-live .ah-stage { position: static; height: auto; }
+}

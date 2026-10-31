@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>lotus-leaf</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="lotus-leaf.css"><style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;--serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,40px)}
+  *{box-sizing:border-box}
+  html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:clamp(19px,.7vw + 14px,22px);line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+  .label{font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+  .page{display:grid;grid-template-columns:minmax(0,1fr);gap:0 var(--gutter);padding:clamp(40px,8svh,96px) var(--gutter) clamp(56px,10svh,120px);max-width:1500px;margin:0 auto}
+  header{margin:0 0 clamp(28px,5svh,48px)}
+  h1{text-wrap:balance;font-weight:400;font-size:clamp(44px,5.6vw,84px);line-height:.98;letter-spacing:-.012em;margin:.32em 0 .28em}
+  h1 em{font-weight:300}
+  .dek{font-style:italic;color:var(--ink-2);font-size:1.1em;margin:0;max-width:26rem}
+  .leaf{margin:0 0 clamp(32px,6svh,56px)}
+  .text p{margin:0 0 1.05em;hyphens:auto;-webkit-hyphens:auto;max-width:34rem}
+  .text p.first::first-letter{float:left;font-size:4.1em;line-height:.8;padding:.06em .08em 0 0;font-weight:400}
+  .hint{margin-top:2.2em}
+  .hint .touch{display:none}
+  @media (hover:none){.hint .touch{display:inline}.hint .mouse{display:none}}
+  @media (min-width:900px){
+    .page{grid-template-columns:minmax(0,1.32fr) minmax(0,1fr);align-items:start;min-height:100svh}
+    .leaf{grid-column:1;grid-row:1 / span 2;margin:clamp(8px,4svh,48px) 0 0;position:sticky;top:clamp(24px,7svh,80px)}
+    header{grid-column:2;grid-row:1}
+    .text{grid-column:2;grid-row:2}
+  }
+</style></head><body>
+<main class="page">
+  <header>
+    <div class="label">Nelumbo nucifera</div>
+    <h1>The Leaf <em>that</em> Stays Dry</h1>
+    <p class="dek">Rain on the sacred lotus, which never wets it.</p>
+  </header>
+
+  <figure class="leaf" data-lotus-leaf>
+    <img src="assets/lotus-leaf.webp" alt="" width="2000" height="1730" data-navel=".4995 .4948" data-radius=".4523">
+    <img src="assets/lotus-leaf-2.webp" alt="" width="2000" height="1915" data-navel=".4957 .5383" data-radius=".4756">
+    <img src="assets/lotus-bud.webp" alt="" width="374" height="496" data-navel=".5 .88" data-radius=".5">
+  </figure>
+
+  <div class="text">
+    <p class="first">Rain does not wet a lotus leaf. A drop lands, springs up a little, and comes to rest as a bead so round that it seems to sit on the leaf rather than touch it, and at the slightest tilt it rolls away like mercury spilled on a table. Under a microscope the reason is plain. The upper side of the leaf is crowded with papillae, domes of living cells ten or twenty thousandths of a millimetre high, and every one is furred with tubules of wax far finer still. The drop rests on their tips, on a cushion of trapped air, and touches perhaps a fiftieth of the surface beneath it. It meets the leaf at an angle of about a hundred and sixty degrees, very nearly a whole sphere, and a tilt of a few degrees is enough to set it going.</p>
+    <p>It rolls, rather than slides, and that is the point. Whatever lies in its path, a speck of soot, a grain of pollen, the spore of a mould, holds to water more readily than to wax, and is taken up on the surface of the drop and turned over and over as it travels, and carried off. In 1997 the botanists Wilhelm Barthlott and Christoph Neinhuis, asking why some leaves always come out of the rain clean, called this the lotus effect, and it has since been copied into paint, glass and cloth. The plant had it first. It roots in the mud of still ponds, and its leaves stand clear of the water all summer, unmarked.</p>
+    <p>Small beads stop where they land, held by a vein or a hollow. Larger ones run, and meet, and become one with a shiver, and anything bigger than a few millimetres across is pressed flat by its own weight. The leaf is a shallow cup, and the water finds its way to the middle, over the place where the stalk joins beneath, and gathers into a single pool that shines like quicksilver. Under it, between the water and the leaf, there is still a film of air, and it is that film you see, holding the light. Tip the leaf and the pool goes out over the edge in a rush, onto the leaf below or into the pond with a small ring, and the leaf is as dry as before.</p>
+    <p class="hint label"><span class="mouse">press a leaf, or push a bead</span><span class="touch">tip the phone, or press a leaf</span></p>
+  </div>
+</main>
+<script type="module" src="lotus-leaf.js"></script>
+<script type="module" src="sound.js"></script>
+</body></html>

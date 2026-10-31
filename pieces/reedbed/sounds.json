@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "reed-rustle",
+      "file": "assets/sounds/reed-rustle.wav",
+      "on": "drag",
+      "target": "[data-reedbed] .rb-canvas",
+      "volume": 0.22,
+      "vary": 1.5,
+      "cooldown": 700,
+      "credit": "Synthesised for Taste: pink noise (Paul Kellet's filter), band-limited 0.5-8 kHz, a slow swell and an 11 Hz flutter for the leaves. No recording."
+    }
+  ]
+}

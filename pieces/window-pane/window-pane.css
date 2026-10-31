@@ -1,0 +1,30 @@
+/* ─── window-pane // a painting through a cold, wet window (window-pane.js) ─
+   The figure is the pane. Give it a size (or let the <img> set it at its
+   natural ratio); the canvas lies exactly over the img and takes the same
+   crop. Without JS or WebGL2 the img is all there is. */
+
+[data-window-pane] {
+  position: relative; margin: 0; overflow: hidden;
+  background: var(--wp-floor, #b9b6b0);
+  touch-action: pan-y;                  /* sideways strokes wipe; vertical swipes scroll */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none; user-select: none;
+}
+[data-window-pane] > img { display: block; width: 100%; height: auto; }
+.wp-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+  cursor: var(--wp-cursor, default);
+}
+[data-window-pane].is-live > img { opacity: 0; }
+
+/* full-bleed: the window fills a band of the page */
+.wp-bleed { width: 100%; height: 92svh; min-height: 420px; }
+.wp-bleed > img { height: 100%; object-fit: cover; }
+/* on a tall phone a landscape picture would be cropped to a sliver: a shorter band keeps half its width in view */
+@media (max-aspect-ratio: 1/1) { .wp-bleed { height: 72svh; } }
+
+@media print {
+  .wp-canvas { display: none; }
+  [data-window-pane].is-live > img { opacity: 1; }
+}

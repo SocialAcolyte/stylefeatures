@@ -1,0 +1,37 @@
+[
+  {
+    "file": "lod-floor.webp",
+    "source": "File:Lod-Mosaic-798.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Lod-Mosaic-798.jpg",
+    "title": "The Lod Mosaic: the central panel of animals (elephant, giraffe, lions, bull)",
+    "maker": "Roman villa floor, Lydda (Lod), c. 300 CE; photograph by Bukvoed",
+    "date": "c. 300 CE",
+    "license": "CC BY 4.0",
+    "author": "Bukvoed",
+    "width": 2880,
+    "height": 3640,
+    "changes": "cropped to the band around the elephant, resized from 3236 px wide, re-encoded"
+  },
+  {
+    "file": "sand.webp",
+    "source": "File:Sand Properties.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Sand_Properties.jpg",
+    "title": "Sand Properties (fine sand surface)",
+    "license": "CC0",
+    "author": "Paul The Writer",
+    "width": 1024,
+    "height": 1024,
+    "changes": "central crop, greyscale, low frequencies removed, made seamless (cross-faded with a half-offset copy), normalised; used as grain, not shown as a picture"
+  },
+  {
+    "file": "sponge.webp",
+    "source": "File:Spongia officinalis 001.JPG",
+    "url": "https://commons.wikimedia.org/wiki/File:Spongia_officinalis_001.JPG",
+    "title": "Spongia officinalis (bath sponge)",
+    "license": "CC BY-SA 3.0",
+    "author": "H. Zell",
+    "width": 520,
+    "height": 377,
+    "changes": "cut out of its black background (alpha), colour softened, resized"
+  }
+]

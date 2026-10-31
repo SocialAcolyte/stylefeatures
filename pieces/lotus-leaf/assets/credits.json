@@ -1,0 +1,29 @@
+[
+  {
+    "file": "lotus-leaf.webp",
+    "title": "Nelumbo nucifera Himeji 03",
+    "maker": "Syrio",
+    "date": "photograph, Himeji, Japan",
+    "source": "https://commons.wikimedia.org/wiki/File:Nelumbo_nucifera_Himeji_03.jpg",
+    "license": "CC BY-SA 4.0",
+    "notes": "Cut out along the leaf's own rim (polar dynamic-programming edge trace from the navel, a short straight run fixed by hand at the upper left where the trace wandered into the leaf behind, gaps showing background at the rim nibbled in), edge colours pulled from just inside the rim, cropped and scaled to 2000 px wide. Colour graded in the shader, not in the file. Library copy: library/ornaments/botanical/nelumbo-nucifera-himeji-03.webp"
+  },
+  {
+    "file": "lotus-leaf-2.webp",
+    "title": "Nelumbo nucifera feuille",
+    "maker": "Dinkum",
+    "date": "photograph",
+    "source": "https://commons.wikimedia.org/wiki/File:Nelumbo_nucifera_feuille.JPG",
+    "license": "CC0",
+    "notes": "Cut out along the leaf's rim the same way (polar edge trace from the navel, held to an ellipse band because the neighbouring leaves are the same green; a torn flap at the right left out). Hue-shifted toward blue-green in the shader. Library copy: library/ornaments/botanical/nelumbo-nucifera-feuille.webp"
+  },
+  {
+    "file": "lotus-bud.webp",
+    "title": "Nelumbo nucifera, bud (iNaturalist observation 408004236)",
+    "maker": "Md. Tayhid Hasan",
+    "date": "photograph",
+    "source": "https://www.inaturalist.org/photos/749898324",
+    "license": "CC BY 4.0",
+    "notes": "The pink bud cut out from its green background (colour key, largest component, soft 1.6 px edge, edge colours pulled from inside); its pale base is left out and hidden under a leaf in the layout."
+  }
+]

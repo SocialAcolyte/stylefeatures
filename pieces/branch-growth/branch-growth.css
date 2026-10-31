@@ -1,0 +1,6 @@
+/* branch-growth: an ink-plum branch that grows down the page through the space around the text */
+.bgr-host{position:relative}
+.bgr-host > :not(.bgr-layer){position:relative;z-index:1}
+.bgr-layer{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:var(--bgr-z,0);contain:strict}
+.bgr-canvas{position:absolute;left:0;top:0;display:block;will-change:transform;pointer-events:none}
+@media print{.bgr-layer{display:none}}

@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "cave-drip",
+      "file": "assets/sounds/cave-drip.mp3",
+      "on": "event:glowworm-grotto:drip",
+      "target": "body",
+      "volume": 0.28,
+      "vary": 3.0,
+      "cooldown": 600,
+      "credit": "Synthesised for Taste in numpy: an upward-gliding sine (the Minnaert resonance of the bubble a drop entrains) with a soft impact click, through a 2.8 s dark noise reverb. No recording."
+    },
+    {
+      "name": "stream",
+      "file": "assets/sounds/stream.mp3",
+      "on": "event:glowworm-grotto:torch",
+      "target": "body",
+      "volume": 0.1,
+      "cooldown": 20000,
+      "credit": "Synthesised for Taste in numpy: band-limited noise with a slow uneven murmur and small bubbling plinks, short reverb. No recording."
+    }
+  ]
+}

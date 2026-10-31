@@ -1,0 +1,20 @@
+[
+ {
+  "file": "vendor/hershey/hershey.js",
+  "title": "Hershey font: futural (simplex sans)",
+  "date": "c. 1967",
+  "source": "Dr. A. V. Hershey; .jhf format by James Hurt, Cognition, Inc.; file via github.com/kamalmostafa/hershey-fonts (carried over from the xy-scope component)",
+  "url": "https://github.com/kamalmostafa/hershey-fonts",
+  "license": "Hershey Fonts licence (Hershey and Hurt): free for any purpose provided the acknowledgements are distributed with the font data and it is not converted into the U.S. NTIS format. Full text in vendor/hershey/LICENSE.",
+  "note": "futural.jhf only, unmodified, as a JS string export. Used for plain text in vector mode.",
+  "acknowledgement": "The Hershey Fonts were originally created by Dr. A. V. Hershey while working at the U. S. National Bureau of Standards. The format of the Font data in this distribution was originally created by James Hurt, Cognition, Inc., 900 Technology Park Drive, Billerica, MA 01821."
+ },
+ {
+  "file": "demo.html (inline SVG)",
+  "title": "TASTE wordmark, warm-to-cool gradient (raster) and per-letter colours (vector)",
+  "date": "2026",
+  "source": "Drawn for Taste: geometric letters on a 100-unit cap height",
+  "license": "Original work for this library",
+  "note": "No third-party images, fonts or sounds are used by the component."
+ }
+]

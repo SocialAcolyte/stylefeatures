@@ -1,0 +1,20 @@
+[
+  {
+    "file": "justinian.webp",
+    "also": "justinian-tiles.png (tile data derived from it)",
+    "title": "Emperor Justinian and his retinue. Detail of the mosaic in the Basilica of San Vitale, Ravenna (c. 547)",
+    "source": "https://commons.wikimedia.org/wiki/File:Emperor_Justinian_and_his_retinue._Detail_of_the_mosaic_in_the_Basilica_of_San_Vitale._Ravena,_Italy.jpg",
+    "maker": "Mosaic: unknown Byzantine workshop, c. 547. Photograph: Ввласенко (Wikimedia Commons)",
+    "license": "CC BY-SA 3.0",
+    "changes": "cropped to the upper 1880 px (frieze, gold ground and heads); per-tile data derived from it is shared under the same licence"
+  },
+  {
+    "file": "deesis.webp",
+    "also": "deesis-tiles.png (tile data derived from it)",
+    "title": "Christ Pantocrator, Deësis mosaic, south gallery of Hagia Sophia, Istanbul (c. 1261)",
+    "source": "https://commons.wikimedia.org/wiki/File:Christ_Pantocrator_Deesis_mosaic_Hagia_Sophia.jpg",
+    "maker": "Mosaic: unknown Byzantine workshop, 13th century. Photograph: Myrabella (Wikimedia Commons)",
+    "license": "Public domain",
+    "changes": "cropped to the head and halo"
+  }
+]

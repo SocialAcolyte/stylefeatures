@@ -1,0 +1,48 @@
+/* ─── waterfall-print — a descent down a Hokusai waterfall ───────────────────
+   Without JS (or WebGL, or with reduced motion) each section is the print on
+   the page, fitted to the screen. Live, the section becomes a scroll runway, its
+   stage pins, and a fixed canvas draws the print through a camera that travels
+   down the falls; the <img> stays in place, hidden, as the layout and fallback. */
+
+.wf-section {
+  position: relative;
+}
+.wf-stage {
+  position: relative;
+  height: 100svh;
+  display: grid;
+  place-items: center;
+  touch-action: pan-y;               /* a finger may rest in the water; vertical swipes still scroll */
+}
+.wf {
+  margin: 0;
+  /* the same fit the camera uses at its widest: the whole sheet with a margin */
+  width: min(calc(100% - 2 * var(--wf-margin, clamp(16px, 4vw, 56px))),
+             calc((100svh - 2 * var(--wf-margin, clamp(16px, 4vw, 56px))) * .6948));
+}
+.wf img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 1px 1.5px rgba(48, 36, 22, .16)) drop-shadow(0 10px 22px rgba(48, 36, 22, .13));
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.wf-section.wf-descent { height: var(--wf-runway, 520svh); }
+.wf-section.wf-descent .wf-stage { position: sticky; top: 0; }
+.wf-section.is-live .wf img { visibility: hidden; }
+
+.wf-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: var(--wf-z, 4);
+}
+@media print {
+  .wf-canvas { display: none; }
+  .wf-section.is-live .wf img { visibility: visible; }
+  .wf-section.wf-descent { height: auto; }
+}

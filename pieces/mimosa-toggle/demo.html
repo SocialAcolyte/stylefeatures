@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>mimosa-toggle</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mimosa-toggle.css"><style>
+  :root{--paper:#f3f0e8;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--serif:'Cormorant Garamond',Georgia,serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box} html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  .prose{max-width:33em;margin:0 auto;padding:0 var(--gutter);font-size:clamp(19px,1.5vw,22px);line-height:1.55;font-weight:500;color:var(--ink-2);text-wrap:pretty;hyphens:auto}
+  .prose p{margin:0 0 1.1em}
+  .lead{padding-top:24svh;padding-bottom:9svh}
+  .end{padding-top:9svh;padding-bottom:28svh}
+  .stage{display:grid;place-items:center;padding:0 var(--gutter)}
+  .stage .mt{--mt-width:min(600px,100%,calc(88svh * 2200 / 3096))}
+  @media (max-width:520px){ .stage{padding:0 10px} }
+</style></head><body>
+
+<div class="prose lead">
+  <p>Brush a leaf of <i>Mimosa pudica</i> and it answers before you have taken your hand away. The two leaflets you touched fold up against each other, face to face, and the pair beside them follows, and the next, a closing that runs down the little branch toward the stalk at a pace you can watch, a few centimetres a second. When it reaches the stalk the other branches draw together and close from their bases, and then the whole leaf drops on its hinge, as if it had been cut. A few seconds have passed. It takes the plant ten or twenty minutes to put the leaf back.</p>
+  <p>The hinge is a pulvinus, a swelling at the foot of every stalk, every branch and every leaflet, packed with motor cells that hold the leaf up by the pressure of the water in them. In 1873 Wilhelm Pfeffer showed that the movement lives there and nowhere else: the cells on one side of the joint suddenly let their water go, and the joint buckles. His attempt to explain how a cell could hold and lose that pressure sent him to the semipermeable membranes of his <i>Osmotische Untersuchungen</i>, the experiments on which van ’t Hoff later built the law of osmotic pressure.</p>
+</div>
+
+<div class="stage">
+  <figure class="mt">
+    <img class="mt-plate" src="assets/plate.webp" width="2200" height="3096" alt="A hand-coloured engraving of the sensitive plant: a hairy stem with round pink flower heads and long feathery leaves.">
+    <input type="checkbox" role="switch" class="mt-switch" data-mimosa-toggle data-src="assets/mimosa.json" aria-label="The leaf" checked>
+  </figure>
+</div>
+
+<div class="prose end">
+  <p>Charles Darwin and his son Francis spent much of the 1870s watching leaves move. In <i>The Power of Movement in Plants</i> (1880) they fixed fine glass filaments to the tips of leaves and traced, dot by dot on sheets of glass, the slow circles every growing part of a plant describes, and the evening movement they called sleep. <i>Mimosa</i> sleeps in earnest: at dusk its leaflets fold and its leaves sink exactly as they do when touched, though slowly, and nobody has touched them. A hundred and fifty years earlier the astronomer de Mairan had shut a sensitive plant in a cupboard and found that it went on opening by day and closing by night in the dark, the first sign of a clock inside a living thing.</p>
+  <p>Touch is expensive. A folded leaf is not feeding, and in 2014 Monica Gagliano and her colleagues asked whether the plant could learn when not to bother. They dropped potted plants fifteen centimetres in a padded rig, again and again. Within a few drops many stopped closing; shaken instead of dropped, they closed at once, so they were not simply tired. A month later, without further training, they still ignored the drop. Plants grown in poor light, for whom a closed leaf costs most, learned fastest. Close this leaf too often and it will do the same: it still closes, but slowly, the way it does at dusk, without falling.</p>
+</div>
+
+<script type="module" src="mimosa-toggle.js"></script>
+</body></html>

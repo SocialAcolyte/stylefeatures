@@ -1,0 +1,26 @@
+/* ─── koi-pond // koi under water you can touch (koi-pond.js) ──────────
+   The figure is the pond: give it a size, full width. Its top and bottom
+   edges meet the page along an irregular line with a short fade. Without JS or WebGL the <img> (a still of the pond)
+   is all there is. */
+
+[data-koi-pond] {
+  position: relative; margin: 0;
+  touch-action: pan-y;                 /* sideways strokes stir, vertical swipes scroll */
+  -webkit-tap-highlight-color: transparent; -webkit-user-select: none; user-select: none;
+  cursor: default;
+}
+[data-koi-pond] > img {
+  display: block; width: 100%; height: 100%; object-fit: contain;
+}
+.kp-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+  pointer-events: none;
+}
+[data-koi-pond].is-live > img { visibility: hidden; }
+[data-koi-pond]:focus { outline: none; }
+[data-koi-pond]:focus-visible { outline: 2px solid var(--accent, #c96f4a); outline-offset: -4px; }
+
+@media print {
+  .kp-canvas { display: none; }
+  [data-koi-pond].is-live > img { visibility: visible; }
+}

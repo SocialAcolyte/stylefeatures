@@ -1,0 +1,30 @@
+/* ─── lotus-leaf // rain on a cluster of lotus leaves in a still pond (lotus-leaf.js) ───
+   The figure is the pond. Its <img>s are the cut-out leaves the script draws from;
+   the canvas covers the figure. Without JS or WebGL the two images lie on the
+   paper as a small still group. */
+
+[data-lotus-leaf] {
+  position: relative; margin: 0;
+  width: 100%; aspect-ratio: 1.18;
+  touch-action: pan-y;                    /* sideways pushes roll beads; vertical swipes scroll */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none; user-select: none;
+  outline: none;
+}
+[data-lotus-leaf] > img {
+  position: absolute; display: block; height: auto;
+  -webkit-user-drag: none;
+  filter: saturate(.8) hue-rotate(4deg) drop-shadow(4px 7px 9px rgba(20, 19, 18, .16));
+}
+[data-lotus-leaf] > img:nth-of-type(1) { left: 8%; top: 4%; width: 52%; }
+[data-lotus-leaf] > img:nth-of-type(2) { right: 4%; bottom: 3%; width: 38%; filter: saturate(.75) hue-rotate(-14deg) drop-shadow(3px 5px 7px rgba(20, 19, 18, .14)); }
+[data-lotus-leaf] > img:nth-of-type(n+3) { display: none; }
+.ll-canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+[data-lotus-leaf].is-live > img { opacity: 0; }
+[data-lotus-leaf]:focus-visible { outline: 1px solid var(--accent, #c96f4a); outline-offset: 6px; }
+
+@media print {
+  .ll-canvas { display: none; }
+  [data-lotus-leaf].is-live > img { opacity: 1; }
+}

@@ -1,0 +1,53 @@
+/* ─── paper-theatre — a Victorian toy theatre set as you scroll ──────────────
+   Without JS (or with reduced motion) the stage shows the set scene as an <img>.
+   Live, a canvas covers the stage and draws the proscenium and the cards itself:
+   the stage is pinned while the section scrolls past (the runway) and is set on
+   it; on a phone it goes in close and follows what is being set. */
+
+[data-paper-theatre], .pt {
+  position: relative;
+  background: var(--paper, #f3f0e8);
+}
+.pt-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: clamp(14px, 7svh, 72px) var(--pt-gutter, var(--gutter, clamp(12px, 3vw, 32px)));
+  box-sizing: border-box;
+}
+.pt-img {
+  grid-area: 1 / 1;
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: min(100%, 1500px);
+  max-height: 86svh;
+  object-fit: contain;
+  /* the proscenium's edge, as the canvas draws it */
+  outline: 1px solid rgba(20, 19, 18, .55);
+  outline-offset: 3px;
+}
+.pt-canvas { display: none; position: absolute; inset: 0; width: 100%; height: 100%; }
+
+.pt.is-live .pt-canvas { display: block; }
+.pt.is-live .pt-img { visibility: hidden; }
+
+.pt.pt-scroll.is-live { height: var(--pt-runway, 440svh); }
+.pt.pt-scroll.is-live .pt-stage {
+  position: sticky; top: 0; height: 100svh; overflow: hidden;
+  touch-action: pan-y;
+}
+.pt:not(.pt-scroll).is-live .pt-stage { aspect-ratio: 16 / 9; max-height: 92svh; margin: 0 auto; }
+
+@media (prefers-reduced-motion: reduce) {
+  .pt.pt-scroll.is-live { height: auto; }
+  .pt.pt-scroll.is-live .pt-stage { position: relative; height: auto; }
+  .pt.is-live .pt-canvas { display: none; }
+  .pt.is-live .pt-img { visibility: visible; }
+}
+@media print {
+  .pt.pt-scroll.is-live { height: auto; }
+  .pt.pt-scroll.is-live .pt-stage { position: static; height: auto; }
+  .pt.is-live .pt-canvas { display: none; }
+  .pt.is-live .pt-img { visibility: visible; }
+}

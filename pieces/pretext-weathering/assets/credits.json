@@ -1,0 +1,65 @@
+[
+  {
+    "file": "stone.webp",
+    "title": "Sawn limestone texture",
+    "maker": "Titus Tscharntke",
+    "date": "",
+    "source": "https://commons.wikimedia.org/wiki/File:Sawn_limestone_texture.jpg",
+    "licence": "Public domain",
+    "use": "The face of the block: its lighting gradient divided out, mostly desaturated; tinted to --pw-stone in the shader, its fine grain used as relief"
+  },
+  {
+    "file": "lichens.webp",
+    "cell": "top left (orange lichen)",
+    "title": "Caloplaca saxicola 117983955",
+    "maker": "Stephen James McWilliam",
+    "source": "https://commons.wikimedia.org/wiki/File:Caloplaca_saxicola_117983955.jpg",
+    "licence": "CC BY 4.0",
+    "use": "a seamless tile cropped from the thallus"
+  },
+  {
+    "file": "lichens.webp",
+    "cell": "top middle (Caloplaca)",
+    "title": "Caloplaca saxicola 65498596",
+    "maker": "mister_bumble",
+    "source": "https://commons.wikimedia.org/wiki/File:Caloplaca_saxicola_65498596.jpg",
+    "licence": "CC BY 4.0",
+    "use": "a seamless tile cropped from the thallus"
+  },
+  {
+    "file": "lichens.webp",
+    "cell": "top right (Lecanora muralis)",
+    "title": "Leiden - Muurschotelkorst (Lecanora muralis)",
+    "maker": "Rudolphous",
+    "source": "https://commons.wikimedia.org/wiki/File:Leiden_-_Muurschotelkorst_(Lecanora_muralis).jpg",
+    "licence": "CC BY-SA 4.0",
+    "use": "a seamless tile cropped from the thallus"
+  },
+  {
+    "file": "lichens.webp",
+    "cell": "bottom left (grey crust)",
+    "title": "Myriolecis albescens 736323",
+    "maker": "Igor Yevdokimov (Mushroom Observer)",
+    "source": "https://commons.wikimedia.org/wiki/File:Myriolecis_albescens_736323.jpg",
+    "licence": "CC BY-SA 3.0",
+    "use": "a seamless tile cropped from the thallus"
+  },
+  {
+    "file": "lichens.webp",
+    "cell": "bottom middle (Verrucaria)",
+    "title": "Verrucaria nigrescens 38318069",
+    "maker": "Nova Patch",
+    "source": "https://commons.wikimedia.org/wiki/File:Verrucaria_nigrescens_38318069.jpg",
+    "licence": "CC BY-SA 4.0",
+    "use": "a seamless tile cropped from the thallus"
+  },
+  {
+    "file": "lichens.webp",
+    "cell": "bottom right (moss)",
+    "title": "Grimmia pulvinata 105419831",
+    "maker": "Stephen James McWilliam",
+    "source": "https://commons.wikimedia.org/wiki/File:Grimmia_pulvinata_105419831.jpg",
+    "licence": "CC BY 4.0",
+    "use": "a seamless tile cropped from the cushion"
+  }
+]

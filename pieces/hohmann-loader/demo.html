@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>hohmann-loader</title><link rel="icon" href="data:,">
+<!-- The one line the page plate needs in <head>: show it from the first paint, and take it away again
+     after 12 s if the script never arrives, so the page can never be held hostage. -->
+<script>document.documentElement.classList.add('hl-loading');window.hlFailsafe=setTimeout(function(){document.documentElement.classList.remove('hl-loading')},12000)</script>
+<link rel="stylesheet" href="hohmann-loader.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#f3f0e8;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;
+    --serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box} html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  .prose{max-width:33em;margin:0 auto;padding:0 var(--gutter);font-size:clamp(19px,1.5vw,22px);line-height:1.55;font-weight:500;color:var(--ink-2);text-wrap:pretty;hyphens:auto}
+  .prose p{margin:0 0 1.1em}
+  h1{font-weight:400;font-style:italic;font-size:clamp(34px,4.4vw,54px);line-height:1.05;color:var(--ink);margin:0 0 .9em;text-align:center}
+  .lead{padding-top:20svh}
+  .end{padding-bottom:26svh}
+  .rule{width:28px;height:1px;background:var(--ink-3);opacity:.5;margin:2.6em auto 2.6em}
+  .more{display:flex;justify-content:center;margin:2.4em 0 1.6em}
+  .more button{font:500 14px/1 var(--sans);letter-spacing:.01em;color:var(--ink);background:transparent;border:1px solid var(--rule);
+    border-radius:999px;padding:0 20px 0 14px;min-height:46px;display:inline-flex;align-items:center;gap:.7em;cursor:pointer;touch-action:manipulation}
+  .more button:hover{border-color:var(--ink-3)}
+  .more button:focus-visible{outline:2px solid var(--ink-2);outline-offset:3px}
+  .more button[aria-busy=true]{cursor:progress}
+  .more .hl{--hl-size:26px}
+  .more .hl[hidden]{display:none}
+  #next[hidden]{display:none}
+</style></head><body>
+
+<div data-hohmann-loader="page" data-source="manual" aria-label="Loading the page"></div>
+
+<div class="prose lead">
+  <h1>The cheapest way to Mars</h1>
+  <p>Walter Hohmann was a civil engineer in the building department of the city of Essen, and he worked out the arithmetic of travel between the planets in his spare time, with tables and a slide rule, years before anyone had a rocket that could leave the ground for long. In 1925 he published it as a slim book, <i>Die Erreichbarkeit der Himmelskörper</i>, the attainability of the heavenly bodies. Most of it is about fuel, because fuel is what a journey in space is made of: every change of speed has to be bought with propellant carried up from the ground.</p>
+  <p>His answer for going from one circular orbit to a larger one is the curve on the plate that opened this page. Fire once, forwards, to stretch your own orbit into an ellipse whose nearest point to the Sun is where you are and whose farthest point just touches the orbit you want. Then coast, with the engine cold, for exactly half a turn of that ellipse. At the far end you are moving too slowly to stay on the bigger circle, so you fire forwards once more and you are on it. Two burns, both along the direction of travel, and nothing wasted on turning.</p>
+  <p>For Earth to Mars the half-turn takes about two hundred and fifty-nine days. The first burn adds a little under three kilometres a second to the speed Earth already gives you round the Sun; the second, at Mars's orbit, about two and a half more. Because the craft is a planet in its own right for those eight and a half months, it obeys Kepler like one: quick while it is still close to the Sun, slow as it climbs, so the first half of the journey in time carries it well over half the way round.</p>
+</div>
+
+<div class="prose end">
+  <div class="rule"></div>
+  <p>The catch is timing. The craft takes the long way round the Sun, and Mars has to be at the far end when it gets there, so at the moment of the first burn Mars must already be some forty-four degrees ahead of Earth in its orbit. That geometry comes round only once every two years and two months or so, which is why missions to Mars leave in clusters and why the dates are fixed long before anything is built.</p>
+  <div class="more">
+    <button type="button" id="fetch"><span data-hohmann-loader hidden><progress max="100"></progress></span><span>When the windows open</span></button>
+  </div>
+  <div id="next" hidden>
+    <p>Earth runs round the Sun in a year, Mars in about six hundred and eighty-seven days, so Earth gains on Mars by a little under half a degree a day and laps it every seven hundred and eighty. Each lap brings the forty-four degree lead round once, and with it a launch period of a few weeks. Miss it and the arithmetic does not care: the same two burns will be just as cheap again, twenty-six months later.</p>
+    <p>Real planets are not on circles and not quite in one plane, so real trajectories are Hohmann's ellipse bent and tilted to fit. The shape is still his. Mariner, Viking and every rover since has flown some version of the curve a city engineer drew in Essen to see whether it could be done.</p>
+  </div>
+</div>
+
+<script type="module">
+  import './hohmann-loader.js';
+
+  /* DEMO ONLY. On a real site leave out data-source="manual" and the plate follows the document by
+   * itself (parser, images, the load event). Served from disk this page is ready in a few
+   * milliseconds, so here it is fed a believable network instead: uneven chunks, one stall. */
+  const plate = document.querySelector('[data-hohmann-loader="page"]');
+  if (plate && plate.hohmannLoader && !window.__hlStill) {
+    const api = plate.hohmannLoader, chunks = [.07, .16, .22, .31, .31, .38, .52, .58, .71, .84, .9, 1];
+    let i = 0;
+    const next = () => {
+      const v = chunks[i++];
+      if (v >= 1) { api.done(); return; }
+      api.setProgress(v);
+      setTimeout(next, 260 + Math.random() * 420);
+    };
+    setTimeout(next, 250);
+  }
+
+  /* The inline loader: its <progress> is the source of truth. */
+  const btn = document.getElementById('fetch'), next = document.getElementById('next');
+  const hl = btn.querySelector('[data-hohmann-loader]'), pr = hl.querySelector('progress');
+  btn.addEventListener('click', () => {
+    if (btn.getAttribute('aria-busy') === 'true') return;
+    btn.setAttribute('aria-busy', 'true'); hl.hidden = false;
+    let v = 0;
+    const step = () => {
+      v = Math.min(100, v + 8 + Math.random() * 22); pr.value = Math.round(v);
+      if (v < 100) setTimeout(step, 240 + Math.random() * 380);
+    };
+    setTimeout(step, 900);                       // a moment of waiting first: the parking orbit
+    hl.addEventListener('hohmann:arrive', () => setTimeout(() => {
+      next.hidden = false; btn.parentElement.remove();
+    }, 700), { once: true });
+  });
+</script>
+</body></html>

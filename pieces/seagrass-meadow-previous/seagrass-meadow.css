@@ -1,0 +1,77 @@
+/* ─── Seagrass meadow: a Posidonia meadow five metres down (seagrass-meadow.js) ───
+   Namespace .sm-. Without JS, [data-seagrass-meadow] is a band showing its
+   <img> (the open-water plate). With JS a canvas covers it and the meadow
+   grows on it.
+
+   Theme on the element or any parent:
+     --sm-aspect          the band's shape (and --sm-aspect-narrow on phones)
+     --sm-radius          corner radius
+     --sm-water           colour shown before the plate loads
+     --sm-control         pause button colour (on the water)                 */
+
+[data-seagrass-meadow], .sm {
+  --sm-water: #1b6e78;
+  --sm-control: rgba(236, 248, 246, .86);
+  position: relative;
+  display: block;
+  width: 100%; min-width: 0; margin: 0;
+  aspect-ratio: var(--sm-aspect, 21 / 9);
+  overflow: visible;             /* the leaves grow up out of the band, into the page */
+  border-radius: var(--sm-radius, 0);
+  background: var(--sm-water) radial-gradient(120% 90% at 35% -10%, #5fc0c6 0%, #1f7f88 45%, #0d4e5a 100%);
+  contain: inline-size;
+  touch-action: pan-y;          /* a vertical drag still scrolls the page; across, it is your hand */
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none; user-select: none;
+}
+@media (max-width: 640px) {
+  [data-seagrass-meadow], .sm { aspect-ratio: var(--sm-aspect-narrow, 4 / 5); }
+}
+[data-seagrass-meadow] > img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 46% 30%;
+  display: block;
+  transition: opacity .6s ease;
+}
+.sm.is-live > img { opacity: 0; }
+
+.sm-canvas {
+  /* the canvas rises above the band by --sm-rise (of the band's height): the water stays a crisp
+     band, the leaves near you grow up past its top edge onto the page. It takes no events, so the
+     text it rises behind stays selectable; the script listens on the band and follows a mouse. */
+  position: absolute; left: 0; width: 100%;
+  top: calc(-1 * var(--sm-rise, 30%)); height: calc(100% + var(--sm-rise, 30%));
+  display: block;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .9s ease;
+}
+@media (max-width: 640px) { .sm-canvas { top: calc(-1 * var(--sm-rise-narrow, 20%)); height: calc(100% + var(--sm-rise-narrow, 20%)); } }
+.sm.is-live .sm-canvas { opacity: 1; }
+
+.sm-pause {
+  position: absolute; left: max(12px, env(safe-area-inset-left)); bottom: 12px; z-index: 2;
+  width: 34px; height: 34px; padding: 0;
+  display: grid; place-items: center;
+  border: 1px solid color-mix(in srgb, var(--sm-control) 45%, transparent);
+  border-radius: 50%;
+  background: rgba(6, 40, 46, .28);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  color: var(--sm-control);
+  cursor: pointer;
+  opacity: 0; pointer-events: none;     /* nothing on the art: it appears only when reached from the keyboard */
+  transition: opacity .3s, background .3s;
+}
+.sm-pause:focus-visible { opacity: 1; pointer-events: auto; background: rgba(6, 40, 46, .45); }
+.sm-pause:focus-visible { outline: 2px solid var(--sm-control); outline-offset: 2px; }
+.sm-pause svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.sm-pause .sm-i-play { display: none; fill: currentColor; stroke-width: 1; }
+.sm-pause[aria-pressed="true"] .sm-i-play { display: block; }
+.sm-pause[aria-pressed="true"] .sm-i-pause { display: none; }
+.sm-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sm-pause { display: none; }          /* nothing moves, so nothing to pause */
+  .sm-canvas, [data-seagrass-meadow] > img { transition: none; }
+}

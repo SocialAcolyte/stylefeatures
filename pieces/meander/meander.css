@@ -1,0 +1,102 @@
+/* ─── meander — a river wandering across its floodplain as you scroll ─────
+   Without JS the stage shows a detail of Fisk's plate as an <img>.
+   Live, a canvas takes over: the stage is pinned while the section scrolls
+   past (the runway), and the river's history is scrubbed by the scroll. */
+
+[data-meander], .mr {
+  position: relative;
+  background: var(--paper, #f3f0e8);
+  --mr-ink: var(--ink, #141312);
+  --mr-ink-2: var(--ink-2, #4a4744);
+}
+.mr-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  box-sizing: border-box;
+  padding: clamp(20px, 5svh, 56px) var(--gutter, clamp(16px, 3vw, 32px));
+}
+.mr-still {
+  display: block;
+  width: min(100%, 1000px);
+  height: auto;
+  mix-blend-mode: multiply;
+}
+
+.mr.is-live .mr-stage { padding: 0; height: 100svh; overflow: hidden; touch-action: pan-y; }
+.mr.is-live .mr-still { display: none; }
+.mr-canvas {
+  position: absolute; top: 0; left: 0;
+  display: block;
+  pointer-events: none;
+  /* the map melts into the page above and below */
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%);
+          mask-image: linear-gradient(to bottom, transparent 0, #000 7%, #000 93%, transparent 100%);
+}
+
+/* Scroll: the runway is the section's height; the stage is pinned inside it. */
+.mr.mr-scroll.is-live { height: var(--mr-runway, 350svh); }
+.mr.mr-scroll.is-live .mr-stage { position: sticky; top: 0; }
+
+/* ─── the legend: stages earned one by one, and a scale of miles ─────── */
+.mr-legend {
+  position: absolute;
+  left: max(var(--gutter, clamp(16px, 3vw, 32px)), 3vw);
+  bottom: max(18px, 4.5svh);
+  z-index: 1;
+  padding: 7px 10px 8px;
+  background: color-mix(in srgb, var(--paper, #f3f0e8) 94%, transparent);
+  border: .5px solid color-mix(in srgb, var(--mr-ink) 55%, transparent);
+  box-shadow: 0 0 0 2.5px var(--paper, #f3f0e8), 0 0 0 3px color-mix(in srgb, var(--mr-ink) 35%, transparent);
+  font: 500 9px/1 var(--mr-sans, 'Inter', 'Helvetica Neue', Arial, sans-serif);
+  color: var(--mr-ink-2);
+  letter-spacing: .02em;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.mr-lg-head {
+  display: flex; justify-content: space-between;
+  text-transform: uppercase; letter-spacing: .16em; font-size: 8px;
+  padding-bottom: 6px; margin-bottom: 7px;
+  border-bottom: .5px solid color-mix(in srgb, var(--mr-ink) 40%, transparent);
+}
+.mr-lg-row { list-style: none; margin: 0; padding: 0; display: flex; gap: 4px; }
+.mr-lg-row li { display: grid; justify-items: center; gap: 4px; width: 18px; }
+.mr-lg-row i {
+  display: block; width: 18px; height: 11px; box-sizing: border-box;
+  border: .5px solid color-mix(in srgb, var(--mr-ink) 60%, transparent);
+  transition: opacity .9s ease, filter .9s ease;
+}
+.mr-lg-row b { font-weight: 500; transition: opacity .9s ease; }
+.mr-lg-row li:not(.is-on) i { background: transparent !important; opacity: .28; }
+.mr-lg-row li:not(.is-on) b { opacity: .3; }
+.mr-lg-row li.is-on { cursor: default; }
+.mr-lg-row li.is-on.is-hl b { color: var(--mr-ink); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: .5px; }
+.mr-lg-row li.mr-now { width: 22px; }
+.mr-lg-row li.mr-now i { width: 22px; border: 0; }
+.mr-lg-row li.mr-now svg { display: block; width: 22px; height: 11px; fill: none; stroke: #18202c; stroke-width: 1; }
+
+.mr-scale { margin-top: 9px; display: grid; justify-items: start; gap: 3px; }
+.mr-scale-bar {
+  width: calc(var(--mr-mile, 20px) * 5); height: 3px;
+  border: .5px solid var(--mr-ink-2);
+  background: repeating-linear-gradient(90deg, var(--mr-ink-2) 0 var(--mr-mile, 20px), transparent var(--mr-mile, 20px) calc(var(--mr-mile, 20px) * 2));
+}
+.mr-scale-n { display: flex; width: calc(var(--mr-mile, 20px) * 5 + 1px); justify-content: space-between; font-size: 7.5px; margin-left: -2px; }
+.mr-scale-t { font-family: var(--mr-serif, 'Cormorant Garamond', Georgia, serif); font-style: italic; font-size: 11px; letter-spacing: .02em; color: var(--mr-ink-2); }
+
+/* upright screens: the map stops short and the legend sits in the margin under it */
+.mr-v .mr-legend { left: 50%; transform: translateX(-50%); bottom: 10px; }
+@media (max-width: 560px) {
+  .mr-legend { padding: 6px 7px 7px; }
+  .mr-lg-row { gap: 3px; }
+  .mr-lg-row li { width: 17px; }
+  .mr-lg-row i { width: 17px; height: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mr-lg-row i, .mr-lg-row b { transition: none; }
+}
+@media print {
+  .mr.mr-scroll.is-live { height: auto; }
+  .mr.mr-scroll.is-live .mr-stage { position: static; }
+}

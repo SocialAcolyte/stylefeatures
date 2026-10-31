@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "disc-turn",
+      "file": "assets/sounds/disc-turn.wav",
+      "on": "drag",
+      "target": "[data-pretext-spiral]",
+      "volume": 0.2,
+      "vary": 2.0,
+      "source": {
+        "kind": "bank",
+        "id": "swish/stick",
+        "seed": 1442435298,
+        "pitch_st": -5.0,
+        "dur_x": 1.0
+      },
+      "credit": "earshot sound bank swish/stick (seed 1442435298, pitch -5 st), synthesized in code: github.com/Leonxlnx/earshot (MIT), no recording"
+    }
+  ]
+}

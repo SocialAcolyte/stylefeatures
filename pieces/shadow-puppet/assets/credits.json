@@ -1,0 +1,26 @@
+[
+  {
+    "file": "figure.webp",
+    "also": ["figure-painted.webp"],
+    "title": "Shadow puppet (wayang kulit), a female figure",
+    "maker": "Unknown maker, Java, Indonesia",
+    "date": "19th century",
+    "medium": "Wood, painted and gilded leather",
+    "collection": "Cooper Hewitt, Smithsonian Design Museum, 1935-15-1, given by Mrs. Henry J. Post",
+    "source": "https://collection.cooperhewitt.org/view/objects/asitem/id/53742",
+    "image": "https://ids.si.edu/ids/download?id=CHSDM-C473D2A1D7932-000001.jpg (4177 x 8258, via Smithsonian Open Access)",
+    "license": "CC0",
+    "processing": "Cut out at full resolution: paper and its cast shadows by luminance and chroma, the punched holes by the dark paper seen through them. figure.webp is mirrored (the audience's side of the screen) and fitted to 1024 x 2048 with the rod's end at the bottom centre; figure-painted.webp is the unmirrored painted side, 716 x 1600."
+  },
+  {
+    "file": "kayon.webp",
+    "title": "Fire Kayon, Wayang Kulit, Bali",
+    "maker": "Unknown maker, Bali, Indonesia",
+    "date": "undated",
+    "collection": "Museu do Oriente, Lisbon",
+    "photographer": "Daderot",
+    "source": "https://commons.wikimedia.org/wiki/File:Fire_Kayon,_Wayang_Kulit,_Bali_-_Museu_do_Oriente_-_Lisbon,_Portugal_-_DSC06830.JPG",
+    "license": "CC0",
+    "processing": "Cut out from the 3648 x 5472 photograph: the wall by brightness and by blue over red (the copper hide is far redder than the wall seen through its punches), broad glare patches refilled. The horn rod, cut off by the photograph, is carried on below in its own colour. Mirrored and fitted to 1024 x 2048."
+  }
+]

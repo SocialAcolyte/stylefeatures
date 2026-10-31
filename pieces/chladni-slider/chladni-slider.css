@@ -1,0 +1,55 @@
+/* ─── chladni-slider: Chladni's Tab. VIII, its sand figures made again as you scroll ───
+   Namespace .cl-. Without JS (or with reduced motion) the stage shows the printed sheet
+   as an <img>, lying on the page. Live, a canvas covers the stage and draws the sheet
+   itself (its edge and a tight shadow): the stage is pinned while the section scrolls past
+   (the runway), and on it the plates are bowed one by one.
+
+   Theme on the element or a parent:
+     --paper        the page around the sheet (the shader reads the element's background)
+     --cl-gutter    side padding of the stage
+     --cl-runway    set by the script: the section's height while live          */
+
+[data-chladni], [data-chladni-slider], .cl {
+  position: relative;
+  background: var(--paper, #f3f0e8);
+}
+.cl-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: clamp(14px, 5svh, 56px) var(--cl-gutter, var(--gutter, clamp(12px, 3vw, 32px)));
+  box-sizing: border-box;
+}
+.cl-img {
+  grid-area: 1 / 1;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 90svh;
+  /* a leaf of laid paper lying on the page */
+  box-shadow: 0 1px 2px rgba(40, 30, 18, .10), 0 6px 20px -10px rgba(40, 30, 18, .20);
+}
+.cl-canvas { display: none; position: absolute; inset: 0; }
+
+.cl.is-live .cl-canvas { display: block; }
+.cl.is-live .cl-img { visibility: hidden; }
+
+.cl.cl-scroll.is-live { height: var(--cl-runway, 300svh); }
+.cl.cl-scroll.is-live .cl-stage {
+  position: sticky; top: 0; height: 100svh; overflow: hidden;
+}
+.cl:not(.cl-scroll) .cl-stage { min-height: min(100svh, 1100px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cl.cl-scroll.is-live { height: auto; }
+  .cl.cl-scroll.is-live .cl-stage { position: relative; height: auto; }
+  .cl.is-live .cl-canvas { display: none; }
+  .cl.is-live .cl-img { visibility: visible; }
+}
+@media print {
+  .cl.cl-scroll.is-live { height: auto; }
+  .cl.cl-scroll.is-live .cl-stage { position: static; height: auto; }
+  .cl.is-live .cl-canvas { display: none; }
+  .cl.is-live .cl-img { visibility: visible; }
+}

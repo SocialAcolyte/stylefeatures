@@ -1,0 +1,52 @@
+/* ─── vellum-study — a botanical watercolour on vellum, painted as you scroll ──
+   Without JS (or with reduced motion) the stage shows the finished painting as an
+   <img>, a sheet of vellum lying on the page. Live, a canvas covers the stage and
+   draws the sheet (its edge, sharp, and a tight shadow that lifts a little where the
+   skin cockles) itself: the stage is pinned while the section scrolls past (the
+   runway) and the flower is painted on it in layers; on a phone the view goes in
+   close and follows the brush. */
+
+[data-vellum-study], .vs {
+  position: relative;
+  background: var(--paper, #f3f0e8);
+}
+.vs-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: clamp(14px, 5svh, 56px) var(--vs-gutter, var(--gutter, clamp(12px, 3vw, 32px)));
+  box-sizing: border-box;
+}
+.vs-img {
+  grid-area: 1 / 1;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: min(100%, 760px);
+  max-height: 90svh;
+  /* a sheet of vellum lying on the page */
+  box-shadow: 0 1px 2px rgba(40, 30, 18, .12), 0 7px 22px -10px rgba(40, 30, 18, .24);
+}
+.vs-canvas { display: none; position: absolute; inset: 0; }
+
+.vs.is-live .vs-canvas { display: block; }
+.vs.is-live .vs-img { visibility: hidden; }
+
+.vs.vs-scroll.is-live { height: var(--vs-runway, 380svh); }
+.vs.vs-scroll.is-live .vs-stage {
+  position: sticky; top: 0; height: 100svh; overflow: hidden;
+}
+.vs:not(.vs-scroll) .vs-stage { min-height: min(100svh, 1100px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .vs.vs-scroll.is-live { height: auto; }
+  .vs.vs-scroll.is-live .vs-stage { position: relative; height: auto; }
+  .vs.is-live .vs-canvas { display: none; }
+  .vs.is-live .vs-img { visibility: visible; }
+}
+@media print {
+  .vs.vs-scroll.is-live { height: auto; }
+  .vs.vs-scroll.is-live .vs-stage { position: static; height: auto; }
+  .vs.is-live .vs-canvas { display: none; }
+  .vs.is-live .vs-img { visibility: visible; }
+}

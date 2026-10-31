@@ -1,0 +1,38 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "surge-soft",
+      "file": "assets/sounds/surge-soft.mp3",
+      "on": "event:seagrass-meadow:surge",
+      "match": { "size": "small" },
+      "target": "[data-seagrass-meadow]",
+      "volume": 0.32,
+      "vary": 0.8,
+      "cooldown": 2500,
+      "credit": "Synthesised for Taste (numpy): low-passed noise whose cutoff swells with the surge, a sub-bass rumble, and faint snapping-shrimp crackle. No recording."
+    },
+    {
+      "name": "surge-big",
+      "file": "assets/sounds/surge-big.mp3",
+      "on": "event:seagrass-meadow:surge",
+      "match": { "size": "big" },
+      "target": "[data-seagrass-meadow]",
+      "volume": 0.4,
+      "vary": 0.6,
+      "cooldown": 2500,
+      "credit": "Synthesised for Taste (numpy), as surge-soft but a stronger swell. No recording."
+    },
+    {
+      "name": "hand-swish",
+      "file": "assets/sounds/hand-swish.mp3",
+      "on": "event:seagrass-meadow:swish",
+      "target": "[data-seagrass-meadow]",
+      "volume": 0.3,
+      "vary": 2.0,
+      "cooldown": 800,
+      "credit": "Synthesised for Taste (numpy): a short, muffled band of noise. No recording."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>paper-theatre</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="paper-theatre.css"><style>
+  :root{--paper:#f3f0e8;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--serif:'Cormorant Garamond',Georgia,serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box} html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  .prose{max-width:33em;margin:0 auto;padding:0 var(--gutter);font-size:clamp(19px,1.5vw,22px);line-height:1.55;font-weight:500;color:var(--ink-2);text-wrap:pretty;hyphens:auto}
+  .prose p{margin:0 0 1.1em}
+  .lead{padding-top:28svh;padding-bottom:14svh}
+  .end{padding-top:12svh;padding-bottom:30svh}
+  .rule{width:28px;height:1px;background:var(--ink-3);opacity:.5;margin:0 auto 3.2em}
+  @media (max-width:520px){ [data-paper-theatre]{--pt-gutter:5px} }
+</style></head><body>
+
+<div class="prose lead">
+  <p>For most of the nineteenth century a London child with a penny could buy a sheet of a play. Printers off the Strand and in Hoxton engraved the scenes and the characters of the pantomimes and melodramas then on at Covent Garden and Drury Lane, and sold them a penny plain, twopence coloured. You cut them out, pasted them onto card, and set them up in a theatre of wood and paper on the kitchen table.</p>
+  <p>The stage worked like the real one. The backcloth hung at the back. The wings stood in grooves down each side, one pair behind another, so the scene seemed to go back further than the table did. A ground row stood across the front to hide the floor, and the characters came on from the wings at the end of a wire.</p>
+</div>
+
+<section data-paper-theatre data-src="assets/stage.json">
+  <div class="pt-stage">
+    <img class="pt-img" src="assets/scene.webp" alt="" aria-hidden="true" width="1600" height="900">
+  </div>
+</section>
+
+<div class="prose end">
+  <div class="rule"></div>
+  <p>Light came from the front, from a row of small oil lamps or candles in a tin trough along the edge of the stage, and it did what footlights do. Each cut-out threw its shadow up and back onto whatever stood behind it, a little larger than itself, and the nearer it stood to the lamps the larger its shadow was.</p>
+  <p>Robert Louis Stevenson wrote about the sheets in 1884, in an essay called <i>A Penny Plain and Twopence Coloured</i>, long after the shop where he had bought them as a boy in Edinburgh. What he remembered best was not the plays but the sheets themselves, and the buying of them.</p>
+</div>
+
+<script type="module" src="paper-theatre.js"></script>
+</body></html>

@@ -1,0 +1,77 @@
+/* ─── Rain — a letter left out in a shower (pretext-rain.js) ──────────────
+   The letter is real text and stays in the DOM. Without JS (or WebGL2 with
+   float render targets) it is a sheet of laid paper with the letter written
+   on it. Once the paper is ready, the section becomes a tall runway with a
+   pinned stage; the canvas takes over and the letter is visually hidden
+   (still read aloud, found by ctrl+F, printed). */
+
+[data-pretext-rain], .pr {
+  position: relative;
+  color: var(--ink, #141312);
+}
+.pr-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: clamp(28px, 6svh, 64px) var(--gutter, clamp(16px, 3vw, 32px));
+  outline: none;
+}
+.pr-letter {
+  box-sizing: border-box;
+  width: min(100%, 34em);
+  margin: 0 auto;
+  padding: clamp(24px, 6vw, 56px) clamp(22px, 5.5vw, 52px);
+  font-family: var(--pr-hand, "Homemade Apple", "Segoe Script", cursive);
+  font-size: clamp(12px, 1.6vw, 15px);
+  line-height: 2.05;
+  color: var(--pr-ink, #1f3277);
+  background: var(--pr-sheet, #f6f0e2) url("assets/paper.webp") center / cover;
+  box-shadow: 0 1px 2px rgba(60, 40, 20, .12), 0 10px 26px -12px rgba(60, 40, 20, .35);
+}
+.pr-letter p { margin: 0; }
+.pr-letter p + p { margin-top: .35em; }
+.pr-letter .pr-date { text-align: right; margin-bottom: 1em; }
+.pr-letter p:not([class]) { text-indent: 2em; }
+.pr-letter .pr-close { margin-top: 1em; padding-left: 40%; }
+.pr-letter .pr-sign { padding-left: 58%; }
+.pr-letter .pr-ps { margin-top: 1em; }
+.pr-letter .pr-verso { margin-top: 2em; padding-top: 1.5em; border-top: 1px dashed rgba(31, 50, 119, .25); }
+
+.pr-canvas { display: none; }
+
+/* live: a runway; the sheet stays put while the shower passes over it */
+.pr.is-live { height: var(--pr-runway, 280svh); }
+.pr.is-live .pr-stage {
+  position: sticky; top: 0;
+  height: 100svh; box-sizing: border-box;
+  padding: 0; overflow: hidden;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color .6s ease;
+}
+.pr.is-live .pr-stage:focus-visible { box-shadow: inset 0 0 0 2px var(--accent, #c96f4a); }
+.pr.is-live .pr-canvas {
+  display: block;
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+}
+.pr.is-live .pr-letter {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap; padding: 0; margin: 0;
+  box-shadow: none; background: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pr.is-live { height: auto; }
+  .pr.is-live .pr-stage { position: relative; }
+}
+@media print {
+  .pr.is-live { height: auto; }
+  .pr.is-live .pr-stage { position: static; height: auto; padding: 0; }
+  .pr.is-live .pr-canvas { display: none; }
+  .pr.is-live .pr-letter {
+    position: static; width: auto; height: auto; overflow: visible;
+    clip-path: none; white-space: normal; padding: 2em;
+  }
+}

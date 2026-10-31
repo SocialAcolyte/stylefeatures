@@ -1,0 +1,216 @@
+/* cera-tablet: a Roman wax tablet as a text input. See README.md. */
+
+@font-face {
+  /* outlines-free: only the advance widths of the incised hand (tools/build-font.py) */
+  font-family: 'Cera Metrics';
+  src: url('assets/cera-metrics.woff') format('woff');
+  font-display: block;
+}
+
+.cera-tablet {
+  --ct-size: 30px;                 /* letter size (x-height is 0.42 of it); scales with the leaf where cq units exist, below */
+  --ct-lh: 1.4;
+  --ct-ink: #e9dcbc;               /* text colour before the script runs, and placeholders */
+  --ct-caret: #f2e2b4;
+  --ct-select: rgba(240, 222, 170, .2);
+  --ct-max: 940px;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  max-width: var(--ct-max);
+  margin-inline: auto;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* the photographed leaves: the Met's Coptic wax tablet, 14.2.4b and d (tools/cut-leaves.py);
+   each image box includes a short drawn shadow margin */
+.ct-leaf {
+  position: relative;
+  flex: 0 0 auto;
+  width: 100%;
+  aspect-ratio: 1129 / 1752;
+  background: url('assets/leaf-l.webp') center / 100% 100% no-repeat;
+}
+/* the hand is sized to the leaf, as a scribe's is to the tablet: about 9 or 10 lines
+   on an upright leaf, 5 or 6 on one lying landscape */
+@supports (width: 1cqmin) {
+  .ct-leaf { container-type: size; }
+  .cera-tablet { --ct-size: 8.2cqmin; }
+}
+.ct-leaf[data-leaf="r"] { aspect-ratio: 1128 / 1752; background-image: url('assets/leaf-r.webp'); }
+.ct-leaf[data-leaf="one"] { aspect-ratio: 1752 / 1125; background-image: url('assets/leaf-one.webp'); }
+.ct-leaf[data-leaf="land"] { aspect-ratio: 1752 / 1129; background-image: url('assets/leaf-land.webp'); }
+.ct-leaf[data-leaf="land-r"] { aspect-ratio: 1752 / 1128; background-image: url('assets/leaf-land-r.webp'); }
+
+/* the recessed panel: exactly where the wax is in the photograph */
+.ct-wax {
+  position: absolute;
+  z-index: 2;
+  left: 15.589%; top: 9.132%; right: 14.437%; bottom: 9.075%;
+  display: flex;
+  flex-direction: column;
+}
+.ct-leaf[data-leaf="r"] > .ct-wax { left: 13.741%; top: 8.847%; right: 15.337%; bottom: 10.331%; }
+.ct-leaf[data-leaf="one"] > .ct-wax { left: 10.445%; top: 14.222%; right: 10.103%; bottom: 14.311%; }
+.ct-leaf[data-leaf="land"] > .ct-wax { left: 9.018%; top: 15.589%; right: 9.19%; bottom: 14.437%; }
+.ct-leaf[data-leaf="land-r"] > .ct-wax { left: 10.274%; top: 13.741%; right: 8.904%; bottom: 15.337%; }
+
+/* a diptych: the two leaves of one set, the binding holes facing, a finger's width apart
+   (:has() so that it is a diptych before, or without, the script) */
+:is(.ct-diptych, .cera-tablet:has(> .ct-leaf ~ .ct-leaf)) > .ct-leaf[data-leaf="l"] { width: 50.4%; }
+:is(.ct-diptych, .cera-tablet:has(> .ct-leaf ~ .ct-leaf)) > .ct-leaf[data-leaf="r"] { width: 50.4%; margin-left: -0.8%; }
+/* narrow screens: the pair turns a quarter, one leaf above the other, holes facing */
+@media (max-width: 640px) {
+  :is(.ct-diptych, .cera-tablet:has(> .ct-leaf ~ .ct-leaf)) { flex-direction: column; }
+  :is(.ct-diptych, .cera-tablet:has(> .ct-leaf ~ .ct-leaf)) > .ct-leaf[data-leaf] { width: 100%; margin-left: 0; aspect-ratio: 1752 / 1129; background-image: url('assets/leaf-land.webp'); }
+  :is(.ct-diptych, .cera-tablet:has(> .ct-leaf ~ .ct-leaf)) > .ct-leaf[data-leaf="r"] { aspect-ratio: 1752 / 1128; background-image: url('assets/leaf-land-r.webp'); }
+  :is(.ct-diptych, .cera-tablet:has(> .ct-leaf ~ .ct-leaf)) > .ct-leaf + .ct-leaf { margin-top: -1.6%; }
+  :is(.ct-diptych, .cera-tablet:has(> .ct-leaf ~ .ct-leaf)) > .ct-leaf[data-leaf] > .ct-wax { left: 9.018%; top: 15.589%; right: 9.19%; bottom: 14.437%; }
+  :is(.ct-diptych, .cera-tablet:has(> .ct-leaf ~ .ct-leaf)) > .ct-leaf[data-leaf="r"] > .ct-wax { left: 10.274%; top: 13.741%; right: 8.904%; bottom: 15.337%; }
+}
+
+.ct-wax textarea,
+.ct-wax input,
+.ct-wax > .ct-inscription {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: .3em .45em .12em;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--ct-ink);
+  font: 400 var(--ct-size) / var(--ct-lh) var(--serif, Georgia, serif);
+  letter-spacing: 0;
+  text-align: start;
+  text-indent: 0;
+  text-transform: none;
+  word-spacing: 0;
+  tab-size: 4;
+  caret-color: var(--ct-caret);
+  resize: none;
+  outline: none;
+  overflow: hidden;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.ct-wax textarea { flex: 1 1 auto; min-height: 0; }
+.ct-wax input { flex: 0 0 auto; height: calc(var(--ct-size) * var(--ct-lh) + .3em); padding-block: .1em .2em; }
+.ct-wax > .ct-inscription { flex: 0 0 auto; }
+
+/* once the script is running, the letters are cut into the wax, not printed */
+.ct-on .ct-wax textarea,
+.ct-on .ct-wax input,
+.ct-on .ct-inscription {
+  font-family: 'Cera Metrics', var(--serif, Georgia, serif);
+  font-kerning: none;
+  font-variant-ligatures: none;
+  font-feature-settings: normal;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+.cera-tablet ::selection { background: var(--ct-select); color: transparent; }
+.ct-wax textarea::placeholder,
+.ct-wax input::placeholder {
+  color: var(--ct-ink);
+  -webkit-text-fill-color: var(--ct-ink);
+  opacity: .3;
+  font-family: var(--serif, Georgia, serif);
+  font-style: italic;
+  transition: opacity .6s ease;
+}
+.ct-warming .ct-wax textarea::placeholder,
+.ct-warming .ct-wax input::placeholder { opacity: 0; transition: none; }
+/* focus: the native caret, blinking in the wax, is the focus mark (no box drawn on the tablet) */
+
+.ct-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+.ct-2d .ct-canvas { image-rendering: auto; }
+
+.ct-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+}
+.ct-overlay svg { position: absolute; inset: 0; overflow: visible; }
+.ct-stylus-body, .ct-stylus-shadow { transform-origin: 0 0; }
+
+.ct-mirror {
+  position: absolute;
+  visibility: hidden;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: -1;
+}
+.ct-ghost {
+  position: absolute;
+  inset: auto 0 auto 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.ct-live, .ct-sr {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* the leaf is full: a small knock */
+.ct-full { animation: ct-knock .22s ease-out; }
+@keyframes ct-knock { 30% { transform: translateX(-2px); } 65% { transform: translateX(1.5px); } }
+
+.ct-has-bar { margin-bottom: 48px; }
+.ct-bar {
+  position: absolute;
+  top: 100%;
+  right: 4%;
+  z-index: 5;
+  display: flex;
+  gap: 8px;
+  margin-top: 4px;
+}
+.ct-clear {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 36px;
+  padding: 0 14px 0 11px;
+  border: 1px solid var(--rule, #cfcac0);
+  border-radius: 999px;
+  background: var(--paper, #f3f0e8);
+  color: var(--ink-2, #4a4744);
+  font: 500 12px/1 var(--sans, system-ui, sans-serif);
+  letter-spacing: .02em;
+  cursor: pointer;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.ct-clear svg { width: 15px; height: 15px; fill: #b4652d; }
+.ct-clear:hover { background: var(--paper-2, #e9e5da); color: var(--ink, #141312); }
+.ct-clear:focus-visible { outline: 2px solid var(--accent, #c96f4a); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ct-full { animation: none; }
+}
+@media (forced-colors: active) {
+  .ct-canvas, .ct-overlay { display: none; }
+  .ct-on .ct-wax textarea, .ct-on .ct-wax input, .ct-on .ct-inscription {
+    font-family: var(--serif, Georgia, serif);
+    color: CanvasText;
+    -webkit-text-fill-color: CanvasText;
+  }
+  .ct-wax textarea, .ct-wax input { border: 1px solid CanvasText; }
+}

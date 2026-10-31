@@ -1,0 +1,15 @@
+[
+  {
+    "file": "waratah.webp",
+    "derived": ["waratah-bare.webp", "waratah-wash.webp", "waratah-body.webp", "waratah-model.webp", "waratah-lines.webp", "waratah-map.webp", "waratah.json"],
+    "title": "Untitled (Waratah, Telopea speciosissima)",
+    "artist": "Pancrace Bessa (French, 1772–1846)",
+    "date": "1828–1835",
+    "medium": "Pencil and watercolour (with body colour) on vellum, gold frame",
+    "source": "https://clevelandart.org/art/1955.484",
+    "image": "https://openaccess-cdn.clevelandart.org/1955.484/1955.484_full.tif",
+    "collection": "The Cleveland Museum of Art, Gift of The Print Club of Cleveland in honor of Mrs. William G. Mather, 1955.484",
+    "licence": "CC0 1.0 (Cleveland Museum of Art Open Access)",
+    "notes": "Full TIFF (3067x4669) resized to 2048x3118. The bare vellum, first wash, body colour, graphite drawing and time maps are derived from it by the builder (scripts in the scratch folder); they are reconstructions, not technical images."
+  }
+]

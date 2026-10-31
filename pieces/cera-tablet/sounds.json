@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "spatula",
+      "file": "assets/sounds/spatula.wav",
+      "on": "event:cera-tablet:smooth",
+      "target": ".cera-tablet",
+      "volume": 0.3,
+      "vary": 1.5,
+      "cooldown": 120,
+      "credit": "synthesised in code (tools/make-sounds.py): band-limited noise under a swell, no recording"
+    },
+    {
+      "name": "warm",
+      "file": "assets/sounds/warm.wav",
+      "on": "event:cera-tablet:clear",
+      "target": ".cera-tablet",
+      "volume": 0.35,
+      "credit": "synthesised in code (tools/make-sounds.py): low hiss with small crackles, no recording"
+    }
+  ]
+}

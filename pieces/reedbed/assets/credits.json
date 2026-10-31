@@ -1,0 +1,16 @@
+[
+ {
+  "file": "reedbed-dusk.webp",
+  "title": "Common reed bed at dusk over open water",
+  "source": "Generated with Midjourney for Taste (job id not recorded)",
+  "license": "Generated with Midjourney; not public domain",
+  "note": "The plate is the sky, the mist, the far reeds and the water; the near stems are drawn over it in WebGL2."
+ },
+ {
+  "file": "reedbed-mask.webp",
+  "derived_from": "reedbed-dusk.webp",
+  "title": "Shader mask (reeds, water, sky)",
+  "license": "Ours, derived from reedbed-dusk.webp",
+  "note": "A map made from the plate, read by the shaders to tell the plate's reeds and water apart."
+ }
+]

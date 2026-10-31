@@ -1,0 +1,76 @@
+[
+  {
+    "file": "koi-body.webp",
+    "derived": "A top view of a koi assembled from the print: scales from the carp's flank; head skin from its pale snout and red brow (smooth, unscaled); the tail from two copies of its pectoral fin. Eyes, nostrils and barbels drawn over it in the print's own colours. Recoloured to kohaku, sanke, yamabuki and chagoi in the shader.",
+    "title": "The Red Carp",
+    "artist": "Utagawa Toyokuni I",
+    "date": "c. 1804/18",
+    "medium": "Color woodblock print; oban",
+    "source": "Art Institute of Chicago, Clarence Buckingham Collection, 1925.3308 (object 24886)",
+    "url": "https://www.artic.edu/artworks/24886/the-red-carp",
+    "license": "CC0 (Art Institute of Chicago, public domain)"
+  },
+  {
+    "file": "koi-fin.webp",
+    "derived": "The carp's pectoral fin, keyed off the green ground of the print.",
+    "title": "The Red Carp",
+    "artist": "Utagawa Toyokuni I",
+    "date": "c. 1804/18",
+    "url": "https://www.artic.edu/artworks/24886/the-red-carp",
+    "license": "CC0 (Art Institute of Chicago, public domain)"
+  },
+  {
+    "file": "koi-shadow.webp",
+    "derived": "The silhouette of koi-body.webp in a wider frame, fins at half weight, blurred three ways.",
+    "title": "The Red Carp",
+    "artist": "Utagawa Toyokuni I",
+    "url": "https://www.artic.edu/artworks/24886/the-red-carp",
+    "license": "CC0 (Art Institute of Chicago, public domain)"
+  },
+  {
+    "file": "pond-floor.webp",
+    "derived": "Lightened and softened (contrast 0.6, saturation 0.8).",
+    "title": "Sawn limestone texture",
+    "artist": "Titus Tscharntke",
+    "source": "Wikimedia Commons, File:Sawn limestone texture.jpg (via library/ornaments/stone/)",
+    "url": "https://commons.wikimedia.org/wiki/File:Sawn_limestone_texture.jpg",
+    "license": "Public domain"
+  },
+  {
+    "file": "koi-pond-still.webp",
+    "derived": "A render of the component itself (reduced motion), used as the fallback image. Made from the files above.",
+    "license": "as above"
+  },
+  {
+    "file": "lily-pad-a.webp",
+    "derived": "One lily pad cut from the photograph (keyed off the dark water), toned a little darker.",
+    "title": "20260817 LilyPad",
+    "artist": "NotPavlychenko",
+    "url": "https://commons.wikimedia.org/wiki/File:20260817_LilyPad.jpg",
+    "license": "CC0"
+  },
+  {
+    "file": "lily-pad-b.webp",
+    "derived": "A second pad from the same photograph, its stem cut away.",
+    "title": "20260817 LilyPad",
+    "artist": "NotPavlychenko",
+    "url": "https://commons.wikimedia.org/wiki/File:20260817_LilyPad.jpg",
+    "license": "CC0"
+  },
+  {
+    "file": "pebbles.webp",
+    "derived": "The two roundest stones cut from the photograph, greyed as wet river stone, in three tones.",
+    "title": "Neolithic smoothing stone (FindID 410734)",
+    "artist": "Salisbury and South Wiltshire Museum, Katie Hinds",
+    "url": "https://commons.wikimedia.org/wiki/File:Neolithic_smoothing_stone_(FindID_410734).jpg",
+    "license": "CC BY-SA 4.0"
+  },
+  {
+    "file": "leaves.webp",
+    "derived": "Three leaves cut from their scans and dulled to look waterlogged.",
+    "title": "Autumn American Sycamore Leaf; Autumn Tulip Tree Leaf; Autumn White Oak Leaf",
+    "artist": "Ninjatacoshell",
+    "url": "https://commons.wikimedia.org/wiki/File:Autumn_American_Sycamore_Leaf.jpg https://commons.wikimedia.org/wiki/File:Autumn_Tulip_Tree_Leaf.jpg https://commons.wikimedia.org/wiki/File:Autumn_White_Oak_Leaf.jpg",
+    "license": "CC BY-SA 3.0"
+  }
+]

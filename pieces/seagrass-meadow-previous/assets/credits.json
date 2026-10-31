@@ -1,0 +1,30 @@
+[
+ {
+  "file": "assets/meadow-plate.webp",
+  "title": "Open water over a Posidonia meadow (background plate)",
+  "date": "2026",
+  "source": "Generated with Midjourney for Taste (job 4ea2a806-cdb0-4151-af78-87d1365bb644, variant 3 of 4)",
+  "url": "",
+  "image": "mj/seagrass/4ea2a806_3.png",
+  "license": "Generated with Midjourney for Taste",
+  "prompt": "underwater photograph of a sunlit Posidonia seagrass meadow on pale sand, long green ribbon blades leaning in the current, clear blue-green water, caustic light on the sand, low angle, no fish, no text --ar 16:9 --style raw",
+  "note": "Only the water column and the surface are used. Every leaf and the dark rock were masked (green dominance plus local darkness), inpainted at quarter resolution (OpenCV Telea) and feathered back in; everything below the horizon row (y = 452 of 816) is replaced by that row, blurred sideways, because the sand is drawn by the shader. Light grain added, resized to 1600x896, WebP q82. meadow-plate-small.webp is the same at 800x448."
+ },
+ {
+  "file": "assets/sounds/surge-soft.mp3, assets/sounds/surge-big.mp3, assets/sounds/hand-swish.mp3",
+  "title": "Underwater surge, hand swish",
+  "date": "2026",
+  "source": "Synthesised for Taste in Python (numpy), no recordings",
+  "license": "Made for Taste",
+  "note": "Surge: white noise through two one-pole low-passes whose cutoff rises with a 2 s attack and 1.5 s ebb envelope, a sub-100 Hz rumble, and sparse high-passed clicks for the snapping-shrimp crackle of a warm shallow sea. Swish: a 0.8 s low-passed noise burst. Encoded at 80 kbit/s with ffmpeg."
+ },
+ {
+  "file": "assets/salema.webp",
+  "title": "Salema (Sarpa salpa), Catania, Sicilia, Italia, 2025-04-04, DD 90",
+  "maker": "Diego Delso",
+  "date": "2025-04-04",
+  "source": "https://commons.wikimedia.org/wiki/File:Salema_(Sarpa_salpa),_Catania,_Sicilia,_Italia,_2025-04-04,_DD_90.jpg",
+  "license": "CC BY-SA 4.0",
+  "note": "Cut out of its open-water background (scratch fish.py: polynomial background field, alpha from colour distance, edge decontaminated), scaled to 1400 px long, WebP q90."
+ }
+]

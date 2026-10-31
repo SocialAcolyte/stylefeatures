@@ -1,0 +1,12 @@
+{
+  "smith.webp": {
+    "title": "Banknote vignette with a blacksmith and forge",
+    "maker": "Asher Brown Durand",
+    "date": "ca. 1824-37",
+    "medium": "Engraving and etching on chine colle; proof",
+    "source": "https://www.metmuseum.org/art/collection/search/393945",
+    "image": "https://images.metmuseum.org/CRDImages/dp/original/DP837932.jpg",
+    "licence": "CC0 (The Met Open Access)",
+    "changes": "Cropped to the vignette inside the plate, resized to 1800 px wide, WebP q84."
+  }
+}

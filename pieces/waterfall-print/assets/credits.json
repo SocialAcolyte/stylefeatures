@@ -1,0 +1,48 @@
+[
+ {
+  "file": "kirifuri-2413.webp",
+  "also": [
+   "kirifuri-1600.webp",
+   "kirifuri-1100.webp"
+  ],
+  "title": "Kirifuri Falls (Kirifuri no taki), from the series Tour of the Waterfalls in Various Provinces (Shokoku taki meguri)",
+  "artist": "Katsushika Hokusai (1760-1849)",
+  "date": "about 1833",
+  "medium": "Colour woodblock print; oban",
+  "collection": "The Art Institute of Chicago, Clarence Buckingham Collection, 1925.3390 (object 25186)",
+  "source": "https://www.artic.edu/artworks/25186",
+  "image": "https://www.artic.edu/iiif/2/222db246-4eae-d023-5bba-11af5bbd4e82/full/2475,/0/default.jpg",
+  "licence": "CC0 1.0 (public domain image, Art Institute of Chicago Open Access)",
+  "processing": "Cut off the museum mount along the four fitted sheet edges (soft 1px alpha), resized for srcset."
+ },
+ {
+  "file": "amida-2408.webp",
+  "also": [
+   "amida-1600.webp",
+   "amida-1100.webp"
+  ],
+  "title": "Amida Falls in the Far Reaches of the Kisokaido (Kisoji no oku Amidagataki), from the series A Tour of Waterfalls in Various Provinces (Shokoku taki meguri)",
+  "artist": "Katsushika Hokusai (1760-1849)",
+  "date": "about 1833",
+  "collection": "The Art Institute of Chicago, Clarence Buckingham Collection, 1925.3394 (object 25201)",
+  "source": "https://www.artic.edu/artworks/25201",
+  "image": "https://www.artic.edu/iiif/2/778f5ecd-af29-b0d0-6c15-6b4a603dfa0d/full/2460,/0/default.jpg",
+  "licence": "CC0 1.0 (Art Institute of Chicago Open Access)",
+  "processing": "Cut off the museum mount along the four fitted sheet edges, resized for srcset."
+ },
+ {
+  "file": "kirifuri-flow.webp",
+  "also": [
+   "kirifuri-air.webp",
+   "kirifuri-streaks.webp",
+   "kirifuri.json",
+   "amida-flow.webp",
+   "amida-air.webp",
+   "amida-streaks.webp",
+   "amida.json"
+  ],
+  "title": "Water mask, flow field, mist and streak maps for the print above",
+  "artist": "Made for this component from the print's own strokes (structure tensor, line-integral convolution)",
+  "licence": "Same as the component"
+ }
+]

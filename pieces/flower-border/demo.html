@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>flower-border</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..600;1,400..500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="flower-border.css"><style>
+  :root{--paper:#f3f0e8;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--serif:'EB Garamond',Georgia,serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box} html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  .prose{max-width:33em;margin:0 auto;padding:0 var(--gutter);font-size:clamp(19px,1.45vw,22px);line-height:1.58;color:var(--ink-2);text-wrap:pretty;hyphens:auto}
+  .prose p{margin:0 0 1.1em}
+  .lead{padding-top:28svh;padding-bottom:14svh}
+  .end{padding-top:12svh;padding-bottom:30svh}
+  .rule{width:28px;height:1px;background:var(--ink-3);opacity:.5;margin:0 auto 3.2em}
+  @media (max-width:560px){ [data-flower-border]{--fb-gutter:5px} }
+</style></head><body>
+
+<div class="prose lead">
+  <p>For two hundred years the margins of a prayer book had been filled with pattern: ivy and acanthus drawn flat in ink and burnished gold, a scroll of leaves that knew it was a scroll. Then, in Ghent in the 1470s, in books made for Mary of Burgundy and the people round her, the painters began to treat the margin as a place. They washed it with a coloured ground, a shallow tray of yellow or grey or gold, and laid real things on it one at a time: a pink, a sprig of borage, a split pea pod, a pilgrim’s badge pinned through the vellum, each with a small shadow beside it, as if it had been dropped there that morning and might be picked up again.</p>
+  <p>This leaf is from the Spinola Hours, made in Ghent or Bruges between about 1510 and 1520 by a team of painters round the one now called the Master of James IV of Scotland. It is the prayer for the feast of Mary Magdalene. The work went in a fixed order. The scribe ruled the sheet and wrote the text and left the margins bare. The illuminator drew the flowers in a fine line, laid the ground round them, painted each one in thin washes and then in solid colour, picked out the veins and stamens with the point of the brush, and put in the shadows last of all.</p>
+</div>
+
+<section data-flower-border data-src="assets/leaf.json">
+  <div class="fb-stage">
+    <div class="fb-leaf">
+      <img class="fb-img" src="assets/leaf.webp" alt="" aria-hidden="true" width="2400" height="3569">
+      <p class="fb-text">Ghent or Bruges, about 1515. The scribe has written his lines and left the margins bare. The illuminator rules a frame, draws the flowers in a fine grey line and lays a ground of yellow round them. Then each is painted as if it had been cut that morning and dropped on the open book: pinks, cornflowers, irises, a white butterfly, a snail. The shadows go on last, a soft brown wash beside every petal, and the flowers lift off the page. Five hundred years later a reader’s hand still moves to brush them away.</p>
+    </div>
+  </div>
+</section>
+
+<div class="prose end">
+  <div class="rule"></div>
+  <p>The shadows are what make it work, and they are not consistent. Each flower casts its own, down and to the right, as if the light came over the reader’s left shoulder, but no shadow agrees exactly with its neighbour’s, and nobody minded. The painter was not making a study of light, only making the page look as though someone had just set things down on it. The yellow ground is the trick that lets it happen: it reads as a surface, a cloth or a tray, rather than as the parchment itself, so the flowers can lie on it, and the text block, left bare in the middle, becomes a window cut through it.</p>
+  <p>Books of hours were read at set times of day, the same prayers week after week, and the borders were painted for that kind of looking. A reader who knew the Latin by heart had time for the snail in the corner and the white butterfly on the iris, for the clove pinks down the right-hand side, still grown in gardens for their scent, and for the dragonfly at the top, whose wings go over the ruled frame and out onto the margin, the one place on the page where nothing else is allowed to go.</p>
+</div>
+
+<script type="module" src="flower-border.js"></script>
+</body></html>

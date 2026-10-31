@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "notify-m4",
+      "file": "assets/sounds/notify-m4.mp3",
+      "on": "press",
+      "target": "body",
+      "volume": 0.15,
+      "vary": 3.0,
+      "source": {
+        "kind": "bank",
+        "id": "notify/m4",
+        "seed": 661058652,
+        "pitch_st": 0,
+        "dur_x": 2.0
+      },
+      "credit": "earshot sound bank notify/m4 (seed 661058652, length x2), synthesized in code: github.com/Leonxlnx/earshot (MIT), no recording"
+    }
+  ]
+}

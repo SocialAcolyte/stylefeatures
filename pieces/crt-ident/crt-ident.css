@@ -1,0 +1,47 @@
+/* crt-ident: a logo on a colour television of the mid-1980s. Tokens: --ci-*
+   Without JS the element is left alone: the logo is just the logo. Live, the element becomes
+   the face of the set (the glass in a narrow black surround, or the glass alone with
+   data-bezel="off"), drawn in a canvas; the logo stays in the DOM, out of sight, as the
+   accessible content. */
+
+.ci {
+  position: relative;
+  display: block;
+  aspect-ratio: 4 / 3;
+  isolation: isolate;
+  -webkit-tap-highlight-color: transparent;
+}
+.ci.is-live {
+  background: var(--ci-bezel, #121211);
+  border-radius: var(--ci-radius, 1.4% / 1.9%);
+  box-shadow: 0 1px 1px rgba(20, 16, 10, .22), 0 14px 34px -18px rgba(20, 16, 10, .55);
+}
+.ci.ci-bare.is-live { background: none; box-shadow: none; border-radius: 0; }
+
+/* the logo, kept for screen readers (and for the page without JS) */
+.ci.is-live > :not(.ci-canvas):not(.ci-power) {
+  position: absolute !important; width: 1px !important; height: 1px !important; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap; margin: 0; padding: 0;
+}
+.ci-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+  border-radius: inherit; pointer-events: none;
+}
+.ci:not(.is-live) > .ci-canvas { display: none; }
+
+/* the switch: the whole face is the button */
+.ci-power {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  margin: 0; padding: 0; border: 0; background: transparent;
+  border-radius: inherit; cursor: pointer;
+  touch-action: manipulation;
+}
+.ci:not(.is-live) > .ci-power { display: none; }
+.ci-power:focus { outline: none; }
+.ci-power:focus-visible { outline: 1px solid var(--ci-focus, var(--ink-3, #8a857d)); outline-offset: 5px; }
+
+@media print {
+  .ci-canvas, .ci-power { display: none; }
+  .ci.is-live { background: none; box-shadow: none; }
+  .ci.is-live > :not(.ci-canvas):not(.ci-power) { position: static !important; width: auto !important; height: auto !important; clip-path: none; }
+}

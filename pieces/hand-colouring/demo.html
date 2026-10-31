@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>hand-colouring</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="hand-colouring.css"><style>
+  :root{--paper:#f3f0e8;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--serif:'Cormorant Garamond',Georgia,serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box} html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  .prose{max-width:33em;margin:0 auto;padding:0 var(--gutter);font-size:clamp(19px,1.5vw,22px);line-height:1.55;font-weight:500;color:var(--ink-2);text-wrap:pretty;hyphens:auto}
+  .prose p{margin:0 0 1.1em}
+  .lead{padding-top:28svh;padding-bottom:16svh}
+  .end{padding-top:14svh;padding-bottom:30svh}
+  .rule{width:28px;height:1px;background:var(--ink-3);opacity:.5;margin:0 auto 3.2em}
+  @media (max-width:520px){ [data-hand-colouring]{--hc-gutter:5px} }
+</style></head><body>
+
+<div class="prose lead">
+  <p>In June 1699 Maria Sibylla Merian, fifty-two years old, sailed from Amsterdam for Surinam with her younger daughter, Dorothea Maria. She had sold most of her paintings and her collection to pay for the passage. For years she had looked at the insects of that colony in the cabinets of Amsterdam collectors, pinned in rows or floating in jars of spirits, beautiful and dead, with nothing to say what they had eaten or what they had been before. She had spent her life, since she was a girl in Frankfurt keeping silkworms, on exactly that question: what a caterpillar becomes, and on what plant.</p>
+  <p>They took rooms in Paramaribo, at the mouth of the river, and went upriver to the plantations when they could. Merian kept caterpillars in boxes in the house, fed each on the leaves she had found it on, and wrote down the day it stopped eating, the day it spun or hardened, the day something came out and opened its wings. She painted them on vellum in watercolour with their plant beside them, egg, caterpillar, chrysalis and moth or butterfly on one branch, so that a single sheet held a whole life. She did not do it alone. Indigenous and enslaved African people cut the paths, brought her what they found and told her what the plants were for, and some of what they told her went into her book. In the summer of 1701 the heat and a fever sent her home.</p>
+  <p>In Amsterdam the watercolours went to three engravers, Joseph Mulder, Pieter Sluyter and Daniel Stoopendaal, who cut them into sixty copper plates. This one is Mulder’s; his name is in the margin under the branch. The plates were inked and printed on large sheets of good paper, and in 1705 the book came out in Latin and in Dutch. A buyer could take it plain, line alone on cream paper, or pay a good deal more to have every plate coloured by hand.</p>
+</div>
+
+<section data-hand-colouring data-src="assets/pomegranate.json">
+  <div class="hc-stage">
+    <img class="hc-img" src="assets/pomegranate.webp" alt="" aria-hidden="true" width="2000" height="2673">
+  </div>
+</section>
+
+<div class="prose end">
+  <div class="rule"></div>
+  <p>The colouring was done in Merian’s house, by Merian and her daughters, from painted models kept as patterns, so that each copy of a butterfly came out the same blue. It was thin watercolour bound with gum arabic, laid one colour at a time: flat washes brushed up to the engraved line, which held them, and now and then a little over it. The engraver had already done the shading in hatching; the wash only had to give the colour, and the line showed through. Watercolour goes on dark and glossy and dries paler and dull, with the pigment drawn to the rim as the water leaves, and a colourist learned to lay each wash a shade stronger than it was meant to end.</p>
+  <p>On this sheet a pomegranate splits open under a branch in flower, a pale striped caterpillar along one twig and a chrysalis lying across the fruit. Above them is the morpho twice. Closed, from below, it is brown and eyed like a dry leaf, which is how it rests; open, from above, it is the blue it shows only in flight, the colour the whole page waits for.</p>
+  <p>A coloured copy cost forty-five guilders or more, more than a skilled worker in Amsterdam earned in two months, and Merian sold them from her house. After her death in 1717 Dorothea sold the copper plates to a publisher, and the book went on being printed, and coloured by other hands, for most of the century. No two copies are quite alike. Put two side by side and the leaves are greener in one and the fruit rosier in the other; a wash runs over the line here and stops short of it there: the hand of whoever sat at the table that day, matching the model as well as they could, waiting for each colour to dry before laying the next.</p>
+</div>
+
+<script type="module" src="hand-colouring.js"></script>
+</body></html>

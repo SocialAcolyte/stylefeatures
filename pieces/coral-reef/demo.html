@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>coral-reef</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="coral-reef.css"><style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;--serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box} html{background:var(--paper);-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  .prose{max-width:33em;margin:0 auto;padding:0 var(--gutter);font-size:clamp(19px,1.5vw,22px);line-height:1.55;font-weight:500;color:var(--ink-2);text-wrap:pretty;hyphens:auto}
+  .prose p{margin:0 0 1.1em}
+  .kicker{font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:0 0 18px;font-weight:500}
+  h1{font-weight:400;font-size:clamp(40px,6vw,68px);line-height:1;letter-spacing:-.01em;margin:0 0 clamp(28px,5svh,44px);color:var(--ink)}
+  .lead{padding-top:22svh;padding-bottom:12svh}
+  .end{padding-top:10svh;padding-bottom:30svh}
+  .rule{width:28px;height:1px;background:var(--ink-3);opacity:.5;margin:0 auto 3.2em}
+  @media (max-width:520px){ [data-coral-reef]{--cr-gutter:8px} }
+</style></head><body>
+
+<div class="prose lead">
+  <p class="kicker">Queensland · 1893</p>
+  <h1>A reef in thirteen stones</h1>
+  <p>William Saville-Kent spent the years around 1890 as Commissioner of Fisheries for Queensland, and much of that time on the reef itself: on the flats at low spring tides, when the corals stand clear of the water for an hour, and at his tanks, where he kept living colonies long enough to draw them with their polyps out. Dead coral is white and every collector knew it. What he wanted to show in London was the colour, which fades within hours of a coral leaving the sea, so he painted them alive, in watercolour, and wrote under each plate <i>del. et pinx. ad nat.</i>: drawn and painted from nature.</p>
+  <p>The book came out in 1893, a heavy quarto with photographs of the reef flats and sixteen plates in colour. The colour plates were not photographs and not hand-painted. They were chromolithographs, printed by Riddle &amp; Couchman of London from his watercolours, one colour at a time, each colour from its own slab of limestone.</p>
+</div>
+
+<section data-coral-reef data-src="assets/reef.json">
+  <div class="cr-stage">
+    <img class="cr-img" src="assets/reef.webp" alt="" aria-hidden="true" width="1800" height="2658">
+  </div>
+</section>
+
+<div class="prose end">
+  <div class="rule"></div>
+  <p>A lithographic stone is fine Bavarian limestone, ground flat and then grained with sand until it has a tooth like paper. The printer's artist traced the outline of the whole picture, the key, and offset a print of it in red chalk onto each of the other stones as a guide. Then, stone by stone, he drew only what would take one ink: on the yellow stone every part of the plate where yellow lies, in greasy crayon, pressing harder where it should be stronger. The grain breaks the crayon into specks, which is why every colour here, seen close, is a scatter of dots on the paper, and why one ink laid over another makes a third without ever blending.</p>
+  <p>To print, the stone was damped, rolled up with ink that would stick only to the grease, and the sheet laid on it against the register pins. The bed was cranked under a fixed scraper, so the impression travelled down the sheet as a line. The whole edition went through on one stone and was left to dry before the next stone went on the press, so a printer could hold up a sheet halfway through and see a reef that was only yellow and pink, with no edges yet and no shadow. The greens came from blue over yellow, the deep red-browns of the brain corals from several passes on top of each other, and the drawing only became sharp with the darkest stone, the last one, which sat crisp on everything beneath it.</p>
+  <p>Nothing on a stone could be corrected once the edition was under way, and every stone had to fall on the same pins as the last, to within a hair, or each coral would be edged with a thin line of the wrong colour. Look closely at any plate of the period and you can find where they missed. Here they mostly did not. A coral in a museum drawer is a white skeleton; this was the reef as Saville-Kent saw it at low water, with the animals out, and for most people in England it was the first colour they had seen of a living reef.</p>
+</div>
+
+<script type="module" src="coral-reef.js"></script>
+</body></html>

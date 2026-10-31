@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>stipple-rose</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="stipple-rose.css"><style>
+  :root{--paper:#f3f0e8;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--serif:'Cormorant Garamond',Georgia,serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box} html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  .prose{max-width:33em;margin:0 auto;padding:0 var(--gutter);font-size:clamp(19px,1.5vw,22px);line-height:1.55;font-weight:500;color:var(--ink-2);text-wrap:pretty;hyphens:auto}
+  .prose p{margin:0 0 1.1em}
+  .lead{padding-top:28svh;padding-bottom:16svh}
+  .end{padding-top:14svh;padding-bottom:30svh}
+  .rule{width:28px;height:1px;background:var(--ink-3);opacity:.5;margin:0 auto 3.2em}
+  @media (max-width:520px){ [data-stipple-rose]{--sr-gutter:5px} }
+</style></head><body>
+
+<div class="prose lead">
+  <p>Pierre-Joseph Redouté came to Paris from the Ardennes with almost nothing, a painter’s son who had spent his teens going from town to town painting portraits and altarpieces, and found work drawing the flowers of the Jardin du Roi. He drew them for Marie-Antoinette, and after the Revolution, which he survived by being useful, for the Muséum. Then for Joséphine Bonaparte, who in 1799 bought the house at Malmaison and filled its gardens and glasshouses with plants from everywhere. For her he made the eight volumes of <i>Les Liliacées</i>, lilies and irises and amaryllis, nearly five hundred plates.</p>
+  <p><i>Les Roses</i> came after her. Joséphine died at Malmaison in May 1814, and the first part of the book appeared three years later, 168 plates in thirty parts, with a text by the botanist Claude-Antoine Thory. It is often called the roses of Malmaison, but most of them were drawn in the nurseries and gardens of Paris and its suburbs; this one, <i>Rosa lucida</i>, the shining rose, is a wild rose of the American north-east, named for the gloss on its leaves.</p>
+  <p>Redouté did not engrave. He painted each rose in watercolour on vellum, and the paintings went to engravers, here a man called Bessin, others Langlois, Chapuy, Victor, Charlin, who cut them into copper not in lines but in dots, tens of thousands to a plate. The printing was done by Rémond, and the way it was done is the reason a printed page of Redouté can be mistaken for a painting.</p>
+</div>
+
+<section data-stipple-rose data-src="assets/rose.json">
+  <div class="sr-stage">
+    <img class="sr-img" src="assets/rose.webp" alt="" aria-hidden="true" width="2000" height="2639">
+  </div>
+</section>
+
+<div class="prose end">
+  <div class="rule"></div>
+  <p>Stipple was a London fashion when Redouté first saw it. The engraver laid an etching ground on polished copper and pricked the drawing through it with needles and a toothed wheel, the dots set close where the shade was deep and loose where the petal turned to the light, then let acid bite them; afterwards he went over the plate with a curved graver for the palest tones, which acid could not make fine enough. Contours were dots too, or the faintest line. Nothing on the plate says where a petal stops. The eye does that, from how the dots crowd and thin.</p>
+  <p>The printer inked it à la poupée, with a dolly of rolled rag for each colour: rose madder into the flowers, green into the leaves, yellow into the stamens, black into the lettering, each worked into its own few square inches of copper and a little past them. Then the warm plate was wiped with stiff muslin and finished with the palm of the hand until the surface shone, the colours left only down in the dots, and a sheet of dampened paper went through the press on top of it. One pull, every colour at once. The damp paper drew the ink up out of each pit and it spread a fraction as it landed, so the dots softened into one another; that is the bloom on a Redouté petal, which no line engraving can give.</p>
+  <p>The print that comes off the plate is pale and a little flat, the colour of a pressed flower. Colourists finished each impression by hand, laying transparent watercolour over the printed colour, glaze on glaze in the cup of each flower, a warmer green on the lit side of the leaves, the red of the hip, a touch of something brighter in the stamens. No two copies of the book are quite alike, and the best of them were taken for paintings by people who should have known better.</p>
+</div>
+
+<script type="module" src="stipple-rose.js"></script>
+</body></html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>drip-tip</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="drip-tip.css"><style>
+  :root{--paper:#f3f0e8;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--accent:#c96f4a;--serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box} html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:clamp(19px,1.45vw,22px);line-height:1.5;overflow-x:hidden}
+  .prose{max-width:31em;margin:0 auto;padding:0 var(--gutter)}
+  .prose p{margin:0 0 1.05em;text-wrap:pretty;hyphens:auto}
+  .open{padding-top:clamp(72px,18svh,180px);padding-bottom:clamp(40px,10svh,96px)}
+  .kicker{font-family:var(--sans);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);margin:0 0 1.6em}
+  h1{font-weight:500;font-size:clamp(40px,6vw,64px);line-height:1.02;letter-spacing:-.01em;margin:0 0 .5em}
+  .close{padding-top:clamp(48px,12svh,120px);padding-bottom:clamp(96px,22svh,200px)}
+  .close p:first-child::first-letter{font-size:1em}
+</style></head><body>
+
+<header class="prose open">
+  <p class="kicker">Under the canopy</p>
+  <h1>The rain after the rain</h1>
+  <p>In a lowland forest almost none of the rain reaches the ground the way it fell. The crowns take it first. A drop that strikes the canopy forty metres up is caught, gathered with others, let go and caught again, and what comes down into the understorey arrives as fewer and heavier drops, falling from leaf to leaf like water down a flight of steps. Botanists call it throughfall. Stand in it during a downpour and what you hear is not rain so much as leaves being struck, thousands of small blows a second, each one bending a blade that springs back and sheds what it was given.</p>
+</header>
+
+<section data-drip-tip data-src="assets/rousseau-the-equatorial-jungle.webp">
+  <div class="dt-stage">
+    <img class="dt-still" src="assets/rousseau-the-equatorial-jungle.webp" alt="" aria-hidden="true" width="3681" height="4000">
+  </div>
+</section>
+
+<div class="prose close">
+  <p>Then the sky stops, and the forest goes on raining. For half an hour, sometimes an hour, the canopy drains through itself: water gathers at the end of a leaf high up, lets go, lands on another leaf, runs down its middle and gathers again at its point. You can stand at the edge of a clearing in sunshine and hear the trees behind you still dripping, slower and slower, until a last drop falls somewhere you cannot see.</p>
+  <p>Look closely at the leaves of the shrubs down there and a great many of them end the same way, in a long, narrow, pointed tail. Botanists have called it a drip tip since the 1890s, and the reason they give is the one you can watch: the water runs along the midrib to the point and is shed there in small, quick drops, a hundredth of a millilitre or so, instead of lying on the blade in a film that would feed moss and lichen and fungus and keep the leaf from breathing. When the tips were snipped off living leaves, the leaves drained markedly slower. A blunt leaf holds a pool at its end and lets it go rarely, all at once.</p>
+  <p>Henri Rousseau painted some two dozen jungles and never saw one. He never left France. He spent most of his working life as a clerk in the Paris toll service, and he painted his forests from the glasshouses of the Jardin des Plantes, from the menagerie beside them, from the stuffed animals in the natural history galleries and from the plates of popular picture books, enlarging a single leaf to the height of a man. When he walked into the hothouses, he told a journalist, among those strange plants from distant countries it seemed to him that he was entering a dream. His leaves are flat, one shape of one green, laid edge to edge with the next, which is what makes them easy to cut out, and not hard to imagine wet.</p>
+</div>
+
+<script type="module" src="drip-tip.js"></script>
+<script type="module" src="sound.js"></script>
+</body></html>

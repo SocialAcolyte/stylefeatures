@@ -1,0 +1,15 @@
+{
+  "plate.webp": {
+    "title": "Agaricus xerampelinus (tab. 31), Coloured Figures of English Fungi or Mushrooms",
+    "maker": "James Sowerby (drawn, etched and published); coloured by hand",
+    "date": "1 July 1796 (imprint)",
+    "source": "https://archive.org/details/colouredfigureso00sowe (raw camera frame colouredfigureso00sowe_raw_0121.JPG)",
+    "holder": "New York Botanical Garden, LuEsther T. Mertz Library; digitised by the Internet Archive",
+    "licence": "Public domain (possible-copyright-status: NOT_IN_COPYRIGHT)",
+    "changes": "Rotated upright, cropped between gutter and fore-edge (2000x3665), page colour composited beyond the leaf's top and bottom edges. The pencil note under the plate is a later owner's."
+  },
+  "plate-paper.webp, plate-print.webp, plate-wash.webp, plate-mapa.webp, plate-mapb.webp": {
+    "derived_from": "plate.webp",
+    "changes": "Decomposition in optical density into bare leaf, printed impression, flat washes; arrival-time and mask maps. Ours."
+  }
+}

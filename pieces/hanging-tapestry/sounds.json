@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "cloth-pull",
+      "file": "assets/sounds/cloth-pull.wav",
+      "on": "drag",
+      "target": "[data-hanging-tapestry]",
+      "volume": 0.3,
+      "vary": 2.0,
+      "source": {
+        "kind": "bank",
+        "id": "swipe/cloth",
+        "seed": 883394181,
+        "pitch_st": 0,
+        "dur_x": 1.0
+      },
+      "credit": "earshot sound bank swipe/cloth (seed 883394181), synthesized in code: github.com/Leonxlnx/earshot (MIT), no recording"
+    }
+  ]
+}

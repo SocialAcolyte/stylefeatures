@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>chladni-slider</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="chladni-slider.css?v=5"><style>
+  :root{--paper:#f3f0e8;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--serif:'Cormorant Garamond',Georgia,serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box} html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  .prose{max-width:33em;margin:0 auto;padding:0 var(--gutter);font-size:clamp(19px,1.5vw,22px);line-height:1.55;font-weight:500;color:var(--ink-2);text-wrap:pretty;hyphens:auto}
+  .prose p{margin:0 0 1.1em}
+  .lead{padding-top:28svh;padding-bottom:12svh}
+  .end{padding-top:12svh;padding-bottom:30svh}
+  .rule{width:28px;height:1px;background:var(--ink-3);opacity:.5;margin:0 auto 3.2em}
+  @media (max-width:520px){ [data-chladni]{--cl-gutter:6px} }
+</style></head><body>
+
+<div class="prose lead">
+  <p>In 1787 Ernst Florens Friedrich Chladni, a lawyer’s son from Wittenberg who had taken a degree in law to please his father and then given it up for physics, published a short book in Leipzig called <i>Entdeckungen über die Theorie des Klanges</i>, discoveries in the theory of sound. He had been working at a trick for years. He held a thin square plate of glass or brass still at one point, scattered sand over it, and drew a violin bow down its edge. The plate sang, and the sand moved. It jumped away from the parts of the plate that were swinging and came to rest along the lines that stood still, so that in a second or two the note had drawn its own picture. Touch the edge with a fingertip somewhere else, bow at another place, and a higher note drew a different figure.</p>
+  <p>He had no camera and no way to fix the sand, so he copied each figure by eye, and a Leipzig engraver, Capieux, cut them in copper: well over a hundred of them on eleven plates at the back of the book, numbered, with small letters for the places where he had held the plate and where the bow went. This is the eighth sheet, twenty square plates, figures 87 to 106, from the Getty Research Institute’s copy.</p>
+</div>
+
+<section data-chladni data-src="assets/tab8.json">
+  <div class="cl-stage">
+    <img class="cl-img" src="assets/tab8.webp" alt="" aria-hidden="true" width="3170" height="3961">
+  </div>
+</section>
+
+<div class="prose end">
+  <div class="rule"></div>
+  <p>Look at the drawings closely and they are full of sand. The cross of figure 87 swells at its centre into a dark star, because grains run along a nodal line and pile up where two lines meet; the eight rays of figure 99 meet in a heap. The lines are thin where the plate crosses them steeply and wide where it barely moves on either side. Chladni did not invent any of this. He drew what the sand did.</p>
+  <p>He spent the rest of his life on the road with his plates and the glass instruments he built, earning his keep from lectures in Europe’s drawing rooms. In 1808 he brought them to Paris. Early the next year Laplace and the physicists of the Institut presented him to Napoleon, who watched the sand gather, asked questions, gave Chladni six thousand francs to publish his <i>Traité d’acoustique</i> in French, and had the Institut set a prize, a medal of a kilogram of gold, for a mathematical theory of vibrating elastic surfaces that would agree with experiment.</p>
+  <p>Most of the mathematicians in Paris thought it could not be done, and only one person entered. Sophie Germain had taught herself mathematics from her father’s library and had sent her work to Lagrange under a man’s name. Her first memoir, in 1811, was turned down: its calculus had mistakes, though Lagrange, one of the judges, worked the right equation out of her assumptions. Her second, in 1813, got an honourable mention. Her third won the prize in January 1816, the first the Academy had given to a woman. She did not go to the ceremony. Her conditions for a free edge were still not right; Kirchhoff settled them in 1850, and in 1909 Walther Ritz at last computed the figures of a free square plate well enough to set beside Chladni’s sand.</p>
+</div>
+
+<script type="module" src="chladni-slider.js?v=5"></script>
+</body></html>

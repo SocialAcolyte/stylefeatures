@@ -1,0 +1,16 @@
+[
+  {
+    "file": "leaf.webp",
+    "derived": ["leaf-vellum.webp", "leaf-ground.webp", "leaf-wash.webp", "leaf-body.webp", "leaf-masks.webp", "leaf-id.webp", "leaf-time.webp", "leaf.json"],
+    "title": "Decorated Text Page, from the Spinola Hours (Ms. Ludwig IX 18, fol. 265)",
+    "artist": "Workshop of the Master of James IV of Scotland and other Ghent-Bruges illuminators (Flemish)",
+    "date": "about 1510-1520",
+    "medium": "Tempera colors, gold, and ink on parchment; leaf 23.2 x 16.7 cm, justification 10.9 x 7.4 cm",
+    "place": "Bruges or Ghent",
+    "source": "https://www.getty.edu/art/collection/object/108JFF",
+    "image": "https://media.getty.edu/iiif/image/71440b7c-3a4b-4e16-a09b-7fd23e6afafa/full/full/0/default.jpg",
+    "institution": "The J. Paul Getty Museum, Los Angeles",
+    "license": "Getty Open Content: no copyright (public domain image); metadata CC0 1.0",
+    "notes": "The 6228 x 9302 px IIIF image, a 40 px strip trimmed from the top, resampled to 2400 px. The scribe's text block (and its gold initial) is replaced by bare parchment inpainted from the margins, so the page's own text can be set there. Everything else in leaf.webp is the original. The split into vellum, ground, washes, body colour, underdrawing, masks and time maps is ours (derived, see README)."
+  }
+]

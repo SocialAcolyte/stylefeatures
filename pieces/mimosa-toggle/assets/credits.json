@@ -1,0 +1,15 @@
+{
+  "plate.webp": {
+    "title": "Mimosa pudica (Sensitive Plant), plate 544",
+    "maker": "Henry C. Andrews (drawn, engraved and hand-coloured)",
+    "publication": "The Botanist's Repository for New, and Rare Plants, vol. 8, pl. 544",
+    "date": "1807",
+    "source": "https://www.plantillustrations.org/illustration.php?id_illustration=111905 (scan of the Biodiversity Heritage Library copy)",
+    "licence": "Public domain (published 1807)",
+    "changes": "Trimmed 14 px (gutter) and 30 px (gilt edge) off the scan's left and top; resized from 2872 to 2200 px wide (Lanczos)."
+  },
+  "mimosa-leaf.webp": { "derived_from": "plate.webp", "what": "the plate's great lower leaf, its colour un-mixed from the paper under it (RGB) and its coverage (alpha), in the leaf's box", "licence": "Public domain" },
+  "mimosa-clean.webp": { "derived_from": "plate.webp", "what": "the same box with the leaf lifted off: paper tone and grain copied from the plate's own bare paper, the stalk's overlap on other leaves reconstructed (OpenCV FSR); alpha marks the lifted area", "licence": "Public domain" },
+  "mimosa-ids.png": { "derived_from": "plate.webp", "what": "piece id per pixel: petiole and hub, 4 rachises, 255 leaflets", "licence": "Public domain" },
+  "mimosa.json": { "derived_from": "plate.webp", "what": "the pieces: pulvinules (pivots), axes, sides, ranks along each pinna; pinna paths; primary pulvinus and hub", "licence": "Public domain" }
+}

@@ -1,0 +1,49 @@
+/* ─── stipple-rose — a Redouté rose engraved, inked à la poupée, printed and finished ──
+   Without JS (or with reduced motion) the stage shows the finished plate as an <img>, a
+   sheet lying on the page. Live, a canvas covers the pinned stage and draws everything:
+   the copper, the paper, the roller and the sheet, with their own tight shadows. */
+
+[data-stipple-rose], .sr {
+  position: relative;
+  background: var(--paper, #f3f0e8);
+}
+.sr-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: clamp(10px, 3.5svh, 40px) var(--sr-gutter, var(--gutter, clamp(12px, 3vw, 32px)));
+  box-sizing: border-box;
+}
+.sr-img {
+  grid-area: 1 / 1;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 90svh;
+  /* a trimmed sheet of the book lying on the page */
+  box-shadow: 0 1px 2px rgba(40, 30, 18, .10), 0 6px 22px -8px rgba(40, 30, 18, .22);
+}
+.sr-canvas { display: none; position: absolute; inset: 0; }
+
+.sr.is-live .sr-canvas { display: block; }
+.sr.is-live .sr-img { visibility: hidden; }
+
+.sr.sr-scroll.is-live { height: var(--sr-runway, 380svh); }
+.sr.sr-scroll.is-live .sr-stage {
+  position: sticky; top: 0; height: 100svh; overflow: hidden;
+}
+.sr:not(.sr-scroll) .sr-stage { min-height: min(100svh, 980px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .sr.sr-scroll.is-live { height: auto; }
+  .sr.sr-scroll.is-live .sr-stage { position: relative; height: auto; }
+  .sr.is-live .sr-canvas { display: none; }
+  .sr.is-live .sr-img { visibility: visible; }
+}
+@media print {
+  .sr.sr-scroll.is-live { height: auto; }
+  .sr.sr-scroll.is-live .sr-stage { position: static; height: auto; }
+  .sr.is-live .sr-canvas { display: none; }
+  .sr.is-live .sr-img { visibility: visible; }
+}

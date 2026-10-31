@@ -1,0 +1,9 @@
+[
+  {
+    "file": "assets/plate-tone.webp",
+    "title": "Plate tone (the film of ink left by wiping an intaglio plate)",
+    "maker": "Made for hohmann-loader (scratch/hohmann-loader-p/tone.py): periodic filtered noise, long diagonal wiping streaks plus paper tooth",
+    "license": "Original to this component",
+    "processing": "512px RGBA tile, warm ink at 0-7% alpha, lossless WebP, shown at 256 CSS px"
+  }
+]

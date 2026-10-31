@@ -1,0 +1,171 @@
+{
+ "width": 2400,
+ "height": 1350,
+ "paper": "#f3f0e8",
+ "wall": "#e6e1d4",
+ "backcloth": {
+  "src": "backcloth.webp",
+  "z": 0,
+  "over": 1.06,
+  "enter": "fly",
+  "window": [
+   0.04,
+   0.16
+  ]
+ },
+ "light": {
+  "x": 1200.0,
+  "y": 1687.5,
+  "z": 6,
+  "window": [
+   0.9,
+   0.98
+  ]
+ },
+ "pieces": [
+  {
+   "name": "swallow-a",
+   "src": "swallow-a.webp",
+   "shadow": "swallow-a-shadow.png",
+   "shadowPad": 15.0,
+   "x": 822.2,
+   "y": 180,
+   "w": 155.6,
+   "h": 120,
+   "z": 0.12,
+   "enter": "fly",
+   "window": [
+    0.47,
+    0.53
+   ]
+  },
+  {
+   "name": "swallow-b",
+   "src": "swallow-b.webp",
+   "shadow": "swallow-b-shadow.png",
+   "shadowPad": 15.1,
+   "x": 1215.9,
+   "y": 130,
+   "w": 168.3,
+   "h": 92,
+   "z": 0.12,
+   "enter": "fly",
+   "window": [
+    0.5,
+    0.56
+   ]
+  },
+  {
+   "name": "swallow-c",
+   "src": "swallow-c.webp",
+   "shadow": "swallow-c-shadow.png",
+   "shadowPad": 15.0,
+   "x": 1540.2,
+   "y": 256,
+   "w": 119.7,
+   "h": 84,
+   "z": 0.12,
+   "enter": "fly",
+   "window": [
+    0.53,
+    0.58
+   ]
+  },
+  {
+   "name": "temple",
+   "src": "temple.webp",
+   "shadow": "temple-shadow.png",
+   "shadowPad": 25.0,
+   "x": 832.4,
+   "y": 400,
+   "w": 855.2,
+   "h": 490,
+   "z": 0.3,
+   "enter": "right",
+   "window": [
+    0.16,
+    0.27
+   ]
+  },
+  {
+   "name": "boat",
+   "src": "boat.webp",
+   "shadow": "boat-shadow.png",
+   "shadowPad": 33.3,
+   "x": 624.8,
+   "y": 805,
+   "w": 390.3,
+   "h": 170,
+   "z": 0.45,
+   "enter": "left",
+   "window": [
+    0.58,
+    0.68
+   ]
+  },
+  {
+   "name": "cypress",
+   "src": "cypress.webp",
+   "shadow": "cypress-shadow.png",
+   "shadowPad": 45.0,
+   "x": -44.0,
+   "y": 90,
+   "w": 558.0,
+   "h": 1160,
+   "z": 0.62,
+   "enter": "left",
+   "window": [
+    0.27,
+    0.37
+   ]
+  },
+  {
+   "name": "oak",
+   "src": "oak.webp",
+   "shadow": "oak-shadow.png",
+   "shadowPad": 50.0,
+   "x": 1621.3,
+   "y": -28,
+   "w": 977.4,
+   "h": 1390,
+   "z": 0.7,
+   "enter": "right",
+   "window": [
+    0.37,
+    0.47
+   ]
+  },
+  {
+   "name": "reeds",
+   "src": "reeds.webp",
+   "shadow": "reeds-shadow.png",
+   "shadowPad": 65.0,
+   "x": -100.2,
+   "y": 922,
+   "w": 1502.5,
+   "h": 460,
+   "z": 0.92,
+   "enter": "rise",
+   "window": [
+    0.78,
+    0.88
+   ]
+  },
+  {
+   "name": "heron",
+   "src": "heron.webp",
+   "shadow": "heron-shadow.png",
+   "shadowPad": 66.7,
+   "x": 1198.3,
+   "y": 758,
+   "w": 403.3,
+   "h": 560,
+   "z": 0.95,
+   "enter": "right",
+   "window": [
+    0.68,
+    0.78
+   ]
+  }
+ ]
+}

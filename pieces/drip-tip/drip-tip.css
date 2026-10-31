@@ -1,0 +1,41 @@
+/* ─── drip-tip // rain in the understorey (drip-tip.js) ─────────────────
+   The section is the runway; .dt-stage is pinned while you scroll through
+   it and the rain eases. Without JS the painting is a plain image in the
+   flow, softened at its edges. */
+
+[data-drip-tip], .dt {
+  position: relative;
+  background: var(--paper, #f3f0e8);
+  -webkit-tap-highlight-color: transparent;
+}
+.dt-stage {
+  position: relative;
+  padding: clamp(16px, 4svh, 40px) 0;
+}
+.dt-still {
+  display: block; width: 100%; height: auto;
+}
+.dt-canvas { display: none; }
+
+/* with the script: a pinned stage over a tall runway (set at once, so the
+   page does not jump when the painting arrives) */
+.dt { height: var(--dt-runway, 260svh); }
+.dt .dt-stage {
+  position: sticky; top: 0; height: 100svh; padding: 0; overflow: hidden;
+  touch-action: pan-y; outline: none;
+}
+.dt .dt-still { width: 100%; height: 90%; margin-top: 5svh; object-fit: cover; object-position: 100% 1%; }
+.dt.is-live .dt-still { display: none; }
+.dt.is-live .dt-canvas { display: block; position: absolute; inset: 0; touch-action: pan-y; }
+.dt.is-live .dt-stage:focus-visible { box-shadow: inset 0 0 0 2px var(--accent, #c96f4a); }
+
+/* reduced motion: no runway, the moment after the rain */
+.dt.dt-calm { height: auto; }
+.dt.dt-calm .dt-stage { position: relative; height: 100svh; }
+
+@media print {
+  .dt { height: auto; }
+  .dt .dt-stage { position: relative; height: auto; }
+  .dt.is-live .dt-canvas { display: none; }
+  .dt.is-live .dt-still { display: block; }
+}

@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "stone-tap",
+      "file": "assets/sounds/stone-tap.wav",
+      "on": "press",
+      "target": "[data-pretext-inscription]",
+      "volume": 0.3,
+      "vary": 2.0,
+      "source": {
+        "kind": "bank",
+        "id": "tap/knuckle",
+        "seed": 1826701615,
+        "pitch_st": 0,
+        "dur_x": 1.0
+      },
+      "credit": "earshot sound bank tap/knuckle (seed 1826701615), synthesized in code: github.com/Leonxlnx/earshot (MIT), no recording"
+    }
+  ]
+}

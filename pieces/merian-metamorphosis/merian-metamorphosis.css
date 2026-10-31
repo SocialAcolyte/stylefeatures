@@ -1,0 +1,23 @@
+/* merian-metamorphosis — hand-colour washes flood a Merian engraving. */
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#f3efe4;overflow-x:hidden}
+.mm-runway{height:360vh;position:relative}
+.mm-stage{position:sticky;top:0;height:100svh;display:grid;place-items:center;background:#f3efe4;overflow:hidden}
+.mm-frame{position:relative;height:min(94svh,1180px);aspect-ratio:1920/2512;max-width:94vw;touch-action:pan-y}
+.mm-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;user-select:none;-webkit-user-drag:none}
+.mm-base{filter:grayscale(1) contrast(1.14) brightness(1.07) sepia(.18)}
+.mm-wash{filter:saturate(1.18) brightness(1.03);opacity:.55;
+  -webkit-mask-image:radial-gradient(circle at 62% 30%,#000 calc(var(--p,0)*95%),transparent calc(var(--p,0)*95% + 14%));
+  mask-image:radial-gradient(circle at 62% 30%,#000 calc(var(--p,0)*95%),transparent calc(var(--p,0)*95% + 14%))}
+.mm-top{
+  -webkit-mask-image:radial-gradient(circle at 38% 58%,#000 calc(var(--p,0)*135%),transparent calc(var(--p,0)*135% + 13%));
+  mask-image:radial-gradient(circle at 38% 58%,#000 calc(var(--p,0)*135%),transparent calc(var(--p,0)*135% + 13%))}
+.mm-sheen{position:absolute;inset:0;pointer-events:none;mix-blend-mode:soft-light;opacity:var(--wet,0);
+  background:radial-gradient(60% 45% at 40% 55%,rgba(255,252,235,.95),rgba(255,252,235,0) 70%)}
+@media (prefers-reduced-motion: reduce){
+  .mm-runway{height:auto}
+  .mm-stage{position:static;height:auto;padding:4svh 0}
+  .mm-top,.mm-wash{-webkit-mask-image:none;mask-image:none}
+  .mm-wash{opacity:0}.mm-sheen{opacity:0}
+}
