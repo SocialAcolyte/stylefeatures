@@ -184,8 +184,11 @@ export async function peonyPrint(section, opts = {}) {
     [atlasAIm, atlasBIm, residIm] = await Promise.all([
       loadImage(base + 'peony-blocks-a.webp'), loadImage(base + 'peony-blocks-b.webp'), loadImage(base + 'peony-resid.webp')]);
   } catch { return { destroy() {} }; }
+  // a quick check for WebGL; the probe's context is released at once, so it never counts
+  // against the browser's limit on live contexts
   const gl0 = document.createElement('canvas').getContext('webgl');
   if (!gl0) return { destroy() {} };
+  gl0.getExtension('WEBGL_lose_context')?.loseContext();
 
   const runwaySv = NB * 72 + 150;
   section.style.setProperty('--pp-runway', runwaySv + 'svh');
