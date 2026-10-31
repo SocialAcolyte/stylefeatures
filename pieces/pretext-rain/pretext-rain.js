@@ -43,7 +43,6 @@
  *     the writing and catch the sky.
  */
 
-const LIB = './vendor/pretext/layout.js';
 const REF = 100;
 const calm = matchMedia('(prefers-reduced-motion: reduce)');
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -1045,7 +1044,7 @@ export function pretextRain(root, opts = {}) {
             paperRGB = colour(getComputedStyle(root).getPropertyValue('--pr-sheet').trim(), '#f6f0e2');
             const src = new URL('./assets/paper.webp', import.meta.url).href;
             const imgP = new Promise((res, rej) => { const im = new Image(); im.onload = () => res(im); im.onerror = rej; im.src = src; });
-            api = await import(LIB);
+            api = await import('./vendor/pretext/layout.js');
             try { await document.fonts.load(`${font.style} ${font.weight} 30px ${font.family}`, 'Dear'); await document.fonts.ready; } catch (e) { /* measure what we have */ }
             paperImg = await imgP;
             if (dead) return;

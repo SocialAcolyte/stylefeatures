@@ -35,7 +35,6 @@
  *  few seconds after; then the loop stops on dim, frozen embers.
  */
 
-const LIB = './vendor/pretext/layout.js';
 const REF = 100;
 const calm = matchMedia('(prefers-reduced-motion: reduce)');
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
@@ -1050,7 +1049,7 @@ export function pretextBurn(root, opts = {}) {
             const rs = getComputedStyle(root);
             paperRGB = colour(rs.getPropertyValue('--pb-sheet').trim(), '#f7f0df');
             inkRGB = colour(rs.getPropertyValue('--pb-ink').trim(), '#2a1d14');
-            api = await import(LIB);
+            api = await import('./vendor/pretext/layout.js');
             try { await document.fonts.load(`${font.style} ${font.weight} 30px ${font.family}`, 'Dear'); await document.fonts.ready; } catch (e) { /* measure what we have */ }
             if (dead) return;
             stage.insertBefore(canvas, stage.firstChild);

@@ -7,7 +7,6 @@
 // scroll position picks how far into it you are. Rendered in WebGL as brush strokes, with ink
 // texture and moss dots sampled from Jin Nong's plum album leaf of 1757 (Met, CC0).
 
-const ASSETS = new URL('./assets/', import.meta.url);
 const GAMMA = 2.3;
 
 const DEFAULTS = {
@@ -969,7 +968,7 @@ export function branchGrowth(el, options = {}) {
   const cs = getComputedStyle(el);
   const ink = parseColor(opts.ink || cs.getPropertyValue('--ink'), '#141312');
   const paper = parseColor(opts.paper || cs.getPropertyValue('--paper'), '#f3f0e8');
-  const base = opts.assets ? new URL(opts.assets, location.href) : ASSETS;
+  const base = opts.assets ? new URL(opts.assets, location.href) : null;
   let images = null;
 
   function hostTop() { return el.getBoundingClientRect().top + scrollY; }
@@ -977,7 +976,10 @@ export function branchGrowth(el, options = {}) {
   async function init() {
     try { await document.fonts.ready; } catch (e) {}
     try {
-      images = await Promise.all([loadImage(new URL('ink-texture.png', base)), loadImage(new URL('moss-dots.png', base))]);
+      // each file named in full (not by folder) so bundlers copy them
+      images = await Promise.all(opts.assets
+        ? [loadImage(new URL('ink-texture.png', base)), loadImage(new URL('moss-dots.png', base))]
+        : [loadImage(new URL('./assets/ink-texture.png', import.meta.url)), loadImage(new URL('./assets/moss-dots.png', import.meta.url))]);
     } catch (e) { images = [null, null]; }
     if (dead) return;
     try { G = makeGL(canvas); } catch (e) { G = null; console.warn('branch-growth: no WebGL', e); }

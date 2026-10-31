@@ -45,7 +45,6 @@
  *  Reduced motion: the vessel already painted, still.
  */
 
-const LIB = './vendor/pretext/layout.js';
 const REF = 100;            // pretext measures once at 100px; other sizes scale
 const LEADING = 1.08;       // line height, x font size: tight, so many lines draw the shape
 const ALPHA = 150;          // alpha (0-255) above which a mask pixel is vessel
@@ -614,7 +613,7 @@ export function pretextCalligram(root, opts = {}) {
     // ---- start -------------------------------------------------------------
     (async () => {
         try {
-            api = await import(LIB);
+            api = await import('./vendor/pretext/layout.js');
             img = await loadImage(new URL(url, document.baseURI).href);
             const cs = getComputedStyle(src);
             font = { style: cs.fontStyle, weight: weight || cs.fontWeight, family: family || cs.fontFamily };

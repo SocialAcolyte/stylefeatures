@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Page not found</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#3f5468">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&family=Inter:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/stylefeatures/c/murmuration-v1/murmuration.css">
+<!--
+  404, shared by Monet Shot and StyleFeatures. Built by monetshot-site/tools/make-404.py. Credits (not shown on the page):
+  - Dusk over a wetland: backdrop generated with Midjourney for Taste; treeline cut-out derived from it.
+  - Starling flock model after Ballerini et al. 2008, Hildenbrandt, Carere & Hemelrijk 2010,
+    Hemelrijk, van Zuidam & Hildenbrandt 2015. Component: StyleFeatures "murmuration" (MIT).
+  - Fallback sky colours sampled from Frederic Edwin Church, Twilight in the Wilderness (1860),
+    Cleveland Museum of Art, CC0.
+-->
+<style>
+:root{--paper:#f3f0e8;--ink:#141312;--clay:#c96f4a;
+  --serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:16px}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;background:#2e3d4d}
+body{margin:0;background:#2e3d4d;color:var(--paper);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+
+/* the whole section is the sky */
+.install[data-murmuration]{aspect-ratio:auto;height:100svh;min-height:560px;
+  display:grid;place-items:start center;padding:0 var(--gutter)}
+.eyebrow{font:500 12px/1 var(--sans);letter-spacing:.24em;color:rgba(243,240,232,.78);margin-bottom:-6px}
+.say{position:relative;z-index:1;margin-top:clamp(120px,27svh,260px);display:grid;justify-items:center;gap:clamp(26px,4.4svh,44px);text-align:center}
+h1{margin:0;font:400 clamp(72px,10.4vw,164px)/.9 var(--serif);letter-spacing:-.022em;color:var(--paper);
+  text-shadow:0 1px 1px rgba(20,19,18,.10),0 0 42px rgba(30,40,56,.28)}
+h1 em{font-style:italic;font-weight:400;letter-spacing:-.01em}
+
+/* three crisp pills: one solid paper, two glass on the sky */
+.acts{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.b{appearance:none;-webkit-appearance:none;display:inline-flex;align-items:center;justify-content:center;
+  height:46px;padding:0 22px;border-radius:999px;font:500 14.5px/1 var(--sans);letter-spacing:.005em;text-decoration:none;
+  cursor:pointer;white-space:nowrap;transition:background-color .25s ease,border-color .25s ease,color .25s ease}
+.b.solid{background:var(--paper);color:var(--ink);border:0;min-width:186px}
+.b.solid:hover{background:#fff}
+.b.glass{color:var(--paper);background:rgba(28,34,44,.16);border:1px solid rgba(243,240,232,.62);
+  -webkit-backdrop-filter:blur(14px) saturate(1.1);backdrop-filter:blur(14px) saturate(1.1)}
+.b.glass:hover{background:rgba(28,34,44,.30);border-color:var(--paper)}
+.b:focus-visible{outline:2px solid var(--paper);outline-offset:3px}
+
+@media (max-width:560px){
+  .say{margin-top:clamp(120px,24svh,220px)}
+  h1{font-size:clamp(76px,22vw,96px)}
+  .acts{display:grid;grid-template-columns:1fr 1fr;width:min(100%,300px);gap:10px}
+  .b{height:46px;padding:0 16px}
+  .b.solid{grid-column:1/-1;min-width:0}
+}
+
+/* a clipboard fallback the visitor never sees: selected, ready for ⌘C */
+.install .clip{position:fixed;left:-9999px;top:0;width:1px;height:1px;opacity:0;font-size:16px}
+.install .sr{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<main>
+  <section id="install" class="install" data-murmuration data-birds="3000" data-birds-phone="1500" data-roost="0" data-sound="off" data-wind="none"
+           data-label="A murmuration of starlings at dusk." aria-label="Page not found">
+    <div class="say">
+      <div class="eyebrow">404</div>
+      <h1>Page <em>not found.</em></h1>
+      <div class="acts">
+        <a class="b solid" href="https://socialacolyte.github.io/">SocialAcolyte</a>
+        <a class="b glass" href="https://monetshot.pages.dev/">Monet Shot</a>
+        <a class="b glass" href="https://socialacolyte.github.io/stylefeatures/">StyleFeatures</a>
+      </div>
+    </div>
+  </section>
+</main>
+<script type="module">
+import { murmuration } from '/stylefeatures/c/murmuration-v1/murmuration.js';
+const sky = document.getElementById('install');
+const flock = sky.__murmuration || murmuration(sky);
+// the flock opens round whichever way out you take
+document.querySelectorAll('.acts a').forEach((a) => a.addEventListener('pointerdown', () => {
+  const r = sky.getBoundingClientRect(), b = a.getBoundingClientRect();
+  try { flock.scatter((b.left + b.width / 2 - r.left) / r.width, (b.top + b.height / 2 - r.top) / r.height); } catch (e) {}
+}));
+</script>
+</body>
+</html>

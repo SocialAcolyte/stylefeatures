@@ -1,0 +1,41 @@
+[
+ {
+  "file": "assets/dusk.webp",
+  "title": "Dusk over a wetland (backdrop)",
+  "date": "2026",
+  "source": "Generated with Midjourney for Taste (job 7158e52b-883e-458c-bc65-1e080907e1d0, variant 3)",
+  "prompt": "empty dusk sky over a flat wetland, low dark reedbed and a line of bare winter trees silhouetted along the very bottom edge, sky graded from pale apricot at the horizon to cool slate blue above, faint high cirrus, documentary photograph, no birds, no text --ar 21:9 --style raw",
+  "license": "Generated with Midjourney for Taste",
+  "note": "1680x720 PNG converted to webp (q84). The horizon (84.7% down), the run of trees used as the roost (64-99% across) and the tree tops (77.5% down) were measured from the image."
+ },
+ {
+  "file": "assets/dusk-narrow.webp",
+  "title": "Dusk over a wetland (phone crop)",
+  "source": "Generated with Midjourney for Taste (as above)",
+  "license": "Generated with Midjourney for Taste",
+  "note": "A 720x720 square crop of the same image starting 56.5% across, centred over the trees, for tall screens."
+ },
+ {
+  "file": "assets/dusk-land.webp",
+  "title": "Treeline and field cut-out",
+  "source": "Derived from assets/dusk.webp",
+  "license": "Generated with Midjourney for Taste",
+  "note": "Alpha matte of everything darker than the sky in its own row (soft threshold at 80% of the row's sky luminance, colours un-mixed from the sky at the edges); everything below the horizon is opaque. Drawn in front of the birds so they go down into the trees. dusk-narrow-land.webp is the same crop as dusk-narrow.webp."
+ },
+ {
+  "file": "assets/sounds/wing-roar.wav",
+  "title": "Wing roar (a flock taking off)",
+  "source": "Synthesised for this component in Python/numpy",
+  "license": "Original, no recording",
+  "note": "260 overlapping bursts of 10-15 Hz wingbeats over pink noise, band-passed 300-4200 Hz, 1.9 s. Played on murmuration:scatter. The continuous wing rush is synthesised live in murmuration.js (pink noise, Paul Kellet's filter)."
+ },
+ {
+  "file": "(fallback sky, data-src=\"none\")",
+  "title": "Twilight in the Wilderness, Frederic Edwin Church, 1860",
+  "source": "The Cleveland Museum of Art, 1965.233",
+  "url": "https://clevelandart.org/art/1965.233",
+  "image": "https://openaccess-cdn.clevelandart.org/1965.233/1965.233_web.jpg",
+  "license": "CC0 (Cleveland Museum of Art Open Access)",
+  "note": "Not shipped. Eight colours sampled from the clear parts of its sky (median of patches), lightened in linear light by 1.3-1.7x to undo the darkened varnish; used for the drawn sky when no photograph is used or it fails to load."
+ }
+]

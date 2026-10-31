@@ -53,7 +53,6 @@
  *  turns by itself; dragging and keys still work and stop dead.
  */
 
-const LIB = './vendor/pretext/layout.js';
 const REF = 100;                 // pretext measures once at 100px; widths scale
 const TAU = Math.PI * 2;
 const M = 0.13;                  // canvas margin round the disc, x radius (shadow, needle)
@@ -937,7 +936,7 @@ export function pretextSpiral(root, opts = {}) {
     // ---- start ---------------------------------------------------------------------
     (async () => {
         try {
-            api = await import(LIB);
+            api = await import('./vendor/pretext/layout.js');
             img = await loadImage(new URL(url, document.baseURI).href);
             const cs = getComputedStyle(src);
             font = { style: cs.fontStyle, weight: weightOpt || cs.fontWeight, family: familyOpt || cs.fontFamily };

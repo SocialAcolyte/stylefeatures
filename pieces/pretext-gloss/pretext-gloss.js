@@ -55,7 +55,6 @@
  *  no drawing, the initial already in colour.
  */
 
-const LIB = './vendor/pretext/layout.js';
 let uid = 0;
 const REF = 100;                       // pretext measures at 100px; widths scale linearly
 const KEYS = 'abcdefghiklmnopqrstxyz'; // the Latin alphabet: no j, u, w
@@ -895,7 +894,7 @@ export function pretextGloss(root, opts = {}) {
     /* ---- start -------------------------------------------------------- */
     (async () => {
         try {
-            api = await import(LIB);
+            api = await import('./vendor/pretext/layout.js');
             src = readSource(mainEl, asides, o);
             if (o.initial && o.initial !== 'none') {
                 try { img = await loadImage(new URL(o.initial, document.baseURI).href); } catch (e) { img = null; }

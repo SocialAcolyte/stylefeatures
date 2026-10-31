@@ -44,7 +44,6 @@
  *  answers the pointer directly but nothing moves by itself.
  */
 
-const LIB = './vendor/pretext/layout.js';
 const REF = 100;              // pretext measures at 100px; widths scale linearly
 const CUT = 0.42;             // seconds for one letter to go from scratch to full V
 const PAINT = 1.7;            // seconds for the paint to sweep through after the last cut
@@ -973,7 +972,7 @@ export function pretextInscription(root, opts = {}) {
             const rs = getComputedStyle(root);
             tint = colour(rs.getPropertyValue('--pi-stone').trim(), '#ddd6c8');
             paintC = colour(rs.getPropertyValue('--pi-paint').trim(), '#94402a');
-            [api, stoneImg] = await Promise.all([import(LIB), loadImage(new URL(stoneUrl, document.baseURI).href)]);
+            [api, stoneImg] = await Promise.all([import('./vendor/pretext/layout.js'), loadImage(new URL(stoneUrl, document.baseURI).href)]);
             try { await document.fonts.load(`${font.weight} 40px ${font.family}`, 'HOSPES'); } catch (e) { /* measure what we have */ }
             if (dead) return;
             root.insertBefore(stage, text);
