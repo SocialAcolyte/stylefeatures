@@ -1,0 +1,214 @@
+/* jali-light: the figure is the room. Prefix .jl- */
+[data-jali-light] {
+    position: relative;
+    display: block;
+    margin: 0;
+    width: 100%;
+    height: 88svh;
+    min-height: 460px;
+    overflow: hidden;
+    background: #14100d;
+    touch-action: pan-y;
+    cursor: ew-resize;
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+}
+[data-jali-light]:focus-visible { outline: 2px solid var(--accent, #c96f4a); outline-offset: -6px; }
+
+/* without script: the screens in a row you can scroll along */
+[data-jali-light]:not(.jl-on) { display: flex; gap: 4vw; overflow-x: auto; align-items: center; padding: 0 8vw; scroll-snap-type: x mandatory; }
+[data-jali-light]:not(.jl-on) > img { flex: none; height: 70%; width: auto; scroll-snap-align: center; }
+[data-jali-light].jl-on > img { display: none; }
+
+.jl-room, .jl-air, .jl-dust { position: absolute; inset: 0; width: 100%; height: 100%; display: block; pointer-events: none; }
+
+/* shafts of sun and dust add light to what is under them */
+.jl-air, .jl-dust { mix-blend-mode: screen; }
+
+/* the pinned walk: the page scroll is the way along the wall */
+.jl-track.jl-pinned { height: calc(100svh + (var(--jl-n, 4) - 1) * 70svh); }
+.jl-track.jl-pinned > [data-jali-light] { position: sticky; top: 0; height: 100svh; }
+
+.jl-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* ---- orbs: glass hung in the room (orbs.js). --jl-sun / --jl-sky are "r,g,b" set from the hour ---- */
+.jl-vr { position: absolute; inset: 0; perspective: 900px; pointer-events: none; overflow: hidden; }
+.jl-obj, .jl-pool { position: absolute; left: 0; top: 0; width: 0; height: 0; }
+.jl-par { transform: translate3d(calc(var(--jl-px, 0) * var(--par, 10px)), calc(var(--jl-py, 0) * var(--par, 10px) * .55), 0); }
+.jl-bob { animation: jl-bob var(--jl-dur, 7s) ease-in-out var(--jl-delay, 0s) infinite alternate; }
+@keyframes jl-bob { from { transform: translateY(5px); } to { transform: translateY(-7px); } }
+
+/* the shadow on the floor, with a small bright pool where the glass gathers the light */
+.jl-pool { pointer-events: none; }
+.jl-pool::before, .jl-pool::after { content: ""; position: absolute; border-radius: 50%; transform: translate(-50%, -50%); }
+.jl-pool::before { width: calc(var(--d) * 2.1); height: calc(var(--d) * .62);
+    background: radial-gradient(closest-side, rgba(2, 1, 0, .95), rgba(2, 1, 0, .62) 40%, rgba(2, 1, 0, .2) 74%, rgba(6, 4, 2, 0)); }
+.jl-pool::after { width: calc(var(--d) * .72); height: calc(var(--d) * .15); mix-blend-mode: screen;
+    background: radial-gradient(closest-side, rgba(var(--jl-sun, 255, 214, 150), calc(.18 + .5 * var(--jl-warm, 1))), rgba(var(--jl-sun, 255, 214, 150), 0)); }
+
+.jl-orb {
+    position: absolute; left: calc(var(--d) / -2); top: calc(var(--d) / -2);
+    width: var(--d); height: var(--d); padding: 0; margin: 0; border: 0; border-radius: 50%;
+    display: grid; place-items: center; overflow: hidden; cursor: pointer; pointer-events: auto;
+    color: #fff4e2; -webkit-tap-highlight-color: transparent; touch-action: manipulation;
+    background:
+        radial-gradient(circle at 50% 50%, rgba(255, 246, 228, 0) 58%, rgba(255, 246, 228, .22) 82%, rgba(255, 246, 228, .62) 99%),
+        radial-gradient(circle at 36% 28%, rgba(255, 250, 240, .5), rgba(255, 246, 230, .1) 24%, rgba(255, 244, 226, 0) 44%),
+        radial-gradient(circle at 40% 32%, rgba(255, 246, 228, .1), rgba(40, 28, 18, .2) 62%, rgba(14, 9, 5, .55) 100%);
+    -webkit-backdrop-filter: blur(5px) saturate(1.45) brightness(1.18); backdrop-filter: blur(5px) saturate(1.45) brightness(1.18);
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 244, 224, .45),
+        inset calc(var(--d) * -.06) calc(var(--d) * -.1) calc(var(--d) * .22) rgba(var(--jl-sun, 255, 214, 150), .5),
+        inset calc(var(--d) * .05) calc(var(--d) * .07) calc(var(--d) * .14) rgba(255, 255, 255, .3),
+        inset 0 calc(var(--d) * -.2) calc(var(--d) * .3) rgba(10, 6, 3, .35),
+        0 calc(var(--d) * .1) calc(var(--d) * .22) rgba(0, 0, 0, .4),
+        0 0 calc(var(--d) * .4) rgba(var(--jl-sun, 255, 214, 150), .16);
+    transition: transform .45s cubic-bezier(.2, .8, .2, 1), box-shadow .45s ease;
+    transform: rotateY(calc(var(--jl-px, 0) * 16deg)) rotateX(calc(var(--jl-py, 0) * -11deg));
+}
+.jl-lace { position: absolute; inset: 0; width: 100%; height: 100%; mix-blend-mode: screen; opacity: 1; pointer-events: none; }
+.jl-glyph { position: relative; width: 36%; height: 36%; filter: drop-shadow(0 1px 6px rgba(0, 0, 0, .35)); }
+.jl-gloss { position: absolute; inset: 0; border-radius: 50%; pointer-events: none;
+    background:
+        radial-gradient(34% 22% at 34% 15%, rgba(255, 255, 255, .55), rgba(255, 255, 255, 0)),
+        radial-gradient(60% 20% at 60% 96%, rgba(var(--jl-sun, 255, 214, 150), .3), rgba(var(--jl-sun, 255, 214, 150), 0)); }
+.jl-orb:hover, .jl-orb:focus-visible {
+    transform: rotateY(calc(var(--jl-px, 0) * 16deg)) rotateX(calc(var(--jl-py, 0) * -11deg)) translateZ(46px) scale(1.1);
+    box-shadow:
+        inset 0 0 0 1.5px rgba(255, 246, 228, .75),
+        inset 0 calc(var(--d) * -.12) calc(var(--d) * .3) rgba(var(--jl-sun, 255, 214, 150), .6),
+        inset 0 calc(var(--d) * .08) calc(var(--d) * .2) rgba(255, 255, 255, .3),
+        0 calc(var(--d) * .12) calc(var(--d) * .3) rgba(0, 0, 0, .3),
+        0 0 calc(var(--d) * .8) rgba(var(--jl-sun, 255, 214, 150), .45);
+}
+.jl-orb:focus-visible { outline: 2px solid var(--accent, #c96f4a); outline-offset: 7px; }
+.jl-tag { position: absolute; left: 50%; top: calc(var(--d) / 2 + 16px); transform: translate(-50%, -4px); white-space: nowrap; pointer-events: none;
+    font: italic 500 21px/1 var(--serif, Georgia, serif); letter-spacing: .03em; color: #fff8ea; text-shadow: 0 1px 14px rgba(0, 0, 0, .85), 0 0 3px rgba(0, 0, 0, .7), 0 0 22px rgba(0, 0, 0, .55);
+    opacity: 0; transition: opacity .35s ease, transform .35s ease; }
+.jl-orb:hover + .jl-tag, .jl-orb:focus-visible + .jl-tag { opacity: 1; transform: translate(-50%, 0); }
+.jl-vr.jl-away { opacity: .5; transition: opacity .4s ease; }
+
+/* ---- the gaze reticle ---- */
+.jl-gaze { cursor: none; }
+.jl-gaze .jl-orb, .jl-gaze .jl-scrim, .jl-gaze .jl-scrim * { cursor: none; }
+.jl-gaze .jl-scrim button, .jl-gaze .jl-scrim a { cursor: pointer; }
+.jl-reticle { position: absolute; left: -30px; top: -30px; width: 60px; height: 60px; pointer-events: none; z-index: 5; opacity: 1; transition: opacity .25s ease; }
+.jl-reticle svg { width: 100%; height: 100%; overflow: visible; transform: scale(.44); transition: transform .45s cubic-bezier(.2, .8, .2, 1); }
+.jl-reticle circle { fill: none; stroke: rgba(255, 246, 228, .9); stroke-width: 2; vector-effect: non-scaling-stroke; filter: drop-shadow(0 0 3px rgba(0, 0, 0, .55)); }
+.jl-reticle .jl-r-ring { stroke-width: 1.4; stroke-opacity: .85; }
+.jl-reticle .jl-r-dot { fill: rgba(255, 246, 228, .95); stroke: none; }
+.jl-reticle .jl-r-fill { stroke: rgb(var(--jl-sun, 255, 214, 150)); stroke-width: 2.4; stroke-linecap: round; stroke-dasharray: 100; stroke-dashoffset: 100; transform: rotate(-90deg); transform-origin: 30px 30px; transition: stroke-dashoffset .7s cubic-bezier(.3, .7, .2, 1); }
+.jl-reticle.jl-lock svg { transform: scale(1); }
+.jl-reticle.jl-lock .jl-r-fill { stroke-dashoffset: 0; }
+.jl-reticle.jl-press svg { transform: scale(.34); }
+.jl-reticle.jl-lock.jl-press svg { transform: scale(.82); }
+.jl-reticle.jl-hide { opacity: 0; }
+.jl-reticle:not(.jl-tap):not(.jl-lock) { }
+.jl-reticle.jl-tap svg { animation: jl-tap .7s ease-out both; }
+@keyframes jl-tap { from { transform: scale(.4); opacity: 1; } to { transform: scale(1.1); opacity: 0; } }
+[data-jali-light]:not(.jl-gaze) .jl-reticle:not(.jl-tap) { opacity: 0; }
+
+/* ---- an orb opened: a floating glass window that unfolds out of it ---- */
+.jl-scrim { position: absolute; inset: 0; z-index: 6; display: grid; place-items: center; padding: 14px; cursor: default; touch-action: pan-y;
+    background: radial-gradient(closest-side at 50% 52%, rgba(10, 7, 4, .32), rgba(10, 7, 4, .6)); opacity: 0; transition: opacity .3s ease; perspective: 1100px; }
+.jl-scrim.jl-in { opacity: 1; }
+.jl-scrim.jl-out { opacity: 0; transition-duration: .22s; }
+.jl-app-win {
+    position: relative; width: min(440px, 100%); max-height: 100%; overflow: auto; overscroll-behavior: contain;
+    color: #fbf1df; font-family: var(--text, Georgia, serif); font-size: 17px; line-height: 1.45;
+    border-radius: 26px; padding: 26px 24px 22px;
+    background: linear-gradient(160deg, rgba(255, 246, 230, .2), rgba(255, 246, 230, .07) 50%, rgba(255, 238, 212, .11));
+    -webkit-backdrop-filter: blur(26px) saturate(1.35); backdrop-filter: blur(26px) saturate(1.35);
+    box-shadow: inset 0 0 0 1px rgba(255, 244, 224, .34), inset 0 1px 0 rgba(255, 255, 255, .35), inset 0 -40px 80px rgba(var(--jl-sun, 255, 214, 150), .12), 0 30px 80px rgba(0, 0, 0, .55);
+    transform-origin: var(--ox, 50%) var(--oy, 50%); transform: scale(.35) rotateX(-14deg); opacity: 0;
+    transition: transform .55s cubic-bezier(.16, .9, .2, 1), opacity .3s ease;
+}
+.jl-in .jl-app-win { transform: none; opacity: 1; }
+.jl-out .jl-app-win { transform: scale(.5) rotateX(-10deg); opacity: 0; transition-duration: .22s; }
+.jl-app-win[data-app="code"] { width: min(560px, 100%); padding: 0; background: linear-gradient(160deg, rgba(34, 26, 18, .72), rgba(22, 16, 11, .82)); }
+.jl-app-win[data-app="gallery"] { width: min(560px, 100%); padding: 14px; }
+.jl-x { position: absolute; top: 12px; right: 12px; z-index: 2; width: 36px; height: 36px; padding: 0; border: 0; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
+    color: #fbf1df; background: rgba(255, 244, 224, .14); box-shadow: inset 0 0 0 1px rgba(255, 244, 224, .3); transition: background .25s ease; touch-action: manipulation; }
+.jl-x svg { width: 16px; height: 16px; }
+.jl-x:hover { background: rgba(255, 244, 224, .26); }
+.jl-app-win button:focus-visible, .jl-app-win a:focus-visible, .jl-src:focus-visible { outline: 2px solid #e3b66a; outline-offset: 3px; }
+.jl-a h2 { margin: 0; font-family: var(--serif, Georgia, serif); font-weight: 400; }
+/* a page's own paragraph rules (small-caps first lines, hyphens) must not leak into the glass */
+.jl-app-win .jl-a p { hyphens: manual; -webkit-hyphens: manual; }
+.jl-app-win .jl-a p::first-line { font-variant: normal; letter-spacing: normal; }
+
+/* profile */
+.jl-a-profile { text-align: center; }
+.jl-avatar { width: 92px; height: 92px; margin: 6px auto 14px; border-radius: 50%; display: grid; place-items: center; color: rgba(255, 244, 226, .8);
+    background: radial-gradient(circle at 32% 26%, #e9c58f, #b9835a 55%, #7a4f39); box-shadow: inset 0 0 0 1.5px rgba(255, 244, 224, .55), 0 10px 26px rgba(0, 0, 0, .35); }
+.jl-avatar svg { width: 46px; height: 46px; }
+.jl-a-name { font-size: 38px; line-height: 1.05; letter-spacing: -.005em; }
+.jl-a-line { margin: 6px auto 20px; max-width: 24ch; color: rgba(251, 241, 223, .78); text-wrap: balance; }
+.jl-rows { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; text-align: left; }
+.jl-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 13px 16px; border-radius: 16px; color: inherit; text-decoration: none;
+    background: rgba(255, 244, 224, .09); box-shadow: inset 0 0 0 1px rgba(255, 244, 224, .18); transition: background .25s ease, transform .3s ease; }
+.jl-row:hover { background: rgba(255, 244, 224, .17); transform: translateX(3px); }
+.jl-row b { display: block; font-weight: 500; font-size: 19px; line-height: 1.2; }
+.jl-row i { display: block; font-size: 15px; line-height: 1.3; color: rgba(251, 241, 223, .65); }
+.jl-go { width: 20px; height: 20px; flex: none; opacity: .8; }
+
+/* code */
+.jl-tabs { display: flex; gap: 2px; padding: 12px 56px 0 14px; border-bottom: 1px solid rgba(255, 244, 224, .14); }
+.jl-tabs button { display: flex; align-items: center; gap: 8px; padding: 9px 14px 10px; border: 0; border-radius: 10px 10px 0 0; cursor: pointer; background: none; color: rgba(251, 241, 223, .55);
+    font: 500 13.5px/1 ui-monospace, 'SF Mono', Menlo, Consolas, monospace; touch-action: manipulation; }
+.jl-tabs button[aria-selected="true"] { color: #fbf1df; background: rgba(255, 244, 224, .1); box-shadow: inset 0 1px 0 #e3b66a; }
+.jl-dot { width: 7px; height: 7px; border-radius: 50%; background: #e3b66a; }
+.jl-dot-md { background: #9db08a; }
+.jl-src { margin: 0; padding: 16px 18px 18px 6px; overflow: auto; max-height: min(52vh, 380px);
+    font: 400 13.5px/1.75 ui-monospace, 'SF Mono', Menlo, Consolas, monospace; color: #efe2cc; tab-size: 2; white-space: pre; }
+.jl-l { display: block; }
+.jl-l u { display: inline-block; width: 3em; padding-right: 1.2em; text-align: right; text-decoration: none; color: rgba(251, 241, 223, .28); user-select: none; }
+.jl-t-k { color: #e3b66a; } .jl-t-s { color: #d98a63; } .jl-t-c { color: #8f8a7f; font-style: italic; } .jl-t-n { color: #c3a7d9; }
+.jl-t-f { color: #f1d9a4; } .jl-t-p { color: #efe2cc; } .jl-t-o { color: #b9ad9a; }
+.jl-caret { display: inline-block; width: .55em; height: 1.15em; margin: 0 0 -.2em .15em; background: #e3b66a; animation: jl-blink 1.1s steps(2, start) infinite; }
+@keyframes jl-blink { to { visibility: hidden; } }
+.jl-status { display: flex; gap: 16px; padding: 9px 18px 11px; border-top: 1px solid rgba(255, 244, 224, .12); font: 500 11.5px/1 ui-monospace, 'SF Mono', Menlo, monospace; color: rgba(251, 241, 223, .5); }
+.jl-status .jl-ln { margin-left: auto; }
+
+/* social */
+.jl-a-head { font-size: 30px; margin: 0 40px 14px 2px; }
+.jl-feed { list-style: none; margin: 0; padding: 0; display: grid; gap: 4px; }
+.jl-post { display: grid; grid-template-columns: 42px 1fr; gap: 12px; padding: 14px 4px; border-top: 1px solid rgba(255, 244, 224, .14); }
+.jl-pa { width: 42px; height: 42px; border-radius: 50%; background: radial-gradient(circle at 32% 26%, color-mix(in srgb, var(--c) 55%, #fff), var(--c) 60%, color-mix(in srgb, var(--c) 60%, #000));
+    box-shadow: inset 0 0 0 1px rgba(255, 244, 224, .4); }
+.jl-pn { margin: 0; line-height: 1.2; } .jl-pn b { font-weight: 600; } .jl-pn i { font-style: normal; color: rgba(251, 241, 223, .55); font-size: 15px; margin-left: 4px; }
+.jl-pt { margin: 3px 0 8px; text-wrap: pretty; }
+.jl-like { display: inline-flex; align-items: center; gap: 7px; min-height: 36px; padding: 0 12px 0 8px; margin-left: -8px; border: 0; border-radius: 18px; cursor: pointer; background: none; color: rgba(251, 241, 223, .7);
+    font: 500 15px/1 var(--text, Georgia, serif); transition: color .25s ease, background .25s ease; touch-action: manipulation; }
+.jl-like svg { width: 20px; height: 20px; transition: transform .35s cubic-bezier(.3, 1.6, .4, 1); }
+.jl-like:hover { background: rgba(255, 244, 224, .1); }
+.jl-like[aria-pressed="true"] { color: #f0a483; }
+.jl-like[aria-pressed="true"] svg { fill: #e58b68; stroke: #e58b68; transform: scale(1.12); }
+
+/* gallery */
+.jl-frame { position: relative; aspect-ratio: 4 / 3; border-radius: 16px; overflow: hidden; background: #14100d; box-shadow: inset 0 0 0 1px rgba(255, 244, 224, .2); }
+.jl-frame > img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.jl-pv, .jl-nx { position: absolute; top: 50%; width: 42px; height: 42px; margin-top: -21px; padding: 0; border: 0; border-radius: 50%; display: grid; place-items: center; cursor: pointer;
+    color: #fbf1df; background: rgba(20, 15, 10, .5); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); box-shadow: inset 0 0 0 1px rgba(255, 244, 224, .3); touch-action: manipulation; }
+.jl-pv { left: 10px; } .jl-nx { right: 10px; }
+.jl-pv svg, .jl-nx svg { width: 20px; height: 20px; }
+.jl-thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 10px; }
+.jl-thumbs button { padding: 0; aspect-ratio: 1.15; border: 0; border-radius: 10px; overflow: hidden; cursor: pointer; background: #14100d; opacity: .55; box-shadow: inset 0 0 0 1px rgba(255, 244, 224, .2); transition: opacity .25s ease, box-shadow .25s ease; }
+.jl-thumbs button[aria-current="true"] { opacity: 1; box-shadow: 0 0 0 2px #e3b66a; }
+.jl-thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+@media (max-width: 639px) {
+    .jl-app-win { padding: 22px 18px 18px; border-radius: 22px; }
+    .jl-a-name { font-size: 34px; }
+    .jl-tag { font-size: 19px; }
+    .jl-src { font-size: 12.5px; }
+}
+@media (prefers-reduced-motion: reduce) {
+    .jl-bob, .jl-caret, .jl-reticle.jl-tap svg { animation: none; }
+    .jl-par { transform: none; }
+    .jl-orb, .jl-orb:hover, .jl-orb:focus-visible { transition: none; transform: none; }
+    .jl-orb:hover, .jl-orb:focus-visible { transform: scale(1.06); }
+    .jl-app-win, .jl-scrim { transition: none; transform: none; }
+    .jl-scrim { opacity: 1; }
+    .jl-app-win { opacity: 1; }
+}

@@ -1,0 +1,60 @@
+[
+ {
+  "file": "assets/tree-of-life.webp",
+  "mask": "assets/tree-of-life-mask.webp",
+  "title": "Sidi Saiyyed Mosque, marble screen (tree of life), Ahmedabad",
+  "source": "Wikimedia Commons, File:Sidi Saiyyed Mosque - Marble Screen.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Sidi_Saiyyed_Mosque_-_Marble_Screen.jpg",
+  "author": "Ronakshah1990",
+  "license": "CC BY-SA 4.0",
+  "note": "Share-alike applies. Resized, soft-edged so the dark surround merges into the wall; the -mask file is the photograph thresholded on its own luminance (white = daylight through the lattice)."
+ },
+ {
+  "file": "assets/mihrab.webp",
+  "mask": "assets/mihrab-mask.webp",
+  "title": "Humayun's Tomb, jali with symbolic mihrab, Delhi",
+  "source": "Wikimedia Commons, File:Humayun's Tomb Jali with symbolic Mihrab (3544568571).jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Humayun%27s_Tomb_Jali_with_symbolic_Mihrab_(3544568571).jpg",
+  "author": "Varun Shiv Kapur from New Delhi, India",
+  "license": "CC BY 2.0",
+  "note": "Cropped above the floor, soft-edged; the -mask file is the photograph thresholded on its own luminance."
+ },
+ {
+  "file": "assets/geometric.webp",
+  "mask": "assets/geometric-mask.webp",
+  "title": "Humayun's Tomb, geometric jali, Delhi",
+  "source": "Wikimedia Commons, File:Humayun Tomb jali Islamic geometric pattern.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Humayun_Tomb_jali_Islamic_geometric_pattern.jpg",
+  "author": "Hu741f4",
+  "license": "CC BY-SA 4.0",
+  "note": "Share-alike applies. Cropped to the arch of the frame; the -mask file is the photograph thresholded on its own luminance."
+ },
+ {
+  "file": "assets/floral.webp",
+  "mask": "assets/floral-mask.webp",
+  "title": "Kusru Bagh, Allahabad, floral jali",
+  "source": "Wikimedia Commons, File:Allahabad, Kusru Bagh 11 - jali (28015722349).jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Allahabad,_Kusru_Bagh_11_-_jali_(28015722349).jpg",
+  "author": "juggadery",
+  "license": "CC BY-SA 2.0",
+  "note": "Share-alike applies. Cropped and soft-edged; the -mask file is the photograph thresholded on its own luminance."
+ },
+ {
+  "file": "assets/wall.webp",
+  "title": "Stone block wall (scanned diffuse texture)",
+  "source": "Wikimedia Commons, File:Stone block wall diff 16k (Amal Kumar via Poly Haven) JPG.jpg, from Poly Haven",
+  "url": "https://commons.wikimedia.org/wiki/File:Stone_block_wall_diff_16k_(Amal_Kumar_via_Poly_Haven)_JPG.jpg",
+  "author": "Amal Kumar (Poly Haven)",
+  "license": "CC0",
+  "note": "Seamless; resized to 2560px."
+ },
+ {
+  "file": "assets/floor.webp",
+  "title": "Monastery stone floor (scanned diffuse texture)",
+  "source": "Wikimedia Commons, File:Monastery stone floor diff 8k (Amal Kumar via Poly Haven).png, from Poly Haven",
+  "url": "https://commons.wikimedia.org/wiki/File:Monastery_stone_floor_diff_8k_(Amal_Kumar_via_Poly_Haven).png",
+  "author": "Amal Kumar (Poly Haven)",
+  "license": "CC0",
+  "note": "Seamless; resized to 2560px, laid in perspective by the script."
+ }
+]
