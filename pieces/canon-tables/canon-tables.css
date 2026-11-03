@@ -1,0 +1,246 @@
+/* canon-tables: a comparison table under a painted arcade. Namespace .cn- */
+
+.cn {
+  --cn-ink: #2e241b;            /* iron-gall brown-black */
+  --cn-rubric: #b4462a;         /* the book's orange-red minium */
+  --cn-dim: #b8ab95;            /* text of the other rows while one is lit */
+  --cn-label: var(--ink-2, #4a4744);
+  --cn-rule: rgba(180, 70, 42, .5);
+  --cn-cell-font: 'EB Garamond', Garamond, Georgia, serif;
+  --cn-head-font: 'Cormorant Garamond', 'EB Garamond', Garamond, serif;
+  position: relative;
+  margin: 0;
+  color: var(--cn-ink);
+  font: 400 16px/1.4 var(--cn-cell-font);
+}
+
+/* ---- the source table (and the page without JS) ----------------------- */
+.cn table {
+  width: 100%;
+  border-collapse: collapse;
+  font: inherit;
+  color: inherit;
+}
+.cn caption {
+  caption-side: bottom;
+  padding-top: .9em;
+  font: 600 .95em/1.3 var(--cn-head-font);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--cn-rubric);
+}
+.cn thead th {
+  font: 600 1.15em/1.2 var(--cn-head-font);
+  text-transform: uppercase;
+  color: var(--cn-rubric);
+  padding: .3em .7em .5em;
+  vertical-align: bottom;
+}
+.cn tbody th {
+  font: italic 400 1em/1.4 var(--cn-cell-font);
+  color: var(--cn-label);
+  text-align: right;
+  padding: .45em .9em .5em 0;
+  vertical-align: top;
+}
+.cn td {
+  font: 400 1em/1.4 var(--cn-cell-font);
+  padding: .45em .7em .5em;
+  vertical-align: top;
+  border-left: 3px double var(--cn-rule);
+}
+.cn tbody tr + tr > * { border-top: 1px solid var(--cn-rule); }
+.cn b, .cn strong, .cn [data-rubric] { font-weight: inherit; color: var(--cn-rubric); }
+.cn [data-less] { display: none; }              /* the short form's capitals; the table holds the whole passage */
+@media (max-width: 640px) {
+  .cn:not(.is-drawn) table { display: block; overflow-x: auto; }
+}
+
+/* once drawn, the table stays for screen readers, find and print
+   (clipped at the root: a hidden table still lays out at its full width) */
+.cn.is-drawn table {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+@media print {
+  .cn.is-drawn table { position: static !important; width: 100%; height: auto; clip: auto; clip-path: none; white-space: normal; }
+  .cn .cn-drawing { display: none; }
+}
+
+/* ---- the drawing -------------------------------------------------------- */
+.cn.is-drawn { overflow-x: clip; overflow-clip-margin: 6px; }   /* arches may rise as a bay widens */
+.cn-drawing { position: relative; }
+/* the canon pages of a long table, one under another as they come in the book */
+.cn-page { position: relative; }
+.cn-page + .cn-page { margin-top: clamp(28px, 4.5vw, 64px); }
+.cn-folio { letter-spacing: .04em; text-transform: none; font-style: italic; font-weight: 500; opacity: .8; }
+.cn-draw { position: relative; width: 100%; }
+.cn-margin { position: absolute; top: 0; bottom: 0; }
+.cn-scroll { position: absolute; top: 0; bottom: 0; }
+.cn-draw[data-mode="folio"] { touch-action: pan-y; }            /* a sideways drag handles; a vertical one scrolls */
+.cn-draw[data-mode="folio"] .cn-scroll { cursor: grab; }
+.cn.is-carrying .cn-draw .cn-scroll, .cn.is-carrying { cursor: grabbing; }
+.cn-draw[data-mode="swipe"] .cn-scroll {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 22px), transparent);
+          mask-image: linear-gradient(90deg, #000 calc(100% - 22px), transparent);
+}
+.cn-draw[data-mode="swipe"] .cn-scroll::-webkit-scrollbar { display: none; }
+.cn-arcade { position: relative; }
+.cn-snap { position: absolute; top: 0; width: 1px; height: 1px; scroll-snap-align: start; }
+.cn-under { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+
+.cn-arch, .cn-part, .cn-shaft {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+.cn-arch { background-repeat: no-repeat; z-index: 2; transform-origin: 50% 50%; }
+.cn-arch.is-turned { transform: scaleX(-1); }
+.cn-col { position: absolute; left: 0; top: 0; width: 0; height: 0; z-index: 3; will-change: transform; }
+.cn-shaft { clip-path: inset(0 -40px); }
+.cn-shaft img { position: absolute; left: 0; top: 0; display: block; }
+.cn-part { display: block; }
+.cn-cap { z-index: 1; }
+/* the handle on each column: grab it to slide the stone */
+.cn-grip {
+  position: absolute;
+  z-index: 2;
+  cursor: grab;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+}
+.cn.is-dragging, .cn.is-dragging .cn-grip { cursor: grabbing; }
+
+.cn-rule {
+  position: absolute;
+  height: 1px;
+  background: var(--cn-rule);
+}
+.cn-rule.is-foot { background: var(--cn-rubric); opacity: .7; }
+
+/* the reading line: runs under the first line of the lit row, behind the shafts */
+.cn-read {
+  position: absolute;
+  height: 1.5px;
+  background: var(--cn-rubric);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  opacity: .9;
+  transition: transform .7s cubic-bezier(.3, .1, .2, 1);
+  pointer-events: none;
+}
+.cn-read.is-margin { transition-duration: .25s; }
+.cn-read.is-drawn { transform: scaleX(1); }
+.cn-read.is-drawn:not(.is-margin) { transition-delay: .12s; }
+.cn-read.is-reset { transition: none; }
+.cn:not(.is-lit) .cn-read { opacity: 0; transition: opacity .3s; }
+
+.cn-text { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
+.cn-ln {
+  position: absolute;
+  left: 0; top: 0;
+  white-space: pre;
+  will-change: transform;
+  font: 400 var(--cn-fs, 16px) var(--cn-cell-font);
+  color: var(--cn-ink);
+  transition: color .35s ease;
+  font-kerning: normal;
+}
+/* written in as it comes up the page: a pen's soft front, --w per cent along the line */
+.cn-ln.is-ink {
+  --x: calc(var(--w, 100) * 1% + var(--w, 100) * .016em);
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(var(--x) - 1.6em), transparent var(--x));
+          mask-image: linear-gradient(90deg, #000 calc(var(--x) - 1.6em), transparent var(--x));
+}
+/* a row closed up round an opened one keeps its first line, fading where it goes on */
+.cn-ln.is-folded:not(.is-ink) {
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(100% - 3.2em), transparent);
+          mask-image: linear-gradient(90deg, #000 calc(100% - 3.2em), transparent);
+}
+.cn-ln { transition: color .35s ease, opacity .4s ease; }
+.cn-ln.is-new { opacity: 0; transition: none; }
+.cn-ln.is-leaving { opacity: 0; transition: opacity .3s ease; }
+.cn-head {
+  font-family: var(--cn-head-font);
+  font-weight: 600;
+  color: var(--cn-rubric);
+}
+.cn-lab {
+  font-style: italic;
+  color: var(--cn-label);
+  text-align: right;
+  white-space: pre;
+}
+.cn-lab.is-in { text-align: left; color: var(--cn-rubric); }
+.cn-rub { color: var(--cn-rubric); }
+.cn.is-lit .cn-ln[data-r]:not(.is-on) { color: var(--cn-dim); }
+.cn.is-lit .cn-ln[data-r]:not(.is-on) .cn-rub { color: color-mix(in srgb, var(--cn-rubric) 40%, var(--cn-dim)); }
+.cn-lab.is-on { color: var(--cn-rubric); }
+.cn-ln.is-carried { text-shadow: 0 6px 10px rgba(60, 40, 20, .2); }
+.cn.is-lit .cn-ln.is-carried { color: var(--cn-ink); }
+.cn-head.is-focus { outline: 1.5px solid var(--cn-rubric); outline-offset: 3px; border-radius: 2px; }
+.cn-lab.is-focus { outline: 1.5px solid var(--cn-rubric); outline-offset: 3px; border-radius: 2px; }
+.cn-draw { cursor: default; }
+
+.cn-cap-text {
+  margin: .2em 0 0;
+  text-align: center;
+  font: 600 .95em/1.3 var(--cn-head-font);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--cn-rubric);
+}
+
+/* announcements for screen readers */
+.cn-sr { position: absolute !important; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; margin: 0; }
+
+/* the pager under a swiping arcade */
+.cn-pager {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: .2em .9em;
+  margin: .3em 0 .4em;
+}
+.cn-pager button {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: .55em .2em;
+  min-height: 44px;
+  font: 600 1.02em/1 var(--cn-head-font);
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--cn-dim);
+  cursor: pointer;
+  transition: color .3s;
+}
+.cn-pager button[aria-current="true"] { color: var(--cn-rubric); }
+.cn-pager button:focus-visible { outline: 1.5px solid var(--cn-rubric); outline-offset: 2px; border-radius: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .cn-ln, .cn-read, .cn-pager button { transition: none !important; }
+  .cn-ln.is-new { opacity: 1; }
+}
+
+/* a plate: the whole folio, as photographed, lying on the page */
+.cn-plate {
+  position: absolute;
+  left: 0; top: 0;
+  z-index: 0;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  box-shadow: 0 1px 0 rgba(60, 40, 20, .08), 0 22px 50px -32px rgba(60, 40, 20, .45);
+}

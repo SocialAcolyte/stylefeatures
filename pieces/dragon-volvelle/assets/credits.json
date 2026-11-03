@@ -1,0 +1,28 @@
+[
+ {
+  "files": [
+   "assets/plate.webp",
+   "assets/disc.webp",
+   "assets/ring.webp"
+  ],
+  "title": "The first dragon volvelle (lunar latitude: Caput and Cauda Draconis), from Astronomicum Caesareum",
+  "maker": "Petrus Apianus (Peter Apian), with Georg Apian; printed, hand-coloured and assembled in the Apians' workshop",
+  "date": "1540",
+  "place": "Ingolstadt",
+  "medium": "Hand-coloured woodcut on paper, with a cut paper disc turning on the plate",
+  "source": "National Library of Poland (Polona, object 149346690), via Wikimedia Commons; public domain",
+  "url": "https://commons.wikimedia.org/wiki/File:Astronomicum_Caesareum._1540_(149346690).jpg",
+  "original_size": [8822, 11649],
+  "fetched": "3840 px wide standard thumbnail (tools/engine/jobs/dragon-volvelle-src/polona-draco-3840.jpg)",
+  "license": "Public domain (author died 1552)",
+  "note": "The instrument cut off its page by distance from the paper's own colour. The turning paper disc (and its two tabs, CAPVT and CAVDA, with the shadows they cast on the mater) cut along its own hand-cut edge, measured angle by angle about the pin; its colour solved so that the restored mater under it plus the disc equals the scan at rest. Under each tab the mater's zodiac ring was restored from the same printed sign 60 or 120 degrees round (the white signs repeat their numerals and checker), registered on the ring either side, its seams on printed cell rules; the gap between the disc and the ring from the same gap a sector along. Scaled to 1600 px wide. Nothing drawn."
+ },
+ {
+  "files": [],
+  "title": "References (not used as images)",
+  "notes": [
+   "Lars Gislén, 'A commentary on the volvelles in Petrus Apianus' Astronomicum Caesareum' (2018), section on the Latitude of the Moon: one disc on the mater with tabs CAPVT and CAVDA, year marks, and the arched latitude scales; latitude = 5 deg x sin(argument of latitude).",
+   "Library of Congress, Bibliomania, 'Dragons in the Astronomicum Caesareum' (2025): Apian claims to have coloured, cut and assembled the instruments himself; the layers are tied together at the centre."
+  ]
+ }
+]

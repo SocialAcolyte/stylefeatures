@@ -1,0 +1,211 @@
+[
+ {
+  "files": [
+   "assets/parts/*",
+   "assets/arcades.json"
+  ],
+  "title": "Gospel Book",
+  "maker": "Carolingian, made probably in Metz",
+  "date": "ca. 825–50",
+  "medium": "Ink and opaque watercolor on parchment",
+  "source": "The Metropolitan Museum of Art, The Cloisters Collection and Director's Fund, 2015 (2015.560)",
+  "url": "https://www.metmuseum.org/art/collection/search/693765",
+  "objectID": 693765,
+  "license": "CC0 1.0 (Met Open Access, public domain)",
+  "note": "Seven canon-table pages of the same book, each cut by hand-read geometry and colour distance from the vellum into separate parts: one arch row (split at runtime into bays and ends), capitals, shafts and bases per column. Text and rubrics touching the parts removed; edge colour un-mixed from the vellum. Columns against the binding (the last shaft or base on folios 16, 18, 21, 24, and the last capital on 18, 21 and 24) are left out and replaced at runtime by a sister of the same colour; the right ends of 18, 21 and 24 are drawn as their own left end, mirrored. Sharpness checked with tools/engine inspect (all pass) and every part with alpha_check. Scripts: tools/engine/jobs/canon-tables-work/cut.py, pack.py.",
+  "parts": [
+   {
+    "folio": "04",
+    "image": "https://images.metmuseum.org/CRDImages/cl/original/DP702188.jpg",
+    "size": [
+     2573,
+     3889
+    ],
+    "files": "assets/parts/f04-*.webp",
+    "what": "four bays; blue band with a white running scroll; gold acanthus finials; stepped capitals and bases; ochre and green marbled shafts"
+   },
+   {
+    "folio": "05",
+    "image": "https://images.metmuseum.org/CRDImages/cl/original/DP702189.jpg",
+    "size": [
+     2573,
+     3889
+    ],
+    "files": "assets/parts/f05-*.webp",
+    "what": "four bays; ochre band spotted brown; acanthus finials; cushion capitals; marbled and leaf-scroll shafts; stepped and meander bases"
+   },
+   {
+    "folio": "16",
+    "image": "https://images.metmuseum.org/CRDImages/cl/original/DP702196.jpg",
+    "size": [
+     2573,
+     3889
+    ],
+    "files": "assets/parts/f16-*.webp",
+    "what": "three bays; blue band with a white dentil edge; capitals of human heads (the man of Matthew); red shafts; crouching atlantes as bases"
+   },
+   {
+    "folio": "17",
+    "image": "https://images.metmuseum.org/CRDImages/cl/original/DP702197.jpg",
+    "size": [
+     2573,
+     3889
+    ],
+    "files": "assets/parts/f17-*.webp",
+    "what": "three bays; plain ochre band; Corinthian capitals; green marbled shafts; acanthus bases"
+   },
+   {
+    "folio": "18",
+    "image": "https://images.metmuseum.org/CRDImages/cl/original/DP702198.jpg",
+    "size": [
+     2573,
+     3889
+    ],
+    "files": "assets/parts/f18-*.webp",
+    "what": "four bays; green band with leaf strokes; lion-head capitals (the lion of Mark); twisted blue and red shafts; lion-paw and turned bases"
+   },
+   {
+    "folio": "21",
+    "image": "https://images.metmuseum.org/CRDImages/cl/original/DP702200.jpg",
+    "size": [
+     2573,
+     3889
+    ],
+    "files": "assets/parts/f21-*.webp",
+    "what": "four bays; blue running-wave band; atlas capitals; red and green shafts; seated evangelists as bases"
+   },
+   {
+    "folio": "24",
+    "image": "https://images.metmuseum.org/CRDImages/cl/original/DP702202.jpg",
+    "size": [
+     2573,
+     3889
+    ],
+    "files": "assets/parts/f24-*.webp",
+    "what": "four bays; green and red scalloped band; ox-head capitals (the ox of Luke); green shafts; hoofed bases"
+   }
+  ]
+ },
+ {
+  "files": [
+   "assets/roslin/*",
+   "assets/roslin.json"
+  ],
+  "title": "Zeyt'un Gospels",
+  "maker": "T'oros Roslin (Armenian, active 1256-1268)",
+  "date": "1256",
+  "place": "Hromkla (Rumkale), Cilicia",
+  "medium": "Tempera colors, gold leaf, and ink on parchment",
+  "source": "J. Paul Getty Museum, Los Angeles, Ms. 59 (95.MG.4)",
+  "url": "https://www.getty.edu/art/collection/object/107TXJ",
+  "license": "Getty Open Content (CC0)",
+  "parts": [
+   {
+    "folio": "f1v",
+    "object": "https://www.getty.edu/art/collection/object/107TXJ",
+    "image": "https://media.getty.edu/iiif/image/cc50b4e1-c950-4071-a81b-68a043c10f84/full/max/0/default.jpg",
+    "files": [
+     "roslin/f1v-plate.webp",
+     "roslin/f1v-col0.webp",
+     "roslin/f1v-col1.webp",
+     "roslin/f1v-col2.webp"
+    ]
+   },
+   {
+    "folio": "f2",
+    "object": "https://www.getty.edu/art/collection/object/107TXD",
+    "image": "https://media.getty.edu/iiif/image/788f070d-689e-4145-8483-68a327626e1d/full/max/0/default.jpg",
+    "files": [
+     "roslin/f2-plate.webp",
+     "roslin/f2-col0.webp",
+     "roslin/f2-col1.webp",
+     "roslin/f2-col2.webp"
+    ]
+   },
+   {
+    "folio": "f3v",
+    "object": "https://www.getty.edu/art/collection/object/107TXC",
+    "image": "https://media.getty.edu/iiif/image/92a46de0-fcd5-4967-9cb1-7250412c3e42/full/max/0/default.jpg",
+    "files": [
+     "roslin/f3v-plate.webp",
+     "roslin/f3v-col0.webp",
+     "roslin/f3v-col1.webp",
+     "roslin/f3v-col2.webp"
+    ]
+   },
+   {
+    "folio": "f4",
+    "object": "https://www.getty.edu/art/collection/object/107TXK",
+    "image": "https://media.getty.edu/iiif/image/c0b53b09-7d83-4788-9be9-996b05d926ca/full/max/0/default.jpg",
+    "files": [
+     "roslin/f4-plate.webp",
+     "roslin/f4-col0.webp",
+     "roslin/f4-col1.webp",
+     "roslin/f4-col2.webp"
+    ]
+   },
+   {
+    "folio": "f5v",
+    "object": "https://www.getty.edu/art/collection/object/107TXE",
+    "image": "https://media.getty.edu/iiif/image/b757843f-9c41-43aa-802c-65f1e56d2b64/full/max/0/default.jpg",
+    "files": [
+     "roslin/f5v-plate.webp",
+     "roslin/f5v-col0.webp",
+     "roslin/f5v-col1.webp",
+     "roslin/f5v-col2.webp"
+    ]
+   },
+   {
+    "folio": "f6",
+    "object": "https://www.getty.edu/art/collection/object/107TXH",
+    "image": "https://media.getty.edu/iiif/image/97eb834c-1568-4eb7-b1e1-066abed33d94/full/,6400/0/default.jpg",
+    "files": [
+     "roslin/f6-plate.webp",
+     "roslin/f6-col0.webp",
+     "roslin/f6-col1.webp",
+     "roslin/f6-col2.webp"
+    ]
+   },
+   {
+    "folio": "f7v",
+    "object": "https://www.getty.edu/art/collection/object/107TXF",
+    "image": "https://media.getty.edu/iiif/image/2be4025d-58dc-4c66-ac1e-3f7395a80af3/full/max/0/default.jpg",
+    "files": [
+     "roslin/f7v-plate.webp",
+     "roslin/f7v-col0.webp",
+     "roslin/f7v-col1.webp",
+     "roslin/f7v-col2.webp"
+    ]
+   },
+   {
+    "folio": "f8",
+    "object": "https://www.getty.edu/art/collection/object/107TXG",
+    "image": "https://media.getty.edu/iiif/image/97e71b81-d60a-4a1f-8dad-01e4f403f72b/full/max/0/default.jpg",
+    "files": [
+     "roslin/f8-plate.webp",
+     "roslin/f8-col0.webp",
+     "roslin/f8-col1.webp",
+     "roslin/f8-col2.webp"
+    ]
+   }
+  ],
+  "note": "All eight canon pages, each with two bays (fols. 1v-8: four facing openings), worked at 2100 px wide from the IIIF images (3168 x 4418; fol. 6 4600 x 6400). The bays (the old canon table, its gold ruling and headings) and the place of each column are refilled with parchment: tone from the bays' own bare parchment, grain tiled from the page's bottom margin with its strength matched. Each column (with its corbel and its red and gold flecks) is lifted off as a separate part with edge colour un-mixed from the parchment. Everything outside the bays is the photograph. All files pass the engine's inspect."
+ },
+ {
+  "files": [
+   "demo.html"
+  ],
+  "title": "Texts in the demo",
+  "note": "Canon I: Matthew 14:13-21, Mark 6:32-44, Luke 9:10-17, John 6:1-13 (excerpts), King James Version, public domain (text checked against bible-api.com, KJV). John 1:1-5 in the Clementine Vulgate and the King James Version, public domain. The plans table was written for the demo. John 1:1-14 in the Clementine Vulgate and the King James Version, and the fuller passages of the feeding of the five thousand (Matthew 14, Mark 6, Luke 9, John 6), fetched from bible-api.com. The Lord's Prayer, Matthew 6:7-15 and Luke 11:1-4 (KJV)."
+ },
+ {
+  "files": [
+   "vendor/pretext/*"
+  ],
+  "title": "pretext",
+  "maker": "Cheng Lou",
+  "url": "https://github.com/chenglou/pretext",
+  "license": "MIT",
+  "note": "v0.0.8, vendored unmodified (as in pretext-gloss)."
+ }
+]

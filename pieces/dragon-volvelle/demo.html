@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>dragon-volvelle</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dragon-volvelle.css">
+<style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;
+    --serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  main{max-width:1120px;margin:0 auto;padding:clamp(48px,10svh,120px) var(--gutter) 120px;display:grid;gap:clamp(56px,9svh,104px)}
+  .tag{font:500 10.5px/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  .head{display:grid;gap:14px;justify-items:center;text-align:center}
+  .head h1{margin:0;font-weight:300;font-style:italic;font-size:clamp(34px,5vw,58px);line-height:1}
+  .prose{max-width:34em;margin:0 auto;font-size:clamp(18px,1.6vw,20.5px);line-height:1.55;color:var(--ink-2);text-wrap:pretty}
+  .prose p{margin:0 0 .9em}.prose p:last-child{margin:0}
+  .dv-wide{--dv-plate:min(100%,500px,calc(76svh * 1600 / 2063))}
+  .files{margin:6px 0 0;padding:0;list-style:none;font:400 13px/1.9 var(--sans);color:var(--ink-3);font-variant-numeric:tabular-nums}
+  .files li{display:flex;gap:10px}.files li span:first-child{min-width:12ch}
+  .files .sent{color:var(--ink)}
+  .btn{min-height:44px;min-width:96px;padding:0 22px;border-radius:999px;border:1px solid var(--ink);background:transparent;color:var(--ink);
+    font:500 13px/1 var(--sans);letter-spacing:.04em;cursor:pointer}
+  .btn:hover{background:var(--ink);color:var(--paper)}
+  .btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .notice{border-top:1px solid var(--rule);padding-top:clamp(40px,7svh,72px);display:grid;gap:28px;justify-items:center}
+  .notice .dv{width:min(100%,420px)}
+  .notice p.line{margin:0;font-size:20px;color:var(--ink-2)}
+</style></head><body>
+<main>
+  <header class="head">
+    <span class="tag">upload</span>
+    <h1>The dragon's head goes round</h1>
+  </header>
+
+  <div class="dv dv-wide" data-dragon-volvelle id="send">
+    <div class="dv-plate"><img class="dv-img" src="assets/plate.webp" width="1600" height="2063"
+      alt="A hand-coloured woodcut instrument from 1540: an octagonal plate ringed with the signs of the zodiac, and on it a turning paper disc with a winged dragon, two small tabs marked Caput and Cauda at its rim."></div>
+    <div class="dv-face">
+      <label class="dv-label" for="send-bar">Sending 12 plates</label>
+      <progress id="send-bar" max="12" value="0">0 of 12</progress>
+      <p class="dv-readout" aria-hidden="true">0%</p>
+      <ol class="files" id="files" aria-label="Files"></ol>
+      <button type="button" class="btn" id="go">Send</button>
+      <p class="dv-hint">Turn the disc while you wait. Let go and the work takes it back.</p>
+    </div>
+  </div>
+
+  <div class="prose">
+    <p>Peter Apian printed the <i>Astronomicum Caesareum</i> in Ingolstadt in 1540 for the emperor Charles V, and coloured, cut and assembled its paper instruments in his own workshop. On this one a paper disc, tied at its centre, turns over the zodiac. Its dragon's head and tail mark the two points where the moon's path crosses the sun's; set the head against the year, read the moon's latitude off the arcs.</p>
+    <p>The nodes go backwards through the signs, one full turn in eighteen and a half years. Here the turn is the work: a value turns the disc that far, and at the end the head is home where it was printed.</p>
+  </div>
+
+  <section class="notice" aria-label="Saving">
+    <span class="tag">saving</span>
+    <div class="dv dv-small" data-dragon-volvelle data-turn="30" id="save">
+      <div class="dv-plate"><img class="dv-img" src="assets/plate.webp" width="1600" height="2063" alt=""></div>
+      <div class="dv-face">
+        <label class="dv-label" for="save-bar">Saving the catalogue</label>
+        <progress id="save-bar"></progress>
+        <p class="dv-readout" aria-hidden="true" data-busy="working…">working…</p>
+      </div>
+    </div>
+    <p class="line">No value, so it simply goes round.</p>
+  </section>
+</main>
+<script>
+  // a pretend upload of twelve files, each a little different in size, with the network's own unevenness
+  const names = ['folio-01.tif','folio-02.tif','folio-03.tif','folio-04.tif','folio-05.tif','folio-06.tif','folio-07.tif','folio-08.tif','folio-09.tif','folio-10.tif','folio-11.tif','folio-12.tif'];
+  const sizes = [41, 38, 52, 47, 36, 58, 44, 39, 50, 46, 42, 55];
+  const list = document.getElementById('files'), bar = document.getElementById('send-bar'), go = document.getElementById('go');
+  const total = sizes.reduce((a, b) => a + b, 0);
+  names.forEach((n, i) => { const li = document.createElement('li'); li.innerHTML = `<span>${n}</span><span>${sizes[i]} MB</span>`; list.appendChild(li); });
+  let timer = 0;
+  function send() {
+    clearInterval(timer);
+    let sent = 0;
+    bar.value = 0; [...list.children].forEach((li) => li.classList.remove('sent'));
+    go.textContent = 'Sending…'; go.disabled = true;
+    timer = setInterval(() => {
+      sent = Math.min(total, sent + 0.9 + Math.random() * 1.6);
+      let acc = 0, n = 0;
+      sizes.forEach((s, i) => { acc += s; if (acc <= sent) { n = i + 1; list.children[i].classList.add('sent'); } });
+      bar.value = (sent / total) * 12;
+      if (sent >= total) { clearInterval(timer); go.textContent = 'Send again'; go.disabled = false; }
+    }, 250);
+  }
+  go.addEventListener('click', send);
+  if (!location.hash.includes('still')) setTimeout(send, 1200);
+</script>
+<script type="module" src="dragon-volvelle.js"></script>
+</body></html>

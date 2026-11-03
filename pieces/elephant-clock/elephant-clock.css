@@ -1,0 +1,117 @@
+/* ─── elephant-clock — al-Jazari's Elephant Clock (1315 folio) as a countdown ───────────────────────
+   The folio is an <img> lying on the page as a sheet, cut to its own worn outline. While the clock is
+   going, a canvas over it draws the moving parts; idle, what you see is the <img>. The digits are a real
+   <time>; the buttons are real buttons. Prefix: .ec- */
+
+.ec {
+  container-type: inline-size;
+  display: grid;
+  gap: var(--ec-gap, clamp(18px, 4cqi, 40px));
+  justify-items: center;
+  align-items: center;
+  color: var(--ink, #141312);
+  font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
+}
+.ec-sheet {
+  position: relative;
+  width: var(--ec-sheet, min(100%, 560px));
+  line-height: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.ec-folio {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* a sheet of old paper lying on the page: a tight contact shadow and a soft one, along its own torn edge */
+  filter: drop-shadow(0 .5px .8px rgba(40, 30, 18, .22)) drop-shadow(0 10px 18px rgba(40, 30, 18, .16));
+}
+.ec-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  pointer-events: none;
+}
+.ec-moving .ec-canvas { display: block; }
+/* touchable: vertical swipes still scroll the page; taps and sideways drags work the machine */
+.ec-touch .ec-sheet { touch-action: pan-y; cursor: default; user-select: none; -webkit-user-select: none; }
+.ec-grabbing .ec-sheet { cursor: grabbing !important; }
+
+.ec-face {
+  display: grid;
+  gap: 14px;
+  justify-items: center;
+  text-align: center;
+}
+.ec-label {
+  margin: 0;
+  font: 500 11px/1.2 var(--sans, Inter, system-ui, sans-serif);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-3, #8a857d);
+}
+.ec-readout { margin: 0; line-height: 1; }
+.ec-time {
+  display: block;
+  font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
+  font-weight: 400;
+  font-size: var(--ec-size, clamp(48px, 13cqi, 96px));
+  font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: .01em;
+  color: var(--ink, #141312);
+}
+.ec-hint {
+  margin: 4px 0 0;
+  max-width: 22em;
+  font: 400 12.5px/1.5 var(--sans, Inter, system-ui, sans-serif);
+  color: var(--ink-3, #8a857d);
+}
+.ec:not(.ec-touch) .ec-hint { display: none; }
+.ec-done .ec-time { color: var(--accent, #c96f4a); }
+.ec-controls { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
+.ec [data-ec] {
+  min-height: 44px;
+  min-width: 96px;
+  padding: 0 22px;
+  border-radius: 999px;
+  border: 1px solid var(--ink, #141312);
+  background: transparent;
+  color: var(--ink, #141312);
+  font: 500 13px/1 var(--sans, Inter, system-ui, sans-serif);
+  letter-spacing: .04em;
+  cursor: pointer;
+}
+.ec [data-ec="toggle"] { background: var(--ink, #141312); color: var(--paper, #f3f0e8); }
+.ec [data-ec]:disabled { opacity: .35; cursor: default; }
+.ec [data-ec]:focus-visible { outline: 2px solid var(--accent, #c96f4a); outline-offset: 3px; }
+.ec-live {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* side by side when there is room */
+@media (min-width: 860px) {
+  .ec-wide {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+    justify-items: stretch;
+  }
+  .ec-wide .ec-sheet { justify-self: end; }
+  .ec-wide .ec-face { justify-items: start; text-align: left; }
+  .ec-wide .ec-controls { justify-content: flex-start; }
+}
+
+/* small: the folio as a thumbnail beside the digits, for "closes in", "sale ends in" */
+.ec-small {
+  grid-template-columns: auto minmax(0, 1fr);
+  justify-items: start;
+  gap: 18px;
+  --ec-sheet: clamp(84px, 26cqi, 150px);
+  --ec-size: clamp(30px, 9cqi, 46px);
+}
+.ec-small .ec-face { justify-items: start; text-align: left; gap: 6px; }
+
+@media (forced-colors: active) {
+  .ec-canvas { display: none !important; }
+  .ec-folio { filter: none; }
+}

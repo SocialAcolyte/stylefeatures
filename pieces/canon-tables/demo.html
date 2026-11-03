@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>canon-tables</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="canon-tables.css">
+<style>
+  :root {
+    --paper: #f3f0e8; --paper-2: #e9e5da; --ink: #141312; --ink-2: #4a4744; --ink-3: #8a857d;
+    --rule: #cfcac0; --vellum: #f1e9d6;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--paper); }
+  body { margin: 0; background: var(--paper); color: var(--ink); -webkit-text-size-adjust: 100%; }
+  .desk { padding: clamp(28px, 6vw, 88px) 16px clamp(64px, 10vw, 140px); }
+  .label {
+    margin: 0 auto clamp(18px, 3vw, 34px); text-align: center;
+    font: 500 11px/1 'EB Garamond', serif; letter-spacing: .26em; text-transform: uppercase; color: var(--ink-3);
+  }
+  /* a leaf of vellum to set the tables on */
+  .leaf {
+    position: relative;
+    margin: 0 auto;
+    width: min(100%, 1180px);
+    padding: clamp(28px, 5vw, 72px) clamp(14px, 4.5vw, 72px) clamp(36px, 5vw, 64px);
+    background: var(--vellum);
+    box-shadow: 0 1px 0 rgba(60, 40, 20, .06), 0 18px 50px -30px rgba(60, 40, 20, .35);
+  }
+  .leaf + .leaf { margin-top: clamp(40px, 7vw, 96px); }
+  .leaf.is-narrow { width: min(100%, 860px); }
+  .leaf.is-slim { width: min(100%, 700px); }
+  /* a whole folio is its own leaf: it lies on the desk as it is */
+  .leaf.is-folio { width: min(100%, 980px); padding: 0; background: none; box-shadow: none; }
+  .leaf.is-folio.is-narrow { width: min(100%, 820px); }
+  /* the grip on the first leaf resizes it, so the arcade can be seen rebuilding */
+  .grip {
+    position: absolute; top: 0; bottom: 0; right: -30px; width: 22px; margin: 0;
+    /* engine-lint: allow big-touch-none -- a 22px strip, shown only to fine pointers at 900px+ */
+    border: 0; padding: 0; background: none; cursor: ew-resize; touch-action: none; display: none; color: var(--ink-3);
+  }
+  .grip::before {
+    content: ""; position: sticky; top: calc(50vh - 36px); display: block; margin: 40px auto; width: 4px; height: 72px; border-radius: 4px;
+    background: currentColor; opacity: .45; transition: opacity .25s;
+  }
+  .grip:hover::before, .grip:focus-visible::before, .grip.is-dragging::before { opacity: .9; }
+  .grip:focus-visible { outline: none; }
+  .grip:focus-visible::after { content: ""; position: absolute; inset: 30px 0; border-radius: 12px; box-shadow: 0 0 0 1.5px var(--ink-2); }
+  @media (hover: hover) and (pointer: fine) and (min-width: 900px) { .grip { display: block; } }
+</style>
+</head>
+<body>
+<main class="desk">
+  <p class="label">canon-tables</p>
+
+  <div class="leaf is-folio">
+    <figure class="cn" data-canon-tables data-folio="f3v" lang="en">
+      <table>
+        <caption>Canon V · in quo duo</caption>
+        <thead>
+          <tr><td></td><th scope="col">Matthew</th><th scope="col">Luke</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">The asking</th><td><span data-more><b>6.7</b> But when ye pray, use not vain repetitions, as the heathen do: for they think that they shall be heard for their much speaking. <b>6.8</b> Be not ye therefore like unto them: for your Father knoweth what things ye have need of, before ye ask him. </span><b>6.9</b> After this manner therefore pray ye:</td><td><b>11.1</b> <span data-more>And it came to pass, that, as he was praying in a certain place, when he ceased, o</span><span data-less aria-hidden="true">O</span>ne of his disciples said unto him, Lord, teach us to pray, as John also taught his disciples.</td></tr>
+          <tr><th scope="row">The Father</th><td>Our Father which art in heaven, Hallowed be thy name.</td><td><b>11.2</b> <span data-more>And he said unto them, When ye pray, say, </span>Our Father which art in heaven, Hallowed be thy name.</td></tr>
+          <tr><th scope="row">The kingdom</th><td><b>6.10</b> Thy kingdom come. Thy will be done in earth, as it is in heaven.</td><td>Thy kingdom come. Thy will be done, as in heaven, so in earth.</td></tr>
+          <tr><th scope="row">The bread</th><td><b>6.11</b> Give us this day our daily bread.</td><td><b>11.3</b> Give us day by day our daily bread.</td></tr>
+          <tr><th scope="row">The debts</th><td><b>6.12</b> And forgive us our debts, as we forgive our debtors.<span data-more> <b>6.14</b> For if ye forgive men their trespasses, your heavenly Father will also forgive you: <b>6.15</b> But if ye forgive not men their trespasses, neither will your Father forgive your trespasses.</span></td><td><b>11.4</b> And forgive us our sins; for we also forgive every one that is indebted to us.</td></tr>
+          <tr><th scope="row">The temptation</th><td><b>6.13</b> And lead us not into temptation, but deliver us from evil:</td><td>And lead us not into temptation; but deliver us from evil.</td></tr>
+          <tr><th scope="row">The glory</th><td>For thine is the kingdom, and the power, and the glory, for ever. Amen.</td><td></td></tr>
+        </tbody>
+      </table>
+    </figure>
+  </div>
+
+  <div class="leaf is-folio is-narrow">
+    <figure class="cn" data-canon-tables data-folio="f5v" lang="en">
+      <table>
+        <caption>Plans</caption>
+        <thead>
+          <tr><td></td><th scope="col">Scribe</th><th scope="col">Scriptorium</th></tr>
+        </thead>
+        <tbody>
+          <tr><th scope="row">Price</th><td><b>$8</b> a month</td><td><b>$6</b> a person, a month, billed yearly</td></tr>
+          <tr><th scope="row">Notebooks</th><td>As many as you like</td><td>As many as you like, shared across the house</td></tr>
+          <tr><th scope="row">Storage</th><td>50 GB</td><td>1 TB, pooled</td></tr>
+          <tr><th scope="row">History</th><td>A year of versions, restorable one page at a time</td><td>Everything, for as long as you keep the account</td></tr>
+          <tr><th scope="row">Help</th><td>Email, answered within a day</td><td>A named person, and a call when you need one</td></tr>
+        </tbody>
+      </table>
+    </figure>
+  </div>
+
+  <div class="leaf is-folio">
+    <figure class="cn" data-canon-tables data-hand="roslin" data-folio="f1v">
+      <table>
+        <caption>Iohannes I · 1–14</caption>
+        <thead>
+          <tr><th scope="col" lang="la">Vulgata</th><th scope="col">King James</th></tr>
+        </thead>
+        <tbody>
+          <tr><td lang="la"><b>1</b> In principio erat Verbum, et Verbum erat apud Deum, et Deus erat Verbum.</td><td lang="en"><b>1</b> In the beginning was the Word, and the Word was with God, and the Word was God.</td></tr>
+          <tr><td lang="la"><b>2</b> Hoc erat in principio apud Deum.</td><td lang="en"><b>2</b> The same was in the beginning with God.</td></tr>
+          <tr><td lang="la"><b>3</b> Omnia per ipsum facta sunt: et sine ipso factum est nihil, quod factum est.</td><td lang="en"><b>3</b> All things were made by him; and without him was not any thing made that was made.</td></tr>
+          <tr><td lang="la"><b>4</b> In ipso vita erat, et vita erat lux hominum:</td><td lang="en"><b>4</b> In him was life; and the life was the light of men.</td></tr>
+          <tr><td lang="la"><b>5</b> et lux in tenebris lucet, et tenebræ eam non comprehenderunt.</td><td lang="en"><b>5</b> And the light shineth in darkness; and the darkness comprehended it not.</td></tr>
+          <tr><td lang="la"><b>6</b> Fuit homo missus a Deo, cui nomen erat Joannes.</td><td lang="en"><b>6</b> There was a man sent from God, whose name was John.</td></tr>
+          <tr><td lang="la"><b>7</b> Hic venit in testimonium ut testimonium perhiberet de lumine, ut omnes crederent per illum.</td><td lang="en"><b>7</b> The same came for a witness, to bear witness of the Light, that all men through him might believe.</td></tr>
+          <tr><td lang="la"><b>8</b> Non erat ille lux, sed ut testimonium perhiberet de lumine.</td><td lang="en"><b>8</b> He was not that Light, but was sent to bear witness of that Light.</td></tr>
+          <tr><td lang="la"><b>9</b> Erat lux vera, quæ illuminat omnem hominem venientem in hunc mundum.</td><td lang="en"><b>9</b> That was the true Light, which lighteth every man that cometh into the world.</td></tr>
+          <tr><td lang="la"><b>10</b> In mundo erat, et mundus per ipsum factus est, et mundus eum non cognovit.</td><td lang="en"><b>10</b> He was in the world, and the world was made by him, and the world knew him not.</td></tr>
+          <tr><td lang="la"><b>11</b> In propria venit, et sui eum non receperunt.</td><td lang="en"><b>11</b> He came unto his own, and his own received him not.</td></tr>
+          <tr><td lang="la"><b>12</b> Quotquot autem receperunt eum, dedit eis potestatem filios Dei fieri, his qui credunt in nomine ejus:</td><td lang="en"><b>12</b> But as many as received him, to them gave he power to become the sons of God, even to them that believe on his name:</td></tr>
+          <tr><td lang="la"><b>13</b> qui non ex sanguinibus, neque ex voluntate carnis, neque ex voluntate viri, sed ex Deo nati sunt.</td><td lang="en"><b>13</b> Which were born, not of blood, nor of the will of the flesh, nor of the will of man, but of God.</td></tr>
+          <tr><td lang="la"><b>14</b> Et Verbum caro factum est, et habitavit in nobis: et vidimus gloriam ejus, gloriam quasi unigeniti a Patre plenum gratiæ et veritatis.</td><td lang="en"><b>14</b> And the Word was made flesh, and dwelt among us, (and we beheld his glory, the glory as of the only begotten of the Father,) full of grace and truth.</td></tr>
+        </tbody>
+      </table>
+    </figure>
+  </div>
+
+  <div class="leaf" id="leaf">
+    <figure class="cn" data-canon-tables data-hand="metz" data-folio="04" lang="en">
+      <table>
+        <caption>Canon I · in quo quattuor</caption>
+        <thead>
+          <tr><td></td><th scope="col">Matthew</th><th scope="col">Mark</th><th scope="col">Luke</th><th scope="col">John</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">The place</th>
+            <td><b>14.13</b> <span data-more>When Jesus heard of it, h</span><span data-less aria-hidden="true">H</span>e departed thence by ship into a desert place apart<span data-more>: and when the people had heard thereof, they followed him on foot out of the cities. <b>14.14</b> And Jesus went forth, and saw a great multitude, and was moved with compassion toward them, and he healed their sick</span>.</td>
+            <td><b>6.32</b> And they departed into a desert place by ship privately.<span data-more> <b>6.33</b> And the people saw them departing, and many knew him, and ran afoot thither out of all cities, and outwent them, and came together unto him. <b>6.34</b> And Jesus, when he came out, saw much people, and was moved with compassion toward them, because they were as sheep not having a shepherd: and he began to teach them many things.</span></td>
+            <td><b>9.10</b> <span data-more>And the apostles, when they were returned, told him all that they had done. And h</span><span data-less aria-hidden="true">H</span>e took them, and went aside privately into a desert place belonging to the city called Bethsaida.<span data-more> <b>9.11</b> And the people, when they knew it, followed him: and he received them, and spake unto them of the kingdom of God, and healed them that had need of healing.</span></td>
+            <td><span data-more><b>6.1</b> After these things Jesus went over the sea of Galilee, which is the sea of Tiberias. <b>6.2</b> And a great multitude followed him, because they saw his miracles which he did on them that were diseased. </span><b>6.3</b> And Jesus went up into a mountain, and there he sat with his disciples.</td>
+          </tr>
+          <tr>
+            <th scope="row">The question</th>
+            <td><b>14.15</b> <span data-more>And when it was evening, his disciples came to him, saying, This is a desert place, and the time is now past; s</span><span data-less aria-hidden="true">S</span>end the multitude away, that they may go into the villages, and buy themselves victuals.<span data-more> <b>14.16</b> But Jesus said unto them, They need not depart; give ye them to eat.</span></td>
+            <td><span data-more><b>6.36</b> Send them away, that they may go into the country round about, and into the villages, and buy themselves bread: for they have nothing to eat. </span><b>6.37</b> <span data-more>He answered and said unto them, Give ye them to eat. And they say unto him, </span>Shall we go and buy two hundred pennyworth of bread, and give them to eat?</td>
+            <td><b>9.12</b> <span data-more>And when the day began to wear away, then came the twelve, and said unto him, </span>Send the multitude away, that they may go into the towns and country round about, and lodge, and get victuals<span data-more>: for we are here in a desert place</span>.</td>
+            <td><b>6.5</b> <span data-more>When Jesus then lifted up his eyes, and saw a great company come unto him, he saith unto Philip, </span>Whence shall we buy bread, that these may eat?<span data-more> <b>6.6</b> And this he said to prove him: for he himself knew what he would do. <b>6.7</b> Philip answered him, Two hundred pennyworth of bread is not sufficient for them, that every one of them may take a little.</span></td>
+          </tr>
+          <tr>
+            <th scope="row">The loaves</th>
+            <td><b>14.17</b> <span data-more>And they say unto him, </span>We have here but five loaves, and two fishes.<span data-more> <b>14.18</b> He said, Bring them hither to me.</span></td>
+            <td><b>6.38</b> <span data-more>He saith unto them, How many loaves have ye? go and see. And when they knew, they say, </span>Five, and two fishes.</td>
+            <td><b>9.13</b> <span data-more>But he said unto them, Give ye them to eat. And they said, </span>We have no more but five loaves and two fishes<span data-more>; except we should go and buy meat for all this people</span>.</td>
+            <td><span data-more><b>6.8</b> One of his disciples, Andrew, Simon Peter’s brother, saith unto him, </span><b>6.9</b> There is a lad here, which hath five barley loaves, and two small fishes: but what are they among so many?</td>
+          </tr>
+          <tr>
+            <th scope="row">The grass</th>
+            <td><b>14.19</b> <span data-more>And h</span><span data-less aria-hidden="true">H</span>e commanded the multitude to sit down on the grass<span data-more>, and took the five loaves, and the two fishes, and looking up to heaven, he blessed, and brake, and gave the loaves to his disciples, and the disciples to the multitude</span>.</td>
+            <td><b>6.39</b> <span data-more>And h</span><span data-less aria-hidden="true">H</span>e commanded them to make all sit down by companies upon the green grass. <b>6.40</b> And they sat down in ranks, by hundreds, and by fifties.<span data-more> <b>6.41</b> And when he had taken the five loaves and the two fishes, he looked up to heaven, and blessed, and brake the loaves, and gave them to his disciples to set before them; and the two fishes divided he among them all.</span></td>
+            <td><b>9.14</b> <span data-more>For they were about five thousand men. And he said to his disciples, </span>Make them sit down by fifties in a company.<span data-more> <b>9.15</b> And they did so, and made them all sit down. <b>9.16</b> Then he took the five loaves and the two fishes, and looking up to heaven, he blessed them, and brake, and gave to the disciples to set before the multitude.</span></td>
+            <td><b>6.10</b> <span data-more>And Jesus said, </span>Make the men sit down. Now there was much grass in the place.<span data-more> So the men sat down, in number about five thousand. <b>6.11</b> And Jesus took the loaves; and when he had given thanks, he distributed to the disciples, and the disciples to them that were set down; and likewise of the fishes as much as they would.</span></td>
+          </tr>
+          <tr>
+            <th scope="row">The fragments</th>
+            <td><b>14.20</b> <span data-more>And they did all eat, and were filled: and t</span><span data-less aria-hidden="true">T</span>hey took up of the fragments that remained twelve baskets full.</td>
+            <td><span data-more><b>6.42</b> And they did all eat, and were filled. </span><b>6.43</b> <span data-more>And t</span><span data-less aria-hidden="true">T</span>hey took up twelve baskets full of the fragments, and of the fishes.</td>
+            <td><b>9.17</b> <span data-more>And they did eat, and were all filled: and t</span><span data-less aria-hidden="true">T</span>here was taken up of fragments that remained to them twelve baskets.</td>
+            <td><span data-more><b>6.12</b> When they were filled, he said unto his disciples, Gather up the fragments that remain, that nothing be lost. </span><b>6.13</b> Therefore they gathered them together, and filled twelve baskets with the fragments of the five barley loaves, which remained over and above unto them that had eaten.</td>
+          </tr>
+          <tr>
+            <th scope="row">The number</th>
+            <td><b>14.21</b> <span data-more>And they that had eaten were a</span><span data-less aria-hidden="true">A</span>bout five thousand men, beside women and children.</td>
+            <td><b>6.44</b> <span data-more>And they that did eat of the loaves were a</span><span data-less aria-hidden="true">A</span>bout five thousand men.</td>
+            <td><b>9.14</b> For they were about five thousand men.</td>
+            <td><b>6.10</b> <span data-more>So the men sat down, i</span><span data-less aria-hidden="true">I</span>n number about five thousand.</td>
+          </tr>
+        </tbody>
+      </table>
+    </figure>
+    <button class="grip" id="grip" type="button" role="slider" aria-label="Leaf width"
+            aria-valuemin="360" aria-valuemax="1180" aria-valuenow="1180"></button>
+  </div>
+
+</main>
+
+<script type="module" src="canon-tables.js"></script>
+<script type="module">
+  // Demo only: a grip on the first leaf's edge, so the arcade can be seen re-solving.
+  const leaf = document.getElementById('leaf');
+  const grip = document.getElementById('grip');
+  const MIN = 360;
+  const max = () => Math.min(1180, document.querySelector('.desk').clientWidth - 32);
+  const set = (v) => {
+    const w = Math.round(Math.max(MIN, Math.min(max(), v)));
+    leaf.style.width = w + 'px';
+    grip.setAttribute('aria-valuenow', w);
+    grip.setAttribute('aria-valuetext', w + ' pixels');
+  };
+  let x0 = 0, w0 = 0, id = null;
+  grip.addEventListener('pointerdown', (e) => {
+    id = e.pointerId; grip.setPointerCapture(id); x0 = e.clientX; w0 = leaf.getBoundingClientRect().width;
+    grip.classList.add('is-dragging'); e.preventDefault();
+  });
+  grip.addEventListener('pointermove', (e) => { if (e.pointerId === id) set(w0 + (e.clientX - x0) * 2); });
+  const end = (e) => { if (e.pointerId !== id) return; id = null; grip.classList.remove('is-dragging'); };
+  grip.addEventListener('pointerup', end);
+  grip.addEventListener('pointercancel', end);
+  grip.addEventListener('keydown', (e) => {
+    const cur = leaf.getBoundingClientRect().width, step = e.shiftKey ? 120 : 30;
+    if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') set(cur - step);
+    else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') set(cur + step);
+    else if (e.key === 'Home') set(MIN);
+    else if (e.key === 'End') set(max());
+    else return;
+    e.preventDefault();
+  });
+</script>
+</body>
+</html>

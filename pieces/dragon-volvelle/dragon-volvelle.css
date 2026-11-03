@@ -1,0 +1,92 @@
+/* ─── dragon-volvelle — Apian's lunar dragon volvelle (1540) as a loader / progress indicator ───────────
+   The plate is an <img> cut to its own printed outline. While the disc is turned, a canvas over it draws the
+   restored mater and the turned paper disc; at rest, what you see is the <img>. The control is a real <progress>.
+   Prefix: .dv- */
+
+.dv {
+  container-type: inline-size;
+  display: grid;
+  gap: var(--dv-gap, clamp(18px, 5cqi, 48px));
+  justify-items: center;
+  align-items: center;
+  color: var(--ink, #141312);
+  font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
+}
+.dv-plate {
+  position: relative;
+  width: var(--dv-plate, min(100%, 520px));
+  line-height: 0;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.dv-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* a printed, cut-out instrument lying on the page: a tight contact shadow and a soft one along its outline */
+  filter: drop-shadow(0 .5px .7px rgba(40, 30, 18, .2)) drop-shadow(0 8px 16px rgba(40, 30, 18, .13));
+}
+.dv-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  pointer-events: none;
+  filter: drop-shadow(0 .5px .7px rgba(40, 30, 18, .2)) drop-shadow(0 8px 16px rgba(40, 30, 18, .13));
+}
+.dv-moving .dv-canvas { display: block; }
+.dv-moving .dv-img { visibility: hidden; }
+/* handled: vertical swipes still scroll the page; sideways and round drags turn the disc */
+.dv-touch .dv-plate { touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.dv-grabbing .dv-plate { cursor: grabbing !important; }
+.dv-plate:focus-visible { outline: 2px solid var(--accent, #c96f4a); outline-offset: 6px; border-radius: 4px; }
+
+.dv-face { display: grid; gap: 12px; justify-items: center; text-align: center; }
+.dv-label {
+  margin: 0;
+  font: 500 11px/1.2 var(--sans, Inter, system-ui, sans-serif);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-3, #8a857d);
+}
+.dv-readout {
+  margin: 0;
+  min-height: 1em;
+  font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
+  font-weight: 400;
+  font-size: var(--dv-size, clamp(44px, 12cqi, 88px));
+  line-height: 1;
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--ink, #141312);
+}
+.dv-indeterminate .dv-readout { font-style: italic; font-weight: 300; color: var(--ink-2, #4a4744); font-size: calc(var(--dv-size, clamp(44px, 12cqi, 88px)) * .6); }
+.dv-done .dv-readout { color: var(--accent, #c96f4a); }
+/* the <progress> stays in the accessibility tree; the disc is how it looks */
+.dv-on progress, .dv-status {
+  position: absolute !important;
+  width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+.dv-hint {
+  margin: 2px 0 0;
+  max-width: 22em;
+  font: 400 12.5px/1.5 var(--sans, Inter, system-ui, sans-serif);
+  color: var(--ink-3, #8a857d);
+}
+.dv:not(.dv-touch) .dv-hint { display: none; }
+
+/* side by side when there is room (by viewport: a container cannot query itself) */
+@media (min-width: 860px) {
+  .dv-wide { grid-template-columns: auto minmax(14em, 22em); justify-content: center; justify-items: start; column-gap: clamp(48px, 7vw, 112px); }
+  .dv-wide .dv-face { justify-items: start; text-align: left; }
+}
+/* small: a thumbnail beside a line of words (saving, syncing) */
+.dv-small { grid-template-columns: auto 1fr; justify-items: start; gap: 16px; --dv-plate: clamp(72px, 26cqi, 120px); --dv-size: 30px; }
+.dv-small .dv-face { justify-items: start; text-align: left; gap: 6px; }
+.dv-small .dv-hint { display: none; }
+
+@media (forced-colors: active) {
+  .dv-canvas { display: none !important; }
+  .dv-moving .dv-img { visibility: visible; }
+}

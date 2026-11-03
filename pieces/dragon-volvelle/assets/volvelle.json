@@ -1,0 +1,37 @@
+{
+ "source": "Petrus Apianus, Astronomicum Caesareum (Ingolstadt 1540), the first dragon volvelle; National Library of Poland",
+ "plate": {
+  "w": 1600,
+  "h": 2063,
+  "scale": 0.5278785879247773,
+  "crop": [
+   190,
+   357,
+   3221,
+   4266
+  ]
+ },
+ "pin": [
+  795.52,
+  1249.29
+ ],
+ "square": {
+  "x": 30.62,
+  "y": 484.06,
+  "size": 1530,
+  "master": 2898
+ },
+ "r_disc": 692.39,
+ "r_ring_inner": 679.91,
+ "r_max": 763.34,
+ "tabs": {
+  "caput": {
+   "angle": 143.51,
+   "r_tip": 745.93
+  },
+  "cauda": {
+   "angle": 325.36,
+   "r_tip": 741.68
+  }
+ }
+}

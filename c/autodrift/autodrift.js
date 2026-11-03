@@ -13,6 +13,8 @@
  *              at the switch, which is the one way to take over. Once the drift
  *              reaches end() the page is free for good. (default false)
  *
+ *  Returns { stop, box, on, done, taken }: taken counts the times someone took over mid-drift.
+ *
  *  Without lock, any wheel, touch, key or press hands control back: the leaf
  *  flinches shut, as the sensitive plant does, and opens again as the drift
  *  picks up. The switch itself turns the drift off and on for good. Reduced
@@ -38,11 +40,11 @@ export function autoDrift(o = {}) {
     document.body.append(box);
     const leaf = mimosaToggle(input, { size: 'compact', recover: resume, habituate: false, seed: 4 });
 
-    let on = true, paused = 0, pos = 0, lastSet = null, lastT = 0, running = false, done = false, since = 0;
+    let on = true, paused = 0, pos = 0, lastSet = null, lastT = 0, running = false, done = false, since = 0, taken = 0;
     const started = performance.now();
     function stop() {
         paused = performance.now(); lastSet = null;
-        if (running) { running = false; leaf.touch && leaf.touch(); }
+        if (running) { running = false; taken++; leaf.touch && leaf.touch(); }
     }
     const mine = (e) => box.contains(e.target);
 
@@ -98,5 +100,5 @@ export function autoDrift(o = {}) {
         requestAnimationFrame(tick);
     }
     requestAnimationFrame(tick);
-    return { stop, box, get on() { return on; }, get done() { return done; } };
+    return { stop, box, get on() { return on; }, get done() { return done; }, get taken() { return taken; } };
 }

@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "cymbal",
+      "file": "assets/sounds/cymbal.wav",
+      "on": "event:elephant-clock:cymbal",
+      "target": "[data-elephant-clock]",
+      "volume": 0.28,
+      "vary": 0.4,
+      "cooldown": 200,
+      "source": { "kind": "bank", "id": "fit/bell/small_bell", "seed": 0, "pitch_hz": 2150, "dur_s": 1.6 },
+      "credit": "earshot bank fit/bell/small_bell, fitted from \"Small Bell #2\" by steffcaffrey (CC0 1.0, freesound.org/people/steffcaffrey/sounds/452379/), lowered to 2150 Hz: the white-bronze cymbal struck on its edge by the ball"
+    },
+    {
+      "name": "knock",
+      "file": "assets/sounds/knock.wav",
+      "on": "event:elephant-clock:strike",
+      "target": "[data-elephant-clock]",
+      "volume": 0.3,
+      "vary": 1.2,
+      "cooldown": 120,
+      "source": { "kind": "bank", "id": "fit/hit/bamboo_tok", "seed": 0 },
+      "credit": "earshot bank fit/hit/bamboo_tok, fitted from \"Bamboo hit\" by michorvath (CC0 1.0, freesound.org/people/michorvath/sounds/386888/): the axe and the mallet on the hollow copper head"
+    }
+  ]
+}
