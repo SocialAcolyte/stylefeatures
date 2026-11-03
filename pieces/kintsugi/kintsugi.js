@@ -120,11 +120,11 @@ function readOutline(img) {
     const A = 256, r = new Float32Array(A);
     for (let i = 0; i < A; i++) {
         const t = (i / A) * TAU, dx = Math.cos(t), dy = Math.sin(t);
-        let q = 0;
+        let q = 0;   // the farthest solid point on the ray: a handle or a neck still counts, the gap before it does not end the ray
         for (let s = 0; s < R * 1.6; s += 0.35) {
             const px = Math.round(cx + dx * s - 0.5), py = Math.round(cy + dy * s - 0.5);
-            if (px < 0 || py < 0 || px >= w || py >= h || a[(py * w + px) * 4 + 3] < 128) break;
-            q = s;
+            if (px < 0 || py < 0 || px >= w || py >= h) break;
+            if (a[(py * w + px) * 4 + 3] >= 128) q = s;
         }
         r[i] = q / R;
     }
@@ -133,8 +133,64 @@ function readOutline(img) {
         const f = (((t / TAU) % 1) + 1) % 1 * A, i = Math.floor(f) % A;
         return mix(rs[i], rs[(i + 1) % A], f - Math.floor(f));
     };
+    // the true silhouette (holes inside handles, the gap under a spout) as a test on unit coordinates
+    const at = (x, y) => { const px = Math.round(cx + x * R - 0.5), py = Math.round(cy + y * R - 0.5); return px >= 0 && py >= 0 && px < w && py < h && a[(py * w + px) * 4 + 3] >= 128; };
+    const solid = (p, m = 0) => at(p[0], p[1]) && (m <= 0 || (at(p[0] + m, p[1]) && at(p[0] - m, p[1]) && at(p[0], p[1] + m) && at(p[0], p[1] - m)));
     // natural-pixel geometry of the unit frame
-    return { rim, cx: cx / k, cy: cy / k, R: R / k };
+    return { rim, solid, at, bx0: (x0 - cx) / R, bx1: (x1 + 1 - cx) / R, by0: (y0 - cy) / R, by1: (y1 + 1 - cy) / R, cx: cx / k, cy: cy / k, R: R / k };
+}
+
+
+/* ---- a vessel is a solid of revolution ------------------------------------
+ * For a cup, bowl or vase photographed from the side, the gold must lie on the
+ * curved body, not on the picture plane. The body is taken as a surface of
+ * revolution about a vertical axis; its half-width R(y) is read from the
+ * cut-out (handles and spouts are narrower than a few rows, so an opening
+ * removes them). The fracture is laid out on the unrolled surface (u = arc
+ * across the front, v = height) and wrapped back with
+ *     x = xc + R sin(u/R),   y = v + tilt·R·(cos(u/R) − 1)
+ * so a crack bends round the belly, thins as it turns, meets the silhouette
+ * tangentially and is carried away from us; a horizontal crack becomes an arc
+ * of the right ellipse. Nothing above the front lip of the mouth is outer
+ * surface, so a crack stops there instead of running across the opening.  */
+function makeVessel(o, tau, lipF) {
+    const N = 240, y0 = o.by0, y1 = o.by1, yAt = (k) => y0 + (y1 - y0) * (k + 0.5) / N;
+    const ext = (c, y) => {
+        let l = c, r = c; const st = 0.004;
+        while (r < 2.5 && o.at(r + st, y)) r += st;
+        while (l > -2.5 && o.at(l - st, y)) l -= st;
+        return [l, r];
+    };
+    const c0 = (o.bx0 + o.bx1) / 2, mids = [];
+    for (let k = Math.floor(N * 0.72); k < N; k++) { const y = yAt(k); if (o.at(c0, y)) { const [l, r] = ext(c0, y); mids.push((l + r) / 2); } }
+    mids.sort((a, b) => a - b);
+    const xc = mids.length ? mids[mids.length >> 1] : c0;
+    let raw = [];
+    for (let k = 0; k < N; k++) { const y = yAt(k); if (o.at(xc, y)) { const [l, r] = ext(xc, y); raw.push(Math.max(0.02, Math.min(xc - l, r - xc))); } else raw.push(NaN); }
+    for (let k = 0; k < N; k++) if (!(raw[k] > 0)) { let j = k; while (j < N && !(raw[j] > 0)) j++; raw[k] = j < N ? raw[j] : (raw[k - 1] || 0.05); }
+    const win = Math.max(3, Math.round(N * 0.07));
+    const roll = (a, f) => a.map((_, k) => { let v = a[k]; for (let j = Math.max(0, k - win); j <= Math.min(N - 1, k + win); j++) v = f(v, a[j]); return v; });
+    let prof = roll(roll(raw, Math.min), Math.max);
+    prof = prof.map((_, k) => { let t = 0, n = 0; for (let j = Math.max(0, k - 3); j <= Math.min(N - 1, k + 3); j++) { t += prof[j]; n++; } return Math.max(0.02, t / n); });
+    const Rof = (y) => { const f = clamp((y - y0) / (y1 - y0) * N - 0.5, 0, N - 1), i = Math.floor(f), j = Math.min(N - 1, i + 1); return mix(prof[i], prof[j], f - i); };
+    const H = Math.PI / 2;
+    const inv = (p) => {
+        const dx = p[0] - xc, a = Math.abs(dx), sg = dx < 0 ? -1 : 1;
+        let v = p[1], u = 0;
+        for (let it = 0; it < 3; it++) {
+            const R = Rof(v);
+            if (a <= R) { const th = Math.asin(clamp(dx / R, -1, 1)); u = R * th; v = p[1] - tau * R * (Math.cos(th) - 1); }
+            else { u = sg * (H * R + (a - R)); v = p[1] + tau * R; }
+        }
+        return [u, v];
+    };
+    const fwd = (q) => {
+        const R = Rof(q[1]), a = Math.abs(q[0]), sg = q[0] < 0 ? -1 : 1;
+        if (a <= H * R) { const th = q[0] / R; return [xc + R * Math.sin(th), q[1] + tau * R * (Math.cos(th) - 1)]; }
+        return [xc + sg * (R + (a - H * R)), q[1] - tau * R];
+    };
+    const fore = (q) => { const R = Rof(q[1]), th = Math.abs(q[0]) / R; return th >= H ? 1 : Math.max(0.3, Math.cos(th)); };
+    return { fwd, inv, fore, lip: y0 + lipF * (y1 - y0), xc };
 }
 
 /* ---- the fracture -------------------------------------------------------
@@ -198,12 +254,14 @@ function seedsFor(I, n, rnd, inside) {
 }
 
 function fracture(outline, I, n, seed, blow = 1) {
+    const VS = outline.vessel, F = VS ? VS.fwd : (p) => p, G = VS ? VS.inv : (p) => p;
+    I = G(I);
     const rnd = rng(seed), N2 = noise2(seed * 7 + 3), N3 = noise2(seed * 13 + 5);
     const rim = outline.rim;
-    const inside = (p, f = 1) => Math.hypot(p[0], p[1]) < rim(Math.atan2(p[1], p[0])) * f;
+    const inside = (p, f = 1) => (!VS || p[1] >= VS.lip) && outline.solid(F(p), (1 - f) * 0.95);
     const rimX = (t) => rim(t) * 1.03 + 0.012;            // the enlarged outline the cells are cut from
     const A = 160, base = [], btag = [];
-    for (let i = 0; i < A; i++) { const t = (i / A) * TAU, q = rimX(t); base.push([Math.cos(t) * q, Math.sin(t) * q]); btag.push(-1); }
+    for (let i = 0; i < A; i++) { const t = (i / A) * TAU, q = rimX(t); base.push(G([Math.cos(t) * q, Math.sin(t) * q])); btag.push(-1); }
 
     const seeds = seedsFor(I, n, rnd, inside);
     // vertices, snapped so neighbouring cells share them exactly
@@ -227,7 +285,7 @@ function fracture(outline, I, n, seed, blow = 1) {
     // the displacement that makes straight bisectors into cracks: smooth bends plus a fine tremor,
     // fading to nothing at the enlarged outline so cracks always reach it
     const disp = (p) => {
-        const t = Math.atan2(p[1], p[0]), f = clamp((rimX(t) - Math.hypot(p[0], p[1])) / 0.1);
+        const sp = F(p), t = Math.atan2(sp[1], sp[0]), f = clamp((rimX(t) - Math.hypot(sp[0], sp[1])) / 0.1);
         const ax = N2(p[0] * 1.3 + 11, p[1] * 1.3) * 0.1 + N2(p[0] * 5 + 40, p[1] * 5) * 0.016 + N3(p[0] * 16, p[1] * 16 + 7) * 0.006;
         const ay = N2(p[0] * 1.3, p[1] * 1.3 + 23) * 0.1 + N2(p[0] * 5, p[1] * 5 + 61) * 0.016 + N3(p[0] * 16 + 3, p[1] * 16) * 0.006;
         return [p[0] + ax * f, p[1] + ay * f];
@@ -299,11 +357,11 @@ function fracture(outline, I, n, seed, blow = 1) {
             if (inn) {
                 if (!cur) {
                     cur = { pts: [], d: [] , end0: false, end1: false };
-                    if (k > 0) { const q = c.pts[k - 1], e = rimCross(q, p, rim, 0.988); cur.pts.push(e); cur.d.push(d); cur.end0 = true; }
+                    if (k > 0) { const q = c.pts[k - 1], e = rimCross(q, p, inside, 0.988); cur.pts.push(e); cur.d.push(d); cur.end0 = true; }
                 }
                 cur.pts.push(p); cur.d.push(d);
             } else if (cur) {
-                const q = c.pts[k - 1], e = rimCross(q, p, rim, 0.988);
+                const q = c.pts[k - 1], e = rimCross(q, p, inside, 0.988);
                 cur.pts.push(e); cur.d.push(nodes[c.nodes[k - 1]].d); cur.end1 = true;
                 seams.push(cur); cur = null;
             }
@@ -407,6 +465,31 @@ function fracture(outline, I, n, seed, blow = 1) {
         for (let j = 0; j < k; j++) { const aa = a + (j / k) * TAU + (rnd() - 0.5) * 0.9, rr = sz * (0.55 + rnd() * 0.6); pts.push([p[0] + Math.cos(aa) * rr, p[1] + Math.sin(aa) * rr]); }
         chips.push({ pts, hx: p[0], hy: p[1], area: sz * sz, chip: true, cracks: [{ pts: [...pts, pts[0]] }] });
     }
+    if (VS) {
+        // wrap everything from the unrolled surface onto the picture; marks foreshorten as they turn away
+        const geom = (pts) => {
+            let ar = 0, cx = 0, cy = 0;
+            for (let i = 0; i < pts.length; i++) { const p = pts[i], q = pts[(i + 1) % pts.length], c = p[0] * q[1] - q[0] * p[1]; ar += c; cx += (p[0] + q[0]) * c; cy += (p[1] + q[1]) * c; }
+            ar /= 2; return ar ? { cx: cx / (6 * ar), cy: cy / (6 * ar), area: Math.abs(ar) } : null;
+        };
+        const wrapCracks = (cs) => cs && cs.map((c) => ({ ...c, pts: c.pts.map(F) }));
+        shards.forEach((sh) => {
+            const hx = sh.hx, hy = sh.hy;
+            sh.pts = sh.pts.map(F); sh.cracks = wrapCracks(sh.cracks);
+            const g = geom(sh.pts);
+            if (g) { sh.hx = g.cx; sh.hy = g.cy; sh.area = g.area; } else { [sh.hx, sh.hy] = F([hx, hy]); }
+        });
+        chips.forEach((sh) => { [sh.hx, sh.hy] = F([sh.hx, sh.hy]); sh.pts = sh.pts.map(F); sh.cracks = wrapCracks(sh.cracks); });
+        seams.forEach((sm) => {
+            sm.w = sm.w.map((w, k) => w * VS.fore(sm.pts[k]));
+            sm.pts = sm.pts.map(F);
+            let acc = 0; sm.s = sm.pts.map((p, k) => (k ? (acc += Math.hypot(p[0] - sm.pts[k - 1][0], p[1] - sm.pts[k - 1][1])) : 0));
+        });
+        blobs.forEach((b) => { b.r *= VS.fore(b.p); b.p = F(b.p); });
+        dust.forEach((d) => { d.r *= VS.fore([d.x, d.y]); [d.x, d.y] = F([d.x, d.y]); });
+        holes.forEach((h) => { h.pts = h.pts.map(F); [h.hx, h.hy] = F([h.hx, h.hy]); });
+        I = F(I);
+    }
     return { shards, chips, seams, blobs, dust, holes, maxD, I };
 }
 
@@ -418,10 +501,10 @@ function pointIn(pts, p) {
     }
     return c;
 }
-function rimCross(q, p, rim, f) {
-    // bisect between an outside point and an inside one for where the crack meets the rim
+function rimCross(q, p, inside, f) {
+    // bisect between an outside point and an inside one for where the crack meets the edge
     let a = q, b = p;
-    const inn = (x) => Math.hypot(x[0], x[1]) < rim(Math.atan2(x[1], x[0])) * f;
+    const inn = (x) => inside(x, f);
     if (inn(a)) { a = p; b = q; }
     for (let i = 0; i < 18; i++) { const m = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2]; if (inn(m)) b = m; else a = m; }
     return b;
@@ -469,6 +552,9 @@ export function kintsugi(el, opts = {}) {
         label: get('label', 'Break the dish'),
         mendLabel: get('mendLabel', 'Mend it with gold'),
         announce: get('announce', 'Mended with gold.'),
+        form: String(get('form', 'flat')),
+        tilt: clamp(+get('tilt', 0.18) || 0, 0, 0.6),
+        lip: clamp(+get('lip', 0.05) || 0, 0, 0.5),
     };
     const img = el.querySelector('img');
     if (!img) return () => {};
@@ -1062,6 +1148,7 @@ export function kintsugi(el, opts = {}) {
         try { await img.decode(); } catch (e) { if (!img.complete || !img.naturalWidth) await new Promise((res) => { img.addEventListener('load', res, { once: true }); img.addEventListener('error', res, { once: true }); }); }
         if (dead || !img.naturalWidth) return;
         outline = readOutline(img);
+        if (cfg.form === 'vessel') outline.vessel = makeVessel(outline, cfg.tilt, cfg.lip);
         if (!grain) grain = makeGrain();
         const css = getComputedStyle(el);
         const read = (v, d) => rgbOf(css.getPropertyValue(v).trim() || d, el);

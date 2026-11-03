@@ -18,6 +18,7 @@
   .pair{display:grid;grid-template-columns:1fr;gap:clamp(8px,3vw,40px);border-top:1px solid var(--rule);padding-top:clamp(24px,5svh,56px)}
   @media (min-width:760px){.pair{grid-template-columns:1fr 1fr}}
   .pair [data-kintsugi]{--kt-aspect:1/1;--kt-aspect-narrow:1/1;--kt-size:.84}
+  @media (min-width:760px){.more{grid-template-columns:repeat(3,1fr)}}
   .foot{justify-self:center}
 </style></head><body>
 <main>
@@ -31,6 +32,20 @@
   <section class="pair" aria-label="Mended pieces">
     <figure data-kintsugi data-state="mended" data-pieces="9"><img src="assets/celadon-dish.webp" alt="" width="1600" height="1590"></figure>
     <figure data-kintsugi data-state="mended" data-pieces="8"><img src="assets/twin-fish-bowl.webp" alt="" width="1590" height="1600"></figure>
+  </section>
+  <section class="pair more" aria-label="More mended pieces">
+    <figure data-kintsugi data-state="mended" data-break="tap" data-pieces="8" data-form="vessel" data-tilt=".27" data-lip=".19"><img src="assets/fluted-coffee-cup.webp" alt=""></figure>
+    <figure data-kintsugi data-state="mended" data-break="tap" data-pieces="9"><img src="assets/pheasant-plate.webp" alt=""></figure>
+    <figure data-kintsugi data-state="mended" data-break="tap" data-pieces="8" data-form="vessel" data-tilt=".14" data-lip=".07"><img src="assets/red-raku-tea-bowl.webp" alt=""></figure>
+    <figure data-kintsugi data-state="mended" data-break="tap" data-pieces="8" data-form="vessel" data-tilt=".1" data-lip=".02"><img src="assets/turquoise-vase.webp" alt=""></figure>
+    <figure data-kintsugi data-state="mended" data-break="tap" data-pieces="8" data-form="vessel" data-tilt=".08" data-lip=".01"><img src="assets/imari-vase.webp" alt=""></figure>
+  </section>
+  <section class="pair more" aria-label="Relics of India">
+    <figure data-kintsugi data-state="mended" data-break="tap" data-pieces="10"><img src="assets/shiva-nataraja.webp" alt=""></figure>
+    <figure data-kintsugi data-state="mended" data-break="tap" data-pieces="9"><img src="assets/ganesha-bronze.webp" alt=""></figure>
+    <figure data-kintsugi data-state="mended" data-break="tap" data-pieces="9"><img src="assets/hanuman-bronze.webp" alt=""></figure>
+    <figure data-kintsugi data-state="mended" data-break="tap" data-pieces="10"><img src="assets/durga-shrine.webp" alt=""></figure>
+    <figure data-kintsugi data-state="mended" data-break="tap" data-pieces="9"><img src="assets/standing-vishnu.webp" alt=""></figure>
   </section>
   <span class="tag foot">kintsugi</span>
 </main>

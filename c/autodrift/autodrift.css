@@ -13,3 +13,14 @@
 .ad:has(input:not(:checked)) .ad-t { color: #8a857d; }
 .ad.is-gone { opacity: 0; transform: translateY(8px); pointer-events: none; }
 @media (max-width: 520px) { .ad { gap: 10px; padding: 6px 7px 6px 13px; font-size: 12px; --mt-w: 56px; --mt-h: 26px; } }
+
+/* lock: a note above the switch when someone tries to scroll while it drifts */
+.ad-say {
+  position: absolute; right: 2px; bottom: calc(100% + 10px); width: max-content; max-width: min(270px, calc(100vw - 32px));
+  padding: 9px 13px; border-radius: 12px; background: #141312; color: #f3f0e8;
+  font: 500 12.5px/1.35 var(--sans, 'Inter', system-ui, sans-serif); white-space: normal; text-align: left;
+  opacity: 0; transform: translateY(6px); pointer-events: none; transition: opacity .3s ease, transform .4s cubic-bezier(.2, .7, .2, 1);
+}
+.ad-say::after { content: ""; position: absolute; right: 30px; top: 100%; border: 6px solid transparent; border-top-color: #141312; }
+.ad.is-saying .ad-say { opacity: 1; transform: none; pointer-events: auto; }
+.ad.is-saying { box-shadow: 0 0 0 .5px rgba(20, 19, 18, .16), 0 0 0 4px rgba(201, 111, 74, .35), 0 10px 26px -14px rgba(20, 19, 18, .45); }
