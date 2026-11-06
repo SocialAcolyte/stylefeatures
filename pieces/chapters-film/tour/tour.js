@@ -192,7 +192,8 @@ export class Tour {
   /* ── overlays the engine owns ── */
   overlays() {
     const mk = (cls, html = '', tag = 'div') => { const e = document.createElement(tag); e.className = cls; e.innerHTML = html; this.stage.append(e); return e; };
-    this.card = mk('tour-card', '<span class="tour-card-n"></span><h3></h3><p></p>');
+    this.card = mk('tour-card', '<span class="tour-card-n"></span><h3></h3><p></p>' + (this.rec ? '' : '<button type="button" class="tour-card-x" aria-label="Hide the chapter cards">×</button>'));
+    this.card.querySelector('.tour-card-x')?.addEventListener('click', (e) => { e.stopPropagation(); this.cardOff = true; this.card.dataset.dodge = 'off'; });
     this.cap = mk('tour-cap', '', 'p');
     this.keysEl = mk('tour-keys');
     this.rings = [mk('tour-ring'), mk('tour-ring'), mk('tour-ring')];
@@ -207,7 +208,7 @@ export class Tour {
   compile() {
     const S = this.S;
     this.ch = []; this.chMap = new Map(); this.track = []; this.zooms = []; this.chapters = []; this.caps = []; this.keyList = [];
-    this.ringAt = []; this.deferred = []; this.n = 0; this.marks = [];
+    this.ringAt = []; this.focus = []; this.deferred = []; this.n = 0; this.marks = [];
     let clock = 0, last = 0, k = 0;
     for (const st of S.steps || []) {
       const start = st.at != null ? st.at : clock + (st.wait || 0);
@@ -246,6 +247,7 @@ export class Tour {
             this.seg(e, 'class:is-caret', start, (t) => t < typed || Math.floor((t - typed) * 2.1) % 2 === 0);
             this.seg(e, 'class:is-caret', stop, () => false);
           }
+          this.focus.push({ start, end: stop + .8, els });     // typed text: the card and caption keep off it
           break;
         }
         case 'scroll': {
@@ -260,6 +262,7 @@ export class Tour {
             this.seg(e, 'class:is-in', s0, () => true); this.seg(e, '--in', s0, (t) => ease(cl((t - s0) / dur)));
           });
           if (!els.length) console.warn('[tour] nothing matches', st.el);
+          this.focus.push({ start, end: c + 1.2, els });
           end = c + dur; break;
         }
         case 'key': this.keyList.push({ start, end: start + (st.hold ?? 1.4), keys: st.keys }); end = start + (st.dur ?? .9); break;
@@ -578,13 +581,14 @@ export class Tour {
     if (this.touch) {
       const tu = this.cursorOn ? this.touchAt(t) : null;
       this.cur.style.opacity = tu ? (tu.o * seam).toFixed(3) : '0';
+      this._sp = tu ? [T.x + T.s * tu.p[0], T.y + T.s * tu.p[1]] : null; this._co = tu ? tu.o : 0;
       if (tu) this.cur.style.transform = `translate(${(T.x + T.s * tu.p[0]).toFixed(2)}px,${(T.y + T.s * tu.p[1]).toFixed(2)}px) scale(${(cz * tu.k).toFixed(4)})`;
       this.cur.classList.toggle('is-down', !!tu?.down);
     } else {
       const cu = this.cursorAt(t), sp = [T.x + T.s * cu.p[0], T.y + T.s * cu.p[1]];
       const co = (this.cursorOn ? ease(cl((t - this.firstMove + .15) / .35)) * (1 - ease(cl((t - this.outroAt + .3) / .5))) : 0) * cu.vis
       * (L.stack ? cl(1 - Math.max(L.F.y - sp[1], sp[1] - L.F.y - L.F.h) / 24) : 1);   // stacked: never drawn outside the window's frame
-      this.cur.style.opacity = co.toFixed(3);
+      this.cur.style.opacity = co.toFixed(3); this._sp = sp; this._co = co;
       const ml = this.S.pointers?.main?.label;     // pointers.main.label: the person's cursor gets a label too
       if (ml && !this.cur.querySelector('.tour-tag')) { this.cur.dataset.who = 'main'; this.cur.insertAdjacentHTML('beforeend', `<span class="tour-tag"><b>${ml}</b></span>`); }
       this.cur.style.transform = `translate(${sp[0].toFixed(2)}px,${sp[1].toFixed(2)}px) scale(${(cz * (cu.press ? .86 : 1)).toFixed(4)})`;
@@ -605,8 +609,35 @@ export class Tour {
     this.fade(this.card, this.chapters, t, (c) => { this.card.children[0].textContent = c.n; this.card.children[1].innerHTML = c.title; this.card.children[2].innerHTML = c.line; this.card.children[2].hidden = !c.line; this.capTop(); });
     this.fade(this.cap, this.capsOn ? this.caps : [], t, (c) => { this.cap.textContent = c.text; });
     this.fade(this.keysEl, this.keyList, t, (c) => { this.keysEl.innerHTML = c.keys.map((k2) => `<kbd>${k2}</kbd>`).join(''); }, .18, .3);
+    this.dodge(t, W);
     if (this.keyList.length) { this.keysEl.style.left = W / 2 + 'px'; this.keysEl.style.top = (L.stack ? L.F.y + L.F.h * .78 : Math.min(H * .78, T.y + T.s * this.Hd * .82)) + 'px'; }
     this.onFrame && this.onFrame(t);
+  }
+  /* the chapter card and caption never sit on what the tour is doing: the cursor, or text being typed or streamed in.
+     The card slides to the other side (or steps out if both sides are busy) and comes home once the spot has been
+     clear for a moment; the caption lifts to the top. A viewer can close the cards (×); recordings have no ×. */
+  dodge(t, W) {
+    if (this.L.stack) return;
+    const sr = this.stage.getBoundingClientRect(), pad = 16, hot = [];
+    if (this._sp && this._co > .05) hot.push([this._sp[0] - pad, this._sp[1] - pad, this._sp[0] + 30 + pad, this._sp[1] + 34 + pad]);
+    for (const f of this.focus) if (t >= f.start && t < f.end) for (const e of f.els) {
+      const r = e.getBoundingClientRect(); if (r.width || r.height) hot.push([r.left - sr.left - pad, r.top - sr.top - pad, r.right - sr.left + pad, r.bottom - sr.top + pad]);
+    }
+    const hit = (el, dx = 0, dy = 0) => { const x = el.offsetLeft + dx, y = el.offsetTop + dy, w = el.offsetWidth, h = el.offsetHeight; return hot.some((q) => q[0] < x + w && q[2] > x && q[1] < y + h && q[3] > y); };
+    const settle = (el, want) => {     // move away at once; come back only after .8 s clear (either way along the timeline)
+      if (this.still || want === el.dataset.dodge) { el.dataset.dodge = want; el._since = t; return; }
+      if (want !== 'home' || Math.abs(t - (el._since ?? t)) > .8) { el.dataset.dodge = want; el._since = t; }
+    };
+    if (this.card._i >= 0 && !this.cardOff) {
+      const span = W - this.card.offsetWidth - 2 * this.card.offsetLeft;
+      settle(this.card, !hit(this.card) ? 'home' : span > 0 && !hit(this.card, span) ? 'right' : 'hide');
+      this.card.style.translate = this.card.dataset.dodge === 'right' ? `${span}px 0` : '';
+    }
+    if (this.cap._i >= 0) {
+      const up = -(this.cap.offsetTop - parseFloat(this.stage.style.getPropertyValue('--su') || 8) * 4);
+      settle(this.cap, hit(this.cap) && !hit(this.cap, 0, up) ? 'up' : 'home');
+      this.cap.style.translate = this.cap.dataset.dodge === 'up' ? `0 ${up}px` : '';
+    }
   }
   capTop() { if (this.L.stack) this.stage.style.setProperty('--cap-top', this.card.offsetTop + this.card.offsetHeight + parseFloat(this.stage.style.getPropertyValue('--su')) * 2.2 + 'px'); }
   fade(el, list, t, fill, fi = .6, fo = .5) {

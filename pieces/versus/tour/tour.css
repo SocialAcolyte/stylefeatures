@@ -75,6 +75,13 @@
 .tour-card h3{margin:calc(var(--su)*1) 0 calc(var(--su)*.75);font:400 max(25px,calc(var(--su)*3.7))/1 var(--serif,Georgia,serif);letter-spacing:-.018em;color:var(--ink,#191816)}
 .tour-card h3 em{font-style:italic}
 .tour-card p{margin:0;font:400 max(13.5px,calc(var(--su)*1.7))/1.45 var(--sans,system-ui);color:var(--ink-2,#5f5a53)}
+.tour-card,.tour-cap{transition:translate .55s cubic-bezier(.2,.7,.2,1)}
+.tour-card[data-dodge=hide]{opacity:0!important}
+.tour-card[data-dodge=off]{display:none}
+.tour-card-x{position:absolute;top:calc(var(--su)*.9);right:calc(var(--su)*.9);width:max(26px,calc(var(--su)*2.8));height:max(26px,calc(var(--su)*2.8));display:grid;place-items:center;
+  padding:0;border:0;border-radius:50%;background:transparent;color:var(--ink-3,#9c968c);font:400 max(16px,calc(var(--su)*1.9))/1 var(--sans,system-ui);cursor:pointer;pointer-events:auto;opacity:.7}
+.tour-card-x:hover{opacity:1;background:var(--ph-line,#e3dfd7);color:var(--ink,#191816)}
+.tour-card-x:focus-visible{outline:2px solid var(--tour-ring,#c2643f);outline-offset:2px;opacity:1}
 .is-stack .tour-card{left:4%;right:4%;width:auto;bottom:auto;top:var(--card-top);padding:calc(var(--su)*2) calc(var(--su)*2.4)}
 [data-tour-root].is-play:not(.is-stack) .tour-card{bottom:calc(var(--gutter,32px) + 46px)}
 
