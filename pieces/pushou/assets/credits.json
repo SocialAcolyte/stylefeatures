@@ -1,0 +1,39 @@
+[
+ {
+  "files": [
+   "assets/plate-1207.webp", "assets/plate-480.webp", "assets/plate-168.webp",
+   "assets/ring-1207.webp", "assets/ring-480.webp", "assets/ring-168.webp",
+   "assets/loop-1207.webp", "assets/loop-480.webp", "assets/loop-168.webp"
+  ],
+  "title": "Mask and ring handle",
+  "maker": "unknown bronze caster",
+  "date": "5th-4th century BCE, Eastern Zhou dynasty, Warring States period",
+  "place": "China",
+  "medium": "Bronze with gold and silver inlay",
+  "dimensions": "H x W x D: 7.7 x 5.4 x 2.2 cm",
+  "source": "National Museum of Asian Art, Smithsonian Institution, Freer Gallery of Art Collection, F1917.18, Gift of Charles Lang Freer (purchased from Li Wenqing, New York, 1917). Smithsonian Open Access",
+  "url": "https://asia.si.edu/object/F1917.18/",
+  "images": [
+   "https://ids.si.edu/ids/download?id=FS-7729_16.jpg (4200 x 3150)"
+  ],
+  "license": "CC0 1.0 (public domain)",
+  "note": "Matted off the museum's white sweep at full resolution (tools/matte_fine.py: BiRefNet for what is object, then each edge solved against the sweep and unmixed from it). Cut into three parts on one canvas (tools/parts.py): the ring along its own edges (traced at 3x where its band crosses the mask), the nose loop that lies in front of it, and the plate. Where the ring's band covers the mask's lower edge, the mask is continued behind it (its outline by a harmonic fill of its own alpha; its surface, in the strip the lifted ring can uncover, by exemplar from the mask's own lower cheeks, never from the inlay). At rest the three parts recombine to the photograph within 1/255. Uniform Lanczos downscales to 1207, 480 and 168 px tall. Nothing is redrawn, recoloured or warped; the ring only turns as a rigid plane about its hinge in the browser."
+ },
+ {
+  "files": [],
+  "title": "Other candidates (the hunt)",
+  "source": "47 candidates from the Freer|Sackler, the Met, the Art Institute of Chicago, the Cleveland Museum of Art and Wikimedia Commons",
+  "note": "Shortlist, contact sheet and reasons in assets/PICK.md; every candidate with source and licence in tools/engine/jobs/pushou-work/candidates.json. First fallbacks: the Met's Ring Handle with Mask 1985.214.47 and the Freer's pair F1915.81/.82."
+ },
+ {
+  "files": [
+   "assets/sounds/knock.wav"
+  ],
+  "title": "Door knocker audio",
+  "maker": "Mx. Granger (Wikimedia Commons user), own work",
+  "source": "Wikimedia Commons",
+  "url": "https://commons.wikimedia.org/wiki/File:Door_knocker_audio.ogg",
+  "license": "CC0 1.0 (public domain)",
+  "note": "A metal door knocker knocked three times; the third knock (1.105-1.474 s, the only one not clipped) trimmed, faded in 2 ms and out 80 ms, and normalised to -3 dBFS. earshot: real recording, p_real 0.87."
+ }
+]

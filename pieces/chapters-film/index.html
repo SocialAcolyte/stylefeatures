@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Product name</title>
+<meta name="description" content="One line that says what the product does and who it is for.">
+<meta property="og:title" content="Product name">
+<meta name="theme-color" content="#f5f3ef">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./film/film.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="top">
+  <a class="mark" href="#">Product <em>name</em></a>
+  <a class="btn solid sm" href="#start">Get started</a>
+</nav>
+
+<header class="intro">
+  <p class="eyebrow">A film · <span data-dur>1:20</span> · with captions</p>
+  <h1>Watch how it works, <em>start to finish.</em></h1>
+</header>
+
+<main class="theatre">
+  <!-- The film: a long code tour with chapters and a caption for every beat (tours.js: "long"), on the engine's play bar.
+       A recording instead: data-src="media/film.mp4" data-vtt="media/film.vtt" data-sound, and data-at="seconds" on each chapter. -->
+  <div class="screen" data-film="long" data-driver="play" data-captions="always" data-fit=".9 .8 .45" data-record></div>
+
+  <!-- Chapters: one <li> per chapter() step in the tour, in order; the times fill themselves in. Keep 3 to 7. -->
+  <aside class="chapters" aria-label="Chapters">
+    <p class="eyebrow">Chapters</p>
+    <ol id="chapters">
+      <li><button type="button"><time></time><b>Start from nothing</b><span>An empty workspace and one button.</span></button></li>
+      <li><button type="button"><time></time><b>Make it yours</b><span>Settings beside the work.</span></button></li>
+      <li><button type="button"><time></time><b>The whole picture</b><span>Everything in a project, in one place.</span></button></li>
+      <li><button type="button"><time></time><b>Find it fast</b><span>A few letters away.</span></button></li>
+      <li><button type="button"><time></time><b>Share it</b><span>One link for the whole team.</span></button></li>
+    </ol>
+  </aside>
+
+  <!-- The transcript is built from the tour's caption steps, so the words live in one place. -->
+  <section class="transcript" aria-label="Transcript">
+    <p class="eyebrow">Transcript</p>
+    <div class="text" id="transcript"></div>
+  </section>
+</main>
+
+<section class="end" id="start">
+  <h2>An invitation, <em>in six words or so.</em></h2>
+  <div class="go"><a class="btn solid" href="#">Get started</a><a class="btn ghost" href="#">Read the docs</a></div>
+</section>
+
+<footer><span>Product name</span><span>© Year · Company</span></footer>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>

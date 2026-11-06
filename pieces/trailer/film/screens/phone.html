@@ -1,0 +1,49 @@
+<!-- The placeholder product on a phone (390 × 798 under the phone chrome's status bar). The stories play on it.
+     Replace it with your app's real screens, rebuilt from its views (see ../../README.md). -->
+<div class="mob" data-tour="mob">
+  <div class="mob-list" data-tour="list">
+    <header class="mob-head"><h4>Projects</h4><span class="mob-plus" role="button" data-tour="m-new"><svg viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9"/></svg></span></header>
+    <span class="mob-search"><svg viewBox="0 0 16 16"><path d="M7 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8ZM10 10l3.5 3.5"/></svg>Search</span>
+    <div class="mob-scroll" data-tour="m-scroll">
+      <article class="mob-card is-new" data-tour="m-card-new"><figure class="ph is-bare" data-tone="3"></figure><b>Launch plan</b><small>Just now</small></article>
+      <article class="mob-card" role="button" data-tour="m-card-1"><figure class="ph is-bare"></figure><b>Spring catalogue</b><small>Edited today</small></article>
+      <article class="mob-card"><figure class="ph is-bare is-tone"></figure><i style="--w:58%"></i><small class="mob-bars"><i></i></small></article>
+      <article class="mob-card"><figure class="ph is-bare"></figure><i style="--w:70%"></i><small class="mob-bars"><i></i></small></article>
+      <article class="mob-card"><figure class="ph is-bare is-tone"></figure><i style="--w:46%"></i><small class="mob-bars"><i></i></small></article>
+    </div>
+    <nav class="mob-tabs"><span class="is-on"><i></i>Projects</span><span><i></i>Shared</span><span><i></i>You</span></nav>
+  </div>
+
+  <!-- a project: pushes in from the right (--open 0 → 1) -->
+  <section class="mob-detail" data-tour="m-detail">
+    <header class="mob-bar"><span class="mob-back" role="button" data-tour="m-back"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg>Projects</span><span class="mob-sharebtn" role="button" data-tour="m-share"><svg viewBox="0 0 16 16"><path d="M8 2.5v8M5 5.5l3-3 3 3M3.5 8.5v5h9v-5"/></svg></span></header>
+    <div class="mob-detail-scroll" data-tour="m-detail-scroll">
+      <figure class="ph mob-hero" data-ph="Your main screen" data-hint="What the app makes"></figure>
+      <h3>Spring catalogue</h3>
+      <p class="ph-text" style="--n:3"></p>
+      <div class="mob-seg" data-tour="m-seg"><span class="is-on" data-tour="m-seg-1">Week</span><span data-tour="m-seg-2" role="button">Month</span><span>Year</span></div>
+      <div class="mob-chart" data-tour="m-chart"><i style="--h:.4"></i><i style="--h:.62"></i><i style="--h:.5"></i><i style="--h:.78"></i><i style="--h:.66"></i><i style="--h:.9"></i></div>
+      <div class="mob-row"><span>Notify me</span><span class="mob-switch" role="switch" data-tour="m-toggle"><i></i></span></div>
+      <div class="mob-row"><span>Shared with</span><span class="mob-people"><span class="ph is-round is-bare is-tone"></span><span class="ph is-round is-bare is-tone"></span></span></div>
+      <div class="mob-row"><span>Files</span><small>12</small></div>
+      <div class="mob-grid"><figure class="ph is-bare is-tone"></figure><figure class="ph is-bare"></figure><figure class="ph is-bare is-tone"></figure><figure class="ph is-bare"></figure></div>
+    </div>
+  </section>
+
+  <div class="mob-scrim" data-tour="m-scrim"></div>
+  <!-- the new-project sheet: slides up (--in) -->
+  <div class="mob-sheet" data-tour="m-sheet">
+    <span class="mob-grab"></span>
+    <b>New project</b>
+    <label class="mob-field" data-tour="m-name" data-tour-cursor="text"><small>Name</small><span data-tour="m-name-text" data-placeholder="Untitled"></span></label>
+    <span class="mob-btn" role="button" data-tour="m-create">Create</span>
+  </div>
+  <!-- the share sheet -->
+  <div class="mob-sheet is-share" data-tour="m-sharesheet">
+    <span class="mob-grab"></span>
+    <b>Share “Spring catalogue”</b>
+    <div class="mob-link"><span>yourproduct.com/p/spring</span></div>
+    <span class="mob-btn" role="button" data-tour="m-copy">Copy link</span>
+  </div>
+  <div class="mob-toast" data-tour="m-toast"><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg>Link copied</div>
+</div>

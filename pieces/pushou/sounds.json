@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "knock",
+      "file": "assets/sounds/knock.wav",
+      "on": "event:pushou:knock",
+      "target": "[data-pushou]",
+      "match": { "strike": 1 },
+      "volume": 0.42,
+      "vary": 0.8,
+      "cooldown": 90,
+      "source": { "kind": "file", "file": "Door knocker audio.ogg", "trim_s": [1.105, 1.474] },
+      "credit": "\"Door knocker audio\" by Mx. Granger (CC0 1.0, commons.wikimedia.org/wiki/File:Door_knocker_audio.ogg): the third of three knocks of a metal door knocker, trimmed, faded and normalised to -3 dBFS; the ring falling against the door"
+    },
+    {
+      "name": "knock-again",
+      "file": "assets/sounds/knock.wav",
+      "on": "event:pushou:knock",
+      "target": "[data-pushou]",
+      "match": { "strike": 2 },
+      "volume": 0.14,
+      "vary": 1.4,
+      "cooldown": 60,
+      "source": { "kind": "file", "file": "Door knocker audio.ogg", "trim_s": [1.105, 1.474] },
+      "credit": "the same recording, quieter: the ring's small rebound against the door"
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Product name</title>
+<meta name="description" content="One line that says what the product does and who it is for.">
+<meta property="og:title" content="Product name">
+<meta name="theme-color" content="#f5f3ef">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./film/film.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="top">
+  <a class="mark" href="#">Product <em>name</em></a>
+  <a class="btn solid sm" href="#start">Get started</a>
+</nav>
+
+<header class="intro">
+  <h1>Product <em>name</em></h1>
+  <p class="lede">One line that says what it does and who it is for.</p>
+</header>
+
+<!-- The trailer: the best 15–20 seconds of the product as a looping tour (tours.js: "highlights").
+     A Monet Shot trailer instead: data-src="media/trailer.mp4" on the figure; the Sound button then appears. -->
+<figure class="trailer" id="trailer" data-film="highlights" data-autoplay data-loop data-fit=".84 .84" data-record aria-label="Trailer">
+  <div class="ctls">
+    <button class="ctl" id="pause" type="button" aria-label="Pause or play the trailer"><i class="ico"></i><span class="lbl"></span></button>
+    <button class="ctl" id="sound" type="button" aria-pressed="false" hidden>Sound</button>
+  </div>
+</figure>
+
+<!-- The clips: each a short tour of one feature (data-film), playing on hover and opening bigger on click.
+     Six is a good number; three or nine work too. A recording instead: data-src="media/clip-1.mp4" on the .frame. -->
+<section class="clips" aria-labelledby="clips-title">
+  <div class="clips-head">
+    <p class="eyebrow">Six things it does</p>
+    <h2 id="clips-title"><span class="by-mouse">Hover to watch, <em>click to look closer.</em></span><span class="by-touch">Swipe through, <em>tap to watch.</em></span></h2>
+  </div>
+  <ul class="grid">
+    <li><button class="tile" type="button"><span class="frame" data-film="create" data-fit=".86 .84"></span><span class="t"><b>The first feature</b><time></time></span></button></li>
+    <li><button class="tile" type="button"><span class="frame" data-film="settings" data-fit=".86 .84"></span><span class="t"><b>The second feature</b><time></time></span></button></li>
+    <li><button class="tile" type="button"><span class="frame" data-film="open" data-fit=".86 .84"></span><span class="t"><b>The third feature</b><time></time></span></button></li>
+    <li><button class="tile" type="button"><span class="frame" data-film="search" data-fit=".86 .84"></span><span class="t"><b>The fourth feature</b><time></time></span></button></li>
+    <li><button class="tile" type="button"><span class="frame" data-film="share" data-fit=".86 .84"></span><span class="t"><b>The fifth feature</b><time></time></span></button></li>
+    <li><button class="tile" type="button"><span class="frame" data-film="tone" data-fit=".86 .84"></span><span class="t"><b>The sixth feature</b><time></time></span></button></li>
+  </ul>
+</section>
+
+<section class="end" id="start">
+  <h2>An invitation, <em>in six words or so.</em></h2>
+  <div class="go"><a class="btn solid" href="#">Get started</a><a class="btn ghost" href="#">Read the docs</a></div>
+</section>
+
+<footer><span>Product name</span><span>© Year · Company</span></footer>
+
+<!-- The lightbox: whichever clip was clicked, bigger, on the play bar and with captions. -->
+<dialog class="box" id="box" aria-label="Clip">
+  <div class="box-screen" id="boxScreen"></div>
+  <div class="box-bar">
+    <b id="boxTitle"></b>
+    <span>
+      <button type="button" id="prev" aria-label="Previous clip">←</button>
+      <button type="button" id="next" aria-label="Next clip">→</button>
+      <button type="button" id="close" autofocus>Close</button>
+    </span>
+  </div>
+</dialog>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>

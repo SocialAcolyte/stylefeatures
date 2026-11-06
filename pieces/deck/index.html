@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Deck launch page</title>
+<script>document.documentElement.classList.remove("no-js")</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+<link rel="stylesheet" href="./kit/scaffold.css">
+<link rel="stylesheet" href="./deck/section.css">
+</head>
+<body>
+<section class="demo-deck" data-tpl="demo/deck" id="top" aria-label="Product name, as a keynote" aria-roledescription="slide deck">
+
+  <!-- THE DECK. One idea per slide, 8–12 slides (AGENT.md, step 1). Each slide is an <article class="deck-slide">:
+         data-kind    title | statement | tour | diagram | quote | action   (how it lays out)
+         data-dur     seconds it stays up when the deck plays as a talk (a tour slide: its film's length + a breath)
+         data-enter   fade (default) | scale | push   (how it arrives; calm, never more)
+         data-film    tour slides: which film in script.js plays in its window
+       Anything inside with data-build="0.6" fades up that many seconds after the slide arrives. -->
+  <div class="deck-stage">
+
+    <article class="deck-slide" data-kind="title" data-dur="4.5" data-enter="fade">
+      <div class="deck-in">
+        <p class="deck-eyebrow" data-build=".2">Introducing</p>
+        <h1 class="deck-name" data-build=".35">Product <em>name</em></h1>
+        <p class="deck-line" data-build=".9">What it does, and for whom, in one sentence.</p>
+        <p class="deck-hint" data-build="1.6"><kbd>→</kbd> or swipe to begin <span>·</span> <kbd>G</kbd> for every slide</p>
+      </div>
+    </article>
+
+    <article class="deck-slide" data-kind="statement" data-dur="4.5" data-enter="fade">
+      <div class="deck-in">
+        <p class="deck-say" data-build=".25">The problem, said in one sentence that everyone in the room has felt.</p>
+        <span class="sf-note">One sentence, set huge. Take it from the first paragraph of your README or launch post, in your own words.</span>
+      </div>
+    </article>
+
+    <article class="deck-slide" data-kind="statement" data-dur="4.5" data-enter="scale">
+      <div class="deck-in">
+        <p class="deck-say" data-build=".25">So we made <em>one thing</em> that does it differently.</p>
+      </div>
+    </article>
+
+    <article class="deck-slide" data-kind="tour" data-film="0" data-enter="push">
+      <div class="deck-in">
+        <div class="deck-words"><p class="deck-n">First</p><h2 data-build=".2">Start from <em>nothing</em></h2><p class="deck-line" data-build=".45">An empty workspace and one button to begin.</p></div>
+        <div class="deck-frame"><div class="deck-film" data-tour-root><div data-tour-stage><div class="deck-glass" data-tour-frame></div><div class="tour-rig">
+          <div data-tour-window data-chrome="browser" data-size="1200x750" data-url="app.yourproduct.com/projects"></div></div></div></div></div>
+      </div>
+    </article>
+
+    <article class="deck-slide" data-kind="tour" data-film="1" data-enter="push">
+      <div class="deck-in">
+        <div class="deck-words"><p class="deck-n">Then</p><h2 data-build=".2">Make it <em>yours</em></h2><p class="deck-line" data-build=".45">Settings sit beside the work, not behind a menu.</p></div>
+        <div class="deck-frame"><div class="deck-film" data-tour-root><div data-tour-stage><div class="deck-glass" data-tour-frame></div><div class="tour-rig">
+          <div data-tour-window data-chrome="browser" data-size="1200x750" data-url="app.yourproduct.com/projects/launch-plan"></div></div></div></div></div>
+      </div>
+    </article>
+
+    <article class="deck-slide" data-kind="diagram" data-dur="6.5" data-enter="fade">
+      <div class="deck-in">
+        <div class="deck-words"><p class="deck-n">How it works</p><h2 data-build=".2">Three parts, one <em>direction</em></h2></div>
+        <div class="deck-flow">
+          <div class="deck-node" data-build=".7"><span class="deck-dot"><svg viewBox="0 0 24 24"><path d="M4 7c0-1.7 3.6-3 8-3s8 1.3 8 3-3.6 3-8 3-8-1.3-8-3Zm0 0v10c0 1.7 3.6 3 8 3s8-1.3 8-3V7M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></svg></span>
+            <b>Where it starts</b><p>What people have today: their files, data or tools, untouched.</p></div>
+          <i class="deck-arrow" data-build="1.25"></i>
+          <div class="deck-node is-core" data-build="1.7"><span class="deck-dot"><span class="deck-mark"></span></span>
+            <b>Product name</b><p>The one thing it does in the middle, in a few words.</p></div>
+          <i class="deck-arrow" data-build="2.25"></i>
+          <div class="deck-node" data-build="2.7"><span class="deck-dot"><svg viewBox="0 0 24 24"><path d="M9 11a3 3 0 1 0 0-.1M3.5 19c.6-3 2.7-4.5 5.5-4.5s4.9 1.5 5.5 4.5M16.5 10a2.5 2.5 0 1 0 0-.1M16 13.6c2.4-.3 4.3 1 4.8 4.4"/></svg></span>
+            <b>Where it lands</b><p>What comes out, and who it's for.</p></div>
+        </div>
+        <span class="sf-note">Draw the real flow from your README's architecture or "how it works" section. Three or four boxes; never more.</span>
+      </div>
+    </article>
+
+    <article class="deck-slide" data-kind="tour" data-film="2" data-enter="push">
+      <div class="deck-in">
+        <div class="deck-words"><p class="deck-n">And then</p><h2 data-build=".2">Share it in <em>one</em> step</h2><p class="deck-line" data-build=".45">Send a link and people see exactly what you see.</p></div>
+        <div class="deck-frame"><div class="deck-film" data-tour-root><div data-tour-stage><div class="deck-glass" data-tour-frame></div><div class="tour-rig">
+          <div data-tour-window data-chrome="browser" data-size="1200x750" data-url="app.yourproduct.com/projects"></div></div></div></div></div>
+      </div>
+    </article>
+
+    <article class="deck-slide" data-kind="quote" data-dur="6" data-enter="fade">
+      <div class="deck-in">
+        <figure class="deck-portrait ph is-round" style="--r:1/1" data-ph="Portrait · 1:1" data-hint="The person who made it" data-build=".2"></figure>
+        <blockquote class="deck-quote" data-build=".5"><p>A sentence from the person who made it, about why it had to exist.</p>
+          <footer><b>Your name</b><span>Made it</span></footer></blockquote>
+        <span class="sf-note">The maker's own words, from the launch post or the README's "why". A real photo, or leave the slot out; never an invented person.</span>
+      </div>
+    </article>
+
+    <article class="deck-slide" data-kind="statement" data-dur="4.5" data-enter="scale">
+      <div class="deck-in">
+        <p class="deck-say" data-build=".25">What changes for the people who use it, in <em>one</em> line.</p>
+      </div>
+    </article>
+
+    <article class="deck-slide" data-kind="action" data-dur="6" data-enter="fade" id="get">
+      <div class="deck-in">
+        <h2 class="deck-name" data-build=".2">Product <em>name</em></h2>
+        <p class="deck-line" data-build=".6">One line on what to do next.</p>
+        <div class="deck-act" data-build="1"><a class="sf-btn deck-cta" href="#">Get it free</a><span class="deck-url">yourproduct.com</span></div>
+      </div>
+    </article>
+  </div>
+
+  <!-- the deck's chrome: play as a talk, the overview, the counter and the progress line -->
+  <nav class="deck-bar" aria-label="Slides">
+    <button class="deck-btn deck-play" type="button" aria-label="Play as a talk"><svg class="i-play" viewBox="0 0 16 16"><path d="M4.5 3.2v9.6L12.5 8z"/></svg><svg class="i-pause" viewBox="0 0 16 16"><path d="M4.5 3.5h2.4v9H4.5zM9.1 3.5h2.4v9H9.1z"/></svg><span>Play talk</span></button>
+    <button class="deck-btn deck-ov" type="button" aria-label="All slides (G)"><svg viewBox="0 0 16 16"><path d="M2.5 2.5h4.5v4.5H2.5zM9 2.5h4.5v4.5H9zM2.5 9h4.5v4.5H2.5zM9 9h4.5v4.5H9z"/></svg><span>All slides</span></button>
+    <button class="deck-btn deck-prev" type="button" aria-label="Previous slide"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg></button>
+    <button class="deck-btn deck-next" type="button" aria-label="Next slide"><svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></svg></button>
+    <span class="deck-count" aria-live="polite"><b class="deck-i">01</b> / <span class="deck-of">10</span></span>
+  </nav>
+  <div class="deck-progress" aria-hidden="true"><b></b></div>
+
+  <!-- THE PRODUCT, once. Every tour slide's window gets a copy. Replace everything inside with your real screens (AGENT.md, step 2). -->
+  <template class="deck-product">
+    <div class="demo-deck-app" data-tour="app">
+    <aside class="app-side">
+      <div class="app-ws"><span class="app-logo"></span><b>Workspace</b><svg viewBox="0 0 16 16"><path d="m5 6 3 3 3-3"/></svg></div>
+      <nav class="app-nav">
+        <a><svg viewBox="0 0 16 16"><path d="M3 7.5 8 3l5 4.5V13H3z"/></svg>Home</a>
+        <a class="is-on"><svg viewBox="0 0 16 16"><path d="M2.5 4.5h4l1.5 1.5h5.5v6.5h-11z"/></svg>Projects</a>
+        <a><svg viewBox="0 0 16 16"><path d="M5.5 7a2 2 0 1 0 0-.1M2.5 13c.4-2 1.6-3 3-3s2.6 1 3 3M10.5 6.5a1.7 1.7 0 1 0 0-.1M10 9.6c1.6-.3 3 .6 3.5 2.9"/></svg>Shared with me</a>
+        <a><svg viewBox="0 0 16 16"><path d="M3.5 3h3v10h-3zM8.5 3h4v10h-4z"/></svg>Library</a>
+        <a><svg viewBox="0 0 16 16"><path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM8 1.8v2M8 12.2v2M1.8 8h2M12.2 8h2"/></svg>Settings</a>
+      </nav>
+      <p class="app-label">Recent</p>
+      <div class="app-recent">
+        <span class="app-recent-new" data-tour="recent-new"><i data-tone="3"></i>Launch plan</span>
+        <span><i></i><b style="--w:62%"></b></span><span><i></i><b style="--w:78%"></b></span><span><i></i><b style="--w:48%"></b></span>
+      </div>
+      <div class="app-me"><span class="ph is-round is-bare is-tone" style="--r:1/1"></span><span><b>Your name</b><small>Team plan</small></span></div>
+    </aside>
+
+    <main class="app-main">
+      <div class="app-bar">
+        <h4>Projects <span class="app-count" data-tour="count">0</span></h4>
+        <span class="app-search"><svg viewBox="0 0 16 16"><path d="M7 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8ZM10 10l3.5 3.5"/></svg>Search</span>
+        <span class="app-seg"><span class="is-on">Grid</span><span>List</span></span>
+        <button class="app-btn" type="button" data-tour="share" tabindex="-1">Share</button>
+        <button class="app-btn is-primary" type="button" data-tour="new" tabindex="-1"><svg viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9"/></svg>New</button>
+      </div>
+
+      <div class="app-body" data-tour="body">
+        <div class="app-empty" data-tour="empty">
+          <span class="app-empty-art"><span class="ph is-tone is-bare" style="--r:1/1"></span><span class="ph is-bare" style="--r:1/1"></span></span>
+          <b>No projects yet</b>
+          <p>Create one and it shows up here.</p>
+        </div>
+
+        <div class="app-grid">
+          <article class="app-card" data-tour="card-1"><figure class="ph is-bare app-cover" style="--r:16/10"></figure><b>Launch plan</b><small>Edited just now</small><em class="app-badge">New</em></article>
+          <article class="app-card"><figure class="ph is-bare app-cover" style="--r:16/10"></figure><i style="--w:64%"></i><small class="app-bars"><i></i><i></i></small></article>
+          <article class="app-card"><figure class="ph is-bare app-cover" style="--r:16/10"></figure><i style="--w:48%"></i><small class="app-bars"><i></i><i></i></small></article>
+          <article class="app-card"><figure class="ph is-bare app-cover" style="--r:16/10"></figure><i style="--w:72%"></i><small class="app-bars"><i></i><i></i></small></article>
+          <article class="app-card"><figure class="ph is-bare app-cover" style="--r:16/10"></figure><i style="--w:56%"></i><small class="app-bars"><i></i><i></i></small></article>
+          <article class="app-card"><figure class="ph is-bare app-cover" style="--r:16/10"></figure><i style="--w:40%"></i><small class="app-bars"><i></i><i></i></small></article>
+        </div>
+
+        <!-- a project opened full size: grows out of the first card -->
+        <section class="app-room" data-tour="room">
+          <div class="app-room-bar"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg><b>Launch plan</b>
+            <span class="app-tabs"><span class="is-on">Overview</span><span>Activity</span><span>Files</span></span></div>
+          <div class="app-room-scroll" data-tour="room-scroll">
+            <figure class="ph app-room-hero" style="--r:16/7" data-ph="Your main screen · 16:7" data-hint="The result your product makes: the thing people came for"></figure>
+            <div class="app-room-cols">
+              <div><p class="app-h">What it's for</p><p class="ph-text" style="--n:4"></p></div>
+              <div class="app-stats" data-tour="stats">
+                <span><small>Measure</small><b></b><i style="--h:.42"></i></span>
+                <span data-tour="stat-2"><small>Measure</small><b></b><i style="--h:.78"></i><em class="app-tip" data-tour="tip">Up since last week</em></span>
+                <span><small>Measure</small><b></b><i style="--h:.58"></i></span>
+              </div>
+    </div>
+            <div class="app-room-row"><figure class="ph is-tone" style="--r:4/3" data-ph="Detail · 4:3" data-hint="A second view"></figure><figure class="ph is-tone" style="--r:4/3" data-ph="Detail · 4:3" data-hint="A third"></figure><p class="ph-text" style="--n:6"></p></div>
+          </div>
+        </section>
+
+        <div class="app-toast" data-tour="toast"><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg><span data-tour="toast-text">Project created</span></div>
+      </div>
+    </main>
+
+    <aside class="app-insp" data-tour="inspector">
+      <div class="app-insp-in">
+        <div class="app-insp-head"><b>Launch plan</b><span class="app-x" data-tour="insp-close" role="button"><svg viewBox="0 0 16 16"><path d="m4 4 8 8M12 4l-8 8"/></svg></span></div>
+        <figure class="ph is-bare app-cover" data-tour="insp-cover" style="--r:16/9"></figure>
+        <p class="app-h">Settings</p>
+        <div class="app-row"><span>Visible to team</span><span class="app-switch" role="switch" data-tour="toggle-1"><i></i></span></div>
+        <div class="app-row"><span>Notifications</span><span class="app-switch" role="switch" style="--on:1"><i></i></span></div>
+        <div class="app-row is-col"><span>Detail <b data-tour="slider-val">30%</b></span>
+          <span class="app-slider" data-tour="slider" style="--v:.3"><i></i><b data-tour="knob" role="slider"></b></span></div>
+        <div class="app-row is-col"><span>Tone</span>
+          <span class="app-tones"><i class="is-on" data-tour="tone-1" data-tone="1" role="button"></i><i data-tone="2" role="button"></i><i data-tour="tone-3" data-tone="3" role="button"></i><i data-tone="4" role="button"></i><i data-tone="5" role="button"></i></span></div>
+      </div>
+    </aside>
+
+    <div class="app-scrim" data-tour="scrim"></div>
+    <div class="app-modal" data-tour="modal">
+      <b class="app-modal-t">New project</b>
+      <label class="app-field" data-tour="name" data-tour-cursor="text"><small>Name</small><span data-tour="name-text" data-placeholder="Untitled"></span></label>
+      <p class="app-h">Start from</p>
+      <div class="app-tpls">
+        <span class="app-tpl is-on" data-tour="tpl-1" role="button"><span class="ph is-tone is-bare" style="--r:4/3"></span>Blank</span>
+        <span class="app-tpl" data-tour="tpl-2" role="button"><span class="ph is-tone is-bare" style="--r:4/3"></span>Template</span>
+        <span class="app-tpl" role="button"><span class="ph is-tone is-bare" style="--r:4/3"></span>Import</span>
+      </div>
+      <div class="app-modal-foot"><button class="app-btn" type="button" tabindex="-1">Cancel</button><button class="app-btn is-primary" type="button" data-tour="create" tabindex="-1">Create</button></div>
+    </div>
+
+    <div class="app-pop" data-tour="sharebox">
+      <b>Share “Launch plan”</b>
+      <div class="app-link"><span>app.yourproduct.com/p/launch-plan</span><button class="app-btn is-primary" type="button" data-tour="copy" tabindex="-1">Copy link</button></div>
+      <div class="app-people"><span class="ph is-round is-bare is-tone" style="--r:1/1"></span><span class="ph is-round is-bare is-tone" style="--r:1/1"></span><span class="ph is-round is-bare is-tone" style="--r:1/1"></span><small>Your team can edit</small></div>
+    </div>
+    </div>
+  </template>
+</section>
+
+<script type="module" src="./kit/scaffold.js"></script>
+<script type="module">
+import s0 from "./deck/section.js";
+for (const [k, f] of [["demo/deck",s0]]) document.querySelectorAll(`[data-tpl="${k}"]`).forEach((el) => f(el));
+</script>
+</body>
+</html>

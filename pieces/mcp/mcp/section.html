@@ -1,0 +1,136 @@
+<section class="demo-mcp" data-tpl="demo/mcp" data-tour-root data-driver="manual" data-captions="off" aria-label="{{server|yourserver}}: an MCP server, shown in use">
+  <div class="demo-mcp-stage" data-tour-stage>
+    <!-- the text column: tour.js fits the window to it (data-tour-frame). Nothing is drawn around it: text on paper. -->
+    <div class="demo-mcp-frame" data-tour-frame aria-hidden="true"></div>
+
+    <div class="tour-rig">
+      <!-- THE PAGE, at 600 design px wide (400 on phones and 9:16); its height follows the screen ("auto").
+           Each .mcp-conv is one short conversation that shows one real tool. The rows are the script (../_chat/README.md):
+           fill them from a real tools/list and real tool calls (AGENT.md). -->
+      <div class="demo-mcp-win" data-tour-window data-chrome="none" data-size="600xauto" data-size-tall="400xauto">
+        <div class="mcp">
+          <header class="mcp-head">
+            <p class="mcp-top"><b class="mcp-name">{{server|yourserver}}</b><span>MCP server</span><a class="mcp-jump" href="#mcp-add" data-mcp-jump>{{add|Add the MCP}}</a></p>
+            <h1 class="mcp-line">{{line|One sentence on what your agent can do once this server is added.}}</h1>
+            <!-- one tab per conversation, named by the tool it shows -->
+            <nav class="mcp-tabs" aria-label="Examples">
+              <button type="button" data-tour="tab-1" data-mcp-conv="1">{{tool1|search}}</button>
+              <button type="button" data-tour="tab-2" data-mcp-conv="2">{{tool2|create_item}}</button>
+              <button type="button" data-tour="tab-3" data-mcp-conv="3">{{tool3|list_changes}}</button>
+            </nav>
+          </header>
+
+          <div class="mcp-talk">
+            <!-- 1 · search -->
+            <div class="mcp-conv" data-tour="conv-1" data-title="{{tool1|search}}">
+              <div class="ck-thread mcp-thread" data-ck-thread data-typing="off" data-avatars="off" data-tour-follow role="log">
+                <div class="ck-row" data-from="person" data-via="inline">
+                  <div class="ck-pad"><span class="mcp-who">you</span><p class="mcp-said" data-said>What did we decide about the onboarding checklist?</p></div>
+                </div>
+                <div class="ck-row" data-kind="tool" data-open data-run="1">
+                  <div class="ck-pad"><span class="mcp-who">agent</span><div class="ck-tool">
+                    <button class="ck-tool-head" type="button" aria-expanded="true"><i class="ck-tool-state"></i><span class="ck-tool-name"><b>{{server|yourserver}}</b> · {{tool1|search}}</span><span class="ck-tool-meta" data-done="3 results · 0.3 s">running</span><svg class="ck-chev" viewBox="0 0 12 12"><path d="m4.5 2.5 3.5 3.5-3.5 3.5"/></svg></button>
+                    <div class="ck-tool-body">
+<pre class="ck-args">{ <span class="ck-k">"query"</span>: <span class="ck-s">"onboarding checklist decision"</span>, <span class="ck-k">"limit"</span>: <span class="ck-n">3</span> }</pre>
+                      <div class="ck-out"><p class="is-dim">3 results</p><p>notes/onboarding-review     Decisions</p><p>notes/checklist-draft-2     Checklist wording</p><p>notes/first-run-feedback    What people said</p></div>
+                    </div>
+                  </div></div>
+                </div>
+                <div class="ck-row">
+                  <div class="ck-pad"><span class="mcp-who">agent</span><div class="ck-text mcp-text" data-stream><p>You decided to cut the checklist to three steps and move invites to the end. The wording is in the second draft.</p></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2 · create -->
+            <div class="mcp-conv" data-tour="conv-2" data-title="{{tool2|create_item}}">
+              <div class="ck-thread mcp-thread" data-ck-thread data-typing="off" data-avatars="off" data-tour-follow role="log">
+                <div class="ck-row" data-from="person" data-via="inline">
+                  <div class="ck-pad"><span class="mcp-who">you</span><p class="mcp-said" data-said>File the empty-state bug on the projects page and give it to me.</p></div>
+                </div>
+                <div class="ck-row" data-kind="tool" data-open data-run="1.1">
+                  <div class="ck-pad"><span class="mcp-who">agent</span><div class="ck-tool">
+                    <button class="ck-tool-head" type="button" aria-expanded="true"><i class="ck-tool-state"></i><span class="ck-tool-name"><b>{{server|yourserver}}</b> · {{tool2|create_item}}</span><span class="ck-tool-meta" data-done="created · 0.5 s">running</span><svg class="ck-chev" viewBox="0 0 12 12"><path d="m4.5 2.5 3.5 3.5-3.5 3.5"/></svg></button>
+                    <div class="ck-tool-body">
+<pre class="ck-args">{ <span class="ck-k">"title"</span>: <span class="ck-s">"Empty state missing on Projects"</span>,
+  <span class="ck-k">"assignee"</span>: <span class="ck-s">"me"</span>, <span class="ck-k">"labels"</span>: [<span class="ck-s">"bug"</span>] }</pre>
+                      <div class="ck-out"><p>{ "id": "ITEM-142", "status": "open" }</p></div>
+                    </div>
+                  </div></div>
+                </div>
+                <div class="ck-row">
+                  <div class="ck-pad"><span class="mcp-who">agent</span><div class="ck-text mcp-text" data-stream><p>Filed as ITEM-142 and assigned to you, labelled as a bug.</p></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3 · list -->
+            <div class="mcp-conv" data-tour="conv-3" data-title="{{tool3|list_changes}}">
+              <div class="ck-thread mcp-thread" data-ck-thread data-typing="off" data-avatars="off" data-tour-follow role="log">
+                <div class="ck-row" data-from="person" data-via="inline">
+                  <div class="ck-pad"><span class="mcp-who">you</span><p class="mcp-said" data-said>What changed since Monday?</p></div>
+                </div>
+                <div class="ck-row" data-kind="tool" data-open data-run=".9">
+                  <div class="ck-pad"><span class="mcp-who">agent</span><div class="ck-tool">
+                    <button class="ck-tool-head" type="button" aria-expanded="true"><i class="ck-tool-state"></i><span class="ck-tool-name"><b>{{server|yourserver}}</b> · {{tool3|list_changes}}</span><span class="ck-tool-meta" data-done="4 changes · 0.2 s">running</span><svg class="ck-chev" viewBox="0 0 12 12"><path d="m4.5 2.5 3.5 3.5-3.5 3.5"/></svg></button>
+                    <div class="ck-tool-body">
+<pre class="ck-args">{ <span class="ck-k">"since"</span>: <span class="ck-s">"monday"</span> }</pre>
+                      <div class="ck-out"><p class="is-dim">4 changes</p><p>edited   notes/onboarding-review</p><p>opened   ITEM-142</p><p>added    notes/pricing-questions</p><p>closed   ITEM-131</p></div>
+                    </div>
+                  </div></div>
+                </div>
+                <div class="ck-row">
+                  <div class="ck-pad"><span class="mcp-who">agent</span><div class="ck-text mcp-text" data-stream><p>Four things since Monday: the onboarding notes were edited, ITEM-142 was opened, a pricing note was added and ITEM-131 was closed.</p></div></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- THE ENDING: one big button, the server's address, and the config for common clients, in text. Honest and simple:
+                 only forms the server really supports (AGENT.md, step 5). In ?record it holds here. -->
+            <section class="mcp-end" id="mcp-add" data-tour-end aria-labelledby="mcp-end-t">
+              <h2 id="mcp-end-t">{{end_line|Add it to your agent.}}</h2>
+              <button class="mcp-add" type="button" data-ck-copy="#mcp-url" data-what="Server address" data-copied="Address copied. Paste it into your client.">{{add|Add the MCP}}</button>
+              <div class="mcp-url"><code id="mcp-url">{{url|https://mcp.yourserver.dev/mcp}}</code><button type="button" data-ck-copy="#mcp-url" data-what="Server address">Copy</button></div>
+              <div class="mcp-cfg">
+                <div class="mcp-cfg-tabs" role="tablist" aria-label="Config for your client" data-ck-tabs>
+                  <button type="button" role="tab" id="mcp-b1" aria-controls="mcp-p1" aria-selected="true">JSON config</button>
+                  <button type="button" role="tab" id="mcp-b2" aria-controls="mcp-p2" aria-selected="false" tabindex="-1">Command line</button>
+                  <button type="button" role="tab" id="mcp-b3" aria-controls="mcp-p3" aria-selected="false" tabindex="-1">Remote URL</button>
+                </div>
+                <div class="mcp-cfg-p" role="tabpanel" id="mcp-p1" aria-labelledby="mcp-b1">
+<pre id="mcp-c1"><code>{
+  "mcpServers": {
+    "{{server|yourserver}}": {
+      "command": "npx",
+      "args": ["-y", "{{package|yourserver-mcp}}"]
+    }
+  }
+}</code></pre>
+                  <button type="button" data-ck-copy="#mcp-c1" data-what="JSON config">Copy</button>
+                </div>
+                <div class="mcp-cfg-p" role="tabpanel" id="mcp-p2" aria-labelledby="mcp-b2" hidden>
+<pre id="mcp-c2"><code>your-client mcp add {{server|yourserver}} -- npx -y {{package|yourserver-mcp}}</code></pre>
+                  <button type="button" data-ck-copy="#mcp-c2" data-what="Command">Copy</button>
+                </div>
+                <div class="mcp-cfg-p" role="tabpanel" id="mcp-p3" aria-labelledby="mcp-b3" hidden>
+<pre id="mcp-c3"><code>{
+  "mcpServers": {
+    "{{server|yourserver}}": {
+      "type": "http",
+      "url": "{{url|https://mcp.yourserver.dev/mcp}}"
+    }
+  }
+}</code></pre>
+                  <button type="button" data-ck-copy="#mcp-c3" data-what="Remote config">Copy</button>
+                </div>
+              </div>
+              <p class="mcp-small">{{small|Open source · MIT · version 1.0}} · <a href="{{source|#}}">Source</a></p>
+              <span class="mcp-said-live" aria-live="polite" data-ck-said></span>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+    <span class="sf-note demo-mcp-note">Three short conversations, each with one real tool (from tools/list, with real output), then the way to add it. AGENT.md says how to harvest them.</span>
+  </div>
+</section>

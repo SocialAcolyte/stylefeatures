@@ -1,0 +1,71 @@
+/* ─── temper-button: the button part of temper-run (temper-button.js) ─────────
+   Load it after temper-run.css, which draws the steel (the .tr- classes, file
+   for file temper-run's own). This sheet gives button[data-temper-button] the
+   engine's button look, two more sizes and a pressed state. Namespace .tb-.
+
+   Theme on the button (a class on it):
+     --tr-ink       the label colour
+     --tr-fallback  the edge of the plain no-JS button                           */
+
+button[data-temper-button] {
+  --tr-fallback: #8c877e;
+  --tr-ink: #1d1b18;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+  font: 500 15px/1 var(--sans, Inter, system-ui, sans-serif);
+  letter-spacing: .01em;
+  color: var(--tr-ink);
+  white-space: nowrap;
+  padding: 15px 26px 17px;               /* 49px tall: the normal size */
+  border: 1px solid var(--tr-fallback);
+  border-radius: 3px;
+  background: linear-gradient(#e4e1da, #cdc9c0);
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none; -webkit-user-select: none;
+  transition: opacity .4s ease;
+}
+/* live: the canvas is the face (temper-run.css carries the rest of the live look) */
+button[data-temper-button].tr--live { background: none; border-color: transparent; }
+
+/* sizes. Keep 2px more padding below than above: the steel's narrow side face takes it */
+button[data-temper-button].tb-sm { font-size: 13px; padding: 10px 15px 12px; }   /* 37px, a row button */
+button[data-temper-button].tb-lg { font-size: 17px; padding: 20px 38px 22px; }   /* 61px */
+
+/* pressed: the face goes down a pixel under the finger, while the colour comes up */
+button[data-temper-button].tr--pressed { transform: translateY(1px); text-shadow: 0 1px 0 rgba(255, 255, 255, .14); }
+
+/* disabled, or aria-disabled="true" (busy, and it keeps its focus): dimmed. But never while the steel
+   still shows a press: the colours are the payoff (a hold button's blue as it confirms, which is when
+   a page tends to disable it), so the button dims as its face is rubbed bright (data-state="cold") */
+button[data-temper-button]:is([disabled], [aria-disabled="true"]) { opacity: .55; cursor: default; }
+button[data-temper-button].tr--live:is([disabled], [aria-disabled="true"]):not([data-state="cold"]) { opacity: 1; }
+/* one that keeps its record (data-reset="0", class tb--keep) is never rubbed bright: it dims once its colours
+   stop, and a hold button's kept blue a beat after it confirms, once it has been seen */
+button[data-temper-button].tb--keep.tr--live:is([disabled], [aria-disabled="true"]):is([data-state="resting"], [data-state="confirmed"]) { opacity: .55; }
+button[data-temper-button].tb--keep.tr--live:is([disabled], [aria-disabled="true"])[data-state="confirmed"] { transition-delay: 1.2s; }
+
+@media (prefers-reduced-motion: reduce) {
+  button[data-temper-button] { transition: none; }
+  /* no fade, but the kept blue still has its beat before it dims */
+  button[data-temper-button].tb--keep.tr--live:is([disabled], [aria-disabled="true"])[data-state="confirmed"] { transition: opacity 0s 1.2s; }
+}
+
+/* Windows contrast themes: a plain system button, no steel */
+@media (forced-colors: active) {
+  button[data-temper-button] > .tr-canvas { display: none; }
+  button[data-temper-button].tr--live { background: ButtonFace; color: ButtonText; border-color: ButtonText; }
+  /* a hold button held down: the system highlight, and a bar along its foot that fills over the hold time.
+     Not adjusted, or the text's backplate (Canvas) would hide HighlightText; so every colour here is a system one */
+  button[data-temper-button].tb--hold.tr--pressed:not([disabled]) {
+    forced-color-adjust: none;
+    background: Highlight; color: HighlightText; border-color: Highlight; outline-color: Highlight; text-shadow: none;
+  }
+  button[data-temper-button].tb--hold.tr--pressed:not([disabled])::after {
+    content: ""; position: absolute; left: 6px; right: 6px; bottom: 4px; height: 2px; background: HighlightText;
+    transform-origin: 0 50%; animation: tb-held var(--tb-hold, 1200ms) linear both;
+  }
+  button[data-temper-button]:is([disabled], [aria-disabled="true"]),
+  button[data-temper-button].tr--live:is([disabled], [aria-disabled="true"]) { opacity: 1; color: GrayText; border-color: GrayText; }
+}
+@keyframes tb-held { from { transform: scaleX(0); } to { transform: scaleX(1); } }

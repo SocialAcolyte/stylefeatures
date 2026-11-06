@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>hohmann-button</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="hohmann-loader.css">
+<link rel="stylesheet" href="hohmann-button.css">
+<style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;
+    --serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px);
+    --sheet:#f8f5ee;--line:#e6e0d2}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  .tag{font-family:var(--sans);font-size:10.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  main{max-width:1060px;margin:0 auto;padding:clamp(36px,8svh,88px) var(--gutter) clamp(64px,12svh,120px)}
+
+  .intro{max-width:34em;margin:0 0 clamp(28px,5svh,48px)}
+  .intro h1{margin:.3em 0 .25em;font-weight:400;font-style:italic;font-size:clamp(36px,4.6vw,52px);line-height:1;letter-spacing:-.005em}
+  .intro p{margin:0;font-size:clamp(19px,1.7vw,21px);line-height:1.4;color:var(--ink-2);text-wrap:pretty}
+
+  .grid{display:grid;gap:18px}
+  .col{display:grid;gap:18px;align-content:start;min-width:0}
+  @media (min-width:860px){.grid{grid-template-columns:1.08fr 1fr;gap:22px}.col{gap:22px}}
+
+  .card{--hb-paper:var(--sheet);background:var(--sheet);border:1px solid #ddd6c8;border-radius:6px;
+    box-shadow:0 24px 44px -34px rgba(40,30,20,.30),0 1px 2px rgba(40,30,20,.06);min-width:0}
+  .card h2{margin:0;font-weight:500;font-size:23px;line-height:1.15;letter-spacing:-.003em}
+  .hint{font-size:17px;line-height:1.3;color:var(--ink-2)}
+  .meta{font-family:var(--sans);font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+
+  /* the share sheet: the larger button */
+  .send{padding:20px 22px 22px;display:grid;gap:2px}
+  .send .tag{margin-bottom:8px}
+  .send .hb{margin-top:18px;justify-self:start}
+
+  /* the editor footer: the normal size */
+  .editor{padding:18px 22px 0}
+  .ed-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+  .ed-title{display:block;width:100%;margin:12px 0 4px;padding:0;border:0;background:transparent;color:var(--ink);
+    font:500 clamp(24px,7.6vw,28px)/1.15 var(--serif);letter-spacing:-.005em;outline:none}
+  .ed-title::placeholder{color:var(--ink-3);opacity:1}
+  .ed-body{display:block;width:100%;margin:0;padding:0;border:0;background:transparent;resize:none;outline:none;
+    font:400 19px/1.42 var(--serif);color:var(--ink-2);field-sizing:content;min-height:3.2em}
+  /* the underline is the focus sign; the transparent outline is drawn only in forced colours, where shadows go */
+  .ed-title:focus-visible,.ed-body:focus-visible{box-shadow:0 1px 0 var(--ink-3);outline:1px solid transparent;outline-offset:3px}
+  /* Save draft on the left, Publish on the right: while it says "Publishing" the pill grows into the space between,
+     and nothing else in the footer moves. The 6px start lines the words of Save draft up with the caption's */
+  .ed-foot{display:flex;align-items:center;justify-content:space-between;gap:6px;margin:16px -22px 0;padding:12px 16px 12px 6px;border-top:1px solid var(--line)}
+  .quiet{font:500 14px/1 var(--sans);letter-spacing:.01em;color:var(--ink-2);background:none;border:0;border-radius:999px;
+    min-height:46px;padding:0 16px;cursor:pointer;touch-action:manipulation}
+  @media (hover:hover){.quiet:hover{color:var(--ink)}}
+  .quiet:focus-visible{outline:2px solid var(--ink-2);outline-offset:1px}
+
+  /* settings rows: the row size */
+  .settings{padding:18px 0 6px}
+  .settings h2{padding:0 22px 10px}
+  .row{display:flex;align-items:center;gap:14px;padding:13px 16px 13px 22px;border-top:1px solid var(--line);min-height:70px}
+  .row > div{flex:1;min-width:0;display:grid;gap:2px}
+  .row .name{font-family:var(--sans);font-size:14px;font-weight:500;color:var(--ink)}
+  .row .hint{font-size:16.5px}
+
+  /* a list with Load more */
+  .list{padding:18px 0 18px}
+  .list header{display:flex;justify-content:space-between;align-items:baseline;padding:0 22px 10px}
+  .list ol{list-style:none;margin:0;padding:0}
+  .list li{display:flex;align-items:baseline;gap:14px;padding:12px 22px;border-top:1px solid var(--line)}
+  .list li .nm{flex:1;min-width:0;font-size:18px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .list li.new{animation:arrive .5s ease both}
+  @keyframes arrive{from{opacity:0;transform:translateY(4px)}}
+  .more{display:flex;justify-content:center;padding:16px 22px 2px;border-top:1px solid var(--line)}
+  .end{margin:7px 0 1px;padding:4px 10px;border-radius:999px;text-align:center;font-family:var(--sans);font-size:13px;color:var(--ink-3)}
+  .end:focus{outline:none}
+  .end:focus-visible{outline:2px solid var(--ink-2);outline-offset:2px}
+  .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;margin:-1px;border:0;padding:0}
+  @media (prefers-reduced-motion:reduce){.list li.new{animation:none}}
+</style></head><body>
+<main>
+  <header class="intro">
+    <span class="tag">Button</span>
+    <h1>Hohmann button</h1>
+    <p>Press it: queued work waits in the parking orbit, and the transfer to Mars is inked as the work is done.</p>
+  </header>
+
+  <div class="grid">
+    <div class="col">
+      <section class="card send" aria-labelledby="send-h">
+        <span class="tag">Share</span>
+        <h2 id="send-h">Twelve photos to Field notes</h2>
+        <span class="hint">48.2 MB, over Wi-Fi</span>
+        <button type="button" class="hb hb-lg" id="send" data-hohmann-button data-working="Sending" data-done="Sent">Send</button>
+      </section>
+
+      <section class="card editor" aria-label="Caption editor">
+        <div class="ed-head"><span class="tag">Caption</span><span class="tag" id="ed-when">Saved</span></div>
+        <input class="ed-title" id="ed-title" value="The harbour at first light" aria-label="Title" placeholder="A title first">
+        <textarea class="ed-body" rows="2" aria-label="Caption">Taken from the north wall a little before six, the tide still out and the boats on their sides.</textarea>
+        <footer class="ed-foot">
+          <button type="button" class="quiet" id="save">Save draft</button>
+          <button type="button" class="hb hb-solid" id="publish" data-hohmann-button data-working="Publishing" data-done="Published">Publish</button>
+        </footer>
+        <span class="vh" id="ed-say" role="status"></span>
+      </section>
+    </div>
+
+    <div class="col">
+      <section class="card settings" aria-labelledby="set-h">
+        <h2 id="set-h">Backups</h2>
+        <div class="row">
+          <div><span class="name">Back up now</span><span class="hint" id="bk-when">Last backup 3 days ago</span></div>
+          <button type="button" class="hb hb-sm" id="backup" data-hohmann-button data-working="Backing up" data-done="Backed up">Back up</button>
+        </div>
+        <div class="row">
+          <div><span class="name">Export the album</span><span class="hint">13 photos, as a zip</span></div>
+          <button type="button" class="hb hb-sm" id="export" data-hohmann-button data-working="Exporting" data-done="Exported">Export</button>
+        </div>
+        <div class="row">
+          <div><span class="name">Copy to the laptop</span><span class="hint">Not on this network</span></div>
+          <button type="button" class="hb hb-sm" id="copy" data-hohmann-button data-working="Copying" data-done="Copied" disabled>Copy</button>
+        </div>
+      </section>
+
+      <section class="card list" aria-labelledby="list-h">
+        <header><h2 id="list-h">Recent uploads</h2><span class="meta" id="count">4 of 13</span></header>
+        <ol id="uploads">
+          <li><span class="nm">harbour-first-light.jpg</span><span class="meta">4.1 MB</span></li>
+          <li><span class="nm">north-wall.jpg</span><span class="meta">3.8 MB</span></li>
+          <li><span class="nm">nets-drying.jpg</span><span class="meta">5.2 MB</span></li>
+          <li><span class="nm">low-tide.jpg</span><span class="meta">3.3 MB</span></li>
+        </ol>
+        <div class="more"><button type="button" class="hb" id="more" data-hohmann-button data-working="Loading" data-done="Loaded" data-reset="500" data-status="more-say">Load more</button></div>
+        <span class="vh" id="more-say" role="status"></span>
+      </section>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+  import './hohmann-button.js';
+
+  /* DEMO ONLY: each button runs a pretend job. A real page does its own work after the
+   * press (the button starts itself) and reports it: hb.progress(0..1), then hb.done().
+   * Like real progress events, the reports are small and frequent, so the drawing keeps an
+   * even pace with the work. Send and Export report at once, as uploads do, so they leave
+   * straight from the launch window; Publish and Back up are queued for a moment, so they park. */
+  const rng = (seed) => () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+  function job(btn, { wait = 900, step = [.02, .03], every = [80, 70], seed = 7 } = {}, then) {
+    const hb = btn.hohmannButton, r = rng(seed);
+    let v = 0;
+    const next = () => {
+      v = Math.min(1, v + step[0] + r() * step[1]);
+      if (v >= 1) { hb.done(then && then.done ? then.done() : undefined); return; }
+      hb.progress(v);
+      setTimeout(next, every[0] + r() * every[1]);
+    };
+    setTimeout(next, wait);
+  }
+  const $ = (id) => document.getElementById(id);
+
+  $('publish').addEventListener('hohmann-button:start', (e) => job(e.target, { wait: 900, seed: 3 }));
+  $('publish').addEventListener('hohmann:arrive', () => { $('ed-when').textContent = 'Published'; });   // the button says it
+  $('save').addEventListener('click', () => { $('ed-when').textContent = $('ed-say').textContent = 'Draft saved'; });
+  /* no title, nothing to publish: Publish is disabled until there is one */
+  const title = $('ed-title');
+  title.addEventListener('input', () => { $('publish').disabled = !title.value.trim(); });
+
+  $('send').addEventListener('hohmann-button:start', (e) => job(e.target, { wait: 120, step: [.012, .018], every: [70, 60], seed: 11 }));
+
+  $('backup').addEventListener('hohmann-button:start', (e) => job(e.target, { wait: 1300, seed: 5 }));
+  $('backup').addEventListener('hohmann:arrive', () => { $('bk-when').textContent = 'Last backup just now'; });
+  $('export').addEventListener('hohmann-button:start', (e) => job(e.target, { wait: 150, step: [.03, .04], seed: 9 }));
+
+  /* Load more: three more each time, until there are none */
+  const more = $('more'), list = $('uploads');
+  const files = ['boats-on-their-sides.jpg 4.6', 'harbour-steps.jpg 2.9', 'gulls.jpg 3.1', 'the-slipway.jpg 4.4', 'lobster-pots.jpg 3.7',
+                 'sea-wall-lichen.jpg 5.0', 'tide-coming-in.jpg 4.2', 'the-ferry.jpg 3.6', 'last-light.jpg 4.8'];
+  let shown = 4;
+  more.addEventListener('hohmann-button:start', (e) => job(e.target, { wait: 600, step: [.06, .06], every: [70, 50], seed: 13 }, {
+    done: () => (shown + 3 >= 13 ? { stay: true, say: 'All 13 uploads shown' } : { say: '3 more uploads' }),
+  }));
+  more.addEventListener('hohmann:arrive', () => {
+    for (const f of files.splice(0, 3)) {
+      const [nm, mb] = f.split(' ');
+      const li = document.createElement('li'); li.className = 'new';
+      li.innerHTML = `<span class="nm">${nm}</span><span class="meta">${mb} MB</span>`;
+      list.appendChild(li);
+    }
+    shown = list.children.length;
+    $('count').textContent = `${shown} of 13`;
+    if (!files.length) {                     // nothing left: the button goes, a quiet line takes its place
+      setTimeout(() => {                     // its last word was said through #more-say, which stays
+        const had = document.activeElement === more;
+        more.hohmannButton.destroy();
+        const p = document.createElement('p'); p.className = 'end'; p.tabIndex = -1; p.textContent = 'That is all of them.';
+        more.replaceWith(p);
+        if (had) p.focus({ preventScroll: true });   // keep the keyboard's place where the button was
+      }, 900);
+    }
+  });
+</script>
+</body></html>

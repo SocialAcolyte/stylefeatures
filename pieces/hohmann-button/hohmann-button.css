@@ -1,0 +1,133 @@
+/* hohmann-button: the button part of hohmann-loader. Everything is prefixed .hb-.
+ * Three sizes: .hb-sm (a 36px row button), the default (46px, as the original), .hb-lg (60px).
+ * .hb-solid for a primary button in ink. Theme with --paper, --ink, --ink-2,
+ * --ink-3, --rule, --sans. The loader's own look is hohmann-loader.css.       */
+
+.hb {
+    --hb-h: 46px; --hl-size: 26px; --hb-pr: 21px;
+    --hb-face: var(--hb-paper, var(--paper, #f3f0e8));        /* the button's face, and the loader's paper */
+    --hb-edge: var(--rule, #cfcac0);
+    box-sizing: border-box; position: relative;
+    display: inline-flex; align-items: center; gap: .72em;
+    min-height: var(--hb-h);
+    /* the orbit sits concentric with the pill's round end */
+    padding: 0 var(--hb-pr) 0 calc((var(--hb-h) - var(--hl-size)) / 2 - 1px);
+    margin: 0;
+    font: 500 14px/1.2 var(--sans, Inter, system-ui, sans-serif);
+    letter-spacing: .01em;
+    color: var(--ink, #141312);
+    background: var(--hb-face);
+    border: 1px solid var(--hb-edge);
+    border-radius: 999px;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none; user-select: none;
+    transition: border-color .2s ease, color .2s ease, transform .12s ease, box-shadow .12s ease;
+}
+.hb .hl { --hl-paper: var(--hb-face); --hl-ink: var(--hb-ink, var(--ink, #141312)); }
+/* hover only where there is a real hover (no sticky hover after a tap), and only when a press would do something */
+@media (hover: hover) { .hb:not(:disabled, [aria-disabled=true]):hover { --hb-edge: var(--ink-3, #8a857d); } }
+.hb:focus-visible { outline: 2px solid var(--ink-2, #4a4744); outline-offset: 3px; }
+
+/* pressed: the face sinks a hair and darkens a touch (touch and a held Space too). While the script runs
+   (.hb-live) only its .hb-press draws it: the main button only, and a press slid off the button lets go.
+   :active is kept for the plain pill without the script. */
+.hb:not(.hb-live):active:not(:disabled, [aria-disabled=true]), .hb.hb-press {
+    --hb-face: color-mix(in srgb, var(--ink, #141312) 5%, var(--hb-paper, var(--paper, #f3f0e8)));
+    --hb-edge: var(--ink-3, #8a857d);
+    transform: translateY(1px);
+    box-shadow: inset 0 1px 2px rgba(20, 19, 18, .12);
+}
+/* the sunk pill keeps the hit area of the pill at rest, so a press on its very top edge is not taken
+   for a slide-off (which would let go, and press again, and flicker) */
+.hb.hb-press::before { content: ''; position: absolute; inset: -2px -1px 0; border-radius: inherit; }
+/* busy: still a button you can focus, but a press does nothing */
+.hb[data-state=waiting], .hb[data-state=working] { cursor: progress; --hb-edge: var(--ink-3, #8a857d); }
+.hb[data-state=done] { cursor: default; --hb-edge: var(--ink-3, #8a857d); }
+
+/* no script yet (or destroyed): a loader span written by hand would show the browser's own <progress> bar.
+   It stays hidden until the engine has started it (.hl), so the pill is plain and even */
+.hb > [data-hohmann-loader]:not(.hl) { display: none; }
+.hb:not(:has(> .hb-orbit)) { padding-left: var(--hb-pr); }    /* no script (or destroyed): a plain, even pill */
+.hb-orbit { flex: none; }
+/* a cross-fade, never a jump and never an empty icon: the outgoing picture's planets, craft and ink, laid
+   over the new drawing while they fade out (the Sun and the orbits are the new drawing's own, and stay) */
+.hb-orbit > .hb-ghost { position: absolute; inset: 0; pointer-events: none; }
+
+/* the label: the words for each state stacked in one cell. The script sets the cell to the width of the
+   word on show (never narrower than the resting word); when the word changes the two cross-fade and the
+   cell eases to the new width. While it grows or shrinks, the longer word fades out through a soft .75em
+   edge (the mask) instead of being cut. The padding holds that edge and the margins give the room back,
+   so at rest the word is untouched and the pill is the size it would be without them. */
+.hb-label {
+    display: inline-grid; justify-items: start;
+    box-sizing: content-box;
+    padding: .3em .75em .3em 2px; margin: -.3em -.75em -.3em -2px;
+    -webkit-mask: linear-gradient(to left, transparent, #000 .75em);
+            mask: linear-gradient(to left, transparent, #000 .75em);
+    overflow-x: clip;
+    transition: width .22s ease;
+}
+/* the old word leaves at once, fast first, and the new one starts a moment later: the two only overlap
+   while both are faint, so they never read as one garbled word, and the cell is never empty */
+.hb-say { grid-area: 1 / 1; white-space: nowrap; transition: opacity .1s cubic-bezier(.2, 0, .4, 1), visibility 0s linear .1s; }
+.hb-say:not(.hb-on) { opacity: 0; visibility: hidden; }         /* the old word fades out, then leaves the name */
+.hb-say.hb-on { transition: opacity .2s ease-out .04s, visibility 0s; }
+
+.hb-status {
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip-path: inset(50%); white-space: nowrap; margin: -1px; border: 0; padding: 0;
+}
+
+/* ---- sizes ---- */
+.hb-sm { --hb-h: 36px; --hl-size: 22px; --hb-pr: 15px; gap: .5em; font-size: 13px; }
+.hb-lg { --hb-h: 60px; --hl-size: 38px; --hb-pr: 30px; gap: .8em; font-size: 16px; letter-spacing: .005em; }
+.hb-block { display: flex; width: 100%; justify-content: center; }
+
+/* ---- the primary, in ink ---- */
+.hb-solid { --hb-paper: var(--ink, #141312); --hb-ink: var(--paper, #f3f0e8); --hb-edge: var(--ink, #141312); color: var(--paper, #f3f0e8); }
+@media (hover: hover) {
+    .hb-solid:not(:disabled, [aria-disabled=true]):hover {
+        --hb-edge: var(--ink, #141312); --hb-paper: color-mix(in srgb, var(--paper, #f3f0e8) 9%, var(--ink, #141312));
+    }
+}
+/* pressed: near-black cannot get much darker, so the ink face lifts a clear step past its hover tone and
+   sits inside its ink edge. It reads on a phone (no hover to start from) and under reduced motion (no sink) */
+.hb-solid:not(.hb-live):active:not(:disabled, [aria-disabled=true]), .hb-solid.hb-press {
+    --hb-face: color-mix(in srgb, var(--paper, #f3f0e8) 17%, var(--ink, #141312)); --hb-edge: var(--ink, #141312);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .4);
+}
+.hb-solid[data-state] { --hb-edge: var(--ink, #141312); }
+.hb-solid:focus-visible { outline-color: var(--ink, #141312); }
+
+/* ---- disabled ----
+   The disabled attribute (or a disabled fieldset), or an author's aria-disabled at rest (the focusable
+   pattern). The word and the drawing go grey and the edge goes faint. Nothing answers a press.
+   Both are read at rest only: a button disabled while its job runs keeps its busy and done look, and goes
+   grey when it comes back to rest. */
+.hb:disabled:not([data-state=waiting], [data-state=working], [data-state=done]),
+.hb[aria-disabled=true]:not([data-state=waiting], [data-state=working], [data-state=done]) {
+    cursor: default;
+    color: var(--ink-3, #8a857d);
+    --hb-ink: color-mix(in srgb, var(--ink-3, #8a857d) 78%, var(--hb-face));
+    --hb-edge: color-mix(in srgb, var(--rule, #cfcac0) 70%, transparent);
+}
+.hb-solid:disabled:not([data-state=waiting], [data-state=working], [data-state=done]),
+.hb-solid[aria-disabled=true]:not([data-state=waiting], [data-state=working], [data-state=done]) {
+    --hb-paper: color-mix(in srgb, var(--ink, #141312) 10%, var(--paper, #f3f0e8));
+    --hb-edge: var(--hb-paper);
+    --hb-ink: var(--ink-3, #8a857d);
+    color: var(--ink-3, #8a857d);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hb, .hb-label, .hb-say, .hb-say.hb-on { transition: none; }
+    .hb:not(.hb-live):active:not(:disabled, [aria-disabled=true]), .hb.hb-press { transform: none; }   /* the colour still changes */
+}
+
+/* forced colours (Windows high contrast): the drawing in the button's own text colour, on its own face */
+@media (forced-colors: active) {
+    .hb .hl { --hl-ink: ButtonText; --hl-paper: ButtonFace; }
+    .hb:disabled:not([data-state=waiting], [data-state=working], [data-state=done]) .hl { --hl-ink: GrayText; }
+}

@@ -1,0 +1,82 @@
+/* ─── temper-run: ground steel that tempers (temper-run.js) ───────────────────
+   Namespace .tr-. Without JS every kind falls back to a quiet native element.
+   With JS a canvas draws the steel (and its shadow on the page, which overflows
+   the box a little).
+
+   Theme on the element or any parent:
+     --tr-h        bar height (bar), rod thickness (rule)
+     --tr-gap      rule under a link: how far below the box the rod sits
+     --tr-frame    frame width
+     --tr-ink      a steel button's label colour
+     --tr-fallback the colour of the no-JS fallbacks                                */
+
+[data-temper-run], .tr {
+  --tr-fallback: #8c877e;
+  --tr-ink: #1d1b18;
+  position: relative;
+  -webkit-tap-highlight-color: transparent;
+}
+.tr-canvas { position: absolute; pointer-events: none; display: block; }
+.tr-sr {
+  position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+
+/* ── bar ── */
+[data-temper-run]:has(> progress), .tr--bar { --tr-h: 14px; display: block; width: 100%; min-width: 0; height: var(--tr-h); }
+[data-temper-run] > progress { display: block; width: 100%; height: 100%; accent-color: var(--tr-fallback); }
+.tr--bar.tr--live > progress {
+  position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
+  overflow: hidden; clip-path: inset(50%);
+}
+
+/* ── button ── */
+button[data-temper-run] {
+  font: 500 15px/1 var(--sans, Inter, system-ui, sans-serif);
+  letter-spacing: .01em;
+  color: var(--tr-ink);
+  padding: 15px 26px 17px;
+  border: 1px solid var(--tr-fallback);
+  border-radius: 3px;
+  background: linear-gradient(#e4e1da, #cdc9c0);
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none; -webkit-user-select: none;
+}
+button.tr--live {
+  background: none;
+  border-color: transparent;
+  isolation: isolate;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, .32);
+}
+button.tr--live .tr-canvas { z-index: -1; }
+button.tr--live:focus { outline: none; }
+button.tr--live:focus-visible { outline: 1.5px solid var(--tr-ink); outline-offset: 5px; }
+button.tr--live[disabled] { opacity: .55; cursor: default; }
+
+/* ── rule: a hairline rod; on a link, its underline ── */
+[data-temper-run][data-kind="rule"] { --tr-h: 3px; display: block; height: 28px; touch-action: pan-y; }
+a[data-temper-run][data-kind="rule"], .tr--rule:is(a, span) {
+  --tr-h: 2px; --tr-gap: 2px;
+  display: inline-block; height: auto;
+  color: inherit;
+  text-decoration: underline 1px var(--tr-fallback);
+  text-underline-offset: 3px;
+}
+a.tr--live[data-kind="rule"] { text-decoration: none; }
+a.tr--live[data-kind="rule"]:focus { outline: none; }
+a.tr--live[data-kind="rule"]:focus-visible { outline: 1.5px solid currentColor; outline-offset: 4px; border-radius: 1px; }
+[data-kind="rule"]:not(a):not(.tr--live)::before {
+  content: ""; position: absolute; left: 0; right: 0; top: calc(50% - .5px); height: 1px; background: var(--tr-fallback);
+}
+
+/* ── frame: mitred steel round an image or card ── */
+[data-temper-run][data-kind="frame"] {
+  --tr-frame: 10px;
+  display: block; margin: 0; padding: var(--tr-frame);
+  background: var(--tr-fallback);
+  touch-action: pan-y;
+}
+[data-kind="frame"].tr--live { background: none; }
+[data-kind="frame"] > img { display: block; width: 100%; height: auto; }
+.tr--frame .tr-canvas { z-index: 1; }

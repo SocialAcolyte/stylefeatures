@@ -1,0 +1,48 @@
+{
+  "object": {
+    "title": "Morse-Vail Telegraph Key",
+    "date": "1844",
+    "makers": "Alfred Vail, for Samuel F. B. Morse; believed to be from the first Baltimore-Washington line",
+    "museum": "Smithsonian National Museum of American History, Electricity collection",
+    "id": "EM.181411 (catalogue 181411, accession 31652)",
+    "dimensions": "3 x 2 x 6 3/4 in (7.62 x 5.08 x 17.145 cm); wood, brass",
+    "url": "https://n2t.net/ark:/65665/ng49ca746a9-46b1-704b-e053-15f76fa0b4fa",
+    "record": "Smithsonian Open Access edanmdm:nmah_1096762",
+    "credit_line": "from Western Union Telegraph Co."
+  },
+  "files": [
+    {
+      "file": "key-base-*.webp, key-spring-*.webp, key-lever-*.webp, key-cheek-*.webp",
+      "role": "the key: four layers cut from one photograph (block and posts; flat spring; lever with both thumbscrews; near cheek of the trunnion and the pin's nut)",
+      "source": "Smithsonian NMAH photograph NMAH-JN2014-3911, high-resolution JPEG 7428 x 4872",
+      "url": "https://ids.si.edu/ids/download?id=NMAH-JN2014-3911.jpg",
+      "licence": "CC0 1.0 (Smithsonian Open Access)",
+      "changes": "matted off the museum's white sweep; cut into four parts; the front thumbscrew raised 1.4 mm along its own thread (the thread this shows above the lock nut is the same screw two pitches higher); the wood under the spring's sweep filled from the block's own top face (the same columns cloned down, or the same rows translated along the grain near its far edge); the top of the back post's dome, hidden in the photograph behind the back screw's tip, carried up to its own outline in the colour of the dome's rows just under the tip; where one layer runs on hidden under another, it carries its own nearest pixels. Nothing is drawn."
+    },
+    {
+      "file": "(measurement only, not shown)",
+      "role": "the pivot, the lever arms and the cheeks, measured on the Smithsonian's photogrammetry scan of the same key",
+      "source": "Smithsonian 3D, Voyager package 3d_package:ed99f44d-3c60-4111-b666-e2908e1b64ef (morse-telegraph-key-150k); also on Wikimedia Commons, Category:Morse-Vail Telegraph Key (Smithsonian Institution)",
+      "url": "https://3d.si.edu/",
+      "licence": "CC0 1.0"
+    },
+    {
+      "file": "(reference only, not shown)",
+      "role": "how the lever hangs in its trunnion, read from other photographs of the same key",
+      "source": "NMAH photographs NMAH-88-8830-12, SIA-74-2491 (three-quarter views) and NMAH-MAH-27979 (black and white side view)",
+      "licence": "CC0 1.0 (Smithsonian Open Access)"
+    },
+    {
+      "file": "sounds/contact.wav, sounds/backstop.wav",
+      "role": "the point striking the anvil; the lever thrown back onto its back screw",
+      "source": "\"Brass_Switches_and_Levers_Steampunk/Dieslpunk\" by SoundsofTheMachine (antique knife switch, 1920s brass push switch, Victorian brass levers), 5.80-5.96 s and 6.09-6.24 s",
+      "url": "https://freesound.org/people/SoundsofTheMachine/sounds/797930/",
+      "licence": "CC0 1.0",
+      "note": "brass switches, not a telegraph key: no CC0 recording of a key was found on Wikimedia Commons or Freesound"
+    }
+  ],
+  "references": [
+    "Frank L. Pope, Modern Practice of the Electric Telegraph (New York, 1869 and later editions), section 52, The Morse Signal Key: the anvil limits the lever's downward travel, a set screw its upward travel, a spring beneath restores it, and the points of contact are platina.",
+    "Smithsonian NMAH object record EM.181411: Vail made this key as an improvement on Morse's original transmitter; it is believed to be from the first Baltimore-Washington line (1844)."
+  ]
+}

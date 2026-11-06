@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Split-screen launch page</title>
+<script>document.documentElement.classList.remove("no-js")</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+<link rel="stylesheet" href="./kit/scaffold.css">
+<link rel="stylesheet" href="./split/section.css">
+<link rel="stylesheet" href="./install/section.css">
+</head>
+<body>
+<section class="demo-split" data-tpl="demo/split" id="top" data-tour-root data-driver="scroll" data-captions="record" aria-label="Split-screen tour">
+  <div class="demo-split-stage" data-tour-stage>
+
+    <div class="tour-rig">
+      <!-- The window: input on the left, the product's output on the right. On phones and in 9:16 the window takes
+           its tall size (data-size-tall) and the panes stack: input on top, output below. -->
+      <div class="demo-split-win" data-tour-window data-chrome="app" data-size="1200x750" data-size-tall="440x820" data-title="Product name">
+        <!-- THE PRODUCT. Replace .sp-in (the input) and .sp-out (the output) with your real screens (AGENT.md).
+             Hooks the script points at are data-tour="…" (written '@…' in script.js). -->
+        <div class="demo-split-app" data-tour="app">
+
+          <!-- INPUT: a chat here; could be a prompt box, a code editor, a form, a query -->
+          <aside class="sp-in" data-tour="in">
+            <header class="sp-head"><span class="sp-mark"></span><b>New chat</b><span class="sp-pill">Model<svg viewBox="0 0 16 16"><path d="m5 6 3 3 3-3"/></svg></span></header>
+            <div class="sp-thread" data-tour="thread" data-tour-follow>
+              <div class="sp-hello" data-tour="hello">
+                <b>What should we make?</b>
+                <p>Describe it in a sentence or two.</p>
+                <span class="sp-sugg"><i style="--w:72%"></i></span><span class="sp-sugg"><i style="--w:58%"></i></span><span class="sp-sugg"><i style="--w:66%"></i></span>
+              </div>
+              <div class="sp-msg is-user" data-tour="msg-1"><p>A one-page site for a small studio: a big headline, three services and a contact form.</p></div>
+              <div class="sp-msg is-ai" data-tour="ai-1">
+                <p data-tour="ai-1-text"></p>
+                <ol class="sp-steps" data-tour="steps-1">
+                  <li><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg>Layout</li>
+                  <li><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg>Headline</li>
+                  <li><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg>Three services</li>
+                  <li><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg>Contact form</li>
+                </ol>
+              </div>
+              <div class="sp-msg is-user" data-tour="msg-2"><span class="sp-ref"><svg viewBox="0 0 16 16"><path d="M3 3h10v10H3z"/></svg>Headline</span><p>Shorter, and say who it’s for.</p></div>
+              <div class="sp-msg is-ai" data-tour="ai-2"><p data-tour="ai-2-text"></p></div>
+            </div>
+            <div class="sp-composer" data-tour="composer">
+              <span class="sp-chip" data-tour="ref"><svg viewBox="0 0 16 16"><path d="M3 3h10v10H3z"/></svg>Headline<svg viewBox="0 0 16 16"><path d="m5 5 6 6M11 5l-6 6"/></svg></span>
+              <div class="sp-input" data-tour="input" data-tour-cursor="text"><span data-tour="input-text" data-placeholder="Describe what you want…"></span></div>
+              <div class="sp-tools">
+                <span class="sp-icon"><svg viewBox="0 0 16 16"><path d="M10.5 5.5 6 10a1.4 1.4 0 0 0 2 2l5-5a2.8 2.8 0 0 0-4-4L4 8a4.2 4.2 0 0 0 6 6l3.5-3.5"/></svg></span>
+                <span class="sp-hint">⌘ return to send</span>
+                <button class="sp-send" type="button" data-tour="send" tabindex="-1" aria-label="Send"><svg viewBox="0 0 16 16"><path d="M8 13V3M4 7l4-4 4 4"/></svg></button>
+              </div>
+            </div>
+          </aside>
+
+          <!-- OUTPUT: the product reacting. A page building here; could be a document, a canvas, a chart, a table -->
+          <main class="sp-out" data-tour="out">
+            <div class="sp-bar">
+              <span class="sp-tabs"><span class="is-on" data-tour="tab-preview" role="tab">Preview</span><span data-tour="tab-code" role="tab">Code</span></span>
+              <span class="sp-status" data-tour="status"><i class="sp-spin" data-tour="spin"></i><span data-tour="status-text">Idle</span></span>
+              <span class="sp-dev"><svg viewBox="0 0 16 16"><path d="M2 3.5h12v8H2zM6 13.5h4"/></svg><svg viewBox="0 0 16 16"><path d="M5 2h6v12H5z"/></svg></span>
+              <button class="sp-btn is-primary" type="button" data-tour="publish" tabindex="-1">Publish</button>
+              <span class="sp-progress" data-tour="progress"></span>
+            </div>
+
+            <div class="sp-canvas" data-tour="canvas">
+              <div class="sp-page" data-tour="page">
+                <p class="sp-blank" data-tour="blank">The preview appears here</p>
+                <div class="pg-nav pg-b"><span class="ph-logo pg-logo"></span><i></i><i></i><i></i><b class="pg-btn is-small">Contact</b></div>
+                <div class="pg-hero pg-b" data-tour="hero">
+                  <p class="pg-eyebrow">Studio</p>
+                  <h3 class="pg-h" data-tour="headline"><span class="pg-old" data-tour="h-old">Design and websites for small, careful brands</span><span class="pg-new" data-tour="h-new"></span></h3>
+                  <p class="ph-text" style="--n:2"></p>
+                  <b class="pg-btn">Start a project</b>
+                </div>
+                <div class="pg-cards pg-b">
+                  <div><figure class="ph is-tone" style="--r:4/3" data-ph="Service · 4:3" data-hint="What the model made"></figure><b>Identity</b><p class="ph-text" style="--n:2"></p></div>
+                  <div><figure class="ph is-tone" style="--r:4/3" data-ph="Service · 4:3" data-hint="Second"></figure><b>Websites</b><p class="ph-text" style="--n:2"></p></div>
+                  <div><figure class="ph is-tone" style="--r:4/3" data-ph="Service · 4:3" data-hint="Third"></figure><b>Print</b><p class="ph-text" style="--n:2"></p></div>
+                </div>
+                <div class="pg-form pg-b"><b>Say hello</b><span class="pg-field">Name</span><span class="pg-field">Email</span><span class="pg-field is-area">A few words about the project</span><b class="pg-btn">Send</b></div>
+              </div>
+
+              <div class="sp-code" data-tour="code">
+                <p class="cl"><i>1</i><span class="c-t">&lt;section</span> <span class="c-a">class</span>=<span class="c-s">"hero"</span><span class="c-t">&gt;</span></p>
+                <p class="cl"><i>2</i>  <span class="c-t">&lt;p</span> <span class="c-a">class</span>=<span class="c-s">"eyebrow"</span><span class="c-t">&gt;</span>Studio<span class="c-t">&lt;/p&gt;</span></p>
+                <p class="cl"><i>3</i>  <span class="c-t">&lt;h1&gt;</span>Careful design for small brands<span class="c-t">&lt;/h1&gt;</span></p>
+                <p class="cl"><i>4</i>  <span class="c-t">&lt;p&gt;</span><span class="c-c">{/* the line under the headline */}</span><span class="c-t">&lt;/p&gt;</span></p>
+                <p class="cl"><i>5</i>  <span class="c-t">&lt;a</span> <span class="c-a">href</span>=<span class="c-s">"#contact"</span> <span class="c-a">class</span>=<span class="c-s">"button"</span><span class="c-t">&gt;</span>Start a project<span class="c-t">&lt;/a&gt;</span></p>
+                <p class="cl"><i>6</i><span class="c-t">&lt;/section&gt;</span></p>
+                <p class="cl"><i>7</i></p>
+                <p class="cl"><i>8</i><span class="c-t">&lt;section</span> <span class="c-a">class</span>=<span class="c-s">"services"</span><span class="c-t">&gt;</span></p>
+                <p class="cl"><i>9</i>  <span class="c-t">&lt;article&gt;</span>…<span class="c-t">&lt;/article&gt;</span></p>
+                <p class="cl"><i>10</i>  <span class="c-t">&lt;article&gt;</span>…<span class="c-t">&lt;/article&gt;</span></p>
+                <p class="cl"><i>11</i>  <span class="c-t">&lt;article&gt;</span>…<span class="c-t">&lt;/article&gt;</span></p>
+                <p class="cl"><i>12</i><span class="c-t">&lt;/section&gt;</span></p>
+                <p class="cl"><i>13</i></p>
+                <p class="cl"><i>14</i><span class="c-t">&lt;form</span> <span class="c-a">id</span>=<span class="c-s">"contact"</span><span class="c-t">&gt;</span></p>
+                <p class="cl"><i>15</i>  <span class="c-t">&lt;input</span> <span class="c-a">name</span>=<span class="c-s">"name"</span><span class="c-t">&gt;</span></p>
+                <p class="cl"><i>16</i>  <span class="c-t">&lt;input</span> <span class="c-a">name</span>=<span class="c-s">"email"</span> <span class="c-a">type</span>=<span class="c-s">"email"</span><span class="c-t">&gt;</span></p>
+                <p class="cl"><i>17</i>  <span class="c-t">&lt;textarea</span> <span class="c-a">name</span>=<span class="c-s">"note"</span><span class="c-t">&gt;&lt;/textarea&gt;</span></p>
+                <p class="cl"><i>18</i>  <span class="c-t">&lt;button&gt;</span>Send<span class="c-t">&lt;/button&gt;</span></p>
+                <p class="cl"><i>19</i><span class="c-t">&lt;/form&gt;</span></p>
+              </div>
+            </div>
+
+            <div class="sp-pop" data-tour="pop">
+              <b>Published</b>
+              <div class="sp-link"><span>yourproduct.app/s/studio</span><button class="sp-btn is-primary" type="button" data-tour="copy" tabindex="-1">Copy link</button></div>
+              <small>Anyone with the link can view it.</small>
+            </div>
+            <div class="sp-toast" data-tour="toast"><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg>Link copied</div>
+          </main>
+        </div>
+      </div>
+    </div>
+
+    <!-- Opening band: the film's first frame, and the gate. -->
+    <header class="demo-split-band" data-tour-band>
+      <div>
+        <p class="sf-eyebrow">Introducing</p>
+        <h1>Product <em>name</em></h1>
+      </div>
+      <div class="demo-split-side">
+        <p class="demo-split-lede">Say what goes in and what comes out, in one sentence. It's the line people read before they press play.</p>
+        <div class="demo-split-act">
+          <button class="sf-btn" type="button" data-tour-gate><svg width="11" height="12" viewBox="0 0 11 12" aria-hidden="true"><path d="M1 1.2v9.6c0 .6.6.9 1.1.6l7.6-4.8c.5-.3.5-.9 0-1.2L2.1.6C1.6.3 1 .6 1 1.2Z" fill="currentColor"/></svg><span data-tour-gate-label>Click to play</span></button>
+          <a class="sf-btn sf-btn--ghost" href="#get" data-tour-hide-on-record>Try it free</a>
+        </div>
+        <span class="sf-note">Left, the input being typed; right, your product reacting live. Use your real prompt examples and real output states (AGENT.md).</span>
+      </div>
+    </header>
+
+    <!-- Closing frame: the name again and one thing to do. In ?record it shows the address instead of a button. -->
+    <footer class="demo-split-end" data-tour-end>
+      <div>
+        <p class="sf-eyebrow">Available now</p>
+        <h2>Product <em>name</em></h2>
+      </div>
+      <div class="demo-split-side">
+        <p class="demo-split-lede">One line on what to try first.</p>
+        <div class="demo-split-act"><a class="sf-btn" href="#get">Try it free</a><span class="demo-split-url">yourproduct.app</span></div>
+      </div>
+    </footer>
+  </div>
+</section>
+
+<section class="cta-install" data-tpl="cta/install" id="get" aria-labelledby="cta-install-t">
+  <div class="sf-wrap cta-install-in">
+    <div class="cta-install-name">
+      <p class="sf-eyebrow">Get it</p>
+      <h2 id="cta-install-t">Product <em>name</em></h2>
+    </div>
+    <div class="cta-install-row">
+      <p class="sf-lede">One sentence on what it costs and what it runs on. Free, open source, macOS 14 and later.</p>
+
+    <div class="cta-install-card">
+      <div class="cta-install-tabs" role="tablist" aria-label="How to install">
+        <button type="button" role="tab" aria-selected="true" aria-controls="cta-install-p1" id="cta-install-b1">Homebrew</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="cta-install-p2" id="cta-install-b2" tabindex="-1">npm</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="cta-install-p3" id="cta-install-b3" tabindex="-1">Download</button>
+      </div>
+      <div class="cta-install-panel" role="tabpanel" id="cta-install-p1" aria-labelledby="cta-install-b1">
+        <pre class="cta-install-cmd"><code>brew install --cask yourproduct</code></pre>
+        <button class="sf-btn cta-install-copy" type="button">Copy</button>
+      </div>
+      <div class="cta-install-panel" role="tabpanel" id="cta-install-p2" aria-labelledby="cta-install-b2" hidden>
+        <pre class="cta-install-cmd"><code>npm install -g yourproduct</code></pre>
+        <button class="sf-btn cta-install-copy" type="button">Copy</button>
+      </div>
+      <div class="cta-install-panel is-dl" role="tabpanel" id="cta-install-p3" aria-labelledby="cta-install-b3" hidden>
+        <p>The signed app, for when you'd rather not use a terminal.</p>
+        <a class="sf-btn" href="#">Download for macOS</a>
+      </div>
+      <p class="cta-install-small">Version · size · what it needs</p>
+      <span class="sf-note">Take these from the README and package metadata: the real commands, the release link, the requirements.</span>
+      <span class="cta-install-said" aria-live="polite"></span>
+    </div>
+    </div>
+  </div>
+  <footer class="sf-wrap cta-install-foot">
+    <span>Product name · 2026 · Licence</span>
+    <nav><a href="#">Source</a><a href="#">Changelog</a><a href="#top">Watch again</a></nav>
+  </footer>
+</section>
+
+<script type="module" src="./kit/scaffold.js"></script>
+<script type="module">
+import s0 from "./split/section.js";
+import s1 from "./install/section.js";
+for (const [k, f] of [["demo/split",s0],["cta/install",s1]]) document.querySelectorAll(`[data-tpl="${k}"]`).forEach((el) => f(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+@import url("../tour/tour.css");
+@import url("../_chat/chat.css");
+/* demo/chat: the page is the conversation. One column, the height of the screen: down the middle of a wide page,
+   the whole screen on a phone and in 9:16 (where it reads as a phone screen recording). No band, no card: the first
+   message is the opening and the last message is the way in. tour.css is the engine's look and _chat/chat.css the
+   chat kit; this file is the stage: the column (the data-tour-frame the window fills), the margins, the control.
+   Stage sizes are container units (cqw/cqh), so the page and the three recording ratios lay out from one set of rules. */
+
+.demo-chat{--tour-stage:var(--page)}
+/* the column's width, --fw: container queries on the stage (not classes), so it is right the first time the engine measures */
+.demo-chat-stage{container-type:size}
+.demo-chat-stage > *{--fw:min(100cqw,max(520px,44cqw))}
+.demo-chat.is-record .demo-chat-stage > *{--fw:48cqw}
+@container (aspect-ratio < 1.15){ .demo-chat-stage > *{--fw:min(100cqw,max(480px,74cqw))} .demo-chat.is-record .demo-chat-stage > *{--fw:86cqw} }
+@container (aspect-ratio < .8){ .demo-chat-stage > *,.demo-chat.is-record .demo-chat-stage > *{--fw:100cqw} }
+
+.demo-chat-frame{position:absolute;top:0;bottom:0;left:calc(50cqw - var(--fw) / 2);width:var(--fw);background:#fbfaf7;
+  box-shadow:0 0 0 1px var(--ph-line),0 40px 90px -50px rgba(25,24,22,.38)}
+.demo-chat.is-tall .demo-chat-frame{box-shadow:none}
+.demo-chat [data-tour-window]{border-radius:0;box-shadow:none;background:transparent}
+.demo-chat .ck-app{--ck-bg:#fbfaf7}
+.demo-chat .tour-card,.demo-chat .tour-cap{display:none}
+
+/* the avatar placeholder: an initial in the serif. Put your bot's mark (an <img> or an <svg>) inside .ck-av instead. */
+.demo-chat-mark-sm,.demo-chat-mark-lg{display:grid!important;place-items:center;width:100%;height:100%;font:italic 400 17px/1 var(--serif);color:var(--ink);background:var(--page-2)}
+.demo-chat-mark-lg{font-size:34px}
+.demo-chat .ck-row .ck-av .demo-chat-mark-sm{font-size:15px}
+
+/* a phone's status bar, only in a 9:16 recording */
+.demo-chat.is-rec-tall .ck-status{display:flex}
+.demo-chat.is-tall .ck-head{padding:10px 16px}
+
+/* ── the margins on a wide stage: the chapters as a quiet index, and the one control ── */
+.demo-chat-index{position:absolute;z-index:5;left:4cqw;top:50%;width:calc(50cqw - var(--fw) / 2 - 8cqw);transform:translateY(-50%)}
+.demo-chat-index ol{margin:0;padding:0;list-style:none;display:grid;gap:1.6cqh}
+.demo-chat-index button{display:flex;align-items:baseline;gap:14px;padding:0;border:0;background:none;text-align:left;cursor:pointer;
+  font:400 min(2.6cqh,1.6cqw)/1.15 var(--serif);letter-spacing:-.01em;color:var(--ink-3);transition:color .5s var(--ease)}
+.demo-chat-index button span{flex:none;width:2.2em;font:500 max(10.5px,1.15cqh)/1 var(--sans);letter-spacing:.14em;color:var(--ink-3)}
+.demo-chat-index b{font-weight:400}
+.demo-chat-index em{font-style:italic}
+.demo-chat-index li.is-on button{color:var(--ink)}
+.demo-chat-index li.is-on button span{color:var(--note)}
+.demo-chat-index button:hover{color:var(--ink-2)}
+.demo-chat-index button:focus-visible,.demo-chat-ctl:focus-visible{outline:2px solid var(--note);outline-offset:4px}
+.demo-chat-index .sf-note{display:block;margin-top:4cqh;max-width:24em}
+
+.demo-chat-ctl{position:absolute;z-index:6;right:3cqw;bottom:4cqh;display:flex;align-items:center;gap:10px;padding:8px 14px 8px 9px;border:0;border-radius:999px;
+  background:color-mix(in srgb,var(--ph) 90%,transparent);box-shadow:0 0 0 1px var(--ph-line),0 10px 26px -16px rgba(25,24,22,.45);
+  font:500 12.5px/1 var(--sans);color:var(--ink);cursor:pointer}
+.demo-chat-ctl i{position:relative;width:24px;height:24px;border-radius:50%;background:var(--ink)}
+.demo-chat-ctl i::before,.demo-chat-ctl i::after{content:"";position:absolute;top:8px;width:2.5px;height:8px;border-radius:1px;background:var(--page)}
+.demo-chat-ctl i::before{left:8.5px}.demo-chat-ctl i::after{left:13px}
+.demo-chat-ctl[data-state=step] i::before{left:9.5px;top:7px;width:0;height:0;border-radius:0;background:none;border:solid transparent;border-width:5px 0 5px 8px;border-left-color:var(--page)}
+.demo-chat-ctl[data-state=step] i::after{display:none}
+.demo-chat-ctl[data-state=again] i::before{left:7px;top:7px;width:10px;height:10px;border-radius:50%;background:none;border:1.8px solid var(--page);border-right-color:transparent;box-sizing:border-box}
+.demo-chat-ctl[data-state=again] i::after{display:none}
+.demo-chat-hint{position:absolute;z-index:5;right:3cqw;bottom:calc(4cqh + 52px);margin:0;font:400 12.5px/1.3 var(--sans);color:var(--ink-3);transition:opacity .6s var(--ease)}
+.demo-chat.is-hinted .demo-chat-hint,.demo-chat.is-ended .demo-chat-hint{opacity:0}
+
+/* stacked and tall: no margins to speak of. The control sits in the header's corner; the index goes. */
+.demo-chat.is-stack .demo-chat-index,.demo-chat.is-stack .demo-chat-hint{display:none}
+.demo-chat.is-stack .demo-chat-ctl{top:max(10px,1.4cqh);bottom:auto;right:calc(50cqw - var(--fw) / 2 + 12px);padding:0;background:none;box-shadow:none}
+.demo-chat.is-stack .demo-chat-ctl span{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.demo-chat.is-stack .ck-head-act{visibility:hidden}
+
+/* reduced motion: the whole transcript, still, to read at your own pace */
+.demo-chat.is-still .demo-chat-ctl,.demo-chat.is-still .demo-chat-hint{display:none}
+.demo-chat.is-still .demo-chat-stage{height:100svh}
+
+/* recording: the index stays (it is the story), nothing to click */
+.demo-chat.is-record .demo-chat-index{width:calc(50cqw - var(--fw) / 2 - 7cqw);left:3.5cqw}
+.demo-chat.is-record .demo-chat-index ol{gap:2.2cqh}
+.demo-chat.is-record .demo-chat-index button{font-size:3cqh}
+.demo-chat.is-record .demo-chat-index button span{font-size:1.25cqh}

@@ -1,0 +1,211 @@
+/* ─── qalamdan — a toggle that is a Qajar pen box: its own tray slides out of its sleeve ─────────────────────
+   A <label> around a real <input type="checkbox" role="switch">: off, the box is closed; on, the tray is drawn out
+   of its sleeve, carrying the calligrapher's tools that lie in its well. The box is two rigid cut-outs from the
+   Met's top-down photographs of Fathallah Shirazi's pen box (2018.664), the tray under the sleeve. Works with CSS
+   alone: :checked slides the tray, and the label, Space, forms and screen readers all talk to the checkbox.
+   Prefix: .ql-
+
+   Geometry is in the photographs' own pixels at export scale (74 px to the centimetre):
+     the closed box is 1628 × 280; the sleeve sits at 0,0 (1595 × 280), the tray at 42,1 (1586 × 277).
+     --ql-draw  how far the tray comes out (the same px); 1100 = 14.9 cm of its 21 cm well
+     --ql-w     the box's room, in the same px: 1628 + draw unless a stage lets the sleeve slide off
+     --ql-align where the closed box sits in its room, 0 (left) .. 1 (right)
+     --ql-split how the drawing is shared: 0 the sleeve stays and the tray comes out (a switch: the box fills its
+                track); .5 each moves half; 1 the tray stays and the sleeve slides off it                       */
+
+.ql {
+  --ql-draw: 1100;
+  --ql-split: .5;
+  --ql-align: .5;
+  --ql-w: calc(1628 + var(--ql-draw));
+  --ql-ease: cubic-bezier(.33, 0, .18, 1);
+  --ql-time: 1.05s;
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: var(--ql-gap, clamp(14px, 2.2vw, 24px));
+  color: var(--ink, #141312);
+  font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* the real control: in the page for the keyboard, forms and readers; the box is what you see */
+.ql-switch {
+  position: absolute;
+  width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  opacity: 0;
+}
+
+/* the box's room is as wide as the box drawn open */
+.ql-box {
+  position: relative;
+  display: block;
+  width: calc(100% + 2 * var(--ql-bleed, 0px));
+  margin-inline: calc(-1 * var(--ql-bleed, 0px));
+  line-height: 0;
+  overflow-x: clip;          /* a sleeve sliding off the tray leaves the box's room, never the page */
+  overflow-y: visible;
+  border-radius: 999px;      /* only the focus ring and a compact track use it */
+}
+.ql-box::before {
+  content: '';
+  display: block;
+  padding-top: calc(280 / var(--ql-w) * 100%);
+}
+.ql-sleeve,
+.ql-tray {
+  position: absolute;
+  transition: transform var(--ql-time) var(--ql-ease);
+}
+.ql-still .ql-sleeve, .ql-still .ql-tray, .ql-still .ql-text { transition: none; }   /* starting on: no slide */
+.ql-sleeve {
+  top: 0;
+  left: calc((var(--ql-w) - 1628) * var(--ql-align) / var(--ql-w) * 100%);
+  width: calc(1595 / var(--ql-w) * 100%);
+  height: auto;
+  z-index: 2;
+}
+.ql-tray {
+  top: calc(1 / 280 * 100%);
+  left: calc(((var(--ql-w) - 1628) * var(--ql-align) + 42) / var(--ql-w) * 100%);
+  width: calc(1586 / var(--ql-w) * 100%);
+  aspect-ratio: 1586 / 277;
+  z-index: 1;
+}
+.ql-tray-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* lying on the page: a tight contact shadow and a soft one, along their own outlines */
+.ql-sleeve,
+.ql-tray-img {
+  filter: drop-shadow(0 .5px .7px rgba(40, 30, 18, .26)) drop-shadow(0 6px 11px rgba(40, 30, 18, .15));
+}
+
+/* the tools lie in the well: positions in the tray photograph's px; a shadow only where each touches the lacquer */
+.ql-tool {
+  position: absolute;
+  left: calc(var(--x) / 1586 * 100%);
+  top: calc(var(--y) / 277 * 100%);
+  width: calc(var(--w) / 1586 * 100%);
+  height: auto;
+  transform: rotate(var(--r, 0deg));
+  transform-origin: 50% 50%;
+  filter: drop-shadow(0 .4px .5px rgba(0, 0, 0, .7)) drop-shadow(0 1.5px 2px rgba(0, 0, 0, .45));
+  pointer-events: none;
+}
+
+/* an optional inscription (.ql-note), written by pretext in the lacquer the tools leave free (qalamdan.js) */
+.ql-note { display: none; }
+.ql-writing {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  color: var(--ql-ink, #eadcb4);
+  font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
+  font-style: italic;
+  font-weight: 500;
+  white-space: pre;
+  line-height: 1;
+}
+.ql-writing span {
+  position: absolute;
+  transform: translateY(-50%);
+}
+
+/* on: the tray is drawn out of its sleeve */
+.ql-switch:checked ~ .ql-box .ql-sleeve {
+  transform: translateX(calc(var(--ql-draw) * var(--ql-split) / -1595 * 100%));
+}
+.ql-switch:checked ~ .ql-box .ql-tray {
+  transform: translateX(calc(var(--ql-draw) * (1 - var(--ql-split)) / 1586 * 100%));
+}
+/* a thumb on the end cap: off, the tray gives a little under the pointer */
+@media (hover: hover) and (pointer: fine) {
+  .ql:hover .ql-switch:not(:checked):not(:disabled) ~ .ql-box .ql-tray { transform: translateX(calc(14 / 1586 * 100%)); }
+}
+
+/* focus: a ring on the words (the box's room may run to the page's edges); on a compact switch, round the track */
+.ql-switch:focus-visible ~ .ql-text {
+  outline: 2px solid var(--ql-ring, var(--accent, #c96f4a));
+  outline-offset: 3px;
+}
+
+/* the words: a quiet pill under the box; on, it is pressed in (filled) */
+.ql-text {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 22px;
+  border: 1px solid var(--ink, #141312);
+  border-radius: 999px;
+  font: 500 13px/1 var(--sans, Inter, system-ui, sans-serif);
+  letter-spacing: .04em;
+  color: var(--ink, #141312);
+  transition: background-color .35s ease, color .35s ease;
+}
+.ql-switch:checked ~ .ql-text { background: var(--ink, #141312); color: var(--paper, #f3f0e8); }
+.ql-switch:disabled ~ .ql-box, .ql-switch:disabled ~ .ql-text { opacity: .45; }
+.ql:has(.ql-switch:disabled) { cursor: not-allowed; }
+
+/* ── compact: a switch for a settings row or a toolbar. The pen box is its own track: a pale pill as long as the
+   box drawn open; off, the closed box lies at its left end, rounded end in the rounded end; on, the tray comes out
+   and its end cap fills the right end. ───────────────────────────────────────────────────────────────────── */
+.ql-compact {
+  --ql-draw: 560;
+  --ql-split: 0;
+  --ql-align: 0;
+  --ql-h: 22px;
+  --ql-time: .6s;
+  display: inline-flex;
+  align-items: center;
+  justify-items: start;
+  gap: 14px;
+  vertical-align: middle;
+  min-height: 44px;
+}
+.ql-compact .ql-box {
+  width: calc(var(--ql-h) * var(--ql-w) / 280);
+  margin: 0;
+  flex: none;
+  background: var(--ql-track, var(--paper-2, #e9e5da));
+  box-shadow: inset 0 0 0 1px var(--ql-track-line, var(--rule, #cfcac0));
+}
+.ql-compact .ql-sleeve, .ql-compact .ql-tray-img {
+  filter: drop-shadow(0 .5px .5px rgba(40, 30, 18, .3));
+}
+.ql-compact .ql-tool { filter: none; }
+.ql-compact .ql-text {
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  font: 400 15px/1.3 var(--sans, Inter, system-ui, sans-serif);
+  letter-spacing: 0;
+}
+.ql-compact .ql-switch:checked ~ .ql-text { background: none; color: var(--ink, #141312); }
+.ql-compact .ql-switch:focus-visible ~ .ql-text { outline: none; }
+.ql-compact .ql-switch:focus-visible ~ .ql-box {
+  outline: 2px solid var(--ql-ring, var(--accent, #c96f4a));
+  outline-offset: 4px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .ql-compact:hover .ql-switch:not(:checked):not(:disabled) ~ .ql-box .ql-tray { transform: translateX(calc(30 / 1586 * 100%)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ql-sleeve, .ql-tray, .ql-text { transition: none; }
+  .ql:hover .ql-switch:not(:checked):not(:disabled) ~ .ql-box .ql-tray,
+  .ql-compact:hover .ql-switch:not(:checked):not(:disabled) ~ .ql-box .ql-tray { transform: none; }
+}
+@media (forced-colors: active) {
+  .ql-sleeve, .ql-tray-img, .ql-tool { filter: none; }
+  /* the picture can't show the state here: the real checkbox does */
+  .ql-switch { position: static; width: auto; height: auto; margin: 0; clip: auto; opacity: 1; appearance: auto; }
+  .ql-text { border-color: ButtonText; }
+}

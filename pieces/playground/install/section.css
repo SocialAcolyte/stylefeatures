@@ -1,0 +1,33 @@
+/* cta/install: the end of a launch page. The name, large, and the one way in: a command to copy, or a download. */
+.cta-install{position:relative;min-height:100svh;display:grid;grid-template-rows:1fr auto;background:var(--page)}
+.cta-install > *{width:100%}
+.cta-install-in{display:grid;align-content:center;gap:clamp(28px,5vh,56px);padding-block:clamp(72px,12vh,140px) clamp(48px,8vh,96px)}
+.cta-install-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,440px);gap:clamp(32px,6vw,96px);align-items:start}
+.cta-install-row .sf-lede{padding-top:6px}
+.cta-install-name h2{margin:0;padding-top:.08em;font:400 clamp(64px,14.5vw,236px)/.84 var(--serif);letter-spacing:-.03em;white-space:nowrap}
+.cta-install-name em{font-style:italic}
+.cta-install-card{position:relative;min-width:0;display:grid;grid-template-columns:minmax(0,1fr);gap:14px;padding:22px;background:var(--ph);box-shadow:0 0 0 1px var(--ph-line),0 30px 60px -40px rgba(25,24,22,.4)}
+.cta-install-tabs{display:flex;gap:4px;border-bottom:1px solid var(--ph-line)}
+.cta-install-tabs button{position:relative;padding:10px 12px 12px;border:0;background:none;font:500 13px/1 var(--sans);color:var(--ink-3);cursor:pointer}
+.cta-install-tabs button[aria-selected=true]{color:var(--ink)}
+.cta-install-tabs button[aria-selected=true]::after{content:"";position:absolute;left:12px;right:12px;bottom:-1px;height:2px;background:var(--ink)}
+.cta-install-tabs button:focus-visible{outline:2px solid var(--note);outline-offset:-2px}
+.cta-install-panel{display:flex;align-items:stretch;gap:8px;min-height:50px}
+.cta-install-panel[hidden]{display:none}
+.cta-install-cmd{flex:1;min-width:0;margin:0;display:flex;align-items:center;padding:0 14px;overflow-x:auto;background:var(--page);border-radius:var(--radius);font:500 13.5px/1.4 var(--mono);color:var(--ink);white-space:pre}
+.cta-install-cmd::before{content:"$";margin-right:10px;color:var(--ink-3)}
+.cta-install-copy{min-width:88px;justify-content:center}
+.cta-install-panel.is-dl{flex-direction:column;align-items:flex-start;gap:14px}
+.cta-install-panel.is-dl p{margin:0;color:var(--ink-2);font-size:14.5px;line-height:1.45}
+.cta-install-small{margin:4px 0 0;font:400 12.5px/1.4 var(--sans);color:var(--ink-3)}
+.cta-install-card .sf-note{justify-self:start}
+.cta-install-said{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.cta-install-foot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px 24px;padding-block:22px 28px;background:linear-gradient(var(--rule),var(--rule)) var(--gutter) 0/calc(100% - 2 * var(--gutter)) 1px no-repeat;font:400 12.5px/1.4 var(--sans);color:var(--ink-3)}
+.cta-install-foot nav{display:flex;gap:20px}
+.cta-install-foot a{text-decoration:none}.cta-install-foot a:hover{color:var(--ink)}
+@media (max-width:860px){
+  .cta-install-row{grid-template-columns:minmax(0,1fr)}
+  .cta-install-name h2{font-size:clamp(52px,15.5vw,120px);white-space:normal}
+  .cta-install-card{padding:16px}
+  .cta-install-cmd{font-size:12.5px;padding:0 12px}
+}

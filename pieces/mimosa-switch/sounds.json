@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "rustle",
+      "file": "assets/sounds/rustle.wav",
+      "on": "event:mimosa-toggle:fold",
+      "target": ".mt",
+      "match": { "strength": "full" },
+      "volume": 0.32,
+      "vary": 1.5,
+      "cooldown": 120,
+      "credit": "Synthesised for Taste in numpy (70 band-passed noise grains, 2.2 to 9 kHz, over a soft air bed), no recording"
+    },
+    {
+      "name": "rustle-soft",
+      "file": "assets/sounds/rustle-soft.wav",
+      "on": "event:mimosa-toggle:fold",
+      "target": ".mt",
+      "match": { "strength": "weak" },
+      "volume": 0.2,
+      "vary": 1.5,
+      "cooldown": 120,
+      "credit": "Synthesised for Taste in numpy (16 grains), no recording"
+    }
+  ]
+}

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>telegraph-key</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="telegraph-key.css">
+<style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;
+    --serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px);
+    --card:#f8f5ee;--card-line:#ddd6c8;--hair:#e6e0d2}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  [hidden]{display:none !important}
+
+  .page{max-width:1080px;margin:0 auto;padding:clamp(28px,6svh,72px) var(--gutter) clamp(64px,12svh,128px)}
+  /* the sound switch sits at the top of the page wherever the cards reach the right edge, so that it can't cover a
+     key as you scroll (as in components/pushou) */
+  @media (max-width:1160px){html body .sfs-toggle{position:absolute;top:max(14px,env(safe-area-inset-top));bottom:auto}}
+  .head{margin:0 0 clamp(24px,4.4svh,44px)}
+  .tag{font:500 10.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  .head h1{margin:.45em 0 .2em;font-weight:400;font-style:italic;font-size:clamp(36px,4.6vw,56px);line-height:1;letter-spacing:-.005em}
+  .head p{margin:0;max-width:46em;font-size:clamp(18px,1.6vw,21px);line-height:1.4;font-weight:500;color:var(--ink-2);text-wrap:pretty}
+
+  .grid{display:grid;gap:clamp(18px,2.6vw,30px);align-items:start}
+  @media (min-width:880px){
+    .grid{grid-template-columns:minmax(0,1.14fr) minmax(0,1fr);grid-template-areas:"compose notices" "compose reply" "dispatch dispatch"}
+    .compose{grid-area:compose}.notices{grid-area:notices}.reply{grid-area:reply}.dispatch{grid-area:dispatch}
+  }
+  .card{min-width:0;margin:0;background:var(--card);border:1px solid var(--card-line);
+    box-shadow:0 1px 0 #fff inset,0 26px 50px -38px rgba(40,30,20,.34),0 1px 3px rgba(40,30,20,.07)}
+  .card-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:17px 20px 13px}
+  .card-h h2{margin:0;font-weight:400;font-size:27px;line-height:1.05;letter-spacing:-.005em}
+  .meta{font:400 12px/1.3 var(--sans);color:var(--ink-3);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+  /* a message: two fields and a footer */
+  .fields{padding:2px 20px 16px;display:grid;gap:12px}
+  .field{display:grid;gap:5px}
+  .field>span{font:500 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+  .field input,.field textarea{width:100%;margin:0;border:0;border-bottom:1px solid var(--hair);padding:4px 0 8px;background:transparent;
+    color:var(--ink);font:500 20px/1.35 var(--serif);border-radius:0}
+  .field textarea{resize:none;font-size:22px;line-height:1.4;min-height:5.2em}
+  .field input:focus,.field textarea:focus{outline:none;border-bottom-color:var(--ink-3)}
+  .foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:10px 14px;padding:14px 20px 16px;border-top:1px solid var(--hair)}
+  .status{flex:1 1 12em;margin:0;font:400 13px/1.4 var(--sans);color:var(--ink-3)}
+  .status.sent{color:var(--ink-2)}
+  @media (max-width:480px){.foot .status{flex-basis:100%}}   /* Clear and Send stay side by side */
+  .link{font:500 13px/1 var(--sans);color:var(--ink);background:none;border:0;padding:8px 2px;cursor:pointer;
+    text-decoration:underline 1px var(--rule);text-underline-offset:4px}
+  .link:hover{text-decoration-color:var(--ink-3)}
+  .link:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:1px}
+  .link:disabled{color:var(--ink-3);cursor:default;text-decoration-color:var(--hair)}   /* while the message goes */
+
+  /* settings rows */
+  .row{display:flex;align-items:center;gap:16px;padding:12px 20px;border-top:1px solid var(--hair);min-height:62px}
+  .row .txt{flex:1;min-width:0;display:grid;gap:2px}
+  .row .name{font:500 14px/1.35 var(--sans);color:var(--ink)}
+  .row .hint{font-size:17px;font-weight:500;line-height:1.25;color:var(--ink-2);text-wrap:pretty}
+  @media (max-width:480px){.row .hint[aria-live]{min-height:2.5em}}   /* a confirmation never moves the rows below */
+  @media (max-width:360px){   /* too narrow for text and key side by side: the key goes under its text, on the right */
+    .row{flex-wrap:wrap;row-gap:10px}.row .txt{flex-basis:100%}.row .tk{margin-left:auto}
+    .row .hint[aria-live]{min-height:1.25em}   /* full width, every hint and confirmation is one line */
+  }
+
+  /* a reply box with a toolbar */
+  .reply-box{margin:0 20px 4px;border-bottom:1px solid transparent;transition:border-color .2s}
+  .reply-box:focus-within{border-bottom-color:var(--ink-3)}
+  .reply-box textarea{display:block;width:100%;margin:0;border:0;padding:0 0 10px;background:transparent;resize:none;
+    color:var(--ink-2);font:500 19px/1.45 var(--serif);min-height:3.2em}
+  .reply-box textarea.b{font-weight:650}.reply-box textarea.i{font-style:italic}
+  .reply-box textarea:focus{outline:none}
+  .bar{display:flex;align-items:center;gap:2px;padding:6px 10px 6px 14px;border-top:1px solid var(--hair)}
+  .tools{display:flex;gap:2px}
+  .tool{min-width:34px;height:34px;border:0;border-radius:2px;background:none;color:var(--ink-2);cursor:pointer;
+    font:500 15px/1 var(--serif)}
+  .tool:hover{background:var(--paper-2)}
+  .tool[aria-pressed="true"]{background:var(--paper-2);color:var(--ink);box-shadow:inset 0 -2px 0 var(--ink-3)}
+  .tool:focus-visible{outline:2px solid var(--ink);outline-offset:1px}
+  .tool b{font-weight:600}.tool i{font-style:italic}
+  .bar .sp{flex:1}
+
+  /* the large key: the one action of a panel */
+  .dispatch{display:grid;grid-template-columns:minmax(0,1fr);gap:22px 40px;align-items:center;padding:clamp(20px,3.4vw,36px)}
+  @media (min-width:880px){.dispatch{grid-template-columns:minmax(0,1fr) auto}}
+  .dispatch h2{margin:0 0 .35em;font-weight:400;font-size:clamp(30px,3.4vw,40px);line-height:1.02}
+  .dispatch p{margin:0;max-width:30em;font-size:19px;line-height:1.4;font-weight:500;color:var(--ink-2)}
+  .dispatch .status{margin-top:14px;font-size:13px;min-height:1.4em}
+  .dispatch form{display:flex;justify-content:center;min-width:0}
+</style></head><body>
+<main class="page">
+  <header class="head">
+    <span class="tag">Button</span>
+    <h1>Telegraph key button</h1>
+    <p>Press it: the brass lever of the 1844 Morse–Vail key turns on its pin until its point meets the anvil, and its spring throws it back when you let go.</p>
+  </header>
+
+  <div class="grid">
+    <form class="card compose" id="telegram" aria-labelledby="tg-h">
+      <div class="card-h"><h2 id="tg-h">New message</h2><span class="meta" id="tg-count">8 words</span></div>
+      <div class="fields">
+        <label class="field"><span>To</span><input name="to" value="Ada Clarke" autocomplete="off"></label>
+        <label class="field"><span>Message</span><textarea name="message" id="tg-msg" rows="3">Running ten minutes late. Please start without me.</textarea></label>
+      </div>
+      <div class="foot">
+        <p class="status" id="tg-status" aria-live="polite">Draft, not sent</p>
+        <button type="button" class="link" id="tg-clear">Clear</button>
+        <button class="tk" type="submit" data-telegraph-key id="tg-send" data-sending="Sending" data-sent="Sent">
+          <span class="tk-key" aria-hidden="true">
+            <img class="tk-base" src="assets/key-base-400.webp" srcset="assets/key-base-400.webp 400w, assets/key-base-800.webp 800w" sizes="65px" width="400" height="198" alt="">
+            <img class="tk-spring" src="assets/key-spring-400.webp" srcset="assets/key-spring-400.webp 400w, assets/key-spring-800.webp 800w" sizes="65px" width="400" height="198" alt="">
+            <img class="tk-lever" src="assets/key-lever-400.webp" srcset="assets/key-lever-400.webp 400w, assets/key-lever-800.webp 800w" sizes="65px" width="400" height="198" alt="">
+            <img class="tk-cheek" src="assets/key-cheek-400.webp" srcset="assets/key-cheek-400.webp 400w, assets/key-cheek-800.webp 800w" sizes="65px" width="400" height="198" alt="">
+          </span>
+          <span class="tk-label">Send</span>
+        </button>
+      </div>
+    </form>
+
+    <section class="card notices" aria-labelledby="nt-h">
+      <div class="card-h"><h2 id="nt-h">Notices</h2><span class="meta">Settings</span></div>
+      <div class="row">
+        <div class="txt"><span class="name">Morning summary</span><span class="hint" id="nt-1" aria-live="polite">Goes out at seven on weekdays.</span></div>
+        <button class="tk tk-sm" type="button" data-telegraph-key data-done="nt-1" data-said="Sent just now, ahead of seven." data-again="Sent again, just now.">
+          <span class="tk-key" aria-hidden="true">
+            <img class="tk-base" src="assets/key-base-400.webp" sizes="49px" srcset="assets/key-base-400.webp 400w" width="400" height="198" alt="">
+            <img class="tk-spring" src="assets/key-spring-400.webp" sizes="49px" srcset="assets/key-spring-400.webp 400w" width="400" height="198" alt="">
+            <img class="tk-lever" src="assets/key-lever-400.webp" sizes="49px" srcset="assets/key-lever-400.webp 400w" width="400" height="198" alt="">
+            <img class="tk-cheek" src="assets/key-cheek-400.webp" sizes="49px" srcset="assets/key-cheek-400.webp 400w" width="400" height="198" alt="">
+          </span>
+          <span class="tk-label">Send now</span>
+        </button>
+      </div>
+      <div class="row">
+        <div class="txt"><span class="name">Invitations</span><span class="hint" id="nt-2" aria-live="polite">Three people are waiting.</span></div>
+        <button class="tk tk-sm" type="button" data-telegraph-key data-done="nt-2" data-said="Sent to all three just now." data-again="Sent to all three again.">
+          <span class="tk-key" aria-hidden="true">
+            <img class="tk-base" src="assets/key-base-400.webp" sizes="49px" srcset="assets/key-base-400.webp 400w" width="400" height="198" alt="">
+            <img class="tk-spring" src="assets/key-spring-400.webp" sizes="49px" srcset="assets/key-spring-400.webp 400w" width="400" height="198" alt="">
+            <img class="tk-lever" src="assets/key-lever-400.webp" sizes="49px" srcset="assets/key-lever-400.webp 400w" width="400" height="198" alt="">
+            <img class="tk-cheek" src="assets/key-cheek-400.webp" sizes="49px" srcset="assets/key-cheek-400.webp 400w" width="400" height="198" alt="">
+          </span>
+          <span class="tk-label">Send invites</span>
+        </button>
+      </div>
+      <div class="row">
+        <div class="txt"><span class="name">Weekly report</span><span class="hint">Nothing new since Monday.</span></div>
+        <button class="tk tk-sm" type="button" data-telegraph-key disabled>
+          <span class="tk-key" aria-hidden="true">
+            <img class="tk-base" src="assets/key-base-400.webp" sizes="49px" srcset="assets/key-base-400.webp 400w" width="400" height="198" alt="">
+            <img class="tk-spring" src="assets/key-spring-400.webp" sizes="49px" srcset="assets/key-spring-400.webp 400w" width="400" height="198" alt="">
+            <img class="tk-lever" src="assets/key-lever-400.webp" sizes="49px" srcset="assets/key-lever-400.webp 400w" width="400" height="198" alt="">
+            <img class="tk-cheek" src="assets/key-cheek-400.webp" sizes="49px" srcset="assets/key-cheek-400.webp 400w" width="400" height="198" alt="">
+          </span>
+          <span class="tk-label">Send</span>
+        </button>
+      </div>
+    </section>
+
+    <form class="card reply" id="reply" aria-labelledby="rp-h">
+      <div class="card-h"><h2 id="rp-h">Reply</h2><span class="meta" id="rp-status" aria-live="polite">to Sam</span></div>
+      <div class="reply-box"><textarea id="rp-msg" rows="2" aria-labelledby="rp-h">Thursday works for me. I will bring the drawings.</textarea></div>
+      <div class="bar">
+        <div class="tools" role="toolbar" aria-label="Formatting" aria-controls="rp-msg">
+          <button type="button" class="tool" data-style="b" aria-pressed="false" aria-label="Bold"><b>B</b></button>
+          <button type="button" class="tool" data-style="i" aria-pressed="false" aria-label="Italic" tabindex="-1"><i>I</i></button>
+          <button type="button" class="tool" data-quote aria-label="Quote" tabindex="-1">“</button>
+        </div>
+        <span class="sp"></span>
+        <button class="tk tk-bare" type="submit" data-telegraph-key id="rp-send">
+          <span class="tk-key" aria-hidden="true">
+            <img class="tk-base" src="assets/key-base-400.webp" srcset="assets/key-base-400.webp 400w, assets/key-base-800.webp 800w" sizes="65px" width="400" height="198" alt="">
+            <img class="tk-spring" src="assets/key-spring-400.webp" srcset="assets/key-spring-400.webp 400w, assets/key-spring-800.webp 800w" sizes="65px" width="400" height="198" alt="">
+            <img class="tk-lever" src="assets/key-lever-400.webp" srcset="assets/key-lever-400.webp 400w, assets/key-lever-800.webp 800w" sizes="65px" width="400" height="198" alt="">
+            <img class="tk-cheek" src="assets/key-cheek-400.webp" srcset="assets/key-cheek-400.webp 400w, assets/key-cheek-800.webp 800w" sizes="65px" width="400" height="198" alt="">
+          </span>
+          <span class="tk-label">Send</span>
+        </button>
+      </div>
+    </form>
+
+    <section class="card dispatch" aria-labelledby="dp-h">
+      <div>
+        <h2 id="dp-h">Evening newsletter</h2>
+        <p>Ready for 2,140 readers. It goes out the moment the key closes.</p>
+        <p class="status" id="dp-status" aria-live="polite"></p>
+      </div>
+      <form id="dispatch" aria-labelledby="dp-h">
+        <button class="tk tk-lg" type="submit" data-telegraph-key id="dp-send" data-sending="Sending" data-sent="Sent">
+          <span class="tk-key" aria-hidden="true">
+            <img class="tk-base" src="assets/key-base-800.webp" srcset="assets/key-base-400.webp 400w, assets/key-base-800.webp 800w, assets/key-base-1600.webp 1600w" sizes="(min-width: 790px) 477px, 61vw" width="800" height="396" alt="">
+            <img class="tk-spring" src="assets/key-spring-800.webp" srcset="assets/key-spring-400.webp 400w, assets/key-spring-800.webp 800w, assets/key-spring-1600.webp 1600w" sizes="(min-width: 790px) 477px, 61vw" width="800" height="396" alt="">
+            <img class="tk-lever" src="assets/key-lever-800.webp" srcset="assets/key-lever-400.webp 400w, assets/key-lever-800.webp 800w, assets/key-lever-1600.webp 1600w" sizes="(min-width: 790px) 477px, 61vw" width="800" height="396" alt="">
+            <img class="tk-cheek" src="assets/key-cheek-800.webp" srcset="assets/key-cheek-400.webp 400w, assets/key-cheek-800.webp 800w, assets/key-cheek-1600.webp 1600w" sizes="(min-width: 790px) 477px, 61vw" width="800" height="396" alt="">
+          </span>
+          <span class="tk-label">Send</span>
+        </button>
+      </form>
+    </section>
+  </div>
+</main>
+<script type="module" src="telegraph-key.js"></script>
+<script type="module" src="sound.js"></script>
+<script type="module">
+  // the demo's own page: word counts, an empty message can't be sent, a send takes a moment, nothing leaves the page
+  const $ = (s) => document.querySelector(s);
+  const time = () => new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  const words = (t) => (t.trim().match(/\S+/g) || []).length;
+  const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+  const keyOf = (b) => b.__telegraphKey;
+
+  // a new message: Send holds the key down on the anvil while it goes, then lets it spring back and says Sent.
+  // While it goes the draft is locked: the fields are read-only and Clear is off, so the page never contradicts itself
+  const msg = $('#tg-msg'), to = $('#telegram [name=to]'), send = $('#tg-send'), clear = $('#tg-clear');
+  const count = $('#tg-count'), status = $('#tg-status');
+  let sends = 0, going = false;
+  const draft = () => { status.textContent = 'Draft, not sent'; status.classList.remove('sent'); };
+  const sync = () => { const n = words(msg.value); count.textContent = n === 1 ? '1 word' : n + ' words'; send.disabled = n === 0; };
+  const lock = (on) => { going = on; msg.readOnly = to.readOnly = on; clear.disabled = on; };
+  msg.addEventListener('input', () => { sync(); draft(); });
+  clear.addEventListener('click', () => { if (going) return; msg.value = ''; sync(); draft(); msg.focus(); });
+  sync();
+  $('#telegram').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    if (going) return;                     // one message at a time, with or without the key's module
+    const key = keyOf(send);
+    key && key.hold();
+    lock(true);
+    status.textContent = 'Sending…'; status.classList.remove('sent');
+    await wait(1100);
+    const who = to.value.trim().split(/\s+/)[0] || 'them';
+    status.textContent = sends++ ? `Sent to ${who} again at ${time()}.` : `Sent to ${who} at ${time()}.`;
+    status.classList.add('sent');
+    lock(false);
+    key && key.done();
+  });
+
+  // settings rows: a send happens at once; a second one says so
+  document.querySelectorAll('[data-done]').forEach((b) => {
+    let n = 0;
+    b.addEventListener('click', () => { $('#' + b.dataset.done).textContent = n++ ? b.dataset.again : b.dataset.said; });
+  });
+
+  // the reply's formatting toolbar: Bold and Italic set the reply's style, Quote wraps the selection (or all of it);
+  // one tab stop, arrows move along it
+  const reply = $('#rp-msg'), tools = [...document.querySelectorAll('.tools .tool')];
+  tools.forEach((t, i) => {
+    t.addEventListener('click', () => {
+      if (t.dataset.style) {
+        const on = t.getAttribute('aria-pressed') !== 'true';
+        t.setAttribute('aria-pressed', String(on));
+        reply.classList.toggle(t.dataset.style, on);
+      } else {
+        const a = reply.selectionStart, z = reply.selectionEnd, v = reply.value;
+        const [s, e] = a === z ? [0, v.length] : [a, z];
+        reply.setRangeText('“' + v.slice(s, e).replace(/^“|”$/g, '') + '”', s, e, 'select');
+      }
+    });
+    t.addEventListener('keydown', (e) => {
+      const k = { ArrowRight: i + 1, ArrowLeft: i - 1, Home: 0, End: tools.length - 1 }[e.key];
+      if (k === undefined) return;
+      e.preventDefault();
+      const next = tools[(k + tools.length) % tools.length];
+      tools.forEach((x) => (x.tabIndex = x === next ? 0 : -1));
+      next.focus();
+    });
+  });
+  let replies = 0;
+  $('#reply').addEventListener('submit', (e) => {
+    e.preventDefault();
+    $('#rp-status').textContent = (replies++ ? 'Sent again at ' : 'Sent at ') + time();
+  });
+
+  // the newsletter: the large key held down while 2,140 copies go
+  const dp = $('#dp-send');
+  let letters = 0;
+  $('#dispatch').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const key = keyOf(dp);
+    key && key.hold();
+    $('#dp-status').textContent = 'Sending to 2,140 readers…';
+    await wait(1400);
+    $('#dp-status').textContent = `${letters++ ? 'Sent again' : 'Sent'} at ${time()} to 2,140 readers.`;
+    key && key.done();
+  });
+</script>
+</body></html>

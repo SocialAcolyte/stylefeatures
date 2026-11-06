@@ -1,0 +1,362 @@
+<section class="demo-agentic" data-tpl="demo/agentic" data-tour-root data-driver="manual" data-captions="off" data-agent="{{agent|Agent}}" aria-label="Watch the agent do a task">
+  <h1 class="ag-sr">{{name|Product}} {{name_em|name}}</h1>
+  <p class="ag-sr" aria-live="polite" data-ag="live"></p>
+
+  <div class="demo-agentic-stage" data-tour-stage>
+    <div class="tour-rig">
+      <!-- THE DESK: one window (chrome "none") holding the task box, the run sheet and the workspace windows the agent
+           operates. Three layouts: wide (16:9 and desktops), square (1:1) and tall (9:16 and phones), each with its own
+           design size; section.css lays each one out. Hooks are data-tour="…" ('@…' in script.js). AGENT.md says what
+           to replace with your product's real run. -->
+      <div class="ag-desk" data-tour-window data-chrome="none" data-size="1600x900" data-size-square="760x760" data-size-tall="480x854">
+        <div class="ag-in" data-tour="desk">
+
+        <!-- 1 · THE TASK: the first screen. A person's sentence types itself in; Run sends it. -->
+        <div class="ag-cmp" data-tour="cmp">
+          <p class="ag-cmp-eyebrow">{{eyebrow|Introducing}}</p>
+          <p class="ag-cmp-name">{{name|Product}} <em>{{name_em|name}}</em></p>
+          <div class="ag-cmp-box" data-tour="box" data-tour-cursor="text">
+            <p class="ag-cmp-text" data-tour="ask" data-placeholder="Give it a task…"></p>
+            <div class="ag-cmp-foot">
+              <span class="ag-cmp-tools"><i></i>Editor<i></i>Terminal<i></i>Browser<i></i>Docs</span>
+              <button class="ag-run" type="button" tabindex="-1" data-tour="run">Run<kbd>↵</kbd></button>
+            </div>
+          </div>
+          <p class="ag-cmp-hint">{{lede|It plans, works in your tools, and asks before anything risky.}}</p>
+        </div>
+
+        <!-- 2 · THE RUN SHEET: the task, the status, the plan, then every tool call as it happens. -->
+        <aside class="ag-sheet" data-tour="sheet">
+          <header class="ag-head">
+            <div class="ag-who">
+              <span class="ag-mark"></span><b>{{name|Product}} <em>{{name_em|name}}</em></b>
+              <span class="ag-status" data-tour="status" data-state="ready"><i></i><span data-tour="status-text">Ready</span></span>
+            </div>
+            <p class="ag-task" data-tour="task">{{task|Add a CSV export to the Reports page, test it, and open a pull request.}}</p>
+            <p class="ag-now" data-tour="now">Reading the task</p>
+            <dl class="ag-meta">
+              <div><dt>Elapsed</dt><dd class="ag-clock" data-tour="clock">0:00</dd></div>
+              <div><dt>Steps</dt><dd data-tour="count">0</dd></div>
+              <div class="ag-meta-repo"><dt>Repo</dt><dd>{{repo|your-repo}}</dd></div>
+            </dl>
+          </header>
+
+          <section class="ag-plan" data-tour="plan">
+            <p class="ag-label">Plan</p>
+            <ol>
+              <li data-tour="p1"><i></i>Find where Reports draws its toolbar</li>
+              <li data-tour="p2"><i></i>Write the CSV export the way the docs describe</li>
+              <li data-tour="p3"><i></i>Add the button and a test</li>
+              <li data-tour="p4"><i></i>Run the tests, then try it in a browser</li>
+              <li data-tour="p5"><i></i>Ask before pushing, then open a pull request</li>
+            </ol>
+          </section>
+
+          <section class="ag-log">
+            <p class="ag-label">Run</p>
+            <ol class="ag-steps" data-tour="steps" data-tour-follow>
+              <li class="ag-row" data-tour="r-search">
+                <span class="ag-n">01</span><span class="ag-ic"><svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4"/><path d="m10 10 3.5 3.5"/></svg></span>
+                <b class="ag-tool">search_code</b><code class="ag-arg">"export" src/reports</code><span class="ag-ms">0.6 s</span>
+                <p class="ag-sum">3 matches</p>
+                <div class="ag-res"><p><b>ReportsPage.tsx:10</b> &lt;Toolbar&gt;</p><p><b>ReportTable.tsx:4</b> export function ReportTable</p><p><b>types.ts:3</b> export type Report</p></div>
+              </li>
+              <li class="ag-row" data-tour="r-read">
+                <span class="ag-n">02</span><span class="ag-ic"><svg viewBox="0 0 16 16"><path d="M4 2.5h5l3 3v8H4zM9 2.5v3h3"/></svg></span>
+                <b class="ag-tool">read_file</b><code class="ag-arg">ReportsPage.tsx</code><span class="ag-ms">0.2 s</span>
+                <p class="ag-sum">14 lines · page actions live in &lt;Toolbar&gt;</p>
+              </li>
+              <li class="ag-row" data-tour="r-docs">
+                <span class="ag-n">03</span><span class="ag-ic"><svg viewBox="0 0 16 16"><path d="M2.5 3.5h4A1.5 1.5 0 0 1 8 5v8.5A1.5 1.5 0 0 0 6.5 12h-4zM13.5 3.5h-4A1.5 1.5 0 0 0 8 5v8.5A1.5 1.5 0 0 1 9.5 12h4z"/></svg></span>
+                <b class="ag-tool">read_docs</b><code class="ag-arg">docs/reports.md#csv</code><span class="ag-ms">1.1 s</span>
+                <p class="ag-sum">CSV headers are the column labels</p>
+                <div class="ag-res"><blockquote>“Headers use each column’s label, in table order.”</blockquote></div>
+              </li>
+              <li class="ag-row" data-tour="r-csv">
+                <span class="ag-n">04</span><span class="ag-ic"><svg viewBox="0 0 16 16"><path d="M4 2.5h5l3 3v8H4zM8 7.5v4M6 9.5h4"/></svg></span>
+                <b class="ag-tool">write_file</b><code class="ag-arg">exportCsv.ts</code><span class="ag-ms">4.2 s</span>
+                <p class="ag-sum">new file <span class="ag-add">+14</span></p>
+              </li>
+              <li class="ag-row" data-tour="r-test">
+                <span class="ag-n">05</span><span class="ag-ic"><svg viewBox="0 0 16 16"><path d="M4 2.5h5l3 3v8H4zM8 7.5v4M6 9.5h4"/></svg></span>
+                <b class="ag-tool">write_file</b><code class="ag-arg">exportCsv.test.ts</code><span class="ag-ms">3.0 s</span>
+                <p class="ag-sum">new file <span class="ag-add">+9</span> · 3 tests</p>
+              </li>
+              <li class="ag-row" data-tour="r-page">
+                <span class="ag-n">06</span><span class="ag-ic"><svg viewBox="0 0 16 16"><path d="M10.5 2.5l3 3L6 13H3v-3z"/></svg></span>
+                <b class="ag-tool">edit_file</b><code class="ag-arg">ReportsPage.tsx</code><span class="ag-ms">2.4 s</span>
+                <p class="ag-sum"><span class="ag-add">+5</span> · an Export CSV button in the toolbar</p>
+              </li>
+              <li class="ag-row" data-tour="r-run1">
+                <span class="ag-n">07</span><span class="ag-ic"><svg viewBox="0 0 16 16"><path d="M2.5 3.5h11v9h-11zM5 6.5l2 1.5-2 1.5M8.5 10h2.5"/></svg></span>
+                <b class="ag-tool">run_command</b><code class="ag-arg">npm test reports</code><span class="ag-ms">2 m 34 s</span>
+                <p class="ag-sum is-bad">1 failed · 23 passed</p>
+                <div class="ag-res is-bad"><p><b>✗</b> writes the header row</p><p>expected <code>Date,Customer,Amount</code></p><p>received <code>date,customer,amount</code></p></div>
+              </li>
+              <li class="ag-lapse-row" data-tour="lapse-1"><span>Time-lapse</span><b>2 m 33 s in 3 s</b></li>
+              <li class="ag-row" data-tour="r-fix">
+                <span class="ag-n">08</span><span class="ag-ic"><svg viewBox="0 0 16 16"><path d="M10.5 2.5l3 3L6 13H3v-3z"/></svg></span>
+                <b class="ag-tool">edit_file</b><code class="ag-arg">exportCsv.ts</code><span class="ag-ms">1.8 s</span>
+                <p class="ag-sum"><span class="ag-add">+1</span> <span class="ag-del">−1</span> · headers use the labels, as the docs say</p>
+              </li>
+              <li class="ag-row" data-tour="r-run2">
+                <span class="ag-n">09</span><span class="ag-ic"><svg viewBox="0 0 16 16"><path d="M2.5 3.5h11v9h-11zM5 6.5l2 1.5-2 1.5M8.5 10h2.5"/></svg></span>
+                <b class="ag-tool">run_command</b><code class="ag-arg">npm test reports</code><span class="ag-ms">1 m 21 s</span>
+                <p class="ag-sum is-good">24 passed</p>
+              </li>
+              <li class="ag-lapse-row" data-tour="lapse-2"><span>Time-lapse</span><b>1 m 20 s in 2 s</b></li>
+              <li class="ag-row" data-tour="r-open">
+                <span class="ag-n">10</span><span class="ag-ic"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M2.5 8h11M8 2.5c1.6 1.6 2.3 3.5 2.3 5.5S9.6 11.9 8 13.5C6.4 11.9 5.7 10 5.7 8S6.4 4.1 8 2.5"/></svg></span>
+                <b class="ag-tool">browser_open</b><code class="ag-arg">{{url|localhost:3000/reports}}</code><span class="ag-ms">1.4 s</span>
+                <p class="ag-sum">200 · the page renders with the new button</p>
+              </li>
+              <li class="ag-row" data-tour="r-click">
+                <span class="ag-n">11</span><span class="ag-ic"><svg viewBox="0 0 16 16"><path d="M4 3l8 3.6-3.4 1.2L7.4 11.4zM8.6 7.8l3.4 3.4"/></svg></span>
+                <b class="ag-tool">browser_click</b><code class="ag-arg">"Export CSV"</code><span class="ag-ms">0.7 s</span>
+                <p class="ag-sum">report.csv downloaded · 24 rows</p>
+              </li>
+              <li class="ag-row ag-ask" data-tour="r-ask">
+                <span class="ag-n">12</span><span class="ag-ic"><svg viewBox="0 0 16 16"><path d="M8 2l5 2v4c0 3-2.2 5-5 6-2.8-1-5-3-5-6V4z"/></svg></span>
+                <b class="ag-tool">request_approval</b><code class="ag-arg">git push</code><span class="ag-ms" data-tour="ask-ms">waiting</span>
+                <div class="ag-ask-card" data-tour="ask-card">
+                  <p class="ag-ask-q">Push <code>export-csv</code> and open a pull request to <code>main</code>?</p>
+                  <p class="ag-ask-why">This changes the shared repository, so it asks first.</p>
+                  <div class="ag-ask-act">
+                    <button type="button" tabindex="-1" class="ag-btn" data-tour="deny">Deny</button>
+                    <button type="button" tabindex="-1" class="ag-btn is-primary" data-tour="approve">Approve</button>
+                    <span class="ag-ask-ok"><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg>Approved by you</span>
+                  </div>
+                </div>
+              </li>
+              <li class="ag-row" data-tour="r-pr">
+                <span class="ag-n">13</span><span class="ag-ic"><svg viewBox="0 0 16 16"><circle cx="4.5" cy="3.8" r="1.4"/><circle cx="4.5" cy="12.2" r="1.4"/><circle cx="11.5" cy="12.2" r="1.4"/><path d="M4.5 5.2v5.6M11.5 10.8V6.5a2 2 0 0 0-2-2H7M8.5 3 7 4.5 8.5 6"/></svg></span>
+                <b class="ag-tool">create_pull_request</b><code class="ag-arg">export-csv → main</code><span class="ag-ms">2.9 s</span>
+                <p class="ag-sum">Pull request opened <span class="ag-link" data-tour="pr-link">Add CSV export to Reports ↗</span></p>
+              </li>
+              <li class="ag-end-row" data-tour="r-done"><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg><b>Done</b><span data-tour="done-line">13 steps · 1 approval</span></li>
+            </ol>
+          </section>
+        </aside>
+
+        <!-- 3 · THE WORKSPACE: small windows the agent operates. Each [data-chrome] gets its chrome from the engine. -->
+        <div class="ag-space" data-tour="space">
+          <nav class="ag-tabs">
+            <span data-tour="tab-editor"><i></i>Editor</span><span data-tour="tab-term"><i></i>Terminal</span><span data-tour="tab-browser"><i></i>Browser</span><span data-tour="tab-docs"><i></i>Docs</span>
+          </nav>
+
+          <!-- EDITOR: a file tree with search, tabs, code with a diff -->
+          <div class="ag-win ag-w-editor" data-tour="w-editor" data-chrome="app" data-title="{{repo|your-repo}}">
+            <div class="ed">
+              <div class="ed-side">
+                <label class="ed-search" data-tour="ed-search" data-tour-cursor="text"><svg viewBox="0 0 16 16"><circle cx="7" cy="7" r="4"/><path d="m10 10 3.5 3.5"/></svg><span data-tour="ed-q" data-placeholder="Search"></span></label>
+                <div class="ed-hits" data-tour="ed-hits">
+                  <p class="ed-hit" data-tour="hit-1"><b>ReportsPage.tsx</b><span>&lt;Toolbar&gt;</span></p>
+                  <p class="ed-hit"><b>ReportTable.tsx</b><span>export function</span></p>
+                  <p class="ed-hit"><b>types.ts</b><span>export type Report</span></p>
+                </div>
+                <p class="ed-dir">src / reports</p>
+                <p class="ed-file" data-tour="f-page">ReportsPage.tsx</p>
+                <p class="ed-file">ReportTable.tsx</p>
+                <p class="ed-file is-new" data-tour="f-csv">exportCsv.ts<em>A</em></p>
+                <p class="ed-file is-new" data-tour="f-test">exportCsv.test.ts<em>A</em></p>
+                <p class="ed-file">types.ts</p>
+              </div>
+              <div class="ed-main">
+                <div class="ed-tabs">
+                  <span class="ed-tab" data-tour="t-page">ReportsPage.tsx</span>
+                  <span class="ed-tab" data-tour="t-csv">exportCsv.ts</span>
+                  <span class="ed-tab" data-tour="t-test">exportCsv.test.ts</span>
+                </div>
+                <div class="ed-panes">
+                  <div class="ed-pane" data-tour="pane-empty"><p class="ed-empty">No file open</p></div>
+                  <div class="ed-pane" data-tour="pane-page">
+<p class="ln"><i class="k">import</i> { Page, Toolbar, Button } <i class="k">from</i> <i class="s">'../ui'</i>;</p>
+<p class="ln"><i class="k">import</i> { ReportTable } <i class="k">from</i> <i class="s">'./ReportTable'</i>;</p>
+<p class="ln add ins" data-tour="pg-add"><i class="k">import</i> { toCsv } <i class="k">from</i> <i class="s">'./exportCsv'</i>;</p>
+<p class="ln add ins" data-tour="pg-add"><i class="k">import</i> { download } <i class="k">from</i> <i class="s">'../lib/download'</i>;</p>
+<p class="ln"><i class="k">import type</i> { Report } <i class="k">from</i> <i class="s">'./types'</i>;</p>
+<p class="ln"> </p>
+<p class="ln"><i class="k">export function</i> <i class="f">ReportsPage</i>({ report }: { report: Report }) {</p>
+<p class="ln">  <i class="k">return</i> (</p>
+<p class="ln">    &lt;<i class="t">Page</i> title=<i class="s">"Reports"</i>&gt;</p>
+<p class="ln" data-tour="pg-toolbar">      &lt;<i class="t">Toolbar</i>&gt;</p>
+<p class="ln add ins" data-tour="pg-add">        &lt;<i class="t">Button</i> onClick={() =&gt; <i class="f">download</i>(<i class="f">toCsv</i>(report), <i class="s">'report.csv'</i>)}&gt;</p>
+<p class="ln add ins" data-tour="pg-add">          Export CSV</p>
+<p class="ln add ins" data-tour="pg-add">        &lt;/<i class="t">Button</i>&gt;</p>
+<p class="ln">      &lt;/<i class="t">Toolbar</i>&gt;</p>
+<p class="ln">      &lt;<i class="t">ReportTable</i> report={report} /&gt;</p>
+<p class="ln">    &lt;/<i class="t">Page</i>&gt;</p>
+<p class="ln">  );</p>
+<p class="ln">}</p>
+                  </div>
+                  <div class="ed-pane" data-tour="pane-csv">
+<p class="ln add ins" data-tour="csv-add"><i class="k">import type</i> { Report } <i class="k">from</i> <i class="s">'./types'</i>;</p>
+<p class="ln add ins" data-tour="csv-add"> </p>
+<p class="ln add ins" data-tour="csv-add"><i class="k">export function</i> <i class="f">toCsv</i>(report: Report): <i class="t">string</i> {</p>
+<p class="ln add ins bug" data-tour="csv-add">  <i class="k">const</i> head = report.columns.<i class="f">map</i>((c) =&gt; c.key);</p>
+<p class="ln add ins" data-tour="fix-add">  <i class="k">const</i> head = report.columns.<i class="f">map</i>((c) =&gt; c.label);</p>
+<p class="ln add ins" data-tour="csv-add">  <i class="k">const</i> rows = report.rows.<i class="f">map</i>((row) =&gt;</p>
+<p class="ln add ins" data-tour="csv-add">    report.columns.<i class="f">map</i>((c) =&gt; <i class="f">quote</i>(row[c.key])).<i class="f">join</i>(<i class="s">','</i>),</p>
+<p class="ln add ins" data-tour="csv-add">  );</p>
+<p class="ln add ins" data-tour="csv-add">  <i class="k">return</i> [head.<i class="f">join</i>(<i class="s">','</i>), ...rows].<i class="f">join</i>(<i class="s">'\n'</i>);</p>
+<p class="ln add ins" data-tour="csv-add">}</p>
+<p class="ln add ins" data-tour="csv-add"> </p>
+<p class="ln add ins" data-tour="csv-add"><i class="k">function</i> <i class="f">quote</i>(v: <i class="t">unknown</i>): <i class="t">string</i> {</p>
+<p class="ln add ins" data-tour="csv-add">  <i class="k">const</i> s = <i class="t">String</i>(v ?? <i class="s">''</i>);</p>
+<p class="ln add ins" data-tour="csv-add">  <i class="k">return</i> <i class="s">/[",\n]/</i>.<i class="f">test</i>(s) ? <i class="s">`"${s}"`</i> : s;</p>
+<p class="ln add ins" data-tour="csv-add">}</p>
+                  </div>
+                  <div class="ed-pane" data-tour="pane-test">
+<p class="ln add ins" data-tour="test-add"><i class="k">import</i> { toCsv } <i class="k">from</i> <i class="s">'./exportCsv'</i>;</p>
+<p class="ln add ins" data-tour="test-add"><i class="k">import</i> { sample } <i class="k">from</i> <i class="s">'./fixtures'</i>;</p>
+<p class="ln add ins" data-tour="test-add"> </p>
+<p class="ln add ins" data-tour="test-add"><i class="f">test</i>(<i class="s">'writes the header row'</i>, () =&gt;</p>
+<p class="ln add ins" data-tour="test-add">  <i class="f">expect</i>(<i class="f">toCsv</i>(sample).<i class="f">split</i>(<i class="s">'\n'</i>)[0]).<i class="f">toBe</i>(<i class="s">'Date,Customer,Amount'</i>));</p>
+<p class="ln add ins" data-tour="test-add"><i class="f">test</i>(<i class="s">'quotes values with commas'</i>, () =&gt;</p>
+<p class="ln add ins" data-tour="test-add">  <i class="f">expect</i>(<i class="f">toCsv</i>(sample)).<i class="f">toContain</i>(<i class="s">'"1,200.00"'</i>));</p>
+<p class="ln add ins" data-tour="test-add"><i class="f">test</i>(<i class="s">'one line per row'</i>, () =&gt;</p>
+<p class="ln add ins" data-tour="test-add">  <i class="f">expect</i>(<i class="f">toCsv</i>(sample).<i class="f">split</i>(<i class="s">'\n'</i>)).<i class="f">toHaveLength</i>(<i class="n">25</i>));</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TERMINAL: commands the agent runs, output streaming in -->
+          <div class="ag-win ag-w-term" data-tour="w-term" data-chrome="terminal" data-title="{{repo|your-repo}} — zsh">
+            <div class="tm" data-tour="tm" data-tour-follow>
+              <p class="tl"><span class="ps">{{repo|your-repo}} %</span> <span class="cmd" data-tour="cmd-1"></span></p>
+              <div data-tour="o1">
+                <p class="tl t-dim"> RUN  reports</p>
+                <p class="tl"> <b class="t-g">✓</b> ReportTable › renders every row <span class="t-dim">14 ms</span></p>
+                <p class="tl"> <b class="t-g">✓</b> ReportTable › sorts by a column <span class="t-dim">9 ms</span></p>
+                <p class="tl"> <b class="t-g">✓</b> ReportTable › formats amounts <span class="t-dim">11 ms</span></p>
+                <p class="tl"> <b class="t-g">✓</b> ReportsPage › shows the toolbar <span class="t-dim">7 ms</span></p>
+                <p class="tl"> <b class="t-g">✓</b> exportCsv › quotes values with commas <span class="t-dim">3 ms</span></p>
+                <p class="tl"> <b class="t-g">✓</b> exportCsv › one line per row <span class="t-dim">2 ms</span></p>
+                <p class="tl t-dim">   … 17 more</p>
+              </div>
+              <div data-tour="o1b">
+                <p class="tl" data-tour="fail"> <b class="t-r">✗ exportCsv › writes the header row</b></p>
+                <p class="tl">   Expected  <span class="t-g">"Date,Customer,Amount"</span></p>
+                <p class="tl">   Received  <span class="t-r">"date,customer,amount"</span></p>
+                <p class="tl"> </p>
+                <p class="tl"> Tests  <b class="t-r">1 failed</b> · <b class="t-g">23 passed</b> <span class="t-dim">(24)</span></p>
+                <p class="tl"><span class="ps">{{repo|your-repo}} %</span> <span class="cmd" data-tour="cmd-2"></span></p>
+              </div>
+              <div data-tour="o2">
+                <p class="tl t-dim"> RUN  reports</p>
+                <p class="tl"> <b class="t-g">✓</b> exportCsv › writes the header row <span class="t-dim">2 ms</span></p>
+                <p class="tl"> <b class="t-g">✓</b> exportCsv › quotes values with commas <span class="t-dim">3 ms</span></p>
+                <p class="tl"> <b class="t-g">✓</b> exportCsv › one line per row <span class="t-dim">2 ms</span></p>
+                <p class="tl t-dim">   … 21 more</p>
+                <p class="tl" data-tour="pass"> Tests  <b class="t-g">24 passed</b> <span class="t-dim">(24)</span></p>
+                <p class="tl"><span class="ps">{{repo|your-repo}} %</span> <span class="cmd" data-tour="cmd-3"></span></p>
+              </div>
+              <div data-tour="o3">
+                <p class="tl t-dim"> To origin</p>
+                <p class="tl"> * [new branch]  export-csv -&gt; export-csv</p>
+                <p class="tl"><span class="ps">{{repo|your-repo}} %</span> <span class="cmd is-caret"></span></p>
+              </div>
+            </div>
+          </div>
+
+          <!-- DOCS: what the agent read; it selects the sentence it acts on -->
+          <div class="ag-win ag-w-docs" data-tour="w-docs" data-chrome="browser" data-url="{{docs|your-repo/docs/reports.md}}">
+            <div class="dc" data-tour="dc">
+              <p class="dc-crumb">docs / reports</p>
+              <p class="dc-h1">Reports</p>
+              <p class="ph-text" style="--n:3"></p>
+              <p class="dc-h2" data-tour="dc-csv">CSV export</p>
+              <p class="dc-p"><span class="dc-hl" data-tour="hl"><span>Headers use each column’s label, in table order.</span></span> Quote any value that holds a comma, a quote or a line break.</p>
+              <p class="ph-text" style="--n:4"></p>
+              <p class="dc-h2">Limits</p>
+              <p class="ph-text" style="--n:3"></p>
+            </div>
+          </div>
+
+          <!-- BROWSER: the result, running locally; the agent tries the button it added -->
+          <div class="ag-win ag-w-browser" data-tour="w-browser" data-chrome="browser" data-url="{{url|localhost:3000/reports}}">
+            <div class="br">
+              <span class="br-load" data-tour="br-load"></span>
+              <p class="br-idle" data-tour="br-idle">Not opened yet</p>
+              <div class="br-page" data-tour="br-page">
+                <div class="br-bar"><span class="br-logo"></span><b>Reports</b><span class="br-btn">Filter</span><span class="br-btn is-new" data-tour="br-export" role="button">Export CSV</span></div>
+                <div class="br-table">
+                  <p class="br-th"><span>Date</span><span>Customer</span><span>Amount</span></p>
+                  <p class="br-tr"><i style="--w:70%"></i><i style="--w:82%"></i><i style="--w:46%"></i></p>
+                  <p class="br-tr"><i style="--w:70%"></i><i style="--w:58%"></i><i style="--w:52%"></i></p>
+                  <p class="br-tr"><i style="--w:70%"></i><i style="--w:74%"></i><i style="--w:38%"></i></p>
+                  <p class="br-tr"><i style="--w:70%"></i><i style="--w:64%"></i><i style="--w:56%"></i></p>
+                  <p class="br-tr"><i style="--w:70%"></i><i style="--w:88%"></i><i style="--w:42%"></i></p>
+                  <p class="br-tr"><i style="--w:70%"></i><i style="--w:52%"></i><i style="--w:50%"></i></p>
+                  <p class="br-tr"><i style="--w:70%"></i><i style="--w:68%"></i><i style="--w:34%"></i></p>
+                </div>
+                <div class="br-dl" data-tour="br-dl"><svg viewBox="0 0 16 16"><path d="M8 2.5v7.5M5 7l3 3 3-3M3 12.5h10"/></svg><b>report.csv</b><span>24 rows · 2.1 kB</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- the time-lapse marker: shown while a long wait passes quickly -->
+          <p class="ag-lapse" data-tour="lapse"><svg viewBox="0 0 16 16"><path d="M2.5 4v8l5-4zM8.5 4v8l5-4z"/></svg>Time-lapse<b data-tour="lapse-x">×50</b></p>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The frame the desk fills (the engine fits the desk to it and keeps every zoom inside it). The receipt prints
+         over it at the end: real links, so it lives outside the scaled desk. -->
+    <div class="ag-frame" data-tour-frame>
+      <div class="ag-receipt" data-tour-end>
+        <div class="ag-paper">
+          <p class="ag-rc-top"><span>Receipt</span><span>{{name|Product}} {{name_em|name}}</span></p>
+          <p class="ag-rc-title">Task <em>done</em></p>
+          <p class="ag-rc-task">{{task|Add a CSV export to the Reports page, test it, and open a pull request.}}</p>
+          <dl class="ag-rc-lines">
+            <div><dt>Tool calls</dt><dd data-ag="rc-steps">13</dd></div>
+            <div><dt>Approvals</dt><dd>1 · you</dd></div>
+            <div><dt>Tests</dt><dd>24 passed</dd></div>
+            <div class="ag-rc-files"><dt>Files changed</dt><dd>3 <span class="ag-add">+28</span></dd></div>
+          </dl>
+          <ul class="ag-rc-diff">
+            <li><span>exportCsv.ts</span><i style="--a:14"></i><b class="ag-add">+14</b></li>
+            <li><span>exportCsv.test.ts</span><i style="--a:9"></i><b class="ag-add">+9</b></li>
+            <li><span>ReportsPage.tsx</span><i style="--a:5"></i><b class="ag-add">+5</b></li>
+          </ul>
+          <p class="ag-rc-h">Made</p>
+          <ul class="ag-rc-links">
+            <li><a href="{{pr_href|#}}"><svg viewBox="0 0 16 16"><circle cx="4.5" cy="3.8" r="1.4"/><circle cx="4.5" cy="12.2" r="1.4"/><circle cx="11.5" cy="12.2" r="1.4"/><path d="M4.5 5.2v5.6M11.5 10.8V6.5a2 2 0 0 0-2-2H7M8.5 3 7 4.5 8.5 6"/></svg>Pull request<span>↗</span></a></li>
+            <li><a href="{{preview_href|#}}"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M2.5 8h11"/></svg>Preview<span>↗</span></a></li>
+            <li><a href="{{log_href|#}}"><svg viewBox="0 0 16 16"><path d="M4 2.5h8v11H4zM6 6h4M6 8.5h4M6 11h2"/></svg>Run log<span>↗</span></a></li>
+          </ul>
+          <dl class="ag-rc-time">
+            <div><dt>Time</dt><dd data-ag="rc-time">4 m 36 s</dd></div>
+            <div><dt>By hand</dt><dd>{{by_hand|about an hour}}<span class="sf-note">Your own estimate, one you'd stand behind.</span></dd></div>
+          </dl>
+          <div class="ag-rc-cta">
+            <a class="ag-rc-go" href="{{cta_href|#}}">{{cta|Give it a task}}<svg viewBox="0 0 16 16"><path d="M3 8h9.5M8.5 4l4 4-4 4"/></svg></a>
+            <span class="ag-rc-domain">{{domain|yourproduct.com}}</span>
+          </div>
+          <button class="ag-rc-again" type="button" data-ag="replay" data-tour-hide-on-record><svg viewBox="0 0 16 16"><path d="M3.5 8a4.5 4.5 0 1 0 1.4-3.3M3.5 2.5v2.6h2.6"/></svg>Watch it again</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- the visitor's hands on the page: real buttons laid over the drawn Run and Approve while the run waits for them -->
+    <button class="ag-hit" type="button" data-ag="run" data-tour-hide-on-record aria-label="Run the task: {{task|Add a CSV export to the Reports page, test it, and open a pull request.}}"></button>
+    <button class="ag-hit" type="button" data-ag="approve" data-tour-hide-on-record aria-label="Approve: push the branch and open a pull request"></button>
+    <button class="ag-hit" type="button" data-ag="deny" data-tour-hide-on-record aria-label="Deny"></button>
+    <p class="ag-tip" data-ag="tip" data-tour-hide-on-record></p>
+
+    <!-- speed and scrub: the run plays itself; this is how you take it over -->
+    <div class="ag-ctl" data-tour-hide-on-record>
+      <button class="ag-pp" type="button" data-ag="pp" aria-label="Pause"></button>
+      <div class="ag-tl" data-ag="tl"><input type="range" min="0" max="1" step="0.01" value="0" aria-label="Seek the run" data-ag="scrub"><span class="ag-tl-fill"></span></div>
+      <span class="ag-time" data-ag="time">0:00</span>
+      <div class="ag-speed" role="group" aria-label="Speed">
+        <button type="button" data-rate="1" aria-pressed="true">1×</button><button type="button" data-rate="2" aria-pressed="false">2×</button><button type="button" data-rate="4" aria-pressed="false">4×</button>
+      </div>
+    </div>
+    <span class="sf-note ag-note">The task, the plan, the tool calls and the windows are placeholders: AGENT.md says how to put in your agent's real run log, tools and screens.</span>
+  </div>
+</section>

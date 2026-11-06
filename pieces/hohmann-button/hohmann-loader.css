@@ -1,0 +1,26 @@
+/* hohmann-loader: an engraved plate of a Hohmann transfer, in one warm ink.
+ * Theme with --paper, --paper-2, --ink. Everything is prefixed .hl-.
+ * hohmann-button: the original stylesheet with its full-page plate section taken
+ * out (that plate and its texture are not part of this folder). Nothing else changed. */
+
+.hl { --hl-paper: var(--paper, #f3f0e8); --hl-ink: var(--ink, #141312); }
+.hl-svg { display: block; width: 100%; height: auto; overflow: visible; shape-rendering: geometricPrecision; }
+.hl-ink { fill: var(--hl-ink); stroke: none; }
+.hl-paper { fill: var(--hl-paper); stroke: none; }
+.hl-limb { fill: none; stroke: var(--hl-ink); }
+.hl-ring { stroke: var(--hl-ink); }
+.hl-orbit { fill: none; stroke: var(--hl-ink); stroke-opacity: .62; }
+.hl-plan { fill: none; stroke: var(--hl-ink); stroke-opacity: .7; stroke-linecap: round; }
+.hl-mark { fill: none; stroke: var(--hl-ink); stroke-opacity: .7; }
+
+/* ---- the inline loader ------------------------------------------------- */
+.hl-inline {
+    display: inline-block; vertical-align: -.32em;
+    width: var(--hl-size, 1.45em); height: var(--hl-size, 1.45em);
+    position: relative;
+}
+.hl-inline .hl-svg { width: 100%; height: 100%; }
+.hl-inline progress {          /* still there for screen readers */
+    position: absolute; width: 1px; height: 1px; overflow: hidden;
+    clip-path: inset(50%); white-space: nowrap; margin: -1px; border: 0; padding: 0;
+}

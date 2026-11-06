@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Launch note for one feature</title>
+<script>document.documentElement.classList.remove("no-js")</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+<link rel="stylesheet" href="./kit/scaffold.css">
+<link rel="stylesheet" href="./launch-note/section.css">
+<link rel="stylesheet" href="./install/section.css">
+</head>
+<body>
+<article class="demo-launch-note" data-tpl="demo/launch-note" id="top" aria-labelledby="ln-title">
+
+  <!-- 1. The note: what shipped, when. Short. -->
+  <header class="sf-wrap ln-head">
+    <p class="ln-meta"><a href="#">Changelog</a><span><time datetime="2026-01-01">Release date</time></span><span>Version number</span></p>
+    <h1 class="ln-h1" id="ln-title">Name the feature, <em>then what it does</em></h1>
+    <p class="ln-dek">One or two sentences: who it's for and the moment it helps. Link the docs if there are any.</p>
+    <span class="sf-note">Take the feature from your latest pull request, commits or CHANGELOG (AGENT.md). One feature per note.</span>
+  </header>
+
+  <!-- 2. The loop: 10–20 s of just this feature, a scripted cursor, playing on its own. ?record films it with a title and an end card. -->
+  <div class="sf-wrap ln-film-wrap">
+    <div class="ln-film" data-tour-root data-driver="play" data-loop data-captions="always" aria-label="The feature, in a short loop">
+      <div class="ln-stage" data-tour-stage>
+        <div class="ln-frame" data-tour-frame aria-hidden="true"></div>
+        <div class="tour-rig">
+          <!-- THE PRODUCT, 1200 × 750 design px with the browser bar. Replace .ln-app with the real screen (AGENT.md). -->
+          <div class="ln-win" data-tour-window data-chrome="browser" data-size="1200x750" data-url="app.yourproduct.com/tasks">
+            <div class="ln-app" data-tour="app">
+              <aside class="ln-side">
+                <div class="ln-ws"><span class="ln-logo"></span><b>Workspace</b></div>
+                <nav><a><i></i><b style="--w:46%"></b></a><a class="is-on"><i></i>Tasks</a><a><i></i><b style="--w:58%"></b></a><a><i></i><b style="--w:40%"></b></a><a><i></i><b style="--w:52%"></b></a></nav>
+                <p class="ln-side-h">Views</p>
+                <nav class="ln-views"><a><i></i><b style="--w:54%"></b></a><a><i></i><b style="--w:38%"></b></a><a class="ln-view-new" data-tour="view-new"><i></i>In progress</a></nav>
+              </aside>
+              <main class="ln-main">
+                <div class="ln-bar">
+                  <h4>Tasks <span class="ln-count" data-tour="count">8</span></h4>
+                  <span class="ln-search"><svg viewBox="0 0 16 16"><path d="M7 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8ZM10 10l3.5 3.5"/></svg>Search</span>
+                  <button class="ln-btn ln-filter" type="button" tabindex="-1" data-tour="filter"><svg viewBox="0 0 16 16"><path d="M2.5 4h11M4.5 8h7M6.5 12h3"/></svg>Filter<em>New</em></button>
+                  <button class="ln-btn is-primary" type="button" tabindex="-1"><svg viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9"/></svg>New</button>
+                </div>
+                <div class="ln-chips" data-tour="chips">
+                  <span class="ln-chip" data-tour="chip">Status <i>is</i> In progress<svg viewBox="0 0 16 16"><path d="m5 5 6 6M11 5l-6 6"/></svg></span>
+                  <span class="ln-chip-add">+ Add filter</span>
+                  <button class="ln-btn is-text" type="button" tabindex="-1" data-tour="save-view">Save view</button>
+                </div>
+                <div class="ln-table">
+                  <div class="ln-th"><span>Name</span><span>Status</span><span>Owner</span><span>Due</span></div>
+                  <div class="ln-row" data-st="todo"><i></i><b style="--w:52%"></b><span class="ln-st">Todo</span><span class="ph is-round is-bare is-tone ln-av" style="--r:1/1"></span><s style="--w:50%"></s></div>
+                  <div class="ln-row" data-st="prog"><i></i><b style="--w:64%"></b><span class="ln-st">In progress</span><span class="ph is-round is-bare ln-av" style="--r:1/1"></span><s style="--w:62%"></s></div>
+                  <div class="ln-row" data-st="done"><i></i><b style="--w:44%"></b><span class="ln-st">Done</span><span class="ph is-round is-bare is-tone ln-av" style="--r:1/1"></span><s style="--w:40%"></s></div>
+                  <div class="ln-row" data-st="todo"><i></i><b style="--w:58%"></b><span class="ln-st">Todo</span><span class="ph is-round is-bare ln-av" style="--r:1/1"></span><s style="--w:56%"></s></div>
+                  <div class="ln-row" data-st="prog"><i></i><b style="--w:48%"></b><span class="ln-st">In progress</span><span class="ph is-round is-bare is-tone ln-av" style="--r:1/1"></span><s style="--w:46%"></s></div>
+                  <div class="ln-row" data-st="done"><i></i><b style="--w:70%"></b><span class="ln-st">Done</span><span class="ph is-round is-bare ln-av" style="--r:1/1"></span><s style="--w:58%"></s></div>
+                  <div class="ln-row" data-st="prog"><i></i><b style="--w:56%"></b><span class="ln-st">In progress</span><span class="ph is-round is-bare is-tone ln-av" style="--r:1/1"></span><s style="--w:52%"></s></div>
+                  <div class="ln-row" data-st="todo"><i></i><b style="--w:40%"></b><span class="ln-st">Todo</span><span class="ph is-round is-bare ln-av" style="--r:1/1"></span><s style="--w:44%"></s></div>
+                </div>
+                <div class="ln-pop" data-tour="pop">
+                  <p>Filter by</p>
+                  <span class="ln-opt is-head"><svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5"/></svg>Status</span>
+                  <span class="ln-opt" data-tour="opt-todo"><i></i>Todo<small>3</small></span>
+                  <span class="ln-opt" data-tour="opt-prog" role="button"><i></i>In progress<small>3</small></span>
+                  <span class="ln-opt"><i></i>Done<small>2</small></span>
+                  <span class="ln-opt is-head is-sep"><svg viewBox="0 0 16 16"><circle cx="8" cy="6" r="2.5"/><path d="M3.5 13c.6-2.2 2.3-3.3 4.5-3.3s3.9 1.1 4.5 3.3"/></svg>Owner</span>
+                  <span class="ln-opt is-head"><svg viewBox="0 0 16 16"><path d="M3 3h5l5 5-5 5-5-5z"/></svg>Label</span>
+                </div>
+                <div class="ln-toast" data-tour="toast"><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg>View saved</div>
+              </main>
+            </div>
+          </div>
+        </div>
+
+        <!-- recording only: the first frame (the note's headline), a slug that stays, and the end card -->
+        <div class="ln-band" data-tour-band="css">
+          <p class="ln-meta"><span>Changelog</span><span>Release date</span></p>
+          <p class="ln-band-h">Name the feature, <em>then what it does</em></p>
+        </div>
+        <p class="ln-slug"><b>Name the feature, <em>then what it does</em></b><span>Product · Release date</span></p>
+        <footer class="ln-end" data-tour-end>
+          <p class="ln-meta"><span>Out now</span></p>
+          <p class="ln-end-h">Update to get it.</p>
+          <code class="ln-end-cmd">brew upgrade yourproduct</code>
+          <span class="ln-end-url">yourproduct.com/changelog</span>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Before and after: the same screen harvested twice. Drag the line, or use the arrow keys. -->
+  <section class="sf-wrap ln-ba" aria-labelledby="ln-ba-t">
+    <div class="ln-ba-head"><h2 id="ln-ba-t" class="ln-h2">Before and after</h2><p class="ln-ba-hint">Drag the line</p></div>
+    <div class="ln-ba-frame" style="--x:50">
+      <div class="ln-ba-pane is-before" data-ln-state="before"></div>
+      <div class="ln-ba-pane is-after" data-ln-state="after"></div>
+      <span class="ln-ba-tag is-before">Before</span><span class="ln-ba-tag is-after">After</span>
+      <span class="ln-ba-line"><span class="ln-ba-grip" role="slider" tabindex="0" aria-label="Before and after" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M7.5 6 3.5 10l4 4M12.5 6l4 4-4 4"/></svg></span></span>
+    </div>
+    <span class="sf-note">Two snapshots of the same screen at the same size: before (your main branch, or the last release) and after (this branch).</span>
+  </section>
+
+  <!-- 4. What changed, in three notes. -->
+  <section class="sf-wrap ln-notes" aria-labelledby="ln-notes-t">
+    <h2 id="ln-notes-t" class="ln-h2">What changed</h2>
+    <ol>
+      <li><b>What's new</b><p>The change people will notice first, in one sentence.</p></li>
+      <li><b>What it replaces</b><p>What used to happen, and why this is better.</p></li>
+      <li><b>What to do</b><p>Nothing, or the one setting, shortcut or migration they need.</p></li>
+    </ol>
+    <p class="ln-src">Shipped in <a href="#">the pull request</a></p>
+  </section>
+</article>
+
+<section class="cta-install" data-tpl="cta/install" id="get" aria-labelledby="cta-install-t">
+  <div class="sf-wrap cta-install-in">
+    <div class="cta-install-name">
+      <p class="sf-eyebrow">Update</p>
+      <h2 id="cta-install-t">Product <em>name</em></h2>
+    </div>
+    <div class="cta-install-row">
+      <p class="sf-lede">Already have it? Update and the feature is there. New here? It's free to start.</p>
+
+    <div class="cta-install-card">
+      <div class="cta-install-tabs" role="tablist" aria-label="How to install">
+        <button type="button" role="tab" aria-selected="true" aria-controls="cta-install-p1" id="cta-install-b1">Homebrew</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="cta-install-p2" id="cta-install-b2" tabindex="-1">npm</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="cta-install-p3" id="cta-install-b3" tabindex="-1">Download</button>
+      </div>
+      <div class="cta-install-panel" role="tabpanel" id="cta-install-p1" aria-labelledby="cta-install-b1">
+        <pre class="cta-install-cmd"><code>brew upgrade yourproduct</code></pre>
+        <button class="sf-btn cta-install-copy" type="button">Copy</button>
+      </div>
+      <div class="cta-install-panel" role="tabpanel" id="cta-install-p2" aria-labelledby="cta-install-b2" hidden>
+        <pre class="cta-install-cmd"><code>npm install -g yourproduct@latest</code></pre>
+        <button class="sf-btn cta-install-copy" type="button">Copy</button>
+      </div>
+      <div class="cta-install-panel is-dl" role="tabpanel" id="cta-install-p3" aria-labelledby="cta-install-b3" hidden>
+        <p>The signed app, for when you'd rather not use a terminal.</p>
+        <a class="sf-btn" href="#">Download for macOS</a>
+      </div>
+      <p class="cta-install-small">Version number · what it needs</p>
+      <span class="sf-note">Take these from the README and package metadata: the real commands, the release link, the requirements.</span>
+      <span class="cta-install-said" aria-live="polite"></span>
+    </div>
+    </div>
+  </div>
+  <footer class="sf-wrap cta-install-foot">
+    <span>Product name · 2026 · Licence</span>
+    <nav><a href="#">Source</a><a href="#">Changelog</a><a href="#top">Watch again</a></nav>
+  </footer>
+</section>
+
+<script type="module" src="./kit/scaffold.js"></script>
+<script type="module">
+import s0 from "./launch-note/section.js";
+import s1 from "./install/section.js";
+for (const [k, f] of [["demo/launch-note",s0],["cta/install",s1]]) document.querySelectorAll(`[data-tpl="${k}"]`).forEach((el) => f(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+{
+ "source": "Freer Gallery of Art F1917.18, photograph FS-7729_16; the canvas is the object box [1251, 325, 2934, 2738]",
+ "canvas": [
+  1683,
+  2413
+ ],
+ "sizes": [
+  [
+   842,
+   1207
+  ],
+  [
+   335,
+   480
+  ],
+  [
+   117,
+   168
+  ]
+ ],
+ "hinge": 0.44965,
+ "ring_top": 0.37232,
+ "ring_bottom": 0.98782,
+ "ring_cx": 0.52561,
+ "ring_rw": 0.88247,
+ "rest_deg": 12,
+ "lift_max_deg": 32,
+ "height_cm": 7.7,
+ "depth_cm": 2.2
+}

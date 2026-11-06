@@ -1,0 +1,124 @@
+<section class="demo-terminal" data-tpl="demo/terminal" data-tour-root data-driver="scroll" data-captions="record" aria-label="Terminal tour">
+  <div class="demo-terminal-stage" data-tour-stage>
+
+    <div class="tour-rig">
+      <!-- The desk: one window (chrome "none") holding two real-looking windows, a terminal and the browser that
+           shows what the command made. The camera pans between them. data-size-tall is the desk on phones and 9:16. -->
+      <div class="demo-terminal-desk" data-tour-window data-chrome="none" data-size="1280x800" data-size-tall="560x920">
+
+        <!-- THE TERMINAL. Commands are typed by script.js into the empty .cmd spans; output lines (.tl) stay hidden
+             until stream() reveals them. Replace the output with your CLI's real output (AGENT.md, ansi.py). -->
+        <div class="term-win" data-tour="term" data-chrome="terminal" data-title="{{tool|yourtool}} — zsh — 80×24">
+          <div class="term-screen" data-tour="screen" data-tour-follow>
+            <p class="tl is-in t-faint">Last login: Sun Nov 1 09:41:07 on ttys002</p>
+            <p class="tl is-in"><span class="ps">~</span><span class="cmd" data-tour="cmd-1"></span></p>
+
+            <div class="tb" data-tour="out-1">
+              <p class="tl" data-tour-wait=".35"><span class="t-spin" data-tour="spin-1">⠋</span> <span class="t-dim">fetching {{tool|yourtool}}…</span></p>
+              <p class="tl" data-tour-wait="1.5"></p>
+              <p class="tl">added 1 package in 1.6s</p>
+              <p class="tl" data-tour-wait=".25"><span class="t-green">✓</span> <b>{{tool|yourtool}}</b> <span class="t-dim">1.0.0</span> is ready. Try <span class="t-blue">{{tool|yourtool}} new</span></p>
+              <p class="tl" data-tour-wait=".35"><span class="ps">~</span><span class="cmd" data-tour="cmd-2"></span></p>
+            </div>
+
+            <div class="tb" data-tour="out-2a">
+              <p class="tl" data-tour-wait=".3"></p>
+              <p class="tl"><span class="t-dim">Creating</span> <b>my-site</b> <span class="t-dim">in ~/my-site</span></p>
+              <p class="tl" data-tour-wait=".25"><span class="t-green">+</span> package.json</p>
+              <p class="tl"><span class="t-green">+</span> {{tool|yourtool}}.config.js</p>
+              <p class="tl"><span class="t-green">+</span> src/index.html</p>
+              <p class="tl"><span class="t-green">+</span> src/styles.css</p>
+              <p class="tl" data-tour-wait=".3"><span class="t-dim">Installing</span> <span class="bar" data-tour="bar-2"><i>━━━━━━━━━━━━━━━━━━━━━━</i><i>━━━━━━━━━━━━━━━━━━━━━━</i></span> <span class="t-yellow" data-tour="pct-2">0%</span></p>
+            </div>
+            <div class="tb" data-tour="out-2b">
+              <p class="tl" data-tour-wait=".2"><span class="t-green">✓</span> Done in 3.1s</p>
+              <p class="tl"></p>
+              <p class="tl"><span class="t-dim">Next:</span> cd my-site &amp;&amp; {{tool|yourtool}} dev</p>
+              <p class="tl" data-tour-wait=".35"><span class="ps">~</span><span class="cmd" data-tour="cmd-3"></span></p>
+            </div>
+
+            <div class="tb" data-tour="out-3">
+              <p class="tl" data-tour-wait=".45"></p>
+              <p class="tl">  <b class="t-accent">{{tool|yourtool}}</b> <span class="t-dim">1.0.0  dev server</span></p>
+              <p class="tl"></p>
+              <p class="tl" data-tour-wait=".5">  <span class="t-green">✓</span> Ready in 412 ms</p>
+              <p class="tl" data-tour-wait=".15">  <span class="t-accent">➜</span>  Local:   <a class="t-blue t-u" data-tour="link" data-tour-cursor="pointer">http://localhost:3000/</a></p>
+              <p class="tl">  <span class="t-dim">➜  Network: use --host to expose</span></p>
+            </div>
+            <div class="tb" data-tour="out-3b">
+              <p class="tl t-dim">^C</p>
+              <p class="tl" data-tour-wait=".25"><span class="ps">~/my-site</span><span class="cmd" data-tour="cmd-4"></span></p>
+            </div>
+
+            <div class="tb" data-tour="out-4a">
+              <p class="tl" data-tour-wait=".3"><span class="t-spin" data-tour="spin-4">⠋</span> <span class="t-dim">Building for production…</span></p>
+              <p class="tl" data-tour-wait="1.3"><span class="t-green">✓</span> 4 files <span class="t-dim">·</span> 18 kB</p>
+              <p class="tl" data-tour-wait=".2"><span class="t-dim">Uploading </span> <span class="bar" data-tour="bar-4"><i>━━━━━━━━━━━━━━━━━━━━━━</i><i>━━━━━━━━━━━━━━━━━━━━━━</i></span> <span class="t-yellow" data-tour="pct-4">0%</span></p>
+            </div>
+            <div class="tb" data-tour="out-4b">
+              <p class="tl" data-tour-wait=".25"></p>
+              <p class="tl"><span data-tour="live"><span class="t-green">✓</span> Live at <span class="t-blue t-u">https://my-site.{{tool|yourtool}}.app</span></span></p>
+              <p class="tl" data-tour-wait=".4"><span class="ps">~/my-site</span><span class="cmd is-caret"></span></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- THE RESULT: what the command made, in a browser (or data-chrome="app" for an editor). Harvest it with
+             tour/snapshot.py into fragments/result.html and swap the placeholder page for
+             <div data-tour-include="fragments/result.html"></div> (AGENT.md, step 3). -->
+        <div class="term-browser" data-tour="browser" data-chrome="browser" data-url="localhost:3000">
+          <div class="res-view">
+            <span class="res-load" data-tour="load"></span>
+            <p class="res-idle" data-tour="idle">Nothing running yet</p>
+            <div class="res-page" data-tour="page">
+              <div class="res-nav res-blk"><span class="ph-logo res-logo"></span><i></i><i></i><i></i><b class="res-btn is-small">Get started</b></div>
+              <div class="res-hero res-blk">
+                <p class="res-eyebrow">The page your command made</p>
+                <h3>Its real headline, as the starter ships it</h3>
+                <p class="ph-text" style="--n:2"></p>
+                <b class="res-btn" data-tour="res-cta" role="button">Primary action</b>
+              </div>
+              <figure class="ph res-blk" style="--r:16/7" data-ph="Result · 16:7" data-hint="The screen the command produced, harvested with snapshot.py"></figure>
+              <div class="res-row res-blk" data-tour="res-2">
+                <div><figure class="ph is-tone" style="--r:4/3" data-ph="Part · 4:3" data-hint="A detail of the result"></figure><p class="ph-text" style="--n:2"></p></div>
+                <div><figure class="ph is-tone" style="--r:4/3" data-ph="Part · 4:3" data-hint="Another"></figure><p class="ph-text" style="--n:2"></p></div>
+                <div><figure class="ph is-tone" style="--r:4/3" data-ph="Part · 4:3" data-hint="A third"></figure><p class="ph-text" style="--n:2"></p></div>
+              </div>
+              <div class="res-foot res-blk"><p class="ph-text" style="--n:3"></p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Opening band: the film's first frame, and the gate. -->
+    <header class="demo-terminal-band" data-tour-band>
+      <div>
+        <p class="sf-eyebrow">{{eyebrow|Introducing}}</p>
+        <h1>{{name|Product}} <em>{{name_em|name}}</em></h1>
+      </div>
+      <div class="demo-terminal-side">
+        <p class="demo-terminal-lede">{{lede|Say what the tool does, and for whom, in one sentence. It's the line people read before they press play.}}</p>
+        <code class="demo-terminal-cmd"><span>$</span> {{install|npm install -g yourtool}}</code>
+        <div class="demo-terminal-act">
+          <button class="sf-btn" type="button" data-tour-gate><svg width="11" height="12" viewBox="0 0 11 12" aria-hidden="true"><path d="M1 1.2v9.6c0 .6.6.9 1.1.6l7.6-4.8c.5-.3.5-.9 0-1.2L2.1.6C1.6.3 1 .6 1 1.2Z" fill="currentColor"/></svg><span data-tour-gate-label>Click to play</span></button>
+          <a class="sf-btn sf-btn--ghost" href="#get" data-tour-hide-on-record>{{cta|Install it}}</a>
+        </div>
+        <span class="sf-note">The terminal types your real commands and streams your CLI's real output (captured with ansi.py), then pans to what the command made. AGENT.md says how.</span>
+      </div>
+    </header>
+
+    <!-- Closing frame: the name and the one command to copy. -->
+    <footer class="demo-terminal-end" data-tour-end>
+      <div>
+        <p class="sf-eyebrow">{{end_eyebrow|Available now}}</p>
+        <h2>{{name|Product}} <em>{{name_em|name}}</em></h2>
+      </div>
+      <div class="demo-terminal-side">
+        <p class="demo-terminal-lede">{{end_line|One line on what to run first.}}</p>
+        <code class="demo-terminal-cmd"><span>$</span> {{install|npm install -g yourtool}}</code>
+        <span class="demo-terminal-url">{{domain|yourtool.dev}}</span>
+      </div>
+    </footer>
+  </div>
+</section>

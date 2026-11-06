@@ -1,0 +1,38 @@
+<section class="cta-install" data-tpl="cta/install" id="get" aria-labelledby="cta-install-t">
+  <div class="sf-wrap cta-install-in">
+    <div class="cta-install-name">
+      <p class="sf-eyebrow">{{eyebrow|Get it}}</p>
+      <h2 id="cta-install-t">{{name|Product}} <em>{{name_em|name}}</em></h2>
+    </div>
+    <div class="cta-install-row">
+      <p class="sf-lede">{{line|One sentence on what it costs and what it runs on. Free, open source, macOS 14 and later.}}</p>
+
+    <div class="cta-install-card">
+      <div class="cta-install-tabs" role="tablist" aria-label="How to install">
+        <button type="button" role="tab" aria-selected="true" aria-controls="cta-install-p1" id="cta-install-b1">{{tab1|Homebrew}}</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="cta-install-p2" id="cta-install-b2" tabindex="-1">{{tab2|npm}}</button>
+        <button type="button" role="tab" aria-selected="false" aria-controls="cta-install-p3" id="cta-install-b3" tabindex="-1">{{tab3|Download}}</button>
+      </div>
+      <div class="cta-install-panel" role="tabpanel" id="cta-install-p1" aria-labelledby="cta-install-b1">
+        <pre class="cta-install-cmd"><code>{{cmd1|brew install --cask yourproduct}}</code></pre>
+        <button class="sf-btn cta-install-copy" type="button">Copy</button>
+      </div>
+      <div class="cta-install-panel" role="tabpanel" id="cta-install-p2" aria-labelledby="cta-install-b2" hidden>
+        <pre class="cta-install-cmd"><code>{{cmd2|npm install -g yourproduct}}</code></pre>
+        <button class="sf-btn cta-install-copy" type="button">Copy</button>
+      </div>
+      <div class="cta-install-panel is-dl" role="tabpanel" id="cta-install-p3" aria-labelledby="cta-install-b3" hidden>
+        <p>{{dl_note|The signed app, for when you'd rather not use a terminal.}}</p>
+        <a class="sf-btn" href="{{dl_href|#}}">{{dl|Download for macOS}}</a>
+      </div>
+      <p class="cta-install-small">{{small|Version · size · what it needs}}</p>
+      <span class="sf-note">Take these from the README and package metadata: the real commands, the release link, the requirements.</span>
+      <span class="cta-install-said" aria-live="polite"></span>
+    </div>
+    </div>
+  </div>
+  <footer class="sf-wrap cta-install-foot">
+    <span>{{name|Product}} {{name_em|name}} · {{year|2026}} · {{licence|Licence}}</span>
+    <nav><a href="{{repo|#}}">{{repo_label|Source}}</a><a href="{{changes|#}}">Changelog</a><a href="#top">Watch again</a></nav>
+  </footer>
+</section>

@@ -1,0 +1,195 @@
+<section class="demo-chapters" data-tpl="demo/chapters" aria-label="What it does, one chapter at a time">
+
+  <!-- The opening: name, one line, and a contents list that section.js fills from the chapter titles below. -->
+  <header class="demo-chapters-head">
+    <div class="demo-chapters-name">
+      <p class="sf-eyebrow">{{eyebrow|Introducing}}</p>
+      <h1>{{name|Product}} <em>{{name_em|name}}</em></h1>
+    </div>
+    <div class="demo-chapters-intro">
+      <p class="demo-chapters-lede">{{lede|Say what it does, and for whom, in one sentence. Then show it, one feature at a time.}}</p>
+      <div class="demo-chapters-act"><a class="sf-btn" href="#get">{{cta|Get it free}}</a><a class="sf-btn sf-btn--ghost" href="#chapter-1">See it work</a></div>
+      <ol class="demo-chapters-index" aria-label="Chapters"></ol>
+    </div>
+  </header>
+
+  <div class="demo-chapters-body">
+    <!-- One item per feature. Its film (same position below) plays when the text reaches the middle of the screen. -->
+    <ol class="demo-chapters-list">
+      <li class="demo-chapters-item" id="chapter-1">
+        <div class="demo-chapters-text">
+          <p class="demo-chapters-n"><span>01</span><i class="demo-chapters-bar" aria-hidden="true"><b></b></i></p>
+          <h2>Start from <em>nothing</em></h2>
+          <p class="demo-chapters-line">An empty workspace and one button to begin.</p>
+          <p class="ph-text" style="--n:3"></p>
+          <button class="demo-chapters-again" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8a4.5 4.5 0 1 0 1.4-3.3M3.5 2.5v2.6h2.6"/></svg>Play again</button>
+          <span class="sf-note">Each chapter is its own 8–15 s script in script.js. Name the feature, then say what it saves people in one plain line.</span>
+        </div>
+      </li>
+      <li class="demo-chapters-item" id="chapter-2">
+        <div class="demo-chapters-text">
+          <p class="demo-chapters-n"><span>02</span><i class="demo-chapters-bar" aria-hidden="true"><b></b></i></p>
+          <h2>Make it <em>yours</em></h2>
+          <p class="demo-chapters-line">Settings sit beside the work, not behind a menu.</p>
+          <p class="ph-text" style="--n:3"></p>
+          <button class="demo-chapters-again" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8a4.5 4.5 0 1 0 1.4-3.3M3.5 2.5v2.6h2.6"/></svg>Play again</button>
+        </div>
+      </li>
+      <li class="demo-chapters-item" id="chapter-3">
+        <div class="demo-chapters-text">
+          <p class="demo-chapters-n"><span>03</span><i class="demo-chapters-bar" aria-hidden="true"><b></b></i></p>
+          <h2>See the <em>whole</em> picture</h2>
+          <p class="demo-chapters-line">Open a project and everything in it is right there.</p>
+          <p class="ph-text" style="--n:3"></p>
+          <button class="demo-chapters-again" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8a4.5 4.5 0 1 0 1.4-3.3M3.5 2.5v2.6h2.6"/></svg>Play again</button>
+        </div>
+      </li>
+      <li class="demo-chapters-item" id="chapter-4">
+        <div class="demo-chapters-text">
+          <p class="demo-chapters-n"><span>04</span><i class="demo-chapters-bar" aria-hidden="true"><b></b></i></p>
+          <h2>Share it in <em>one</em> step</h2>
+          <p class="demo-chapters-line">Send a link and people see exactly what you see.</p>
+          <p class="ph-text" style="--n:3"></p>
+          <button class="demo-chapters-again" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8a4.5 4.5 0 1 0 1.4-3.3M3.5 2.5v2.6h2.6"/></svg>Play again</button>
+        </div>
+      </li>
+    </ol>
+
+    <!-- The pinned slot: one film per chapter, stacked, so it reads as one window that re-stages itself.
+         An empty [data-tour-window] gets a copy of the product <template> below; fill one to give a chapter its own screens. -->
+    <div class="demo-chapters-pinwrap">
+      <div class="demo-chapters-pin">
+        <div class="demo-chapters-slot">
+          <div class="demo-chapters-film" data-tour-root><div data-tour-stage><div class="tour-rig">
+            <div data-tour-window data-chrome="browser" data-size="1200x750" data-url="{{url|app.yourproduct.com}}/projects"></div>
+          </div></div></div>
+          <div class="demo-chapters-film" data-tour-root><div data-tour-stage><div class="tour-rig">
+            <div data-tour-window data-chrome="browser" data-size="1200x750" data-url="{{url|app.yourproduct.com}}/projects/launch-plan/settings"></div>
+          </div></div></div>
+          <div class="demo-chapters-film" data-tour-root><div data-tour-stage><div class="tour-rig">
+            <div data-tour-window data-chrome="browser" data-size="1200x750" data-url="{{url|app.yourproduct.com}}/projects/launch-plan"></div>
+          </div></div></div>
+          <div class="demo-chapters-film" data-tour-root><div data-tour-stage><div class="tour-rig">
+            <div data-tour-window data-chrome="browser" data-size="1200x750" data-url="{{url|app.yourproduct.com}}/projects"></div>
+          </div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE PRODUCT, once. Replace everything inside with your real screens (AGENT.md). Hooks are data-tour="…" ('@…' in script.js). -->
+  <template class="demo-chapters-product">
+    <div class="demo-chapters-app" data-tour="app">
+    <aside class="app-side">
+      <div class="app-ws"><span class="app-logo"></span><b>{{workspace|Workspace}}</b><svg viewBox="0 0 16 16"><path d="m5 6 3 3 3-3"/></svg></div>
+      <nav class="app-nav">
+        <a><svg viewBox="0 0 16 16"><path d="M3 7.5 8 3l5 4.5V13H3z"/></svg>Home</a>
+        <a class="is-on"><svg viewBox="0 0 16 16"><path d="M2.5 4.5h4l1.5 1.5h5.5v6.5h-11z"/></svg>Projects</a>
+        <a><svg viewBox="0 0 16 16"><path d="M5.5 7a2 2 0 1 0 0-.1M2.5 13c.4-2 1.6-3 3-3s2.6 1 3 3M10.5 6.5a1.7 1.7 0 1 0 0-.1M10 9.6c1.6-.3 3 .6 3.5 2.9"/></svg>Shared with me</a>
+        <a><svg viewBox="0 0 16 16"><path d="M3.5 3h3v10h-3zM8.5 3h4v10h-4z"/></svg>Library</a>
+        <a><svg viewBox="0 0 16 16"><path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM8 1.8v2M8 12.2v2M1.8 8h2M12.2 8h2"/></svg>Settings</a>
+      </nav>
+      <p class="app-label">Recent</p>
+      <div class="app-recent">
+        <span class="app-recent-new" data-tour="recent-new"><i data-tone="3"></i>Launch plan</span>
+        <span><i></i><b style="--w:62%"></b></span><span><i></i><b style="--w:78%"></b></span><span><i></i><b style="--w:48%"></b></span>
+      </div>
+      <div class="app-me"><span class="ph is-round is-bare is-tone" style="--r:1/1"></span><span><b>Your name</b><small>Team plan</small></span></div>
+    </aside>
+
+    <main class="app-main">
+      <div class="app-bar">
+        <h4>Projects <span class="app-count" data-tour="count">0</span></h4>
+        <span class="app-search"><svg viewBox="0 0 16 16"><path d="M7 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8ZM10 10l3.5 3.5"/></svg>Search</span>
+        <span class="app-seg"><span class="is-on">Grid</span><span>List</span></span>
+        <button class="app-btn" type="button" data-tour="share" tabindex="-1">Share</button>
+        <button class="app-btn is-primary" type="button" data-tour="new" tabindex="-1"><svg viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9"/></svg>New</button>
+      </div>
+
+      <div class="app-body" data-tour="body">
+        <div class="app-empty" data-tour="empty">
+          <span class="app-empty-art"><span class="ph is-tone is-bare" style="--r:1/1"></span><span class="ph is-bare" style="--r:1/1"></span></span>
+          <b>No projects yet</b>
+          <p>Create one and it shows up here.</p>
+        </div>
+
+        <div class="app-grid">
+          <article class="app-card" data-tour="card-1"><figure class="ph is-bare app-cover" style="--r:16/10"></figure><b>Launch plan</b><small>Edited just now</small><em class="app-badge">New</em></article>
+          <article class="app-card"><figure class="ph is-bare app-cover" style="--r:16/10"></figure><i style="--w:64%"></i><small class="app-bars"><i></i><i></i></small></article>
+          <article class="app-card"><figure class="ph is-bare app-cover" style="--r:16/10"></figure><i style="--w:48%"></i><small class="app-bars"><i></i><i></i></small></article>
+          <article class="app-card"><figure class="ph is-bare app-cover" style="--r:16/10"></figure><i style="--w:72%"></i><small class="app-bars"><i></i><i></i></small></article>
+          <article class="app-card"><figure class="ph is-bare app-cover" style="--r:16/10"></figure><i style="--w:56%"></i><small class="app-bars"><i></i><i></i></small></article>
+          <article class="app-card"><figure class="ph is-bare app-cover" style="--r:16/10"></figure><i style="--w:40%"></i><small class="app-bars"><i></i><i></i></small></article>
+        </div>
+
+        <!-- a project opened full size: grows out of the first card -->
+        <section class="app-room" data-tour="room">
+          <div class="app-room-bar"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg><b>Launch plan</b>
+            <span class="app-tabs"><span class="is-on">Overview</span><span>Activity</span><span>Files</span></span></div>
+          <div class="app-room-scroll" data-tour="room-scroll">
+            <figure class="ph app-room-hero" style="--r:16/7" data-ph="Your main screen · 16:7" data-hint="The result your product makes: the thing people came for"></figure>
+            <div class="app-room-cols">
+              <div><p class="app-h">What it's for</p><p class="ph-text" style="--n:4"></p></div>
+              <div class="app-stats" data-tour="stats">
+                <span><small>Measure</small><b></b><i style="--h:.42"></i></span>
+                <span data-tour="stat-2"><small>Measure</small><b></b><i style="--h:.78"></i><em class="app-tip" data-tour="tip">Up since last week</em></span>
+                <span><small>Measure</small><b></b><i style="--h:.58"></i></span>
+              </div>
+    </div>
+            <div class="app-room-row"><figure class="ph is-tone" style="--r:4/3" data-ph="Detail · 4:3" data-hint="A second view"></figure><figure class="ph is-tone" style="--r:4/3" data-ph="Detail · 4:3" data-hint="A third"></figure><p class="ph-text" style="--n:6"></p></div>
+          </div>
+        </section>
+
+        <div class="app-toast" data-tour="toast"><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg><span data-tour="toast-text">Project created</span></div>
+      </div>
+    </main>
+
+    <aside class="app-insp" data-tour="inspector">
+      <div class="app-insp-in">
+        <div class="app-insp-head"><b>Launch plan</b><span class="app-x" data-tour="insp-close" role="button"><svg viewBox="0 0 16 16"><path d="m4 4 8 8M12 4l-8 8"/></svg></span></div>
+        <figure class="ph is-bare app-cover" data-tour="insp-cover" style="--r:16/9"></figure>
+        <p class="app-h">Settings</p>
+        <div class="app-row"><span>Visible to team</span><span class="app-switch" role="switch" data-tour="toggle-1"><i></i></span></div>
+        <div class="app-row"><span>Notifications</span><span class="app-switch" role="switch" style="--on:1"><i></i></span></div>
+        <div class="app-row is-col"><span>Detail <b data-tour="slider-val">30%</b></span>
+          <span class="app-slider" data-tour="slider" style="--v:.3"><i></i><b data-tour="knob" role="slider"></b></span></div>
+        <div class="app-row is-col"><span>Tone</span>
+          <span class="app-tones"><i class="is-on" data-tour="tone-1" data-tone="1" role="button"></i><i data-tone="2" role="button"></i><i data-tour="tone-3" data-tone="3" role="button"></i><i data-tone="4" role="button"></i><i data-tone="5" role="button"></i></span></div>
+      </div>
+    </aside>
+
+    <div class="app-scrim" data-tour="scrim"></div>
+    <div class="app-modal" data-tour="modal">
+      <b class="app-modal-t">New project</b>
+      <label class="app-field" data-tour="name" data-tour-cursor="text"><small>Name</small><span data-tour="name-text" data-placeholder="Untitled"></span></label>
+      <p class="app-h">Start from</p>
+      <div class="app-tpls">
+        <span class="app-tpl is-on" data-tour="tpl-1" role="button"><span class="ph is-tone is-bare" style="--r:4/3"></span>Blank</span>
+        <span class="app-tpl" data-tour="tpl-2" role="button"><span class="ph is-tone is-bare" style="--r:4/3"></span>Template</span>
+        <span class="app-tpl" role="button"><span class="ph is-tone is-bare" style="--r:4/3"></span>Import</span>
+      </div>
+      <div class="app-modal-foot"><button class="app-btn" type="button" tabindex="-1">Cancel</button><button class="app-btn is-primary" type="button" data-tour="create" tabindex="-1">Create</button></div>
+    </div>
+
+    <div class="app-pop" data-tour="sharebox">
+      <b>Share “Launch plan”</b>
+      <div class="app-link"><span>{{url|app.yourproduct.com}}/p/launch-plan</span><button class="app-btn is-primary" type="button" data-tour="copy" tabindex="-1">Copy link</button></div>
+      <div class="app-people"><span class="ph is-round is-bare is-tone" style="--r:1/1"></span><span class="ph is-round is-bare is-tone" style="--r:1/1"></span><span class="ph is-round is-bare is-tone" style="--r:1/1"></span><small>Your team can edit</small></div>
+    </div>
+    </div>
+  </template>
+
+  <!-- Only in ?record: the clip's first frame and its closing frame. section.js fills in the chapter. -->
+  <template class="demo-chapters-band">
+    <header class="demo-chapters-open" data-tour-band>
+      <div><p class="sf-eyebrow" data-fill="n"></p><h1>{{name|Product}} <em>{{name_em|name}}</em></h1></div>
+      <div class="demo-chapters-side"><p class="demo-chapters-say" data-fill="title"></p><p class="demo-chapters-lede" data-fill="line"></p></div>
+    </header>
+  </template>
+  <template class="demo-chapters-close">
+    <footer class="demo-chapters-end" data-tour-end>
+      <div><p class="sf-eyebrow">{{end_eyebrow|Available now}}</p><h2>{{name|Product}} <em>{{name_em|name}}</em></h2></div>
+      <div class="demo-chapters-side"><p class="demo-chapters-lede">{{end_line|One line on what to do next.}}</p><span class="demo-chapters-url">{{domain|yourproduct.com}}</span></div>
+    </footer>
+  </template>
+</section>

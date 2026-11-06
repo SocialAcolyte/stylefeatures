@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Versus launch page</title>
+<script>document.documentElement.classList.remove("no-js")</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+<link rel="stylesheet" href="./kit/scaffold.css">
+<link rel="stylesheet" href="./versus/section.css">
+</head>
+<body>
+<section class="demo-versus" data-tpl="demo/versus" id="top" aria-label="The same task, done two ways, side by side">
+
+  <!-- THE RACE: the first screen. Two windows start at the same instant; each lane has a clock and a click counter.
+       The numbers come from race.js (your measured runs), never from the films. AGENT.md, step 1. -->
+  <div class="vs-race">
+    <header class="vs-head">
+      <div>
+        <p class="sf-eyebrow">Same task, two ways</p>
+        <h1 class="vs-task">Send the weekly numbers to the team</h1>
+      </div>
+      <div class="vs-head-act">
+        <button class="sf-btn vs-go" type="button"><svg width="11" height="12" viewBox="0 0 11 12" aria-hidden="true"><path d="M1 1.2v9.6c0 .6.6.9 1.1.6l7.6-4.8c.5-.3.5-.9 0-1.2L2.1.6C1.6.3 1 .6 1 1.2Z" fill="currentColor"/></svg><span class="vs-go-label">Start both</span></button>
+        <span class="sf-note">The task in a few words, as the person doing it would say it. Both lanes start together and run on one clock.</span>
+      </div>
+    </header>
+
+    <div class="vs-lanes">
+      <!-- lane 1: the old way. A generic tangle of tabs, a spreadsheet and mail: never another company's real UI. -->
+      <div class="vs-lane" data-lane="old">
+        <div class="vs-meta">
+          <p class="vs-label">The old way</p>
+          <p class="vs-clock" aria-label="Time"><span class="vs-time">0:00.0</span></p>
+          <p class="vs-clicks"><b class="vs-n">0</b> <span class="vs-unit">clicks</span></p>
+          <p class="vs-ff" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M2.5 3.5 8 8l-5.5 4.5zM8.5 3.5 14 8l-5.5 4.5z"/></svg><span>Fast-forward</span><b class="vs-rate">×1</b></p>
+        </div>
+        <div class="vs-film" data-tour-root>
+          <div data-tour-stage>
+            <div class="vs-frame" data-tour-frame></div>
+            <div class="tour-rig">
+              <div class="vs-win" data-tour-window data-chrome="none" data-size="880x580">
+                <div class="vs-old" data-tour="old" data-view="dash">
+                  <div class="vs-tabs">
+                    <span class="vs-lights"><i></i><i></i><i></i></span>
+                    <span class="vs-tab" data-tab="dash" data-tour="tab-dash" role="tab"><i></i>Dashboard</span>
+                    <span class="vs-tab" data-tab="sheet" data-tour="tab-sheet" role="tab"><i></i>Weekly numbers</span>
+                    <span class="vs-tab" data-tab="doc" role="tab"><i></i>Notes</span>
+                    <span class="vs-tab" data-tab="mail" data-tour="tab-mail" role="tab"><i></i>Inbox</span>
+                    <span class="vs-tab is-more"><svg viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9"/></svg></span>
+                  </div>
+                  <div class="vs-addr"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg><svg viewBox="0 0 16 16"><path d="m6 3 5 5-5 5"/></svg>
+                    <span class="vs-url"><span data-u="dash">dashboard.example/overview</span><span data-u="sheet">sheets.example/weekly-numbers</span><span data-u="mail">mail.example/inbox</span></span></div>
+
+                  <div class="vs-views">
+                    <!-- a dashboard to copy numbers out of -->
+                    <section class="vs-v vs-dash" data-v="dash">
+                      <div class="vs-dash-bar"><b>Overview</b><span class="vs-chip">Last 7 days</span><span class="vs-chip">Export</span></div>
+                      <div class="vs-tiles">
+                        <div class="vs-tile"><small>Metric one</small><b data-tour="m1">1,204</b><i style="--w:62%"></i></div>
+                        <div class="vs-tile"><small>Metric two</small><b data-tour="m2">318</b><i style="--w:44%"></i></div>
+                        <div class="vs-tile"><small>Metric three</small><b data-tour="m3">2,046</b><i style="--w:78%"></i></div>
+                        <div class="vs-tile"><small>Metric four</small><b data-tour="m4">1.9%</b><i style="--w:30%"></i></div>
+                      </div>
+                      <div class="vs-chart"><i style="--h:.42"></i><i style="--h:.58"></i><i style="--h:.5"></i><i style="--h:.71"></i><i style="--h:.64"></i><i style="--h:.82"></i><i style="--h:.76"></i></div>
+                    </section>
+                    <!-- a spreadsheet to paste them into -->
+                    <section class="vs-v vs-sheet" data-v="sheet">
+                      <div class="vs-menu"><span data-tour="file" role="button">File</span><span>Edit</span><span>View</span><span>Insert</span><span>Format</span><span>Data</span></div>
+                      <div class="vs-fx"><i>fx</i><span data-tour="fx"></span></div>
+                      <div class="vs-grid">
+                        <span class="h"></span><span class="h">A</span><span class="h">B</span><span class="h">C</span><span class="h">D</span><span class="h">E</span>
+                        <span class="h">1</span><span class="hd">Metric</span><span class="hd">This week</span><span class="hd">Last week</span><span class="hd">Change</span><span></span>
+                        <span class="h">2</span><span>Metric one</span><span class="c" data-tour="c1"></span><span>1,150</span><span class="c" data-tour="d1"></span><span></span>
+                        <span class="h">3</span><span>Metric two</span><span class="c" data-tour="c2"></span><span>301</span><span class="c" data-tour="d2"></span><span></span>
+                        <span class="h">4</span><span>Metric three</span><span class="c" data-tour="c3"></span><span>1,987</span><span class="c" data-tour="d3"></span><span></span>
+                        <span class="h">5</span><span>Metric four</span><span class="c" data-tour="c4"></span><span>2.1%</span><span class="c" data-tour="d4"></span><span></span>
+                        <span class="h">6</span><span></span><span></span><span></span><span></span><span></span>
+                        <span class="h">7</span><span></span><span></span><span></span><span></span><span></span>
+                        <span class="h">8</span><span></span><span></span><span></span><span></span><span></span>
+                        <span class="h">9</span><span></span><span></span><span></span><span></span><span></span>
+                        <span class="h">10</span><span></span><span></span><span></span><span></span><span></span>
+                        <span class="h">11</span><span></span><span></span><span></span><span></span><span></span>
+                      </div>
+                      <div class="vs-dd" data-tour="menu"><span>New</span><span>Open</span><span class="is-on" data-tour="download" role="button">Download as CSV</span><span>Print</span></div>
+                    </section>
+                    <!-- mail, to send it -->
+                    <section class="vs-v vs-mail" data-v="mail">
+                      <aside class="vs-mlist"><span class="vs-compose" data-tour="compose" role="button">Compose</span>
+                        <span class="vs-mrow"><b></b><i style="--w:80%"></i></span><span class="vs-mrow"><b></b><i style="--w:64%"></i></span><span class="vs-mrow"><b></b><i style="--w:72%"></i></span><span class="vs-mrow"><b></b><i style="--w:56%"></i></span></aside>
+                      <div class="vs-mail-pane">
+                        <div class="vs-draft" data-tour="draft">
+                          <p class="vs-mf"><small>To</small><span data-tour="to" data-tour-cursor="text"></span></p>
+                          <p class="vs-mf"><small>Subject</small><span data-tour="subject" data-tour-cursor="text"></span></p>
+                          <div class="vs-mbody"><p class="ph-text" style="--n:3"></p></div>
+                          <div class="vs-att" data-tour="att"><i></i><span>weekly-numbers.csv</span><small data-tour="att-state">Uploading…</small></div>
+                          <div class="vs-mfoot"><span class="vs-btn is-primary" data-tour="send-old" role="button">Send</span><span class="vs-btn" data-tour="attach" role="button"><svg viewBox="0 0 16 16"><path d="m10.5 5-4.8 4.8a1.3 1.3 0 0 0 1.8 1.8l5-5a2.6 2.6 0 0 0-3.7-3.7L3.9 7.8a3.9 3.9 0 0 0 5.5 5.5L13 9.7"/></svg>Attach</span></div>
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                  <!-- waits that happen to you: a modal with a spinner, a file picker -->
+                  <div class="vs-scrim" data-tour="scrim"></div>
+                  <div class="vs-wait" data-tour="wait"><span class="vs-spin" data-tour="spin"></span><b data-tour="wait-text">Preparing download…</b><small>This can take a minute</small></div>
+                  <div class="vs-pick" data-tour="pick"><b>Choose a file</b>
+                    <span class="vs-file"><i></i>Downloads</span><span class="vs-file" data-tour="file-csv" role="button"><i></i>weekly-numbers.csv</span><span class="vs-file"><i></i>weekly-numbers (1).csv</span>
+                    <span class="vs-btn is-primary vs-pick-ok" data-tour="pick-ok" role="button">Open</span></div>
+                  <div class="vs-sent" data-tour="sent-old"><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg>Message sent</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- lane 2: their product. Replace .vs-app with the real screens (AGENT.md, step 2). -->
+      <div class="vs-lane is-new" data-lane="new">
+        <div class="vs-meta">
+          <p class="vs-label">With <em>Product name</em></p>
+          <p class="vs-clock" aria-label="Time"><span class="vs-time">0:00.0</span></p>
+          <p class="vs-clicks"><b class="vs-n">0</b> <span class="vs-unit">clicks</span></p>
+          <p class="vs-done" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg>Done</p>
+        </div>
+        <div class="vs-film" data-tour-root>
+          <div data-tour-stage>
+            <div class="vs-frame" data-tour-frame></div>
+            <div class="tour-rig">
+              <div class="vs-win" data-tour-window data-chrome="app" data-size="880x580" data-title="Product name">
+                <div class="vs-app" data-tour="app">
+                  <aside class="vs-rail"><span class="vs-logo"></span>
+                    <i class="is-on"><svg viewBox="0 0 16 16"><path d="M3 12.5V8M6.5 12.5v-7M10 12.5V9.5M13.5 12.5V4"/></svg></i>
+                    <i><svg viewBox="0 0 16 16"><path d="M2.5 4.5h4l1.5 1.5h5.5v6.5h-11z"/></svg></i>
+                    <i><svg viewBox="0 0 16 16"><path d="M5.5 7a2 2 0 1 0 0-.1M2.5 13c.4-2 1.6-3 3-3s2.6 1 3 3M10.5 6.5a1.7 1.7 0 1 0 0-.1M10 9.6c1.6-.3 3 .6 3.5 2.9"/></svg></i>
+                    <i><svg viewBox="0 0 16 16"><path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5ZM8 1.8v2M8 12.2v2M1.8 8h2M12.2 8h2"/></svg></i></aside>
+                  <main class="vs-main">
+                    <div class="vs-bar"><h4>Reports</h4><span class="vs-search"><svg viewBox="0 0 16 16"><path d="M7 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8ZM10 10l3.5 3.5"/></svg>Search</span></div>
+                    <div class="vs-list">
+                      <div class="vs-row" data-tour="report" role="button"><span class="vs-ic"></span><span><b>Weekly numbers</b><small>Every Monday · the team</small></span><em>Ready</em></div>
+                      <div class="vs-row"><span class="vs-ic"></span><span><i style="--w:150px"></i><small><i style="--w:96px"></i></small></span></div>
+                      <div class="vs-row"><span class="vs-ic"></span><span><i style="--w:120px"></i><small><i style="--w:80px"></i></small></span></div>
+                      <div class="vs-row"><span class="vs-ic"></span><span><i style="--w:170px"></i><small><i style="--w:110px"></i></small></span></div>
+                    </div>
+                    <!-- the report, opened over the list -->
+                    <section class="vs-panel" data-tour="panel">
+                      <div class="vs-panel-bar"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg><b>Weekly numbers</b>
+                        <span class="vs-status" data-tour="status">Not run yet</span>
+                        <span class="vs-btn" data-tour="run" role="button"><svg viewBox="0 0 16 16"><path d="M4.5 3.2v9.6L12.5 8z"/></svg>Run</span>
+                        <span class="vs-btn is-primary" data-tour="send" role="button">Send</span></div>
+                      <div class="vs-panel-body">
+                        <div class="vs-kpis">
+                          <div class="vs-kpi"><small>Metric one</small><b data-tour="k1">—</b><em class="vs-up">+4.7%</em></div>
+                          <div class="vs-kpi"><small>Metric two</small><b data-tour="k2">—</b><em class="vs-up">+5.6%</em></div>
+                          <div class="vs-kpi"><small>Metric three</small><b data-tour="k3">—</b><em class="vs-up">+3.0%</em></div>
+                          <div class="vs-kpi"><small>Metric four</small><b data-tour="k4">—</b><em>−0.2</em></div>
+                        </div>
+                        <div class="vs-bars" data-tour="bars"><i style="--h:.42"></i><i style="--h:.58"></i><i style="--h:.5"></i><i style="--h:.71"></i><i style="--h:.64"></i><i style="--h:.82"></i><i style="--h:.76"></i></div>
+                      </div>
+                      <div class="vs-pop" data-tour="sendbox"><b>Send “Weekly numbers”</b>
+                        <div class="vs-to"><span class="vs-who"><span class="ph is-round is-bare is-tone" style="--r:1/1"></span>The team</span><small>3 people</small></div>
+                        <p class="ph-text" style="--n:2"></p>
+                        <span class="vs-btn is-primary vs-pop-go" data-tour="send-now" role="button">Send now</span></div>
+                    </section>
+                    <div class="vs-toast" data-tour="toast"><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg>Sent to the team</div>
+                  </main>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="vs-foot"><span class="vs-foot-say">Both clocks started together. Times and clicks are from measured runs; the old way's film is cut to fit.</span>
+      <button class="vs-again" type="button"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.5 8a4.5 4.5 0 1 0 1.4-3.3M3.5 2.5v2.6h2.6"/></svg>Race again</button></p>
+  </div>
+
+  <!-- THE SCORE: filled from race.js. Every number here must come from your own measured runs. -->
+  <section class="vs-score" aria-labelledby="vs-score-h">
+    <div class="vs-score-in">
+      <p class="sf-eyebrow" id="vs-score-h">The score</p>
+      <div class="vs-rows">
+        <div class="vs-srow" data-k="time"><p class="vs-sk">Time</p>
+          <div class="vs-sv"><span class="vs-sl">The old way</span><i class="vs-sbar"><b></b></i><b class="vs-snum" data-v="old"></b></div>
+          <div class="vs-sv is-new"><span class="vs-sl">Product name</span><i class="vs-sbar"><b></b></i><b class="vs-snum" data-v="new"></b></div>
+          <p class="vs-sx" data-x></p></div>
+        <div class="vs-srow" data-k="clicks"><p class="vs-sk">Clicks</p>
+          <div class="vs-sv"><span class="vs-sl">The old way</span><i class="vs-sbar"><b></b></i><b class="vs-snum" data-v="old"></b></div>
+          <div class="vs-sv is-new"><span class="vs-sl">Product name</span><i class="vs-sbar"><b></b></i><b class="vs-snum" data-v="new"></b></div>
+          <p class="vs-sx" data-x></p></div>
+        <div class="vs-srow" data-k="tools"><p class="vs-sk">Tools touched</p>
+          <div class="vs-sv"><span class="vs-sl">The old way</span><i class="vs-sbar"><b></b></i><b class="vs-snum" data-v="old"></b></div>
+          <div class="vs-sv is-new"><span class="vs-sl">Product name</span><i class="vs-sbar"><b></b></i><b class="vs-snum" data-v="new"></b></div>
+          <p class="vs-sx" data-x></p></div>
+      </div>
+      <p class="vs-source" data-source></p>
+    </div>
+  </section>
+
+  <!-- HOW: the product's three key moves, each a frozen moment of the same film (race.js → how). -->
+  <section class="vs-how" aria-labelledby="vs-how-h">
+    <div class="vs-how-in">
+      <h2 class="vs-how-h" id="vs-how-h">How it’s <em>that</em> quick</h2>
+      <ol class="vs-moves"></ol>
+    </div>
+  </section>
+
+  <!-- THE END: the time it gives back, worked out from the score, and one thing to do. -->
+  <section class="vs-end" id="get" aria-label="Get it">
+    <div class="vs-end-in">
+      <p class="sf-eyebrow">Every time you do it</p>
+      <p class="vs-back"><span data-back></span> <em>back</em></p>
+      <div class="vs-end-row">
+        <p class="vs-end-name">Product <em>name</em></p>
+        <div class="vs-end-act"><a class="sf-btn" href="#">Get it free</a><span class="vs-url-end">yourproduct.com</span></div>
+      </div>
+      <span class="sf-note">The big number is the old way's time minus yours, from race.js. If the gap is small, lead with clicks instead (race.js → lead).</span>
+    </div>
+  </section>
+
+  <!-- the product's frame for the how strip: section.js clones the product lane's window into each move -->
+  <template class="vs-move-tpl">
+    <li class="vs-move"><div class="vs-mframe"><div class="vs-mfilm" data-tour-root><div data-tour-stage><div class="vs-frame" data-tour-frame></div><div class="tour-rig"></div></div></div></div>
+      <p class="vs-mn"></p><h3></h3><p class="vs-ml"></p></li>
+  </template>
+</section>
+
+<script type="module" src="./kit/scaffold.js"></script>
+<script type="module">
+import s0 from "./versus/section.js";
+for (const [k, f] of [["demo/versus",s0]]) document.querySelectorAll(`[data-tpl="${k}"]`).forEach((el) => f(el));
+</script>
+</body>
+</html>

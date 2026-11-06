@@ -1,0 +1,159 @@
+<section class="demo-phone" data-tpl="demo/phone" data-tour-root data-driver="scroll" data-captions="always" data-pointer="touch" data-device="{{device|ios}}" aria-label="App tour">
+  <div class="demo-phone-stage" data-tour-stage>
+
+    <!-- The phone's glass: tour.js fits the window to it and keeps every zoom inside it (data-tour-frame). The bezel is its shadow. -->
+    <div class="demo-phone-frame" data-tour-frame aria-hidden="true"></div>
+
+    <div class="tour-rig">
+      <!-- THE APP, built at 390 × 844 design pixels (an iPhone 15's points). Replace .mob's screens with the real ones (AGENT.md).
+           Hooks the script points at are data-tour="…" (written '@…' in script.js). -->
+      <div class="demo-phone-win" data-tour-window data-chrome="none" data-size="390x844">
+        <div class="mob" data-tour="app">
+
+          <div class="mob-status"><b>9:41</b>
+            <span class="mob-status-r">
+              <svg viewBox="0 0 18 12" class="mob-sig"><rect x="0" y="8" width="3" height="4" rx=".8"/><rect x="5" y="5.5" width="3" height="6.5" rx=".8"/><rect x="10" y="3" width="3" height="9" rx=".8"/><rect x="15" y="0" width="3" height="12" rx=".8"/></svg>
+              <svg viewBox="0 0 16 12" class="mob-wifi"><path d="M8 11.6 5.6 9.2a3.4 3.4 0 0 1 4.8 0zM3.5 7.1a6.4 6.4 0 0 1 9 0l1.4-1.4a8.4 8.4 0 0 0-11.8 0zM.7 4.3a10.4 10.4 0 0 1 14.6 0L16.7 2.9a12.4 12.4 0 0 0-17.4 0z"/></svg>
+              <svg viewBox="0 0 27 13" class="mob-batt"><rect x=".5" y=".5" width="23" height="12" rx="3.6" fill="none" stroke-opacity=".4"/><rect x="2.2" y="2.2" width="16.5" height="8.6" rx="2"/><path d="M25 4.4v4.2c.8-.3 1.4-1.1 1.4-2.1s-.6-1.8-1.4-2.1Z" fill-opacity=".45"/></svg>
+            </span>
+          </div>
+
+          <!-- everything behind a sheet: it scales back when one comes up (--sheet) -->
+          <div class="mob-base" data-tour="base">
+
+            <!-- HOME: a large title that collapses as it scrolls, a featured carousel, a list -->
+            <section class="mob-screen mob-home" data-tour="home">
+              <header class="mob-nav"><span class="mob-nav-title">{{tab1|Home}}</span>
+                <span class="mob-nav-act" data-tour="add" role="button"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></header>
+              <div class="mob-scroll" data-tour="feed">
+                <h1 class="mob-large">{{tab1|Home}}</h1>
+                <div class="mob-search"><svg viewBox="0 0 24 24"><path d="M10.5 4a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM15.5 15.5 20 20"/></svg>Search</div>
+                <p class="mob-h">{{featured|Featured}}</p>
+                <div class="mob-car" data-tour="car">
+                  <div class="mob-car-track" data-tour="car-track">
+                    <figure class="ph mob-card" style="--r:4/5" data-ph="Image · 4:5" data-hint="Your app's own featured content"></figure>
+                    <figure class="ph mob-card is-tone" style="--r:4/5" data-ph="Image · 4:5" data-hint="The next card"></figure>
+                    <figure class="ph mob-card" style="--r:4/5" data-ph="Image · 4:5" data-hint="And the next"></figure>
+                    <figure class="ph mob-card is-tone" style="--r:4/5" data-ph="Image · 4:5" data-hint=""></figure>
+                  </div>
+                </div>
+                <p class="mob-h">{{recent|Recent}}</p>
+                <ul class="mob-list">
+                  <li><span class="ph is-bare is-tone mob-thumb" style="--r:1/1"></span><span class="mob-li"><b style="--w:58%"></b><i style="--w:36%"></i></span></li>
+                  <li><span class="ph is-bare mob-thumb" style="--r:1/1"></span><span class="mob-li"><b style="--w:70%"></b><i style="--w:44%"></i></span></li>
+                  <li data-tour="row-3"><span class="ph is-bare is-tone mob-thumb" style="--r:1/1"></span><span class="mob-li"><strong>{{item|Reading list}}</strong><small>{{item_meta|12 items · Updated today}}</small></span><svg class="mob-chev" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></svg></li>
+                  <li><span class="ph is-bare mob-thumb" style="--r:1/1"></span><span class="mob-li"><b style="--w:48%"></b><i style="--w:30%"></i></span></li>
+                  <li data-tour="row-5"><span class="ph is-bare is-tone mob-thumb" style="--r:1/1"></span><span class="mob-li"><b style="--w:64%"></b><i style="--w:40%"></i></span></li>
+                  <li><span class="ph is-bare mob-thumb" style="--r:1/1"></span><span class="mob-li"><b style="--w:54%"></b><i style="--w:46%"></i></span></li>
+                  <li><span class="ph is-bare is-tone mob-thumb" style="--r:1/1"></span><span class="mob-li"><b style="--w:68%"></b><i style="--w:28%"></i></span></li>
+                  <li><span class="ph is-bare mob-thumb" style="--r:1/1"></span><span class="mob-li"><b style="--w:44%"></b><i style="--w:38%"></i></span></li>
+                </ul>
+              </div>
+            </section>
+
+            <!-- DETAIL: pushed in from the right -->
+            <section class="mob-screen mob-detail" data-tour="detail">
+              <header class="mob-nav is-solid"><span class="mob-back" data-tour="back" role="button"><svg viewBox="0 0 24 24"><path d="m15 5-7 7 7 7"/></svg>{{tab1|Home}}</span>
+                <span class="mob-nav-act"><svg viewBox="0 0 24 24"><path d="M12 15V4M8 8l4-4 4 4M6 11v8h12v-8"/></svg></span></header>
+              <div class="mob-detail-in" data-tour="detail-main">
+                <figure class="ph mob-hero" style="--r:4/3" data-ph="Screen image · 4:3" data-hint="The richest thing on this screen: a photo, a map, a chart"></figure>
+                <h2 class="mob-title">{{item|Reading list}}</h2>
+                <p class="mob-meta">{{item_meta|12 items · Updated today}}</p>
+                <p class="ph-text" style="--n:3"></p>
+                <div class="mob-acts" data-tour="acts">
+                  <span class="mob-btn is-primary" data-tour="save" role="button"><svg viewBox="0 0 24 24" class="mob-i-add"><path d="M12 5v14M5 12h14"/></svg><svg viewBox="0 0 24 24" class="mob-i-ok"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span data-tour="save-label">{{save|Save}}</span></span>
+                  <span class="mob-btn"><svg viewBox="0 0 24 24"><path d="M12 15V4M8 8l4-4 4 4M6 11v8h12v-8"/></svg>Share</span>
+                </div>
+                <div class="mob-rows"><span><b style="--w:40%"></b><i></i></span><span><b style="--w:52%"></b><i></i></span></div>
+              </div>
+            </section>
+
+            <!-- LIBRARY: the second tab; press and hold a row for its menu (--menu) -->
+            <section class="mob-screen mob-library" data-tour="library">
+              <div class="mob-scroll">
+                <h1 class="mob-large">{{tab3|Library}}</h1>
+                <div class="mob-seg"><span class="is-on">All</span><span>Pinned</span><span>Shared</span></div>
+                <ul class="mob-list is-plain">
+                  <li class="mob-lib-new" data-tour="lib-new"><span class="ph is-bare is-tone mob-thumb" style="--r:1/1"></span>
+                    <span class="mob-li"><strong data-tour="lib-name">Weekend plan</strong><small>Just now</small></span>
+                    <svg class="mob-pin" viewBox="0 0 24 24"><path d="M14.5 3.5 20.5 9.5 17 11l-3.5 3.5L13 19l-8-8 4.5-.5L13 7Z M5 19l4-4"/></svg>
+                    <div class="mob-menu" data-tour="menu">
+                      <span data-tour="pin" role="button">Pin<svg viewBox="0 0 24 24"><path d="M14.5 3.5 20.5 9.5 17 11l-3.5 3.5L13 19l-8-8 4.5-.5L13 7Z M5 19l4-4"/></svg></span>
+                      <span>Share<svg viewBox="0 0 24 24"><path d="M12 15V4M8 8l4-4 4 4M6 11v8h12v-8"/></svg></span>
+                      <span>Rename<svg viewBox="0 0 24 24"><path d="m15 5 4 4L9 19H5v-4z"/></svg></span>
+                      <span class="is-red">Delete<svg viewBox="0 0 24 24"><path d="M5 7h14M10 7V4h4v3M7 7l1 13h8l1-13"/></svg></span>
+                    </div>
+                  </li>
+                  <li><span class="ph is-bare mob-thumb" style="--r:1/1"></span><span class="mob-li"><b style="--w:62%"></b><i style="--w:34%"></i></span></li>
+                  <li><span class="ph is-bare is-tone mob-thumb" style="--r:1/1"></span><span class="mob-li"><b style="--w:50%"></b><i style="--w:42%"></i></span></li>
+                  <li><span class="ph is-bare mob-thumb" style="--r:1/1"></span><span class="mob-li"><b style="--w:72%"></b><i style="--w:30%"></i></span></li>
+                  <li><span class="ph is-bare is-tone mob-thumb" style="--r:1/1"></span><span class="mob-li"><b style="--w:46%"></b><i style="--w:38%"></i></span></li>
+                  <li><span class="ph is-bare mob-thumb" style="--r:1/1"></span><span class="mob-li"><b style="--w:60%"></b><i style="--w:26%"></i></span></li>
+                </ul>
+              </div>
+              <div class="mob-dim"></div>
+            </section>
+
+            <nav class="mob-tabs">
+              <span class="is-on" data-tour="tab-home" role="tab"><svg viewBox="0 0 24 24"><path d="M4 10.5 12 4l8 6.5V20h-5.5v-5.5h-5V20H4z"/></svg>{{tab1|Home}}</span>
+              <span role="tab"><svg viewBox="0 0 24 24"><path d="M10.5 4a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM15.5 15.5 20 20"/></svg>Search</span>
+              <span data-tour="tab-lib" role="tab"><svg viewBox="0 0 24 24"><path d="M5 4h4v16H5zM11 4h4v16h-4zM16.5 5.2l3.6-1 3.4 15.6-3.6 1z"/></svg>{{tab3|Library}}</span>
+              <span role="tab"><svg viewBox="0 0 24 24"><path d="M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8ZM4.5 20.5c.8-3.6 3.8-5.5 7.5-5.5s6.7 1.9 7.5 5.5"/></svg>Profile</span>
+            </nav>
+          </div>
+
+          <!-- the sheet: slides up over a scrim while the screens behind it scale back -->
+          <div class="mob-scrim" data-tour="scrim"></div>
+          <section class="mob-sheet" data-tour="sheet">
+            <span class="mob-grab"></span>
+            <header class="mob-sheet-bar"><span>Cancel</span><b>{{new|New item}}</b><span class="mob-sheet-add" data-tour="sheet-add" role="button">Add</span></header>
+            <label class="mob-field" data-tour="field" data-tour-cursor="text"><small>Name</small><span data-tour="field-text" data-placeholder="Untitled"></span></label>
+            <div class="mob-seg is-kinds"><span class="is-on" data-tour="kind-1" role="button">List</span><span data-tour="kind-2" role="button">Plan</span><span role="button">Note</span></div>
+            <div class="mob-field is-tall"><small>Notes</small><p class="ph-text" style="--n:2"></p></div>
+          </section>
+
+          <!-- the keyboard: the real QWERTY, rises with the field (--in) -->
+          <div class="mob-kb" data-tour="kb" aria-hidden="true">
+            <div class="mob-kb-sug"><span>“Weekend”</span><span>Weekend</span><span>Weekends</span></div>
+            <div class="mob-kb-row"><i>q</i><i>w</i><i>e</i><i>r</i><i>t</i><i>y</i><i>u</i><i>i</i><i>o</i><i>p</i></div>
+            <div class="mob-kb-row is-mid"><i>a</i><i>s</i><i>d</i><i>f</i><i>g</i><i>h</i><i>j</i><i>k</i><i>l</i></div>
+            <div class="mob-kb-row"><i class="is-fn"><svg viewBox="0 0 24 24"><path d="M12 4 4 12h4.5v7h7v-7H20z"/></svg></i><i>z</i><i>x</i><i>c</i><i>v</i><i>b</i><i>n</i><i>m</i><i class="is-fn"><svg viewBox="0 0 24 24"><path d="M9 6h11v12H9l-6-6zM12 9.5l5 5M17 9.5l-5 5"/></svg></i></div>
+            <div class="mob-kb-row is-bottom"><i class="is-fn">123</i><i class="is-space">space</i><i class="is-fn is-go">return</i></div>
+          </div>
+
+          <div class="mob-toast" data-tour="toast"><svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg><span data-tour="toast-text">{{toast|Saved}}</span></div>
+          <span class="mob-homebar"></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- the glass over the screen: the camera cut-out and the side buttons. It never zooms. -->
+    <div class="demo-phone-glass" aria-hidden="true"><i class="demo-phone-island"></i></div>
+
+    <!-- Opening band: the first frame, and the gate. It stands beside the phone (under it on a tall screen) and fades as the film starts. -->
+    <header class="demo-phone-band" data-tour-band="css">
+      <p class="sf-eyebrow">{{eyebrow|Introducing}}</p>
+      <h1>{{name|App}} <em>{{name_em|name}}</em></h1>
+      <p class="demo-phone-lede">{{lede|Say what the app does, and for whom, in one sentence.}}</p>
+      <div class="demo-phone-act">
+        <button class="sf-btn demo-phone-gate" type="button" data-tour-gate><svg width="11" height="12" viewBox="0 0 11 12" aria-hidden="true"><path d="M1 1.2v9.6c0 .6.6.9 1.1.6l7.6-4.8c.5-.3.5-.9 0-1.2L2.1.6C1.6.3 1 .6 1 1.2Z" fill="currentColor"/></svg><span data-tour-gate-label>Click to play</span></button>
+        <a class="sf-btn sf-btn--ghost" href="#get" data-tour-hide-on-record>{{cta|Get the app}}</a>
+      </div>
+      <span class="sf-note">The film is a pure function of time: a finger taps, swipes and holds through your real screens. Build them in the phone (AGENT.md), write the taps in script.js.</span>
+    </header>
+    <p class="demo-phone-aside" aria-hidden="true"><span>{{aside|Made for iPhone and Android}}</span></p>
+
+    <!-- Closing frame: the name again, and how to get it. In ?record it shows the address instead of buttons. -->
+    <footer class="demo-phone-end" data-tour-end>
+      <p class="sf-eyebrow">{{end_eyebrow|Available now}}</p>
+      <h2>{{name|App}} <em>{{name_em|name}}</em></h2>
+      <p class="demo-phone-lede">{{end_line|One line on what to do next.}}</p>
+      <div class="demo-phone-act">
+        <a class="sf-btn" href="#get">{{store1|Download on the App Store}}</a>
+        <a class="sf-btn sf-btn--ghost" href="#get">{{store2|Get it on Google Play}}</a>
+        <span class="demo-phone-url">{{domain|yourapp.com}}</span>
+      </div>
+    </footer>
+    <figure class="ph demo-phone-qr" style="--r:1/1" data-ph="QR · 1:1" data-hint="A code that opens your store page, for people watching on a computer" aria-hidden="true"></figure>
+  </div>
+</section>

@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chat launch page</title>
+<script>document.documentElement.classList.remove("no-js")</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+<link rel="stylesheet" href="./kit/scaffold.css">
+<link rel="stylesheet" href="./chat/section.css">
+</head>
+<body>
+<section class="demo-chat" data-tpl="demo/chat" id="top" data-tour-root data-driver="manual" data-captions="off" aria-label="Product name: a conversation">
+  <div class="demo-chat-stage" data-tour-stage>
+
+    <!-- The column the conversation lives in. tour.js fits the window to it (data-tour-frame) and keeps every push-in inside it.
+         Wide screens: a column down the middle of the page. Phones and 9:16: the whole screen, like a phone screen recording. -->
+    <div class="demo-chat-frame" data-tour-frame aria-hidden="true"></div>
+
+    <div class="tour-rig">
+      <!-- THE PRODUCT: your chat, at 580 design px wide (400 on phones and 9:16); its height follows the screen ("auto").
+           The thread below IS the script: each .ck-row is one message, played in order (../_chat/README.md).
+           Replace the cards with your real card components and the talk with a real transcript (AGENT.md). -->
+      <div class="demo-chat-win" data-tour-window data-chrome="none" data-size="580xauto" data-size-tall="400xauto">
+        <div class="ck-app">
+          <!-- a phone's status bar: only in a 9:16 recording -->
+          <div class="ck-status" aria-hidden="true"><b>9:41</b><span><svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx=".8"/><rect x="5" y="5.5" width="3" height="6.5" rx=".8"/><rect x="10" y="3" width="3" height="9" rx=".8"/><rect x="15" y="0" width="3" height="12" rx=".8"/></svg><svg viewBox="0 0 27 13"><rect x=".5" y=".5" width="23" height="12" rx="3.6" fill="none" stroke="currentColor" stroke-opacity=".4"/><rect x="2.2" y="2.2" width="16.5" height="8.6" rx="2"/><path d="M25 4.4v4.2c.8-.3 1.4-1.1 1.4-2.1s-.6-1.8-1.4-2.1Z" fill-opacity=".45"/></svg></span></div>
+
+          <header class="ck-head">
+            <!-- the avatar: one source, copied beside every agent turn. Put your bot's mark or image inside. -->
+            <span class="ck-av" data-ck-avatar><span class="demo-chat-mark-sm" aria-hidden="true">P</span></span>
+            <span><b>Product name</b><small>Assistant · replies in seconds</small></span>
+            <span class="ck-head-act" aria-hidden="true"><svg viewBox="0 0 20 20"><circle cx="4.5" cy="10" r="1.5"/><circle cx="10" cy="10" r="1.5"/><circle cx="15.5" cy="10" r="1.5"/></svg></span>
+          </header>
+
+          <div class="ck-thread" data-ck-thread data-tour-follow role="log" aria-label="Conversation">
+            <!-- the top of the conversation: the first frame. It floats in the free space until the talk pushes it away. -->
+            <div class="ck-start">
+              <span class="ck-av-l"><span class="demo-chat-mark-lg" aria-hidden="true">P</span></span>
+              <h1>Product <em>name</em></h1>
+              <p>Say what it does for people, in one sentence, the way your assistant introduces itself.</p>
+              <p class="ck-note">Today</p>
+            </div>
+
+            <!-- 1 · the first message arrives -->
+            <div class="ck-row" data-tour="hi" data-think=".9">
+              <div class="ck-pad"><div class="ck-text" data-stream><p>Hi, I'm Product name. I find times that work, sum up your week and send things for you. What can I do?</p></div></div>
+            </div>
+
+            <!-- 2 · the person types and sends -->
+            <div class="ck-row" data-from="person" data-tour="ask">
+              <div class="ck-pad"><p class="ck-bubble">Find an hour with the design team next week</p></div>
+            </div>
+
+            <!-- 3 · a tool call: "server · tool", folded; a click on it opens the arguments and the result -->
+            <div class="ck-row" data-kind="tool" data-tour="find" data-run="1.1">
+              <div class="ck-pad"><div class="ck-tool">
+                <button class="ck-tool-head" type="button" aria-expanded="false"><i class="ck-tool-state"></i><span class="ck-tool-name"><b>calendar</b> · find_free_time</span><span class="ck-tool-meta" data-done="3 found · 0.6 s">running</span><svg class="ck-chev" viewBox="0 0 12 12"><path d="m4.5 2.5 3.5 3.5-3.5 3.5"/></svg></button>
+                <div class="ck-tool-body">
+<pre class="ck-args">{ <span class="ck-k">"who"</span>: <span class="ck-s">"design team"</span>, <span class="ck-k">"length"</span>: <span class="ck-n">60</span>, <span class="ck-k">"within"</span>: <span class="ck-s">"next week"</span> }</pre>
+                  <div class="ck-out"><p>Tue 10:00 · Wed 14:30 · Thu 09:00</p></div>
+                </div>
+              </div></div>
+            </div>
+
+            <!-- 4 · text, then a card the person taps: pick a time, book it (taps in script.js, "after") -->
+            <div class="ck-row" data-tour="slots" data-read=".5">
+              <div class="ck-pad">
+                <div class="ck-text" data-stream><p>Three times work for everyone.</p></div>
+                <div class="ck-card" data-ck-in data-tour="booking" style="margin-top:10px">
+                  <div data-ck-swap data-tour="booking-swap">
+                    <div>
+                      <p class="ck-card-t">Design review</p>
+                      <p class="ck-card-m">60 min · 5 people · video call</p>
+                      <div class="ck-opts" style="margin-top:14px">
+                        <button class="ck-opt" type="button" data-tour="slot-1">Tue<small>10:00</small></button>
+                        <button class="ck-opt" type="button" data-tour="slot-2">Wed<small>14:30</small></button>
+                        <button class="ck-opt" type="button" data-tour="slot-3">Thu<small>09:00</small></button>
+                      </div>
+                      <button class="ck-btn" type="button" data-tour="book" style="margin-top:12px">Book it</button>
+                    </div>
+                    <div class="ck-done">
+                      <span class="ck-done-mark"><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg></span>
+                      <p class="ck-card-t">Booked: Wed 14:30</p>
+                      <p class="ck-card-m">Design review · invites sent to 5 people</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5 · quick replies -->
+            <div class="ck-row" data-tour="booked" data-think=".6">
+              <div class="ck-pad">
+                <div class="ck-text" data-stream><p>Done, and everyone has the invite. Anything else?</p></div>
+                <div class="ck-chips" style="margin-top:10px">
+                  <button class="ck-chip" type="button" data-ck-in data-tour="chip-week">Sum up my week</button>
+                  <button class="ck-chip" type="button" data-ck-in>Move a meeting</button>
+                  <button class="ck-chip" type="button" data-ck-in>That's all</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6 · a tap on a chip sends it -->
+            <div class="ck-row" data-from="person" data-via="@chip-week" data-tour="week">
+              <div class="ck-pad"><p class="ck-bubble">Sum up my week</p></div>
+            </div>
+
+            <div class="ck-row" data-kind="tool" data-tour="sum" data-run=".9">
+              <div class="ck-pad"><div class="ck-tool">
+                <button class="ck-tool-head" type="button" aria-expanded="false"><i class="ck-tool-state"></i><span class="ck-tool-name"><b>reports</b> · weekly_summary</span><span class="ck-tool-meta" data-done="done · 0.4 s">running</span><svg class="ck-chev" viewBox="0 0 12 12"><path d="m4.5 2.5 3.5 3.5-3.5 3.5"/></svg></button>
+                <div class="ck-tool-body">
+<pre class="ck-args">{ <span class="ck-k">"range"</span>: <span class="ck-s">"this week"</span> }</pre>
+                  <div class="ck-out"><p>5 days · busiest: Wednesday</p></div>
+                </div>
+              </div></div>
+            </div>
+
+            <!-- 7 · a chart, inline -->
+            <div class="ck-row" data-tour="chart" data-read="1.2">
+              <div class="ck-pad">
+                <div class="ck-text" data-stream><p>Wednesday was the busy one. Here's the shape of it:</p></div>
+                <div class="ck-card" data-ck-in style="margin-top:10px">
+                  <div class="ck-legend"><b>This week</b><small>meetings per day</small></div>
+                  <div class="ck-bars"><i data-ck-grow style="--v:.42"></i><i data-ck-grow style="--v:.58"></i><i class="is-hi" data-ck-grow style="--v:.94"></i><i data-ck-grow style="--v:.5"></i><i data-ck-grow style="--v:.3"></i></div>
+                  <div class="ck-axis"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span></div>
+                  <button class="ck-btn is-ghost" type="button">Open the full report</button>
+                </div>
+              </div>
+            </div>
+
+            <div class="ck-row" data-from="person" data-tour="send">
+              <div class="ck-pad"><p class="ck-bubble">Send it to the team with Friday's photos</p></div>
+            </div>
+
+            <!-- 8 · a form with a file and images: the person sends it -->
+            <div class="ck-row" data-tour="draft" data-read=".4">
+              <div class="ck-pad">
+                <div class="ck-text" data-stream><p>Here's a draft. Send it?</p></div>
+                <div class="ck-card" data-ck-in data-tour="mail" style="margin-top:10px">
+                  <div data-ck-swap data-tour="mail-swap">
+                    <div>
+                      <div class="ck-fields"><span><small>To</small>Design team</span><span><small>Subject</small>This week, in short</span></div>
+                      <div class="ck-file" style="margin-top:12px"><svg viewBox="0 0 30 36" aria-hidden="true"><path d="M3 2.5h16l8 8v23H3z" fill="#fff" stroke="#d9d4ca"/><path d="M19 2.5v8h8" fill="none" stroke="#d9d4ca"/><path d="M8 18h14M8 22h14M8 26h9" stroke="#c9c3b8" stroke-width="1.4"/></svg><span><b>weekly-summary.pdf</b><small>2 pages</small></span></div>
+                      <div class="ck-grid" style="margin-top:10px">
+                        <figure class="ph is-tone is-bare" style="--r:1/1"></figure><figure class="ph is-tone is-bare" style="--r:1/1"></figure><figure class="ph is-tone is-bare" style="--r:1/1"></figure>
+                      </div>
+                      <button class="ck-btn" type="button" data-tour="mail-send" style="margin-top:12px"><svg viewBox="0 0 16 16"><path d="M2.5 8h10M9 4.5 12.5 8 9 11.5"/></svg>Send</button>
+                    </div>
+                    <div class="ck-done">
+                      <span class="ck-done-mark"><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg></span>
+                      <p class="ck-card-t">Sent to the design team</p>
+                      <p class="ck-card-m">weekly-summary.pdf and 3 photos</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 9 · the ending: the last message is the way in -->
+            <div class="ck-row" data-tour="end" data-think="1" data-read="1">
+              <div class="ck-pad">
+                <div class="ck-text" data-stream><p>That's what I'm for. Want me in your workspace?</p></div>
+                <div class="ck-card ck-cta" data-ck-in data-tour="cta" style="margin-top:10px">
+                  <p class="ck-card-t">Product <em>name</em></p>
+                  <p>One line on what it costs and where it works.</p>
+                  <a class="ck-btn" href="#" data-tour="cta-add">Add to your workspace</a>
+                  <a class="ck-btn is-ghost" href="#">Open the app</a>
+                  <span class="ck-url">yourproduct.com</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <footer class="ck-composer">
+            <div class="ck-field" data-tour="ck-field">
+              <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4.5v11M4.5 10h11"/></svg>
+              <span class="ck-input" data-tour="ck-input" data-tour-cursor="text" data-placeholder="Message Product name"></span>
+              <button class="ck-send" type="button" data-tour="ck-send" tabindex="-1" aria-label="Send"><svg viewBox="0 0 16 16"><path d="M8 13V3.5M4 7.5l4-4 4 4"/></svg></button>
+            </div>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    <!-- The margins (wide screens): the chapters as a quiet index you can click, and the one control. -->
+    <nav class="demo-chat-index" aria-label="Chapters"><ol></ol>
+      <span class="sf-note">The thread in the HTML is the script: each message plays in order. Put a real transcript and your real cards in (AGENT.md).</span>
+    </nav>
+    <button class="demo-chat-ctl" type="button" aria-pressed="true" data-tour-hide-on-record><i aria-hidden="true"></i><span>Pause</span></button>
+    <p class="demo-chat-hint" aria-hidden="true" data-tour-hide-on-record>Scroll for the next message</p>
+  </div>
+</section>
+
+<script type="module" src="./kit/scaffold.js"></script>
+<script type="module">
+import s0 from "./chat/section.js";
+for (const [k, f] of [["demo/chat",s0]]) document.querySelectorAll(`[data-tpl="${k}"]`).forEach((el) => f(el));
+</script>
+</body>
+</html>

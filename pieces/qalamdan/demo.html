@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>qalamdan</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="qalamdan.css">
+<style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;
+    --serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  main{max-width:1280px;margin:0 auto;padding:clamp(48px,10svh,120px) var(--gutter) 140px;display:grid;gap:clamp(40px,6svh,72px)}
+  .tag{margin:0;font:500 10.5px/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  .head{display:grid;gap:14px;justify-items:center;text-align:center}
+  .head h1{margin:0;font-weight:300;font-style:italic;font-size:clamp(34px,5vw,58px);line-height:1}
+  .prose{width:min(100%,34em);margin:0 auto;font-size:clamp(18px,1.6vw,20.5px);line-height:1.55;color:var(--ink-2);text-wrap:pretty}
+  .prose p{margin:0 0 .9em}.prose p:last-child{margin:0}
+  /* the large boxes lie across the page: switching on holds the tray and slides the sleeve off it, past the screen's edge */
+  .ql:not(.ql-compact){--ql-split:1;--ql-w:2150;--ql-bleed:calc((100vw - 100%) / 2)}
+  @media (max-width:640px){.ql:not(.ql-compact){--ql-w:1800;--ql-bleed:var(--gutter)}}
+  /* a settings card, the way a switch is used in a page */
+  .settings{width:min(100%,30em);margin:0 auto;padding:6px 22px;border:1px solid var(--rule);border-radius:14px;background:color-mix(in srgb,var(--paper) 60%,#fff)}
+  .settings .tag{padding:16px 0 4px}
+  .settings .ql-compact{display:flex;justify-content:space-between;width:100%;padding:10px 0;border-top:1px solid var(--rule)}
+  .settings .tag + .ql-compact{border-top:0}
+  .verse{border-top:1px solid var(--rule);padding-top:clamp(40px,7svh,72px);display:grid;gap:28px;justify-items:center}
+  .verse .ql{width:100%}
+</style></head><body>
+<main>
+  <header class="head">
+    <span class="tag">toggle</span>
+    <h1>The cut of the pen</h1>
+  </header>
+
+  <div class="prose">
+    <p>Before a calligrapher writes a word, the pen has to be made. It is a reed, seasoned for months, and it is cut fresh for every sitting: opened along its length with a small knife, pared on both sides, split, and then cut across the tip at the angle the script asks for. Everything that work needs was carried in one painted box.</p>
+  </div>
+
+  <label class="ql" data-qalamdan>
+    <input type="checkbox" role="switch" class="ql-switch" data-sync="tools">
+    <span class="ql-box" aria-hidden="true">
+      <span class="ql-tray">
+        <img class="ql-tray-img" src="assets/tray.webp" width="1586" height="277" alt="">
+        <img class="ql-tool" src="assets/tools/pen-rest.webp" alt="" style="--x:470;--y:48;--w:943">
+        <img class="ql-tool" src="assets/tools/penholder.webp" alt="" style="--x:72;--y:42;--w:1063;--r:180deg">
+        <img class="ql-tool" src="assets/tools/knife.webp" alt="" style="--x:6;--y:146;--w:1134;--r:180deg">
+        <img class="ql-tool" src="assets/tools/spoon.webp" alt="" style="--x:478;--y:38;--w:683;--r:-7deg">
+        <img class="ql-tool" src="assets/tools/inkwell.webp" alt="" style="--x:1140;--y:39;--w:401">
+      </span>
+      <img class="ql-sleeve" src="assets/sleeve.webp" width="1595" height="280" alt="">
+    </span>
+    <span class="ql-text">Show the tools</span>
+  </label>
+
+  <div class="prose">
+    <p>The last cut is the one that decides the letters. It is made on a little plate of bone, the maqtaʿ, with one firm press of the knife, and the angle belongs to the script: one gives the even strokes of naskh, another the swell and hairline of nastaʿlīq. A practised hand cuts again whenever the edge softens, so the plate and the knife stay in the box beside the pens.</p>
+    <p>The ink sits at the far end of the tray, in a small well of silver or brass with a tuft of raw silk inside it. The silk holds the ink like a sponge, and the pen takes up only what it needs. A little spoon adds water when the ink thickens.</p>
+  </div>
+
+  <div class="settings" role="group" aria-labelledby="settings-tag">
+    <p class="tag" id="settings-tag">this page</p>
+    <label class="ql ql-compact" data-qalamdan>
+      <span class="ql-text">Show the tools</span>
+      <input type="checkbox" role="switch" class="ql-switch" data-sync="tools">
+      <span class="ql-box" aria-hidden="true">
+        <span class="ql-tray">
+          <img class="ql-tray-img" src="assets/tray.webp" width="1586" height="277" alt="">
+          <img class="ql-tool" src="assets/tools/pen-rest.webp" alt="" style="--x:470;--y:48;--w:943">
+          <img class="ql-tool" src="assets/tools/penholder.webp" alt="" style="--x:72;--y:42;--w:1063;--r:180deg">
+          <img class="ql-tool" src="assets/tools/knife.webp" alt="" style="--x:6;--y:146;--w:1134;--r:180deg">
+          <img class="ql-tool" src="assets/tools/spoon.webp" alt="" style="--x:478;--y:38;--w:683;--r:-7deg">
+          <img class="ql-tool" src="assets/tools/inkwell.webp" alt="" style="--x:1140;--y:39;--w:401">
+        </span>
+        <img class="ql-sleeve" src="assets/sleeve.webp" width="1595" height="280" alt="">
+      </span>
+    </label>
+    <label class="ql ql-compact" data-qalamdan>
+      <span class="ql-text">Write the couplet</span>
+      <input type="checkbox" role="switch" class="ql-switch" data-sync="couplet">
+      <span class="ql-box" aria-hidden="true">
+        <span class="ql-tray">
+          <img class="ql-tray-img" src="assets/tray.webp" width="1586" height="277" alt="">
+          <img class="ql-tool" src="assets/tools/penholder.webp" alt="" style="--x:72;--y:150;--w:1063;--r:180deg">
+          <img class="ql-tool" src="assets/tools/spoon.webp" alt="" style="--x:482;--y:82;--w:683;--r:-9deg">
+          <img class="ql-tool" src="assets/tools/inkwell.webp" alt="" style="--x:1140;--y:39;--w:401">
+        </span>
+        <img class="ql-sleeve" src="assets/sleeve.webp" width="1595" height="280" alt="">
+      </span>
+    </label>
+  </div>
+
+  <section class="verse" aria-labelledby="verse-tag">
+    <span class="tag" id="verse-tag">a couplet</span>
+    <label class="ql" data-qalamdan>
+      <input type="checkbox" role="switch" class="ql-switch" data-sync="couplet">
+      <span class="ql-box" aria-hidden="true">
+        <span class="ql-tray">
+          <img class="ql-tray-img" src="assets/tray.webp" width="1586" height="277" alt="">
+          <img class="ql-tool" src="assets/tools/penholder.webp" alt="" style="--x:72;--y:150;--w:1063;--r:180deg">
+          <img class="ql-tool" src="assets/tools/spoon.webp" alt="" style="--x:482;--y:82;--w:683;--r:-9deg">
+          <img class="ql-tool" src="assets/tools/inkwell.webp" alt="" style="--x:1140;--y:39;--w:401">
+          <span class="ql-note">The pen ran on and on in the writing;<br> when it came to love, it split in two.</span>
+        </span>
+        <img class="ql-sleeve" src="assets/sleeve.webp" width="1595" height="280" alt="">
+      </span>
+      <span class="ql-text">Write the couplet</span>
+    </label>
+    <div class="prose">
+      <p>Rumi, near the start of the Masnavi: the pen ran on and on in the writing, and when it came to love, it split in two. The line turns on the reed itself: every qalam is split down its nib, a slit made with the knife so that the ink runs to the tip.</p>
+    </div>
+  </section>
+</main>
+<script type="module">
+  // switches with the same data-sync are one setting shown in two places
+  import './qalamdan.js';
+  addEventListener('qalamdan:toggle', (e) => {
+    const input = e.target.qalamdan?.input;
+    if (!input?.dataset.sync) return;
+    for (const other of document.querySelectorAll(`.ql-switch[data-sync="${input.dataset.sync}"]`)) {
+      if (other !== input) other.closest('[data-qalamdan]').qalamdan?.set(e.detail.pressed);
+    }
+  });
+</script>
+</body></html>

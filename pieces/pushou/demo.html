@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>pushou</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pushou.css">
+<style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;
+    --serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px);
+    --sheet:#f8f5ee;--line:#e6e0d2}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  .tag{font-family:var(--sans);font-size:10.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  main{max-width:1060px;margin:0 auto;padding:clamp(36px,8svh,88px) var(--gutter) clamp(64px,12svh,120px)}
+
+  .intro{max-width:34em;margin:0 0 clamp(28px,5svh,48px)}
+  .intro h1{margin:.3em 0 .25em;font-weight:400;font-style:italic;font-size:clamp(36px,4.6vw,52px);line-height:1;letter-spacing:-.005em}
+  .intro p{margin:0;font-size:clamp(19px,1.7vw,21px);line-height:1.4;color:var(--ink-2);text-wrap:pretty}
+
+  .grid{display:grid;gap:18px;align-items:start}
+  @media (min-width:860px){
+    .grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px;grid-template-areas:"folder settings" "call call" "desk desk"}
+    .folder{grid-area:folder}.settings{grid-area:settings}.call{grid-area:call}.desk{grid-area:desk}
+  }
+
+  .card{--po-paper:var(--sheet);background:var(--sheet);border:1px solid #ddd6c8;border-radius:6px;
+    box-shadow:0 24px 44px -34px rgba(40,30,20,.30),0 1px 2px rgba(40,30,20,.06);min-width:0}
+  .card h2{margin:0;font-weight:500;font-size:23px;line-height:1.15;letter-spacing:-.003em}
+  .hint{margin:0;font-size:17px;line-height:1.3;color:var(--ink-2);text-wrap:pretty}
+  .meta{margin:0;font-family:var(--sans);font-size:12.5px;line-height:1.35;color:var(--ink-2);font-variant-numeric:tabular-nums}
+
+  /* a private folder: the form footer */
+  .folder{padding:18px 22px 0}
+  .folder h2{margin-top:8px}
+  .folder .meta{margin-top:5px}
+  .folder .hint{margin-top:12px}
+  .foot{display:flex;align-items:center;justify-content:flex-end;gap:6px;margin:16px -22px 0;padding:12px 16px 12px 22px;border-top:1px solid var(--line)}
+  .quiet{position:relative;font:500 14px/1 var(--sans);letter-spacing:.01em;color:var(--ink-2);background:none;border:0;border-radius:999px;
+    min-height:46px;padding:0 16px;cursor:pointer;touch-action:manipulation}
+  @media (hover:hover){.quiet:hover:not([aria-disabled=true]){color:var(--ink)}}
+  .quiet[aria-disabled=true]{color:var(--ink-3);cursor:default}
+  .quiet:focus-visible{outline:2px solid var(--ink-2);outline-offset:1px}
+  .quiet[hidden]{display:none}
+
+  /* settings rows: the row size */
+  .settings{padding:18px 0 6px}
+  .settings h2{padding:0 22px 10px}
+  .row{display:flex;align-items:center;gap:14px;padding:13px 16px 13px 22px;border-top:1px solid var(--line);min-height:70px}
+  .row > div{flex:1;min-width:0;display:grid;gap:2px}
+  .row .name{font-family:var(--sans);font-size:14px;font-weight:500;color:var(--ink)}
+  .row .hint{font-size:16.5px}
+
+  /* a call's toolbar: the smallest size */
+  .call{padding:14px 14px 14px 22px;display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+  .call .who{flex:1 1 220px;min-width:0;display:grid;gap:2px}
+  .call .name{font-family:var(--sans);font-size:14px;font-weight:500}
+  .faces{display:flex}
+  .faces b{position:relative;width:30px;height:30px;border-radius:50%;margin-left:-8px;border:2px solid var(--sheet);display:grid;place-items:center;
+    font:500 11px/1 var(--sans);color:var(--ink-2);background:#e7e0d1}
+  .faces b:first-child{margin-left:0;z-index:3}.faces b:nth-child(2){z-index:2}.faces b:nth-child(3){z-index:1}
+  .bar{display:flex;align-items:center;gap:4px;margin-left:auto;padding:4px;border:1px solid var(--line);border-radius:999px}
+  .bar .quiet{min-height:32px;padding:0 12px;font-size:12.5px}
+  .bar .quiet::before{content:"";position:absolute;inset:-6px -2px}
+
+  /* the front desk: the knocker large, the one action of its panel */
+  .desk{display:grid;gap:22px 40px;align-items:center;padding:clamp(20px,3.4vw,36px)}
+  .desk h2{margin-top:10px;font-weight:400;font-size:clamp(28px,3.2vw,36px);line-height:1.05}
+  .desk .hint{margin-top:8px;max-width:22em;font-size:clamp(17px,1.6vw,19px);line-height:1.35}
+  .desk .meta{margin-top:14px}
+  .desk .po-hero{justify-self:center}
+  @media (min-width:860px){.desk{grid-template-columns:minmax(0,1fr) auto;padding-left:clamp(24px,3.6vw,40px)}.desk .po-hero{justify-self:end}}
+
+  /* every line a status can say shares one place (copies, hidden, keep the room of each), so a card never changes
+     height when it speaks and nothing below it moves, at any width */
+  .says{display:grid;font-variant-numeric:tabular-nums}
+  .says > *{grid-area:1/1}
+  .says > [aria-hidden]{visibility:hidden}
+  /* the sound switch sits at the top of the page wherever the cards reach the right edge, so that it can't cover a
+     row's button as you scroll */
+  @media (max-width:1160px){html body .sfs-toggle{position:absolute;top:max(14px,env(safe-area-inset-top));bottom:auto}}
+</style>
+</head>
+<body>
+<main>
+  <header class="intro">
+    <div class="tag">Button</div>
+    <h1>Pushou button</h1>
+    <p>Press it: the bronze ring lifts on its hinge, and knocks on the door when you let go.</p>
+  </header>
+
+  <div class="grid">
+    <section class="card folder" aria-labelledby="folder-h">
+      <div class="tag">Private folder</div>
+      <h2 id="folder-h">Ravenna, the apse mosaics</h2>
+      <p class="meta">42 photographs · 318 MB · Owner: M. Wen</p>
+      <p class="hint says"><span id="folder-status" role="status">This folder is private. Ask its owner to let you in.</span><span aria-hidden="true">This folder is private. Ask its owner to let you in.</span><span aria-hidden="true">Sending your request to M. Wen…</span><span aria-hidden="true" data-says="sent">Sent at 10:58 PM. You’ll hear when M. Wen lets you in.</span><span aria-hidden="true">Withdrawn. M. Wen won’t be asked.</span><span aria-hidden="true">Cancelled. Nothing was sent.</span></p>
+      <div class="foot">
+        <button type="button" class="quiet" id="undo" hidden>Withdraw</button>
+        <button type="button" class="quiet" id="cancel" hidden>Cancel</button>
+        <button type="button" class="po po-solid" data-pushou id="request">
+          <span class="po-knocker" aria-hidden="true">
+            <img class="po-plate" src="assets/plate-168.webp" srcset="assets/plate-168.webp 117w, assets/plate-480.webp 335w, assets/plate-1207.webp 842w" sizes="28px" width="117" height="168" alt="" decoding="async">
+            <img class="po-ring" src="assets/ring-168.webp" srcset="assets/ring-168.webp 117w, assets/ring-480.webp 335w, assets/ring-1207.webp 842w" sizes="28px" width="117" height="168" alt="" decoding="async">
+            <img class="po-loop" src="assets/loop-168.webp" srcset="assets/loop-168.webp 117w, assets/loop-480.webp 335w, assets/loop-1207.webp 842w" sizes="28px" width="117" height="168" alt="" decoding="async">
+          </span>
+          <span class="po-label"><span>Request access</span><span hidden>Requesting…</span><span hidden data-po-done>Requested</span></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="card settings" aria-labelledby="set-h">
+      <h2 id="set-h">Notifications</h2>
+      <div class="row">
+        <div><span class="name">Back in stock</span><span class="hint says"><span id="notify-status" role="status">Mosaic tiles, Ravenna green. Sold out until spring.</span><span aria-hidden="true">Mosaic tiles, Ravenna green. Sold out until spring.</span><span aria-hidden="true">One email, the day the green tiles are back in stock.</span></span></div>
+        <button type="button" class="po po-sm" data-pushou id="notify">
+          <span class="po-knocker" aria-hidden="true">
+            <img class="po-plate" src="assets/plate-168.webp" srcset="assets/plate-168.webp 117w, assets/plate-480.webp 335w, assets/plate-1207.webp 842w" sizes="23px" width="117" height="168" alt="" decoding="async">
+            <img class="po-ring" src="assets/ring-168.webp" srcset="assets/ring-168.webp 117w, assets/ring-480.webp 335w, assets/ring-1207.webp 842w" sizes="23px" width="117" height="168" alt="" decoding="async">
+            <img class="po-loop" src="assets/loop-168.webp" srcset="assets/loop-168.webp 117w, assets/loop-480.webp 335w, assets/loop-1207.webp 842w" sizes="23px" width="117" height="168" alt="" decoding="async">
+          </span>
+          <span class="po-label"><span>Notify me</span><span hidden data-po-done>On the list</span></span>
+        </button>
+      </div>
+      <div class="row">
+        <div><span class="name">Gold smalti</span><span class="hint">No longer made, so there is nothing to wait for.</span></div>
+        <button type="button" class="po po-sm" data-pushou id="smalti" disabled>
+          <span class="po-knocker" aria-hidden="true">
+            <img class="po-plate" src="assets/plate-168.webp" srcset="assets/plate-168.webp 117w, assets/plate-480.webp 335w, assets/plate-1207.webp 842w" sizes="23px" width="117" height="168" alt="" decoding="async">
+            <img class="po-ring" src="assets/ring-168.webp" srcset="assets/ring-168.webp 117w, assets/ring-480.webp 335w, assets/ring-1207.webp 842w" sizes="23px" width="117" height="168" alt="" decoding="async">
+            <img class="po-loop" src="assets/loop-168.webp" srcset="assets/loop-168.webp 117w, assets/loop-480.webp 335w, assets/loop-1207.webp 842w" sizes="23px" width="117" height="168" alt="" decoding="async">
+          </span>
+          <span class="po-label"><span>Notify me</span><span hidden data-po-done>On the list</span></span>
+        </button>
+      </div>
+    </section>
+
+    <section class="card call" aria-labelledby="call-h">
+      <div class="faces" aria-hidden="true"><b>MW</b><b>JL</b><b>AK</b></div>
+      <div class="who"><span class="name" id="call-h">Design review</span><span class="meta" id="call-status" role="status">Three inside, door closed</span></div>
+      <div class="bar">
+        <button type="button" class="po po-xs" data-pushou id="knock">
+          <span class="po-knocker" aria-hidden="true">
+            <img class="po-plate" src="assets/plate-168.webp" srcset="assets/plate-168.webp 117w, assets/plate-480.webp 335w, assets/plate-1207.webp 842w" sizes="19px" width="117" height="168" alt="" decoding="async">
+            <img class="po-ring" src="assets/ring-168.webp" srcset="assets/ring-168.webp 117w, assets/ring-480.webp 335w, assets/ring-1207.webp 842w" sizes="19px" width="117" height="168" alt="" decoding="async">
+            <img class="po-loop" src="assets/loop-168.webp" srcset="assets/loop-168.webp 117w, assets/loop-480.webp 335w, assets/loop-1207.webp 842w" sizes="19px" width="117" height="168" alt="" decoding="async">
+          </span>
+          <span class="po-label">Knock</span>
+        </button>
+        <button type="button" class="quiet" id="note">Leave a note</button>
+      </div>
+    </section>
+
+    <section class="card desk" aria-labelledby="desk-h">
+      <div>
+        <div class="tag">Front desk</div>
+        <h2 id="desk-h">The studio is open</h2>
+        <p class="hint says"><span id="desk-status" role="status">Ring, and someone will come down to let you in.</span><span aria-hidden="true">Ring, and someone will come down to let you in.</span><span aria-hidden="true">Rung. Someone is on the way down.</span></p>
+        <p class="meta">Open Monday to Saturday, 10 to 6 · Third floor</p>
+      </div>
+      <button type="button" class="po po-hero" data-pushou id="ring">
+        <span class="po-knocker" aria-hidden="true">
+          <img class="po-plate" src="assets/plate-480.webp" srcset="assets/plate-168.webp 117w, assets/plate-480.webp 335w, assets/plate-1207.webp 842w" sizes="(min-width: 824px) 196px, (min-width: 530px) 23.8vw, 126px" width="335" height="480" alt="" decoding="async">
+          <img class="po-ring" src="assets/ring-480.webp" srcset="assets/ring-168.webp 117w, assets/ring-480.webp 335w, assets/ring-1207.webp 842w" sizes="(min-width: 824px) 196px, (min-width: 530px) 23.8vw, 126px" width="335" height="480" alt="" decoding="async">
+          <img class="po-loop" src="assets/loop-480.webp" srcset="assets/loop-168.webp 117w, assets/loop-480.webp 335w, assets/loop-1207.webp 842w" sizes="(min-width: 824px) 196px, (min-width: 530px) 23.8vw, 126px" width="335" height="480" alt="" decoding="async">
+        </span>
+        <span class="po-label">Ring for service</span>
+      </button>
+    </section>
+  </div>
+</main>
+
+<script type="module">
+  import { pushou } from './pushou.js';
+  const $ = (s) => document.querySelector(s);
+  const time = (d = new Date()) => d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const sent = (t) => `Sent at ${t}. You’ll hear when M. Wen lets you in.`;
+  $('[data-says="sent"]').textContent = sent(time(new Date(2000, 0, 1, 22, 58)));   // room for it, in this browser's time format
+  // a button whose words change lists every wording in its label, sharing one place (see .po-label in pushou.css),
+  // so its width never changes and the knocker never moves: show one of them
+  const words = (b, w) => b.querySelectorAll('.po-label > span').forEach((s) => { s.hidden = s.textContent !== w; });
+  const done = (b, w) => { words(b, w); b.setAttribute('aria-disabled', 'true'); b.classList.add('po-done'); };
+
+  // the private folder. The request goes out with the click; while it is on its way the hand holds the ring a little
+  // way up, and it knocks when the request has arrived. Then Cancel gives way to Withdraw, in one step, as the ring
+  // strikes. Focus stays where it is (on Cancel, it moves on to Withdraw).
+  const request = $('#request'), knocker = pushou(request), say = $('#folder-status'), cancel = $('#cancel'), undo = $('#undo');
+  let state = 'idle', timer = 0;
+  request.addEventListener('click', () => {
+    if (state !== 'idle') return;
+    state = 'sending';
+    words(request, 'Requesting…');
+    say.textContent = 'Sending your request to M. Wen…';
+    cancel.hidden = false;
+    knocker.wait();
+    timer = setTimeout(() => {                      // the request has arrived: too late to cancel
+      state = 'delivered';
+      cancel.setAttribute('aria-disabled', 'true');
+      knocker.knock();
+    }, 800);
+  });
+  request.addEventListener('pushou:knock', (e) => {
+    if (e.detail.strike !== 1 || state !== 'delivered') return;
+    state = 'done';
+    done(request, 'Requested');
+    say.textContent = sent(time());
+    const onCancel = document.activeElement === cancel;
+    cancel.hidden = true; cancel.removeAttribute('aria-disabled');
+    undo.hidden = false;
+    if (onCancel) undo.focus();                     // the same place, and what Cancel has become
+  });
+  cancel.addEventListener('click', () => {
+    if (state !== 'sending') return;
+    clearTimeout(timer);
+    state = 'idle';
+    knocker.cancel();                               // the ring is put back down: no knock
+    words(request, 'Request access');
+    say.textContent = 'Cancelled. Nothing was sent.';
+    cancel.hidden = true;
+    request.focus();
+  });
+  undo.addEventListener('click', () => {
+    state = 'idle';
+    words(request, 'Request access');
+    request.removeAttribute('aria-disabled'); request.classList.remove('po-done');
+    say.textContent = 'Withdrawn. M. Wen won’t be asked.';
+    undo.hidden = true;
+    request.focus();
+  });
+
+  // a settings row: done once the knock lands
+  const notify = $('#notify');
+  notify.addEventListener('pushou:knock', (e) => {
+    if (e.detail.strike !== 1 || notify.classList.contains('po-done')) return;
+    done(notify, 'On the list');
+    $('#notify-status').textContent = 'One email, the day the green tiles are back in stock.';
+  });
+
+  // a call's toolbar: knock as often as you like
+  let knocks = 0;
+  $('#knock').addEventListener('pushou:knock', (e) => {
+    if (e.detail.strike !== 1) return;
+    knocks += 1;
+    $('#call-status').textContent = knocks === 1 ? 'You knocked. Waiting to be let in…' : 'You knocked again. Still waiting…';
+  });
+  $('#note').addEventListener('click', () => { $('#call-status').textContent = 'Note left for the three inside.'; });
+
+  // the front desk
+  $('#ring').addEventListener('pushou:knock', (e) => {
+    if (e.detail.strike !== 1) return;
+    $('#desk-status').textContent = 'Rung. Someone is on the way down.';
+  });
+</script>
+<script type="module" src="sound.js"></script>
+</body>
+</html>

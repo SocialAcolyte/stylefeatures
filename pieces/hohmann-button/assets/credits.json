@@ -1,0 +1,5 @@
+{
+  "component": "hohmann-button",
+  "note": "No image, sound or font files ship with this component. The drawing (the Sun, the two orbits, Earth, Mars, the craft and the transfer line) is generated as SVG by hohmann-loader.js, the original engine, unchanged. The original's plate texture, assets/plate-tone.webp, belongs to its full-page plate and is not used by the button, so it is not copied here. The demo loads Inter and Cormorant Garamond from Google Fonts (SIL Open Font License 1.1).",
+  "assets": []
+}

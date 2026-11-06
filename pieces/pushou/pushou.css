@@ -1,0 +1,171 @@
+/* pushou: a press button holding a Warring States bronze mask-and-ring handle (Freer F1917.18). Prefixed .po-.
+ * The knocker is three layers of one photograph: the plate (the mask), the ring, and the nose loop in front of it.
+ * Pressing lifts the ring on its hinge (the bar inside the loop); letting go, it falls back against the door.
+ * Sizes: .po-xs (32px), .po-sm (40px, a row button), the default (48px), .po-lg (64px), .po-icon (round, no words),
+ * .po-hero (a large tile: the knocker, the words under it). .po-solid for a primary button in ink. .po-done, with
+ * aria-disabled="true", for an action that has been done. Theme with --paper, --ink, --ink-2, --ink-3, --rule,
+ * --sans, and --po-h (the height; the knocker follows it).                                                      */
+
+.po {
+    --po-h: 48px;                                   /* the button's height */
+    --po-size: calc(var(--po-h) - 8px);             /* the knocker's height */
+    --po-face: var(--po-paper, var(--paper, #f3f0e8));
+    --po-edge: var(--rule, #cfcac0);
+    --po-hinge: 44.965%;                            /* the bar the ring hangs on, from the top of the knocker */
+    --po-ring-x: 52.56%;                            /* the ring's centre, from the left */
+    --po-shadow: rgb(28, 20, 12);                   /* the knocker's shadows on the door */
+    --po-contact: .3;
+    position: relative;
+    box-sizing: border-box;
+    display: inline-flex; align-items: center; gap: .62em;
+    min-height: var(--po-h);
+    /* the knocker sits in the pill's round end, a 32nd of the height right of centre and a 64th below it (in
+       .po-knocker), so that its top ear clears the border by more than a pixel at every size */
+    padding: 0 20px 0 calc((var(--po-h) - var(--po-size) * 0.6976) / 2 + var(--po-h) / 32);
+    margin: 0;
+    font: 500 14px/1.2 var(--sans, Inter, system-ui, sans-serif);
+    letter-spacing: .01em;
+    color: var(--ink, #141312);
+    background: var(--po-face);
+    border: 1px solid var(--po-edge);
+    border-radius: 999px;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none; user-select: none;
+    transition: border-color .2s ease, color .2s ease, background-color .2s ease;
+}
+@media (hover: hover) { .po:hover:not(:disabled):not([aria-disabled=true]) { --po-edge: var(--ink-3, #8a857d); } }
+.po:focus-visible { outline: 2px solid var(--ink-2, #4a4744); outline-offset: 3px; }
+/* pressed. With the script it is .po-press, so that a finger starting a scroll doesn't flash it; without, :active */
+.po:not([data-po-ready]):active:not(:disabled):not([aria-disabled=true]),
+.po.po-press:not(:disabled):not([aria-disabled=true]) {
+    --po-face: color-mix(in srgb, var(--ink, #141312) 4%, var(--po-paper, var(--paper, #f3f0e8)));
+    --po-edge: var(--ink-3, #8a857d);
+}
+.po[aria-busy=true] { cursor: progress; }
+
+/* the knocker: three images of the same canvas, stacked */
+.po-knocker {
+    position: relative; z-index: 0; display: block; flex: none; top: calc(var(--po-h) / 64);
+    height: var(--po-size); aspect-ratio: 842 / 1207;
+}
+.po-knocker > img, .po-shade {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    display: block; margin: 0; max-width: none;
+    pointer-events: none; -webkit-user-drag: none; user-select: none;
+}
+.po-ring { transform-origin: var(--po-ring-x) var(--po-hinge); backface-visibility: hidden; }
+/* it sits on the door: a contact shadow under the mask (::before) and one under the ring (::after), cut from their
+   own outlines and drawn behind them, so that no filter ever touches the photograph. The ring's lets go of it as
+   it lifts (--po-lift, from the script), and its cast shadow (.po-shade) takes over. */
+.po-knocker::before, .po-knocker::after {
+    content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: var(--po-shadow);
+    -webkit-mask: var(--po-plate-src, url("assets/plate-168.webp")) center / 100% 100% no-repeat;
+    mask: var(--po-plate-src, url("assets/plate-168.webp")) center / 100% 100% no-repeat;
+    opacity: var(--po-contact);
+    transform: translateY(max(.6px, calc(var(--po-size) * .016)));
+    filter: blur(max(.35px, calc(var(--po-size) * .014)));
+}
+.po-knocker::after {
+    -webkit-mask-image: var(--po-ring-src, url("assets/ring-168.webp"));
+    mask-image: var(--po-ring-src, url("assets/ring-168.webp"));
+    opacity: calc(var(--po-contact) * (1 - var(--po-lift, 0)));
+}
+/* while the ring is lifted, its shadow falls on the door under it (made by the script from the ring's own outline) */
+.po-shade {
+    background: var(--po-shadow);
+    -webkit-mask: var(--po-ring-src, url("assets/ring-168.webp")) center / 100% 100% no-repeat;
+    mask: var(--po-ring-src, url("assets/ring-168.webp")) center / 100% 100% no-repeat;
+    transform-origin: var(--po-ring-x) var(--po-hinge);
+    opacity: 0;
+}
+
+/* without the script the button still knocks: :active holds the ring up, and it drops when you let go */
+@media (prefers-reduced-motion: no-preference) {
+    .po:not([data-po-ready]) .po-ring { transition: transform .26s cubic-bezier(.55, 0, .9, .45); }
+    .po:not([data-po-ready]):active:not(:disabled):not([aria-disabled=true]) .po-ring {
+        transform: perspective(calc(var(--po-size) * 3.6)) rotateX(22deg);
+        transition: transform .12s cubic-bezier(.2, .7, .3, 1);
+    }
+}
+
+.po-label { white-space: nowrap; }
+/* words that change (Request access, Requesting…, Requested): each wording in its own span, all but the one showing
+   [hidden]. They share one place, so the pill keeps the width of the longest and the knocker doesn't move when the
+   words do. The wording marked data-po-done carries the done tick all the time, so the tick's room is kept too. */
+.po-label:has(> [hidden]) { display: grid; justify-items: start; }
+.po-label:has(> [hidden]) > * { grid-area: 1 / 1; }
+.po-label:has(> [hidden]) > [hidden] { display: block; visibility: hidden; }
+.po-label:has(> [hidden]) > [data-po-done]::after { content: "\2713"; content: "\2713" / ""; margin-left: .38em; }
+
+/* unavailable: the bronze goes grey and the ring stays down */
+.po:disabled, .po[aria-disabled=true] { cursor: not-allowed; color: var(--ink-3, #8a857d); --po-edge: color-mix(in srgb, var(--rule, #cfcac0) 70%, transparent); }
+.po:disabled .po-knocker, .po[aria-disabled=true] .po-knocker { filter: grayscale(1) contrast(.85) brightness(1.08); opacity: .5; }
+
+/* ---- sizes: each knocker follows --po-h ---- */
+.po-xs { --po-h: 32px; --po-size: calc(var(--po-h) - 6px); padding-right: 12px; gap: .42em; font-size: 12.5px; letter-spacing: .012em; }
+.po-xs::before { content: ""; position: absolute; inset: -7px -3px; }      /* a 44 px touch target round a 32 px pill */
+.po-sm { --po-h: 40px; --po-size: calc(var(--po-h) - 7px); padding-right: 15px; gap: .5em; font-size: 13px; }
+.po-lg { --po-h: 64px; --po-size: calc(var(--po-h) - 10px); padding-right: 28px; gap: .72em; font-size: 16px; letter-spacing: .005em; }
+.po-block { display: flex; width: 100%; justify-content: center; }
+
+/* a round button with no words: give it aria-label (and a visible label nearby, or a title) */
+.po-icon {
+    --po-h: 44px; --po-size: calc(var(--po-h) - 12px);
+    width: var(--po-h); flex-shrink: 0; padding: 0; justify-content: center; gap: 0;
+}
+.po-icon .po-label { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* the knocker large in a tile, the words under it: the one action of a panel */
+.po-hero {
+    --po-size: clamp(180px, 34vw, 280px);
+    flex-direction: column; gap: clamp(12px, 1.6vw, 16px);
+    min-height: 0;
+    padding: clamp(20px, 3vw, 30px) clamp(30px, 4.4vw, 48px) clamp(15px, 2vw, 19px);
+    border-radius: 12px;
+    font-size: 15px;
+}
+.po-hero .po-knocker { top: 0; }
+.po-hero .po-label:has(> [hidden]) { justify-items: center; }
+@media (hover: hover) {
+    .po-hero:hover:where(:not(:disabled):not([aria-disabled=true])) {
+        --po-face: color-mix(in srgb, var(--ink, #141312) 2%, var(--po-paper, var(--paper, #f3f0e8)));
+    }
+}
+
+/* ---- the primary, in ink ---- */
+.po-solid { --po-paper: var(--ink, #141312); --po-edge: var(--ink, #141312); --po-shadow: #000; --po-contact: .55; color: var(--paper, #f3f0e8); }
+@media (hover: hover) {
+    .po-solid:hover:not(:disabled):not([aria-disabled=true]) { --po-edge: var(--ink, #141312); --po-paper: color-mix(in srgb, var(--paper, #f3f0e8) 9%, var(--ink, #141312)); }
+}
+/* pressed, the ink takes a little of the words' paper, as the light pill takes a little ink: a step that shows from
+   rest on a phone as well as from hover */
+.po-solid:not([data-po-ready]):active:not(:disabled):not([aria-disabled=true]),
+.po-solid.po-press:not(:disabled):not([aria-disabled=true]) {
+    --po-face: color-mix(in srgb, var(--paper, #f3f0e8) 14%, var(--ink, #141312));
+    --po-edge: color-mix(in srgb, var(--paper, #f3f0e8) 14%, var(--ink, #141312));
+}
+/* a primary that is unavailable steps back onto the paper, so its grey bronze still reads */
+.po-solid:disabled, .po-solid[aria-disabled=true] {
+    --po-paper: color-mix(in srgb, var(--ink, #141312) 7%, var(--paper, #f3f0e8));
+    --po-edge: color-mix(in srgb, var(--ink, #141312) 7%, var(--paper, #f3f0e8));
+    --po-shadow: rgb(28, 20, 12); --po-contact: .3;
+    color: var(--ink-3, #8a857d);
+}
+
+/* done: the action has happened. With aria-disabled="true" it keeps focus and doesn't click again. The bronze keeps
+   its colour, the ring at rest, and the words step back to ink-2 on the paper (a primary leaves its ink) */
+.po.po-done[aria-disabled=true] { cursor: default; color: var(--ink-2, #4a4744); --po-edge: var(--rule, #cfcac0); }
+.po.po-done[aria-disabled=true] .po-knocker { filter: none; opacity: 1; }
+.po.po-done[aria-disabled=true] .po-label::after { content: "\2713"; content: "\2713" / ""; margin-left: .38em; }  /* not read aloud */
+.po.po-done[aria-disabled=true] .po-label:has(> [hidden])::after { content: none; }   /* words that change carry their own */
+.po-solid.po-done[aria-disabled=true] { --po-paper: inherit; --po-shadow: rgb(28, 20, 12); --po-contact: .3; }
+
+@media (forced-colors: active) {
+    .po { border-color: ButtonText; }
+    .po:disabled, .po[aria-disabled=true] { border-color: GrayText; }
+    .po-knocker::before, .po-knocker::after, .po-shade { display: none; }
+}

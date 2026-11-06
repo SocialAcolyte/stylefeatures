@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Product name</title>
+<meta name="description" content="One line that says what the product does and who it is for.">
+<meta property="og:title" content="Product name">
+<meta property="og:description" content="One line that says what the product does and who it is for.">
+<meta name="theme-color" content="#f5f3ef">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./film/film.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="cinema">
+  <!-- The film: a short code tour of the product, looping while it is on screen (tours.js: "highlights").
+       To show a Monet Shot recording instead, add data-src="media/loop.mp4" (and data-poster) to the figure. -->
+  <figure class="film" data-film="highlights" data-autoplay data-loop data-fit=".82 .84" aria-label="A short loop of the product in use">
+    <button class="ctl" id="pause" type="button" aria-label="Pause or play the loop">
+      <svg class="i-pause" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 2h2v8H3zM7 2h2v8H7z"/></svg>
+      <svg class="i-play" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.8v8.4L10 6z"/></svg>
+      <span aria-hidden="true"></span>
+    </button>
+  </figure>
+
+  <!-- The words: a name, one line, one call to action. -->
+  <header class="band">
+    <div class="name">
+      <p class="eyebrow">What it is, in a few words</p>
+      <h1>Product <em>name</em></h1>
+    </div>
+    <div class="side">
+      <p class="lede">One line that says what it does and who it is for.</p>
+      <div class="go">
+        <a class="btn solid" href="#">Get started</a>
+        <button class="btn ghost" id="watch" type="button">
+          <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.8v8.4L10 6z"/></svg>
+          Watch the full film <span class="dur"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+</main>
+
+<!-- The full film: the whole tour with chapters and captions, opened from "Watch the full film" (tours.js: "film").
+     A recording instead: data-src="media/film.mp4" data-vtt="media/film.vtt" data-sound. ?record records this one. -->
+<dialog class="theatre" id="theatre" aria-label="The full film">
+  <div class="screen" data-film="film" data-driver="play" data-captions="always" data-fit=".9 .8 .45" data-record></div>
+  <form method="dialog"><button class="close" type="submit" aria-label="Close the film">Close</button></form>
+</dialog>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>

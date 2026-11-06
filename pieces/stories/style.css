@@ -1,0 +1,87 @@
+/* stories: 9:16 stories you tap, hold and swipe through, each a phone tour. Full screen on phones, a centred card on desktop. */
+:root{
+  --page:#f5f3ef;--page-2:#ece9e3;--ink:#191816;--ink-2:#5f5a53;--ink-3:#9c968c;--rule:#d8d3c9;
+  --serif:'Newsreader',Georgia,serif;--sans:'Inter Tight',system-ui,-apple-system,sans-serif;
+  --gutter:clamp(16px,3.4vw,48px);--ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+video{display:block}
+em{font-style:italic}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;height:46px;padding:0 22px;border-radius:999px;cursor:pointer;
+  font:500 14.5px/1 var(--sans);text-decoration:none;white-space:nowrap;transition:background-color .25s ease}
+.btn.solid{background:var(--ink);color:var(--page);border:1px solid var(--ink)}
+.btn.solid:hover{background:#2e2c29}
+.eyebrow{margin:0 0 16px;font:500 11px/1.2 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+
+/* desktop: words | stories | keys */
+.stage{min-height:100svh;display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;
+  gap:clamp(32px,6vw,110px);padding:clamp(20px,5vh,48px) var(--gutter)}
+.intro{justify-self:end;max-width:22em}
+h1{margin:0;font:400 clamp(48px,5.6vw,92px)/.9 var(--serif);letter-spacing:-.03em}
+.lede{margin:20px 0 28px;font:400 17px/1.5 var(--sans);color:var(--ink-2)}
+.keys dl{margin:0;width:15em}
+.keys div{display:flex;justify-content:space-between;gap:16px;padding:11px 0;border-top:.5px solid var(--rule);font:400 13px/1.3 var(--sans)}
+.keys div:last-child{border-bottom:.5px solid var(--rule)}
+.keys dt{color:var(--ink)}
+.keys dd{margin:0;color:var(--ink-3)}
+
+/* the viewer: a 9:16 story card; each story holds a phone tour between the head and the caption */
+.viewer{position:relative;height:min(88svh,860px);aspect-ratio:9/16;border-radius:22px;overflow:hidden;background:var(--page-2);
+  box-shadow:0 0 0 .5px var(--rule),0 60px 100px -50px rgba(25,24,22,.45);
+  touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;cursor:pointer;outline:none}
+.viewer:focus-visible{box-shadow:0 0 0 .5px var(--rule),0 0 0 3px var(--ink)}
+
+.story{position:absolute;inset:0;margin:0;opacity:0;visibility:hidden;transition:opacity .35s ease,visibility 0s .35s}
+.story.is-on{opacity:1;visibility:visible;transition:opacity .35s ease}
+.slot{position:absolute;inset:0;pointer-events:none;--tour-stage:var(--page-2);--glass-y:82px;--glass-h:calc(100cqh - 82px - 112px)}
+.cap{position:absolute;left:14px;right:14px;bottom:calc(16px + env(safe-area-inset-bottom));margin:0;padding:13px 16px 14px;border-radius:14px;
+  background:rgba(245,243,239,.94);box-shadow:0 0 0 .5px var(--rule),0 16px 30px -18px rgba(25,24,22,.45);
+  font:400 21px/1.2 var(--serif);letter-spacing:-.01em;transition:opacity .3s ease}
+
+/* the head: progress bars, the name and the pause control, on a soft paper scrim */
+.head{position:absolute;z-index:3;left:0;right:0;top:0;padding:calc(12px + env(safe-area-inset-top)) 12px 26px;
+  background:linear-gradient(rgba(245,243,239,.92) 40%,rgba(245,243,239,0));transition:opacity .3s ease}
+.bars{display:flex;gap:4px}
+.bars i{flex:1;height:2px;border-radius:1px;background:rgba(25,24,22,.16);overflow:hidden}
+.bars i::after{content:"";display:block;height:100%;background:var(--ink);transform-origin:left;transform:scaleX(var(--p,0))}
+.row{display:flex;justify-content:space-between;align-items:center;margin-top:12px}
+.mark{font:400 17px/1 var(--serif);letter-spacing:-.01em}
+.ctl{display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 10px;border:0;border-radius:999px;cursor:pointer;
+  background:transparent;color:var(--ink);font:500 12px/1 var(--sans);box-shadow:inset 0 0 0 .5px var(--ink-3)}
+.ctl::before{content:"";width:8px;height:9px;background:linear-gradient(90deg,currentColor 0 34%,transparent 34% 66%,currentColor 66%)}
+.ctl::after{content:"Pause"}
+.is-paused .ctl::before{background:currentColor;clip-path:polygon(0 0,100% 50%,0 100%)}
+.is-paused .ctl::after{content:"Play"}
+.at-end .ctl{visibility:hidden}
+
+/* holding pauses and clears the screen, as in every stories viewer */
+.is-holding .head,.is-holding .cap{opacity:0}
+
+/* the big play button: shown whenever the visitor has paused (and at first with reduced motion) */
+.big{position:absolute;z-index:4;left:50%;top:50%;width:68px;height:68px;margin:-34px 0 0 -34px;border:0;border-radius:50%;
+  display:none;place-items:center;cursor:pointer;background:var(--ink);color:var(--page);box-shadow:0 14px 30px -12px rgba(25,24,22,.6)}
+.big svg{width:20px;height:20px;fill:currentColor;margin-left:3px}
+.is-paused:not(.at-end):not(.is-holding) .big{display:grid}
+
+/* the last card: the call to action */
+.end{display:flex;flex-direction:column;justify-content:flex-end;padding:28px 26px calc(34px + env(safe-area-inset-bottom));background:var(--page);cursor:default}
+.end h2{margin:0 0 26px;font:400 clamp(36px,4.6vh,48px)/1 var(--serif);letter-spacing:-.025em}
+.end .btn{align-self:stretch}
+.again{margin-top:14px;padding:10px;border:0;background:none;cursor:pointer;font:500 13px/1 var(--sans);color:var(--ink-2)}
+.again:hover{color:var(--ink)}
+
+/* phones: the stories are the page */
+@media (max-width:640px){
+  .stage{display:block;padding:0;min-height:0}
+  .side{display:none}
+  .viewer{width:100%;height:100svh;aspect-ratio:auto;border-radius:0;box-shadow:none}
+  .viewer:focus-visible{box-shadow:inset 0 0 0 2px var(--ink)}
+}
+@media (max-width:1000px) and (min-width:641px){.keys{display:none}.stage{grid-template-columns:minmax(0,1fr) auto}}
+@media (prefers-reduced-motion:reduce){.story,.story.is-on,.head,.cap,.btn{transition:none}}

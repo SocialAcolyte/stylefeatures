@@ -1,0 +1,123 @@
+@import url("../tour/tour.css");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap");
+/* demo/terminal: a terminal film for CLIs, dev tools and libraries. tour.css (imported above) is the shared engine look;
+   this file is the band, the closing frame, the desk with its two windows, and the terminal's house palette.
+   Recolour the terminal through the --term-* tokens on .demo-terminal; ansi.py's classes (.t-red …) map onto them. */
+
+.demo-terminal{
+  --term-mono:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
+  --term-bg:#1d1b18;--term-bar:#272420;--term-ink:#ebe5d9;--term-dim:#968e81;--term-faint:#655e55;
+  --term-accent:#e0956a;--term-red:#e08e80;--term-green:#afc48f;--term-yellow:#dfbb73;--term-blue:#93b6c9;
+  --term-magenta:#bfa4cf;--term-cyan:#8cbfb2;--term-sel:rgba(224,149,106,.22);
+  --tour-term-bg:var(--term-bg);--tour-term-bar:var(--term-bar);--tour-term-ink:var(--term-ink);--tour-term-dim:var(--term-dim);
+  --tour-ring:rgba(25,24,22,.38)}
+/* data-term="paper" on the section: a light terminal in the page's own colours */
+.demo-terminal[data-term=paper]{--term-bg:#fbfaf7;--term-bar:var(--page);--term-ink:var(--ink);--term-dim:var(--ink-3);--term-faint:#bcb5aa;
+  --term-accent:#b4572f;--term-red:#b4493b;--term-green:#557a3a;--term-yellow:#9a6b12;--term-blue:#3b6a86;--term-magenta:#7d5a92;--term-cyan:#3c7f72}
+
+/* ── opening band and closing frame (stage coordinates) ── */
+.demo-terminal-band,.demo-terminal-end{position:absolute;z-index:10;left:0;right:0;bottom:0;display:flex;align-items:flex-end;justify-content:space-between;gap:clamp(24px,4vw,64px);
+  padding:clamp(22px,3.6vh,40px) var(--gutter) clamp(26px,4.6vh,50px);background:var(--page)}
+.demo-terminal-band h1,.demo-terminal-end h2{margin:0;padding-top:.08em;font:400 clamp(56px,9.4vw,172px)/.86 var(--serif);letter-spacing:-.028em;white-space:nowrap;color:var(--ink)}
+.demo-terminal-band em,.demo-terminal-end em{font-style:italic}
+.demo-terminal-band .sf-eyebrow,.demo-terminal-end .sf-eyebrow{margin-bottom:14px}
+.demo-terminal-side{max-width:27em;display:grid;gap:18px;justify-items:start}
+.demo-terminal-lede{margin:0;font:400 clamp(16px,1.35vw,19px)/1.45 var(--sans);color:var(--ink-2)}
+.demo-terminal-cmd{display:inline-flex;gap:.7em;align-items:center;padding:.8em 1.1em;border-radius:8px;background:var(--term-bg);color:var(--term-ink);
+  font:400 clamp(13px,1vw,15px)/1 var(--term-mono);white-space:nowrap;max-width:100%;overflow:hidden}
+.demo-terminal-cmd span{color:var(--term-accent)}
+.demo-terminal-act{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
+.demo-terminal-act svg{margin-right:2px}
+.demo-terminal.is-begun [data-tour-gate]{opacity:.4;pointer-events:none}
+.demo-terminal-url{font:500 13px/1 var(--term-mono);color:var(--ink-3)}
+.demo-terminal-end{opacity:var(--in,0);transform:translateY(calc((1 - var(--in,0)) * 40px))}
+.demo-terminal-band .sf-note{max-width:30em}
+@media (max-aspect-ratio:23/20){
+  .demo-terminal-band,.demo-terminal-end{flex-direction:column;align-items:flex-start;gap:16px}
+  .demo-terminal-band h1,.demo-terminal-end h2{font-size:clamp(50px,15vw,96px)}
+  .demo-terminal-band .sf-note{display:none}
+}
+/* recording: sizes follow the stage (and its shape, not the browser's) */
+.demo-terminal.is-record .demo-terminal-band,.demo-terminal.is-record .demo-terminal-end{flex-direction:row;align-items:flex-end;padding:calc(var(--su)*4) calc(var(--su)*5.5) calc(var(--su)*5)}
+.demo-terminal.is-record .demo-terminal-band h1,.demo-terminal.is-record .demo-terminal-end h2{font-size:calc(var(--su)*14)}
+.demo-terminal.is-record .demo-terminal-lede{font-size:calc(var(--su)*2.1)}
+.demo-terminal.is-record .sf-eyebrow{font-size:calc(var(--su)*1.3)}
+.demo-terminal.is-record .demo-terminal-side{max-width:calc(var(--su)*48);gap:calc(var(--su)*2)}
+.demo-terminal.is-record .demo-terminal-cmd{font-size:calc(var(--su)*1.9)}
+.demo-terminal.is-record .demo-terminal-act{display:none}
+.demo-terminal.is-record .demo-terminal-url{font-size:calc(var(--su)*1.8)}
+.demo-terminal.is-record.is-stack .demo-terminal-band,.demo-terminal.is-record.is-stack .demo-terminal-end{flex-direction:column;align-items:flex-start;gap:calc(var(--su)*3)}
+.demo-terminal.is-record.is-stack .demo-terminal-band h1,.demo-terminal.is-record.is-stack .demo-terminal-end h2{font-size:calc(var(--su)*13)}
+.demo-terminal.is-record.is-stack .demo-terminal-side{max-width:none}
+.demo-terminal.is-record.is-stack .demo-terminal-lede{font-size:calc(var(--su)*2.8);max-width:24em}
+.demo-terminal.is-record.is-stack .demo-terminal-cmd{font-size:calc(var(--su)*2.6)}
+.demo-terminal.is-record.is-stack .demo-terminal-url{font-size:calc(var(--su)*2.4)}
+
+/* ── the desk: a transparent window holding the terminal and the browser, in design px ── */
+.demo-terminal-desk{background:transparent!important;box-shadow:none!important;overflow:visible!important}
+.demo-terminal-desk > *{position:absolute}
+.term-win{left:52px;top:58px;width:780px;height:548px;z-index:2;--tour-win-radius:12px;
+  box-shadow:0 0 0 1px rgba(20,18,15,.5),0 50px 100px -40px rgba(25,24,22,.6),0 18px 36px -18px rgba(25,24,22,.4)}
+.term-browser{left:446px;top:196px;width:790px;height:568px;z-index:1;
+  box-shadow:0 0 0 1px rgba(25,24,22,.12),0 40px 90px -40px rgba(25,24,22,.45),0 12px 28px -16px rgba(25,24,22,.22)}
+.term-browser.is-front{z-index:3;box-shadow:0 0 0 1px rgba(25,24,22,.14),0 50px 100px -40px rgba(25,24,22,.55),0 18px 36px -18px rgba(25,24,22,.32)}
+/* the window behind has grey lights, as on a Mac */
+.term-browser:not(.is-front) .tour-lights i{background:#d5d0c7}
+.demo-terminal-desk:has(.term-browser.is-front) .term-win .tour-lights i{background:#4a453f}
+.term-browser .tour-chrome{background:var(--page)}
+.is-tall .term-win{left:12px;top:14px;width:536px;height:476px}
+.is-tall .term-browser{left:28px;top:430px;width:504px;height:476px}
+
+/* ── the terminal ── */
+.term-screen{overflow:hidden;padding:16px 22px 18px;font:400 16px/1.62 var(--term-mono);color:var(--term-ink);font-variant-ligatures:none;-webkit-font-smoothing:antialiased}
+.is-tall .term-screen{padding:14px 16px 16px;font-size:15.5px}
+.tl{margin:0;white-space:pre-wrap;overflow-wrap:anywhere;min-height:1.62em;display:none;opacity:var(--in,1)}
+.tl.is-in{display:block}
+.tb{display:contents}
+.ps{color:var(--term-accent);font-weight:500}
+.ps::after{content:" $";color:var(--term-faint);font-weight:400}
+.cmd{margin-left:1ch}
+.cmd.is-caret::after{content:"";display:inline-block;width:.62em;height:1.2em;margin-left:1px;vertical-align:-.24em;background:var(--term-ink);opacity:.82}
+.t-dim{color:var(--term-dim)}.t-faint{color:var(--term-faint)}.t-accent{color:var(--term-accent)}
+.t-red{color:var(--term-red)}.t-green{color:var(--term-green)}.t-yellow{color:var(--term-yellow)}.t-blue{color:var(--term-blue)}
+.t-magenta{color:var(--term-magenta)}.t-cyan{color:var(--term-cyan)}.t-black{color:var(--term-faint)}.t-white{color:var(--term-ink)}
+.t-bg-red{background:color-mix(in srgb,var(--term-red) 28%,transparent)}.t-bg-green{background:color-mix(in srgb,var(--term-green) 24%,transparent)}
+.t-bg-yellow{background:color-mix(in srgb,var(--term-yellow) 24%,transparent)}.t-bg-blue{background:color-mix(in srgb,var(--term-blue) 24%,transparent)}
+.t-bg-magenta{background:color-mix(in srgb,var(--term-magenta) 24%,transparent)}.t-bg-cyan{background:color-mix(in srgb,var(--term-cyan) 24%,transparent)}
+.t-bg-black{background:rgba(0,0,0,.25)}.t-bg-white{background:rgba(255,255,255,.12)}
+.term-screen b,.t-b{font-weight:700}.t-i{font-style:italic}.t-u{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.t-spin{display:inline-block;width:1ch;color:var(--term-accent)}
+.t-spin.t-green{color:var(--term-green)}
+.bar{position:relative;display:inline-block;vertical-align:top;--p:0}
+.bar i{font-style:normal;white-space:pre;color:var(--term-faint)}
+.bar i + i{position:absolute;left:0;top:0;width:calc(var(--p) * 100%);overflow:hidden;color:var(--term-accent)}
+.term-screen a{color:var(--term-blue)}
+.term-screen a.is-hover{background:var(--term-sel);border-radius:3px}
+.term-screen a.is-press{color:var(--term-ink)}
+
+/* ── the browser: what the command made ── */
+.res-view{position:relative;overflow:hidden;background:var(--ph)}
+.res-load{--p:0;position:absolute;z-index:3;left:0;top:0;height:2.5px;width:calc(var(--p) * 100%);background:var(--note);opacity:calc((1 - var(--p)) * 4)}
+.res-idle{--in:1;position:absolute;inset:0;margin:0;display:grid;place-items:center;font:500 13px/1 var(--sans);color:var(--ink-3);opacity:var(--in)}
+.res-page{--in:0;position:absolute;inset:0;overflow:hidden;padding:0 40px 40px;display:flex;flex-direction:column;gap:26px;opacity:var(--in);font:400 14px/1.4 var(--sans);color:var(--ink)}
+.res-blk{--in:0;opacity:var(--in);transform:translateY(calc((1 - var(--in)) * 12px))}
+.res-page > *{flex:none}
+.res-nav{display:flex;align-items:center;gap:22px;height:64px;border-bottom:1px solid var(--ph-line)}
+.res-logo{width:88px;height:22px;margin-right:auto}
+.res-nav i{width:54px;height:7px;border-radius:4px;background:var(--rule)}
+.res-btn{display:inline-flex;align-self:flex-start;align-items:center;height:40px;padding:0 18px;border-radius:6px;background:var(--ink);color:var(--page);font:500 14px/1 var(--sans);justify-self:start}
+.res-nav .res-btn{align-self:center}
+.res-btn.is-small{height:32px;padding:0 13px;font-size:12.5px}
+.res-btn.is-hover{background:#000;box-shadow:0 0 0 4px color-mix(in srgb,var(--ink) 12%,transparent)}
+.res-btn.is-press{transform:scale(.97)}
+.res-hero{display:grid;gap:14px;padding-top:18px;max-width:560px}
+.res-eyebrow{margin:0;font:500 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.res-hero h3{margin:0;font:400 40px/1.04 var(--serif);letter-spacing:-.02em}
+.res-hero .ph-text{max-width:430px}
+.res-row{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.res-row > div{display:grid;gap:10px}
+.is-tall .res-page{padding:0 24px 24px;gap:20px}
+.is-tall .res-nav i{display:none}
+.is-tall .res-hero h3{font-size:30px}
+.is-tall .res-row{grid-template-columns:repeat(2,1fr)}
+.is-tall .res-row > div:nth-child(3){display:none}

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>temper-button</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="temper-run.css">
+<link rel="stylesheet" href="temper-button.css">
+<!-- no tilt for a button: temper-run's highlight would follow the phone's tilt (tilt.js), repainting every steel
+     face as the hand moves, and iOS would ask for motion access on the first tap. This hands the engine a still
+     tilt instead, so the highlight follows the mouse only (README, "No tilt"). It must come before any module -->
+<script type="importmap">{"imports":{"./tilt.js":"data:text/javascript,export default{x:0,y:0,active:false,listeners:new Set}"}}</script>
+<style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;
+    --serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px);
+    --card:#f8f5ee;--card-line:#ddd6c8;--hair:#e6e0d2}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  [hidden]{display:none !important}
+
+  .page{max-width:1080px;margin:0 auto;padding:clamp(28px,6svh,72px) var(--gutter) clamp(64px,12svh,128px)}
+  .head{margin:0 0 clamp(24px,4.4svh,44px)}
+  .tag{font:500 10.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  .head h1{margin:.45em 0 .2em;font-weight:400;font-style:italic;font-size:clamp(36px,4.6vw,56px);line-height:1;letter-spacing:-.005em}
+  .head p{margin:0;max-width:46em;font-size:clamp(18px,1.6vw,21px);line-height:1.4;font-weight:500;color:var(--ink-2);text-wrap:pretty}
+
+  .grid{display:grid;gap:clamp(18px,2.6vw,30px);align-items:start}
+  @media (min-width:880px){
+    /* the list can grow: the second row takes it, so the Account card stays put under the draft */
+    .grid{grid-template-columns:minmax(0,1.14fr) minmax(0,1fr);grid-template-rows:auto 1fr;grid-template-areas:"editor notes" "settings notes"}
+    .editor{grid-area:editor}.settings{grid-area:settings}.notes{grid-area:notes}
+  }
+  .card{min-width:0;margin:0;background:var(--card);border:1px solid var(--card-line);
+    box-shadow:0 1px 0 #fff inset,0 26px 50px -38px rgba(40,30,20,.34),0 1px 3px rgba(40,30,20,.07)}
+  .card-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:17px 20px 13px}
+  .card-h h2{margin:0;font-weight:400;font-size:27px;line-height:1.05;letter-spacing:-.005em}
+  .meta{font:400 12px/1.3 var(--sans);color:var(--ink-3);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+  /* a line that changes what it says keeps the room of its longest line, so nothing below it moves */
+  .say{display:grid}
+  .say > *{grid-area:1/1}
+  .say .room{visibility:hidden}
+
+  /* an editor, its footer */
+  .ed-main{min-height:142px;padding:0 20px 18px;display:flex;flex-direction:column}
+  .ed-title,.ed-text{display:block;width:100%;margin:0;border:0;padding:0;background:transparent;color:var(--ink);font-family:var(--serif)}
+  .ed-title{font-size:28px;font-weight:500;line-height:1.2;padding:2px 0 6px}
+  .ed-text{flex:1;resize:none;font-size:19px;font-weight:500;line-height:1.45;color:var(--ink-2)}
+  .ed-title:focus,.ed-text:focus{outline:none}
+  .ed-title:focus-visible,.ed-text:focus-visible{outline:1.5px solid var(--ink-3);outline-offset:5px;border-radius:1px}
+  .ed-gone{flex:1;display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;font-size:21px;font-weight:500;color:var(--ink-2);font-style:italic}
+  .ed-gone p{margin:0}
+  .link{font:500 13px/1 var(--sans);color:var(--ink);background:none;border:0;padding:6px 2px;cursor:pointer;
+    text-decoration:underline 1px var(--rule);text-underline-offset:4px;font-style:normal}
+  .link:hover{text-decoration-color:var(--ink-3)}
+  .link:focus-visible{outline:1.5px solid var(--ink);outline-offset:3px;border-radius:1px}
+  .ed-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:12px 12px;padding:16px 20px 18px;border-top:1px solid var(--hair)}
+  .status{flex:1 1 12em;margin:0;font:400 13px/1.4 var(--sans);color:var(--ink-3);text-wrap:balance}
+  .status > *{align-self:center}
+  .status .busy{color:var(--ink-2)}
+  .acts{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:12px;align-items:center}
+  /* the narrowest phones: a little less side padding keeps both buttons on one line, at the same height */
+  @media (max-width:340px){.acts button[data-temper-button]{padding-left:18px;padding-right:18px}}
+
+  /* settings rows */
+  .row{display:flex;align-items:center;gap:16px;padding:12px 20px;border-top:1px solid var(--hair);min-height:66px}
+  .row .txt{flex:1;min-width:0;display:grid;gap:2px}
+  .row .name{font:500 14px/1.35 var(--sans);color:var(--ink)}
+  .row .hint{font-size:17px;font-weight:500;line-height:1.25;color:var(--ink-2);text-wrap:pretty}
+  .row .hint .busy{color:var(--ink-3)}
+
+  /* a list and its "Load more" */
+  .list{list-style:none;margin:0;padding:0}
+  .list:focus{outline:none}
+  .list:focus-visible{outline:1.5px solid var(--ink);outline-offset:-2px}
+  .list li{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:13px 20px;border-top:1px solid var(--hair)}
+  .list .t{font-size:20px;font-weight:500;line-height:1.25;min-width:0}
+  .list .d{font:400 12px/1.3 var(--sans);color:var(--ink-3);white-space:nowrap;font-variant-numeric:tabular-nums}
+  .list li.new{animation:arrive .5s ease-out both}
+  @keyframes arrive{from{opacity:0}to{opacity:1}}
+  @media (prefers-reduced-motion:reduce){.list li.new{animation:none}}
+  .more{display:grid;justify-items:center;gap:14px;padding:26px 20px 20px;border-top:1px solid var(--hair)}
+  .more .meta{min-height:1.3em}
+  .more .meta.busy{color:var(--ink-2)}
+  #list[aria-busy="true"] + .more [data-temper-button]{cursor:progress}
+</style></head><body>
+<main class="page">
+  <header class="head">
+    <span class="tag">Button</span>
+    <h1>Temper button</h1>
+    <p>A ground steel face that blooms with temper colours from where you press it, then is rubbed bright again.</p>
+  </header>
+
+  <div class="grid">
+    <form class="card editor" id="editor" aria-labelledby="ed-h">
+      <div class="card-h"><h2 id="ed-h">Draft</h2><span class="meta">Notebook</span></div>
+      <div class="ed-main">
+        <div class="ed-body" id="edbody" style="display:contents">
+          <input class="ed-title" id="edtitle" value="Groceries for Sunday" aria-label="Title" autocomplete="off">
+          <textarea class="ed-text" id="edtext" rows="3" aria-label="Note">Eggs, lemons, a loaf from the baker on the corner, and something green for the salad.</textarea>
+        </div>
+        <div class="ed-gone" id="edgone" hidden><p>Draft discarded.</p><button type="button" class="link" id="undo">Undo</button></div>
+      </div>
+      <div class="ed-foot">
+        <p class="status say"><span id="edstatus" aria-live="polite">Saved three days ago</span></p>
+        <div class="acts">
+          <button data-temper-button data-hold="1400" data-to="blue" data-done="" data-seed="1407" type="button" id="discard">Hold to discard</button>
+          <button data-temper-button data-seed="2211" type="submit" id="save">Save</button>
+        </div>
+      </div>
+    </form>
+
+    <section class="card settings" aria-labelledby="set-h">
+      <div class="card-h"><h2 id="set-h">Account</h2><span class="meta">Settings</span></div>
+      <div class="row">
+        <div class="txt"><span class="name" id="dev-name">Other devices</span><span class="hint say"><span id="dev-hint" aria-live="polite">Signed in on a phone and a laptop.</span></span></div>
+        <button data-temper-button class="tb-sm" data-seed="3301" type="button" id="signout" aria-describedby="dev-name dev-hint">Sign out</button>
+      </div>
+      <div class="row">
+        <div class="txt"><span class="name" id="lay-name">Layout</span><span class="hint say"><span id="lay-hint" aria-live="polite">Put the panels back where they started.</span></span></div>
+        <button data-temper-button class="tb-sm" data-hold="1200" data-to="purple" data-done="" data-seed="4513" type="button" id="relayout" aria-describedby="lay-name lay-hint">Hold to reset</button>
+      </div>
+      <div class="row">
+        <div class="txt"><span class="name" id="exp-name">Export</span><span class="hint say"><span id="exp-hint" aria-live="polite">Every note in one file.</span></span></div>
+        <button data-temper-button class="tb-sm" data-seed="5129" type="button" id="export" aria-describedby="exp-name exp-hint">Export</button>
+      </div>
+    </section>
+
+    <section class="card notes" aria-labelledby="notes-h">
+      <div class="card-h"><h2 id="notes-h">Notes</h2><span class="meta">Recent</span></div>
+      <ul class="list" id="list" tabindex="-1" aria-labelledby="notes-h">
+        <li><span class="t">Groceries for Sunday</span><span class="d">3 days ago</span></li>
+        <li><span class="t">Train times to Leeds</span><span class="d">Last week</span></li>
+        <li><span class="t">Ideas for the garden</span><span class="d">Oct 21</span></li>
+        <li><span class="t">Books to borrow</span><span class="d">Oct 14</span></li>
+        <li><span class="t">Dentist, Thursday at 9:40</span><span class="d">Oct 9</span></li>
+        <li><span class="t">Paint colours for the hall</span><span class="d">Oct 2</span></li>
+      </ul>
+      <div class="more">
+        <button data-temper-button class="tb-lg" data-seed="6007" type="button" id="more" aria-describedby="count">Load more</button>
+        <span class="meta" id="count" aria-live="polite">Showing 6 of 12</span>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script type="module">
+  import './temper-button.js';
+  const $ = (id) => document.getElementById(id);
+  // "Draft discarded." is the page's only italic. Load that face now, or it swaps in after the line
+  // appears and moves Undo sideways under a pointer already heading for it
+  document.fonts.load('italic 500 21px "Cormorant Garamond"').catch(() => {});
+
+  // a live line of text. It keeps the room of the longest thing it will say (hidden copies stacked
+  // in the same grid cell), so on a phone a short "Signing out…" does not pull the rows below up.
+  // say(text, ms) shows a passing line (ms later it goes back to the settled one); settle(text) is the new truth.
+  // A line is written only when it changes, so typing does not say "Edited, not saved" at every key. But say()
+  // means it: the same line again (a second hold let go too soon) is cleared for a frame and written back, so a
+  // screen reader hears it again
+  function voice(el, ...lines) {
+    let rest = el.textContent, t = 0, f = 0;
+    for (const s of new Set([rest, ...lines])) {
+      const r = document.createElement('span'); r.className = 'room'; r.setAttribute('aria-hidden', 'true'); r.textContent = s;
+      el.parentElement.append(r);
+    }
+    const show = (text, busy, again = false) => {
+      clearTimeout(t); cancelAnimationFrame(f);
+      el.classList.toggle('busy', busy);
+      if (el.textContent !== text) el.textContent = text;
+      else if (again) { el.textContent = ''; f = requestAnimationFrame(() => { f = requestAnimationFrame(() => { el.textContent = text; }); }); }
+    };
+    return {
+      say(text, ms = 0, busy = false) { show(text, busy, true); if (ms) t = setTimeout(() => show(rest, false), ms); },
+      settle(text) { rest = text; show(text, false); },
+    };
+  }
+
+  /* the editor: Save is a plain steel button, discarding takes a held press */
+  const save = $('save'), discard = $('discard'), undo = $('undo');
+  const status = voice($('edstatus'), 'Edited, not saved', 'Saving…', 'Saved just now',
+    'Keep holding until the steel turns blue', 'Press and hold to discard', 'Discarded just now', 'Draft restored');
+  let saving = 0, gone = false;
+  $('editor').addEventListener('input', () => status.settle('Edited, not saved'));
+  $('editor').addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (gone) return;
+    clearTimeout(saving);
+    status.say('Saving…', 0, true);
+    saving = setTimeout(() => status.settle('Saved just now'), 1100);
+  });
+  // why a hold was let go: release, slide, blur, scroll (a touch that became a scroll: no word), or click
+  // (a click with no press behind it, as a screen reader in browse mode or voice control sends)
+  discard.addEventListener('temper-run:cancel', (e) => {
+    const why = e.detail?.reason;
+    if (gone || why === 'scroll') return;
+    status.say(why === 'click' ? 'Press and hold to discard' : 'Keep holding until the steel turns blue', 2600);
+  });
+  discard.addEventListener('temper-run:confirm', () => {
+    if (gone) return;
+    gone = true; clearTimeout(saving);
+    const had = document.activeElement === discard;
+    $('edbody').hidden = true; $('edgone').hidden = false;
+    save.disabled = true; discard.disabled = true;     // nothing to save or discard until Undo
+    status.settle('Discarded just now');
+    if (had) undo.focus();                             // its button is disabled now, so focus goes to Undo
+  });
+  // the key that held Discard may still be down, its auto-repeat landing on Undo: that must not undo
+  undo.addEventListener('keydown', (e) => { if (e.repeat) e.preventDefault(); });
+  undo.addEventListener('click', () => {
+    const had = document.activeElement === undo;
+    gone = false;
+    $('edbody').hidden = false; $('edgone').hidden = true;
+    // the draft is back, so the steel is rubbed bright: its blue belongs to the discard that was undone
+    for (const b of [discard, save]) if (b.__temperButton && b.__temperButton.state !== 'cold') b.__temperButton.reset();
+    save.disabled = false; discard.disabled = false;
+    status.settle('Draft restored');
+    if (had) discard.focus();                          // Undo is gone now: focus goes back where it came from
+  });
+
+  /* settings rows: two plain buttons and a hold */
+  const dev = voice($('dev-hint'), 'Signing out…', 'Only this device is signed in now.');
+  const lay = voice($('lay-hint'), 'Keep holding until it turns purple.', 'Press and hold to reset.', 'The panels are back where they started.');
+  const exp = voice($('exp-hint'), 'Packing twelve notes…', 'notes.zip is ready.');
+  let devT = 0, expT = 0;
+  $('signout').addEventListener('click', () => {
+    clearTimeout(devT); dev.say('Signing out…', 0, true);
+    devT = setTimeout(() => dev.settle('Only this device is signed in now.'), 900);
+  });
+  $('relayout').addEventListener('temper-run:cancel', (e) => {
+    const why = e.detail?.reason;
+    if (why !== 'scroll') lay.say(why === 'click' ? 'Press and hold to reset.' : 'Keep holding until it turns purple.', 2600);
+  });
+  $('relayout').addEventListener('temper-run:confirm', () => lay.settle('The panels are back where they started.'));
+  $('export').addEventListener('click', () => {
+    clearTimeout(expT); exp.say('Packing twelve notes…', 0, true);
+    expT = setTimeout(() => exp.settle('notes.zip is ready.'), 1300);
+  });
+
+  /* the list: three more at a time, then nothing more to load */
+  const more = $('more'), list = $('list'), count = $('count');
+  const rest = [['Recipes to try', 'Sep 26'], ['Bike repairs', 'Sep 19'], ['Packing list for the coast', 'Sep 12'],
+    ['Birthday ideas', 'Sep 3'], ['Questions for the plumber', 'Aug 28'], ['Films to watch', 'Aug 20']];
+  const total = list.children.length + rest.length;
+  more.addEventListener('click', () => {
+    if (!rest.length) return;
+    // working: aria-disabled lets no second press through and it keeps its focus. The line below and the
+    // cursor say it is busy; the steel keeps its bloom, and only dims once its face is rubbed bright
+    more.setAttribute('aria-disabled', 'true');
+    list.setAttribute('aria-busy', 'true'); count.textContent = 'Loading…'; count.classList.add('busy');
+    setTimeout(() => {
+      for (const [t, d] of rest.splice(0, 3)) {
+        const li = document.createElement('li'); li.className = 'new';
+        li.innerHTML = '<span class="t"></span><span class="d"></span>';
+        li.firstChild.textContent = t; li.lastChild.textContent = d;
+        list.append(li);
+      }
+      more.removeAttribute('aria-disabled'); list.removeAttribute('aria-busy'); count.classList.remove('busy');
+      const shown = total - rest.length;
+      count.textContent = rest.length ? `Showing ${shown} of ${total}` : `Showing all ${total}`;
+      if (!rest.length) {
+        const had = document.activeElement === more;
+        more.disabled = true;                          // nothing more: it dims as its face is rubbed bright
+        if (had) list.focus({ preventScroll: true });   // the button is done: focus goes to what it loaded
+      }
+    }, 900);
+  });
+</script>
+</body></html>

@@ -1,0 +1,195 @@
+/* _chat/chat.css: the chat kit's look, shared by demo/chat and demo/mcp. A calm house design of our own: warm paper,
+   hairlines, Newsreader for names and titles, Inter Tight for talk, one accent. Sizes are design pixels inside the tour
+   window (the engine scales the whole window). Restyle through the tokens on .ck-app; the team's agent swaps the
+   placeholder parts for their product's own components (README.md).
+
+   The mechanics, which every skin keeps:
+   - .ck-row takes height as it arrives: the engine measures its natural height into --h (data-tour-grow), show()
+     tweens --in 0 → 1, and max-height lets go entirely once --in reaches 1 (so a row may change size afterwards).
+   - [data-stream] text arrives word by word: each .w is hidden until the engine's stream() marks it .is-in.
+   - [data-ck-in] parts of a card settle in one after another; [data-ck-grow] bars grow with --g. */
+
+.ck-app{--ck-bg:#faf8f4;--ck-card:#fff;--ck-me:#ebe5da;--ck-line:var(--ph-line,#e3dfd7);--ck-accent:var(--note,#c2643f);--ck-radius:16px;
+  position:relative;display:flex;flex-direction:column;height:100%;background:var(--ck-bg);color:var(--ink);font:400 16px/1.55 var(--sans);
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+
+/* ── the rows and their arrival ── */
+.ck-thread{position:relative;flex:1;min-height:0;display:flex;flex-direction:column;overflow-x:hidden;overflow-y:auto;scrollbar-width:none;overscroll-behavior:contain}
+.ck-thread::-webkit-scrollbar{display:none}
+.ck-thread > :first-child{margin-top:auto}
+.ck-row{flex:none;--in:0;overflow:hidden;max-height:max(calc(var(--in) * var(--h,0px)),calc((var(--in) - .999) * 1e7px))}
+.ck-row > .ck-pad{opacity:var(--in);transform:translateY(calc((1 - var(--in)) * 10px))}
+.ck-row.is-static{max-height:none;--in:1}
+.ck-pad{position:relative;padding:7px 20px}
+.w{opacity:0}
+.w.is-in{opacity:var(--in)}
+[data-ck-in]{--in:0;opacity:var(--in);transform:translateY(calc((1 - var(--in)) * 6px))}
+html.no-js .ck-row,html.no-js .ck-tool-body{max-height:none;--in:1}
+html.no-js .w,html.no-js [data-ck-in]{opacity:1;transform:none}
+
+/* ── who's talking ── */
+.ck-av{position:absolute;left:20px;top:9px;width:28px;height:28px;border-radius:50%;overflow:hidden;background:var(--page-2);box-shadow:inset 0 0 0 1px var(--ck-line)}
+.ck-av > *{width:100%;height:100%;object-fit:cover;display:block}
+.ck-row[data-from=agent] > .ck-pad{padding-left:60px}
+.ck-row[data-from=person] > .ck-pad{display:flex;justify-content:flex-end;padding-left:64px}
+.ck-bubble{margin:0;max-width:100%;padding:10px 15px 11px;border-radius:20px 20px 6px 20px;background:var(--ck-me);color:var(--ink);font:inherit;overflow-wrap:anywhere}
+.ck-row[data-from=person] + .ck-row[data-from=person] .ck-bubble{border-top-right-radius:6px}
+.ck-text{max-width:30em;overflow-wrap:anywhere}
+.ck-text > *{margin:0}
+.ck-text > * + *{margin-top:.6em}
+.ck-text ul,.ck-text ol{padding-left:1.15em}
+.ck-text li + li{margin-top:.25em}
+.ck-text b,.ck-text strong{font-weight:600}
+.ck-text code{font:500 .86em/1 var(--mono);padding:.12em .36em;border-radius:5px;background:var(--page-2)}
+.ck-row + .ck-row:not(.is-lead) > .ck-pad{padding-top:3px}
+.ck-row.is-lead:not(:first-child) > .ck-pad{padding-top:14px}
+.ck-row.is-lead > .ck-pad > .ck-av{top:16px}
+.ck-row:first-child > .ck-pad > .ck-av{top:9px}
+
+/* the typing dots: three beats driven by --tk (tweened by the script), so a frozen frame is still a moment */
+.ck-dots{display:inline-flex;gap:5px;align-items:center;height:34px;padding:0 14px;border-radius:17px;background:var(--ck-card);box-shadow:0 0 0 1px var(--ck-line)}
+.ck-dots i{width:7px;height:7px;border-radius:50%;background:var(--ink-2);opacity:.5;
+  opacity:calc(.28 + .62 * max(0, sin(calc(var(--tk,0) * 1turn - var(--d,0deg)))))}
+.ck-dots i:nth-child(2){--d:70deg}.ck-dots i:nth-child(3){--d:140deg}
+
+/* a line in the thread that isn't anyone's message: a date, "Booked", a hand-off */
+.ck-note{display:flex;align-items:center;gap:12px;margin:0;font:500 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.ck-note::before,.ck-note::after{content:"";flex:1;border-top:1px solid var(--ck-line)}
+
+/* ── the top of a conversation: who this is. It sits in the free space and is pushed up and away by the talk ── */
+.ck-start{flex:none;margin:auto 0;padding:28px 28px 22px;text-align:center}
+.ck-start .ck-av-l{display:block;width:64px;height:64px;margin:0 auto 14px;border-radius:50%;overflow:hidden;background:var(--page-2);box-shadow:inset 0 0 0 1px var(--ck-line)}
+.ck-start .ck-av-l > *{width:100%;height:100%;object-fit:cover;display:block}
+.ck-start h1,.ck-start h2{margin:0;font:400 32px/1.05 var(--serif);letter-spacing:-.02em}
+.ck-start em{font-style:italic}
+.ck-start p{margin:8px auto 0;max-width:22em;font-size:14.5px;line-height:1.45;color:var(--ink-2);text-wrap:balance}
+.ck-start .ck-note{margin-top:24px}
+
+/* ── the header and the composer ── */
+.ck-status{display:none;flex:none;height:46px;align-items:center;justify-content:space-between;padding:0 26px 0 30px;font:600 15px/1 var(--sans);letter-spacing:-.01em}
+.ck-status svg{height:12px;fill:currentColor}
+.ck-status span{display:flex;gap:6px;align-items:center}
+.ck-head{flex:none;display:flex;align-items:center;gap:11px;padding:12px 18px;border-bottom:1px solid var(--ck-line);background:color-mix(in srgb,var(--ck-bg) 92%,transparent)}
+.ck-head .ck-av{position:static;width:32px;height:32px;flex:none}
+.ck-head b{display:block;font:500 15px/1.2 var(--sans);letter-spacing:-.01em}
+.ck-head small{display:flex;align-items:center;gap:6px;font:400 12.5px/1.3 var(--sans);color:var(--ink-3)}
+.ck-head small::before{content:"";width:6px;height:6px;border-radius:50%;background:#6f9a6a}
+.ck-head-act{margin-left:auto;display:grid;place-items:center;width:32px;height:32px;border-radius:50%;color:var(--ink-2)}
+.ck-head-act svg{width:18px;height:18px;fill:currentColor}
+.ck-composer{flex:none;padding:10px 16px 16px}
+.ck-field{display:flex;align-items:center;gap:10px;min-height:48px;padding:6px 6px 6px 14px;border-radius:24px;background:var(--ck-card);
+  box-shadow:0 0 0 1px var(--ck-line),0 6px 18px -12px rgba(25,24,22,.25)}
+.ck-field > svg{flex:none;width:20px;height:20px;fill:none;stroke:var(--ink-3);stroke-width:1.6;stroke-linecap:round}
+.ck-input{flex:1;min-width:0;padding:5px 0;font:400 15.5px/1.35 var(--sans);color:var(--ink);overflow-wrap:anywhere}
+.ck-input:empty::before{content:attr(data-placeholder);color:var(--ink-3)}
+.ck-input.is-caret::after{content:"";display:inline-block;width:1.5px;height:1.1em;margin-left:1px;vertical-align:-.18em;background:var(--ck-accent)}
+.ck-input:empty.is-caret::before{content:""}
+.ck-input:empty.is-caret::after{content:"";margin-left:0}
+.ck-send{flex:none;display:grid;place-items:center;width:36px;height:36px;border:0;border-radius:50%;background:var(--ink);color:var(--ck-card);transition:none}
+.ck-send svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ck-composer:has(.ck-input:empty) .ck-send{background:var(--page-2);color:var(--ink-3)}
+.ck-send.is-press{transform:scale(.9)}
+.ck-small{margin:8px 0 0;text-align:center;font:400 11.5px/1.3 var(--sans);color:var(--ink-3)}
+
+/* ── tool calls: "server · tool", the arguments, the result. Folded by default in a chat; open while it runs in mcp ── */
+.ck-tool{max-width:100%;border-radius:12px;font:400 12.5px/1.5 var(--mono);color:var(--ink-2)}
+.ck-tool-head{display:flex;align-items:center;gap:9px;width:100%;margin:0;padding:7px 12px 7px 10px;border:0;border-radius:12px;background:var(--ck-card);
+  box-shadow:0 0 0 1px var(--ck-line);font:inherit;color:inherit;text-align:left;cursor:pointer}
+.ck-row[data-kind=tool] .ck-tool{display:inline-block}
+.ck-tool-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ck-tool-name b{font-weight:500;color:var(--ink)}
+.ck-tool-meta{margin-left:auto;padding-left:10px;color:var(--ink-3);white-space:nowrap}
+.ck-tool-state{position:relative;flex:none;width:14px;height:14px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--ck-line)}
+.ck-tool.is-running .ck-tool-state{box-shadow:inset 0 0 0 1.5px var(--ck-line);background:conic-gradient(from calc(var(--spin,0) * 1turn),var(--ink-2) 0 .22turn,transparent .22turn);
+  -webkit-mask:radial-gradient(circle,transparent 4.6px,#000 5px);mask:radial-gradient(circle,transparent 4.6px,#000 5px)}
+.ck-tool.is-done .ck-tool-state{box-shadow:none;background:var(--ink)}
+.ck-tool.is-done .ck-tool-state::after{content:"";position:absolute;left:4.6px;top:2.6px;width:3.4px;height:6.6px;border:solid var(--ck-card);border-width:0 1.5px 1.5px 0;transform:rotate(42deg)}
+.ck-chev{flex:none;width:12px;height:12px;fill:none;stroke:var(--ink-3);stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:transform .3s var(--ease,ease)}
+.ck-tool-body{--in:0;overflow:hidden;max-height:max(calc(var(--in) * var(--h,0px)),calc((var(--in) - .999) * 1e7px))}
+.ck-tool-body > *{opacity:var(--in)}
+.ck-tool.is-user-open .ck-tool-body{--in:1!important}
+.ck-tool.is-user-shut .ck-tool-body{--in:0!important}
+.ck-tool.is-user-open .ck-chev{transform:rotate(90deg)}
+.ck-args,.ck-out{margin:0;padding:10px 12px 0 33px;white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}
+.ck-args{color:var(--ink-2)}
+.ck-out{color:var(--ink);padding-bottom:4px}
+.ck-out > *{margin:0}
+.ck-out > .is-dim{color:var(--ink-3)}
+.ck-row[data-open] .ck-out > *{opacity:0}                    /* an open call's result streams in, line by line */
+.ck-row[data-open] .ck-out > .is-in{opacity:var(--in)}
+html.no-js .ck-row[data-open] .ck-out > *{opacity:1}
+.ck-k{color:var(--ink-3)}
+.ck-s{color:#7a5a2e}
+.ck-n{color:#4d6f8a}
+
+/* ── cards: the product inline, in a message ── */
+.ck-card{position:relative;max-width:380px;padding:16px;border-radius:var(--ck-radius);background:var(--ck-card);
+  box-shadow:0 0 0 1px var(--ck-line),0 14px 30px -22px rgba(25,24,22,.4)}
+.ck-card-t{margin:0;font:400 22px/1.15 var(--serif);letter-spacing:-.012em}
+.ck-card-t em{font-style:italic}
+.ck-card-m{margin:4px 0 0;font:400 13px/1.4 var(--sans);color:var(--ink-3)}
+.ck-card hr{margin:14px -16px;border:0;border-top:1px solid var(--ck-line)}
+.ck-card > * + *{margin-top:12px}
+.ck-card > .ck-card-m{margin-top:4px}
+.ck-btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:44px;padding:0 16px;border:0;border-radius:12px;background:var(--ink);color:var(--ck-card);
+  font:500 14.5px/1 var(--sans);text-decoration:none;cursor:pointer}
+.ck-btn.is-ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ck-line)}
+.ck-btn.is-press{transform:scale(.97)}
+.ck-btn svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ck-btns{display:flex;gap:8px}
+.ck-btns > *{flex:1}
+
+/* choices: time slots, options. .is-on is the picked one */
+.ck-opts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.ck-opt{display:grid;gap:2px;justify-items:center;padding:10px 6px;border:0;border-radius:11px;background:var(--ck-bg);box-shadow:inset 0 0 0 1px var(--ck-line);font:500 14px/1.2 var(--sans);color:var(--ink);cursor:pointer}
+.ck-opt small{font:400 11.5px/1.2 var(--sans);color:var(--ink-3)}
+.ck-opt.is-hover{box-shadow:inset 0 0 0 1px var(--ink-3)}
+.ck-opt.is-on{background:var(--ck-card);box-shadow:inset 0 0 0 1.5px var(--ink),0 0 0 3px color-mix(in srgb,var(--ck-accent) 22%,transparent)}
+.ck-opt.is-press{transform:scale(.96)}
+
+/* quick replies under a message */
+.ck-chips{display:flex;flex-wrap:wrap;gap:7px}
+.ck-chip{padding:8px 13px;border:0;border-radius:999px;background:transparent;box-shadow:inset 0 0 0 1px var(--ck-line);font:500 13.5px/1 var(--sans);color:var(--ink);cursor:pointer}
+.ck-chip.is-hover{box-shadow:inset 0 0 0 1px var(--ink-3)}
+.ck-chip.is-picked{background:var(--ink);color:var(--ck-card);box-shadow:none}
+
+/* two states in one place (before / after a tap): [data-ck-swap] holds two children, --swap 0 → 1 cross-fades them */
+[data-ck-swap]{display:grid;--swap:0}
+[data-ck-swap] > *{grid-area:1/1;transition:none}
+[data-ck-swap] > :first-child{opacity:calc(1 - var(--swap));overflow:hidden;max-height:max(calc((1 - var(--swap)) * var(--h,2000px)),0px)}   /* it gives up its height as it goes */
+[data-ck-swap] > :last-child{opacity:var(--swap);transform:translateY(calc((1 - var(--swap)) * 6px))}
+.ck-done{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:6px}
+.ck-done-mark{display:grid;place-items:center;width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--ck-card)}
+.ck-done-mark svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+/* a little chart: bars with --v (0–1), grown in with --g */
+.ck-bars{display:flex;align-items:flex-end;gap:7px;height:118px;padding-top:6px}
+.ck-bars i{flex:1;height:calc(var(--v,.5) * var(--g,1) * 100%);border-radius:5px 5px 2px 2px;background:var(--page-2);box-shadow:inset 0 0 0 1px var(--ck-line)}
+.ck-bars i.is-hi{background:var(--ink);box-shadow:none}
+.ck-axis{display:flex;gap:7px;margin-top:7px !important;font:500 10.5px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.ck-axis span{flex:1;text-align:center}
+.ck-legend{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.ck-legend b{font:400 30px/1 var(--serif);letter-spacing:-.02em}
+.ck-legend small{font-size:12.5px;color:var(--ink-3)}
+
+/* a file, fields, a grid of images */
+.ck-file{display:flex;align-items:center;gap:11px;padding:10px 12px;border-radius:12px;background:var(--ck-bg);box-shadow:inset 0 0 0 1px var(--ck-line)}
+.ck-file svg{flex:none;width:30px;height:36px}
+.ck-file b{display:block;font:500 14px/1.25 var(--sans)}
+.ck-file small{font:400 12px/1.3 var(--sans);color:var(--ink-3)}
+.ck-fields{display:grid;gap:0}
+.ck-fields > span{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--ck-line);font-size:14px}
+.ck-fields > span:first-child{padding-top:0}
+.ck-fields small{flex:none;width:56px;font-size:12.5px;line-height:1.6;color:var(--ink-3)}
+.ck-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.ck-grid .ph{border-radius:9px}
+
+/* the last message: the way in */
+.ck-cta{max-width:400px;padding:22px 20px 18px;text-align:left}
+.ck-cta .ck-card-t{font-size:34px;line-height:1;letter-spacing:-.022em}
+.ck-cta p:not(.ck-card-t){margin:0;font:400 15px/1.45 var(--sans);color:var(--ink-2)}
+.ck-cta .ck-card-t + p{margin-top:8px}
+.ck-cta .ck-url{display:block;margin-top:12px;font:500 12px/1 var(--mono);color:var(--ink-3);text-align:center}
+
+/* pressed and hovered look for anything the cursor or the finger touches */
+.ck-chip.is-press,.ck-opt.is-press,.ck-btn.is-press,.ck-send.is-press{transition:none}

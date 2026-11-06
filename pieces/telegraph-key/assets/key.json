@@ -1,0 +1,30 @@
+{
+ "box": [
+  3113,
+  1540
+ ],
+ "aspect": 2.02143,
+ "widths": [
+  400,
+  800,
+  1600
+ ],
+ "height_at": {
+  "400": 198,
+  "800": 396,
+  "1600": 792
+ },
+ "pivot": [
+  0.81465,
+  0.42403
+ ],
+ "spring_root": [
+  0.20238,
+  0.65584
+ ],
+ "lever_deg": -3.9175,
+ "spring_deg": 1.6134,
+ "play_mm": 1.4,
+ "plate_travel": 0.09093,
+ "note": "CSS rotate() angles at full press: the lever turns about the pin until the front screw meets the anvil; the spring turns about the end of its screwed plate so its tip follows the lever. plate_travel is how far the finger plate drops, as a fraction of the key's height."
+}

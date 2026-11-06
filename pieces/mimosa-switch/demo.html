@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>mimosa-toggle</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="mimosa-toggle.css">
+<style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;
+    --serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);font-size:19px;overflow-x:hidden}
+  .tag{font-family:var(--sans);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  main{max-width:1180px;margin:0 auto;padding:clamp(40px,8svh,96px) var(--gutter) 120px;display:grid;gap:clamp(64px,11svh,128px)}
+
+  /* the hero: one leaf on a plate */
+  .hero{display:grid;gap:clamp(28px,4vw,64px);align-items:center}
+  @media (min-width:900px){.hero{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}}
+  .plate{margin:0;position:relative;background:#f8f5ee;border:1px solid #ddd6c8;
+    box-shadow:0 1px 0 #fff inset,0 30px 60px -40px rgba(40,30,20,.35),0 2px 6px -3px rgba(40,30,20,.14)}
+  .plate::before{content:"";position:absolute;inset:9px;border:1px solid #e6e0d2;pointer-events:none}
+  .plate .mt--hero{--mt-aspect:5/4}
+  .plate .fig{position:absolute;left:22px;bottom:18px;pointer-events:none}
+  .copy h1{margin:.25em 0 .35em;font-weight:300;font-style:italic;font-size:clamp(40px,5.4vw,64px);line-height:.98;letter-spacing:-.01em}
+  .copy p{margin:0 0 .9em;color:var(--ink-2);line-height:1.45;font-size:clamp(19px,1.9vw,21px);text-wrap:pretty;max-width:34ch}
+  .control{display:flex;align-items:center;gap:14px;margin-top:1.6em;padding-top:18px;border-top:1px solid var(--rule)}
+  .control label{font-family:var(--sans);font-size:13px;letter-spacing:.02em;color:var(--ink);cursor:pointer}
+  .readout{margin-left:auto;font-family:var(--sans);font-size:11px;letter-spacing:.08em;color:var(--ink-3);text-align:right;line-height:1.6;font-variant-numeric:tabular-nums}
+  .readout b{font-weight:500;color:var(--ink-2)}
+
+  /* a settings panel */
+  .panel{justify-self:center;width:min(560px,100%);background:#f8f5ee;border:1px solid #ddd6c8;
+    box-shadow:0 26px 50px -36px rgba(40,30,20,.32),0 1px 3px rgba(40,30,20,.08)}
+  .panel header{display:flex;justify-content:space-between;align-items:baseline;padding:22px 26px 14px}
+  .panel h2{margin:0;font-weight:400;font-size:30px;letter-spacing:-.005em}
+  .row{display:flex;align-items:center;gap:18px;padding:18px 26px;border-top:1px solid #e6e0d2;min-height:84px}
+  .row label{flex:1;cursor:pointer;display:grid;gap:3px}
+  .row .name{font-family:var(--sans);font-size:14px;font-weight:500;color:var(--ink)}
+  .row .hint{font-size:17px;color:var(--ink-2);line-height:1.25}
+  .row .mt{margin-right:6px}
+
+  /* the brush, and the plate it echoes */
+  .pair{display:grid;gap:clamp(40px,6vw,72px);align-items:end;border-top:1px solid var(--rule);padding-top:clamp(40px,7svh,72px)}
+  @media (min-width:860px){.pair{grid-template-columns:1.2fr 1fr}}
+  .brush{margin:0}
+  .brush [data-mimosa-toggle]{background:radial-gradient(120% 90% at 40% 45%,#f7f4ec,transparent 70%)}
+  .brush .mt--hero{--mt-aspect:16/11}
+  .brush .tag{display:block;margin-top:12px}
+  .edgar{margin:0;justify-self:center;width:min(380px,100%)}
+  .edgar img{display:block;width:100%;height:auto;border:1px solid #ddd6c8;filter:sepia(.18) contrast(.96);mix-blend-mode:multiply}
+  .foot{justify-self:center}
+</style></head><body>
+<main>
+  <section class="hero">
+    <figure class="plate">
+      <input type="checkbox" role="switch" id="frond" data-mimosa-toggle data-size="hero" data-seed="7" checked aria-describedby="frond-note">
+      <span class="fig tag" aria-hidden="true">Fig. 1</span>
+    </figure>
+    <div class="copy">
+      <span class="tag">Sensitive plant</span>
+      <h1>Touch-me-not</h1>
+      <p>One leaf of <i>Mimosa pudica</i> is the switch. Open, it holds its pinnae out like fingers. Switch it off and the signal runs down the leaf: the leaflets fold pair by pair, the pinnae close, and the leaf drops.</p>
+      <p id="frond-note">Folding takes a moment. Reopening takes longer. Toggle it fast and the plant stops bothering, though the switch still changes.</p>
+      <div class="control">
+        <label for="frond">Leaf open</label>
+        <span class="readout" aria-hidden="true">value <b id="val">on</b><br>last reflex <b id="resp">none yet</b></span>
+      </div>
+    </div>
+  </section>
+
+  <form class="panel" onsubmit="return false">
+    <header><h2>Settings</h2><span class="tag">Device</span></header>
+    <div class="row">
+      <label for="s1"><span class="name">Notifications</span><span class="hint">Let messages through while you work.</span></label>
+      <input type="checkbox" role="switch" id="s1" data-mimosa-toggle data-seed="11" checked>
+    </div>
+    <div class="row">
+      <label for="s2"><span class="name">Sync</span><span class="hint">Keep this device and the others in step.</span></label>
+      <input type="checkbox" role="switch" id="s2" data-mimosa-toggle data-seed="23" checked>
+    </div>
+    <div class="row">
+      <label for="s3"><span class="name">Dark room</span><span class="hint">Dim everything after sunset.</span></label>
+      <input type="checkbox" role="switch" id="s3" data-mimosa-toggle data-seed="5">
+    </div>
+    <div class="row">
+      <label for="s4"><span class="name">Haptics</span><span class="hint">A small tap when something lands.</span></label>
+      <input type="checkbox" role="switch" id="s4" data-mimosa-toggle data-seed="41" data-pinnae="1" checked>
+    </div>
+  </form>
+
+  <section class="pair">
+    <figure class="brush">
+      <div data-mimosa-toggle data-size="hero" data-seed="3" data-flower="false" id="brush"></div>
+      <span class="tag">Brush it, or press</span>
+    </figure>
+    <figure class="edgar">
+      <img src="assets/sensitive-plant-edgar-1808.webp" alt="" aria-hidden="true" width="900" height="1163" loading="lazy">
+    </figure>
+  </section>
+  <span class="tag foot">mimosa-toggle</span>
+</main>
+<script type="module">
+  import { mimosaToggle } from './mimosa-toggle.js';
+  const frond = document.getElementById('frond');
+  const val = document.getElementById('val'), resp = document.getElementById('resp');
+  frond.addEventListener('change', () => { val.textContent = frond.checked ? 'on' : 'off'; });
+  frond.addEventListener('mimosa-toggle:fold', (e) => {
+    const r = e.detail.response;
+    resp.textContent = r <= 0 ? 'resting' : Math.round(r * 100) + '%';
+  });
+</script>
+<script type="module" src="sound.js"></script>
+</body></html>

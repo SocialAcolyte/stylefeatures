@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "toggle": true,
+  "sounds": [
+    {
+      "name": "contact",
+      "file": "assets/sounds/contact.wav",
+      "on": "event:telegraph-key:contact",
+      "target": "[data-telegraph-key]",
+      "volume": 0.42,
+      "vary": 0.35,
+      "cooldown": 40,
+      "source": { "kind": "recording", "id": "freesound-797930", "start_s": 5.803, "end_s": 5.955 },
+      "credit": "\"Brass_Switches_and_Levers_Steampunk/Dieslpunk\" by SoundsofTheMachine (CC0 1.0, freesound.org/people/SoundsofTheMachine/sounds/797930/), 5.80-5.96 s, trimmed with 2 ms and 32 ms fades: an antique brass switch closing, for the lever's point striking the anvil. No CC0 recording of a telegraph key itself was found on Commons or Freesound."
+    },
+    {
+      "name": "backstop",
+      "file": "assets/sounds/backstop.wav",
+      "on": "event:telegraph-key:up",
+      "match": { "contact": true },
+      "target": "[data-telegraph-key]",
+      "volume": 0.3,
+      "vary": 0.35,
+      "cooldown": 40,
+      "source": { "kind": "recording", "id": "freesound-797930", "start_s": 6.092, "end_s": 6.24 },
+      "credit": "\"Brass_Switches_and_Levers_Steampunk/Dieslpunk\" by SoundsofTheMachine (CC0 1.0, freesound.org/people/SoundsofTheMachine/sounds/797930/), 6.09-6.24 s, trimmed with 2 ms and 34 ms fades: the next brass click in the same take, for the spring throwing the lever back onto its back screw."
+    }
+  ]
+}

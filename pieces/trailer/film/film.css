@@ -1,0 +1,21 @@
+@import url("../tour/tour.css");
+@import url("screens/screens.css");
+/* film.css: a code tour filling whatever box a layout gives it (a clip, a frame, a tile, a dialog).
+   tour.css (imported above) is the engine's look; restyle through its tokens on the slot, e.g.
+   .clip{--tour-stage:#e9e5de}. screens.css is the placeholder product. */
+
+[data-film]{--tour-stage:var(--page-2,#ece9e3)}
+.film-tour{position:absolute;inset:0}
+.film-tour[data-tour-root] [data-tour-stage]{position:absolute;inset:0;height:auto;container-type:size}   /* any driver: the slot sets the size */
+.film-tour .tour-chrome{background:var(--page,#f5f3ef)}
+.film-tour .tour-ctl{bottom:12px}
+
+/* a phone tour: the glass and bezel are drawn here; the engine fits the window to the glass and keeps
+   every zoom inside it. Layouts place it with --glass-y and --glass-h (it stays 390:844). */
+.film-glass{--h:var(--glass-h,88cqh);position:absolute;left:50%;top:var(--glass-y,6cqh);height:var(--h);aspect-ratio:390/844;transform:translateX(-50%);
+  border-radius:calc(var(--h) * 54 / 844);background:#fff;
+  box-shadow:0 0 0 calc(var(--h) * 9 / 844) #121110,0 0 0 calc(var(--h) * 10 / 844) #3a3835,0 40px 70px -34px rgba(25,24,22,.55)}
+
+/* a recording in a slot instead of a tour */
+[data-film] > video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;background:#111}
+[data-film] > video[controls]{object-fit:contain}

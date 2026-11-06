@@ -1,0 +1,121 @@
+/* telegraph-key: a Send button that is the Morse–Vail key of 1844.
+   The key is four layers of one photograph in one box: the base (block, plates, anvil, posts), the spring, the lever
+   (with everything on it) and the near cheek of the trunnion, which stands in front of the lever's lug. Pressing turns
+   the lever about its pin until its point meets the anvil; the spring turns with it about the end of its plate.
+   The angles and centres come from assets/key.json. Works without JS: :active presses it. With the module running
+   (.tk-js) the module makes the stroke instead ([data-tk-down]), so a scroll, a slide-off or a disabled key never
+   shows a press. */
+
+.tk {
+  --tk-key-h: 32px;                        /* the key's height; its width follows (2.021 : 1) */
+  --tk-press: 48ms;                        /* finger to contact */
+  --tk-release: 72ms;                      /* spring to back stop */
+  --tk-bg: var(--card, #f8f5ee);
+  --tk-line: var(--card-line, var(--rule, #cfcac0));
+  --tk-down-bg: var(--paper-2, #e9e5da);   /* the face while the key is down */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 40px;
+  margin: 0;
+  padding: 0 15px 0 7px;
+  border: 1px solid var(--tk-line);
+  border-radius: 2px;
+  background: var(--tk-bg);
+  color: var(--ink, #141312);
+  font: 500 14px/1 var(--sans, system-ui, sans-serif);
+  letter-spacing: .005em;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  transition: border-color .2s, background-color .12s, box-shadow .12s;
+}
+@media (hover: hover) { .tk:hover:not(:disabled) { border-color: var(--ink-3, #8a857d); } }
+/* down: by CSS alone when the module is not running, by the module's stroke when it is; never a disabled key */
+.tk:not(.tk-js):active:not(:disabled), .tk[data-tk-down] { background-color: var(--tk-down-bg); }
+.tk[data-state="sending"] { cursor: progress; }
+.tk:focus { outline: none; }
+.tk:focus-visible { outline: 2px solid var(--ink, #141312); outline-offset: 3px; }
+
+.tk-key {
+  position: relative;
+  display: block;
+  flex: none;
+  height: var(--tk-key-h);
+  aspect-ratio: 3113 / 1540;
+  pointer-events: none;
+}
+.tk-key > img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  -webkit-user-drag: none;
+}
+.tk-label { display: block; white-space: nowrap; }
+/* the words for sending and sent, when the button has them, stacked in the label's one cell: it never resizes */
+.tk-words { display: grid; justify-items: center; }
+.tk-word { grid-area: 1 / 1; opacity: 0; visibility: hidden; transition: opacity .14s, visibility 0s .14s; }
+.tk-word.tk-on { opacity: 1; visibility: visible; transition: opacity .14s; }
+
+/* the turns: the lever about the pin (81.465%, 42.403% of the box), the spring about the end of its screwed plate */
+.tk-lever, .tk-spring {
+  transition: transform var(--tk-release) cubic-bezier(.45, 0, .9, .55);
+}
+.tk-lever { transform-origin: 81.465% 42.403%; }
+.tk-spring { transform-origin: 20.238% 65.584%; }
+.tk:not(.tk-js):active:not(:disabled) .tk-lever, .tk[data-tk-down] .tk-lever {
+  transform: rotate(-3.9175deg);
+  transition-duration: var(--tk-press);
+}
+.tk:not(.tk-js):active:not(:disabled) .tk-spring, .tk[data-tk-down] .tk-spring {
+  transform: rotate(1.6134deg);
+  transition-duration: var(--tk-press);
+}
+
+/* sizes: as it comes it is a 40 px row button; .tk-lg is the key on its own, large, with the word beneath */
+.tk-sm { --tk-key-h: 24px; min-height: 32px; gap: 7px; padding: 0 12px 0 5px; font-size: 13px; }
+.tk-lg {
+  --tk-key-h: clamp(92px, 30vw, 236px);
+  max-width: 100%;
+  flex-direction: column;
+  gap: clamp(10px, 1.6vw, 16px);
+  padding: clamp(18px, 3vw, 30px) clamp(22px, 4vw, 44px) clamp(14px, 2.4vw, 22px);
+  font-size: 12px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+}
+.tk-lg .tk-label { padding-left: .2em; }        /* the tracking's trailing space */
+/* no frame: for a toolbar, where the bar is the frame. Down is a deeper tone than hover, pressed in */
+.tk-bare { border-color: transparent; background: transparent; padding-right: 10px; }
+@media (hover: hover) { .tk-bare:hover:not(:disabled) { border-color: transparent; background: var(--paper-2, #e9e5da); } }
+.tk.tk-bare:not(.tk-js):active:not(:disabled), .tk.tk-bare[data-tk-down] {
+  background: var(--tk-bare-down-bg, #ddd6c7);
+  box-shadow: inset 0 1px 2px rgba(40, 30, 20, .2);
+}
+
+/* a key disabled while a send holds it down keeps its rest face: a grey key never takes the pressed tone */
+.tk:disabled[data-tk-down] { background-color: var(--tk-bg); }
+.tk.tk-bare:disabled[data-tk-down] { background: transparent; box-shadow: none; }
+.tk:disabled, .tk[aria-disabled="true"]:not([aria-busy="true"]) { cursor: not-allowed; color: var(--ink-3, #8a857d); }
+.tk:disabled .tk-key, .tk[aria-disabled="true"]:not([aria-busy="true"]) .tk-key {
+  filter: grayscale(1) brightness(1.08) contrast(.86); opacity: .5;
+}
+@media (hover: hover) { .tk[aria-disabled="true"]:not([aria-busy="true"]):hover { border-color: var(--tk-line); } }
+@media (hover: hover) { .tk-bare[aria-disabled="true"]:not([aria-busy="true"]):hover { background: transparent; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .tk-lever, .tk-spring, .tk-word { transition: none !important; }
+}
+@media (forced-colors: active) {
+  .tk { border-color: ButtonText; }
+  .tk:disabled { border-color: GrayText; }
+  .tk:focus-visible { outline-color: Highlight; }
+}

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Product name</title>
+<meta name="description" content="One line that says what the product does and who it is for.">
+<meta property="og:title" content="Product name">
+<meta name="theme-color" content="#f5f3ef">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./film/film.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<main class="stage">
+  <!-- Desktop only: the name and one line, to the left of the phone. -->
+  <header class="side intro">
+    <p class="eyebrow">What it is, in a few words</p>
+    <h1>Product <em>name</em></h1>
+    <p class="lede">One line that says what it does and who it is for.</p>
+    <a class="btn solid" href="#">Get started</a>
+  </header>
+
+  <!-- The stories. One <article class="story"> per story, one <i> in .bars per story. Each story is a short
+       tour of the app on a phone, a fingertip tapping through it (data-film names it in tours.js).
+       A Monet Shot clip instead: data-src="media/story-1.mp4" on the .slot. The last article is the call to action. -->
+  <section class="viewer" id="stories" tabindex="0" aria-roledescription="stories" aria-label="Product stories. Left and right arrows move between them, space pauses.">
+    <div class="head">
+      <div class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <div class="row">
+        <span class="mark">Product <em>name</em></span>
+        <button class="ctl" id="pause" type="button"><span class="sr">Pause or play</span></button>
+      </div>
+    </div>
+
+    <article class="story is-on">
+      <div class="slot" data-film="phone-open" data-record></div>
+      <p class="cap">The first thing you see, <em>in one line.</em></p>
+    </article>
+    <article class="story">
+      <div class="slot" data-film="phone-create"></div>
+      <p class="cap">The second, <em>a little closer.</em></p>
+    </article>
+    <article class="story">
+      <div class="slot" data-film="phone-detail"></div>
+      <p class="cap">The part people <em>ask about.</em></p>
+    </article>
+    <article class="story">
+      <div class="slot" data-film="phone-share"></div>
+      <p class="cap">What you have <em>at the end.</em></p>
+    </article>
+    <article class="story end">
+      <p class="eyebrow">Product name</p>
+      <h2>An invitation, <em>in six words or so.</em></h2>
+      <a class="btn solid" href="#">Get started</a>
+      <button class="again" type="button" id="again">Watch again</button>
+    </article>
+
+    <button class="big" id="big" type="button" aria-label="Play">
+      <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.8v8.4L10 6z"/></svg>
+    </button>
+  </section>
+
+  <!-- Desktop only: how to use it. -->
+  <aside class="side keys" aria-hidden="true">
+    <dl>
+      <div><dt>Tap right</dt><dd>Next</dd></div>
+      <div><dt>Tap left</dt><dd>Back</dd></div>
+      <div><dt>Hold</dt><dd>Pause</dd></div>
+      <div><dt>← →</dt><dd>Keys work too</dd></div>
+    </dl>
+  </aside>
+</main>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>

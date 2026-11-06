@@ -1,0 +1,156 @@
+@import url("../tour/tour.css");
+@import url("product.css");
+/* demo/deck: the site is a keynote. Full-screen slides, one idea each, sized in --su (a hundredth of the screen's
+   short side, set by section.js) so the page, a phone and every ?record ratio lay out the same way.
+   The root gets .is-wide (16:9, desktops), .is-square (1:1) or .is-tall (9:16, phones). */
+
+.demo-deck{--su:9px;position:relative;height:100svh;overflow:hidden;background:color-mix(in srgb,var(--page-2) calc(var(--ov,0) * 100%),var(--page));color:var(--ink);touch-action:none;user-select:none;-webkit-user-select:none}
+.demo-deck em{font-style:italic}
+.deck-stage{position:absolute;inset:0}
+.deck-stage::before{content:"All slides · click one, or Esc";position:absolute;left:calc(var(--su)*5);top:calc(var(--su)*3);font:500 max(11px,calc(var(--su)*1.2))/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);opacity:var(--ov,0)}
+
+/* a slide: the whole screen, moved and scaled by section.js (transitions and the overview) */
+.deck-slide{position:absolute;left:0;top:0;width:100%;height:100%;transform-origin:0 0;background:var(--page);opacity:0;visibility:hidden;overflow:hidden;container-type:size}
+.deck-in{position:absolute;inset:0;padding:calc(var(--su)*7) calc(var(--su)*8) calc(var(--su)*10)}
+[data-build]{opacity:var(--in,0);transform:translateY(calc((1 - var(--in,0)) * var(--su) * 1.4))}
+.deck-slide .sf-note{position:absolute;right:calc(var(--su)*4);top:calc(var(--su)*3);max-width:min(30em,46%)}
+/* the overview: every slide a card on the light table */
+.demo-deck.is-ov .deck-slide{cursor:pointer;box-shadow:0 0 0 calc(var(--su)*.45) var(--ph-line),0 calc(var(--su)*4) calc(var(--su)*8) calc(var(--su)*-4) rgba(25,24,22,.35)}
+.demo-deck.is-ov .deck-slide:hover{box-shadow:0 0 0 calc(var(--su)*.7) var(--ink-3)}
+.demo-deck.is-ov .deck-slide.is-cur{box-shadow:0 0 0 calc(var(--su)*1.1) var(--note)}
+.demo-deck.is-ov .sf-note{display:none}
+
+/* type, shared */
+.deck-eyebrow,.deck-n{margin:0 0 calc(var(--su)*2);font:500 max(11px,calc(var(--su)*1.35))/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.deck-name{margin:0;padding-top:.08em;font:400 calc(var(--su)*15)/.86 var(--serif);letter-spacing:-.03em;white-space:nowrap}
+.deck-line{margin:calc(var(--su)*2.6) 0 0;max-width:30em;font:400 max(15px,calc(var(--su)*2.3))/1.45 var(--sans);color:var(--ink-2);text-wrap:balance}
+.deck-say{margin:0;max-width:16em;font:400 calc(var(--su)*8.4)/1.02 var(--serif);letter-spacing:-.025em;text-wrap:balance}
+.deck-words h2{margin:0;font:400 calc(var(--su)*5.6)/1 var(--serif);letter-spacing:-.022em;text-wrap:balance}
+.deck-hint{margin:calc(var(--su)*5) 0 0;font:400 max(12px,calc(var(--su)*1.4))/1 var(--sans);color:var(--ink-3)}
+.deck-hint span{margin:0 .5em}
+.deck-hint kbd{display:inline-grid;place-items:center;min-width:2em;height:2em;padding:0 .5em;margin:0 .15em;border-radius:4px;background:var(--ph);box-shadow:0 0 0 1px var(--ph-line),0 2px 0 var(--ph-line);font:500 .95em/1 var(--sans);color:var(--ink-2)}
+
+/* title and action: the name, set huge, bottom-left */
+.deck-slide[data-kind="title"] .deck-in,.deck-slide[data-kind="action"] .deck-in{display:flex;flex-direction:column;justify-content:flex-end}
+.deck-act{display:flex;align-items:center;flex-wrap:wrap;gap:calc(var(--su)*1.6) calc(var(--su)*3);margin-top:calc(var(--su)*4)}
+.deck-cta{padding:calc(var(--su)*1.9) calc(var(--su)*3.2);font-size:max(14px,calc(var(--su)*1.8))}
+.deck-url{font:500 max(13px,calc(var(--su)*1.8))/1 var(--mono);color:var(--ink-3)}
+/* statement: one sentence, huge */
+.deck-slide[data-kind="statement"] .deck-in{display:flex;flex-direction:column;justify-content:center}
+
+/* tour: the words beside (or above) a window playing one step */
+.deck-slide[data-kind="tour"] .deck-in{display:grid;grid-template-columns:minmax(0,.36fr) minmax(0,1fr);gap:calc(var(--su)*5);align-items:center;padding-right:calc(var(--su)*6)}
+.deck-words{align-self:center}
+.deck-frame{position:relative;align-self:stretch;min-height:0;container-type:size;display:grid;place-items:center}
+.deck-film{position:relative;width:min(100cqw,calc(100cqh * 1.6));aspect-ratio:1200/750;border-radius:calc(var(--su)*1);
+  box-shadow:0 0 0 1px rgba(25,24,22,.12),0 calc(var(--su)*4) calc(var(--su)*9) calc(var(--su)*-4) rgba(25,24,22,.5),0 calc(var(--su)*1.2) calc(var(--su)*3) calc(var(--su)*-1.8) rgba(25,24,22,.26);background:var(--ph)}
+.demo-deck .deck-film [data-tour-stage]{position:absolute;inset:0;height:auto;background:transparent;border-radius:inherit}
+.deck-glass{position:absolute;inset:0;border-radius:inherit;pointer-events:none}
+.deck-film [data-tour-window]{box-shadow:none}
+.deck-film .tour-card,.deck-film .tour-cap{display:none}
+.deck-film .tour-chrome{background:var(--page)}
+
+/* diagram: how it works, three boxes in one direction */
+.deck-slide[data-kind="diagram"] .deck-in{display:flex;flex-direction:column;justify-content:center;gap:calc(var(--su)*6)}
+.deck-flow{display:grid;grid-template-columns:minmax(0,1fr) calc(var(--su)*9) minmax(0,1fr) calc(var(--su)*9) minmax(0,1fr);align-items:stretch}
+.deck-node{display:grid;justify-items:start;align-content:start;gap:calc(var(--su)*1.2);padding:calc(var(--su)*3.4);border-radius:calc(var(--su)*.6);background:var(--ph);box-shadow:0 0 0 1px var(--ph-line)}
+.deck-node b{font:400 calc(var(--su)*3.6)/1.05 var(--serif);letter-spacing:-.015em}
+.deck-node p{margin:0;font:400 max(13px,calc(var(--su)*1.9))/1.45 var(--sans);color:var(--ink-2)}
+.deck-dot{display:grid;place-items:center;width:calc(var(--su)*7);height:calc(var(--su)*7);margin-bottom:calc(var(--su)*2);border-radius:50%;background:var(--page);box-shadow:inset 0 0 0 1px var(--ph-line);color:var(--ink-2)}
+.deck-dot svg{width:50%;height:50%;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.deck-node.is-core{background:var(--ink);box-shadow:none;color:var(--page)}
+.deck-node.is-core p{color:color-mix(in srgb,var(--page) 72%,transparent)}
+.deck-node.is-core .deck-dot{background:color-mix(in srgb,var(--page) 12%,transparent);box-shadow:none}
+.deck-mark{width:42%;height:42%;border-radius:22%;background:var(--page)}
+.deck-arrow{position:relative;align-self:center;height:calc(var(--su)*3);opacity:1!important;transform:none!important}
+.deck-arrow::before{content:"";position:absolute;left:calc(var(--su)*1.4);right:calc(var(--su)*1.4);top:50%;border-top:1.5px solid var(--ink-3);transform-origin:left;transform:scaleX(var(--in,0))}
+.deck-arrow::after{content:"";position:absolute;right:calc(var(--su)*1.4);top:50%;width:calc(var(--su)*1.1);height:calc(var(--su)*1.1);border-top:1.5px solid var(--ink-3);border-right:1.5px solid var(--ink-3);transform:translate(0,-50%) rotate(45deg);opacity:calc(var(--in,0) * 3 - 2)}
+
+/* quote: the maker's words and a portrait slot */
+.deck-slide[data-kind="quote"] .deck-in{display:grid;grid-template-columns:minmax(0,.3fr) minmax(0,1fr);gap:calc(var(--su)*7);align-items:center}
+.deck-portrait{width:100%;max-width:calc(var(--su)*34);justify-self:end}
+.deck-portrait::after{font-size:max(9px,calc(var(--su)*1.05))}
+.deck-quote{margin:0}
+.deck-quote p{margin:0;max-width:19em;font:400 calc(var(--su)*5)/1.12 var(--serif);letter-spacing:-.018em;text-wrap:balance}
+.deck-quote p::before{content:"“";margin-left:-.42em}
+.deck-quote p::after{content:"”"}
+.deck-quote footer{display:flex;gap:calc(var(--su)*1.4);align-items:baseline;margin-top:calc(var(--su)*3.4);font:400 max(13px,calc(var(--su)*1.7))/1.3 var(--sans);color:var(--ink-3)}
+.deck-quote footer b{font-weight:500;color:var(--ink)}
+
+/* ── square (1:1) and tall (9:16, phones): words above, the window or the boxes below ── */
+.demo-deck:not(.is-wide) .deck-in{padding:calc(var(--su)*7) calc(var(--su)*6) calc(var(--su)*11)}
+.demo-deck:not(.is-wide) .deck-name{font-size:calc(var(--su)*15);white-space:normal}
+.demo-deck:not(.is-wide) .deck-say{font-size:calc(var(--su)*8.6)}
+.demo-deck:not(.is-wide) .deck-slide[data-kind="tour"] .deck-in{grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);align-items:stretch;gap:calc(var(--su)*4);padding-right:calc(var(--su)*6)}
+.demo-deck:not(.is-wide) .deck-words{align-self:end}
+.demo-deck:not(.is-wide) .deck-words h2{font-size:calc(var(--su)*7)}
+.demo-deck:not(.is-wide) .deck-line{font-size:max(15px,calc(var(--su)*2.8))}
+.demo-deck:not(.is-wide) .deck-frame{place-items:start center}
+.demo-deck:not(.is-wide) .deck-flow{grid-template-columns:minmax(0,1fr);grid-template-rows:auto calc(var(--su)*5) auto calc(var(--su)*5) auto;align-content:center}
+.demo-deck:not(.is-wide) .deck-node{grid-template-columns:auto minmax(0,1fr);column-gap:calc(var(--su)*2.4);align-items:center;padding:calc(var(--su)*2.4)}
+.demo-deck:not(.is-wide) .deck-dot{grid-row:1 / span 2;margin:0}
+.demo-deck:not(.is-wide) .deck-node p{font-size:max(12px,calc(var(--su)*2))}
+.demo-deck:not(.is-wide) .deck-arrow{height:auto;width:calc(var(--su)*3);justify-self:center}
+.demo-deck:not(.is-wide) .deck-arrow::before{left:50%;right:auto;top:calc(var(--su)*.8);bottom:calc(var(--su)*.8);border-top:0;border-left:1.5px solid var(--ink-3);transform-origin:top;transform:scaleY(var(--in,0))}
+.demo-deck:not(.is-wide) .deck-arrow::after{right:auto;left:50%;top:auto;bottom:calc(var(--su)*.8);transform:translate(-50%,0) rotate(135deg)}
+.demo-deck:not(.is-wide) .deck-slide[data-kind="quote"] .deck-in{grid-template-columns:minmax(0,1fr);align-content:center;gap:calc(var(--su)*4)}
+.demo-deck:not(.is-wide) .deck-portrait{justify-self:start;max-width:calc(var(--su)*24)}
+.demo-deck:not(.is-wide) .deck-quote p{font-size:calc(var(--su)*6)}
+.demo-deck.is-tall .deck-slide[data-kind="tour"] .deck-in{display:flex;flex-direction:column;justify-content:center;gap:calc(var(--su)*5);padding-left:calc(var(--su)*4);padding-right:calc(var(--su)*4)}
+.demo-deck.is-tall .deck-words{align-self:stretch;padding:0 calc(var(--su)*2)}
+.demo-deck.is-tall .deck-frame{flex:none;align-self:stretch;container-type:inline-size;display:block}
+.demo-deck.is-tall .deck-film{width:100cqw}
+.demo-deck.is-tall .deck-name{font-size:calc(var(--su)*17)}
+.demo-deck.is-tall .deck-say{font-size:calc(var(--su)*9.4)}
+.demo-deck.is-tall .deck-words h2{font-size:calc(var(--su)*9)}
+.demo-deck.is-tall .deck-line{font-size:max(15px,calc(var(--su)*3.6))}
+.demo-deck.is-tall .deck-quote p{font-size:calc(var(--su)*7.4)}
+.demo-deck.is-tall .deck-node b{font-size:calc(var(--su)*4.4)}
+.demo-deck.is-tall .deck-node p{font-size:max(12px,calc(var(--su)*2.8))}
+.demo-deck.is-tall .deck-dot{width:calc(var(--su)*9);height:calc(var(--su)*9)}
+.demo-deck.is-tall .deck-eyebrow,.demo-deck.is-tall .deck-n{font-size:max(11px,calc(var(--su)*2))}
+.demo-deck.is-tall .deck-slide .sf-note{left:calc(var(--su)*6);right:auto;max-width:calc(100% - var(--su)*12)}
+.demo-deck.is-tall .deck-hint{font-size:max(12px,calc(var(--su)*2.4))}
+
+/* ── the bar: play as a talk, all slides, back, next, and where you are ── */
+.deck-bar{position:absolute;z-index:5;left:calc(var(--su)*4);right:calc(var(--su)*4);bottom:calc(var(--su)*3);display:flex;align-items:center;gap:6px;transition:opacity .6s var(--ease)}
+@media (hover:hover){
+  .demo-deck.is-idle:not(.is-ov) .deck-bar{opacity:.18}
+  .demo-deck.is-idle:not(.is-ov) .deck-bar:hover,.deck-bar:focus-within{opacity:1}
+}
+.deck-btn{display:inline-flex;align-items:center;gap:8px;height:34px;padding:0 12px;border:0;border-radius:99px;background:transparent;box-shadow:inset 0 0 0 1px var(--rule);font:500 12.5px/1 var(--sans);color:var(--ink);cursor:pointer;transition:background-color .25s,box-shadow .25s}
+.deck-btn:hover{background:var(--ph);box-shadow:inset 0 0 0 1px var(--ink-3)}
+.deck-btn:focus-visible{outline:2px solid var(--note);outline-offset:2px}
+.deck-btn svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.deck-play svg{fill:currentColor;stroke:none}
+.deck-play .i-pause,.demo-deck.is-talk .deck-play .i-play{display:none}
+.demo-deck.is-talk .deck-play .i-pause{display:block}
+.deck-prev{margin-left:auto}
+.deck-prev,.deck-next{width:34px;padding:0;justify-content:center}
+.deck-count{margin-left:10px;min-width:4.6em;text-align:right;font:500 max(12px,calc(var(--su)*1.3))/1 var(--mono);color:var(--ink-3);font-variant-numeric:tabular-nums}
+.deck-count b{font-weight:500;color:var(--ink)}
+.deck-progress{position:absolute;z-index:5;left:0;right:0;bottom:0;height:max(2px,calc(var(--su)*.3));background:color-mix(in srgb,var(--rule) 60%,transparent)}
+.deck-progress b{position:absolute;inset:0;background:var(--ink);transform-origin:left;transform:scaleX(0)}
+.demo-deck.is-ov .deck-progress{opacity:0}
+@media (max-width:640px){
+  .deck-btn span{display:none}
+  .deck-btn{width:34px;padding:0;justify-content:center}
+}
+@media (hover:none){ .deck-prev,.deck-next{display:none} .deck-count{margin-left:auto} }
+
+/* ── ?record: the talk on the record stage. The buttons go; the counter and the progress line stay ── */
+.demo-deck.is-record{height:var(--rh)!important;background:var(--page)}
+.demo-deck.is-record .deck-btn{display:none}
+.demo-deck.is-record .deck-count{margin-left:auto;font-size:calc(var(--su)*1.5)}
+.demo-deck.is-record .deck-bar{left:calc(var(--su)*5);right:calc(var(--su)*5);bottom:calc(var(--su)*3.4)}
+.demo-deck.is-record .deck-hint{display:none}
+.demo-deck.is-record .deck-cta{display:none}
+.demo-deck.is-record .deck-url{font-size:calc(var(--su)*2.6);color:var(--ink)}
+.demo-deck.is-record .deck-eyebrow,.demo-deck.is-record .deck-n{font-size:calc(var(--su)*1.5)}
+.demo-deck.is-record .deck-line{font-size:calc(var(--su)*2.4)}
+.demo-deck.is-record.is-tall .deck-line{font-size:calc(var(--su)*3.6)}
+.demo-deck.is-record .deck-node p{font-size:calc(var(--su)*1.7)}
+.demo-deck.is-record.is-tall .deck-node p{font-size:calc(var(--su)*2.8)}
+.demo-deck.is-record .deck-quote footer{font-size:calc(var(--su)*1.9)}
+
+@media (prefers-reduced-motion:reduce){ .deck-bar,.deck-btn{transition:none} }

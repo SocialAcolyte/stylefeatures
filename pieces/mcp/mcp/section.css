@@ -1,0 +1,107 @@
+@import url("../tour/tour.css");
+@import url("../_chat/chat.css");
+/* demo/mcp: an MCP server's whole website. Text on paper, a serif for the talk, a monospace for the machine: a person
+   and their agent in three short conversations, each showing one real tool, then one big button to add it. No app
+   chrome and nothing drawn around the column. tour.css is the engine's look and _chat/chat.css the shared kit (rows,
+   word streaming, tool blocks); this file is the transcript's skin and the stage. */
+
+.demo-mcp{--tour-stage:var(--page)}
+.demo-mcp .tour-card,.demo-mcp .tour-cap{display:none}
+.demo-mcp [data-tour-window]{border-radius:0;box-shadow:none;background:transparent}
+
+/* the column (the data-tour-frame): container queries on the stage, so it is right the first time the engine measures */
+.demo-mcp-stage{container-type:size}
+.demo-mcp-stage > *{--fw:min(100cqw,max(560px,44cqw))}
+.demo-mcp.is-record .demo-mcp-stage > *{--fw:54cqw}
+@container (aspect-ratio < 1.15){ .demo-mcp-stage > *{--fw:min(100cqw,max(520px,80cqw))} .demo-mcp.is-record .demo-mcp-stage > *{--fw:80cqw} }
+@container (aspect-ratio < .8){ .demo-mcp-stage > *,.demo-mcp.is-record .demo-mcp-stage > *{--fw:100cqw} }
+.demo-mcp-frame{position:absolute;top:0;bottom:0;left:calc(50cqw - var(--fw) / 2);width:var(--fw)}
+.demo-mcp-note{position:absolute;z-index:5;left:3cqw;bottom:4cqh;max-width:min(24em,calc(50cqw - var(--fw) / 2 - 6cqw))}
+@container (aspect-ratio < 1.15){ .demo-mcp-note{display:none!important} }
+
+/* ── the page inside the window ── */
+.mcp{--mcp-gut:64px;--ck-card:#fff;--ck-bg:var(--page);--ck-line:var(--rule);display:flex;flex-direction:column;height:100%;padding:52px 0 0;color:var(--ink)}
+.mcp-head{flex:none;padding:0 0 0 var(--mcp-gut)}
+.mcp-top{display:flex;align-items:baseline;gap:12px;margin:0;font:400 13px/1 var(--mono);color:var(--ink-3)}
+.mcp-name{font-weight:600;color:var(--ink)}
+.mcp-jump{margin-left:auto;padding:7px 12px;border-radius:999px;box-shadow:inset 0 0 0 1px var(--ink);font:500 12.5px/1 var(--sans);color:var(--ink);text-decoration:none}
+.mcp-jump:hover{background:var(--ink);color:var(--page)}
+.mcp-line{margin:18px 0 0;max-width:20em;font:400 31px/1.12 var(--serif);letter-spacing:-.018em;text-wrap:balance}
+.mcp-tabs{display:flex;gap:22px;margin-top:26px;border-bottom:1px solid var(--rule)}
+.mcp-tabs button{position:relative;padding:0 0 11px;border:0;background:none;font:400 13px/1 var(--mono);color:var(--ink-3);cursor:pointer}
+.mcp-tabs button::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1.5px;background:var(--ink);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+.mcp-tabs button.is-on{color:var(--ink)}
+.mcp-tabs button.is-on::after{transform:none}
+.mcp-tabs button:hover{color:var(--ink-2)}
+.mcp-jump:focus-visible,.mcp-tabs button:focus-visible,.mcp-end button:focus-visible,.mcp-end a:focus-visible,.mcp .ck-tool-head:focus-visible{outline:2px solid var(--note);outline-offset:3px}
+
+.mcp-talk{position:relative;flex:1;min-height:0}
+.mcp-conv{position:absolute;inset:0;--in:0;opacity:var(--in);transform:translateY(calc((1 - var(--in)) * 12px));visibility:visible;display:flex;flex-direction:column;
+  opacity:calc(var(--in) * (1 - var(--tour-out,0)))}
+html.no-js .mcp-conv[data-tour="conv-1"]{--in:1}
+.mcp-thread{padding:26px 0 40px}
+.mcp-thread > :first-child{margin-top:0}
+
+/* a transcript: who's talking in a quiet gutter, the talk in the serif, the machine in mono */
+.mcp .ck-row > .ck-pad,.mcp .ck-row[data-from] > .ck-pad{display:grid;grid-template-columns:var(--mcp-gut) minmax(0,1fr);justify-content:stretch;padding:9px 0}
+.mcp .ck-row.is-lead:not(:first-child) > .ck-pad{padding-top:24px}
+.mcp-who{padding-top:6px;font:500 10.5px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+.mcp .ck-row:not(.is-lead) .mcp-who{visibility:hidden}
+.mcp-said{margin:0;font:400 23px/1.32 var(--serif);letter-spacing:-.012em;color:var(--ink);text-wrap:pretty}
+.mcp-said.is-caret::after{content:"";display:inline-block;width:2px;height:.95em;margin-left:2px;vertical-align:-.1em;background:var(--note)}
+.mcp-text{max-width:none;font:400 19px/1.5 var(--serif);color:var(--ink)}
+.mcp-text li::marker{color:var(--ink-3)}
+
+/* the tool call, calm: a hairline down its side, "server · tool", the arguments, the result. It folds to one line. */
+.mcp .ck-tool{display:block;padding-left:14px;border-left:1px solid var(--rule);border-radius:0;font-size:13px;line-height:1.55}
+.mcp .ck-tool-head{padding:4px 0;background:none;box-shadow:none;border-radius:0}
+.mcp .ck-tool-state{width:12px;height:12px}
+.mcp .ck-tool.is-done .ck-tool-state::after{left:3.8px;top:2px;width:3px;height:5.8px}
+.mcp .ck-args,.mcp .ck-out{padding:6px 0 0 21px}
+.mcp .ck-out{padding-bottom:6px;white-space:pre}
+.mcp .ck-out > *{overflow:hidden;text-overflow:ellipsis}
+.mcp .ck-tool.is-running .ck-chev{transform:rotate(90deg)}
+
+/* ── the ending: one big button, the address, the config in text ── */
+.mcp-end{position:absolute;inset:0;padding:30px 0 24px var(--mcp-gut);overflow:auto;scrollbar-width:none;
+  opacity:var(--in,0);transform:translateY(calc((1 - var(--in,0)) * 14px))}
+.mcp-end h2{margin:0;font:400 38px/1.05 var(--serif);letter-spacing:-.022em}
+.mcp-end h2 em{font-style:italic}
+.mcp-add{display:flex;align-items:center;justify-content:center;width:100%;min-height:68px;margin-top:22px;border:0;border-radius:4px;background:var(--ink);color:var(--page);
+  font:500 19px/1 var(--sans);letter-spacing:-.005em;cursor:pointer;text-decoration:none;transition:background-color .3s}
+.mcp-add:hover{background:#000}
+.mcp-add.is-copied{font-size:15px}
+.mcp-url{display:flex;align-items:center;gap:12px;margin-top:12px;padding:12px 8px 12px 16px;border-radius:4px;box-shadow:inset 0 0 0 1px var(--rule)}
+.mcp-url code{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font:400 14px/1 var(--mono)}
+.mcp-end button:not(.mcp-add):not([role=tab]){flex:none;padding:7px 11px;border:0;border-radius:3px;background:var(--page-2);font:500 12px/1 var(--sans);color:var(--ink);cursor:pointer}
+.mcp-end button.is-copied:not(.mcp-add){background:var(--ink);color:var(--page)}
+.mcp-cfg{margin-top:22px}
+.mcp-cfg-tabs{display:flex;gap:20px;border-bottom:1px solid var(--rule)}
+.mcp-cfg-tabs [role=tab]{position:relative;padding:0 0 10px;border:0;background:none;font:500 12.5px/1 var(--sans);color:var(--ink-3);cursor:pointer}
+.mcp-cfg-tabs [aria-selected=true]{color:var(--ink)}
+.mcp-cfg-tabs [aria-selected=true]::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:1.5px;background:var(--ink)}
+.mcp-cfg-p{position:relative;padding-top:14px}
+.mcp-cfg-p pre{margin:0;padding-right:70px;font:400 13px/1.55 var(--mono);color:var(--ink-2);white-space:pre-wrap;overflow-wrap:anywhere}
+.mcp-cfg-p button{position:absolute;right:0;top:12px}
+.mcp-small{margin:22px 0 0;font:400 12px/1.4 var(--mono);color:var(--ink-3)}
+.mcp-small a{color:inherit}
+.mcp-said-live{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+
+/* tall (phones, 9:16): the gutter goes, who's talking sits above the line */
+.demo-mcp.is-tall .mcp{--mcp-gut:0px;padding:30px 22px 0}
+.demo-mcp.is-tall .mcp .ck-row > .ck-pad{grid-template-columns:minmax(0,1fr)}
+.demo-mcp.is-tall .mcp-who{padding:0 0 7px}
+.demo-mcp.is-tall .mcp .ck-row:not(.is-lead) .mcp-who{display:none}
+.demo-mcp.is-tall .mcp-line{font-size:26px}
+.demo-mcp.is-tall .mcp-tabs{gap:16px;overflow:hidden}
+.demo-mcp.is-tall .mcp-tabs button{font-size:12px;white-space:nowrap}
+.demo-mcp.is-tall .mcp-said{font-size:21px}
+.demo-mcp.is-tall .mcp-text{font-size:18px}
+.demo-mcp.is-tall .mcp .ck-tool{font-size:12px}
+.demo-mcp.is-tall .mcp .ck-out{white-space:pre-wrap}
+.demo-mcp.is-tall .mcp-end{padding:22px 0 18px}
+.demo-mcp.is-tall .mcp-end h2{font-size:30px}
+.demo-mcp.is-tall .mcp-cfg-p pre{font-size:12px}
+
+/* the ending owns the column: the head's line steps back once it's there */
+.mcp-line,.mcp-tabs{transition:none;opacity:calc(1 - var(--tour-out,0) * .65)}
