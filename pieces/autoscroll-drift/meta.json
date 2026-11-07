@@ -1,0 +1,1 @@
+{"name":"Auto-scroll: mimosa leaf","idea":"The page drifts down by itself and a sensitive-plant leaf is the switch: touch the page and the leaflets fold, stop and the drift resumes; optionally the page can be locked until the leaf is turned off.","config":{"speed":"px per second (default 30vh)","delay":"ms before it starts (4000)","lock":"false"}}

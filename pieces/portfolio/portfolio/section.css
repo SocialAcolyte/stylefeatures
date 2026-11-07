@@ -1,0 +1,192 @@
+@import url("../tour/tour.css");
+@import url("work.css");
+/* demo/portfolio: a person's site. Their name and one line, then the shelf: one spine per project, one open at a time,
+   its film playing in a frame on the project's own colour; then older work, about, and (contact/hello) the address.
+   tour.css (the engine's look) and work.css (the four placeholder projects inside the frames) are imported above.
+   section.js sets --o (0 closed → 1 open) and --p (film progress) on each .pf-proj, and .is-v on the root when the
+   shelf stacks (phones, 9:16 recordings). */
+
+.demo-portfolio{position:relative;background:var(--page);--spine:76px;--bar:58px;--gap:6px}
+.demo-portfolio em{font-style:italic}
+
+/* ── the opening ── */
+.pf-head{max-width:1560px;margin:0 auto;padding:0 var(--gutter)}
+.pf-nav{display:flex;justify-content:space-between;align-items:center;gap:20px;height:76px;font:500 14px/1 var(--sans)}
+.pf-nav a{color:var(--ink);text-decoration:none}
+.pf-nav span{display:flex;gap:clamp(16px,2.4vw,32px)}
+.pf-nav span a{color:var(--ink-2);transition:color .3s ease}
+.pf-nav span a:hover{color:var(--ink)}
+.pf-nav a:focus-visible{outline:2px solid var(--note);outline-offset:4px}
+.pf-hello{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(0,1fr);align-items:end;gap:clamp(24px,5vw,96px);padding:clamp(48px,11vh,128px) 0 clamp(36px,6vh,64px)}
+.pf-name{margin:0;padding-top:.08em;font:400 clamp(62px,9.2vw,164px)/.86 var(--serif);letter-spacing:-.035em;color:var(--ink);white-space:nowrap}
+.pf-intro{display:grid;gap:20px;justify-items:start;max-width:27em;padding-bottom:.55em}
+.pf-line{margin:0;font:400 clamp(17px,1.35vw,20px)/1.5 var(--sans);color:var(--ink-2)}
+.pf-now{display:flex;align-items:center;gap:10px;margin:0;font:500 13px/1.35 var(--sans);color:var(--ink)}
+.pf-now i{flex:none;width:7px;height:7px;border-radius:50%;background:#7a9468;box-shadow:0 0 0 4px rgba(122,148,104,.16)}
+
+/* ── the shelf ── */
+.pf-work{position:relative;max-width:1560px;margin:0 auto;padding:0 var(--gutter)}
+.pf-shelf-head{display:flex;align-items:center;gap:22px;padding:18px 0 16px;border-top:1px solid var(--rule)}
+.pf-shelf-head .sf-eyebrow{margin:0}
+.pf-shelf-head .sf-eyebrow span{margin-left:12px;color:var(--ink-3);letter-spacing:.08em}
+.pf-count{margin-left:auto;font:500 12px/1 var(--mono);color:var(--ink-3)}
+.pf-count b{font-weight:500;color:var(--ink)}
+.pf-rec-mark{display:none}
+.pf-pp{display:inline-flex;align-items:center;gap:8px;padding:6px 0;border:0;background:none;font:500 12px/1 var(--sans);color:var(--ink-2);cursor:pointer;transition:color .3s}
+.pf-pp:hover{color:var(--ink)}
+.pf-pp[hidden]{display:none}
+.pf-pp svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.pf-pp .pf-pp-play{display:none;fill:currentColor;stroke:none}
+.pf-pp[aria-pressed=true] .pf-pp-play{display:block}
+.pf-pp[aria-pressed=true] .pf-pp-pause{display:none}
+.pf-pp:focus-visible{outline:2px solid var(--note);outline-offset:3px}
+
+.pf-shelf{--n:4;list-style:none;margin:0;padding:0;display:flex;gap:var(--gap);height:clamp(520px,calc(100svh - 132px),880px);container-type:inline-size}
+.pf-proj{--o:0;--p:0;--bw:calc(100cqw - var(--n) * var(--spine) - (var(--n) - 1) * var(--gap));
+  position:relative;flex:0 0 calc(var(--spine) + var(--o) * var(--bw));min-width:0;display:flex;overflow:hidden;border-radius:3px;background:var(--tint,var(--page-2))}
+
+.pf-spine{position:relative;flex:none;width:var(--spine);height:100%;display:flex;flex-direction:column;align-items:center;gap:16px;padding:22px 0 20px;
+  border:0;border-radius:0;background:transparent;color:var(--ink);font:inherit;cursor:pointer;transition:background-color .35s ease}
+.pf-n{font:500 11px/1 var(--sans);letter-spacing:.14em;color:var(--ink-3)}
+.pf-t{margin-top:auto;writing-mode:vertical-rl;transform:rotate(180deg);font:400 27px/1 var(--serif);letter-spacing:-.012em;white-space:nowrap;color:var(--ink-2);transition:color .35s ease}
+.pf-y{font:500 11px/1 var(--sans);letter-spacing:.06em;color:var(--ink-3)}
+.pf-proj.is-open .pf-t,.pf-spine:hover .pf-t{color:var(--ink)}
+.pf-proj:not(.is-open) .pf-spine:hover{background:rgba(25,24,22,.035)}
+.pf-spine:focus-visible{outline:2px solid var(--note);outline-offset:-4px}
+.pf-bar{position:absolute;right:0;top:22px;bottom:20px;width:1px;background:rgba(25,24,22,.1);opacity:var(--o)}
+.pf-bar b{position:absolute;left:-.5px;top:0;width:2px;height:calc(var(--p) * 100%);background:rgba(25,24,22,.62)}
+
+.pf-body{position:relative;flex:none;width:var(--bw);height:100%;display:flex;flex-direction:column}
+.pf-mat{position:relative;flex:1;min-height:0}
+.pf-mat .pf-film{position:absolute;inset:0;container-type:size;--tour-stage:transparent}
+.demo-portfolio .pf-film [data-tour-stage]{position:absolute;inset:0;height:auto;background:transparent}
+.pf-film .tour-card,.pf-film .tour-cap{display:none!important}   /* the caption under the frame says it */
+/* the frame the window fills: the engine fits the window to it and keeps every push-in inside it. --ar is the window's
+   width / height (data-size). .is-bare for a desk of windows (a phone, a terminal and a browser) on the tint itself. */
+.pf-frame{position:absolute;inset:0;margin:auto;width:min(90cqw,calc(84cqh * var(--ar)));height:min(84cqh,calc(90cqw / var(--ar)));border-radius:9px;background:var(--ph);
+  box-shadow:0 0 0 1px rgba(25,24,22,.09),0 34px 80px -40px rgba(25,24,22,.55),0 12px 26px -16px rgba(25,24,22,.3)}
+.pf-frame.is-bare{background:none;box-shadow:none;border-radius:0}
+
+.pf-cap{flex:none;display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:end;gap:14px clamp(24px,3vw,52px);min-height:104px;padding:6px 30px 26px 6px;
+  opacity:calc((var(--o) - .55) * 2.4);transform:translateY(calc((1 - var(--o)) * 10px))}
+.pf-cap h2{margin:0;font:400 clamp(26px,2.3vw,36px)/1 var(--serif);letter-spacing:-.018em;color:var(--ink)}
+.pf-cap-t p{margin:10px 0 0;max-width:36em;font:400 15px/1.45 var(--sans);color:var(--ink-2)}
+.pf-cap dl{display:flex;gap:clamp(20px,2.4vw,36px);margin:0}
+.pf-cap dt{margin-bottom:8px;font:500 10.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.pf-cap dd{margin:0;font:400 14px/1.3 var(--sans);color:var(--ink);white-space:nowrap}
+.pf-link{display:inline-flex;align-items:center;gap:6px;padding-bottom:5px;font:500 14px/1 var(--sans);color:var(--ink);text-decoration:none;white-space:nowrap;
+  box-shadow:inset 0 -1px 0 rgba(25,24,22,.3);transition:box-shadow .3s ease}
+.pf-link:hover{box-shadow:inset 0 -1px 0 var(--ink)}
+.pf-link svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .4s var(--ease)}
+.pf-link:hover svg{transform:translate(2px,-2px)}
+.pf-link:focus-visible{outline:2px solid var(--note);outline-offset:4px}
+.pf-note{margin-top:14px}
+
+/* ── older work, one line each ── */
+.pf-more{max-width:1560px;margin:0 auto;padding:clamp(64px,11vh,128px) var(--gutter) 0}
+.pf-index{list-style:none;margin:0 0 18px;padding:0;border-bottom:1px solid var(--rule)}
+.pf-index li{display:grid;grid-template-columns:90px minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr) 28px;align-items:baseline;gap:20px;padding:17px 0 15px;border-top:1px solid var(--rule);
+  font:400 16px/1.3 var(--sans);color:var(--ink-2)}
+.pf-ix-y{font:500 12px/1 var(--mono);color:var(--ink-3)}
+.pf-ix-n{font:400 22px/1.1 var(--serif);letter-spacing:-.01em;color:var(--ink)}
+.pf-index a{justify-self:end;display:grid;place-items:center;width:28px;height:28px;color:var(--ink-2)}
+.pf-index a svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;transition:transform .4s var(--ease)}
+.pf-index li:hover a{color:var(--ink)}
+.pf-index li:hover a svg{transform:translate(2px,-2px)}
+.pf-index a:focus-visible{outline:2px solid var(--note);outline-offset:2px}
+
+/* ── about ── */
+.pf-about{max-width:1560px;margin:0 auto;display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1.5fr);gap:clamp(28px,6vw,120px);align-items:end;
+  padding:clamp(80px,14vh,160px) var(--gutter) 0}
+.pf-portrait{width:100%;max-width:440px}
+.pf-about-lede{margin:0;max-width:22em;font:400 clamp(26px,2.7vw,42px)/1.18 var(--serif);letter-spacing:-.015em;color:var(--ink);text-wrap:pretty}
+.pf-facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px clamp(20px,3vw,48px);margin-top:clamp(32px,6vh,60px);padding-top:24px;border-top:1px solid var(--rule)}
+.pf-facts .sf-eyebrow{margin-bottom:14px}
+.pf-about-t .sf-note{margin-top:22px}
+
+/* ── stacked: phones (and 9:16 recordings). Each spine is a bar; the open project's film sits under its bar ── */
+.demo-portfolio.is-v .pf-shelf{flex-direction:column;height:auto}
+.is-v .pf-proj{flex:none;height:calc(var(--bar) + var(--o) * var(--bh,420px));flex-direction:column}
+.is-v .pf-spine{width:100%;height:var(--bar);flex-direction:row;gap:14px;padding:0 16px}
+.is-v .pf-t{margin:0;writing-mode:horizontal-tb;transform:none;font-size:22px}
+.is-v .pf-y{margin-left:auto}
+.is-v .pf-bar{top:auto;left:16px;right:16px;bottom:0;width:auto;height:1px}
+.is-v .pf-bar b{left:0;top:-.5px;width:calc(var(--p) * 100%);height:2px}
+.is-v .pf-body{width:100%;height:auto}
+.is-v .pf-mat{flex:none;aspect-ratio:4/3}
+.is-v .pf-cap{grid-template-columns:minmax(0,1fr) auto;align-items:end;min-height:0;padding:4px 16px 20px;transform:translateY(calc((1 - var(--o)) * 6px))}
+.is-v .pf-cap-t{grid-column:1 / -1}
+.is-v .pf-cap h2{font-size:28px}
+.is-v .pf-cap dl{gap:22px}
+
+@media (max-width:860px){
+  .pf-hello{grid-template-columns:minmax(0,1fr);gap:26px;padding-top:clamp(36px,8vh,72px)}
+  .pf-name{font-size:clamp(54px,16vw,120px);white-space:normal}
+  .pf-index li{grid-template-columns:52px minmax(0,1fr) 28px;gap:14px}
+  .pf-ix-k,.pf-ix-r{display:none}
+  .pf-about{grid-template-columns:minmax(0,1fr);align-items:start}
+  .pf-portrait{max-width:300px}
+  .pf-facts{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+}
+@media (max-width:760px){
+  .pf-shelf-head{flex-wrap:wrap;gap:10px 18px}
+  .pf-shelf-head .sf-eyebrow{flex-basis:100%}
+  .pf-count{margin-left:0}
+  .pf-pp{margin-left:auto}
+}
+@media (max-width:480px){
+  .pf-nav{height:64px}
+  .pf-nav span{gap:16px}
+  .pf-facts{grid-template-columns:minmax(0,1fr)}
+}
+@media (prefers-reduced-motion:reduce){.pf-spine,.pf-t,.pf-link svg,.pf-index a svg{transition:none}}
+
+/* ── ?record: the stage is this section; the person's name, then the shelf playing through, then the address ── */
+.pf-rec-open,.pf-rec-end{display:none}
+html.tour-record .demo-portfolio{container-type:size;background:var(--page);--u:1cqmin;--spine:calc(var(--u) * 6.6);--gap:calc(var(--u) * .55);--bar:calc(var(--u) * 7.4)}
+html.tour-record .pf-head,html.tour-record .pf-more,html.tour-record .pf-about,html.tour-record .pf-pp{display:none!important}
+html.tour-record .pf-work{position:absolute;inset:0;max-width:none;display:flex;flex-direction:column;padding:calc(var(--u) * 3.6) calc(var(--u) * 4) calc(var(--u) * 4)}
+html.tour-record .pf-shelf-head{gap:calc(var(--u) * 2.4);padding:0 0 calc(var(--u) * 2.2);border:0}
+html.tour-record .pf-rec-mark{display:block;font:400 calc(var(--u) * 2.6)/1 var(--serif);letter-spacing:-.01em;color:var(--ink)}
+html.tour-record .pf-shelf-head .sf-eyebrow{font-size:calc(var(--u) * 1.25)}
+html.tour-record .pf-count{font-size:calc(var(--u) * 1.4)}
+html.tour-record .pf-shelf{flex:1;min-height:0;height:auto}
+html.tour-record .pf-spine{gap:calc(var(--u) * 1.6);padding:calc(var(--u) * 2.2) 0 calc(var(--u) * 2)}
+html.tour-record .pf-n,html.tour-record .pf-y{font-size:calc(var(--u) * 1.15)}
+html.tour-record .pf-t{font-size:calc(var(--u) * 2.7)}
+html.tour-record .pf-bar{top:calc(var(--u) * 2.2);bottom:calc(var(--u) * 2)}
+html.tour-record .pf-cap{min-height:calc(var(--u) * 10.5);gap:calc(var(--u) * 1.4) calc(var(--u) * 4);padding:calc(var(--u) * .6) calc(var(--u) * 3) calc(var(--u) * 2.6) calc(var(--u) * .6)}
+html.tour-record .pf-cap h2{font-size:calc(var(--u) * 3.5)}
+html.tour-record .pf-cap-t p{margin-top:calc(var(--u) * 1);font-size:calc(var(--u) * 1.6)}
+html.tour-record .pf-cap dt{margin-bottom:calc(var(--u) * .8);font-size:calc(var(--u) * 1.05)}
+html.tour-record .pf-cap dd,html.tour-record .pf-link{font-size:calc(var(--u) * 1.5)}
+html.tour-record .pf-link svg{width:calc(var(--u) * 1.4);height:calc(var(--u) * 1.4)}
+html.tour-record .is-v .pf-shelf{height:auto}
+html.tour-record .is-v .pf-proj{height:calc(var(--bar) + var(--o) * var(--bh))}
+html.tour-record .is-v .pf-spine{gap:calc(var(--u) * 2.6);padding:0 calc(var(--u) * 3.2)}
+html.tour-record .is-v .pf-t{font-size:calc(var(--u) * 4.4)}
+html.tour-record .is-v .pf-n,html.tour-record .is-v .pf-y{font-size:calc(var(--u) * 2.2)}
+html.tour-record .is-v .pf-bar{top:auto;bottom:0;left:calc(var(--u) * 3.2);right:calc(var(--u) * 3.2)}
+html.tour-record .is-v .pf-mat{flex:1;aspect-ratio:auto}
+html.tour-record .is-v .pf-cap{padding:calc(var(--u) * 1) calc(var(--u) * 3.2) calc(var(--u) * 3.6)}
+html.tour-record .is-v .pf-cap h2{font-size:calc(var(--u) * 6)}
+html.tour-record .is-v .pf-cap-t p{font-size:calc(var(--u) * 2.8)}
+html.tour-record .is-v .pf-cap dt{font-size:calc(var(--u) * 1.9)}
+html.tour-record .is-v .pf-cap dd,html.tour-record .is-v .pf-link{font-size:calc(var(--u) * 2.6)}
+html.tour-record .is-v .pf-link svg{width:calc(var(--u) * 2.4);height:calc(var(--u) * 2.4)}
+html.tour-record .is-v .pf-rec-mark{font-size:calc(var(--u) * 4.4)}
+html.tour-record .is-v .pf-shelf-head .sf-eyebrow{display:none}
+html.tour-record .is-v .pf-count{font-size:calc(var(--u) * 2.4)}
+html.tour-record .is-v .pf-work{padding:calc(var(--u) * 5) calc(var(--u) * 4)}
+
+html.tour-record .pf-rec-open,html.tour-record .pf-rec-end{display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;position:absolute;inset:0;z-index:5;
+  padding:calc(var(--u) * 7) calc(var(--u) * 7.5);background:var(--page)}
+html.tour-record .pf-rec-open .sf-eyebrow,html.tour-record .pf-rec-end .sf-eyebrow{margin:0 0 calc(var(--u) * 2.4);font-size:calc(var(--u) * 1.5)}
+.pf-rec-name{margin:0;padding-top:.08em;font:400 calc(var(--u) * 15)/.86 var(--serif);letter-spacing:-.035em;color:var(--ink);white-space:nowrap}
+.pf-rec-line{margin:calc(var(--u) * 3.4) 0 0;max-width:30em;font:400 calc(var(--u) * 2.3)/1.45 var(--sans);color:var(--ink-2)}
+.pf-rec-mail{margin:calc(var(--u) * 3.4) 0 0;font:400 calc(var(--u) * 3.6)/1 var(--serif);letter-spacing:-.01em;color:var(--ink);box-shadow:inset 0 -1px 0 var(--ink);padding-bottom:calc(var(--u) * .6)}
+.is-v .pf-rec-name{font-size:calc(var(--u) * 19);white-space:normal}
+.is-v .pf-rec-line{font-size:calc(var(--u) * 3.8);max-width:20em}
+.is-v .pf-rec-mail{font-size:calc(var(--u) * 5.4)}
+html.tour-record .is-v .pf-rec-open .sf-eyebrow,html.tour-record .is-v .pf-rec-end .sf-eyebrow{font-size:calc(var(--u) * 2.6)}
+html.tour-record .is-v .pf-rec-open,html.tour-record .is-v .pf-rec-end{padding:calc(var(--u) * 10) calc(var(--u) * 7)}

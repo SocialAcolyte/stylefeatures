@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>volvelle-button</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dragon-volvelle.css">
+<link rel="stylesheet" href="volvelle-button.css">
+<style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;
+    --serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px);
+    --sheet:#f8f5ee;--line:#e6e0d2}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  .tag{font-family:var(--sans);font-size:10.5px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  main{max-width:1060px;margin:0 auto;padding:clamp(36px,8svh,88px) var(--gutter) clamp(64px,12svh,120px)}
+
+  .intro{max-width:34em;margin:0 0 clamp(28px,5svh,48px)}
+  .intro h1{margin:.3em 0 .25em;font-weight:400;font-style:italic;font-size:clamp(36px,4.6vw,52px);line-height:1;letter-spacing:-.005em}
+  .intro p{margin:0;font-size:clamp(19px,1.7vw,21px);line-height:1.4;color:var(--ink-2);text-wrap:pretty}
+
+  .grid{display:grid;gap:18px}
+  .col{display:grid;gap:18px;align-content:start;min-width:0}
+  @media (min-width:860px){.grid{grid-template-columns:1fr 1fr;gap:22px}.col{gap:22px}}
+
+  .card{--vb-paper:var(--sheet);background:var(--sheet);border:1px solid #ddd6c8;border-radius:6px;
+    box-shadow:0 24px 44px -34px rgba(40,30,20,.30),0 1px 2px rgba(40,30,20,.06);min-width:0}
+  .card h2{margin:0;font-weight:500;font-size:23px;line-height:1.15;letter-spacing:-.003em}
+  .hint{font-size:17px;line-height:1.3;color:var(--ink-2)}
+  .meta{font-family:var(--sans);font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  .quiet{font:500 14px/1 var(--sans);letter-spacing:.01em;color:var(--ink-2);background:none;border:0;border-radius:999px;
+    min-height:44px;padding:0 16px;cursor:pointer;touch-action:manipulation;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+  @media (hover:hover){.quiet:not([aria-disabled=true]):hover{color:var(--ink)}}
+  .quiet:not([aria-disabled=true]):active{color:var(--ink);background:color-mix(in srgb,var(--ink) 5%,transparent)}
+  .quiet[aria-disabled=true]{cursor:progress;color:var(--ink-3)}
+  .quiet:focus-visible{outline:2px solid var(--ink-2);outline-offset:1px}
+  .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;margin:-1px;border:0;padding:0}
+  /* words that change share one place, as wide and tall as the longest, so nothing beside them moves */
+  .says{display:inline-grid;align-items:center}
+  .says > *{grid-area:1/1}
+  .says > :not(.on){visibility:hidden}
+
+  /* proofs: the large button, alone in an empty state */
+  .empty{padding:34px 22px 30px;display:grid;justify-items:center;text-align:center}
+  .empty h2{margin:12px 0 6px}
+  .empty .hint{max-width:20em;margin:0 0 24px;text-wrap:pretty}
+  .empty .meta{margin-top:14px;font-size:12.5px}
+
+  /* the upload field: the normal size, inside the field */
+  .field{padding:18px 22px 22px;display:grid;gap:10px}
+  .field label{font-family:var(--sans);font-size:14px;font-weight:500}
+  .field-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:-8px -16px -6px 0}
+  .drop{border:1px solid #d9d2c3;border-radius:6px;background:color-mix(in srgb,var(--paper) 55%,var(--sheet))}
+  .drop ul{list-style:none;margin:0;padding:4px 0}
+  .drop li{display:flex;align-items:baseline;gap:12px;padding:9px 16px}
+  .drop li + li{border-top:1px solid var(--line)}
+  .drop .nm{flex:1;min-width:0;font-size:18px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .drop .sz{transition:color .3s ease}
+  .drop li.sent .sz{color:var(--ink)}
+  .drop-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px;padding:10px 10px 10px 16px;border-top:1px solid var(--line)}
+  .drop-foot .meta{flex:1 1 56px;min-width:0;font-size:12.5px;line-height:1.35;color:var(--ink-2)}
+  .drop-foot .vb{margin-left:auto}
+  .field .help{font-family:var(--sans);font-size:12.5px;line-height:1.45;color:var(--ink-3)}
+  .pick{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;clip-path:inset(50%)}
+  label.quiet{display:inline-flex;align-items:center;font-family:var(--sans);font-size:14px}
+  .pick:focus-visible + label{outline:2px solid var(--ink-2);outline-offset:1px}
+
+  /* a dialog on warm paper: the ink primary, in its footer */
+  .dialog{padding:24px 22px 0;box-shadow:0 30px 50px -30px rgba(40,30,20,.36),0 2px 5px rgba(40,30,20,.07)}
+  .dialog .hint{display:grid;margin:8px 0 0;text-wrap:pretty}
+  .dlg-foot{display:flex;align-items:center;justify-content:flex-end;gap:6px;margin:22px -22px 0;padding:12px 16px 12px 22px;border-top:1px solid var(--line)}
+  .quiet.says{display:inline-grid;justify-items:end}
+
+  /* settings rows: the row size */
+  .settings{padding:18px 0 6px}
+  .settings h2{padding:0 22px 10px}
+  .row{display:flex;align-items:center;gap:14px;padding:12px 16px 12px 22px;border-top:1px solid var(--line);min-height:74px}
+  .row > div{flex:1;min-width:0;display:grid;gap:2px}
+  .row .name{font-family:var(--sans);font-size:14px;font-weight:500;color:var(--ink)}
+  .row .hint{font-size:16.5px}
+
+  /* a list of scans with a toolbar: the row size, aria-disabled until something is chosen */
+  .queue{padding:18px 0 0}
+  .queue header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;padding:0 22px 12px}
+  .tools{display:flex;align-items:center;gap:6px;padding:8px 16px 8px 9px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+    background:color-mix(in srgb,var(--paper) 60%,var(--sheet))}
+  .tools .vb{margin-left:auto}
+  .tools .meta{font-size:12.5px;color:var(--ink-2)}
+  .box{display:inline-grid;place-items:center;width:44px;height:44px;flex:none;cursor:pointer}
+  .box input,.picks input{width:17px;height:17px;margin:0;accent-color:var(--ink);cursor:pointer}
+  .picks{list-style:none;margin:0;padding:0}
+  .picks li + li{border-top:1px solid var(--line)}
+  .picks label{display:flex;align-items:center;gap:6px;min-height:50px;padding:0 22px 0 9px;cursor:pointer}
+  .picks label > span:first-child{display:inline-grid;place-items:center;width:44px;height:44px;flex:none}
+  .picks .nm{flex:1;min-width:0;font-size:18px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .picks input:disabled,.box input:disabled{cursor:progress}
+  .picks li.out .meta{color:var(--ink)}
+  @media (prefers-reduced-motion:reduce){.drop .sz{transition:none}}
+</style></head><body>
+<main>
+  <header class="intro">
+    <span class="tag">Button</span>
+    <h1>Volvelle button</h1>
+    <p>Press it: Apian's paper disc turns on its printed ring as the work is done, and settles on the next sign.</p>
+  </header>
+
+  <div class="grid">
+    <div class="col">
+      <section class="card empty" aria-labelledby="pf-h">
+        <span class="tag">Proofs</span>
+        <h2 id="pf-h" class="says"><span class="on">No proofs yet</span><span>24 proofs ready</span></h2>
+        <p class="hint says" id="pf-note"><span class="on">Twenty-four new scans, to check against the folios before they go to print.</span><span>Check them against the folios before the scans go to print.</span></p>
+        <button type="button" class="vb vb-lg" id="proofs" data-volvelle-button><img class="vb-face" src="assets/face.webp" width="384" height="384" alt=""><span class="vb-label"><span class="vb-say vb-on">Make 24 proofs</span><span class="vb-say" data-say="working" aria-hidden="true">Making proofs</span><span class="vb-say" data-say="done" aria-hidden="true">Proofs made</span></span></button>
+        <span class="meta" id="pf-meta">Not made yet</span>
+      </section>
+
+      <section class="card queue" aria-labelledby="q-h">
+        <header><h2 id="q-h">Folio 13</h2><span class="meta" id="q-meta">6 scans</span></header>
+        <div class="tools">
+          <label class="box"><input type="checkbox" id="q-all"><span class="vh">All six scans</span></label>
+          <span class="meta says" id="q-count"><span class="on">None chosen</span><span>Choose scans first</span></span>
+          <button type="button" class="vb vb-sm" id="export" data-volvelle-button aria-disabled="true"><img class="vb-face" src="assets/face.webp" width="384" height="384" alt=""><span class="vb-label"><span class="vb-say vb-on">Export PDF</span><span class="vb-say" data-say="working" aria-hidden="true">Exporting</span><span class="vb-say" data-say="done" aria-hidden="true">Exported</span></span></button>
+        </div>
+        <ul class="picks" id="q-list" aria-label="Scans of folio 13">
+          <li><label><span><input type="checkbox" value="38.0"></span><span class="nm">folio-13-recto.tif</span><span class="meta">38.0 MB</span></label></li>
+          <li><label><span><input type="checkbox" value="37.6"></span><span class="nm">folio-13-verso.tif</span><span class="meta">37.6 MB</span></label></li>
+          <li><label><span><input type="checkbox" value="36.4"></span><span class="nm">folio-13-detail-dragon.tif</span><span class="meta">36.4 MB</span></label></li>
+          <li><label><span><input type="checkbox" value="35.1"></span><span class="nm">folio-13-detail-tabs.tif</span><span class="meta">35.1 MB</span></label></li>
+          <li><label><span><input type="checkbox" value="19.2"></span><span class="nm">binding-spine.tif</span><span class="meta">19.2 MB</span></label></li>
+          <li><label><span><input type="checkbox" value="18.6"></span><span class="nm">paste-down.tif</span><span class="meta">18.6 MB</span></label></li>
+        </ul>
+        <span class="vh" id="q-say" role="status"></span>
+      </section>
+    </div>
+
+    <div class="col">
+      <form class="card dialog" id="ix-form" action="#rebuilt" aria-labelledby="ix-h" aria-describedby="ix-note">
+        <h2 id="ix-h">Rebuild the index?</h2>
+        <p class="hint says" id="ix-note"><span class="on">1,240 pages, last indexed in March. Search is slower while it runs.</span><span>Then we will ask again tomorrow.</span><span>Stopped. Search still uses the March index.</span><span>Rebuilt just now. Search finds every page.</span></p>
+        <footer class="dlg-foot">
+          <button type="button" class="quiet says" id="ix-later"><span class="on">Later</span><span>Stop</span></button>
+          <button type="submit" class="vb vb-solid" id="index" data-volvelle-button><img class="vb-face" src="assets/face.webp" width="384" height="384" alt=""><span class="vb-label"><span class="vb-say vb-on">Rebuild index</span><span class="vb-say" data-say="working" aria-hidden="true">Rebuilding</span><span class="vb-say" data-say="done" aria-hidden="true">Rebuilt</span></span></button>
+        </footer>
+      </form>
+
+      <section class="card settings" aria-labelledby="set-h">
+        <h2 id="set-h">Sync</h2>
+        <div class="row">
+          <div><span class="name">Reading room</span><span class="hint" id="sync-when">Last synced at 09:40</span></div>
+          <button type="button" class="vb vb-sm" id="sync" data-volvelle-button><img class="vb-face" src="assets/face.webp" width="384" height="384" alt=""><span class="vb-label"><span class="vb-say vb-on">Sync now</span><span class="vb-say" data-say="working" aria-hidden="true">Syncing</span><span class="vb-say" data-say="done" aria-hidden="true">Synced</span></span></button>
+        </div>
+        <div class="row">
+          <div><span class="name">Catalogue backup</span><span class="hint" id="bk-when">Last backup yesterday</span></div>
+          <button type="button" class="quiet" id="backup">Back up</button>
+        </div>
+      </section>
+
+      <section class="card field" aria-labelledby="up-l">
+        <span class="tag">Folio 14</span>
+        <div class="field-head">
+          <label id="up-l" for="pick">Scans to add</label>
+          <span><input type="file" class="pick" id="pick" multiple accept=".tif,.tiff,.jpg,.jpeg,image/tiff,image/jpeg"><label class="quiet" for="pick">Add files</label></span>
+        </div>
+        <div class="drop">
+          <ul id="up-files" aria-label="Chosen scans">
+            <li><span class="nm">folio-14-recto.tif</span><span class="meta sz">38.2 MB</span></li>
+            <li><span class="nm">folio-14-verso.tif</span><span class="meta sz">37.9 MB</span></li>
+            <li><span class="nm">the-volvelle-turned.tif</span><span class="meta sz">21.4 MB</span></li>
+          </ul>
+          <div class="drop-foot">
+            <span class="meta" id="up-sum">3&nbsp;scans, 97.5&nbsp;MB</span>
+            <button type="button" class="vb" id="up" data-volvelle-button><img class="vb-face" src="assets/face.webp" width="384" height="384" alt=""><span class="vb-label"><span class="vb-say vb-on">Upload scans</span><span class="vb-say" data-say="working" aria-hidden="true">Uploading</span><span class="vb-say" data-say="done" aria-hidden="true">Uploaded</span></span></button>
+          </div>
+        </div>
+        <span class="help">TIFF or JPEG, up to 200 MB each. Scans stay private until the folio is catalogued.</span>
+      </section>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+  import './volvelle-button.js';
+
+  /* DEMO ONLY: each button runs a pretend job, paced like the real one. A real page does its own work after the
+   * press (the button starts itself) and reports it: vb.progress(0..1) as it goes, then vb.done(). */
+  const $ = (id) => document.getElementById(id);
+  const rng = (seed) => () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+  const later = (ms) => new Promise((r) => setTimeout(r, ms));
+  const clock = () => new Date().toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
+  const busy = (vb) => vb.state === 'waiting' || vb.state === 'working';
+  const show = (box, i) => [...box.children].forEach((n, k) => n.classList.toggle('on', k === i));   // one of .says
+
+  // bytes going out: progress every ~150 ms at about `rate` MB a second, give or take
+  async function transfer(vb, mb, rate, seed, tick) {
+    const r = rng(seed);
+    let sent = 0;
+    await later(160 + r() * 120);                                   // the connection opens
+    while (sent < mb && busy(vb)) {
+      const dt = 130 + r() * 60;
+      await later(dt);
+      sent = Math.min(mb, sent + rate * (0.75 + r() * 0.5) * dt / 1000);
+      if (tick) tick(sent / mb);
+      if (sent < mb) vb.progress(sent / mb);
+    }
+    return sent >= mb;
+  }
+
+  /* proofs: twenty-four, one at a time. A long job: the disc goes its whole course and comes home */
+  $('proofs').addEventListener('volvelle-button:start', async (e) => {
+    const vb = e.target.volvelleButton, meta = $('pf-meta'), r = rng(23);
+    meta.textContent = '0 of 24';
+    for (let n = 1; n <= 24; n++) {
+      await later(360 + r() * 160);
+      if (!busy(vb)) return;
+      meta.textContent = `${n} of 24`;
+      if (n < 24) vb.progress(n / 24);
+    }
+    vb.done();
+    show($('pf-h'), 1); show($('pf-note'), 1);
+    meta.textContent = `Made at ${clock()}`;
+  });
+
+  /* the upload field: the chosen files (three to begin with, or your own), each marked as it goes */
+  let chosen = [['folio-14-recto.tif', 38.2], ['folio-14-verso.tif', 37.9], ['the-volvelle-turned.tif', 21.4]];
+  const upList = $('up-files');
+  const mb = (n) => (n >= 100 ? Math.round(n) : n.toFixed(1)) + '\u00a0MB';
+  const upSum = $('up-sum');
+  const sum = () => `${chosen.length}\u00a0scan${chosen.length === 1 ? '' : 's'}, ${mb(chosen.reduce((a, [, s]) => a + s, 0))}`;
+  function listChosen() {
+    upSum.textContent = sum();
+    upList.replaceChildren(...chosen.map(([nm, size]) => {
+      const li = document.createElement('li');
+      li.innerHTML = '<span class="nm"></span><span class="meta sz"></span>';
+      li.firstChild.textContent = nm; li.lastChild.textContent = mb(size);
+      return li;
+    }));
+  }
+  $('pick').addEventListener('change', (e) => {
+    const f = [...e.target.files];
+    if (f.length) { chosen = f.map((x) => [x.name, Math.max(.1, x.size / 1e6)]); listChosen(); }
+  });
+  $('up').addEventListener('volvelle-button:start', async (e) => {
+    const vb = e.target.volvelleButton;
+    listChosen();
+    const total = chosen.reduce((a, [, s]) => a + s, 0), rows = [...upList.children];
+    const mark = (v) => {
+      let acc = 0, n = 0;
+      chosen.forEach(([, s], i) => { acc += s; if (acc / total <= v + 1e-9) { n++; if (!rows[i].classList.contains('sent')) { rows[i].classList.add('sent'); rows[i].lastChild.textContent = 'Sent'; } } });
+      upSum.textContent = `${n}\u00a0of\u00a0${chosen.length} sent`;
+    };
+    upSum.textContent = `0\u00a0of\u00a0${chosen.length} sent`;
+    if (await transfer(vb, total, 30, 5, mark)) { vb.done(); upSum.textContent = `All\u00a0${chosen.length} sent at\u00a0${clock()}`; }
+  });
+
+  /* the dialog is a form: its Rebuild index submits it (once: presses while it runs go nowhere) and the page works
+   * through 1,240 pages; while it runs, Later becomes Stop */
+  const ix = $('index'), ixLater = $('ix-later'), ixNote = $('ix-note');
+  let run = 0;                                                      // the run going on (a stopped one never reports again)
+  $('ix-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const vb = ix.volvelleButton, r = rng(7), mine = ++run;
+    if (!vb || !busy(vb)) return;
+    show(ixNote, 0); show(ixLater, 1);
+    let pages = 0;
+    await later(220);
+    while (pages < 1240) {
+      await later(150 + r() * 50);
+      if (mine !== run || !busy(vb)) return;                        // stopped
+      pages = Math.min(1240, pages + 24 + r() * 14);
+      if (pages < 1240) vb.progress(pages / 1240);
+    }
+    vb.done();
+    show(ixLater, 0); show(ixNote, 3);
+  });
+  ixLater.addEventListener('click', () => {
+    const vb = ix.volvelleButton;
+    if (vb && busy(vb)) { run++; vb.reset({ say: 'Stopped' }); show(ixLater, 0); show(ixNote, 2); return; }
+    show(ixNote, 1);
+  });
+
+  /* settings rows: Sync is a quick request with no progress to report */
+  $('sync').addEventListener('volvelle-button:start', async (e) => { await later(700); e.target.volvelleButton.done(); });
+  $('sync').addEventListener('volvelle-button:done', () => { $('sync-when').textContent = 'Last synced just now'; });
+  // Back up is a plain button: the row says what it is doing
+  const bk = $('backup');
+  bk.addEventListener('click', async () => {
+    if (bk.getAttribute('aria-disabled') === 'true') return;
+    bk.setAttribute('aria-disabled', 'true');
+    $('bk-when').textContent = 'Backing up…';
+    await later(1400);
+    $('bk-when').textContent = 'Last backup just now';
+    bk.removeAttribute('aria-disabled');
+  });
+
+  /* the toolbar: Export PDF is aria-disabled (the page's own, focusable) until scans are chosen; pressed then, it
+   * says why. The choice is locked while the PDF is made */
+  const ex = $('export'), all = $('q-all'), count = $('q-count'), qSay = $('q-say');
+  const boxes = [...document.querySelectorAll('#q-list input')];
+  let why = 0;
+  function chose() {
+    const n = boxes.filter((b) => b.checked).length;
+    all.checked = n === boxes.length; all.indeterminate = n > 0 && n < boxes.length;
+    count.firstElementChild.textContent = n ? `${n} chosen` : 'None chosen';
+    clearTimeout(why); show(count, 0);
+    if (n) ex.removeAttribute('aria-disabled'); else ex.setAttribute('aria-disabled', 'true');
+    boxes.forEach((b) => b.closest('li').classList.remove('out'));
+  }
+  boxes.forEach((b) => b.addEventListener('change', chose));
+  all.addEventListener('change', () => { boxes.forEach((b) => { b.checked = all.checked; }); chose(); });
+  ex.addEventListener('click', () => {                                // heard only at rest: busy presses go nowhere
+    if (ex.getAttribute('aria-disabled') !== 'true') return;
+    show(count, 1); qSay.textContent = 'Choose scans to export first';
+    clearTimeout(why); why = setTimeout(() => { show(count, 0); qSay.textContent = ''; }, 2400);
+  });
+  const lock = (v) => [all, ...boxes].forEach((b) => { b.disabled = v; });
+  ex.addEventListener('volvelle-button:start', async (e) => {
+    const vb = e.target.volvelleButton;
+    const pick = boxes.filter((b) => b.checked), total = pick.reduce((a, b) => a + +b.value, 0);
+    lock(true);
+    const mark = (v) => {
+      let acc = 0;
+      pick.forEach((b) => { acc += +b.value; if (acc / total <= v + 1e-9) b.closest('li').classList.add('out'); });
+    };
+    if (await transfer(vb, total, 34, 3, mark)) {
+      vb.done();
+      $('q-meta').textContent = `PDF saved at ${clock()}`;
+    }
+    lock(false);
+  });
+  chose();
+</script>
+</body></html>

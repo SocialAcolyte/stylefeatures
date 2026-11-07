@@ -1,0 +1,22 @@
+.contact-hello-top{display:flex;align-items:center;gap:18px}
+.contact-hello-top .ph{width:64px;flex:none}
+.contact-hello-top p{display:grid;gap:8px;margin:0}
+.contact-hello-top .sf-eyebrow{margin:0}
+.contact-hello-who{font:400 15px/1.4 var(--sans);color:var(--ink-2)}
+
+.contact-hello-mail{display:block;margin:clamp(28px,6vh,64px) 0 clamp(40px,8vh,88px);text-decoration:none;color:var(--ink);font:400 clamp(46px,10.2vw,168px)/.95 var(--serif);letter-spacing:-.045em;overflow-wrap:anywhere}
+.contact-hello-mail span{display:inline;background:linear-gradient(currentColor,currentColor) 0 92%/0 .025em no-repeat;transition:background-size .8s var(--ease),color .4s}
+.contact-hello-mail .at{font-style:italic;color:var(--ink-3);padding:0 .02em;transition:color .5s ease}
+.contact-hello-mail:hover span{background-size:100% .025em}
+.contact-hello-mail:hover .at{color:var(--ink)}
+.contact-hello-mail:focus-visible{outline:2px solid var(--note);outline-offset:8px}
+
+.contact-hello-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:28px clamp(24px,3vw,48px);padding-top:26px;border-top:1px solid var(--ink)}
+.contact-hello-grid .sf-eyebrow{margin-bottom:12px}
+.contact-hello-grid a{font:400 16px/1.4 var(--sans);color:var(--ink);text-decoration:none;box-shadow:inset 0 -1px 0 var(--rule);transition:box-shadow .3s;overflow-wrap:anywhere}
+.contact-hello-grid a:hover{box-shadow:inset 0 -1px 0 var(--ink)}
+.contact-hello-grid .ph-text{margin-top:16px;max-width:16em}
+.contact-hello-grid ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.contact-hello-note{margin-top:28px}
+@media (max-width:860px){.contact-hello-grid{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){.contact-hello-grid{grid-template-columns:1fr}.contact-hello-mail .d{display:block}}

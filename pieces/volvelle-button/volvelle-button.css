@@ -1,0 +1,168 @@
+/* volvelle-button: the button part of dragon-volvelle. Everything is prefixed .vb-.
+ * The roundel (the paper disc and the ring of the mater it turns on) sits concentric with the pill's round end.
+ * Sizes: .vb-sm (a 48px row button, a 40px roundel), the default (56px, 48px), .vb-lg (76px, 64px). The roundel is
+ * never smaller than 40px (the dragon blurs below that), so the button is never shorter than 48px.
+ * .vb-solid for a primary button in ink. Theme with --paper, --ink, --ink-2, --ink-3, --rule, --sans.
+ * Load it after dragon-volvelle.css, the engine's own stylesheet.                                          */
+
+.vb {
+    --vb-h: 56px; --vb-disc: 48px; --vb-pr: 24px;
+    --vb-d: max(40px, var(--vb-disc));                       /* the roundel, never under 40px */
+    --vb-hh: max(calc(var(--vb-d) + 8px), var(--vb-h));      /* the button, never under the roundel and its margin */
+    --vb-face: var(--vb-paper, var(--paper, #f3f0e8));       /* the button's face */
+    --vb-edge: var(--rule, #cfcac0);
+    box-sizing: border-box; position: relative;
+    display: inline-flex; align-items: center; gap: .7em;
+    min-height: var(--vb-hh);
+    padding: 0 var(--vb-pr) 0 calc((var(--vb-hh) - var(--vb-d)) / 2 - 1px);
+    margin: 0;
+    vertical-align: middle;
+    font: 500 15px/1.2 var(--sans, Inter, system-ui, sans-serif);
+    letter-spacing: .01em;
+    color: var(--ink, #141312);
+    background: var(--vb-face);
+    border: 1px solid var(--vb-edge);
+    border-radius: 999px;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-user-select: none; user-select: none;
+    transition: border-color .2s ease, color .2s ease, transform .12s ease, box-shadow .12s ease;
+}
+/* hover only where there is a real hover (no sticky hover after a tap), and only when a press would do something */
+@media (hover: hover) { .vb:not(:disabled, [aria-disabled=true]):hover { --vb-edge: var(--ink-3, #8a857d); } }
+.vb:focus-visible { outline: 2px solid var(--ink-2, #4a4744); outline-offset: 3px; }
+
+/* the roundel: the engine's root. At home its <img> is the plate cut round; once the disc has turned, the engine's
+   canvas lies over it (dragon-volvelle.css shows and hides the two). Both are the roundel's size, flat on the
+   button: no cast shadow, since the mater is the printed sheet itself.
+   Its geometry is guarded (!important): it is the photograph, and a page's own rules for spans or images
+   (.row span { display: block }, img { height: auto }) must never stretch it, squash it or move it. */
+.vb > .vb-disc {
+    flex: none !important; position: relative !important; display: block !important; box-sizing: content-box !important;
+    width: var(--vb-d) !important; height: var(--vb-d) !important;
+    min-width: 0 !important; max-width: none !important; min-height: 0 !important; max-height: none !important;
+    margin: 0 !important; padding: 0 !important; border: 0 !important; float: none !important;
+    line-height: 0;
+    pointer-events: none;                    /* the button takes the press, never the picture */
+}
+/* the engine measures its plate (a block) and draws its canvas at the plate's size times the screen's density, at
+   most 2x. Drawn like that and then turned, the disc came out softer than the resting <img>. So the script sets
+   --vb-k, the plate is laid out that many times larger and scaled back down, and the canvas is drawn at twice the
+   screen's own pixels on any screen: the turned disc is as sharp as the one at home. */
+.vb > .vb-disc > .dv-plate {
+    display: block !important; position: relative !important; box-sizing: content-box !important;
+    width: calc(100% * var(--vb-k, 1)) !important; height: calc(100% * var(--vb-k, 1)) !important;
+    min-width: 0 !important; max-width: none !important; min-height: 0 !important; max-height: none !important;
+    margin: 0 !important; padding: 0 !important; border: 0 !important;
+    transform: scale(calc(1 / var(--vb-k, 1))) !important; transform-origin: 0 0 !important;
+}
+.vb > .vb-disc .dv-img, .vb > img.vb-face {
+    display: block !important; box-sizing: content-box !important;
+    min-width: 0 !important; max-width: none !important; min-height: 0 !important; max-height: none !important;
+    margin: 0 !important; padding: 0 !important; border: 0 !important;
+    object-fit: contain; filter: none;
+}
+.vb > .vb-disc .dv-img { width: 100% !important; height: 100% !important; }
+.vb > .vb-disc .dv-canvas {
+    position: absolute !important; inset: 0 !important; width: 100% !important; height: 100% !important;
+    max-width: none !important; max-height: none !important; margin: 0 !important; padding: 0 !important; border: 0 !important;
+    filter: none;
+}
+.vb > .vb-disc:not(.dv-moving) .dv-canvas { display: none !important; }     /* at home: the <img> */
+.vb > .vb-disc.dv-moving .dv-canvas { display: block !important; }          /* turned: the canvas */
+.vb > img.vb-face { flex: none !important; width: var(--vb-d) !important; height: var(--vb-d) !important; pointer-events: none; }   /* no script yet */
+.vb:not(:has(> .vb-disc, > img.vb-face)) { padding-left: var(--vb-pr); }    /* no roundel at all: a plain, even pill */
+
+/* pressed: the face sinks a hair and darkens a touch (touch and a held Space too). While the script runs (.vb-live)
+   only its .vb-press draws it: the main button only, and a press slid off the button lets go of it, since
+   releasing there does nothing. :active is kept for the plain pill without the script. */
+.vb:not(.vb-live):active:not(:disabled, [aria-disabled=true]), .vb.vb-press {
+    --vb-face: color-mix(in srgb, var(--ink, #141312) 5%, var(--vb-paper, var(--paper, #f3f0e8)));
+    --vb-edge: var(--ink-3, #8a857d);
+    transform: translateY(1px);
+    box-shadow: inset 0 1px 2px rgba(20, 19, 18, .12);
+}
+/* the sunk pill keeps the hit area of the pill at rest, so a press on its very top edge is not taken for a slide-off */
+.vb.vb-press::before { content: ''; position: absolute; inset: -2px -1px 0; border-radius: inherit; }
+/* busy: still a button you can focus, but a press does nothing */
+.vb[data-state=waiting], .vb[data-state=working] { cursor: progress; --vb-edge: var(--ink-3, #8a857d); }
+.vb[data-state=done] { cursor: default; --vb-edge: var(--ink-3, #8a857d); }
+/* disabled: the page says no. The words go grey and the roundel goes pale. The page's own aria-disabled at rest (the
+   focusable disabled pattern: it can still say why) looks the same; while busy, aria-disabled is the script's, and
+   the button keeps its colour */
+.vb:disabled, .vb[aria-disabled=true]:not([data-state=waiting], [data-state=working], [data-state=done]) {
+    cursor: not-allowed; color: var(--ink-3, #8a857d); --vb-edge: color-mix(in srgb, var(--rule, #cfcac0) 70%, transparent);
+}
+.vb:disabled > :is(.vb-disc, img.vb-face),
+.vb[aria-disabled=true]:not([data-state=waiting], [data-state=working], [data-state=done]) > :is(.vb-disc, img.vb-face) {
+    opacity: .42; filter: grayscale(.7);
+}
+.vb > .vb-disc, .vb > img.vb-face { transition: opacity .2s ease, filter .2s ease; }
+
+/* the label: the words for each state stacked in one grid cell, so the cell is as wide as the widest word and the
+   pill is the same size in every state (nothing beside it reflows). Every word starts at the same distance from the
+   roundel, so the two always read as one thing; the spare room of a shorter word is end padding (so make the resting
+   word the longest, and the pill hugs it at rest). Write the stack in the markup (see the README) and the pill has
+   its width before the script runs. The old word fades out in 0.08 s, fast first, and the new one fades in over 0.2 s
+   from 0.06 s: the two only overlap while the old one is all but gone, so they never read as one garbled word, and
+   the cell is never empty for more than a frame. The old one then leaves the button's name. */
+.vb > .vb-label {
+    display: inline-grid !important; justify-items: start; align-items: center;
+    position: relative !important; flex: none !important; float: none !important;
+    width: auto !important; min-width: 0 !important; max-width: none !important; height: auto !important;
+    margin: 0 !important; padding: 0 !important; border: 0 !important;
+}
+.vb > .vb-label > .vb-say {
+    grid-area: 1 / 1 !important; display: block !important; position: static !important; float: none !important;
+    width: auto !important; max-width: none !important; margin: 0 !important; padding: 0 !important; border: 0 !important;
+    white-space: nowrap !important;
+    transition: opacity .08s cubic-bezier(0, 0, .3, 1), visibility 0s linear .08s;   /* the old word: out at once, fast first */
+}
+.vb > .vb-label > .vb-say:not(.vb-on) { opacity: 0; visibility: hidden; }
+.vb > .vb-label > .vb-say.vb-on { transition: opacity .2s ease-out .06s, visibility 0s; }     /* the new: in a moment later */
+
+.vb-status {
+    position: absolute !important; width: 1px !important; height: 1px !important; overflow: hidden !important;
+    clip-path: inset(50%) !important; white-space: nowrap !important;
+    margin: -1px !important; border: 0 !important; padding: 0 !important;
+}
+
+/* ---- sizes ---- */
+.vb-sm { --vb-h: 48px; --vb-disc: 40px; --vb-pr: 18px; gap: .55em; font-size: 14px; }
+.vb-lg { --vb-h: 76px; --vb-disc: 64px; --vb-pr: 32px; gap: .8em; font-size: 17px; letter-spacing: .005em; }
+.vb-block { display: flex; width: 100%; justify-content: center; }
+
+/* ---- the primary, in ink ---- */
+.vb-solid { --vb-paper: var(--ink, #141312); --vb-edge: var(--ink, #141312); color: var(--paper, #f3f0e8); }
+@media (hover: hover) {
+    .vb-solid:not(:disabled, [aria-disabled=true]):hover {
+        --vb-edge: var(--ink, #141312); --vb-paper: color-mix(in srgb, var(--paper, #f3f0e8) 9%, var(--ink, #141312));
+    }
+}
+/* pressed: near-black cannot get much darker, so the ink face lifts a clear step past its hover tone and sits
+   inside its ink edge. It reads on a phone (no hover to start from), and under reduced motion (no sink) */
+.vb-solid:not(.vb-live):active:not(:disabled, [aria-disabled=true]), .vb-solid.vb-press {
+    --vb-face: color-mix(in srgb, var(--paper, #f3f0e8) 17%, var(--ink, #141312)); --vb-edge: var(--ink, #141312);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, .4);
+}
+.vb-solid[data-state] { --vb-edge: var(--ink, #141312); }
+.vb-solid:focus-visible { outline-color: var(--ink, #141312); }
+.vb-solid:disabled, .vb-solid[aria-disabled=true]:not([data-state=waiting], [data-state=working], [data-state=done]) {
+    --vb-paper: color-mix(in srgb, var(--ink, #141312) 30%, var(--paper, #f3f0e8)); --vb-edge: transparent; color: var(--paper, #f3f0e8);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .vb, .vb > .vb-disc, .vb > img.vb-face, .vb > .vb-label > .vb-say, .vb > .vb-label > .vb-say.vb-on { transition: none; }
+    /* nothing sinks; the face still changes colour */
+    .vb:not(.vb-live):active:not(:disabled, [aria-disabled=true]), .vb.vb-press { transform: none; }
+}
+/* forced colours (Windows high contrast): the roundel stays as printed, the button in the system's colours */
+@media (forced-colors: active) {
+    .vb { border-color: ButtonText; }
+    .vb:disabled, .vb[aria-disabled=true]:not([data-state=waiting], [data-state=working], [data-state=done]) {
+        border-color: GrayText; color: GrayText;
+    }
+    .vb > .vb-disc.dv-moving .dv-canvas { display: none !important; }
+    .vb > .vb-disc.dv-moving .dv-img { visibility: visible !important; }
+}

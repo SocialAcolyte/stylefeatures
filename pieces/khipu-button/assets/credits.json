@@ -1,0 +1,32 @@
+{
+ "ends.webp": {
+  "what": "Every cord on the button, each one stretch of one real cord of the khipu, cut in one piece: the end of one of its black-and-white two-colour cords, with its own end knot and tuft (the primary, P2), and the ends of seven of its mid-brown cords, each with its own knotted or curled end (C1, A1, M2, E1, E6, B2, B1, in the order the options take them). Nothing is drawn, straightened, resampled or joined. ends.json gives each piece's window in the photograph (origin) and its cord's centreline from the tip.",
+  "source": "Inka Khipu (Fiber Recording Device), Peru, Inca period, c. 1400-1532. Cords, knotted and twisted; cotton and wool. 113 x 137.2 cm.",
+  "museum": "The Cleveland Museum of Art",
+  "accession": "1940.469",
+  "url": "https://clevelandart.org/art/1940.469",
+  "image": "https://openaccess-cdn.clevelandart.org/1940.469/1940.469_full.tif (5968 x 4958)",
+  "licence": "CC0 1.0 (Cleveland Museum of Art Open Access)",
+  "made_by": "components/khipu-button/tools (cut.py, export.py). The cord's path is traced along its ridge only to know where it is; the matte is computed on the photograph's own pixels round that path and the colour lifted off the cloth (F = bg + (o - bg) / a), with the cloth model and cordness map of components/khipu/tools/common.py. The button turns and scales each piece once, as a whole, at run time.",
+  "where": {
+   "P2": "left fan, a two-colour cord ending in a black end knot and a short white tuft (tip at 1069, 2730)",
+   "C1": "bottom of the fan, a mid-brown cord ending in a curl (tip at 3338, 3706)",
+   "A1": "the same group, ending in a knot (3734, 3717)",
+   "M2": "ending in a curl (4295, 3562)",
+   "E1": "ending in a knot (4242, 3789)",
+   "E6": "ending in a knot with a short fray (4346, 3768)",
+   "B2": "ending in a fluffy curl (4187, 3640)",
+   "B1": "ending in a fork (4213, 3748)"
+  }
+ },
+ "cords.webp": {
+  "what": "The atlas of components/khipu (straightened runs, knots and tails), kept here byte for byte with cords.json, as that piece's source. The button no longer loads it: its old pendants were joined from these pieces, and now every cord is a whole one from ends.webp."
+ },
+ "references": [
+  "L. Leland Locke, The Ancient Quipu or Peruvian Knot Record (New York: American Museum of Natural History, 1923).",
+  "Marcia Ascher and Robert Ascher, Code of the Quipu (Ann Arbor: University of Michigan Press, 1981).",
+  "Gary Urton, Signs of the Inka Khipu (Austin: University of Texas Press, 2003)."
+ ],
+ "fonts": "The demo sets its words in Inter and Cormorant Garamond from Google Fonts (SIL Open Font License).",
+ "hunt": "The khipu was chosen from about 80 candidates by components/khipu (its assets/PICK.md; contact sheets in tools/engine/jobs/khipu-commons1, khipu-commons2, khipu-hunt). The cord ends were chosen from about 30 cut on the photograph (sheets in tools/engine/jobs/khipu-button-fix1: ends-sheet-*.png, hang-*.png, mk2-sheet.png)."
+}

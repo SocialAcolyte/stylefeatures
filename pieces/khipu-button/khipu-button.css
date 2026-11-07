@@ -1,0 +1,191 @@
+/* khipu-button: a "next option" stepper button made of the Cleveland khipu 1940.469's own cords.
+   .kb           the button: real cord ends hanging from a run of the khipu's two-colour cord, then the words ("2 of 3 ›")
+   .kb-pair      a "previous" button (.kb-prev) and the khipu button together
+   Sizes: .kb (32 px, a row), .kb-tool (44 px, a toolbar), .kb-lg (64 px, on its own), .kb-xl (132 px, a hero),
+   .kb-sm (26 px, dense desktop lists only). .kb-quiet: no hairline, a faint face instead.
+   Prefix: .kb- */
+
+.kb {
+  --kb-h: 32px;                  /* the button */
+  --kb-cords-h: 28px;            /* the box the cords hang in; its width follows from the number of options */
+  --kb-fragment: 168;            /* how much of the khipu that box holds, top to bottom, in the photograph's px (44 a cm) */
+  --kb-tie: 30;                  /* where the primary crosses, from the top of that box, in the same px */
+  --kb-swing: .62s;              /* the next cord drawn plumb: a damped spring (zeta .85), from rest */
+  --kb-draw: linear(0, .047, .157, .291, .428, .554, .664, .755, .827, .883, .924, .954, .974, .988, .997, 1.002, 1.005,
+    1.006, 1.006, 1.006, 1.005, 1.004, 1.003, 1.002, 1.002, 1.001, 1.001, 1.001, 1);
+  --kb-lay: .8s;                 /* the cord you were on, let go: critically damped, a beat after */
+  --kb-settle: linear(0, .042, .136, .251, .368, .477, .574, .657, .727, .784, .831, .868, .897, .921, .939, .953, .964,
+    .973, .979, .984, .988, .991, .993, .995, .996, .997, .998, .998, 1);
+  --kb-face: transparent;
+  --kb-line: var(--rule, #cfcac0);
+  --kb-pad: 11px;                /* after the words */
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  box-sizing: border-box;
+  height: var(--kb-h);
+  min-width: 44px;
+  margin: 0;
+  padding: 0 var(--kb-pad);       /* without the script (or the cords) the words sit centred, at any size */
+  overflow: hidden;              /* the primary runs on under the left edge: the button is a window on the khipu */
+  border: 1px solid var(--kb-line);
+  border-radius: 6px;
+  background: var(--kb-face);
+  color: var(--ink-2, #4a4744);
+  font: 500 13px/1 var(--sans, Inter, system-ui, sans-serif);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: .005em;
+  white-space: nowrap;
+  cursor: pointer;
+  vertical-align: middle;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background-color .16s, border-color .2s, color .16s;
+}
+.kb.kb-js { padding-left: 0; }   /* the cords' box sits flush with the inner left edge (without JS the words are centred) */
+.kb-label { display: block; }
+.kb-label:has(.kb-ghost) { display: grid; }
+.kb-now, .kb-ghost { grid-area: 1 / 1; }
+.kb-ghost { visibility: hidden; }
+.kb-go { display: block; margin: 0 0 0 -1px; color: var(--ink-3, #8a857d); font-weight: 400; transition: color .16s, transform .2s ease; }
+@media (hover: hover) {
+  .kb:hover { --kb-face: color-mix(in srgb, var(--ink, #141312) 4%, transparent); --kb-line: var(--ink-3, #8a857d); color: var(--ink, #141312); }
+  .kb:hover .kb-go { color: var(--ink-2, #4a4744); }
+}
+/* pressed: the same state as the cord (so a press slid off, still held, shows let go); :active only without the script */
+.kb[data-kb-down], .kb:not(.kb-ready):active { --kb-face: color-mix(in srgb, var(--ink, #141312) 8%, transparent); }
+.kb:focus { outline: none; }
+.kb:focus-visible { outline: 2px solid var(--accent, #c96f4a); outline-offset: 2px; }
+
+/* where linear() easing is not known, the same motions as curves (else the transitions would be dropped) */
+@supports not (transition-timing-function: linear(0, 1)) {
+  .kb { --kb-draw: cubic-bezier(.3, .75, .3, 1); --kb-settle: cubic-bezier(.33, .6, .3, 1); }
+}
+
+/* the cords */
+.kb-cords {
+  position: relative;
+  display: block;
+  flex: none;
+  height: var(--kb-cords-h);
+  pointer-events: none;
+  transition: opacity .3s ease;                                     /* paling at the end of a list that stops */
+}
+.kb-cord, .kb-primary { position: absolute; display: block; max-width: none; }
+.kb-primary { z-index: 3; }
+.kb-cord {
+  z-index: 1;
+  transform: rotate(var(--kb-a, 0deg));
+  transition: transform .7s var(--kb-settle), opacity .4s ease;    /* the rest of the fan, opening or closing */
+}
+.kb-cord.kb-on { z-index: 2; transition: transform var(--kb-swing) var(--kb-draw), opacity .4s ease; }
+.kb-cord.kb-was { transition: transform var(--kb-lay) var(--kb-settle) 40ms, opacity .4s ease; }
+/* a move of more than one option (round from the last to the first, or a jump): a cord at a time, from the one let go
+   toward the one drawn, each in its own time (--kb-t, set from how far it turns) so none turns faster than in a step */
+.kb-sweep .kb-cord, .kb-sweep .kb-cord.kb-on, .kb-sweep .kb-cord.kb-was {
+  transition: transform var(--kb-t, 1.2s) var(--kb-settle) var(--kb-d, 0ms), opacity .4s ease var(--kb-d, 0ms);
+}
+.kb-still .kb-cord { transition: none !important; }
+.kb-cord.kb-new { opacity: 0; }                                     /* a cord tied on for a new option */
+
+/* a hover lifts the next cord a little toward plumb; a press (pointer, touch or a held Space) draws it part way */
+.kb-hover .kb-to-next { transform: rotate(calc(var(--kb-a, 0deg) * .8)); transition-duration: .32s; }
+.kb-drawn-next .kb-to-next, .kb-drawn-prev .kb-to-prev {
+  transform: rotate(calc(var(--kb-a, 0deg) * .42));
+  transition: transform .2s cubic-bezier(.2, .8, .3, 1);
+}
+.kb-hover-prev .kb-to-prev { transform: rotate(calc(var(--kb-a, 0deg) * .8)); transition-duration: .32s; }
+
+/* sizes */
+.kb-sm { --kb-h: 26px; --kb-cords-h: 22px; --kb-fragment: 150; --kb-tie: 27; --kb-pad: 9px; gap: 4px; font-size: 12px; border-radius: 5px; }
+.kb-tool { --kb-h: 44px; --kb-cords-h: 38px; --kb-fragment: 190; --kb-tie: 34; --kb-pad: 14px; gap: 6px; font-size: 14px; }
+.kb-lg { --kb-h: 64px; --kb-cords-h: 56px; --kb-fragment: 210; --kb-tie: 40; --kb-pad: 20px; gap: 8px; font-size: 16px; border-radius: 10px; }
+.kb-xl { --kb-h: 132px; --kb-cords-h: 120px; --kb-fragment: 440; --kb-tie: 70; --kb-pad: 28px; gap: 12px; font-size: 20px; border-radius: 14px; }
+/* no hairline, for a row of quiet text buttons: a faint face instead, so the edge the primary runs under still shows */
+.kb-quiet { --kb-line: transparent; --kb-face: color-mix(in srgb, var(--ink, #141312) 4%, transparent); }
+@media (hover: hover) { .kb-quiet:hover { --kb-line: transparent; --kb-face: color-mix(in srgb, var(--ink, #141312) 7%, transparent); } }
+.kb-quiet[data-kb-down], .kb-quiet:not(.kb-ready):active { --kb-face: color-mix(in srgb, var(--ink, #141312) 11%, transparent); }
+
+/* the previous counterpart: its own framed button of the same height, just before the cords it steps back through */
+.kb-pair { display: inline-flex; align-items: center; gap: 4px; vertical-align: middle; }
+.kb-prev {
+  --kb-line: var(--rule, #cfcac0);
+  display: inline-grid;
+  place-items: center;
+  box-sizing: border-box;
+  height: 32px;
+  min-width: 32px;
+  margin: 0;
+  padding: 0 4px 2px;
+  border: 1px solid var(--kb-line);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ink-3, #8a857d);
+  font: 400 21px/1 var(--serif, Georgia, serif);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background-color .16s, border-color .2s, color .16s;
+}
+@media (hover: hover) {
+  .kb-prev:hover { background: color-mix(in srgb, var(--ink, #141312) 4%, transparent); border-color: var(--ink-3, #8a857d); color: var(--ink, #141312); }
+}
+.kb-prev[data-kb-down], .kb-prev:not(.kb-prev-ready):active { background: color-mix(in srgb, var(--ink, #141312) 8%, transparent); }
+.kb-prev:focus { outline: none; }
+.kb-prev:focus-visible { outline: 2px solid var(--accent, #c96f4a); outline-offset: 2px; }
+.kb-pair > .kb-prev { align-self: stretch; height: auto; }    /* in a pair: the height of the stepper beside it, at any size */
+.kb-pair:has(.kb-quiet) .kb-prev { border-color: transparent; background: color-mix(in srgb, var(--ink, #141312) 4%, transparent); }
+.kb-pair:has(.kb-sm) .kb-prev { min-width: 26px; font-size: 19px; border-radius: 5px; }
+.kb-pair:has(.kb-tool) { gap: 5px; }
+.kb-pair:has(.kb-tool) .kb-prev { min-width: 40px; font-size: 25px; }
+.kb-pair:has(.kb-lg) { gap: 6px; }
+.kb-pair:has(.kb-lg) .kb-prev { min-width: 52px; font-size: 32px; border-radius: 10px; }
+.kb-pair:has(.kb-xl) { gap: 8px; }
+.kb-pair:has(.kb-xl) .kb-prev { min-width: 60px; font-size: 40px; border-radius: 14px; }
+/* on a phone the hero is drawn a little smaller (the same 10 cm of khipu), so seven options and their ‹ fit 390 px */
+@media (max-width: 480px) {
+  .kb-xl { --kb-h: 112px; --kb-cords-h: 100px; --kb-pad: 20px; gap: 10px; font-size: 18px; border-radius: 12px; }
+  .kb-pair:has(.kb-xl) { gap: 6px; }
+  .kb-pair:has(.kb-xl) .kb-prev { min-width: 50px; font-size: 36px; border-radius: 12px; }
+}
+
+/* at the end (aria-disabled, set by the script when there is nowhere further to go): the khipu still shows where you
+   are, at full colour; only the arrow fades, and nothing lights up or moves under a press */
+.kb[aria-disabled="true"] { cursor: default; }
+@media (hover: hover) { .kb[aria-disabled="true"]:hover { --kb-face: transparent; --kb-line: var(--rule, #cfcac0); color: var(--ink-2, #4a4744); } }
+.kb[aria-disabled="true"][data-kb-down] { --kb-face: transparent; }
+.kb[aria-disabled="true"] .kb-go, .kb[aria-disabled="true"]:hover .kb-go { color: color-mix(in srgb, var(--ink-3, #8a857d) 40%, transparent); }
+.kb-quiet[aria-disabled="true"], .kb-quiet[aria-disabled="true"]:hover { --kb-line: transparent; --kb-face: color-mix(in srgb, var(--ink, #141312) 4%, transparent); }
+.kb[aria-disabled="true"] .kb-to-next { transform: rotate(var(--kb-a, 0deg)) !important; }
+/* not now (disabled): the words go grey and the cords pale; nothing moves and nothing lights up */
+.kb:disabled, .kb-prev:disabled, .kb-prev[aria-disabled="true"] { cursor: default; color: var(--ink-3, #8a857d); }
+.kb:disabled { --kb-face: transparent; --kb-line: color-mix(in srgb, var(--rule, #cfcac0) 70%, transparent); }
+.kb-quiet:disabled { --kb-line: transparent; --kb-face: color-mix(in srgb, var(--ink, #141312) 2.5%, transparent); }
+.kb:disabled .kb-go { color: color-mix(in srgb, var(--ink-3, #8a857d) 60%, transparent); }
+.kb:disabled .kb-cords { opacity: .42; }
+.kb-prev:disabled, .kb-prev[aria-disabled="true"] { background: transparent; border-color: color-mix(in srgb, var(--rule, #cfcac0) 70%, transparent); }
+.kb-prev:disabled > *, .kb-prev[aria-disabled="true"] > * { opacity: .45; }
+.kb:disabled .kb-to-next { transform: rotate(var(--kb-a, 0deg)) !important; }
+
+/* the live line: read, not shown */
+.kb-live {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; /* engine-lint: allow sr-only */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kb-cord { transition: none !important; }
+  .kb-hover .kb-to-next, .kb-hover-prev .kb-to-prev,
+  .kb-drawn-next .kb-to-next, .kb-drawn-prev .kb-to-prev { transform: rotate(var(--kb-a, 0deg)) !important; }
+}
+@media (forced-colors: active) {
+  .kb-cords { display: none !important; }
+  .kb.kb-js { padding-left: var(--kb-pad); }
+  .kb, .kb-prev { border-color: ButtonText; }
+  .kb:disabled, .kb[aria-disabled="true"], .kb-prev:disabled, .kb-prev[aria-disabled="true"] { border-color: GrayText; color: GrayText; }
+}

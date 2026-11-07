@@ -1,0 +1,628 @@
+[
+ {
+  "files": [
+   "blocks.webp",
+   "blocks.json"
+  ],
+  "what": "Block faces and tops: 33 parts cut out of five photographs. Each face cut along its own dark joints (weathered outline kept), half-flattened to the component's light, toned toward one stone; tops are rectangular crops.",
+  "parts": [
+   {
+    "source": "File:Jean-Pierre Houdin devant la pyramide de Khéops.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Jean-Pierre_Houdin_devant_la_pyramide_de_Kh%C3%A9ops.jpg",
+    "author": "Jean-Pierre Houdin",
+    "license": "CC BY-SA 4.0",
+    "note": "Great Pyramid of Khufu, Giza: core blocks of the lower courses, low sun from the left.",
+    "fetched": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Jean-Pierre_Houdin_devant_la_pyramide_de_Kh%C3%A9ops.jpg/3840px-Jean-Pierre_Houdin_devant_la_pyramide_de_Kh%C3%A9ops.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pieces": [
+     {
+      "part": "h02",
+      "kind": "face",
+      "box_in_source": [
+       500,
+       340,
+       940,
+       660
+      ],
+      "rect_in_atlas": [
+       724,
+       1018,
+       360,
+       265
+      ]
+     },
+     {
+      "part": "h03",
+      "kind": "face",
+      "box_in_source": [
+       950,
+       330,
+       1500,
+       690
+      ],
+      "rect_in_atlas": [
+       0,
+       1293,
+       360,
+       240
+      ]
+     },
+     {
+      "part": "h04",
+      "kind": "face",
+      "box_in_source": [
+       1510,
+       330,
+       1940,
+       690
+      ],
+      "rect_in_atlas": [
+       910,
+       362,
+       360,
+       303
+      ]
+     },
+     {
+      "part": "h05",
+      "kind": "face",
+      "box_in_source": [
+       1945,
+       310,
+       2430,
+       700
+      ],
+      "rect_in_atlas": [
+       724,
+       716,
+       360,
+       292
+      ]
+     },
+     {
+      "part": "h08",
+      "kind": "face",
+      "box_in_source": [
+       720,
+       680,
+       1100,
+       1090
+      ],
+      "rect_in_atlas": [
+       0,
+       0,
+       335,
+       360
+      ]
+     },
+     {
+      "part": "h12",
+      "kind": "face",
+      "box_in_source": [
+       80,
+       1110,
+       860,
+       1590
+      ],
+      "rect_in_atlas": [
+       1412,
+       1293,
+       360,
+       227
+      ]
+     },
+     {
+      "part": "h13",
+      "kind": "face",
+      "box_in_source": [
+       870,
+       1130,
+       1300,
+       1590
+      ],
+      "rect_in_atlas": [
+       337,
+       0,
+       337,
+       360
+      ]
+     }
+    ]
+   },
+   {
+    "source": "File:Giseh 06.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Giseh_06.jpg",
+    "author": "Olaf Tausch",
+    "license": "CC BY 3.0",
+    "note": "Great Pyramid of Khufu, Giza: core blocks near the base, north side.",
+    "fetched": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/11/Giseh_06.jpg/3840px-Giseh_06.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pieces": [
+     {
+      "part": "g01",
+      "kind": "face",
+      "box_in_source": [
+       650,
+       1010,
+       1200,
+       1400
+      ],
+      "rect_in_atlas": [
+       1448,
+       1018,
+       360,
+       259
+      ]
+     },
+     {
+      "part": "g02",
+      "kind": "face",
+      "box_in_source": [
+       1220,
+       1040,
+       1690,
+       1410
+      ],
+      "rect_in_atlas": [
+       1086,
+       716,
+       360,
+       286
+      ]
+     },
+     {
+      "part": "g06",
+      "kind": "face",
+      "box_in_source": [
+       1560,
+       720,
+       2000,
+       1050
+      ],
+      "rect_in_atlas": [
+       0,
+       1018,
+       360,
+       273
+      ]
+     },
+     {
+      "part": "g08",
+      "kind": "face",
+      "box_in_source": [
+       2400,
+       740,
+       2800,
+       1150
+      ],
+      "rect_in_atlas": [
+       676,
+       0,
+       352,
+       360
+      ]
+     },
+     {
+      "part": "g09",
+      "kind": "face",
+      "box_in_source": [
+       2830,
+       780,
+       3330,
+       1160
+      ],
+      "rect_in_atlas": [
+       1448,
+       716,
+       360,
+       277
+      ]
+     },
+     {
+      "part": "g10",
+      "kind": "face",
+      "box_in_source": [
+       820,
+       650,
+       1310,
+       1000
+      ],
+      "rect_in_atlas": [
+       1086,
+       1018,
+       360,
+       261
+      ]
+     },
+     {
+      "part": "g12",
+      "kind": "face",
+      "box_in_source": [
+       2600,
+       1470,
+       3150,
+       1830
+      ],
+      "rect_in_atlas": [
+       362,
+       1293,
+       360,
+       240
+      ]
+     },
+     {
+      "part": "g14",
+      "kind": "face",
+      "box_in_source": [
+       650,
+       1890,
+       1040,
+       2540
+      ],
+      "rect_in_atlas": [
+       1030,
+       0,
+       222,
+       360
+      ]
+     },
+     {
+      "part": "g15",
+      "kind": "face",
+      "box_in_source": [
+       1060,
+       1890,
+       1560,
+       2540
+      ],
+      "rect_in_atlas": [
+       1254,
+       0,
+       280,
+       360
+      ]
+     },
+     {
+      "part": "g18",
+      "kind": "face",
+      "box_in_source": [
+       3120,
+       1900,
+       3640,
+       2490
+      ],
+      "rect_in_atlas": [
+       1536,
+       0,
+       319,
+       360
+      ]
+     }
+    ]
+   },
+   {
+    "source": "File:紅金字塔 Red Pyramid - panoramio (1).jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:%E7%B4%85%E9%87%91%E5%AD%97%E5%A1%94_Red_Pyramid_-_panoramio_(1).jpg",
+    "author": "lienyuan lee",
+    "license": "CC BY 3.0",
+    "note": "Titled on Commons as the Red Pyramid (Dahshur); the stepped core and white pavement look like the base of the Great Pyramid at Giza. Credited under its own title.",
+    "fetched": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/34/%E7%B4%85%E9%87%91%E5%AD%97%E5%A1%94_Red_Pyramid_-_panoramio_%281%29.jpg/3840px-%E7%B4%85%E9%87%91%E5%AD%97%E5%A1%94_Red_Pyramid_-_panoramio_%281%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pieces": [
+     {
+      "part": "r01",
+      "kind": "face",
+      "box_in_source": [
+       210,
+       930,
+       550,
+       1150
+      ],
+      "rect_in_atlas": [
+       724,
+       1293,
+       352,
+       232
+      ]
+     },
+     {
+      "part": "r02",
+      "kind": "face",
+      "box_in_source": [
+       555,
+       950,
+       790,
+       1150
+      ],
+      "rect_in_atlas": [
+       641,
+       1535,
+       243,
+       208
+      ]
+     },
+     {
+      "part": "r03",
+      "kind": "face",
+      "box_in_source": [
+       800,
+       950,
+       1080,
+       1150
+      ],
+      "rect_in_atlas": [
+       349,
+       1535,
+       290,
+       210
+      ]
+     },
+     {
+      "part": "r04",
+      "kind": "face",
+      "box_in_source": [
+       1085,
+       945,
+       1420,
+       1150
+      ],
+      "rect_in_atlas": [
+       0,
+       1535,
+       347,
+       217
+      ]
+     },
+     {
+      "part": "r05",
+      "kind": "face",
+      "box_in_source": [
+       2020,
+       950,
+       2340,
+       1170
+      ],
+      "rect_in_atlas": [
+       1078,
+       1293,
+       332,
+       232
+      ]
+     },
+     {
+      "part": "r08",
+      "kind": "face",
+      "box_in_source": [
+       1140,
+       1160,
+       1340,
+       1500
+      ],
+      "rect_in_atlas": [
+       334,
+       362,
+       212,
+       351
+      ]
+     },
+     {
+      "part": "r09",
+      "kind": "face",
+      "box_in_source": [
+       1350,
+       1160,
+       1700,
+       1500
+      ],
+      "rect_in_atlas": [
+       548,
+       362,
+       360,
+       321
+      ]
+     },
+     {
+      "part": "r10",
+      "kind": "face",
+      "box_in_source": [
+       1710,
+       1160,
+       2030,
+       1500
+      ],
+      "rect_in_atlas": [
+       0,
+       362,
+       332,
+       352
+      ]
+     },
+     {
+      "part": "r13",
+      "kind": "face",
+      "box_in_source": [
+       1310,
+       760,
+       1470,
+       940
+      ],
+      "rect_in_atlas": [
+       886,
+       1535,
+       166,
+       186
+      ]
+     }
+    ]
+   },
+   {
+    "source": "File:Dahschur - Rote Pyramide 2019-11-10f.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Dahschur_-_Rote_Pyramide_2019-11-10f.jpg",
+    "author": "Djehouty",
+    "license": "CC BY-SA 4.0",
+    "note": "Red Pyramid of Sneferu, Dahshur: weathered upper surfaces of the stripped blocks (used for block tops).",
+    "fetched": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/49/Dahschur_-_Rote_Pyramide_2019-11-10f.jpg/3840px-Dahschur_-_Rote_Pyramide_2019-11-10f.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pieces": [
+     {
+      "part": "t01",
+      "kind": "top",
+      "box_in_source": [
+       2200,
+       1700,
+       2800,
+       2200
+      ],
+      "rect_in_atlas": [
+       1272,
+       362,
+       360,
+       300
+      ]
+     },
+     {
+      "part": "t02",
+      "kind": "top",
+      "box_in_source": [
+       2800,
+       300,
+       3400,
+       800
+      ],
+      "rect_in_atlas": [
+       1634,
+       362,
+       360,
+       300
+      ]
+     },
+     {
+      "part": "t03",
+      "kind": "top",
+      "box_in_source": [
+       1300,
+       1300,
+       1900,
+       1800
+      ],
+      "rect_in_atlas": [
+       0,
+       716,
+       360,
+       300
+      ]
+     },
+     {
+      "part": "t04",
+      "kind": "top",
+      "box_in_source": [
+       3000,
+       1400,
+       3600,
+       1900
+      ],
+      "rect_in_atlas": [
+       362,
+       716,
+       360,
+       300
+      ]
+     },
+     {
+      "part": "t05",
+      "kind": "top",
+      "box_in_source": [
+       600,
+       2000,
+       1200,
+       2450
+      ],
+      "rect_in_atlas": [
+       362,
+       1018,
+       360,
+       270
+      ]
+     }
+    ]
+   },
+   {
+    "source": "File:Stones of Khufu.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Stones_of_Khufu.jpg",
+    "author": "@bastique",
+    "license": "CC BY-SA 2.0",
+    "note": "Great Pyramid of Khufu, Giza: looking up the face; rough block surfaces (used for block tops).",
+    "fetched": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Stones_of_Khufu.jpg/3840px-Stones_of_Khufu.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+    "pieces": [
+     {
+      "part": "t06",
+      "kind": "top",
+      "box_in_source": [
+       1000,
+       1450,
+       2100,
+       1700
+      ],
+      "rect_in_atlas": [
+       1416,
+       1535,
+       360,
+       82
+      ]
+     },
+     {
+      "part": "t07",
+      "kind": "top",
+      "box_in_source": [
+       2300,
+       1500,
+       3000,
+       1750
+      ],
+      "rect_in_atlas": [
+       1054,
+       1535,
+       360,
+       129
+      ]
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "files": [
+   "capstone.webp"
+  ],
+  "title": "Pyramidion of Iufaa",
+  "date": "Late Period, Dynasty 26, 664-525 BCE",
+  "place": "probably Abydos",
+  "medium": "Limestone, paint",
+  "dimensions": "H 35.5 x W 27.2 x D 26.4 cm",
+  "source": "The Metropolitan Museum of Art, Rogers Fund, 1921 (21.2.66), Open Access",
+  "url": "https://www.metmuseum.org/art/collection/search/552805",
+  "license": "CC0 1.0 (public domain)",
+  "images": [
+   "https://images.metmuseum.org/CRDImages/eg/original/LC-21_2_66_EGDP027851.jpg",
+   "https://images.metmuseum.org/CRDImages/eg/original/LC-21_2_66_EGDP027848.jpg",
+   "https://images.metmuseum.org/CRDImages/eg/original/LC-21_2_66_EGDP027849.jpg",
+   "https://images.metmuseum.org/CRDImages/eg/original/LC-21_2_66_EGDP027850.jpg"
+  ],
+  "note": "Four faces, each from the Met view that looks straight at it (the four colour views), matted with BiRefNet, then each mapped by an affine fit of its own measured base corners and apex onto the true face triangle (slant / base 1.416 from the catalogue dimensions; the photos measure 1.36-1.38, i.e. the camera about 14 degrees above the face normal). The four black-and-white corner views were used to check which faces adjoin. The museum's painted accession number on face A was inpainted out. Mid-tones opened slightly (gamma 0.8): the Met shot it on black. Tile order in the atlas: A scarab in the solar barque, C Iufaa kneeling under the jackal (three columns), B sun disc between adoring baboons, D Iufaa kneeling under the jackal (two columns)."
+ },
+ {
+  "files": [
+   "mortar.webp"
+  ],
+  "title": "Specimen of Mortar from the Great Pyramid",
+  "source": "The Metropolitan Museum of Art (17.6.143), Open Access, via Wikimedia Commons",
+  "url": "https://commons.wikimedia.org/wiki/File:Speciman_of_Mortar_from_the_Great_Pyramid_MET_17.6.143_EGDP017920.jpg",
+  "license": "CC0 1.0 (public domain)",
+  "note": "A square from the middle of the sample (gypsum mortar, pink with lime and grit), spread thinly on the bed of the course being laid."
+ },
+ {
+  "files": [
+   "(data in pyramid-steps.js)"
+  ],
+  "title": "Course heights of the Great Pyramid, courses 1-203, north-east corner",
+  "source": "W. M. Flinders Petrie, The Pyramids and Temples of Gizeh (London, 1883), pl. VIII, as tabulated at cheops-pyramide.ch (Stone courses of the Pyramid of Khufu)",
+  "url": "https://cheops-pyramide.ch/khufu-pyramid/stonecourses-pyramid.html",
+  "note": "Summed, the 203 courses give 138.6 m, Petrie's measured height."
+ }
+]

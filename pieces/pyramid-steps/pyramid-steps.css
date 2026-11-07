@@ -1,0 +1,97 @@
+/* ─── pyramid-steps: a stepper that lays limestone courses (pyramid-steps.js) ──────────────────────────────
+   Namespace .ps-. Without JS it is a plain numbered list with the current step marked.
+
+   Theme on the element or a parent:
+     --ps-h         tower height (default clamp(240px, 52vw, 460px))
+     --ps-strip-h   strip height (default 46px)
+     --ps-ink / --ps-ink-2 / --ps-ink-3   current, done and coming labels
+     --ps-rule      the hairline leaders from each course to its label
+     --ps-font      label font (default --sans)                                                                   */
+
+.ps {
+    --ps-ink: var(--ink, #141312);
+    --ps-ink-2: var(--ink-2, #4a4744);
+    --ps-ink-3: var(--ink-3, #8a857d);
+    --ps-rule: var(--rule, #cfcac0);
+    --ps-font: var(--sans, Inter, system-ui, sans-serif);
+    --ps-h: clamp(240px, 52vw, 460px);
+    --ps-strip-h: 46px;
+    font: 400 15px/1.35 var(--ps-font);
+    color: var(--ps-ink-2);
+    counter-reset: ps;
+}
+.ps ol { margin: 0; padding: 0 0 0 1.6em; }
+.ps li { margin: .2em 0; }
+.ps li[aria-current="step"] { color: var(--ps-ink); font-weight: 500; }
+.ps-sr {
+    position: absolute !important; width: 1px; height: 1px; margin: -1px; padding: 0; border: 0;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+.ps-frame { display: none; }
+
+/* labels */
+.ps-label {
+    font: inherit; color: inherit; letter-spacing: .005em;
+    background: none; border: 0; padding: 0; margin: 0; text-align: left;
+    -webkit-tap-highlight-color: transparent;
+}
+.ps-step { counter-increment: ps; }
+.ps--live .ps-label::before {
+    content: counter(ps);
+    display: inline-block; min-width: 1.5em;
+    font: italic 500 1.08em/1 var(--serif, 'Cormorant Garamond', Georgia, serif);
+    color: var(--ps-ink-3);
+}
+.ps-step[data-state="todo"] { color: var(--ps-ink-3); }
+.ps-step[data-state="done"] { color: var(--ps-ink-2); }
+.ps-step[data-state="current"] { color: var(--ps-ink); font-weight: 500; }
+.ps-step[data-state="current"] .ps-label::before { color: var(--ps-ink); }
+button.ps-label { cursor: pointer; text-decoration: underline 1px transparent; text-underline-offset: 3px; transition: text-decoration-color .2s; }
+button.ps-label:hover { text-decoration-color: var(--ps-ink-3); }
+button.ps-label:focus { outline: none; }
+button.ps-label:focus-visible, a.ps-label:focus-visible { outline: 1.5px solid var(--ps-ink); outline-offset: 4px; border-radius: 1px; }
+span.ps-label:focus { outline: none; }
+a.ps-label { text-decoration: none; }
+
+/* ── tower: the pyramid, its labels beside it on hairline leaders, each at its own course ── */
+.ps--live.ps--tower {
+    display: grid;
+    grid-template-columns: auto minmax(8.5em, 1fr);
+    height: var(--ps-h);
+    align-items: stretch;
+}
+.ps--live.ps--tower .ps-frame { display: block; height: var(--ps-h); aspect-ratio: .74; max-width: 58vw; }
+.ps--live.ps--tower .ps-steps { position: relative; list-style: none; margin: 0; padding: 0 0 0 clamp(14px, 3vw, 28px); }
+.ps--live.ps--tower .ps-step {
+    position: absolute; left: clamp(14px, 3vw, 28px); right: 0; top: var(--y, 0);
+    margin: 0; transform: translateY(-50%);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    overflow: visible;
+}
+.ps--live.ps--tower .ps-step::before {
+    content: ""; position: absolute; right: calc(100% + 6px); top: 50%;
+    width: var(--lead, 0); border-top: 1px solid var(--ps-rule);
+}
+.ps--live.ps--tower .ps-step[data-state="current"]::before { border-top-color: var(--ps-ink-3); }
+
+/* ── strip: a small pyramid at the start of a row of labels (a page header) ── */
+.ps--live.ps--strip { display: flex; align-items: center; gap: 14px; }
+.ps--live.ps--strip .ps-frame { display: block; flex: none; height: var(--ps-strip-h); aspect-ratio: .74; }
+.ps--live.ps--strip .ps-steps { display: flex; flex-wrap: wrap; gap: .25em 1.2em; list-style: none; margin: 0; padding: 0; font-size: 14px; }
+.ps--live.ps--strip .ps-step { margin: 0; }
+
+.ps-frame { position: relative; }
+.ps-canvas { display: block; position: absolute; left: 0; top: 0; pointer-events: none; }
+.ps--live .ps-steps { position: relative; z-index: 1; }
+
+/* ── the haul: a lane of sand, a sledge and its block (haul.js) ── */
+.ps-lane { position: relative; width: 100%; aspect-ratio: 3.2; touch-action: pan-y; outline: none; }
+.ps-lane:focus-visible { outline: 1.5px solid var(--ink, #141312); outline-offset: 4px; }
+.ps-lane-canvas { position: absolute; inset: 0; display: block; }
+.ps-jar {
+    position: absolute; left: 0; top: 0; padding: 0; border: 0; margin: 0;
+    background: none center / contain no-repeat; cursor: pointer;
+    transform-origin: 50% 100%; -webkit-tap-highlight-color: transparent; touch-action: none;
+}
+.ps-jar:focus { outline: none; }
+.ps-jar:focus-visible { outline: 1.5px solid var(--ink, #141312); outline-offset: 3px; border-radius: 40% 40% 20% 20%; }

@@ -216,7 +216,7 @@ export class Tour {
       switch (st.do) {
         case 'pause': end = start + (st.dur ?? 1); break;
         case 'move': case 'hover': case 'click': case 'dblclick': case 'drag': case 'longpress': case 'swipe': {
-          const el = this.one(st.do === 'drag' ? st.handle : st.do === 'swipe' ? st.on : st.to); const g = { kind: st.do, el, i: k, start, aim: st.aim || [.5 + (rnd(k) - .5) * .18, .55 + (rnd(k + 7) - .5) * .16], shape: st.cursor, who: st.by || 'main', from: st.from, tag: st.tag };
+          const el = this.one(st.do === 'drag' ? st.handle : st.do === 'swipe' ? st.on : st.to); const g = { kind: st.do, el, i: k, start, aim: st.aim || [.5 + (rnd(k) - .5) * .18, .55 + (rnd(k + 7) - .5) * .16], shape: st.cursor, who: typeof st.by === 'string' ? st.by : 'main', from: st.from, tag: st.tag };
           g.arrive = start + (st.do === 'drag' || st.do === 'swipe' ? st.approach ?? (st.do === 'swipe' ? .7 : .8) : st.dur ?? .9);
           if (st.do === 'longpress') { const c0 = g.arrive + .06; g.act = c0 + (st.hold ?? .7); g.press = [[c0, g.act + (st.lift ?? .35)]]; g.end = g.act; this.ringAt.push({ t: g.act, g }); }
           if (st.do === 'swipe') this.swipeStep(st, g, el);
@@ -266,7 +266,7 @@ export class Tour {
           end = c + dur; break;
         }
         case 'key': this.keyList.push({ start, end: start + (st.hold ?? 1.4), keys: st.keys }); end = start + (st.dur ?? .9); break;
-        case 'zoom': this.zooms.push({ start, dur: st.dur ?? 1.3, el: st.to ? this.one(st.to) : null, z: st.z, fill: st.fill ?? .66, aim: st.aim || [.5, .5], pt: null, size: null }); end = start + (st.dur ?? 1.3); break;
+        case 'zoom': this.zooms.push({ start, dur: st.dur ?? 1.3, el: st.to ? this.one(st.to) : null, z: st.z, fill: st.fill ?? .66, aim: st.aim || [.5, .5], max: st.max ?? 2.6, arc: st.arc || 0, pt: null, size: null }); end = start + (st.dur ?? 1.3); break;
         case 'show': case 'hide': {
           const els = this.$$(st.el), dur = st.dur ?? (st.do === 'show' ? .35 : .28), to = st.do === 'show' ? 1 : 0;
           const E = easeOf(st.ease);
@@ -464,14 +464,15 @@ export class Tour {
     if (!zm.el) return 1;
     if (typeof zm.z === 'number') return zm.z * (this.L.stack && !this.L.framed ? 1.15 : 1);
     const F = this.L.F, sz = zm.size || [this.Wd, this.Hd], f = Array.isArray(zm.fill) ? zm.fill[this.L.stack ? 1 : 0] : zm.fill;   // fill: n or [wide, stacked]
-    return Math.min(2.6, Math.max(1, Math.min(F.w * f / (sz[0] * this.L.s), F.h * f / (sz[1] * this.L.s))));
+    return Math.min(zm.max, Math.max(1, Math.min(F.w * f / (sz[0] * this.L.s), F.h * f / (sz[1] * this.L.s))));
   }
   camAt(t) { let i = -1; for (let k = 0; k < this.zooms.length && this.zooms[k].start <= t; k++) i = k; return this.camSeg(i, t); }
   camSeg(i, t) {
     if (i < 0) return { z: 1, c: [this.Wd / 2, this.Hd / 2] };
     const zm = this.zooms[i], from = this.camSeg(i - 1, zm.start), toZ = this.zFor(zm), toC = zm.el && zm.pt ? zm.pt : from.c;
     const p = ease(cl((t - zm.start) / zm.dur));
-    return { z: from.z * Math.pow(toZ / from.z, p), c: [lerp(from.c[0], toC[0], p), lerp(from.c[1], toC[1], p)] };
+    const dip = zm.arc ? Math.pow(1 - zm.arc, Math.sin(Math.PI * p)) : 1;     // arc: pull back mid-flight, like a camera crossing a board
+    return { z: from.z * Math.pow(toZ / from.z, p) * dip, c: [lerp(from.c[0], toC[0], p), lerp(from.c[1], toC[1], p)] };
   }
   camT(z, c, b) {
     if (z <= 1.0001) return b;

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Khipu button</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="khipu-button.css">
+<style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;
+    --serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px);
+    --card:#f8f5ee;--card-line:#ddd6c8;--hair:#e6e0d2}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+
+  .page{max-width:1080px;margin:0 auto;padding:clamp(28px,6svh,72px) var(--gutter) clamp(64px,12svh,128px)}
+  .head{margin:0 0 clamp(24px,4.4svh,44px)}
+  .tag{font:500 10.5px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  .head h1{margin:.5em 0 .22em;font-weight:400;font-style:italic;font-size:clamp(38px,4.6vw,56px);line-height:1;letter-spacing:-.01em}
+  .head p{margin:0;max-width:46em;font-size:clamp(18px,1.6vw,21px);line-height:1.4;font-weight:500;color:var(--ink-2);text-wrap:pretty}
+
+  .grid{display:grid;gap:clamp(18px,2.6vw,28px);align-items:start}
+  .col{display:grid;gap:clamp(18px,2.6vw,28px);min-width:0}
+  @media (min-width:880px){.grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.wide{grid-column:1/-1}}
+  .card{min-width:0;margin:0;background:var(--card);border:1px solid var(--card-line);
+    box-shadow:0 1px 0 #fff inset,0 26px 50px -38px rgba(40,30,20,.34),0 1px 3px rgba(40,30,20,.07)}
+  .card-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:17px 20px 13px}
+  .card-h h2{margin:0;font-weight:400;font-size:27px;line-height:1.05;letter-spacing:-.005em}
+  .meta{font:400 12px/1.3 var(--sans);color:var(--ink-3);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .stack{display:grid}
+  .stack>span{grid-area:1/1}
+  .stack>.ghost{visibility:hidden}
+  .swap{transition:opacity .22s ease}
+  .swap.out{opacity:0;transition-duration:.12s}
+  @media (prefers-reduced-motion:reduce){.swap,.swap.out{transition:none}}
+
+  /* a chat reply with three versions: the button in the reply's footer, with Copy and Retry */
+  .chat{display:grid;gap:14px;padding:0 20px 16px}
+  .you{justify-self:end;max-width:min(100%,26em);margin:0;padding:10px 14px;border-radius:14px;background:var(--paper-2);
+    font-size:17.5px;line-height:1.4;font-weight:500;color:var(--ink-2);text-wrap:pretty}
+  .reply{margin:0;font-size:19.5px;line-height:1.45;font-weight:500;text-wrap:pretty}
+  .reply-foot{display:flex;flex-wrap:wrap;align-items:center;gap:6px 4px;margin:-2px 0 0}
+  .reply-foot .kb-pair{margin-right:6px}
+  .tb{height:32px;padding:0 10px;border:0;border-radius:6px;background:none;color:var(--ink-3);cursor:pointer;
+    font:500 13px/1 var(--sans);touch-action:manipulation}
+  @media (hover:hover){.tb:hover{background:color-mix(in srgb,var(--ink) 5%,transparent);color:var(--ink)}}
+  .tb:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .tb[aria-disabled="true"]{color:var(--ink-3);opacity:.5;cursor:default;background:none}
+
+  /* an editor's suggestion: the button beside Dismiss and Accept in the suggestion's footer */
+  .doc{margin:0;padding:0 20px 16px;font-size:19.5px;line-height:1.5;font-weight:500;text-wrap:pretty}
+  .doc mark{background:none;color:inherit;box-shadow:inset 0 -2px 0 color-mix(in srgb,var(--accent) 70%,transparent);padding:0 1px}
+  @media (forced-colors:active){.doc mark{background-color:Mark;color:MarkText;box-shadow:none}}
+  .sugg{margin:0 20px 18px;border:1px solid var(--card-line);background:#fbf9f3}
+  .sugg-h{display:flex;justify-content:space-between;gap:10px;padding:12px 14px 0;font:500 11px/1.2 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--ink-3)}
+  .sugg-t{margin:0;padding:6px 14px 10px;font-size:25px;line-height:1.2;font-weight:500}
+  .sugg-f{display:flex;flex-wrap:wrap;align-items:center;gap:8px;padding:9px 10px 10px;border-top:1px solid var(--hair)}
+  .sugg-f .acts{display:flex;gap:8px;margin-left:auto}
+  .btn{font:500 13.5px/1 var(--sans);letter-spacing:.005em;color:var(--ink);background:transparent;border:1px solid var(--card-line);
+    border-radius:6px;min-height:32px;padding:0 14px;cursor:pointer;touch-action:manipulation}
+  .btn.solid{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+  @media (hover:hover){.btn:hover{border-color:var(--ink-3)}.btn.solid:hover{background:#2a2826}}
+  .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .said{margin:0;padding:0 20px 14px;font:400 13px/1.4 var(--sans);color:var(--ink-2);min-height:1.4em}
+
+  /* a composer's toolbar: the button at 44 px, with its previous counterpart */
+  .bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 2px;padding:6px 10px;border-top:1px solid var(--hair);border-bottom:1px solid var(--hair)}
+  .tool{min-width:40px;height:44px;border:0;border-radius:6px;background:none;color:var(--ink-2);cursor:pointer;
+    font:500 15px/1 var(--sans);padding:0 10px;touch-action:manipulation}
+  .tool.i{font:italic 500 21px/1 var(--serif)}
+  .tool.b{font-weight:600}
+  .tool[aria-pressed="true"]{background:var(--paper-2);color:var(--ink)}
+  @media (hover:hover){.tool:hover{background:color-mix(in srgb,var(--ink) 5%,transparent)}}
+  .tool:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .bar .sep{width:1px;height:22px;background:var(--hair);margin:0 6px}
+  .bar .kb-pair{margin-left:auto}
+  .mail{padding:12px 20px 18px;display:grid;gap:8px}
+  .mail .to{font:400 12.5px/1.3 var(--sans);color:var(--ink-3)}
+  .mail .to b{font-weight:500;color:var(--ink-2)}
+  .mail p{margin:0;font-size:19.5px;line-height:1.48;font-weight:500;text-wrap:pretty}
+  .mail p.b{font-weight:650}
+  .mail p.i{font-style:italic}
+  .mail p.q{padding-left:14px;border-left:2px solid var(--rule);color:var(--ink-2)}
+  .tool.q{font:500 26px/1 var(--serif);padding-top:8px}
+
+  /* a list of a newsletter's fields, each with its own alternatives: the button at row size */
+  .list{margin:0;padding:0 0 6px;list-style:none}
+  .list li{display:flex;align-items:center;gap:14px;padding:9px 14px 9px 20px;border-top:1px solid var(--hair);min-height:64px}
+  .list .txt{flex:1;min-width:0;display:grid;gap:2px}
+  .list .name{font:500 12px/1.3 var(--sans);color:var(--ink-3)}
+  .list .val{font-size:18.5px;line-height:1.25;font-weight:500;color:var(--ink);text-wrap:pretty}
+
+  /* the hero: the opening line, and the button at its largest beside it */
+  .open{display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"text" "step" "use";gap:clamp(18px,2.6vw,26px);
+    justify-items:start;align-items:center;padding:clamp(20px,3.6vw,40px) clamp(20px,3.6vw,44px) clamp(22px,3.6vw,40px)}
+  .open .text{grid-area:text;display:grid;gap:clamp(14px,2vw,20px);min-width:0}
+  .open .tag{display:block}
+  .open blockquote{margin:0;font-size:clamp(26px,3.3vw,38px);line-height:1.18;font-weight:500;letter-spacing:-.005em;text-wrap:balance;max-width:22em}
+  .open .kb-pair{grid-area:step}
+  .open .row{grid-area:use;display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px}
+  .open .hint{font:400 13px/1.4 var(--sans);color:var(--ink-2);min-height:1.4em}
+  @media (min-width:880px){
+    .open{grid-template-columns:minmax(0,1fr) auto;grid-template-areas:"text step" "use step";column-gap:clamp(40px,5vw,72px);row-gap:28px}
+    .open .kb-pair{justify-self:end}
+  }
+  .btn.big{min-height:48px;padding:0 20px;font-size:15px;border-radius:10px}
+
+  @media (max-width:420px){
+    .card-h{padding:15px 16px 11px}
+    .chat,.doc,.mail{padding-left:16px;padding-right:16px}
+    .sugg{margin-left:16px;margin-right:16px}
+    .said{padding-left:16px;padding-right:16px}
+    .list li{padding-left:16px;padding-right:12px;gap:10px}
+    .bar{padding:6px 6px}
+    .tool{min-width:36px;padding:0 8px}
+    .bar .sep{margin:0 3px}
+  }
+</style></head><body>
+<main class="page">
+  <header class="head">
+    <span class="tag">Button</span>
+    <h1>Khipu button</h1>
+    <p>A button that steps through a few alternatives. From a run of one cord of an Inka khipu hang the ends of its real cords, one for each: the one you are on hangs plumb, and a press draws the next one plumb as it lays the last aside.</p>
+  </header>
+
+  <div class="grid">
+    <div class="col">
+      <!-- 1. a chat reply that has three versions (Retry ties on a fourth) -->
+      <section class="card" aria-labelledby="c1">
+        <div class="card-h"><h2 id="c1">Wedding toast</h2><span class="meta">Chat</span></div>
+        <div class="chat">
+          <p class="you">Two minutes for my sister’s wedding toast. She’s a marine biologist; Tom, her husband, builds wooden boats.</p>
+          <p class="reply swap" id="reply">Try opening on a rock pool: “When we were kids, Ana could sit by one rock pool for a whole afternoon. Tom is the first thing I’ve seen her look at that way.”</p>
+          <div class="reply-foot">
+            <span class="kb-pair">
+              <button type="button" class="kb-prev" id="reply-prev" aria-label="Previous version"><span aria-hidden="true">‹</span></button>
+              <button type="button" class="kb" id="reply-kb" data-khipu-button data-count="3" data-current="2" data-max="4" data-noun="version"><span class="kb-label">2 of 3</span><span class="kb-go" aria-hidden="true">›</span></button>
+            </span>
+            <button type="button" class="tb" id="copy">Copy</button>
+            <button type="button" class="tb" id="retry">Retry</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. the next suggestion in an editor -->
+      <section class="card" aria-labelledby="c2">
+        <div class="card-h"><h2 id="c2">At the harbour</h2><span class="meta">1 suggestion</span></div>
+        <p class="doc" id="doc">We got down to the harbour just after six. The water was <mark id="mark">very calm</mark>, and Tom’s boat was the only one out.</p>
+        <div class="sugg" role="group" aria-labelledby="sugg-h">
+          <div class="sugg-h"><span id="sugg-h">Instead of “very calm”</span></div>
+          <p class="sugg-t swap" id="sugg">flat calm</p>
+          <div class="sugg-f">
+            <button type="button" class="kb" id="sugg-kb" data-khipu-button data-count="3" data-current="1" data-noun="suggestion"><span class="kb-label">1 of 3</span><span class="kb-go" aria-hidden="true">›</span></button>
+            <span class="acts">
+              <button type="button" class="btn" id="dismiss">Dismiss</button>
+              <button type="button" class="btn solid" id="accept">Accept</button>
+            </span>
+          </div>
+        </div>
+        <p class="said" id="said" role="status"></p>
+      </section>
+    </div>
+
+    <div class="col">
+      <!-- 3. a composer's toolbar, stepping through drafts -->
+      <section class="card" aria-labelledby="c3">
+        <div class="card-h"><h2 id="c3">Reply to the Harbour Club</h2><span class="meta">3 drafts</span></div>
+        <div class="bar">
+          <button type="button" class="tool b" aria-pressed="false" data-style="b" aria-label="Bold">B</button>
+          <button type="button" class="tool i" aria-pressed="false" data-style="i" aria-label="Italic">I</button>
+          <button type="button" class="tool q" aria-pressed="false" data-style="q" aria-label="Quote">“</button>
+          <span class="kb-pair">
+            <button type="button" class="kb-prev" id="draft-prev" aria-label="Previous draft"><span aria-hidden="true">‹</span></button>
+            <button type="button" class="kb kb-tool" id="draft-kb" data-khipu-button data-count="3" data-current="1" data-noun="draft" data-label="Draft {i} of {n}"><span class="kb-label">Draft 1 of 3</span><span class="kb-go" aria-hidden="true">›</span></button>
+          </span>
+        </div>
+        <div class="mail">
+          <span class="to"><b>To</b> bookings@harbourclub.example · <b>Subject</b> Saturday</span>
+          <p class="swap" id="draft">Thank you, Saturday at six works for us. Could we have the long table by the window? We will be twenty-two.</p>
+        </div>
+      </section>
+
+      <!-- 4. a list: a newsletter's fields, each with its own alternatives -->
+      <section class="card" aria-labelledby="c4">
+        <div class="card-h"><h2 id="c4">Newsletter</h2><span class="meta">Saturday, 6 pm</span></div>
+        <ul class="list">
+          <li><span class="txt"><span class="name">Subject line</span><span class="val swap" id="v-subj">Ana and Tom: the harbour at six</span></span>
+            <button type="button" class="kb" data-khipu-button data-count="3" data-current="1" data-noun="subject line" data-for="subj"><span class="kb-label">1 of 3</span><span class="kb-go" aria-hidden="true">›</span></button></li>
+          <li><span class="txt"><span class="name">Preview text</span><span class="val swap" id="v-prev">Directions, parking, and what to bring</span></span>
+            <button type="button" class="kb" data-khipu-button data-count="2" data-current="1" data-noun="preview text" data-for="prev"><span class="kb-label">1 of 2</span><span class="kb-go" aria-hidden="true">›</span></button></li>
+          <li><span class="txt"><span class="name">Button</span><span class="val swap" id="v-btn">Add it to your calendar</span></span>
+            <button type="button" class="kb" data-khipu-button data-count="4" data-current="1" data-noun="button text" data-for="btn"><span class="kb-label">1 of 4</span><span class="kb-go" aria-hidden="true">›</span></button></li>
+          <li><span class="txt"><span class="name">From</span><span class="val">Ana and Tom</span></span>
+            <button type="button" class="kb" data-khipu-button data-count="1" data-current="1" data-noun="sender" disabled><span class="kb-label">1 of 1</span><span class="kb-go" aria-hidden="true">›</span></button></li>
+        </ul>
+      </section>
+    </div>
+
+    <!-- 5. the hero: the opening line, with all seven cords -->
+    <section class="card wide" aria-labelledby="c5">
+      <div class="open">
+        <div class="text">
+          <span class="tag" id="c5">The opening line</span>
+          <blockquote class="swap" id="line">“Tom spent a winter building Ana a boat, and named it after a sea slug she discovered.”</blockquote>
+        </div>
+        <span class="kb-pair">
+          <button type="button" class="kb-prev" id="line-prev" aria-label="Previous opening line"><span aria-hidden="true">‹</span></button>
+          <button type="button" class="kb kb-xl" id="line-kb" data-khipu-button data-count="7" data-current="4" data-noun="opening line"><span class="kb-label">4 of 7</span><span class="kb-go" aria-hidden="true">›</span></button>
+        </span>
+        <div class="row">
+          <button type="button" class="btn solid big" id="use">Use this one</button>
+          <span class="hint" id="used" role="status"></span>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script type="module">
+  import { khipuButton } from './khipu-button.js';
+
+  const texts = {
+    reply: [
+      'Here’s a start: “Good evening. I’m Ana’s little brother, which means I’ve spent thirty years being told to put the crab back.” Shall I carry on in that voice?',
+      'Try opening on a rock pool: “When we were kids, Ana could sit by one rock pool for a whole afternoon. Tom is the first thing I’ve seen her look at that way.”',
+      'A short one: “Ana studies things that live under pressure. Tom builds things that float. I think that’s the whole marriage.” Then a line about each of them, and the toast.',
+      'Or start with the boat: “Tom spent a winter building Ana a boat, and named it after a sea slug she discovered. If that isn’t love, I don’t know what is.”',
+    ],
+    sugg: ['flat calm', 'glassy', 'as still as a plate'],
+    draft: [
+      'Thank you, Saturday at six works for us. Could we have the long table by the window? We will be twenty-two.',
+      'Six on Saturday is perfect, thank you. If the long table by the window is free, we would love it: there will be twenty-two of us.',
+      'Thanks for holding Saturday for us. We will arrive at six, twenty-two in all, and the window table would be ideal.',
+    ],
+    subj: ['Ana and Tom: the harbour at six', 'Saturday, by the water', 'See you at the harbour'],
+    prev: ['Directions, parking, and what to bring', 'Everything you need for Saturday evening'],
+    btn: ['Add it to your calendar', 'Save the date', 'Get directions', 'Tell us you are coming'],
+    line: [
+      '“I’m Ana’s little brother, which means I’ve spent thirty years being told to put the crab back.”',
+      '“When we were kids, Ana could sit by one rock pool for a whole afternoon.”',
+      '“Ana studies things that live under pressure. Tom builds things that float.”',
+      '“Tom spent a winter building Ana a boat, and named it after a sea slug she discovered.”',
+      '“The first time Ana brought Tom home, he mended our gate. She named everything living on it.”',
+      '“Tom once asked me how to impress my sister. I told him to learn to read a tide table.”',
+      '“I have never seen either of them in a hurry, except on the way to the water.”',
+    ],
+  };
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+  const $ = (id) => document.getElementById(id);
+
+  /* the alternatives there are sit in the same grid cell, unseen but for the one shown, so a longer one never moves
+     the button you are pressing (or anything under it) */
+  function stack(el, list) {
+    const shown = el.textContent.trim();
+    el.textContent = '';
+    el.classList.add('stack');
+    list.forEach((t) => add(el, t, t === shown));
+  }
+  function add(el, t, on = false) {
+    const s = document.createElement('span');
+    s.textContent = t;
+    s.classList.toggle('ghost', !on);
+    if (!on) s.setAttribute('aria-hidden', 'true');
+    el.append(s);
+  }
+  function show(el, i) {
+    const set = () => [...el.children].forEach((s, k) => {
+      s.classList.toggle('ghost', k !== i);
+      if (k === i) s.removeAttribute('aria-hidden'); else s.setAttribute('aria-hidden', 'true');
+    });
+    if (reduce.matches) return set();
+    el.classList.add('out');
+    setTimeout(() => { set(); el.classList.remove('out'); }, 120);
+  }
+  const current = (el) => [...el.children].find((s) => !s.classList.contains('ghost'))?.textContent ?? el.textContent;
+  // the chat holds the versions there are; Retry adds the fourth
+  stack($('reply'), texts.reply.slice(0, 3));
+  for (const [id, key] of [['sugg', 'sugg'], ['draft', 'draft'], ['line', 'line'], ['v-subj', 'subj'], ['v-prev', 'prev'], ['v-btn', 'btn']]) stack($(id), texts[key]);
+
+  document.addEventListener('khipu-button:change', (e) => {
+    const b = e.target, i = e.detail.current - 1;
+    if (b.id === 'reply-kb') show($('reply'), i);
+    else if (b.id === 'sugg-kb') { show($('sugg'), i); $('said').textContent = ''; }
+    else if (b.id === 'draft-kb') show($('draft'), i);
+    else if (b.id === 'line-kb') { show($('line'), i); $('used').textContent = ''; }
+    else if (b.dataset.for) show($('v-' + b.dataset.for), i);
+  });
+
+  /* the chat footer: Copy copies this version, Retry ties on a fourth */
+  $('copy').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(current($('reply'))); $('copy').textContent = 'Copied'; setTimeout(() => { $('copy').textContent = 'Copy'; }, 1600); }
+    catch { /* no clipboard here: nothing to say */ }
+  });
+  $('retry').addEventListener('click', () => {
+    const kb = $('reply-kb').__khipuButton, retry = $('retry');
+    if (!kb || retry.getAttribute('aria-disabled') === 'true' || kb.count >= texts.reply.length) return;
+    add($('reply'), texts.reply[kb.count]);
+    kb.setCount(kb.count + 1, kb.count + 1, { say: true });   // its change event shows the new version
+    // no more to come: Retry stays where it is (and keeps focus), but does nothing now
+    if (kb.count >= texts.reply.length) retry.setAttribute('aria-disabled', 'true');
+  });
+
+  /* the editor: Accept puts the suggestion in the text, Dismiss keeps what was written */
+  $('accept').addEventListener('click', () => {
+    const t = current($('sugg'));
+    $('mark').textContent = t;
+    $('said').textContent = `Changed to “${t}”.`;
+  });
+  $('dismiss').addEventListener('click', () => { $('said').textContent = 'Kept “' + $('mark').textContent + '”.'; });
+
+  /* the large one: choose a line for the toast */
+  $('use').addEventListener('click', () => { $('used').textContent = `Line ${$('line-kb').__khipuButton?.current ?? 1} is in the toast.`; });
+
+  /* the toolbar's other buttons do what they say */
+  for (const t of document.querySelectorAll('.tool[data-style]')) {
+    t.addEventListener('click', () => {
+      const on = t.getAttribute('aria-pressed') !== 'true';
+      t.setAttribute('aria-pressed', String(on));
+      $('draft').classList.toggle(t.dataset.style, on);
+    });
+  }
+</script>
+</body></html>

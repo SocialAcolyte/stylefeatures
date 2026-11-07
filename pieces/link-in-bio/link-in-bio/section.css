@@ -1,0 +1,186 @@
+@import url("../tour/tour.css");
+/* demo/link-in-bio: a personal page as a short film. The page sits on the stage like a printed sheet (the frame
+   tour.js fills); under it runs one quiet rail that holds the name at first, then the chapter and the caption, then
+   the address. A fingertip unfolds a link into its preview, widens a clip in the latest-work strip and plays it, and
+   turns the contact card over to save it.
+   The stage lays out from container units (cqw/cqh), so the page, 16:9, 1:1 and 9:16 recordings share one set of
+   rules. The page inside has three layouts keyed off the classes tour.js sets before it measures: a spread (wide),
+   two columns (.is-square), one column (.is-tall). */
+
+.demo-link-in-bio{--tour-stage:var(--page-2)}
+.lib-stage{container-type:size;
+  --fw:min(88cqw,calc(72.5cqh * 1.6667));            /* the sheet: 1200 × 720 on a wide stage */
+  --fh:calc(var(--fw) / 1.6667);
+  --fx:calc(50cqw - var(--fw) / 2);
+  --fy:5.6cqh;
+  --ry:calc(var(--fy) + var(--fh) + 3.6cqh);       /* where the rail starts */
+  --fs:min(1cqh,.62cqw)}                           /* one step of rail type */
+.demo-link-in-bio.is-square .lib-stage{--fw:92cqw;--fx:4cqw;--fy:4cqw;--fh:calc(100cqh - var(--fy) - 21cqh);--fs:.92cqh}
+.demo-link-in-bio.is-tall .lib-stage{--fw:92cqw;--fx:4cqw;--fy:4cqw;--fh:calc(100cqh - var(--fy) - var(--rail,21cqh));--fs:min(.62cqh,1.15cqw)}
+.demo-link-in-bio.is-tall.is-play:not(.is-record) .lib-stage{--rail:calc(22cqh + 54px)}
+
+/* ── the sheet: the frame tour.js fills. Its shadow lifts it off the stage; the window draws the page inside ── */
+.lib-frame{position:absolute;left:var(--fx);top:var(--fy);width:var(--fw);height:var(--fh);border-radius:calc(var(--fw) * .013);background:var(--page);
+  box-shadow:0 0 0 1px rgba(25,24,22,.07),0 2.2cqh 5cqh -2.4cqh rgba(25,24,22,.32),0 .5cqh 1.2cqh -.6cqh rgba(25,24,22,.14)}
+.demo-link-in-bio.is-tall .lib-frame,.demo-link-in-bio.is-square .lib-frame{border-radius:calc(var(--fw) * .045)}
+.demo-link-in-bio [data-tour-window]{border-radius:0;box-shadow:none;background:transparent}
+
+/* ── the rail: band (first frame), chapter, caption, closing frame. All share one slot under the sheet ── */
+.lib-band,.lib-end,.demo-link-in-bio .tour-card,.demo-link-in-bio.is-stack .tour-card,.demo-link-in-bio .tour-cap,.demo-link-in-bio.is-stack .tour-cap,.demo-link-in-bio.is-stack.is-tall .tour-cap{
+  position:absolute;z-index:6;top:var(--ry);bottom:auto;margin:0;padding:0;border-radius:0;background:none;box-shadow:none;color:var(--ink)}
+.lib-band,.lib-end{left:var(--fx);width:var(--fw);display:flex;align-items:flex-start;justify-content:space-between;gap:2cqh 4cqw;flex-wrap:wrap}
+.lib-band{z-index:10;opacity:var(--tour-band,1);transform:translateY(calc((1 - var(--tour-band,1)) * -1cqh))}
+.lib-band-name,.lib-end-url{margin:0;font:400 calc(var(--fs) * 5.4)/1 var(--serif);letter-spacing:-.025em;text-wrap:balance}
+.lib-band-name em{font-style:italic}
+.lib-band-name span{font-style:italic}
+.lib-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.lib-act{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px}
+.lib-gate svg{margin-right:2px}
+.demo-link-in-bio.is-begun .lib-gate{opacity:.4;pointer-events:none}
+.lib-band .sf-note{flex-basis:100%;max-width:36em;margin-top:-.6cqh}
+.lib-end{opacity:var(--in,0);transform:translateY(calc((1 - var(--in,0)) * 1.4cqh))}
+.lib-end-url{font-style:italic}
+
+.demo-link-in-bio .tour-card,.demo-link-in-bio.is-stack .tour-card{left:var(--fx);width:calc(var(--fw) * .56);transform:translateY(calc((1 - var(--o,0)) * 1cqh))}
+.demo-link-in-bio .tour-card-x{display:none}
+.demo-link-in-bio .tour-card-n{font:500 max(10px,calc(var(--fs) * 1.2))/1 var(--sans);letter-spacing:.16em}
+.demo-link-in-bio .tour-card h3{margin:calc(var(--fs) * 1.3) 0 calc(var(--fs) * 1);font:400 calc(var(--fs) * 4.4)/1 var(--serif);letter-spacing:-.022em;text-wrap:balance}
+.demo-link-in-bio .tour-card p{max-width:30em;font:400 max(12.5px,calc(var(--fs) * 1.85))/1.45 var(--sans);color:var(--ink-2);text-wrap:pretty}
+
+/* the caption: the right end of the rail, led by a fingertip like the one on the page */
+.demo-link-in-bio .tour-cap,.demo-link-in-bio.is-stack .tour-cap{left:auto;right:var(--fx);width:calc(var(--fw) * .36);max-width:none;
+  font:500 max(13px,calc(var(--fs) * 2.2))/1.36 var(--sans);letter-spacing:-.008em;text-align:right;text-wrap:balance;transform:translateY(calc((1 - var(--o,0)) * .8cqh))}
+.demo-link-in-bio .tour-cap::before{content:"";display:inline-block;width:calc(var(--fs) * 2);height:calc(var(--fs) * 2);margin:0 calc(var(--fs) * 1.1) 0 0;vertical-align:-.3em;border-radius:50%;
+  background:rgba(112,112,120,.36);box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7),0 0 0 1px rgba(20,19,18,.1)}
+
+/* the play driver's bar: small, at the end of the rail */
+.demo-link-in-bio .tour-ctl{left:auto;right:var(--fx);bottom:max(12px,2.4cqh);transform:none;width:min(340px,calc(var(--fw) * .4))}
+.demo-link-in-bio .tour-time{min-width:0}
+
+/* tall (a phone, 9:16): everything centred under the page */
+.demo-link-in-bio.is-tall .lib-band,.demo-link-in-bio.is-tall .lib-end{flex-direction:column;align-items:center;text-align:center;gap:2cqh}
+.demo-link-in-bio.is-tall .tour-card{left:var(--fx);width:var(--fw);text-align:center;transform:translateY(calc((1 - var(--o,0)) * .8cqh))}
+.demo-link-in-bio.is-tall .tour-card h3{font-size:min(4.2cqh,8.2cqw);margin:1cqh 0 0}
+.demo-link-in-bio.is-tall .tour-card p{display:none}
+.demo-link-in-bio.is-tall .tour-card-n{font-size:max(10px,min(1.25cqh,2.6cqw))}
+.demo-link-in-bio.is-tall .lib-band-name,.demo-link-in-bio.is-tall .lib-end-url{font-size:min(4.6cqh,9cqw)}
+.demo-link-in-bio.is-tall .tour-cap,.demo-link-in-bio.is-stack.is-tall .tour-cap{left:50%;right:auto;top:calc(var(--ry) + min(9.4cqh,18cqw));width:max-content;max-width:86cqw;
+  padding:1cqh 2.2cqh;border-radius:99px;background:var(--ink);color:var(--page);font-size:min(2cqh,3.8cqw);text-align:center;transform:translate(-50%,calc((1 - var(--o,0)) * .6cqh))}
+.demo-link-in-bio.is-tall .tour-cap::before{display:none}
+.demo-link-in-bio.is-tall .lib-band .sf-note{display:none}
+.demo-link-in-bio.is-tall .tour-ctl{right:auto;left:50%;transform:translateX(-50%);width:min(340px,var(--fw));bottom:max(10px,1.6cqh)}
+.demo-link-in-bio.is-tall:not(.is-record) .lib-act .sf-btn{padding:12px 18px}
+
+/* recording: the address replaces the buttons */
+.demo-link-in-bio.is-record .lib-act{display:none}
+.demo-link-in-bio.is-record:not(.is-tall) .lib-band{align-items:baseline}
+
+/* ── THE PAGE, in design pixels. Replace the placeholders with the person's own (AGENT.md) ── */
+.lib{--card:var(--ph);--line:var(--ph-line);position:absolute;inset:0;overflow:hidden;background:var(--page);color:var(--ink);font:400 15px/1.45 var(--sans);text-align:left}
+.lib .ph{border-radius:12px}
+.lib .ph.is-round{border-radius:50%}
+.lib-grid{display:grid;grid-template-columns:344px minmax(0,1fr) 316px;grid-template-areas:"me links work" "me links contact";grid-template-rows:auto 1fr;
+  gap:0 48px;padding:52px 56px 0;min-height:100%;align-items:start}
+.lib-me{grid-area:me}
+.lib-links{grid-area:links}
+.lib-work{grid-area:work}
+.lib-contact{grid-area:contact;margin-top:22px}
+.lib-foot{display:none}
+
+/* who */
+.lib-portrait{border-radius:16px}
+.lib-who{padding-top:22px}
+.lib-role{margin:0 0 12px;font:500 11px/1.3 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.lib-name{margin:0;font:400 46px/1 var(--serif);letter-spacing:-.025em}
+.lib-name em{font-style:italic}
+.lib-line{margin:12px 0 0;max-width:22em;font-size:16px;line-height:1.45;color:var(--ink-2);text-wrap:pretty}
+.lib-h{margin:4px 0 14px;font:500 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+
+/* links: a row, and under it a preview folded flat. --in unfolds it: the image panel swings down from the row and the
+   text panel swings down from the image, like a folded card opened (data-tour-grow gives the height as it opens) */
+.lib-list{display:grid;gap:8px;margin:0;padding:0;list-style:none}
+.lib-link{--in:0;position:relative;border-radius:14px;background:var(--card);
+  box-shadow:0 0 0 1px var(--line),0 calc(var(--in) * 18px) calc(var(--in) * 36px) calc(var(--in) * -18px) rgba(25,24,22,.4)}
+.lib-row{display:flex;align-items:center;gap:13px;height:58px;padding:0 18px 0 13px;border-radius:14px}
+.lib-row.is-press{background:var(--page-2)}
+.lib-ico{flex:none;width:32px;height:32px;border-radius:9px!important}
+.lib-lt{flex:1;min-width:0;display:grid;gap:2px}
+.lib-lt b{font-weight:500;font-size:15.5px;letter-spacing:-.01em}
+.lib-lt small{font-size:12.5px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lib-chev{flex:none;width:8px;height:8px;margin:0 2px 0 0;border:solid var(--ink-3);border-width:0 1.6px 1.6px 0;transform:translateY(calc((.5 - var(--in)) * 4px)) scaleY(calc(1 - var(--in) * 2)) rotate(45deg)}
+.lib-fold{max-height:max(calc(var(--in) * var(--h)),calc((var(--in) - .999) * 1e7px));overflow:hidden;perspective:900px;perspective-origin:50% 0}
+.lib-pa{position:relative;padding:0 14px 14px;transform-origin:50% 0;transform-style:preserve-3d;transform:rotateX(calc((1 - var(--in)) * -72deg));opacity:min(1,calc(var(--in) * 2.2))}
+.lib-pb{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:end;gap:0 16px;padding-top:12px;transform-origin:50% 0;transform:rotateX(calc((1 - var(--in)) * 120deg));backface-visibility:hidden}
+.lib-pa::before,.lib-pb::before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:linear-gradient(rgba(25,24,22,.16),rgba(25,24,22,.03));opacity:calc(1 - var(--in))}
+.lib-og{border-radius:10px!important}
+.lib-pb b{display:block;grid-column:1;font-weight:500;font-size:15px;letter-spacing:-.01em}
+.lib-pb .ph-text{grid-column:1;margin:8px 0 0;font-size:10px}
+.lib-pb .lib-open{grid-column:2;grid-row:1 / 3}
+.lib-open{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 14px;border-radius:99px;background:var(--ink);color:var(--page);font:500 13px/1 var(--sans)}
+.lib-open svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.lib-open.is-press{transform:scale(.96)}
+
+/* latest work: a strip of clips. --open widens one (the others give way), --pl turns its play button into a
+   running bar, --p is how far it has played */
+.lib-strip{display:flex;gap:8px;height:336px}
+.lib-clip{--open:0;--pl:0;--p:0;flex:calc(.8 + var(--open) * 2.4) 1 0;min-width:0;height:100%;aspect-ratio:auto!important;border-radius:12px}
+.lib-clip::after{top:16px;transform:translateX(-50%);opacity:var(--open);max-width:84%}
+.lib-clip.is-press{filter:brightness(.96)}
+.lib-play{position:absolute;z-index:2;left:50%;top:50%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;background:var(--ink);
+  opacity:calc(1 - var(--pl));transform:scale(calc(.66 + var(--open) * .34 + var(--pl) * .3))}
+.lib-play::before{content:"";position:absolute;left:15px;top:12px;border:8px solid transparent;border-left:12px solid var(--page);border-right:0}
+.lib-bar{position:absolute;z-index:2;left:14px;right:14px;bottom:14px;height:3px;border-radius:2px;background:rgba(25,24,22,.14);overflow:hidden;opacity:var(--pl)}
+.lib-bar i{position:absolute;inset:0;background:var(--ink);transform-origin:0 50%;transform:scaleX(var(--p))}
+
+.lib-wcap{display:flex;align-items:baseline;gap:10px;margin:12px 0 0;font-size:13px;color:var(--ink-3)}
+.lib-wcap b{font-weight:500;font-size:14.5px;color:var(--ink);letter-spacing:-.01em}
+.lib-wc{display:contents}
+.lib-work:not([data-on="2"]) .lib-wc[data-clip="2"],.lib-work[data-on="2"] .lib-wc[data-clip="1"]{display:none}
+
+/* contact: a card that turns over (--flip) into the contact you're saving */
+.lib-contact{perspective:1100px}
+.lib-cc{--flip:0;position:relative;height:158px;transform-style:preserve-3d;transform:rotateY(calc(var(--flip) * -180deg))}
+.lib-cc-front,.lib-cc-back{position:absolute;inset:0;padding:18px;border-radius:16px;background:var(--card);box-shadow:0 0 0 1px var(--line),0 16px 30px -22px rgba(25,24,22,.45);
+  -webkit-backface-visibility:hidden;backface-visibility:hidden}
+.lib-cc-front{display:grid;grid-template-columns:52px 1fr;align-content:space-between;gap:0 14px}
+.lib-cc-av{width:52px}
+.lib-cc-who{display:grid;align-content:center;gap:3px}
+.lib-cc-who b{font-weight:500;font-size:16px;letter-spacing:-.01em}
+.lib-cc-who small{font-size:12px;color:var(--ink-3)}
+.lib-cc-save,.lib-cc-add{grid-column:1 / -1;display:flex;align-items:center;justify-content:center;gap:7px;height:40px;border-radius:99px;background:var(--ink);color:var(--page);font:500 14px/1 var(--sans)}
+.lib-cc-save.is-press,.lib-cc-add.is-press{transform:scale(.97)}
+.lib-cc-back{transform:rotateY(180deg);display:grid;grid-template-columns:1fr 66px;grid-template-rows:1fr auto;gap:12px 14px}
+.lib-cc-rows{display:grid;gap:5px;align-content:start;font-size:13px;min-width:0}
+.lib-cc-rows span{display:grid;grid-template-columns:42px 1fr;align-items:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lib-cc-rows small{font-size:11px;color:var(--ink-3)}
+.lib-cc-dash{display:block;width:72%;height:8px;border-radius:4px;background:var(--line)}
+.lib-cc-qr{width:66px;border-radius:8px!important}
+.lib-cc-qr::after{padding:3px 5px;font-size:9px}
+.lib-cc-add svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.lib-cc-add .lib-i-ok,.lib-cc-add.is-saved .lib-i-add{display:none}
+.lib-cc-add.is-saved .lib-i-ok{display:block}
+.lib-cc-add.is-saved{background:var(--page-2);color:var(--ink)}
+
+/* the page's own toast */
+.lib-toast{--in:0;position:absolute;z-index:9;left:50%;top:18px;display:flex;align-items:center;gap:8px;padding:10px 17px 10px 13px;border-radius:99px;background:var(--ink);color:var(--page);
+  font:500 14px/1 var(--sans);white-space:nowrap;opacity:var(--in);transform:translate(-50%,calc((1 - var(--in)) * -14px)) scale(calc(.94 + var(--in) * .06));box-shadow:0 14px 30px -12px rgba(0,0,0,.45)}
+.lib-toast svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* square (1:1): the person stays put on the left while the right column scrolls */
+.demo-link-in-bio.is-square .lib-grid{grid-template-columns:290px minmax(0,1fr);grid-template-areas:"me links" "me work" "me contact" "me foot";grid-template-rows:auto;gap:0 46px;padding:42px 46px 0}
+.demo-link-in-bio.is-square .lib-me{position:sticky;top:42px}
+.demo-link-in-bio.is-square .lib-name{font-size:42px}
+.demo-link-in-bio.is-square .lib-work{margin-top:34px}
+.demo-link-in-bio.is-square .lib-strip{height:280px}
+
+/* tall (a phone, 9:16): one column, centred at the top, scrolled by the finger */
+.demo-link-in-bio.is-tall .lib-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"me" "links" "work" "contact" "foot";grid-template-rows:auto;gap:0;padding:30px 24px 0}
+.demo-link-in-bio.is-tall .lib-me{display:grid;justify-items:center;text-align:center}
+.demo-link-in-bio.is-tall .lib-portrait{width:196px}
+.demo-link-in-bio.is-tall .lib-who{padding-top:20px}
+.demo-link-in-bio.is-tall .lib-name{font-size:40px}
+.demo-link-in-bio.is-tall .lib-line{margin-inline:auto;max-width:19em}
+.demo-link-in-bio.is-tall .lib-links{margin-top:30px}
+.demo-link-in-bio.is-tall .lib-work{margin-top:34px}
+.demo-link-in-bio.is-tall .lib-strip{height:300px}
+.demo-link-in-bio.is-square .lib-foot,.demo-link-in-bio.is-tall .lib-foot{grid-area:foot;display:block;margin:0;padding:30px 0 40px;text-align:center;font:italic 400 17px/1 var(--serif);color:var(--ink-3)}

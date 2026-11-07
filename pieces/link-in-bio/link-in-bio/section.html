@@ -1,0 +1,117 @@
+<section class="demo-link-in-bio" data-tpl="demo/link-in-bio" data-tour-root data-driver="play" data-captions="always" data-pointer="touch" aria-label="{{name|Your}} {{name_em|Name}}: links, work and contact">
+  <div class="lib-stage" data-tour-stage>
+
+    <!-- The sheet of paper the page is printed on. tour.js fits the window to it and keeps every push-in inside it
+         (data-tour-frame). Wide screens: a spread, 1200 × 720. Square: two columns. Phones and 9:16: one column. -->
+    <div class="lib-frame" data-tour-frame aria-hidden="true"></div>
+
+    <div class="tour-rig">
+      <!-- THE PAGE, in design pixels. One set of markup, three layouts (section.css): a three-column spread on a wide
+           screen (1200 × 720), two columns on a square one (800 wide), one column on a phone and in 9:16 (420 wide).
+           On square and tall the height follows the frame ("auto") and the page scrolls; the script swipes it.
+           Hooks the script points at are data-tour="…" (written '@…' in script.js). Fill it from the person's real
+           links, work and contact details (AGENT.md). -->
+      <div class="lib-win" data-tour-window data-chrome="none" data-size="1200x720" data-size-square="800xauto" data-size-tall="420xauto">
+        <div class="lib" data-tour="page">
+          <div class="lib-grid">
+
+            <!-- WHO: a portrait, the name, one line -->
+            <header class="lib-me">
+              <figure class="ph lib-portrait" style="--r:4/5" data-ph="Portrait · 4:5" data-hint="You, in good light. The one people already know you by"></figure>
+              <div class="lib-who">
+                <p class="lib-role">{{role|What you do · Where you are}}</p>
+                <h2 class="lib-name">{{name|Your}} <em>{{name_em|Name}}</em></h2>
+                <p class="lib-line">{{line|One line about the work, in your own words.}}</p>
+              </div>
+            </header>
+
+            <!-- LINKS: each row unfolds in place into a preview of where it goes (--in on .lib-link) -->
+            <section class="lib-links" data-tour="links">
+              <p class="lib-h">{{links_h|Links}}</p>
+              <ul class="lib-list">
+                <li class="lib-link" data-tour="link-1">
+                  <div class="lib-row" data-tour="row-1" role="button"><span class="ph is-bare is-tone lib-ico"></span><span class="lib-lt"><b>{{l1|Newsletter}}</b><small>{{l1_url|yourname.substack.com}}</small></span><i class="lib-chev"></i></div>
+                  <div class="lib-fold" data-tour-grow><div class="lib-pa"><figure class="ph lib-og" style="--r:1.91/1" data-ph="Link preview · 1.91:1" data-hint="That page's own og:image"></figure>
+                    <div class="lib-pb"><b>{{l1_title|The title on the other side}}</b><p class="ph-text" style="--n:2;--last:62%"></p><span class="lib-open">Open<svg viewBox="0 0 12 12"><path d="M3.5 8.5 8.5 3.5M4.5 3.5h4v4"/></svg></span></div></div></div>
+                </li>
+                <li class="lib-link" data-tour="link-2">
+                  <div class="lib-row" data-tour="row-2" role="button"><span class="ph is-bare is-tone lib-ico"></span><span class="lib-lt"><b>{{l2|The new piece}}</b><small>{{l2_url|yourname.com/latest}}</small></span><i class="lib-chev"></i></div>
+                  <div class="lib-fold" data-tour-grow><div class="lib-pa"><figure class="ph lib-og" style="--r:1.91/1" data-ph="Link preview · 1.91:1" data-hint="That page's own og:image"></figure>
+                    <div class="lib-pb"><b>{{l2_title|What the newest thing is called}}</b><p class="ph-text" style="--n:2;--last:48%"></p><span class="lib-open" data-tour="open-2">Open<svg viewBox="0 0 12 12"><path d="M3.5 8.5 8.5 3.5M4.5 3.5h4v4"/></svg></span></div></div></div>
+                </li>
+                <li class="lib-link" data-tour="link-3">
+                  <div class="lib-row" data-tour="row-3" role="button"><span class="ph is-bare is-tone lib-ico"></span><span class="lib-lt"><b>{{l3|Book a call}}</b><small>{{l3_url|cal.com/yourname}}</small></span><i class="lib-chev"></i></div>
+                  <div class="lib-fold" data-tour-grow><div class="lib-pa"><figure class="ph lib-og" style="--r:1.91/1" data-ph="Link preview · 1.91:1" data-hint="That page's own og:image"></figure>
+                    <div class="lib-pb"><b>{{l3_title|Thirty minutes, any weekday}}</b><p class="ph-text" style="--n:2;--last:40%"></p><span class="lib-open">Open<svg viewBox="0 0 12 12"><path d="M3.5 8.5 8.5 3.5M4.5 3.5h4v4"/></svg></span></div></div></div>
+                </li>
+                <li class="lib-link" data-tour="link-4">
+                  <div class="lib-row" data-tour="row-4" role="button"><span class="ph is-bare is-tone lib-ico"></span><span class="lib-lt"><b>{{l4|Shop}}</b><small>{{l4_url|shop.yourname.com}}</small></span><i class="lib-chev"></i></div>
+                  <div class="lib-fold" data-tour-grow><div class="lib-pa"><figure class="ph lib-og" style="--r:1.91/1" data-ph="Link preview · 1.91:1" data-hint="That page's own og:image"></figure>
+                    <div class="lib-pb"><b>{{l4_title|Prints, books, the thing you sell}}</b><p class="ph-text" style="--n:2;--last:54%"></p><span class="lib-open">Open<svg viewBox="0 0 12 12"><path d="M3.5 8.5 8.5 3.5M4.5 3.5h4v4"/></svg></span></div></div></div>
+                </li>
+                <li class="lib-link" data-tour="link-5">
+                  <div class="lib-row" data-tour="row-5" role="button"><span class="ph is-bare is-tone lib-ico"></span><span class="lib-lt"><b>{{l5|Elsewhere}}</b><small>{{l5_url|@yourname}}</small></span><i class="lib-chev"></i></div>
+                  <div class="lib-fold" data-tour-grow><div class="lib-pa"><figure class="ph lib-og" style="--r:1.91/1" data-ph="Link preview · 1.91:1" data-hint="That page's own og:image"></figure>
+                    <div class="lib-pb"><b>{{l5_title|Where you post most}}</b><p class="ph-text" style="--n:2;--last:36%"></p><span class="lib-open">Open<svg viewBox="0 0 12 12"><path d="M3.5 8.5 8.5 3.5M4.5 3.5h4v4"/></svg></span></div></div></div>
+                </li>
+              </ul>
+            </section>
+
+            <!-- LATEST WORK: a strip of clips; the one you tap widens and plays where it is (--open, --p) -->
+            <section class="lib-work" data-tour="work">
+              <p class="lib-h">{{work_h|Latest}}</p>
+              <div class="lib-strip">
+                <figure class="ph lib-clip" data-tour="clip-1" role="button" style="--open:1" data-ph="Clip · 4:5" data-hint="Your newest piece, playing"><i class="lib-play"></i><span class="lib-bar"><i></i></span></figure>
+                <figure class="ph lib-clip is-tone" data-tour="clip-2" role="button" data-ph="Clip · 4:5" data-hint="The piece before it"><i class="lib-play"></i><span class="lib-bar"><i></i></span></figure>
+                <figure class="ph lib-clip" data-tour="clip-3" role="button" data-ph="Clip · 4:5" data-hint="And one more"><i class="lib-play"></i><span class="lib-bar"><i></i></span></figure>
+              </div>
+              <p class="lib-wcap"><span class="lib-wc" data-clip="1"><b>{{w1|The newest piece}}</b><span>{{w1_meta|Film · 2026}}</span></span><span class="lib-wc" data-clip="2"><b>{{w2|The one before}}</b><span>{{w2_meta|Series · 2026}}</span></span></p>
+            </section>
+
+            <!-- CONTACT: a card that turns over into the contact you're saving (--flip on .lib-cc) -->
+            <section class="lib-contact" data-tour="contact">
+              <div class="lib-cc" data-tour="cc">
+                <div class="lib-cc-front">
+                  <span class="ph is-round is-bare is-tone lib-cc-av" style="--r:1/1"></span>
+                  <span class="lib-cc-who"><b>{{name|Your}} {{name_em|Name}}</b><small>{{role|What you do · Where you are}}</small></span>
+                  <span class="lib-cc-save" data-tour="cc-open" role="button">{{save|Save contact}}</span>
+                </div>
+                <div class="lib-cc-back">
+                  <div class="lib-cc-rows">
+                    <span><small>email</small>{{email|hello@yourname.com}}</span>
+                    <span><small>phone</small><i class="lib-cc-dash"></i></span>
+                    <span><small>web</small>{{domain|yourname.com}}</span>
+                  </div>
+                  <figure class="ph lib-cc-qr" style="--r:1/1" data-ph="QR"></figure>
+                  <span class="lib-cc-add" data-tour="cc-add" role="button"><svg viewBox="0 0 16 16"><path d="M8 3.5v9M3.5 8h9" class="lib-i-add"/><path d="m3.6 8.4 2.9 2.9 5.9-6.2" class="lib-i-ok"/></svg><span data-tour="cc-add-label">{{add|Add to Contacts}}</span></span>
+                </div>
+              </div>
+            </section>
+
+            <p class="lib-foot">{{domain|yourname.com}}</p>
+          </div>
+        </div>
+        <div class="lib-toast" data-tour="toast"><svg viewBox="0 0 16 16"><path d="m3.6 8.4 2.9 2.9 5.9-6.2"/></svg><span data-tour="toast-text">{{toast|Added to Contacts}}</span></div>
+      </div>
+    </div>
+
+    <!-- Opening band: the first frame. It sits on the rail under the page and fades as the film starts. -->
+    <header class="lib-band" data-tour-band="css">
+      <h1 class="lib-band-name"><span class="lib-sr">{{name|Your}} {{name_em|Name}}: </span><span>{{domain|yourname.com}}</span></h1>
+      <div class="lib-act">
+        <button class="sf-btn lib-gate" type="button" data-tour-gate><svg width="11" height="12" viewBox="0 0 11 12" aria-hidden="true"><path d="M1 1.2v9.6c0 .6.6.9 1.1.6l7.6-4.8c.5-.3.5-.9 0-1.2L2.1.6C1.6.3 1 .6 1 1.2Z" fill="currentColor"/></svg><span data-tour-gate-label>Click to play</span></button>
+        <a class="sf-btn sf-btn--ghost" href="#links" data-tour-hide-on-record>{{skip|The links}}</a>
+      </div>
+      <span class="sf-note">Your page as a 30-second film: a fingertip unfolds a link, plays the newest piece and saves your card. Fill it from your real links (AGENT.md).</span>
+    </header>
+
+    <!-- Closing frame: the page stays; the rail says where to find it. In ?record the address replaces the buttons. -->
+    <footer class="lib-end" data-tour-end>
+      <p class="lib-end-url">{{domain|yourname.com}}</p>
+      <div class="lib-act">
+        <a class="sf-btn" href="#links">{{end_cta|See the links}}</a>
+        <a class="sf-btn sf-btn--ghost" href="{{vcf|contact.vcf}}" download>{{save|Save contact}}</a>
+      </div>
+    </footer>
+  </div>
+</section>

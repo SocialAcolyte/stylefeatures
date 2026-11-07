@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<script src="./backdrop/backdrop.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Writer and speaker</title>
+<script>document.documentElement.classList.remove("no-js")</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+<link rel="stylesheet" href="./kit/scaffold.css">
+<link rel="stylesheet" href="./writer/section.css">
+</head>
+<body>
+<article class="demo-writer" data-tpl="demo/writer" id="top" aria-labelledby="wr-name">
+
+  <!-- 0. The top bar: the name, and four ways in. -->
+  <header class="sf-wrap wr-top">
+    <a class="wr-wordmark" href="#top">Your Name</a>
+    <nav class="wr-nav" aria-label="Sections"><a href="#writing">Writing</a><a href="#talks">Talks</a><a href="#letters">Letters</a><a href="#contact">Contact</a></nav>
+  </header>
+
+  <!-- 1. The masthead: a name and one line. Nothing else. -->
+  <section class="sf-wrap wr-mast">
+    <h1 class="wr-name" id="wr-name">Your Name</h1>
+    <p class="wr-line">One line on what you write about, and what people ask you to speak on.</p>
+    <span class="sf-note">Your byline, your bio's first sentence, or how event organisers introduce you. Under twenty words (AGENT.md).</span>
+  </section>
+
+  <!-- 2. The film: the site itself in forty seconds. An essay opened, a line underlined and set as a quote card,
+          a talk played as slides, the letter signed up for. Plays on its own while it's on screen; ?record films it. -->
+  <div class="sf-wrap wr-film-wrap">
+    <div class="wr-film" data-tour-root data-driver="play" data-loop data-captions="record" aria-label="A short film of this site: an essay, a quoted line, a talk and the letter">
+      <div class="wr-stage" data-tour-stage>
+        <div class="wr-frame" data-tour-frame aria-hidden="true"></div>
+        <div class="tour-rig">
+          <!-- THE SITE, small: 1200 × 750 design px (480 × 780 on phones and 9:16), browser bar included.
+               Same copy as the page below; replace the bars with your real paragraphs and slides (AGENT.md §4). -->
+          <div class="wr-win" data-tour-window data-chrome="browser" data-size="1200x750" data-size-tall="480x780" data-url="yourname.com">
+            <div class="wm" data-tour="site">
+              <header class="wm-top">
+                <b class="wm-name">Your Name</b>
+                <nav class="wm-nav"><span class="is-on" data-tour="nav-writing">Writing</span><span role="button" data-tour="nav-talks">Talks</span><span role="button" data-tour="nav-letters">Letters</span><span>Contact</span></nav>
+              </header>
+              <div class="wm-views">
+
+                <!-- home: the line, and the essays newest first -->
+                <section class="wm-view wm-home" data-tour="home">
+                  <div><p class="wm-lede">One line on what you write about, and what people ask you to speak on.</p><p class="wm-small">Essays · Talks · Letters</p></div>
+                  <ol class="wm-list">
+                    <li class="wm-row" role="button" data-tour="essay-1"><time>2026</time><b>The essay you'd hand a stranger first</b><small>12 min</small></li>
+                    <li class="wm-row" role="button" data-tour="essay-2"><time>2026</time><b>The one people still write to you about</b><small>9 min</small></li>
+                    <li class="wm-row" role="button" data-tour="essay-3"><time>2025</time><b>Something recent, still warm</b><small>6 min</small></li>
+                    <li class="wm-row" role="button"><time>2025</time><b>An older piece you stand by</b><small>15 min</small></li>
+                    <li class="wm-row" role="button"><time>2024</time><b>A short note that travelled</b><small>3 min</small></li>
+                  </ol>
+                </section>
+
+                <!-- an essay: its opening, the line, a quote card -->
+                <section class="wm-view wm-post" data-tour="post">
+                  <div class="wm-scroll" data-tour="post-scroll">
+                    <article class="wm-col">
+                      <p class="wm-kick">Essay · Month Year · 12 min</p>
+                      <h2 class="wm-title">The essay you'd hand a stranger first</h2>
+                      <p class="wm-dek">Its standfirst: what it argues, in a sentence.</p>
+                      <p class="ph-text" style="--n:4;--last:72%"></p>
+                      <p class="ph-text" style="--n:3;--last:44%"></p>
+                      <p class="wm-q" data-tour="q"><span class="wm-hl" data-tour="line">The one line people should carry away.<i class="wm-hl-end" data-tour="line-end" data-tour-cursor="text"></i><span class="wm-tools" data-tour="tools"><span role="button" data-tour="quote-btn"><svg viewBox="0 0 16 16"><path d="M3 10.5c0-3 1.2-5 3.6-6M3 10.5h3v3H3zM9.5 10.5c0-3 1.2-5 3.6-6M9.5 10.5h3v3h-3z"/></svg>Quote</span><span role="button">Copy link</span></span></span></p>
+                      <p class="ph-text" style="--n:4;--last:60%"></p>
+                      <p class="ph-text" style="--n:3;--last:30%"></p>
+                    </article>
+                  </div>
+                  <div class="wm-scrim" data-tour="scrim"></div>
+                  <div class="wm-share">
+                    <figure class="wm-card" data-tour="card">
+                      <span class="wm-card-mark" aria-hidden="true">“</span>
+                      <blockquote>The one line people should carry away.</blockquote>
+                      <figcaption><b>Your Name</b><span>The essay you'd hand a stranger first</span></figcaption>
+                      <code>yourname.com/essay#:~:text=…</code>
+                    </figure>
+                    <div class="wm-acts" data-tour="acts"><span class="wm-act is-primary" role="button" data-tour="copy">Copy link</span><span class="wm-act" role="button">Save image</span><span class="wm-act" role="button">Post</span></div>
+                  </div>
+                  <div class="wm-toast" data-tour="toast"><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg>The link opens on that line</div>
+                </section>
+
+                <!-- a talk: slides, the transcript beside them -->
+                <section class="wm-view wm-talk" data-tour="talk">
+                  <div class="wm-talk-h"><p class="wm-kick">Talk · Event · City · Year</p><h2 class="wm-title">The talk you give most often</h2></div>
+                  <div class="wm-player" data-tour="player">
+                    <div class="wm-av">
+                      <div class="wm-screen" data-tour="screen">
+                        <div class="wm-slide is-title" data-tour="slide-1"><small>Event · City</small><b>The talk you give most often</b><span>Your Name</span></div>
+                        <div class="wm-slide is-big" data-tour="slide-2"><b>One idea, said plainly.</b></div>
+                        <div class="wm-slide is-pic" data-tour="slide-3"><figure class="ph" style="--r:16/9" data-ph="Slide · 16:9" data-hint="The picture they'll remember"></figure></div>
+                        <div class="wm-slide is-pic" data-tour="slide-4"><figure class="ph is-tone" style="--r:16/9" data-ph="Slide · 16:9" data-hint="A diagram or a chart"></figure></div>
+                        <div class="wm-slide is-big is-end" data-tour="slide-5"><b>The line you want repeated.</b></div>
+                        <span class="wm-play" role="button" data-tour="play"><svg viewBox="0 0 20 20"><path d="M6.5 4v12L16 10z"/></svg>Play the talk</span>
+                      </div>
+                      <div class="wm-bar"><span class="wm-pp" data-tour="pp"><svg class="is-p" viewBox="0 0 20 20"><path d="M6.5 4v12L16 10z"/></svg><svg class="is-s" viewBox="0 0 20 20"><path d="M5.5 4h3v12h-3zM11.5 4h3v12h-3z"/></svg></span><span class="wm-track" data-tour="track"><i style="left:12%"></i><i style="left:27%"></i><i style="left:42%"></i><i style="left:86%"></i></span><span class="wm-time"><b data-tour="time">0:00</b> / 24:10</span></div>
+                    </div>
+                    <ol class="wm-script" data-tour="script">
+                      <li data-tour="ln-1"><small>0:00</small><span>Open on the question the talk answers.</span></li>
+                      <li data-tour="ln-2"><small>2:54</small><span>Say the idea once, plainly.</span></li>
+                      <li data-tour="ln-3"><small>6:32</small><span>Show the picture people remember.</span></li>
+                      <li data-tour="ln-4"><small>10:10</small><span>The turn: what most people miss.</span></li>
+                      <li data-tour="ln-5" role="button"><small>20:48</small><span>Close on the line you want repeated.</span></li>
+                    </ol>
+                  </div>
+                </section>
+
+                <!-- the letter, and a way to reach you -->
+                <section class="wm-view wm-letters" data-tour="letters">
+                  <div class="wm-col">
+                    <p class="wm-kick">Letters</p>
+                    <h2 class="wm-title">A letter when there's something worth sending.</h2>
+                    <p class="wm-meta">How often it comes · how many read it</p>
+                    <div class="wm-form" data-tour="form"><span class="wm-field" data-tour="email" data-tour-cursor="text"><span data-tour="email-text"></span></span><span class="wm-sub" role="button" data-tour="subscribe">Subscribe</span></div>
+                    <p class="wm-done" data-tour="done"><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg>You're in. The next one comes to you.</p>
+                    <div class="wm-contact" data-tour="contact"><p class="wm-kick">Contact</p><b>hello@yourname.com</b></div>
+                  </div>
+                </section>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- recording only: the title card, then a slug over the window (name + chapters), then the end card.
+             On the page the chapter list sits under the film beside the play button. -->
+        <div class="wr-band" data-tour-band="css">
+          <p class="wr-band-k">Essays · Talks · Letters</p>
+          <p class="wr-band-h">Your Name</p>
+          <p class="wr-band-l">One line on what you write about, and what people ask you to speak on.</p>
+        </div>
+        <div class="wr-slug"><b>Your Name</b><ol class="wr-steps" aria-label="Chapters"></ol></div>
+        <footer class="wr-end" data-tour-end>
+          <p class="wr-end-h">Your Name</p>
+          <p class="wr-end-l">Essays, talks, and a letter now and then.</p>
+          <span class="wr-end-url">yourname.com</span>
+        </footer>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Writing: the newest essay opens on its first paragraphs, with its best line marked (select any sentence to
+          quote it), then the rest, newest first. -->
+  <section class="sf-wrap wr-sec" id="writing" aria-labelledby="wr-writing-t">
+    <header class="wr-sec-h"><h2 class="wr-h2" id="wr-writing-t">Writing</h2><a class="wr-more" href="#">All essays</a></header>
+    <article class="wr-lead" data-quotable data-quote-title="The essay you'd hand a stranger first" data-quote-href="#">
+      <div class="wr-lead-h">
+        <p class="wr-meta"><time datetime="2026-01-01">Month Year</time><span>12 min read</span></p>
+        <h3 class="wr-lead-t"><a href="#">The essay you'd hand a stranger first</a></h3>
+      </div>
+      <div class="wr-lead-body">
+        <p>Its first paragraph goes here as you wrote it, not a summary. The opening is what decides whether someone reads on, so let it do its job.</p>
+        <p><mark class="wr-hl" tabindex="0" title="Quote this line">The one line people should carry away.</mark> Then a sentence or two more, and the way in.</p>
+        <p class="wr-lead-foot"><a class="sf-btn sf-btn--text" href="#">Read the essay</a><span class="wr-hint">Select any sentence to quote it</span></p>
+        <span class="sf-note">The newest essay's real opening, and the line you'd want quoted, marked. Selecting text anywhere in here makes a card with a link straight to that line.</span>
+      </div>
+    </article>
+    <ol class="wr-index">
+      <li><a href="#"><time>Month Year</time><b>The one people still write to you about</b><span class="wr-dek">Its standfirst, in one line.</span><span class="wr-len">9 min</span></a></li>
+      <li><a href="#"><time>Month Year</time><b>Something recent, still warm</b><span class="wr-dek">Its standfirst, in one line.</span><span class="wr-len">6 min</span></a></li>
+      <li><a href="#"><time>Month Year</time><b>An older piece you stand by</b><span class="wr-dek">Its standfirst, in one line.</span><span class="wr-len">15 min</span></a></li>
+      <li><a href="#"><time>Month Year</time><b>A short note that travelled</b><span class="wr-dek">Its standfirst, in one line.</span><span class="wr-len">3 min</span></a></li>
+    </ol>
+  </section>
+
+  <!-- 4. Talks: one talk in a compact player (slides, the speaker in the corner, a transcript that follows along and
+          seeks when clicked), then the rest. Not a keynote: it stays in the page. -->
+  <section class="sf-wrap wr-sec" id="talks" aria-labelledby="wr-talks-t">
+    <header class="wr-sec-h"><h2 class="wr-h2" id="wr-talks-t">Talks</h2><a class="wr-more" href="mailto:hello@yourname.com?subject=Speaking">Invite me to speak</a></header>
+    <div class="wr-player" data-wr-player data-dur="1450" data-demo-rate="40">
+      <div class="wr-pl-av">
+        <div class="wr-pl-screen">
+          <div class="wr-pl-slide is-title is-on" data-at="0"><small>Event · City · Year</small><b>The talk you give most often</b><span>Your Name</span></div>
+          <div class="wr-pl-slide is-big" data-at="174"><b>One idea, said plainly.</b></div>
+          <figure class="wr-pl-slide ph" data-at="392" data-ph="Slide · 16:9" data-hint="Your slides, exported one image each"></figure>
+          <figure class="wr-pl-slide ph is-tone" data-at="610" data-ph="Slide · 16:9" data-hint="A diagram or a chart"></figure>
+          <div class="wr-pl-slide is-big is-end" data-at="1248"><b>The line you want repeated.</b></div>
+          <button class="wr-pl-pip ph is-bare" type="button" aria-label="Swap the slides and the speaker"><span>Speaker</span></button>
+          <button class="wr-pl-big" type="button"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M6.5 4v12L16 10z"/></svg>Play the talk</button>
+        </div>
+        <div class="wr-pl-bar">
+          <button class="wr-pl-pp" type="button" aria-label="Play"><svg class="is-p" viewBox="0 0 20 20" aria-hidden="true"><path d="M6.5 4v12L16 10z"/></svg><svg class="is-s" viewBox="0 0 20 20" aria-hidden="true"><path d="M5.5 4h3v12h-3zM11.5 4h3v12h-3z"/></svg></button>
+          <span class="wr-pl-track"><input type="range" min="0" max="1450" step="1" value="0" aria-label="Seek the talk"></span>
+          <span class="wr-pl-time"><b>0:00</b> / 24:10</span>
+        </div>
+        <span class="sf-note">Slides as images (export the deck), the recording in the corner if there is one, and the transcript's turning points with their times. Clicking the corner swaps slides and speaker.</span>
+      </div>
+      <div class="wr-pl-side">
+        <p class="wr-meta"><span>Event · City</span><span>Year</span></p>
+        <h3 class="wr-pl-title">The talk you give most often</h3>
+        <ol class="wr-pl-script" data-quotable data-quote-title="The talk you give most often" data-quote-href="#talks">
+          <li data-at="0"><small>0:00</small><span>Open on the question the talk answers.</span></li>
+          <li data-at="174"><small>2:54</small><span>Say the idea once, plainly.</span></li>
+          <li data-at="392"><small>6:32</small><span>Show the picture people remember.</span></li>
+          <li data-at="610"><small>10:10</small><span>The turn: what most people miss.</span></li>
+          <li data-at="1248"><small>20:48</small><span>Close on the line you want repeated.</span></li>
+        </ol>
+      </div>
+    </div>
+    <ol class="wr-talks">
+      <li><span class="wr-y">Year</span><b>A talk with a recording</b><span class="wr-ev">Event · City</span><span class="wr-ln"><a href="#">Slides</a><a href="#">Video</a></span></li>
+      <li><span class="wr-y">Year</span><b>A keynote, a lecture, a panel</b><span class="wr-ev">Event · City</span><span class="wr-ln"><a href="#">Slides</a><a href="#">Video</a></span></li>
+      <li><span class="wr-y">Year</span><b>A podcast or an interview</b><span class="wr-ev">Show · Episode</span><span class="wr-ln"><a href="#">Listen</a></span></li>
+    </ol>
+  </section>
+
+  <!-- 5. Letters: one sentence on what the newsletter is, and the field. -->
+  <section class="wr-letters" id="letters" aria-labelledby="wr-letters-t">
+    <div class="sf-wrap wr-letters-in">
+      <p class="sf-eyebrow">Letters</p>
+      <h2 class="wr-h2 is-big" id="wr-letters-t">A letter when there's something worth sending.</h2>
+      <form class="wr-form" action="#" method="post">
+        <label class="wr-sr" for="wr-email">Email address</label>
+        <input class="sf-field" id="wr-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required>
+        <button class="sf-btn" type="submit">Subscribe</button>
+      </form>
+      <p class="wr-form-done" role="status" hidden>You're in. The next one comes to you.</p>
+      <p class="wr-small">How often it comes · how many read it · <a href="#">Past letters</a></p>
+      <span class="sf-note">Point the form at your newsletter service (Buttondown, Substack, Ghost, Kit…): AGENT.md §6.</span>
+    </div>
+  </section>
+
+  <!-- 6. Contact, and the speaker kit organisers always ask for. -->
+  <section class="sf-wrap wr-contact" id="contact" aria-labelledby="wr-contact-t">
+    <p class="sf-eyebrow" id="wr-contact-t">Contact</p>
+    <p class="wr-contact-l">For talks, interviews and everything else:</p>
+    <a class="wr-email" href="mailto:hello@yourname.com">hello@yourname.com</a>
+    <ul class="wr-links">
+      <li><a href="#">Speaker kit</a></li>
+      <li><a href="#">RSS</a></li>
+      <li><a href="#">Bluesky</a></li>
+      <li><a href="#">LinkedIn</a></li>
+    </ul>
+    <span class="sf-note">The speaker kit is a bio in three lengths, a headshot, and one paragraph per talk: what organisers copy into their programme.</span>
+  </section>
+  <footer class="sf-wrap wr-foot"><span>© 2026 Your Name</span><a href="#top">Back to top</a></footer>
+
+  <!-- the quote card: opens on the house paper when a line is selected or the marked line is clicked -->
+  <button class="wr-qpop" type="button" hidden><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 10.5c0-3 1.2-5 3.6-6M3 10.5h3v3H3zM9.5 10.5c0-3 1.2-5 3.6-6M9.5 10.5h3v3h-3z"/></svg>Quote</button>
+  <dialog class="wr-qd" aria-label="Quote card">
+    <figure class="wr-qc" tabindex="-1" autofocus>
+      <span class="wr-qc-mark" aria-hidden="true">“</span>
+      <blockquote class="wr-qc-q"></blockquote>
+      <figcaption><b>Your Name</b><span class="wr-qc-src"></span></figcaption>
+    </figure>
+    <p class="wr-qd-url"><code></code></p>
+    <div class="wr-qd-acts">
+      <button class="sf-btn" type="button" data-act="copy">Copy link</button>
+      <button class="sf-btn sf-btn--ghost" type="button" data-act="save">Save image</button>
+      <a class="sf-btn sf-btn--ghost" data-act="post" href="#" target="_blank" rel="noopener">Post</a>
+      <button class="sf-btn sf-btn--text" type="button" data-act="close">Close</button>
+    </div>
+  </dialog>
+</article>
+
+<script type="module" src="./kit/scaffold.js"></script>
+<script type="module">
+import s0 from "./writer/section.js";
+for (const [k, f] of [["demo/writer",s0]]) document.querySelectorAll(`[data-tpl="${k}"]`).forEach((el) => f(el));
+</script>
+</body>
+</html>

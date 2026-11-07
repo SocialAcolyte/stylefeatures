@@ -1,0 +1,230 @@
+<section class="demo-portfolio" data-tpl="demo/portfolio" aria-label="{{first|Your}} {{last|Name}}: work, about and contact">
+
+  <!-- The opening: your name and one line. Nothing else competes with it. -->
+  <header class="pf-head">
+    <nav class="pf-nav" aria-label="Site">
+      <a class="pf-mark" href="#top">{{first|Your}} {{last|Name}}</a>
+      <span><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></span>
+    </nav>
+    <div class="pf-hello">
+      <h1 class="pf-name">{{first|Your}} <em>{{last|Name}}</em></h1>
+      <div class="pf-intro">
+        <p class="pf-line">{{line|What you make, and for whom, in one sentence. Then the work, one project at a time.}}</p>
+        <p class="pf-now"><i aria-hidden="true"></i>{{now|Now: where you work, or that you're open to new work}}</p>
+      </div>
+    </div>
+  </header>
+
+  <!-- THE SHELF. One <li> per project, newest or best first (3 to 5). Each one is a spine (number, name, year) and a
+       body: the film of the project playing in a frame on its own colour (--tint), and a caption. One body is open at a
+       time; the shelf plays through them by itself while it's on screen, and a click on a spine opens that project.
+       The films' scripts are in script.js, in the same order. Hooks are data-tour="…" ('@…' in script.js). -->
+  <div class="pf-work" id="work">
+    <div class="pf-shelf-head">
+      <span class="pf-rec-mark" aria-hidden="true">{{first|Your}} <em>{{last|Name}}</em></span>
+      <p class="sf-eyebrow">{{work_eyebrow|Selected work}} <span>{{years|2019 – 2026}}</span></p>
+      <span class="pf-count" aria-hidden="true"><b>01</b> / <span class="pf-of">04</span></span>
+      <button class="pf-pp" type="button" aria-pressed="false"><svg viewBox="0 0 16 16" aria-hidden="true"><path class="pf-pp-pause" d="M5 3.5v9M11 3.5v9"/><path class="pf-pp-play" d="M5 3.2v9.6L12.6 8z"/></svg><span>Pause</span></button>
+    </div>
+
+    <ol class="pf-shelf" aria-label="Selected work">
+
+      <!-- 01 · a web app, in a browser -->
+      <li class="pf-proj" style="--tint:#e7e0d3">
+        <button class="pf-spine" type="button" aria-expanded="true" aria-controls="pf-body-1"><span class="pf-n">01</span><span class="pf-t">Web app</span><span class="pf-y">2026</span><i class="pf-bar" aria-hidden="true"><b></b></i></button>
+        <div class="pf-body" id="pf-body-1" role="region" aria-label="Web app">
+          <div class="pf-mat">
+            <div class="pf-film" data-tour-root><div data-tour-stage>
+              <div class="pf-frame" data-tour-frame style="--ar:1.6"></div>
+              <div class="tour-rig">
+                <div data-tour-window data-chrome="browser" data-size="1200x750" data-url="{{p1_url|project-one.app}}/library">
+                  <div class="pw-app" data-tour="app">
+                    <aside class="pw-rail"><i class="pw-logo"></i><i></i><i class="is-on"></i><i></i><i></i></aside>
+                    <section class="pw-list">
+                      <div class="pw-list-head"><b>Library</b><span class="pw-pill"><svg viewBox="0 0 16 16"><path d="M7 3a4 4 0 1 0 0 8 4 4 0 0 0 0-8ZM10 10l3.5 3.5"/></svg>Search</span></div>
+                      <div class="pw-row is-on" data-tour="row-1"><span class="ph is-bare is-tone"></span><span><i style="--w:72%"></i><i style="--w:38%"></i></span></div>
+                      <div class="pw-row"><span class="ph is-bare is-tone"></span><span><i style="--w:58%"></i><i style="--w:44%"></i></span></div>
+                      <div class="pw-row" data-tour="row-3"><span class="ph is-bare is-tone"></span><span><i style="--w:80%"></i><i style="--w:30%"></i></span></div>
+                      <div class="pw-row"><span class="ph is-bare is-tone"></span><span><i style="--w:50%"></i><i style="--w:36%"></i></span></div>
+                      <div class="pw-row"><span class="ph is-bare is-tone"></span><span><i style="--w:66%"></i><i style="--w:28%"></i></span></div>
+                      <div class="pw-row"><span class="ph is-bare is-tone"></span><span><i style="--w:44%"></i><i style="--w:40%"></i></span></div>
+                    </section>
+                    <main class="pw-main">
+                      <div class="pw-bar"><span class="pw-crumb"><i style="--w:120px"></i></span><span class="pw-seg"><span class="is-on">Edit</span><span>Preview</span></span><button class="pw-btn" type="button" tabindex="-1" data-tour="publish">Publish</button></div>
+                      <div class="pw-canvas">
+                        <div class="pw-view" data-tour="view-a"><figure class="ph" style="--r:16/10" data-ph="Its main screen · 16:10" data-hint="The view people spend their time in"></figure></div>
+                        <div class="pw-view is-b" data-tour="view-b">
+                          <figure class="ph" style="--r:4/3" data-ph="Second screen · 4:3" data-hint="What a click opens"></figure>
+                          <div class="pw-side"><p class="ph-text" style="--n:3"></p><figure class="ph is-tone" style="--r:16/9"></figure><p class="ph-text" style="--n:2;--last:40%"></p></div>
+                        </div>
+                      </div>
+                      <div class="pw-toast" data-tour="toast"><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg>Published</div>
+                    </main>
+                  </div>
+                </div>
+              </div>
+            </div></div>
+          </div>
+          <div class="pf-cap">
+            <div class="pf-cap-t"><h2>A web <em>app</em></h2><p>{{p1_line|One line: what it is, who it's for, and what you did on it.}}</p></div>
+            <dl><div><dt>Role</dt><dd>{{p1_role|Design, front end}}</dd></div><div><dt>Year</dt><dd>2026</dd></div></dl>
+            <a class="pf-link" href="#">{{p1_url|project-one.app}}<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
+          </div>
+        </div>
+      </li>
+
+      <!-- 02 · a phone app, held in a phone, tapped with a fingertip -->
+      <li class="pf-proj" style="--tint:#dfe2d8">
+        <button class="pf-spine" type="button" aria-expanded="false" aria-controls="pf-body-2"><span class="pf-n">02</span><span class="pf-t">Phone app</span><span class="pf-y">2025</span><i class="pf-bar" aria-hidden="true"><b></b></i></button>
+        <div class="pf-body" id="pf-body-2" role="region" aria-label="Phone app">
+          <div class="pf-mat">
+            <div class="pf-film" data-tour-root><div data-tour-stage>
+              <div class="pf-frame is-bare" data-tour-frame style="--ar:.72"></div>
+              <div class="tour-rig">
+                <div class="pw-desk" data-tour-window data-chrome="none" data-size="540x750">
+                  <div class="pw-phone" data-chrome="phone">
+                    <div class="pw-screen" data-tour="screen">
+                      <div class="pw-feed" data-tour="feed">
+                        <div class="pw-feed-head"><b>Today</b><span class="ph is-round is-bare is-tone"></span></div>
+                        <article class="pw-card"><figure class="ph is-bare is-tone" style="--r:4/3"></figure><i style="--w:70%"></i><i style="--w:44%"></i></article>
+                        <article class="pw-card" data-tour="card-2"><figure class="ph" style="--r:4/3" data-ph="A card · 4:3" data-hint="One item in its list"></figure><i style="--w:62%"></i><i style="--w:36%"></i></article>
+                        <article class="pw-card"><figure class="ph is-bare is-tone" style="--r:4/3"></figure><i style="--w:54%"></i><i style="--w:40%"></i></article>
+                        <article class="pw-card"><figure class="ph is-bare is-tone" style="--r:4/3"></figure><i style="--w:66%"></i><i style="--w:30%"></i></article>
+                      </div>
+                      <div class="pw-detail" data-tour="detail">
+                        <div class="pw-detail-bar"><svg viewBox="0 0 16 16"><path d="M10 3 5 8l5 5"/></svg><span class="pw-like" data-tour="like" role="button"><svg viewBox="0 0 16 16"><path d="M8 13.4 2.9 8.6a3 3 0 0 1 4.3-4.3l.8.8.8-.8a3 3 0 0 1 4.3 4.3z"/></svg></span></div>
+                        <figure class="ph" style="--r:4/5" data-ph="Detail · 4:5" data-hint="The screen that tap opens"></figure>
+                        <i style="--w:76%"></i><p class="ph-text" style="--n:3;--last:50%"></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div></div>
+          </div>
+          <div class="pf-cap">
+            <div class="pf-cap-t"><h2>A phone <em>app</em></h2><p>{{p2_line|Say what problem it solved, in the words its users would use.}}</p></div>
+            <dl><div><dt>Role</dt><dd>{{p2_role|Product design}}</dd></div><div><dt>Year</dt><dd>2025</dd></div></dl>
+            <a class="pf-link" href="#">{{p2_url|App Store}}<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
+          </div>
+        </div>
+      </li>
+
+      <!-- 03 · a website or case study, scrolled and opened -->
+      <li class="pf-proj" style="--tint:#ead9cd">
+        <button class="pf-spine" type="button" aria-expanded="false" aria-controls="pf-body-3"><span class="pf-n">03</span><span class="pf-t">Website</span><span class="pf-y">2024</span><i class="pf-bar" aria-hidden="true"><b></b></i></button>
+        <div class="pf-body" id="pf-body-3" role="region" aria-label="Website">
+          <div class="pf-mat">
+            <div class="pf-film" data-tour-root><div data-tour-stage>
+              <div class="pf-frame" data-tour-frame style="--ar:1.6"></div>
+              <div class="tour-rig">
+                <div data-tour-window data-chrome="browser" data-size="1200x750" data-url="{{p3_url|studio-client.com}}/work">
+                  <div class="pw-site">
+                    <div class="pw-page" data-tour="page">
+                      <div class="pw-site-nav"><b class="pw-site-logo"></b><span><i></i><i></i><i></i></span></div>
+                      <div class="pw-site-hero"><p class="pw-eyebrow">Case study</p><p class="pw-h"><i style="--w:68%"></i><i style="--w:44%"></i></p></div>
+                      <figure class="ph" style="--r:16/7" data-ph="Hero · 16:7" data-hint="The first thing the site shows"></figure>
+                      <div class="pw-site-cols"><p class="ph-text" style="--n:4"></p><p class="ph-text" style="--n:4;--last:30%"></p></div>
+                      <div class="pw-grid" data-tour="grid">
+                        <figure class="ph is-tone" style="--r:4/5" data-tour="img-1"></figure>
+                        <figure class="ph" style="--r:4/5" data-tour="img-2" data-ph="Image · 4:5" data-hint="Opens large"></figure>
+                        <figure class="ph is-tone" style="--r:4/5" data-tour="img-3"></figure>
+                      </div>
+                      <figure class="ph" style="--r:16/8" data-ph="Wide · 2:1" data-hint="A detail, full width"></figure>
+                      <div class="pw-site-cols"><p class="ph-text" style="--n:3"></p><p class="ph-text" style="--n:3;--last:24%"></p></div>
+                      <div class="pw-site-foot"><i style="--w:30%"></i></div>
+                    </div>
+                    <div class="pw-lightbox" data-tour="lightbox">
+                      <figure class="ph" style="--r:4/5" data-tour="lb-img" data-ph="Image, large · 4:5" data-hint="The same picture, opened"></figure>
+                      <span class="pw-lb-x" data-tour="lb-close" role="button"><svg viewBox="0 0 16 16"><path d="m4 4 8 8M12 4l-8 8"/></svg></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div></div>
+          </div>
+          <div class="pf-cap">
+            <div class="pf-cap-t"><h2>A <em>website</em></h2><p>{{p3_line|The brief in a sentence, then what changed because of it.}}</p></div>
+            <dl><div><dt>Role</dt><dd>{{p3_role|Art direction, build}}</dd></div><div><dt>Year</dt><dd>2024</dd></div></dl>
+            <a class="pf-link" href="#">{{p3_url|studio-client.com}}<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
+          </div>
+        </div>
+      </li>
+
+      <!-- 04 · a library or tool: typed in a terminal, the result in a browser -->
+      <li class="pf-proj" style="--tint:#dcdfe2">
+        <button class="pf-spine" type="button" aria-expanded="false" aria-controls="pf-body-4"><span class="pf-n">04</span><span class="pf-t">Library</span><span class="pf-y">2023</span><i class="pf-bar" aria-hidden="true"><b></b></i></button>
+        <div class="pf-body" id="pf-body-4" role="region" aria-label="Library">
+          <div class="pf-mat">
+            <div class="pf-film" data-tour-root><div data-tour-stage>
+              <div class="pf-frame is-bare" data-tour-frame style="--ar:1.6"></div>
+              <div class="tour-rig">
+                <div class="pw-desk" data-tour-window data-chrome="none" data-size="1200x750">
+                  <div class="pw-term" data-chrome="terminal" data-title="~/{{p4_name|your-library}}" data-tour="term">
+                    <div class="pw-term-body">
+                      <p class="pw-ln"><b>$</b> <span data-tour="cmd-1"></span></p>
+                      <p class="pw-out pw-out-1">added 1 package in 1.2s</p>
+                      <p class="pw-out pw-out-1 is-ok">✓ {{p4_name|your-library}} 2.4.0</p>
+                      <p class="pw-ln pw-out pw-out-1"><b>$</b> <span data-tour="cmd-2"></span></p>
+                      <p class="pw-out pw-out-2">Building example…</p>
+                      <p class="pw-out pw-out-2 is-dim">  ready in 380 ms</p>
+                      <p class="pw-out pw-out-2 is-ok">✓ Open http://localhost:3000</p>
+                    </div>
+                  </div>
+                  <div class="pw-preview" data-chrome="browser" data-url="localhost:3000" data-tour="preview">
+                    <div class="pw-preview-in"><figure class="ph" style="--r:16/9" data-ph="What it makes · 16:9" data-hint="The library's output, running"></figure><p class="ph-text" style="--n:2;--last:46%"></p></div>
+                  </div>
+                </div>
+              </div>
+            </div></div>
+          </div>
+          <div class="pf-cap">
+            <div class="pf-cap-t"><h2>A <em>library</em></h2><p>{{p4_line|What it does in one line, and who uses it.}}</p></div>
+            <dl><div><dt>Role</dt><dd>{{p4_role|Author, maintainer}}</dd></div><div><dt>Year</dt><dd>2023</dd></div></dl>
+            <a class="pf-link" href="#">github.com/you/{{p4_name|your-library}}<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5"/></svg></a>
+          </div>
+        </div>
+      </li>
+    </ol>
+    <span class="sf-note pf-note">Each project is an 8–14 s film of the real thing, its own screens and words, playing on its own colour (--tint). Hover or tab to a spine and click to open it; the shelf plays through by itself while it's on screen.</span>
+
+    <!-- Only in ?record: the opening and closing frames of the film. -->
+    <div class="pf-rec-open" aria-hidden="true">
+      <p class="sf-eyebrow">{{work_eyebrow|Selected work}} · {{years|2019 – 2026}}</p>
+      <p class="pf-rec-name">{{first|Your}} <em>{{last|Name}}</em></p>
+      <p class="pf-rec-line">{{line|What you make, and for whom, in one sentence. Then the work, one project at a time.}}</p>
+    </div>
+    <div class="pf-rec-end" aria-hidden="true">
+      <p class="sf-eyebrow">{{end_eyebrow|Open to new work}}</p>
+      <p class="pf-rec-name">{{first|Your}} <em>{{last|Name}}</em></p>
+      <p class="pf-rec-mail">{{user|hello}}@{{domain|yourdomain.com}}</p>
+    </div>
+  </div>
+
+  <!-- More work: older or smaller things, one line each. -->
+  <div class="pf-more">
+    <p class="sf-eyebrow">Also</p>
+    <ul class="pf-index">
+      <li><span class="pf-ix-y">2023</span><span class="pf-ix-n">Project name</span><span class="pf-ix-k">Kind of work</span><span class="pf-ix-r">Your role</span><a href="#" aria-label="Open project"><svg viewBox="0 0 16 16"><path d="M5 11 11 5M6 5h5v5"/></svg></a></li>
+      <li><span class="pf-ix-y">2022</span><span class="pf-ix-n">Project name</span><span class="pf-ix-k">Kind of work</span><span class="pf-ix-r">Your role</span><a href="#" aria-label="Open project"><svg viewBox="0 0 16 16"><path d="M5 11 11 5M6 5h5v5"/></svg></a></li>
+      <li><span class="pf-ix-y">2021</span><span class="pf-ix-n">Project name</span><span class="pf-ix-k">Kind of work</span><span class="pf-ix-r">Your role</span><a href="#" aria-label="Open project"><svg viewBox="0 0 16 16"><path d="M5 11 11 5M6 5h5v5"/></svg></a></li>
+      <li><span class="pf-ix-y">2019</span><span class="pf-ix-n">Project name</span><span class="pf-ix-k">Kind of work</span><span class="pf-ix-r">Your role</span><a href="#" aria-label="Open project"><svg viewBox="0 0 16 16"><path d="M5 11 11 5M6 5h5v5"/></svg></a></li>
+    </ul>
+    <span class="sf-note">Older or smaller work, one line each, linked. Delete the list if the films say it all.</span>
+  </div>
+
+  <!-- About: a portrait, a few sentences in your own voice, three short lists. -->
+  <div class="pf-about" id="about">
+    <figure class="ph pf-portrait" style="--r:4/5" data-ph="Portrait · 4:5" data-hint="You, or your hands at work. Natural light."></figure>
+    <div class="pf-about-t">
+      <p class="sf-eyebrow">About</p>
+      <p class="pf-about-lede">{{about|Two or three sentences in your own voice: what you make, how you like to work, and what you want to do next.}}</p>
+      <div class="pf-facts">
+        <div><p class="sf-eyebrow">Now</p><p class="ph-text" style="--n:2;--last:46%"></p></div>
+        <div><p class="sf-eyebrow">Before</p><p class="ph-text" style="--n:3;--last:62%"></p></div>
+        <div><p class="sf-eyebrow">Tools</p><p class="ph-text" style="--n:3;--last:34%"></p></div>
+      </div>
+      <span class="sf-note">Write it yourself, or have your agent draft it from your CV and then cut it in half. No clients or awards you can't link to.</span>
+    </div>
+  </div>
+</section>

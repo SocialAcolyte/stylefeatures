@@ -1,0 +1,104 @@
+/* work.css: the four placeholder projects that play inside the frames. Everything here is replaced by the person's real
+   work (AGENT.md): harvested fragments, or their own CSS and markup. Sizes are design pixels inside each window
+   (data-size); the engine scales the whole window. State the films change: --in (show/hide), --push, .is-on,
+   .is-hover / .is-press (the cursor on it). */
+
+/* shared bits */
+.pw-app i,.pw-card > i,.pw-detail > i,.pw-crumb i,.pw-site-foot i,.pw-h i{display:block;height:8px;width:var(--w,60%);border-radius:4px;background:var(--ph-line)}
+
+/* ── 01 · a web app (browser, 1200 × 750) ── */
+.pw-app{display:grid;grid-template-columns:64px 300px minmax(0,1fr);background:#fff;font-family:var(--sans);color:var(--ink)}
+.pw-rail{display:flex;flex-direction:column;align-items:center;gap:18px;padding:18px 0;background:var(--page);border-right:1px solid var(--ph-line)}
+.pw-rail i{width:22px;height:22px;border-radius:7px;background:var(--ph-line)}
+.pw-rail i.pw-logo{width:28px;height:28px;margin-bottom:10px;border-radius:8px;background:var(--ink)}
+.pw-rail i.is-on{background:var(--ink-3)}
+.pw-list{padding:16px 14px;border-right:1px solid var(--ph-line);overflow:hidden}
+.pw-list-head{display:flex;align-items:center;justify-content:space-between;padding:4px 6px 14px}
+.pw-list-head b{font:600 15px/1 var(--sans)}
+.pw-pill{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px 0 9px;border-radius:7px;box-shadow:inset 0 0 0 1px var(--ph-line);font:400 12px/1 var(--sans);color:var(--ink-3)}
+.pw-pill svg,.pw-toast svg{width:13px;height:13px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round}
+.pw-row{display:grid;grid-template-columns:58px minmax(0,1fr);align-items:center;gap:14px;margin-top:4px;padding:10px;border-radius:9px}
+.pw-row .ph{display:block;width:58px;--r:4/3;border-radius:5px}
+.pw-row i + i{margin-top:9px;height:6px;opacity:.7}
+.pw-row.is-hover{background:#faf9f7}
+.pw-row.is-on{background:var(--page);box-shadow:inset 0 0 0 1px var(--ph-line)}
+.pw-row.is-on i:first-child{background:#cfc8bb}
+.pw-main{position:relative;display:flex;flex-direction:column;min-width:0}
+.pw-bar{flex:none;display:flex;align-items:center;gap:16px;height:62px;padding:0 22px;border-bottom:1px solid var(--ph-line)}
+.pw-crumb i{height:9px;width:var(--w)}
+.pw-seg{margin-left:auto;display:inline-flex;padding:3px;border-radius:9px;background:var(--page);font:500 12.5px/1 var(--sans);color:var(--ink-2)}
+.pw-seg span{padding:7px 13px;border-radius:7px}
+.pw-seg .is-on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08)}
+.pw-btn{height:34px;padding:0 17px;border:0;border-radius:9px;background:var(--ink);color:var(--page);font:500 13px/1 var(--sans);transition:transform .12s ease}
+.pw-btn.is-hover{background:#000}
+.pw-btn.is-press{transform:scale(.96)}
+.pw-btn.is-done{background:var(--page);color:var(--ink);box-shadow:inset 0 0 0 1px var(--ph-line)}
+.pw-canvas{position:relative;flex:1;background:#faf9f7}
+.pw-view{position:absolute;inset:30px;display:grid;align-content:center;opacity:var(--in)}
+.pw-view[data-tour=view-a]{--in:1}
+.pw-view.is-b{--in:0;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);align-content:center;align-items:start;gap:24px}
+.pw-side{display:grid;gap:18px;padding-top:4px}
+.pw-toast{position:absolute;left:50%;bottom:26px;--in:0;display:flex;align-items:center;gap:9px;padding:11px 17px;border-radius:10px;background:var(--ink);color:var(--page);
+  font:500 13px/1 var(--sans);opacity:var(--in);transform:translate(-50%,calc((1 - var(--in)) * 12px))}
+
+/* ── 02 · a phone app (a desk 540 × 750 holding a phone; the cursor is a fingertip) ── */
+.pw-desk[data-tour-window]{background:transparent;box-shadow:none;align-items:center;justify-content:center}
+.pw-desk > .pw-phone{flex:none;width:326px;height:690px;background:#fff}
+.pw-phone[data-chrome=phone]{box-shadow:0 0 0 9px #141312,0 0 0 10px #3a3835,0 40px 70px -34px rgba(25,24,22,.6)}
+.pw-screen{position:relative;overflow:hidden;--push:0}
+.pw-feed{position:absolute;inset:0;overflow:hidden;padding:4px 18px 30px;transform:translateX(calc(var(--push) * -28%))}
+.pw-feed-head{display:flex;align-items:center;justify-content:space-between;padding:6px 0 16px}
+.pw-feed-head b{font:700 28px/1 var(--sans);letter-spacing:-.02em}
+.pw-feed-head .ph{display:block;width:32px;--r:1/1}
+.pw-card{margin-bottom:20px;transition:transform .15s ease}
+.pw-card .ph{border-radius:16px}
+.pw-card > i{margin-top:12px;height:9px}
+.pw-card > i + i{margin-top:8px;height:7px;opacity:.7}
+.pw-card.is-press{transform:scale(.975)}
+.pw-detail{position:absolute;inset:0;padding:0 18px;background:#fff;transform:translateX(calc((1 - var(--push)) * 104%));box-shadow:-14px 0 30px -24px rgba(0,0,0,.4)}
+.pw-detail-bar{display:flex;align-items:center;justify-content:space-between;height:46px}
+.pw-detail-bar > svg{width:22px;height:22px;fill:none;stroke:var(--ink);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pw-like{display:grid;place-items:center;width:38px;height:38px;border-radius:50%;transition:transform .15s ease}
+.pw-like svg{width:22px;height:22px;fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linejoin:round}
+.pw-like.is-on svg{fill:var(--note);stroke:var(--note)}
+.pw-like.is-press{transform:scale(.86)}
+.pw-detail .ph{border-radius:18px}
+.pw-detail > i{margin:18px 0 14px;height:12px}
+
+/* ── 03 · a website or case study (browser, 1200 × 750) ── */
+.pw-site{position:relative;background:#fff;font-family:var(--sans)}
+.pw-page{position:absolute;inset:0;overflow:hidden;padding:0 72px 72px}
+.pw-site-nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.pw-site-logo{width:26px;height:26px;border-radius:50%;background:var(--ink)}
+.pw-site-nav span{display:flex;gap:26px}
+.pw-site-nav span i{width:46px;height:7px;border-radius:4px;background:var(--ph-line)}
+.pw-site-hero{padding:46px 0 34px}
+.pw-eyebrow{margin:0 0 20px;font:500 11px/1 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+.pw-h{margin:0}
+.pw-h i{height:34px;border-radius:5px;background:#ebe7df}
+.pw-h i + i{margin-top:14px}
+.pw-page > .ph{margin:0 0 8px}
+.pw-site-cols{display:grid;grid-template-columns:1fr 1fr;gap:56px;margin:44px 0}
+.pw-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:0 0 44px}
+.pw-grid .ph{transition:transform .5s var(--ease),box-shadow .5s var(--ease)}
+.pw-grid .ph.is-hover{transform:translateY(-4px);box-shadow:inset 0 0 0 1px var(--ph-line),0 18px 30px -20px rgba(25,24,22,.4)}
+.pw-site-foot{padding-top:28px;border-top:1px solid var(--ph-line)}
+.pw-lightbox{position:absolute;inset:0;--in:0;display:grid;place-items:center;background:rgba(245,243,239,.95);opacity:var(--in)}
+.pw-lightbox .ph{height:84%;width:auto;box-shadow:inset 0 0 0 1px var(--ph-line),0 30px 60px -30px rgba(25,24,22,.45);transform:scale(calc(.95 + .05 * var(--in)))}
+.pw-lb-x{position:absolute;top:22px;right:22px;display:grid;place-items:center;width:40px;height:40px;border-radius:50%;background:#fff;box-shadow:0 0 0 1px var(--ph-line),0 6px 16px -8px rgba(0,0,0,.3)}
+.pw-lb-x svg{width:15px;height:15px;fill:none;stroke:var(--ink);stroke-width:1.6;stroke-linecap:round}
+.pw-lb-x.is-hover{background:var(--page)}
+
+/* ── 04 · a library or tool (a desk 1200 × 750: a terminal, then the result in a browser) ── */
+.pw-desk > .pw-term{position:absolute;left:24px;top:28px;flex:none;width:760px;height:480px;box-shadow:0 0 0 1px rgba(0,0,0,.2),0 36px 70px -36px rgba(25,24,22,.6)}
+.pw-term-body{padding:22px 26px;font:500 19px/1.7 var(--mono);color:var(--tour-term-ink,#ebe5d9)}
+.pw-term-body p{margin:0;white-space:pre}
+.pw-ln b{font-weight:500;color:#a9c48f}
+.pw-out{display:none}
+.pw-out.is-in{display:block}
+.pw-out.is-ok{color:#a9c48f}
+.pw-out.is-dim{color:var(--tour-term-dim,#a39b8e)}
+.pw-desk > .pw-preview{position:absolute;right:24px;bottom:26px;flex:none;width:660px;height:450px;--in:0;background:#fff;opacity:var(--in);
+  transform:translateY(calc((1 - var(--in)) * 18px));box-shadow:0 0 0 1px rgba(25,24,22,.1),0 40px 80px -36px rgba(25,24,22,.55)}
+.pw-preview-in{padding:24px}
+.pw-preview-in .ph-text{margin-top:18px}

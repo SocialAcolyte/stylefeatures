@@ -1,0 +1,110 @@
+/* StyleFeatures scaffolds: the shared placeholder kit.
+   Every scaffold section links this first. Tokens can be overridden per site in site.json "theme". */
+:root{
+  --page:#f5f3ef;--page-2:#ece9e3;--ph:#ffffff;--ph-line:#e3dfd7;--ph-mark:#d9d4ca;
+  --ink:#191816;--ink-2:#5f5a53;--ink-3:#9c968c;--rule:#d8d3c9;
+  --note:#c2643f;--note-bg:#fbf1ea;
+  --serif:'Newsreader',Georgia,serif;--sans:'Inter Tight',system-ui,-apple-system,sans-serif;--mono:ui-monospace,'SF Mono',Menlo,monospace;
+  --gutter:clamp(16px,3.4vw,48px);--max:1280px;--radius:2px;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box}
+html{background:var(--page);-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--page);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit}
+img{display:block;max-width:100%}
+.sf-wrap{max-width:var(--max);margin:0 auto;padding-inline:var(--gutter)}
+.sf-sec{padding-block:clamp(72px,12vh,140px)}
+
+/* ── type ───────────────────────────────────────────── */
+.sf-eyebrow{margin:0 0 18px;font:500 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+.sf-h1{margin:0;font:400 clamp(44px,6.4vw,96px)/.98 var(--serif);letter-spacing:-.025em}
+.sf-h2{margin:0;font:400 clamp(32px,4vw,58px)/1.02 var(--serif);letter-spacing:-.02em}
+.sf-h3{margin:0;font:500 clamp(19px,1.6vw,23px)/1.2 var(--sans);letter-spacing:-.01em}
+.sf-lede{margin:0;max-width:34em;font:400 clamp(17px,1.4vw,20px)/1.5 var(--sans);color:var(--ink-2)}
+.sf-small{font:400 13px/1.45 var(--sans);color:var(--ink-3)}
+
+/* ── placeholder image: <figure class="ph" style="--r:4/5" data-ph="Image · 4:5" data-hint="What goes here"></figure> */
+.ph{position:relative;margin:0;aspect-ratio:var(--r,4/3);background:var(--ph);border-radius:var(--radius);overflow:hidden;
+  box-shadow:inset 0 0 0 1px var(--ph-line);min-width:0}
+.ph::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(to top right,transparent calc(50% - .5px),var(--ph-mark) calc(50% - .5px),var(--ph-mark) calc(50% + .5px),transparent calc(50% + .5px)),
+    linear-gradient(to bottom right,transparent calc(50% - .5px),var(--ph-mark) calc(50% - .5px),var(--ph-mark) calc(50% + .5px),transparent calc(50% + .5px));
+  opacity:.55}
+.ph::after{content:attr(data-ph) "\A" attr(data-hint);white-space:pre-line;position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:max-content;max-width:min(80%,24em);padding:9px 13px;background:var(--ph);text-align:center;
+  font:500 11px/1.45 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);border-radius:var(--radius)}
+.ph[data-hint]::after{font-size:11px}
+.ph.is-bare::after{content:none}
+.ph.is-round{border-radius:50%}
+.ph.is-tone{--ph:var(--page-2)}              /* a placeholder on a white card */
+.ph > *{position:relative;z-index:1}
+
+/* video placeholder: add .ph-video; scaffold.js adds the transport */
+.ph-video{--ph:#f7f6f3}
+.ph-video::before{opacity:.35}
+.ph-video::after{top:auto;bottom:44px;transform:translateX(-50%);max-width:min(86%,26em)}   /* label sits low, clear of the play button */
+.ph-play{position:absolute;z-index:2;left:50%;top:50%;width:56px;height:56px;margin:-28px 0 0 -28px;border:0;border-radius:50%;
+  background:var(--ink);color:var(--page);cursor:pointer;display:grid;place-items:center;transition:transform .4s var(--ease)}
+.ph-play:hover{transform:scale(1.06)}
+.ph-play[hidden],.ph-bar[hidden]{display:none}
+.ph-play svg{width:20px;height:20px}
+.ph-play:focus-visible{outline:2px solid var(--note);outline-offset:4px}
+.ph-bar{position:absolute;z-index:2;left:16px;right:16px;bottom:14px;display:flex;align-items:center;gap:12px;font:500 11px/1 var(--mono);color:var(--ink-3)}
+.ph-track{flex:1;height:2px;background:var(--ph-line);position:relative;overflow:hidden}
+.ph-track i{position:absolute;inset:0;background:var(--ink);transform-origin:left;transform:scaleX(var(--p,0))}
+.ph-video.is-playing::before{animation:ph-breathe 3.2s ease-in-out infinite}
+@keyframes ph-breathe{50%{opacity:.12}}
+
+/* placeholder copy: <p class="ph-text" style="--n:3"></p>  (n lines, last one short) */
+.ph-text{--lh:1.6em;display:block;margin:0;height:calc(var(--n,3) * var(--lh));max-width:32em;
+  background:repeating-linear-gradient(to bottom,var(--ph-line) 0 .55em,transparent .55em var(--lh));
+  -webkit-mask:linear-gradient(#000,#000) top/100% calc(100% - var(--lh)) no-repeat,linear-gradient(90deg,#000 var(--last,58%),transparent 0) bottom/100% var(--lh) no-repeat;
+          mask:linear-gradient(#000,#000) top/100% calc(100% - var(--lh)) no-repeat,linear-gradient(90deg,#000 var(--last,58%),transparent 0) bottom/100% var(--lh) no-repeat}
+.ph-logo{display:inline-flex;align-items:center;justify-content:center;height:34px;min-width:110px;padding:0 14px;border-radius:var(--radius);
+  box-shadow:inset 0 0 0 1px var(--ph-line);background:var(--ph);font:600 11px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3)}
+
+/* ── controls ───────────────────────────────────────── */
+.sf-btn{display:inline-flex;align-items:center;gap:10px;padding:14px 22px;border:0;border-radius:var(--radius);background:var(--ink);color:var(--page);
+  font:500 14px/1 var(--sans);text-decoration:none;cursor:pointer;transition:background-color .3s ease,color .3s ease,box-shadow .3s ease}
+.sf-btn:hover{background:#000}
+.sf-btn--ghost{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.sf-btn--ghost:hover{background:var(--ink);color:var(--page)}
+.sf-btn--text{padding:6px 0;background:none;color:var(--ink);box-shadow:inset 0 -1px 0 currentColor}
+.sf-btn--text:hover{background:none;color:var(--ink-2)}
+.sf-btn:focus-visible,.sf-field:focus-visible{outline:2px solid var(--note);outline-offset:3px}
+.sf-field{width:100%;padding:14px 0;border:0;border-bottom:1px solid var(--rule);background:transparent;font:400 16px/1.2 var(--sans);color:var(--ink);border-radius:0}
+.sf-field::placeholder{color:var(--ink-3)}
+.sf-rule{height:0;border:0;border-top:1px solid var(--rule);margin:0}
+
+/* ── notes: what goes here / who it suits. <span class="sf-note">Swap for your logo</span>; html.sf-clean hides them */
+.sf-note{display:inline-flex;align-items:center;gap:7px;padding:5px 9px 5px 7px;border-radius:var(--radius);background:var(--note-bg);color:var(--note);
+  font:500 11px/1.25 var(--sans);letter-spacing:.01em;vertical-align:middle;white-space:normal;max-width:30em}
+.sf-note::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:currentColor}
+.sf-note.is-pin{position:absolute;z-index:5}
+html.sf-clean .sf-note{display:none!important}
+
+/* ── reveal ─────────────────────────────────────────── */
+[data-reveal]{opacity:0;transform:translateY(14px);transition:opacity 1s var(--ease),transform 1.2s var(--ease);transition-delay:calc(var(--i,0) * 80ms)}
+[data-reveal].is-in{opacity:1;transform:none}
+.no-js [data-reveal]{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){[data-reveal]{opacity:1;transform:none;transition:none}}
+
+/* ── preview spec card (only on preview pages) ───────── */
+.sf-spec{position:fixed;z-index:9999;left:14px;bottom:14px;max-width:min(360px,calc(100vw - 28px));padding:14px 16px;border-radius:4px;
+  background:rgba(255,255,255,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);box-shadow:0 0 0 1px var(--ph-line),0 10px 30px -14px rgba(0,0,0,.3);
+  font:400 12px/1.45 var(--sans);color:var(--ink-2)}
+.sf-spec b{display:block;font:500 14px/1.25 var(--sans);color:var(--ink);margin:6px 0 3px}
+.sf-spec .sf-kind{margin-right:6px}
+.sf-spec ul{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:5px}
+.sf-spec li{padding:3px 7px;border-radius:2px;background:var(--page);color:var(--ink-2);font-size:11px}
+.sf-spec button{margin-top:10px;padding:0;border:0;background:none;font:500 11px/1 var(--sans);color:var(--ink-3);text-decoration:underline;cursor:pointer}
+.sf-spec.is-min p,.sf-spec.is-min ul{display:none}
+.sf-thumb .sf-spec{display:none}
+@media (max-width:700px){.sf-spec{left:8px;bottom:8px;padding:10px 12px}}
+.sf-kind{display:inline-flex;align-items:center;gap:6px;padding:4px 8px 4px 7px;border-radius:2px;font:600 10px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase}
+.sf-kind::before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.sf-kind--static{background:#eceae5;color:#6f6a62}
+.sf-kind--interactive{background:#fbeee6;color:#b65a35}
+.sf-kind--video{background:#1d1c1a;color:#f2efe9}

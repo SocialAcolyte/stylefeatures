@@ -1,0 +1,76 @@
+{
+  "object": {
+    "title": "Beggars and Street Characters (流氓圖)",
+    "artist": "Zhou Chen 周臣 (c. 1450–c. 1536)",
+    "date": "1516",
+    "place": "China, Suzhou, Ming dynasty (1368–1644)",
+    "medium": "Handscroll; ink and light colour on paper",
+    "dimensions": "Overall: 31.9 x 244.5 cm",
+    "museum": "The Cleveland Museum of Art",
+    "accession": "1964.94",
+    "credit_line": "John L. Severance Fund",
+    "licence": "CC0 1.0 (Cleveland Museum of Art Open Access)",
+    "url": "https://clevelandart.org/art/1964.94",
+    "api": "https://openaccess-api.clevelandart.org/api/artworks/1964.94",
+    "note": "Painted as an album of 24 leaves; mounted as two handscrolls, this one and one in the Honolulu Museum of Art."
+  },
+  "files": [
+    {
+      "file": "s/00-1600.webp … s/16-1600.webp, s/00-900.webp … s/16-900.webp",
+      "what": "the scroll's 17 sections: frontispiece, 12 leaves, Zhou Chen's inscription, 3 colophons",
+      "source": "https://openaccess-cdn.clevelandart.org/1964.94/1964.94_full.tif",
+      "source_size": "64714 x 4862",
+      "made": "tools/sections.py: resampled once to 1600 and 900 px tall, cut at the album's seams and the silk separators found in the scan, the black table matted out along the scroll's own silk edge. Nothing else changed."
+    },
+    {
+      "file": "backing.webp",
+      "what": "the outside of the rolls: the scroll's own blank end paper with its silk edges",
+      "source": "https://openaccess-cdn.clevelandart.org/1964.94/1964.94_alt11_full.tif",
+      "source_size": "5780 x 4740",
+      "made": "tools/rolls.py: the paper between the ruler and the silk separator (x 620–3880), at the sections' scale (the photograph is at the scan's own scale), edges matted."
+    },
+    {
+      "file": "ribbon.webp",
+      "what": "the scroll's ribbon where it leaves the stave",
+      "source": "https://openaccess-cdn.clevelandart.org/1964.94/1964.94_alt18_full.tif",
+      "source_size": "3814 x 6096",
+      "made": "cut from the photograph of the closed scroll (x 600–1842, y 1900–5400) with BiRefNet (tools/engine convert.matte), at the sections' scale, turned half a turn. A rigid cut-out."
+    },
+    {
+      "file": "scroll.json",
+      "what": "geometry: section extents, the paper's edges along the scroll, the roll build and the light across a roll",
+      "source": "measured on 1964.94_full.tif, alt11, alt12 (the whole mounting in one stitch, 79145 x 4440), alt14, alt15 and alt18 (tools/sections.py, tools/rolls.py)",
+      "made": "closed scroll 901 px across against 5312 px tall in alt18 (5.05 cm); unscanned start 9034 px and at least 4121 px of end paper (alt12, which lines up with the full scan at the same scale, 4121 px further along); light across the roll measured on alt18 below the title slip."
+    },
+    {
+      "file": "s/start-1600.webp, s/start-900.webp",
+      "what": "the start of the scroll the full scan leaves out: white silk, the gold-flecked strip, the damask",
+      "source": "https://openaccess-cdn.clevelandart.org/1964.94/1964.94_alt15_full.tif and 1964.94_alt14_full.tif",
+      "made": "tools/start.py: matched to the scan (corr 0.92) and to each other (corr 0.64) by correlation, scaled so their silk edges lie on the sections', joined at alt15 x 5600 in the damask, one gain per channel fitted on the white silk they share with the scan; cut short of the stave where Cleveland's weight lies on it; the table matted out."
+    },
+    {
+      "file": "brocade.webp",
+      "what": "the wrapper and Zhao Heqin's title slip, the outside of the closed scroll",
+      "source": "https://openaccess-cdn.clevelandart.org/1964.94/1964.94_alt13_full.tif",
+      "made": "tools/wrapper.py: the wrapper laid flat from its stave edge (x 2030-4580); the corner under Cleveland's rosewood weight and its shadow (x 2005-2365, y 3400-4310) restored from the same weave one repeat away (450 px across, 10 px up) and the stave's fold from 910 px above, with 14-16 px blends; the cloth matted out."
+    },
+    {
+      "file": "silk.webp",
+      "what": "a strip of the white silk between two colophons, to mount the page's own leaves between",
+      "source": "https://openaccess-cdn.clevelandart.org/1964.94/1964.94_full.tif",
+      "made": "full scan x 5600-6020 at the sections' scale."
+    },
+    {
+      "file": "ribbon-left.webp",
+      "what": "the ribbon as it lies beside the closed scroll",
+      "source": "1964.94_alt18_full.tif",
+      "made": "the same cut-out as ribbon.webp, not turned."
+    }
+  ],
+  "references": [
+    "Cleveland Museum of Art, 1964.94: inscriptions and translations (frontispiece by Zhao Heqin, 1962; Zhou Chen's inscription, 1516; colophons by Huang Jishui, 1564, Zhang Fengyi, and Wen Jia, 1577).",
+    "Cleveland's photographs of the same scroll: alt13 (wrapper and title slip laid flat), alt14 and alt15 (the start: stave, ribbon, damask, gold-flecked strip, silk), alt11 (the end paper with a ruler), alt18 (the closed scroll)."
+  ],
+  "generated": "nothing",
+  "page_leaves": "The demo's press (Idle Window) and its words are made up for the demo; the paper and silk they are written on are this scroll's own (backing.webp, silk.webp)."
+}

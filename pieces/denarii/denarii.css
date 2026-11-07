@@ -1,0 +1,95 @@
+/* denarii: a bar chart counted out in real Roman silver. Namespace .dn- */
+.dn {
+  --dn-coin: 60px;          /* the largest slot (the widest denarius) */
+  --dn-min: 20px;           /* the smallest slot before a bigger unit is chosen */
+  --dn-reserve: 64px;       /* room after the longest row for its number */
+  --dn-label: 26%;
+  position: relative; margin: 0; color: var(--ink, #141312); font-family: var(--serif, Georgia, serif);
+}
+.dn table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.dn caption { caption-side: top; text-align: left; font-size: clamp(19px, 2.2vw, 24px); font-weight: 400; line-height: 1.2;
+  padding: 0 0 .7em; text-wrap: balance; }
+.dn-title { font-size: clamp(19px, 2.2vw, 24px); line-height: 1.2; padding: 0 0 .5em; text-wrap: balance; }
+.dn-titled caption { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.dn caption small, .dn-title small { display: block; margin-top: .35em; font: 400 12.5px/1.45 var(--sans, system-ui, sans-serif); color: var(--ink-3, #8a857d); letter-spacing: .01em; }
+
+/* without JS (or before the coins arrive) it is a plain, quiet table */
+.dn th, .dn td { padding: .55em .9em .55em 0; text-align: left; border-bottom: 1px solid var(--rule, #cfcac0); font-weight: 400; vertical-align: middle; }
+.dn thead th { font: 500 10.5px/1.2 var(--sans, system-ui, sans-serif); letter-spacing: .14em; text-transform: uppercase; color: var(--ink-3, #8a857d); }
+.dn tbody th { font-size: 17px; }
+.dn tbody td { font: 400 14px/1.3 var(--sans, system-ui, sans-serif); color: var(--ink-2, #4a4744); }
+
+/* with JS: the data cells stay in the table for assistive tech, the coins are drawn in one extra cell per row */
+.dn-on thead th, .dn-on tbody td:not(.dn-bar), .dn-live {
+  position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+}
+.dn-on tbody th { width: 1%; max-width: var(--dn-label); white-space: nowrap; padding: 0 1.4em 0 0; border: 0; font-size: clamp(15px, 1.5vw, 17.5px); line-height: 1.15;
+  color: var(--ink, #141312); transition: color .3s ease; overflow-wrap: anywhere; }
+.dn-on td.dn-bar { padding: 0 0 0 var(--dn-band, 0); border: 0; width: 99%; position: relative; }
+.dn-on table { position: relative; z-index: 1; }
+.dn-clothed table { margin: var(--dn-above, 0) 0 var(--dn-below, 0); }
+
+/* the cloth: a real wool tunic fragment, cut from its mount, the count laid on its plain field */
+.dn-cloth { display: none; }
+.dn-clothed .dn-cloth { display: block; position: absolute; z-index: 0; overflow: hidden; pointer-events: none; }
+.dn-cloth img { position: absolute; top: 0; max-width: none; user-select: none; -webkit-user-select: none; }
+.dn-bar { display: none; }
+.dn-on .dn-bar { display: table-cell; }
+.dn-lane { position: relative; height: calc(var(--dn-d, 40px) * 1.04); }
+
+.dn-coin { position: absolute; top: 50%; transform: translate(-50%, -50%); max-width: none; user-select: none; -webkit-user-select: none;
+  filter: drop-shadow(0 .5px .5px rgba(38, 28, 16, .42)) drop-shadow(0 1.5px 2.5px rgba(38, 28, 16, .16));
+  transition: opacity .28s ease, filter .28s ease, scale .32s cubic-bezier(.3,.7,.3,1); cursor: pointer; -webkit-tap-highlight-color: transparent; }
+/* the coin under the pointer is lifted a little off the cloth, so you can see it */
+.dn-coin.dn-lift { z-index: 1; scale: 1.42; filter: drop-shadow(0 1px 1px rgba(38, 28, 16, .35)) drop-shadow(0 6px 9px rgba(38, 28, 16, .24)); }
+@media (prefers-reduced-motion: reduce) { .dn-coin { transition: none; } }
+.dn-val { position: absolute; top: 50%; transform: translate(0, -50%); white-space: nowrap; pointer-events: none;
+  font: 500 13px/1 var(--sans, system-ui, sans-serif); color: var(--ink-2, #4a4744); transition: color .3s ease;
+  margin-left: .45em; }
+.dn-clothed .dn-val { color: var(--ink, #141312); }
+
+/* reading a row: the others step back */
+.dn-has-active tbody tr:not(.dn-active) .dn-coin { opacity: .5; }
+.dn-has-active tbody tr:not(.dn-active) th, .dn-has-active tbody tr:not(.dn-active) .dn-val { color: var(--ink-3, #8a857d); }
+.dn-clothed.dn-has-active tbody tr:not(.dn-active) .dn-val, .dn-clothed.dn-has-active tbody tr:not(.dn-active) .dn-name { color: rgba(20, 19, 18, .55); }
+.dn-active .dn-val { color: var(--ink, #141312); }
+.dn-focusable { outline: none; }
+.dn-focusable:focus-visible { outline: 2px solid var(--accent, #c96f4a); outline-offset: 6px; border-radius: 2px; }
+.dn-focusable:focus-visible .dn-active th { text-decoration: underline; text-decoration-color: var(--accent, #c96f4a); text-underline-offset: 4px; }
+
+.dn-tip { position: absolute; z-index: 2; left: 0; top: 0; transform: translate(-50%, calc(-100% - 6px)); pointer-events: none;
+  font: 500 11.5px/1 var(--sans, system-ui, sans-serif); white-space: nowrap; color: var(--paper, #f3f0e8); background: var(--ink, #141312);
+  padding: 6px 8px 5px; border-radius: 3px; opacity: 0; transition: opacity .18s ease; }
+.dn-tip-on { opacity: 1; }
+
+.dn-switch { display: flex; flex-wrap: wrap; gap: 0 1.4em; margin: 0 0 .6em; }
+.dn-switch button { appearance: none; background: none; border: 0; padding: 0; min-height: 44px; cursor: pointer; color: var(--ink-3, #8a857d);
+  font: 500 11px/1.2 var(--sans, system-ui, sans-serif); letter-spacing: .14em; text-transform: uppercase;
+  text-decoration: underline 1px transparent; text-underline-offset: 6px; transition: color .2s ease, text-decoration-color .2s ease; }
+.dn-switch button:hover { color: var(--ink-2, #4a4744); }
+.dn-switch button[aria-pressed="true"] { color: var(--ink, #141312); text-decoration-color: currentColor; }
+.dn-switch button:focus-visible { outline: 2px solid var(--accent, #c96f4a); outline-offset: 2px; }
+
+.dn-key { display: none; }
+.dn-on .dn-key { display: flex; flex-wrap: wrap; align-items: center; gap: .4em 1.6em; margin-top: .9em; padding-left: var(--dn-keypad, 0);
+  font: 400 12px/1 var(--sans, system-ui, sans-serif); color: var(--ink-2, #4a4744); }
+.dn-k { display: inline-flex; align-items: center; gap: .5em; }
+.dn-kc { position: static; transform: none; filter: drop-shadow(0 .5px .5px rgba(38, 28, 16, .42)); }
+
+.dn-name { display: none; }
+/* narrow (.dn-stack, set below 640 px of the chart's own width): the name goes above its row (a copy; the real <th>
+   stays for assistive tech) and the coins get the width */
+/* engine-lint: allow scroll-trap */
+.dn-stack.dn-on tbody th { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.dn-stack.dn-on td.dn-bar { width: 100%; padding-top: 3px; }
+.dn-stack .dn-name { display: block; width: fit-content; position: relative; z-index: 1; padding: 0 0 0 1px;
+  font: 400 15.5px/1.05 var(--serif, Georgia, serif); color: var(--ink, #141312); transition: color .3s ease; }
+.dn-stack { --dn-reserve: 46px; }
+.dn-stack .dn-switch { gap: 0 1.1em; }
+.dn-stack .dn-switch button { letter-spacing: .1em; }
+
+@media (forced-colors: active) {
+  .dn-on .dn-bar, .dn-on .dn-key, .dn-clothed .dn-cloth { display: none; }
+  .dn-clothed table { margin: 0; }
+  .dn-on thead th, .dn-on tbody td:not(.dn-bar) { position: static !important; width: auto; height: auto; margin: 0; clip-path: none; }
+}

@@ -1,0 +1,198 @@
+/* ─── handscroll: a Chinese handscroll as a carousel, read right to left an arm's length at a time ──────────
+   The sections are real <img>s, the scroll's own leaves and sheets cut at its own seams. Without JS they are a
+   scrolling row that starts at the right end. With JS the row lies on the page as an open scroll: a WebGL2 canvas
+   draws the two rolls (the scroll's own paper wound on a cylinder) and its ribbon over the ends; the flat paper
+   between them is still the <img>s. Prefix: .hs- */
+
+.hs {
+  container-type: inline-size;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--hs-gap, clamp(14px, 3cqi, 26px));
+  color: var(--ink, #141312);
+  font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
+  /* the scroll's height on the page: one leaf fills a phone, an arm's length shows on a desk */
+  --hs-h: clamp(280px, 96cqi, var(--hs-max, 520px));
+}
+@container (min-width: 700px) { .hs { --hs-h: clamp(380px, 46cqi, var(--hs-max, 520px)); } }
+
+.hs-scroll { position: relative; height: var(--hs-h); min-width: 0; }
+
+/* ── without JS: a row of the sections that scrolls sideways, starting at the right ── */
+.hs-track {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  display: flex;
+  direction: rtl;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: thin;
+  filter: drop-shadow(0 .5px .8px rgba(40, 30, 18, .22)) drop-shadow(0 8px 14px rgba(40, 30, 18, .14));
+}
+.hs-slide {
+  flex: none;
+  position: relative;
+  height: 100%;
+  width: calc(var(--w) * var(--hs-h) / 1600);
+  scroll-snap-align: start;
+  margin: 0;
+}
+.hs-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-user-drag: none;
+}
+.hs-slide figure { margin: 0; height: 100%; }
+.hs-label, .hs-live {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ── with JS: the scroll lies open on the page ── */
+.hs-on .hs-scroll { touch-action: pan-y; cursor: grab; -webkit-tap-highlight-color: transparent; }
+.hs-on.hs-dragging .hs-scroll { cursor: grabbing; }
+.hs-on .hs-window {
+  position: absolute;
+  inset: 0;
+  filter: drop-shadow(0 .5px .8px rgba(40, 30, 18, .22)) drop-shadow(0 8px 14px rgba(40, 30, 18, .14));
+}
+.hs-on .hs-clip { position: absolute; inset: 0; overflow: hidden; }   /* the rest of the scroll is off the page, not beside it */
+.hs-on .hs-track {
+  position: absolute;
+  left: 0;
+  top: 0;
+  direction: ltr;
+  flex-direction: row-reverse;
+  overflow: visible;
+  scroll-snap-type: none;
+  filter: none;
+  will-change: transform;
+}
+.hs-canvas {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;          /* JS widens it into the page margin on the right when the ribbon has room there */
+  height: 100%;
+  pointer-events: none;
+  filter: drop-shadow(0 .5px .8px rgba(40, 30, 18, .26)) drop-shadow(0 6px 10px rgba(40, 30, 18, .16));
+}
+.hs-scroll:focus-visible { outline: 2px solid var(--accent, #c96f4a); outline-offset: 6px; border-radius: 2px; }
+
+/* ── the controls under the scroll: next is on the left, because the scroll is read leftward ── */
+.hs-bar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 14px;
+  max-width: 40rem;
+  width: 100%;
+  margin: 0 auto;
+}
+.hs-caption { margin: 0; text-align: center; line-height: 1.3; min-height: 2.6em; display: grid; align-content: center; }
+.hs-count {
+  display: block;
+  font: 500 10.5px/1.3 var(--sans, Inter, system-ui, sans-serif);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-3, #8a857d);
+  font-variant-numeric: tabular-nums;
+}
+.hs-title { display: block; font-size: clamp(16px, 2.4cqi, 19px); font-style: italic; color: var(--ink-2, #4a4744); text-wrap: balance; }
+.hs-btn {
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 16px;
+  border-radius: 999px;
+  border: 1px solid var(--ink, #141312);
+  background: transparent;
+  color: var(--ink, #141312);
+  font: 500 13px/1 var(--sans, Inter, system-ui, sans-serif);
+  letter-spacing: .04em;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.hs-btn svg { width: 16px; height: 16px; flex: none; }
+.hs-btn:disabled { opacity: .3; cursor: default; }
+.hs-btn:focus-visible { outline: 2px solid var(--accent, #c96f4a); outline-offset: 3px; }
+.hs:not(.hs-on):not(.hs-row) .hs-bar { display: none; }   /* no JS: the row alone */
+@container (max-width: 520px) { .hs-btn .hs-word { display: none; } .hs-btn { padding: 0 12px; } }
+
+@media (forced-colors: active) {
+  .hs-canvas { display: none !important; }
+  .hs-on .hs-window, .hs-track { filter: none; }
+}
+
+/* ── the start of the scroll (stave end, damask, gold-flecked strip, silk): part of the scroll, not a slide ── */
+.hs-start {
+  flex: none;
+  height: 100%;
+  width: calc(var(--w) * var(--hs-h) / 1600);
+}
+.hs-start img { display: block; width: 100%; height: 100%; user-select: none; -webkit-user-select: none; -webkit-user-drag: none; }
+
+/* ── a leaf of the page's own, mounted between the scroll's sections: this scroll's own end paper between two strips of
+      its own silk, the page's words written on it. --w is its width in the 1600 set (keep it under about 1100). ── */
+.hs-sheet {
+  background:
+    url("assets/silk.webp") left var(--st, 0px) / auto var(--sh, 100%) no-repeat,
+    url("assets/silk.webp") right var(--st, 0px) / auto var(--sh, 100%) no-repeat,
+    url("assets/backing.webp") var(--paper-x, 0%) var(--pt, 0px) / auto var(--ph, 100%) no-repeat;
+}
+.hs-words {
+  position: absolute;
+  inset: 13% calc(var(--hs-h) * .14) 11% calc(var(--hs-h) * .14);
+  display: grid;
+  align-content: start;
+  gap: calc(var(--hs-h) * .018);
+  color: var(--ink, #141312);
+  mix-blend-mode: multiply;              /* the ink sits in the paper */
+  font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: calc(var(--hs-h) * .036);
+  line-height: 1.42;
+  text-wrap: pretty;
+}
+.hs-words > * { margin: 0; }
+.hs-words .hs-mark {
+  font: 500 calc(var(--hs-h) * .021)/1.2 var(--sans, Inter, system-ui, sans-serif);
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--ink-3, #8a857d);
+}
+.hs-words h2, .hs-words h3 {
+  font-weight: 400;
+  font-style: italic;
+  font-size: calc(var(--hs-h) * .052);
+  line-height: 1.08;
+  letter-spacing: -.005em;
+  text-wrap: balance;
+}
+.hs-words ul { list-style: none; padding: 0; display: grid; gap: calc(var(--hs-h) * .012); }
+.hs-words li b { font-weight: 500; font-style: italic; }
+.hs-words small { color: var(--ink-2, #4a4744); font-size: .82em; }
+.hs-words a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: .18em; text-decoration-color: rgba(20, 19, 18, .35); }
+.hs-words a:hover { text-decoration-color: currentColor; }
+.hs-words a:focus-visible { outline: 2px solid var(--accent, #c96f4a); outline-offset: 2px; border-radius: 1px; }
+.hs-words .hs-sign { margin-top: auto; font-style: italic; color: var(--ink-2, #4a4744); font-size: .9em; }
+
+/* ── the scene: pinned while the page scrolls it open (JS sets the runway's height) ── */
+.hs-scene { --hs-h: clamp(280px, min(58svh, 100cqi), var(--hs-max, 520px)); }
+@container (min-width: 700px) { .hs-scene { --hs-h: clamp(380px, min(60svh, 46cqi), var(--hs-max, 520px)); } }
+.hs-stage { display: grid; gap: var(--hs-gap, clamp(14px, 3cqi, 26px)); }
+.hs-scene-on .hs-stage {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  align-content: center;
+}
+.hs-scene-on .hs-scroll { cursor: default; touch-action: auto; }
+.hs-scene .hs-caption .hs-count { min-height: 1.3em; }

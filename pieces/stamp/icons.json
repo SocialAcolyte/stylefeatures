@@ -1,0 +1,394 @@
+{
+ "arrow-right": [
+  "next",
+  "forward",
+  "direction",
+  "vine",
+  "tendril",
+  "go",
+  "arrow-right"
+ ],
+ "arrow-left": [
+  "back",
+  "previous",
+  "direction",
+  "vine",
+  "tendril",
+  "arrow-left"
+ ],
+ "arrow-down": [
+  "down",
+  "direction",
+  "vine",
+  "more",
+  "arrow-down"
+ ],
+ "arrow-up": [
+  "up",
+  "top",
+  "direction",
+  "vine",
+  "arrow-up"
+ ],
+ "arrow-up-right": [
+  "diagonal",
+  "outbound",
+  "corner",
+  "arrow-up-right"
+ ],
+ "menu": [
+  "hamburger",
+  "navigation",
+  "lines",
+  "menu"
+ ],
+ "close": [
+  "x",
+  "dismiss",
+  "cancel",
+  "close"
+ ],
+ "plus": [
+  "add",
+  "new",
+  "more",
+  "expand",
+  "plus"
+ ],
+ "minus": [
+  "remove",
+  "less",
+  "collapse",
+  "minus"
+ ],
+ "check": [
+  "tick",
+  "done",
+  "yes",
+  "ok",
+  "confirm",
+  "check"
+ ],
+ "search": [
+  "find",
+  "magnifier",
+  "lens",
+  "search"
+ ],
+ "play": [
+  "start",
+  "media",
+  "video",
+  "play"
+ ],
+ "pause": [
+  "stop",
+  "media",
+  "hold",
+  "pause"
+ ],
+ "next": [
+  "skip",
+  "forward",
+  "track",
+  "next"
+ ],
+ "prev": [
+  "skip",
+  "back",
+  "previous",
+  "track",
+  "prev"
+ ],
+ "volume": [
+  "sound",
+  "audio",
+  "speaker",
+  "on",
+  "volume"
+ ],
+ "mute": [
+  "sound",
+  "off",
+  "silent",
+  "speaker",
+  "mute"
+ ],
+ "music": [
+  "note",
+  "audio",
+  "song",
+  "listen",
+  "music"
+ ],
+ "download": [
+  "save",
+  "stamp",
+  "perforated",
+  "get",
+  "download"
+ ],
+ "upload": [
+  "send",
+  "stamp",
+  "perforated",
+  "put",
+  "upload"
+ ],
+ "external": [
+  "open",
+  "new",
+  "window",
+  "outbound",
+  "external"
+ ],
+ "link": [
+  "chain",
+  "url",
+  "hyperlink",
+  "link"
+ ],
+ "copy": [
+  "duplicate",
+  "clipboard",
+  "copy"
+ ],
+ "mail": [
+  "email",
+  "letter",
+  "envelope",
+  "contact",
+  "mail"
+ ],
+ "phone": [
+  "call",
+  "telephone",
+  "handset",
+  "phone"
+ ],
+ "pin": [
+  "location",
+  "map",
+  "place",
+  "address",
+  "pin"
+ ],
+ "calendar": [
+  "date",
+  "schedule",
+  "event",
+  "calendar"
+ ],
+ "clock": [
+  "time",
+  "hour",
+  "watch",
+  "clock"
+ ],
+ "sun": [
+  "light",
+  "day",
+  "bright",
+  "sun"
+ ],
+ "moon": [
+  "dark",
+  "night",
+  "theme",
+  "moon"
+ ],
+ "heart": [
+  "love",
+  "like",
+  "favourite",
+  "heart"
+ ],
+ "star": [
+  "rating",
+  "favourite",
+  "featured",
+  "star"
+ ],
+ "bookmark": [
+  "save",
+  "later",
+  "ribbon",
+  "bookmark"
+ ],
+ "share": [
+  "send",
+  "social",
+  "network",
+  "share"
+ ],
+ "lock": [
+  "secure",
+  "private",
+  "padlock",
+  "lock"
+ ],
+ "key": [
+  "access",
+  "login",
+  "password",
+  "key"
+ ],
+ "eye": [
+  "view",
+  "show",
+  "visible",
+  "watch",
+  "eye"
+ ],
+ "home": [
+  "house",
+  "start",
+  "index",
+  "home"
+ ],
+ "user": [
+  "person",
+  "profile",
+  "account",
+  "user"
+ ],
+ "basket": [
+  "cart",
+  "shop",
+  "bag",
+  "buy",
+  "basket"
+ ],
+ "tag": [
+  "label",
+  "price",
+  "category",
+  "tag"
+ ],
+ "filter": [
+  "funnel",
+  "refine",
+  "sort",
+  "filter"
+ ],
+ "grid": [
+  "tiles",
+  "layout",
+  "gallery",
+  "view",
+  "grid"
+ ],
+ "list": [
+  "rows",
+  "layout",
+  "lines",
+  "list"
+ ],
+ "settings": [
+  "sliders",
+  "preferences",
+  "controls",
+  "options",
+  "settings"
+ ],
+ "info": [
+  "about",
+  "help",
+  "detail",
+  "info"
+ ],
+ "scroll-down": [
+  "mouse",
+  "wheel",
+  "more",
+  "below",
+  "scroll-down"
+ ],
+ "scroll-up": [
+  "mouse",
+  "wheel",
+  "top",
+  "above",
+  "scroll-up"
+ ],
+ "cursor": [
+  "pointer",
+  "arrow",
+  "click",
+  "cursor"
+ ],
+ "hand": [
+  "pointing",
+  "touch",
+  "interact",
+  "hand"
+ ],
+ "image": [
+  "picture",
+  "photo",
+  "landscape",
+  "image"
+ ],
+ "film": [
+  "movie",
+  "video",
+  "reel",
+  "strip",
+  "film"
+ ],
+ "text": [
+  "type",
+  "font",
+  "letter",
+  "serif",
+  "text"
+ ],
+ "code": [
+  "brackets",
+  "developer",
+  "source",
+  "code"
+ ],
+ "leaf": [
+  "nature",
+  "plant",
+  "eco",
+  "leaf"
+ ],
+ "flower": [
+  "bloom",
+  "blossom",
+  "garden",
+  "flower"
+ ],
+ "github": [
+  "octocat",
+  "code",
+  "repo",
+  "social",
+  "github"
+ ],
+ "instagram": [
+  "photo",
+  "social",
+  "camera",
+  "instagram"
+ ],
+ "x": [
+  "twitter",
+  "social",
+  "x"
+ ],
+ "youtube": [
+  "video",
+  "social",
+  "play",
+  "youtube"
+ ],
+ "rss": [
+  "feed",
+  "subscribe",
+  "syndicate",
+  "rss"
+ ]
+}

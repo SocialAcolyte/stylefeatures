@@ -1,0 +1,7 @@
+/* stamp icons: <svg class="ic"><use href="icons.svg#ic-NAME"/></svg>
+   colour = currentColor; two-tone second colour = --ic-2; size = --ic-size or .ic-16/.ic-24/.ic-32/.ic-48/.ic-64 */
+.ic{--ic-size:1.5em;width:var(--ic-size);height:var(--ic-size);display:inline-block;vertical-align:-.3em;flex:none;overflow:visible;color:inherit}
+.ic-16{--ic-size:16px}.ic-24{--ic-size:24px}.ic-32{--ic-size:32px}.ic-48{--ic-size:48px}.ic-64{--ic-size:64px}
+.ic-accent{color:var(--accent,#b4532a)}
+.ic-2-paper{--ic-2:var(--paper,#f3f0e8)}
+.ic-stamp-ink{--ic-2:#1d1a16}

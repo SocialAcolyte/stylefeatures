@@ -1,0 +1,37 @@
+{
+ "source": "Petrus Apianus, Astronomicum Caesareum (Ingolstadt 1540), the first dragon volvelle; National Library of Poland; the button roundel, cut on the outer rule of the zodiac",
+ "plate": {
+  "w": 384,
+  "h": 384,
+  "from": "dragon-volvelle/assets/plate.webp",
+  "scale": 0.2456813819577735,
+  "origin": [
+   15.69067671885773,
+   468.8072651955538
+  ]
+ },
+ "pin": [
+  191.58954583490635,
+  191.7500768809388
+ ],
+ "square": {
+  "x": 3.6678567754053946,
+  "y": 3.7473129653917776,
+  "size": 375.89251439539345,
+  "master": 376
+ },
+ "r_disc": 170.1073320537428,
+ "r_ring_inner": 167.04122840690977,
+ "r_max": 187.53842610364683,
+ "r_face": 192.0,
+ "tabs": {
+  "caput": {
+   "angle": 143.51,
+   "r_tip": 183.26111324376197
+  },
+  "cauda": {
+   "angle": 325.36,
+   "r_tip": 182.21696737044144
+  }
+ }
+}

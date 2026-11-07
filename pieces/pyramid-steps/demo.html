@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>pyramid-steps</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400..600;1,400..600&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="pyramid-steps.css">
+<style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;
+        --serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box} html{background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);overflow-x:hidden}
+  header{position:sticky;top:0;z-index:2;background:var(--paper);
+         border-bottom:1px solid var(--rule);padding:10px var(--gutter)}
+  header .in{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:24px;justify-content:space-between}
+  .mark{font:500 22px/1 var(--serif);letter-spacing:.01em;white-space:nowrap}
+  main{max-width:1080px;margin:0 auto;padding:clamp(40px,9vh,96px) var(--gutter) 18vh}
+  .app{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:clamp(28px,6vw,80px);align-items:center}
+  h1{font:500 clamp(34px,4.4vw,52px)/1.02 var(--serif);margin:0 0 .5em;letter-spacing:-.005em}
+  form{max-width:26em}
+  fieldset{border:0;margin:0;padding:0}
+  fieldset[hidden]{display:none}
+  legend{font:500 13px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);margin-bottom:18px;padding:0}
+  label{display:block;font-size:13px;color:var(--ink-2);margin:0 0 14px}
+  input,select{display:block;width:100%;margin-top:6px;font:16px/1.3 var(--sans);color:var(--ink);background:#fbf9f4;
+        border:1px solid var(--rule);border-radius:3px;padding:10px 12px}
+  input:focus,select:focus{outline:1.5px solid var(--ink);outline-offset:1px;border-color:transparent}
+  .row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .review{font-size:14px;line-height:1.6;color:var(--ink-2);margin:0 0 14px}
+  .review b{font-weight:500;color:var(--ink)}
+  .nav{display:flex;gap:10px;margin-top:22px}
+  .nav button{font:500 15px/1 var(--sans);border-radius:3px;padding:13px 20px;cursor:pointer}
+  .go{background:var(--ink);color:var(--paper);border:1px solid var(--ink)}
+  .bk{background:none;color:var(--ink-2);border:1px solid var(--rule)}
+  .bk[disabled]{display:none}
+  .nav button:focus-visible{outline:1.5px solid var(--ink);outline-offset:3px}
+  .done-note{font-size:14px;color:var(--ink-2)}
+  .tower{--ps-h:clamp(300px,42vw,470px)}
+  @media (max-width:760px){
+    .app{grid-template-columns:1fr}
+    .tower{--ps-h:300px;order:-1}
+    header .ps-steps{position:absolute !important;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+    header .in{justify-content:flex-start}
+  }
+</style>
+</head><body>
+
+<header><div class="in">
+  <span class="mark">Abydos Reading Room</span>
+  <nav class="strip" data-pyramid-steps data-layout="strip" data-seed="11" aria-label="Application progress">
+    <ol><li aria-current="step">Account</li><li>Details</li><li>Address</li><li>Payment</li><li>Review</li></ol>
+  </nav>
+</div></header>
+
+<main>
+  <div class="app">
+    <nav class="tower" data-pyramid-steps data-seed="11" aria-label="Application steps">
+      <ol><li aria-current="step">Account</li><li>Details</li><li>Address</li><li>Payment</li><li>Review</li></ol>
+    </nav>
+
+    <div>
+      <h1>Apply for a reader's ticket</h1>
+      <form id="f" novalidate>
+        <fieldset data-step="0"><legend>Account</legend>
+          <label>Email<input name="email" type="email" autocomplete="email"></label>
+          <label>Password<input name="pw" type="password" autocomplete="new-password"></label>
+        </fieldset>
+        <fieldset data-step="1" hidden><legend>Details</legend>
+          <div class="row"><label>Given name<input name="given" autocomplete="given-name"></label>
+          <label>Family name<input name="family" autocomplete="family-name"></label></div>
+          <label>Field of study<input name="field"></label>
+        </fieldset>
+        <fieldset data-step="2" hidden><legend>Address</legend>
+          <label>Street<input name="street" autocomplete="address-line1"></label>
+          <div class="row"><label>City<input name="city" autocomplete="address-level2"></label>
+          <label>Postcode<input name="post" autocomplete="postal-code"></label></div>
+        </fieldset>
+        <fieldset data-step="3" hidden><legend>Payment</legend>
+          <label>Ticket<select name="ticket"><option value="">Choose</option><option>One day</option><option>One year</option></select></label>
+          <label>Card number<input name="card" inputmode="numeric" autocomplete="cc-number"></label>
+        </fieldset>
+        <fieldset data-step="4" hidden><legend>Review</legend>
+          <p class="review" id="summary"></p>
+        </fieldset>
+        <div class="nav"><button type="button" class="bk" id="bk" disabled>Back</button><button type="submit" class="go" id="go">Continue</button></div>
+        <p class="done-note" id="note" hidden>Your ticket will be waiting at the desk. <button type="button" class="bk" id="again" style="padding:6px 10px;margin-left:6px">Start again</button></p>
+      </form>
+    </div>
+  </div>
+</main>
+
+<script type="module">
+  import { pyramidSteps } from './pyramid-steps.js';
+  const navs = [...document.querySelectorAll('[data-pyramid-steps]')].map((el) => pyramidSteps(el));
+  const f = document.getElementById('f'), sets = [...f.querySelectorAll('fieldset')];
+  const bk = document.getElementById('bk'), go = document.getElementById('go'), note = document.getElementById('note');
+  let step = 0;
+  const show = () => {
+    sets.forEach((s, i) => { s.hidden = i !== step; });
+    bk.disabled = step === 0 || step >= sets.length;
+    go.textContent = step === sets.length - 1 ? 'Submit' : 'Continue';
+    go.hidden = step >= sets.length; note.hidden = step < sets.length;
+    if (step === 4) document.getElementById('summary').innerHTML =
+      `<b>${f.given.value || '—'} ${f.family.value}</b><br>${f.email.value || '—'}<br>${[f.street.value, f.city.value, f.post.value].filter(Boolean).join(', ') || '—'}<br>${f.ticket.value || '—'}`;
+    fill();
+  };
+  // each field filled sets another block of the course being laid
+  const fill = () => {
+    const s = sets[step]; if (!s) return;
+    const fields = [...s.querySelectorAll('input,select')];
+    const share = fields.length ? fields.filter((i) => i.value.trim()).length / fields.length : 1;
+    navs.forEach((n) => n.progress(.2 + .8 * share * .999));
+  };
+  f.addEventListener('input', fill);
+  const to = (n) => { step = n; navs.forEach((p) => p.go(n)); show(); };
+  f.addEventListener('submit', (e) => { e.preventDefault(); to(step + 1); });
+  bk.addEventListener('click', () => to(step - 1));
+  document.getElementById('again').addEventListener('click', () => { f.reset(); to(0); });
+  // a done step's label goes back to it, on either nav
+  document.addEventListener('pyramid-steps:select', (e) => { e.preventDefault(); if (e.detail.index < step) to(e.detail.index); });
+  show();
+</script>
+</body></html>
