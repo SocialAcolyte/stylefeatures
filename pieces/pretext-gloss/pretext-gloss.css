@@ -188,7 +188,9 @@
 }
 .pg-s-p .pg-key { font-size: .62em; }
 .pg-s-p .pg-lemma { cursor: pointer; -webkit-tap-highlight-color: transparent; hyphens: manual; -webkit-hyphens: manual; }
-.pg-s-p a.pg-key { text-decoration: none; padding: .6em .25em; margin: -.6em -.1em; }
+/* a sigil is a letter wide: its tap pad reaches well past it (a fingertip's width) without
+   moving a line, the negative margin taking back all but the old .15em */
+.pg-s-p a.pg-key { text-decoration: none; padding: .6em .9em; margin: -.6em -.75em; position: relative; z-index: 1; }
 .pg-s-ini { float: left; margin: .32em .42em 0 -.04em; mix-blend-mode: multiply; filter: grayscale(1); transition: filter 2.4s cubic-bezier(.3, .6, .2, 1); }
 .pg-stack.is-bloomed .pg-s-ini { filter: none; }
 .pg-s-d { margin: .55em 0 1.35em; }

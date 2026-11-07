@@ -1141,7 +1141,12 @@ export function moodboard(root, opts = {}) {
         const slop = down.type === 'mouse' ? 3 : 7;
         if (state === 'pressing') {
             pushSample(p);
-            if (dist > slop) send(down.card.pinned ? 'PULL_PINNED' : 'MOVE_FAR', p);
+            if (dist > slop) {
+                // a quick upright swipe that happens to start on a card is the page
+                // scrolling: let it go (the browser has it, see onTouchMove)
+                if (toPage(p)) { pts.delete(e.pointerId); primary = null; try { root.releasePointerCapture(e.pointerId); } catch { /* fine */ } send('CANCEL', p); return; }
+                send(down.card.pinned ? 'PULL_PINNED' : 'MOVE_FAR', p);
+            }
             return;
         }
         if (state === 'pointing') {
@@ -1174,7 +1179,18 @@ export function moodboard(root, opts = {}) {
 
     // In the page, a touch on paper may scroll the page; once the board owns a
     // gesture (two fingers, a card, a marquee, full screen) the page keeps still.
+    // On a phone the cards cover most of the board, so a card only takes the finger
+    // once it is held a moment (CARD_HOLD) or pulled sideways: a quick upright swipe
+    // starting on one still scrolls the page, or the board would be a wall in it.
+    const CARD_HOLD = 260;
+    function cardMayScroll() {
+        return !isFull && state === 'pressing' && down && down.type === 'touch' && performance.now() - down.t < CARD_HOLD;
+    }
+    function toPage(p) {
+        return cardMayScroll() && Math.abs(p.y - down.y) > Math.abs(p.x - down.x) * 1.2;
+    }
     function onTouchMove(e) {
+        if (e.touches.length < 2 && cardMayScroll()) return;
         if (isFull || e.touches.length > 1 || (state !== 'idle' && state !== 'pointing')) { if (e.cancelable) e.preventDefault(); }
     }
     function onTouchStart(e) { if (e.touches.length > 1 && e.cancelable) e.preventDefault(); }

@@ -100,7 +100,7 @@
     linear-gradient(170deg, rgba(255, 255, 255, .55), rgba(255, 255, 255, 0) 40%, rgba(120, 100, 70, .035)),
     var(--mb-card);
   transform-origin: 0 0;
-  touch-action: none;
+  touch-action: pan-y;    /* a quick upright swipe scrolls the page; a held or sideways one moves the card (moodboard.js). Full screen is none. */
   cursor: grab;
   outline: none;
   box-shadow:

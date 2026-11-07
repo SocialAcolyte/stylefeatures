@@ -48,6 +48,8 @@
  */
 
 const calm = matchMedia('(prefers-reduced-motion: reduce)');
+const coarse = matchMedia('(pointer: coarse)');
+const TILT_TURN = 0.42;   // radians of wall turn at full tilt (24 degrees)
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 
 const VERT = `
@@ -73,6 +75,7 @@ uniform float uCurve;       // radius of the wall's gentle concave curve, css px
 uniform float uCandleK;
 uniform float uWinK;
 uniform float uColor;       // 0 grey .. 1 gold
+uniform vec2 uTiltN;        // the phone's tilt: the whole wall turned against the room's lights
 varying vec2 vUv;
 
 const vec3 CANDLE = vec3(1., .8, .56);
@@ -98,7 +101,10 @@ void light(vec2 uv, vec3 alb, out vec3 base, out vec3 spec, out float mat) {
     vec3 P = vec3(uv * uSize, 0.);
     // the wall is not flat: a gentle concave curve, like the inside of an apse,
     // turns its surface slowly across the field. The cube's own tilt rides on that.
-    vec2 macro = -(P.xy - uSize * .5) / uCurve;
+    // Tilting a phone turns the wall in your hands while the candle and the window stay
+    // put in the room, so tilt turns every cube's normal together and the pools sweep
+    // across the gold.
+    vec2 macro = -(P.xy - uSize * .5) / uCurve + uTiltN;
     vec3 Nm = normalize(vec3(macro, 1.));
     vec3 N = normalize(vec3(macro + t, 1.));
     vec3 V = normalize(uEye - P);
@@ -267,7 +273,7 @@ export function goldGround(root, opts = {}) {
         for (const n of names) p.u[n] = gl.getUniformLocation(p, n);
         return p;
     }
-    const LIGHT_U = ['uAlb', 'uData', 'uCrop', 'uTexel', 'uSize', 'uEye', 'uCandle', 'uWin', 'uCurve', 'uCandleK', 'uWinK', 'uColor'];
+    const LIGHT_U = ['uAlb', 'uData', 'uCrop', 'uTexel', 'uSize', 'uEye', 'uCandle', 'uWin', 'uCurve', 'uCandleK', 'uWinK', 'uColor', 'uTiltN'];
 
     function tex(filter) {
         const t = gl.createTexture();
@@ -361,9 +367,15 @@ export function goldGround(root, opts = {}) {
     // walks along the wall with you and its pool of light travels across the
     // gold, the way a taper's does down a nave. Unpointed, it is held a little high and
     // and a little right of the middle of the screen.
+    home.y = () => innerHeight * (innerHeight > innerWidth * 1.15 ? 0.66 : 0.4);
     function home() {
+        pointer = null;
         candle.tx = candle.x = innerWidth * 0.56;
-        candle.ty = candle.y = innerHeight * 0.4;
+        // The cubes lean down toward the floor, so a candle's pool forms well above the
+        // flame. On a wide screen the wall is short and that lands it in the gold; on a
+        // tall phone held at 0.4 it landed on the page above, leaving a sliver of glint
+        // along the wall's top edge. There the flame is held lower.
+        candle.ty = candle.y = home.y();
         candle.set = true;
     }
 
@@ -374,8 +386,8 @@ export function goldGround(root, opts = {}) {
         const D = cfg.distance * Math.max(vw, vh, 600);
         // the eye: in the middle of the screen, so as the page scrolls the wall
         // slides past it; the phone's tilt leans it
-        const ex = vw / 2 - r.left + tiltEye.x * D * 0.35;
-        const ey = vh * 0.5 - r.top + tiltEye.y * D * 0.35;
+        const ex = vw / 2 - r.left + tiltEye.x * D * 0.1;
+        const ey = vh * 0.5 - r.top + tiltEye.y * D * 0.1;
         return { r, D, ex, ey, vh };
     }
 
@@ -397,6 +409,8 @@ export function goldGround(root, opts = {}) {
         gl.uniform1f(u.uCandleK, cfg.candle);
         gl.uniform1f(u.uWinK, cfg.window);
         gl.uniform1f(u.uColor, color);
+        // tilt 1 is about 24 degrees (tilt.js), and the normal turns by that much
+        gl.uniform2f(u.uTiltN, tiltEye.x * TILT_TURN, tiltEye.y * TILT_TURN);
     }
 
     function draw(v) {
@@ -453,6 +467,13 @@ export function goldGround(root, opts = {}) {
         if (pointer) {
             candle.tx = pointer.x;
             candle.ty = pointer.y;
+        } else if (coarse.matches) {
+            // On a touch screen nobody carries the flame between touches. It is still held
+            // in the screen, so its pool walks along a tall wall as you scroll, but never
+            // above the wall's middle or below its foot: a small panel near the top of a
+            // phone page would otherwise never come down to meet it, and its pool (which
+            // forms above the flame) would light the page instead of the gold.
+            candle.ty = clamp(home.y(), v.r.top + v.r.height * 0.55, v.r.top + v.r.height);
         }
         const k = 1 - Math.exp(-dt / 0.14);
         candle.x += (candle.tx - candle.x) * k;
@@ -477,7 +498,7 @@ export function goldGround(root, opts = {}) {
         const moving = Math.abs(candle.tx - candle.x) > 0.3 || Math.abs(candle.ty - candle.y) > 0.3
             || Math.abs(ct - color) > 0.002
             || (tilt.active && Math.abs(tilt.x - tiltEye.x) + Math.abs(tilt.y - tiltEye.y) > 0.001);
-        const key = [v.ex, v.ey, candle.x, candle.y, color, W, H].map((x) => x.toFixed(2)).join();
+        const key = [v.ex, v.ey, candle.x, candle.y, color, W, H, tiltEye.x * 100, tiltEye.y * 100].map((x) => x.toFixed(2)).join();
         if (key !== lastKey) { draw(v); lastKey = key; }
         if (moving) raf = requestAnimationFrame(frame);
         else last = 0;
@@ -546,6 +567,20 @@ export function goldGround(root, opts = {}) {
             pointer = { x: e.clientX, y: e.clientY };
             kick();
         }, { passive: true });
+        // On a phone a finger on the wall carries the candle. It follows the
+        // finger while it rests or drags, and goes on following it through a
+        // scroll (touch events keep coming while the page moves), so swiping up
+        // past the gold draws the flame along it. Lifted, the candle stays put.
+        const touchAt = (e) => {
+            const t = e.touches[0];
+            if (!t || calm.matches) return;
+            pointer = { x: t.clientX, y: t.clientY };
+            kick();
+        };
+        on(root, 'touchstart', touchAt, { passive: true });
+        on(root, 'touchmove', touchAt, { passive: true });
+        on(root, 'touchend', () => { pointer = null; }, { passive: true });
+        on(root, 'touchcancel', () => { pointer = null; }, { passive: true });
         on(window, 'deviceorientation', () => { if (tilt.active && !calm.matches) kick(); }, { passive: true });
         on(document, 'visibilitychange', () => { if (!document.hidden) { last = 0; kick(); } });
         on(calm, 'change', () => { if (!gl) return; lastKey = ''; calm.matches ? still() : kick(); });
