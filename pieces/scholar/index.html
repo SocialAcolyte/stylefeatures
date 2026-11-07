@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<script src="./backdrop/backdrop.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Scholar: the paper</title>
+<script>document.documentElement.classList.remove("no-js")</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+<link rel="stylesheet" href="./kit/scaffold.css">
+<link rel="stylesheet" href="./scholar/section.css">
+</head>
+<body>
+<section class="demo-scholar" data-tpl="demo/scholar" id="top" data-tour-root data-driver="manual" aria-label="Your Name: research, publications, teaching">
+  <div class="sc-stage" data-tour-stage>
+
+    <!-- The title page fills the stage. tour.js fits the window to this frame and keeps every push-in inside it
+         (data-tour-frame). Its shape follows the stage: wide (1600 × 900), square (960 × 960), tall (680 × 1209, 9:16);
+         on a phone the title page alone, reflowed into one narrow column (section.js). -->
+    <div class="sc-frame" data-tour-frame aria-hidden="true"></div>
+
+    <div class="tour-rig">
+      <div class="sc-win" data-tour-window data-chrome="none" data-size="1600x900">
+
+        <!-- THE TITLE PAGE: the person's site set like the first page of a paper. Their name is the title, the abstract is
+             their bio, the keywords are their fields. Every reference on it opens where it is: "Fig. 1" enlarges the figure,
+             "[1]" points at the paper, "Cite" opens its BibTeX, "PDF" opens a preview, "*" is the correspondence footnote.
+             Hooks the film points at are data-tour="…" (written '@…' in script.js). Fill it from AGENT.md. -->
+        <article class="sc-page" data-tour="page">
+          <header class="sc-rh" data-r="Updated November 2026">
+            <span class="sc-rh-l sc-sc">Your Name</span>
+            <nav class="sc-rh-r" aria-label="Sections">
+              <a href="#publications"><i>2</i>Publications</a><a href="#talks"><i>3</i>Talks</a><a href="#teaching"><i>4</i>Teaching</a><a href="#people"><i>5</i>Students</a><a href="#cv">CV</a>
+            </nav>
+          </header>
+
+          <div class="sc-tp">
+            <p class="sc-kind sc-sc">Research <span>·</span> Updated November 2026</p>
+            <h1 class="sc-title">Your Name<a class="sc-star" href="#correspondence" data-tour="ref-star" aria-label="Correspondence">*</a></h1>
+            <p class="sc-sub">The question your work keeps asking, in one line</p>
+            <p class="sc-aff">Your position, Department of Your Field, University<a class="sc-fn" href="#sn-1" data-sn="1" data-tour="ref-sn1">1</a></p>
+            <p class="sc-ids"><span>ORCID <b class="sc-num">0000-0000-0000-0000</b></span><a href="#cv">Curriculum vitae</a><a href="#publications">All publications</a></p>
+
+            <aside class="sc-sn sc-sn-1" id="sn-1" data-sn="1"><i>1</i>Before this: your PhD and any postdoc, where and when, exactly as on your CV.</aside>
+
+            <div class="sc-abs">
+              <p><span class="sc-runin sc-sc">Abstract.</span> Who you are and what you study, in the first person and plain words: the question, why it matters, and what you have found so far, the way you would put it to a colleague from another field. The result you are proudest of gets its figure (<a class="sc-ref" href="#fig-1" data-tour="ref-fig">Fig.&nbsp;1</a>) and its paper <a class="sc-cite" href="#pub-1" data-tour="ref-1">[1]</a>. Then where you work now, with whom<a class="sc-fn" href="#sn-2" data-sn="2" data-tour="ref-sn2">2</a>, and the question you are working on next.</p>
+            </div>
+
+            <div class="sc-mg">
+            <figure class="sc-fig" id="fig-1" data-tour="fig">
+              <div class="sc-fig-box" data-tour="fig-box">
+                <div class="ph" style="--r:3/2" data-ph="Figure 1 · 3:2" data-hint="Your best figure, as published"></div>
+              </div>
+              <figcaption><b>Fig. 1.</b> What the figure shows, in one sentence, and what to notice in it. <span class="sc-from">From [1].</span></figcaption>
+            </figure>
+
+            <aside class="sc-sn sc-sn-2" id="sn-2" data-sn="2"><i>2</i>Your lab or group, and the people you work with most. A link to the group page.</aside>
+            </div>
+
+            <p class="sc-kw"><em>Keywords:</em> your first field <span>·</span> a method you are known for <span>·</span> a second field <span>·</span> an application</p>
+
+            <section class="sc-sel" aria-label="Selected papers">
+              <h2 class="sc-h"><span class="sc-n">1</span>Selected papers</h2>
+              <ol class="sc-refs">
+                <li class="sc-pub" id="pub-1" data-tour="pub-1">
+                  <span class="sc-pn">[1]</span>
+                  <div class="sc-pb">
+                    <p class="sc-pt">The title of the paper you would hand someone first.</p>
+                    <p class="sc-pa">A. Coauthor, <b>Y. Name</b>, B. Coauthor. <i>Journal or conference</i>, <span class="sc-num">2024</span>.</p>
+                    <p class="sc-pl"><button type="button" class="sc-act" data-cite data-tour="cite-1">Cite</button><a class="sc-act" href="#" data-pdf data-tour="pdf-1">PDF</a><a class="sc-act" href="#">Code</a></p>
+                    <div class="sc-bib" data-tour-grow><div class="sc-bib-in" data-tour="bib-1">
+                      <button type="button" class="sc-copy" data-tour="copy-1"><span class="a">Copy BibTeX</span><span class="b"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="m2.6 6.3 2.2 2.2 4.6-4.9"/></svg>Copied</span></button>
+<pre class="sc-tex"><span class="sc-sel-wash"></span><b>@article</b>{<i>name2024title</i>,
+  <u>title</u>   = {The title of the paper you would hand someone first},
+  <u>author</u>  = {Coauthor, A. and Name, Y. and Coauthor, B.},
+  <u>journal</u> = {Journal or conference},
+  <u>year</u>    = {2024},
+  <u>doi</u>     = {10.0000/your.doi}
+}</pre>
+                    </div></div>
+                  </div>
+                </li>
+                <li class="sc-pub" id="pub-2" data-tour="pub-2">
+                  <span class="sc-pn">[2]</span>
+                  <div class="sc-pb">
+                    <p class="sc-pt">A second paper, the one that opened a new line of work.</p>
+                    <p class="sc-pa"><b>Y. Name</b>, C. Coauthor. <i>Venue</i>, <span class="sc-num">2022</span>.</p>
+                    <p class="sc-pl"><button type="button" class="sc-act" data-cite>Cite</button><a class="sc-act" href="#" data-pdf>PDF</a></p>
+                    <div class="sc-bib" data-tour-grow><div class="sc-bib-in">
+                      <button type="button" class="sc-copy"><span class="a">Copy BibTeX</span><span class="b"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="m2.6 6.3 2.2 2.2 4.6-4.9"/></svg>Copied</span></button>
+<pre class="sc-tex"><span class="sc-sel-wash"></span><b>@inproceedings</b>{<i>name2022second</i>,
+  <u>title</u>     = {A second paper, the one that opened a new line of work},
+  <u>author</u>    = {Name, Y. and Coauthor, C.},
+  <u>booktitle</u> = {Venue},
+  <u>year</u>      = {2022}
+}</pre>
+                    </div></div>
+                  </div>
+                </li>
+                <li class="sc-pub" id="pub-3" data-tour="pub-3">
+                  <span class="sc-pn">[3]</span>
+                  <div class="sc-pb">
+                    <p class="sc-pt">Your newest work, a preprint is fine.</p>
+                    <p class="sc-pa">D. Student, <b>Y. Name</b>. <i>Preprint</i>, <span class="sc-num">2026</span>.</p>
+                    <p class="sc-pl"><button type="button" class="sc-act" data-cite>Cite</button><a class="sc-act" href="#" data-pdf>PDF</a><a class="sc-act" href="#">Code</a></p>
+                    <div class="sc-bib" data-tour-grow><div class="sc-bib-in">
+                      <button type="button" class="sc-copy"><span class="a">Copy BibTeX</span><span class="b"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="m2.6 6.3 2.2 2.2 4.6-4.9"/></svg>Copied</span></button>
+<pre class="sc-tex"><span class="sc-sel-wash"></span><b>@misc</b>{<i>student2026newest</i>,
+  <u>title</u>  = {Your newest work, a preprint is fine},
+  <u>author</u> = {Student, D. and Name, Y.},
+  <u>note</u>   = {Preprint},
+  <u>year</u>   = {2026}
+}</pre>
+                    </div></div>
+                  </div>
+                </li>
+              </ol>
+            </section>
+
+            <!-- the first page's footnote: the asterisk on the name points here -->
+            <p class="sc-foot" data-tour="foot"><span class="sc-foot-in" data-tour="foot-in"><i>*</i>Correspondence: <span class="sc-foot-mail">you@university.edu</span>. Office, Building, Room.</span></p>
+            <span class="sc-folio sc-num">1</span>
+          </div>
+
+          <span class="sc-veil" data-tour="veil" aria-hidden="true"></span>
+        </article>
+
+        <!-- THE PDF PREVIEW: opens on the paper (never a dark scrim) to the paper's first page, one sentence highlighted.
+             Rebuild the page from their real PDF: its title, authors and abstract as text, the sentence they want read
+             in .sc-hl (AGENT.md §3). -->
+        <div class="sc-pdf" data-tour="pdf" role="dialog" aria-label="Paper preview" aria-hidden="true">
+          <div class="sc-pdf-bar">
+            <svg class="sc-pdf-ic" viewBox="0 0 12 14" aria-hidden="true"><path d="M2 1h5.5L10 3.6V13H2z"/><path d="M7.5 1v2.6H10"/></svg>
+            <span class="sc-pdf-name">name-2024-title.pdf</span>
+            <span class="sc-pdf-pg"><b class="sc-num">1</b> / <span class="sc-num">14</span></span>
+            <a class="sc-pdf-open" href="#">Open the PDF <svg viewBox="0 0 10 10" aria-hidden="true"><path d="M3 2h5v5M8 2 2.5 7.5"/></svg></a>
+            <button type="button" class="sc-pdf-x" data-tour="pdf-close" aria-label="Close the preview"><svg viewBox="0 0 10 10" aria-hidden="true"><path d="m2 2 6 6M8 2 2 8"/></svg></button>
+          </div>
+          <div class="sc-pdf-desk" data-tour="pdf-desk">
+            <div class="sc-pdf-page" data-tour="pdf-page">
+              <p class="sc-pp-head"><span>Journal or conference</span><span class="sc-num">2024</span></p>
+              <p class="sc-pp-title">The title of the paper you would hand someone first</p>
+              <p class="sc-pp-auth">A. Coauthor, <b>Y. Name</b>, B. Coauthor</p>
+              <p class="sc-pp-aff">The affiliations, as printed</p>
+              <div class="sc-pp-abs" data-tour="pp-abs">
+                <p class="sc-pp-k">Abstract</p>
+                <p>The paper's abstract as it was published, word for word, so a reader meets the claim in the authors' own words before deciding to read on.</p>
+                <p><span class="sc-hl" data-tour="hl"><i class="sc-hl-a" data-tour="hl-a"></i>The one sentence you most want a reader to take away.<i class="sc-hl-b" data-tour="hl-b"></i></span> Then the rest of the abstract: how you showed it, and what it changes.</p>
+              </div>
+              <div class="sc-pp-body" aria-hidden="true">
+                <div><p class="sc-pp-h"><span class="sc-num">1</span> Introduction</p><i></i><i></i><i></i><i></i><i class="s"></i><i></i><i></i><i class="s"></i></div>
+                <div><div class="ph is-bare" style="--r:4/3"></div><p class="sc-pp-cap">Figure 1, as printed</p><i></i><i></i><i class="s"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- The film's control (never in ?record): read it to me, skip, read it again -->
+    <div class="sc-ctl" data-tour-hide-on-record>
+      <button class="sc-ctl-btn" type="button"><svg class="i-play" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.2 1.2v7.6L8.6 5z"/></svg><svg class="i-skip" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.6 1.6v6.8L6 5zM7.4 1.6v6.8"/></svg><span class="sc-ctl-say">Read it to me</span></button>
+      <span class="sc-ctl-bar"><i></i></span>
+      <span class="sf-note">The title page reads itself once: a figure opens, a citation's BibTeX is copied, a paper's PDF opens to one highlighted sentence. Then every reference on it is the visitor's.</span>
+    </div>
+
+    <!-- Closing frame (?record): the correspondence footnote, set large -->
+    <footer class="sc-end-frame" data-tour-end>
+      <span class="sc-end-rule"></span>
+      <p class="sc-end-k"><i>*</i>Correspondence</p>
+      <p class="sc-end-mail">you@university.edu</p>
+      <p class="sc-end-at">Office, Building, Room <span>·</span> yourname.org</p>
+    </footer>
+  </div>
+
+  <!-- THE REST OF THE PAPER: real, clickable sections, with sidenotes in the margin on wide screens. A running head
+       follows the reader: the section they are in, and its folio. -->
+  <div class="sc-doc" id="paper">
+    <div class="sc-run" aria-hidden="true"><span class="sc-run-name sc-sc">Your Name</span><span class="sc-run-sec"><b class="sc-num">2</b> <span>Publications</span></span><span class="sc-run-folio sc-num">2</span></div>
+
+    <section class="sc-s" id="publications" data-folio="2">
+      <h2 class="sc-h"><span class="sc-n">2</span>Publications</h2>
+      <p class="sc-p">Every paper, newest first, with its venue and year as published. Your name is set in bold, so a reader sees where you sit in the author list.<a class="sc-fn" href="#sn-3" data-sn="3">3</a><span class="sc-sn" id="sn-3" data-sn="3"><i>3</i>The same list lives on your ORCID and in your field's index. Link them here, so nobody has to search.</span></p>
+
+      <div class="sc-year"><h3 class="sc-y sc-num">2026</h3>
+        <ol class="sc-refs">
+          <li class="sc-pub"><span class="sc-pn">[4]</span><div class="sc-pb">
+            <p class="sc-pt">A paper from this year.</p>
+            <p class="sc-pa"><b>Y. Name</b>, E. Coauthor, F. Coauthor. <i>Venue</i>, <span class="sc-num">2026</span>.</p>
+            <p class="sc-pl"><button type="button" class="sc-act" data-cite>Cite</button><a class="sc-act" href="#">PDF</a><a class="sc-act" href="#">Code</a></p>
+            <div class="sc-bib"><div class="sc-bib-in"><button type="button" class="sc-copy"><span class="a">Copy BibTeX</span><span class="b"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="m2.6 6.3 2.2 2.2 4.6-4.9"/></svg>Copied</span></button>
+<pre class="sc-tex"><span class="sc-sel-wash"></span><b>@article</b>{<i>name2026paper</i>,
+  <u>title</u>   = {A paper from this year},
+  <u>author</u>  = {Name, Y. and Coauthor, E. and Coauthor, F.},
+  <u>journal</u> = {Venue},
+  <u>year</u>    = {2026}
+}</pre></div></div>
+          </div></li>
+          <li class="sc-pub"><span class="sc-pn">[3]</span><div class="sc-pb">
+            <p class="sc-pt">Your newest work, a preprint is fine.</p>
+            <p class="sc-pa">D. Student, <b>Y. Name</b>. <i>Preprint</i>, <span class="sc-num">2026</span>.</p>
+            <p class="sc-pl"><a class="sc-act" href="#">PDF</a><a class="sc-act" href="#">Code</a><span class="sc-tag">With a student</span></p>
+          </div></li>
+        </ol>
+      </div>
+      <div class="sc-year"><h3 class="sc-y sc-num">2025</h3>
+        <ol class="sc-refs">
+          <li class="sc-pub"><span class="sc-pn">[5]</span><div class="sc-pb">
+            <p class="sc-pt">A conference paper.</p>
+            <p class="sc-pa">G. Coauthor, <b>Y. Name</b>. <i>Proceedings of the conference</i>, <span class="sc-num">2025</span>.</p>
+            <p class="sc-pl"><a class="sc-act" href="#">PDF</a><a class="sc-act" href="#">Slides</a></p>
+          </div></li>
+          <li class="sc-pub"><span class="sc-pn">[6]</span><div class="sc-pb">
+            <p class="sc-pt">A workshop paper, a chapter or a dataset.</p>
+            <p class="sc-pa"><b>Y. Name</b>. <i>Where it appeared</i>, <span class="sc-num">2025</span>.</p>
+            <p class="sc-pl"><a class="sc-act" href="#">PDF</a><a class="sc-act" href="#">Data</a></p>
+          </div></li>
+        </ol>
+      </div>
+      <div class="sc-year"><h3 class="sc-y sc-num">2024</h3>
+        <ol class="sc-refs">
+          <li class="sc-pub"><span class="sc-pn">[1]</span><div class="sc-pb">
+            <p class="sc-pt">The title of the paper you would hand someone first.</p>
+            <p class="sc-pa">A. Coauthor, <b>Y. Name</b>, B. Coauthor. <i>Journal or conference</i>, <span class="sc-num">2024</span>.<a class="sc-fn" href="#sn-4" data-sn="4">4</a><span class="sc-sn" id="sn-4" data-sn="4"><i>4</i>A note a reader would want: an award, a press piece, a correction. Only if it is real.</span></p>
+            <p class="sc-pl"><a class="sc-act" href="#">PDF</a><a class="sc-act" href="#">Code</a></p>
+          </div></li>
+        </ol>
+      </div>
+      <div class="sc-year"><h3 class="sc-y">Earlier</h3>
+        <ol class="sc-refs">
+          <li class="sc-pub"><span class="sc-pn">[2]</span><div class="sc-pb">
+            <p class="sc-pt">A second paper, the one that opened a new line of work.</p>
+            <p class="sc-pa"><b>Y. Name</b>, C. Coauthor. <i>Venue</i>, <span class="sc-num">2022</span>.</p>
+            <p class="sc-pl"><a class="sc-act" href="#">PDF</a></p>
+          </div></li>
+          <li class="sc-pub"><span class="sc-pn">[7]</span><div class="sc-pb">
+            <p class="sc-pt">Your doctoral thesis.</p>
+            <p class="sc-pa"><b>Y. Name</b>. <i>PhD thesis, University</i>, <span class="sc-num">2020</span>.</p>
+            <p class="sc-pl"><a class="sc-act" href="#">PDF</a></p>
+          </div></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="sc-s" id="talks" data-folio="3">
+      <h2 class="sc-h"><span class="sc-n">3</span>Talks</h2>
+      <ol class="sc-list">
+        <li><span class="sc-when sc-num">Mar 2026</span><span class="sc-what"><b>The title of a talk</b> <span class="sc-where">Seminar or conference, City</span></span><span class="sc-links"><a href="#">Slides</a><a href="#">Video</a></span></li>
+        <li><span class="sc-when sc-num">Oct 2025</span><span class="sc-what"><b>An invited talk</b> <span class="sc-where">University, City</span></span><span class="sc-links"><a href="#">Slides</a></span></li>
+        <li><span class="sc-when sc-num">Jun 2025</span><span class="sc-what"><b>A contributed talk</b> <span class="sc-where">Conference, City</span></span><span class="sc-links"><a href="#">Video</a></span></li>
+        <li><span class="sc-when sc-num">Nov 2024</span><span class="sc-what"><b>A talk for a general audience</b> <span class="sc-where">Where, City</span></span><span class="sc-links"></span></li>
+      </ol>
+    </section>
+
+    <section class="sc-s" id="teaching" data-folio="4">
+      <h2 class="sc-h"><span class="sc-n">4</span>Teaching</h2>
+      <ol class="sc-list sc-courses">
+        <li><span class="sc-when">Course code</span><span class="sc-what"><b>The course you teach most</b> <span class="sc-where">Level, term, every year since</span><span class="sc-line">What students can do at the end of it, in one sentence.</span></span><span class="sc-links"><a href="#">Syllabus</a></span></li>
+        <li><span class="sc-when">Course code</span><span class="sc-what"><b>A graduate seminar</b> <span class="sc-where">Level, term</span><span class="sc-line">The reading list, or the project students leave with.</span></span><span class="sc-links"><a href="#">Syllabus</a></span></li>
+        <li><span class="sc-when">Earlier</span><span class="sc-what"><b>A course you assisted or guest-lectured</b> <span class="sc-where">Where, when</span></span><span class="sc-links"></span></li>
+      </ol>
+    </section>
+
+    <section class="sc-s" id="people" data-folio="5">
+      <h2 class="sc-h"><span class="sc-n">5</span>Students and collaborators</h2>
+      <p class="sc-p">The people the work is done with. Students first, with what they work on; then where former students went; then the colleagues you write with most.<a class="sc-fn" href="#sn-5" data-sn="5">5</a><span class="sc-sn" id="sn-5" data-sn="5"><i>5</i>Prospective students: what to send you, and when. If you are not taking students this year, say so here.</span></p>
+      <div class="sc-people">
+        <div><h3 class="sc-k sc-sc">Students</h3>
+          <ul><li><b>Student Name</b> <span>PhD, topic in four words, since 2023</span></li><li><b>Student Name</b> <span>PhD, topic, since 2024</span></li><li><b>Student Name</b> <span>Master's, topic, 2026</span></li></ul></div>
+        <div><h3 class="sc-k sc-sc">Former students</h3>
+          <ul><li><b>Student Name</b> <span>PhD 2025, now where they went</span></li><li><b>Student Name</b> <span>Master's 2024, now where</span></li></ul></div>
+        <div><h3 class="sc-k sc-sc">Collaborators</h3>
+          <ul><li><b>Colleague Name</b> <span>Institution</span></li><li><b>Colleague Name</b> <span>Institution</span></li><li><b>Colleague Name</b> <span>Institution</span></li></ul></div>
+      </div>
+    </section>
+
+    <section class="sc-s" id="cv" data-folio="6">
+      <h2 class="sc-h"><span class="sc-n">6</span>Curriculum vitae</h2>
+      <div class="sc-cv">
+        <a class="sc-cv-sheet" href="#" aria-label="Curriculum vitae (PDF)"><span class="sc-cv-page" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span></a>
+        <div>
+          <p class="sc-p">Positions, degrees, grants, service and every paper, in the order a committee reads them.</p>
+          <p class="sc-cv-act"><a class="sf-btn" href="#"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.5v6.8M3.2 5.6 6 8.4l2.8-2.8M2 10.5h8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>The full CV</a><span class="sc-cv-meta">PDF <span>·</span> updated November 2026</span></p>
+        </div>
+      </div>
+      <p class="sc-ack"><span class="sc-runin sc-sc">Acknowledgements.</span> The grants and funders behind the work, named exactly as your CV names them. Leave this out if there are none to name.</p>
+    </section>
+
+    <!-- THE ENDING: the paper's final footnote -->
+    <footer class="sc-corr" id="correspondence">
+      <span class="sc-corr-rule"></span>
+      <p class="sc-corr-k"><a class="sc-corr-mark" href="#top" aria-label="Back to the title">*</a><span class="sc-sc">Correspondence</span></p>
+      <a class="sc-corr-mail" href="mailto:you@university.edu">you@university.edu</a>
+      <dl class="sc-corr-dl">
+        <div><dt class="sc-sc">Office</dt><dd>Office, Building, Room<br>Street, City, Postcode</dd></div>
+        <div><dt class="sc-sc">Office hours</dt><dd>The day and time you hold them<br>or by appointment</dd></div>
+        <div><dt class="sc-sc">Elsewhere</dt><dd><a href="#">ORCID</a>, <a href="#">your field's index</a>, <a href="#">code</a></dd></div>
+      </dl>
+      <p class="sc-colophon">yourname.org <span>·</span> Set in Newsreader and Inter Tight <span>·</span> Updated November 2026</p>
+      <span class="sf-note">The asterisk on your name points here. Keep the email the one you want strangers to use; office hours only if you hold public ones.</span>
+    </footer>
+  </div>
+</section>
+
+<script type="module" src="./kit/scaffold.js"></script>
+<script type="module">
+import s0 from "./scholar/section.js";
+for (const [k, f] of [["demo/scholar",s0]]) document.querySelectorAll(`[data-tpl="${k}"]`).forEach((el) => f(el));
+</script>
+</body>
+</html>

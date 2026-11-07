@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<script src="./backdrop/backdrop.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Canvas</title>
+<script>document.documentElement.classList.remove("no-js")</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+<link rel="stylesheet" href="./kit/scaffold.css">
+<link rel="stylesheet" href="./canvas/section.css">
+</head>
+<body>
+<section class="demo-canvas" data-tpl="demo/canvas" id="board" data-tour-root data-driver="manual" data-captions="off" aria-label="Your Name: the board">
+  <div class="cv-stage" data-tour-stage>
+
+    <!-- The whole stage is the frame: tour.js fits the board to it and every push-in stays on the board. -->
+    <div class="cv-frame-all" data-tour-frame aria-hidden="true"></div>
+
+    <div class="tour-rig">
+      <!-- THE BOARD, in design pixels: one big sheet of warm paper the camera flies across. Its width is fixed per layout
+           (3200 wide, 1800 square, 1200 tall) and its height follows the screen ("auto"), so the whole board always fills
+           it. Everything sits in .cv-region, a box of fixed size centred on the board.
+           Every item carries its place in three layouts as CSS variables: --x --y --w --h (wide, 3200 × 1700),
+           --sx --sy --sw --sh (square, 1800 × 1800), --tx --ty --tw --th (tall, 1200 × 2120). On phones the same items
+           become a vertical sequence in this order, so keep the markup in reading order.
+           Hooks the script points at are data-tour="…" ('@…' in script.js). AGENT.md says how to fill it. -->
+      <div class="cv-win" data-tour-window data-chrome="none" data-size="3200xauto" data-size-square="1800xauto" data-size-tall="1200xauto">
+        <div class="cv-board">
+          <div class="cv-region">
+
+            <!-- hairline arrows, process → outcome. section.js draws each path from data-from to data-to in every layout -->
+            <svg class="cv-arrows" aria-hidden="true">
+              <path data-tour="arrow-1" data-from="sketch" data-to="final" pathLength="1"/>
+              <path data-tour="arrow-2" data-from="wire" data-to="final" pathLength="1"/>
+            </svg>
+
+            <!-- COVER: the name, set like a title frame -->
+            <article class="cv-item cv-frame cv-cover" data-tour="title" data-cv="title" data-label="Cover" style="--x:120;--y:130;--w:880;--h:560;--sx:100;--sy:100;--sw:780;--sh:480;--tx:80;--ty:80;--tw:1040;--th:380">
+              <div class="cv-cover-in">
+                <p class="cv-eyebrow">What you do · Where you are</p>
+                <h1 class="cv-name">Your <em>Name</em></h1>
+                <p class="cv-line">What you make, and for whom, in one sentence.</p>
+                <p class="cv-meta"><span>Selected work, 20XX–20XX</span><span class="cv-meta-hint">Drag to look around</span></p>
+              </div>
+            </article>
+
+            <aside class="cv-item cv-note" data-cv="n0" style="--rot:-4;--x:830;--y:600;--w:250;--h:180;--sx:680;--sy:500;--sw:230;--sh:170;--tx:870;--ty:380;--tw:220;--th:160">
+              <p>Start here, then wander.</p>
+            </aside>
+
+            <!-- PROJECT ONE: process frames on the left, the outcome on the right, arrows between -->
+            <header class="cv-item cv-head" data-cv="head-a" data-zone="a" style="--x:1160;--y:30;--w:1400;--h:64;--sx:100;--sy:640;--sw:1160;--sh:56;--tx:80;--ty:516;--tw:1040;--th:56">
+              <span class="cv-num">01</span><h2>Project name</h2><span class="cv-yr">Role · 20XX</span>
+            </header>
+            <article class="cv-item cv-frame" data-tour="sketch" data-cv="sketch" data-zone="a" data-label="Project name · Sketches" style="--x:1160;--y:150;--w:400;--h:260;--sx:100;--sy:740;--sw:380;--sh:250;--tx:80;--ty:610;--tw:400;--th:230">
+              <figure class="ph" data-ph="Process" data-hint="Early sketches, a whiteboard, a first idea"></figure>
+            </article>
+            <article class="cv-item cv-frame" data-tour="wire" data-cv="wire" data-zone="a" data-label="Project name · Wireframes" style="--x:1160;--y:470;--w:400;--h:260;--sx:100;--sy:1030;--sw:380;--sh:250;--tx:80;--ty:880;--tw:400;--th:230">
+              <figure class="ph" data-ph="Process" data-hint="Wireframes, a model, a test print"></figure>
+            </article>
+            <article class="cv-item cv-frame" data-tour="final" data-cv="final" data-zone="a" data-label="Project name · What shipped" style="--x:1760;--y:150;--w:800;--h:580;--sx:600;--sy:740;--sw:660;--sh:540;--tx:580;--ty:610;--tw:540;--th:500">
+              <figure class="ph" data-ph="Outcome" data-hint="The finished thing, as people saw it"></figure>
+              <div class="cv-pin" data-tour="pin-1" style="--px:.3;--py:.22"><i>YN</i><p><b>Your Name</b><span data-tour="pin-1-t">The version that shipped, and why.</span></p></div>
+            </article>
+            <aside class="cv-item cv-note" data-cv="n1" style="--rot:3;--x:2420;--y:640;--w:250;--h:180;--sx:1100;--sy:1190;--sw:220;--sh:160;--tx:920;--ty:1040;--tw:200;--th:150">
+              <p>What changed because of it.</p>
+            </aside>
+
+            <!-- PROJECT TWO: screens on a phone (or any pair of tall frames: posters, elevations, book spreads) -->
+            <header class="cv-item cv-head" data-cv="head-b" data-zone="b" style="--x:2700;--y:30;--w:440;--h:64;--sx:1340;--sy:640;--sw:360;--sh:56;--tx:80;--ty:1176;--tw:440;--th:56">
+              <span class="cv-num">02</span><h2>Project name</h2>
+            </header>
+            <article class="cv-item cv-frame cv-tall" data-tour="phone-1" data-cv="phone-1" data-zone="b" data-label="Screen" style="--x:2700;--y:150;--w:200;--h:420;--sx:1340;--sy:740;--sw:170;--sh:350;--tx:80;--ty:1270;--tw:170;--th:340">
+              <figure class="ph" data-ph="Screen" data-hint="9:19"></figure>
+              <div class="cv-pin" data-tour="pin-2" style="--px:.6;--py:.74"><i>YN</i><p><b>Your Name</b><span data-tour="pin-2-t">What this screen does, in a line.</span></p></div>
+            </article>
+            <article class="cv-item cv-frame cv-tall" data-tour="phone-2" data-cv="phone-2" data-zone="b" data-label="Screen" style="--x:2940;--y:150;--w:200;--h:420;--sx:1530;--sy:740;--sw:170;--sh:350;--tx:270;--ty:1270;--tw:170;--th:340">
+              <figure class="ph" data-ph="Screen" data-hint="9:19"></figure>
+            </article>
+
+            <!-- PROJECT THREE: a series -->
+            <header class="cv-item cv-head" data-cv="head-c" data-zone="c" style="--x:120;--y:870;--w:1200;--h:64;--sx:100;--sy:1350;--sw:880;--sh:56;--tx:560;--ty:1176;--tw:560;--th:56">
+              <span class="cv-num">03</span><h2>Series name</h2><span class="cv-yr">Medium · 20XX</span>
+            </header>
+            <article class="cv-item cv-frame" data-tour="c1" data-cv="c1" data-zone="c" data-label="1 / 3" style="--x:120;--y:990;--w:380;--h:380;--sx:100;--sy:1440;--sw:280;--sh:280;--tx:560;--ty:1270;--tw:175;--th:175">
+              <figure class="ph" data-ph="Piece" data-hint="1:1"></figure>
+            </article>
+            <article class="cv-item cv-frame" data-tour="c2" data-cv="c2" data-zone="c" data-label="2 / 3" style="--x:530;--y:990;--w:380;--h:380;--sx:400;--sy:1440;--sw:280;--sh:280;--tx:752;--ty:1270;--tw:175;--th:175">
+              <figure class="ph" data-ph="Piece" data-hint="1:1"></figure>
+              <div class="cv-pin" data-tour="pin-3" style="--px:.5;--py:.56"><i>YN</i><p><b>Your Name</b><span data-tour="pin-3-t">The one I'd hang first.</span></p></div>
+            </article>
+            <article class="cv-item cv-frame" data-tour="c3" data-cv="c3" data-zone="c" data-label="3 / 3" style="--x:940;--y:990;--w:380;--h:380;--sx:700;--sy:1440;--sw:280;--sh:280;--tx:945;--ty:1270;--tw:175;--th:175">
+              <figure class="ph" data-ph="Piece" data-hint="1:1"></figure>
+            </article>
+            <aside class="cv-item cv-note" data-cv="n2" style="--rot:-2;--x:1150;--y:1310;--w:240;--h:170;--sx:860;--sy:1570;--sw:200;--sh:150;--tx:800;--ty:1480;--tw:220;--th:150">
+              <p>Process, in three words.</p>
+            </aside>
+
+            <!-- ABOUT -->
+            <article class="cv-item cv-frame cv-about" data-tour="about" data-cv="about" data-label="About" style="--x:1500;--y:1000;--w:760;--h:560;--sx:960;--sy:100;--sw:740;--sh:480;--tx:80;--ty:1680;--tw:520;--th:390">
+              <figure class="ph cv-portrait" style="--r:4/5" data-ph="Portrait" data-hint="4:5"></figure>
+              <div class="cv-about-t">
+                <p class="cv-k">About</p>
+                <p class="cv-bio">Two or three sentences in your own voice: what you make, how you work, what you care about.</p>
+                <p class="cv-k">Previously</p>
+                <ul class="cv-list">
+                  <li><span>Role, Studio</span><span>20XX–20XX</span></li>
+                  <li><span>Role, Studio</span><span>20XX–20XX</span></li>
+                  <li><span>Study, School</span><span>20XX</span></li>
+                </ul>
+              </div>
+            </article>
+
+            <aside class="cv-item cv-note" data-cv="n3" style="--rot:3;--x:2850;--y:700;--w:240;--h:180;--sx:1450;--sy:1180;--sw:220;--sh:150;--tx:470;--ty:1470;--tw:220;--th:150">
+              <p>Free from: month, year.</p>
+            </aside>
+
+            <!-- CONTACT: in the corner of the board, where the film ends -->
+            <article class="cv-item cv-frame cv-contact" data-tour="contact" data-cv="contact" data-label="Contact" style="--x:2380;--y:1080;--w:700;--h:500;--sx:1060;--sy:1400;--sw:640;--sh:320;--tx:640;--ty:1680;--tw:480;--th:390">
+              <p class="cv-k">Say hello</p>
+              <a class="cv-mail" data-tour="mail" href="mailto:hello@yourname.com">hello@yourname.com</a>
+              <p class="cv-open">What you're open to: a role, commissions, collaborations.</p>
+              <ul class="cv-links">
+                <li><a href="#">Portfolio PDF</a></li>
+                <li><a href="#">Instagram</a></li>
+                <li><a href="#">LinkedIn</a></li>
+              </ul>
+              <p class="cv-domain">yourname.com</p>
+              <div class="cv-pin is-left" data-tour="pin-4" style="--px:.84;--py:.8"><i>YN</i><p><b>Your Name</b><span data-tour="pin-4-t">Write to me here.</span></p></div>
+            </article>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The visitor's controls. Hidden while the tour plays; they arrive when the camera hands over (or on any touch). -->
+    <nav class="cv-top" aria-label="Board" data-tour-hide-on-record>
+      <button type="button" class="cv-me" data-go="title">Your Name</button>
+      <span class="cv-nav">
+        <button type="button" data-go="zone-a">Work</button>
+        <button type="button" data-go="about">About</button>
+        <button type="button" data-go="contact">Contact</button>
+        <button type="button" class="cv-replay" data-cv-replay aria-label="Play the tour again"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.2 8a4.8 4.8 0 1 0 1.5-3.5M3.2 2.6v2.6h2.6"/></svg><span>Tour</span></button>
+      </span>
+    </nav>
+    <div class="cv-dock" data-tour-hide-on-record>
+      <div class="cv-mini" aria-hidden="true"><svg class="cv-mini-svg"></svg><i class="cv-mini-view"></i></div>
+      <div class="cv-zoom">
+        <button type="button" data-zoom="-1" aria-label="Zoom out"><svg viewBox="0 0 16 16"><path d="M3.5 8h9"/></svg></button>
+        <button type="button" data-zoom="0" class="cv-pct" aria-label="Show the whole board">100%</button>
+        <button type="button" data-zoom="1" aria-label="Zoom in"><svg viewBox="0 0 16 16"><path d="M3.5 8h9M8 3.5v9"/></svg></button>
+      </div>
+    </div>
+    <button type="button" class="cv-skip" data-cv-skip data-tour-hide-on-record>Look around yourself <span aria-hidden="true">→</span></button>
+
+    <!-- The closing frame: the board, whole. Live, a quiet line on how to move; in ?record, the address. -->
+    <footer class="cv-end" data-tour-end>
+      <p class="cv-hint"><span>Drag to move</span><span>Scroll to zoom</span><span><kbd>←</kbd> <kbd>→</kbd> frame by frame</span></p>
+      <p class="cv-end-url">yourname.com</p>
+    </footer>
+    <span class="sf-note cv-stage-note" data-tour-hide-on-record>The tour flies frame to frame, leaves a comment, and hands the board over. Fill it from your real work (AGENT.md).</span>
+  </div>
+</section>
+
+<script type="module" src="./kit/scaffold.js"></script>
+<script type="module">
+import s0 from "./canvas/section.js";
+for (const [k, f] of [["demo/canvas",s0]]) document.querySelectorAll(`[data-tpl="${k}"]`).forEach((el) => f(el));
+</script>
+</body>
+</html>

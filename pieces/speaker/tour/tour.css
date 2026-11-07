@@ -1,0 +1,144 @@
+/* tour.css: the engine's own look. Window chromes, the cursor, ripples, chapter card, caption, key caps,
+   the play controls, the auto-play switch and the ?record stage. Shared by every demo film; a template
+   restyles it through these tokens rather than editing it:
+     --tour-stage  backdrop behind the window        --tour-win-radius  window corners (design px)
+     --tour-ring   click ripple colour               --tour-cap-bg / --tour-cap-ink  caption pill
+   Sizes on the stage scale with --su (a hundredth of the stage's short side, set by tour.js). */
+
+[data-tour-root]{position:relative;--tour-stage:var(--page-2,#ece9e3);--tour-ring:rgba(25,24,22,.42);--tour-cap-bg:var(--ink,#191816);--tour-cap-ink:var(--page,#f5f3ef);--tour-win-radius:12px}
+[data-tour-stage]{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--tour-stage);isolation:isolate;--su:9px}
+[data-tour-root].is-play [data-tour-stage],[data-tour-root].is-still [data-tour-stage]{position:relative}
+.tour-rig{position:absolute;inset:0}
+
+/* the window: design pixels, scaled by the camera */
+[data-tour-window]{position:absolute;left:0;top:0;transform-origin:0 0;display:flex;flex-direction:column;overflow:hidden;
+  border-radius:var(--tour-win-radius);background:var(--ph,#fff);
+  box-shadow:0 0 0 1px rgba(25,24,22,.12),0 40px 90px -40px rgba(25,24,22,.5),0 12px 28px -16px rgba(25,24,22,.28)}
+[data-tour-window] > :not(.tour-chrome){flex:1;min-height:0}
+.tour-chrome{flex:none;height:40px;display:flex;align-items:center;gap:14px;padding:0 14px;background:var(--page,#f5f3ef);border-bottom:1px solid var(--ph-line,#e3dfd7);font:500 12.5px/1 var(--sans,system-ui);color:var(--ink-2,#5f5a53)}
+.tour-lights{display:flex;gap:8px}
+.tour-lights i{width:12px;height:12px;border-radius:50%;background:#ec6a5e;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.12)}
+.tour-lights i+i{background:#f4bf4f}.tour-lights i+i+i{background:#61c554}
+.tour-navs{display:flex;gap:10px}.tour-navs.is-end{margin-left:auto}
+.tour-chrome svg{width:15px;height:15px;fill:none;stroke:var(--ink-3,#9c968c);stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.tour-url{flex:0 1 420px;margin-left:auto;display:flex;align-items:center;justify-content:center;gap:7px;height:26px;padding:0 14px;border-radius:7px;background:var(--ph,#fff);box-shadow:inset 0 0 0 1px var(--ph-line,#e3dfd7);font-weight:400;color:var(--ink-2,#5f5a53);white-space:nowrap;overflow:hidden}
+.tour-url svg{width:12px;height:12px}
+.tour-chrome[data-kind=app]{height:38px;justify-content:center;position:relative}
+.tour-chrome[data-kind=app] .tour-lights{position:absolute;left:14px;top:13px}
+.tour-chrome[data-kind=phone]{height:46px;justify-content:space-between;padding:0 26px;background:transparent;border:0;font:600 15px/1 var(--sans,system-ui);color:var(--ink,#191816)}
+.tour-notch{width:120px;height:32px;border-radius:20px;background:#111}
+.tour-status{display:flex;gap:4px}.tour-status i{width:16px;height:10px;border-radius:2px;background:var(--ink,#191816)}
+[data-chrome=phone]{--tour-win-radius:54px;box-shadow:0 0 0 10px #111,0 0 0 11px #333,0 40px 90px -30px rgba(25,24,22,.55)}
+[data-chrome=none]{--tour-win-radius:8px}
+/* terminal: a warm charcoal window (tokens --tour-term-bg, --tour-term-bar, --tour-term-ink, --tour-term-dim) */
+[data-chrome=terminal]{background:var(--tour-term-bg,#1d1b18);color:var(--tour-term-ink,#ebe5d9)}
+.tour-chrome[data-kind=terminal]{height:38px;justify-content:center;position:relative;background:var(--tour-term-bar,#272420);border-bottom:1px solid rgba(255,255,255,.07);color:var(--tour-term-dim,#a39b8e);font-weight:500}
+.tour-chrome[data-kind=terminal] .tour-lights{position:absolute;left:14px;top:13px}
+.tour-chrome[data-kind=terminal] .tour-lights i{box-shadow:inset 0 0 0 .5px rgba(0,0,0,.3)}
+/* windows inside the window: any [data-chrome] element in the product gets its own chrome and frame */
+[data-tour-window] [data-chrome]{display:flex;flex-direction:column;overflow:hidden;border-radius:var(--tour-win-radius)}
+[data-tour-window] [data-chrome] > :not(.tour-chrome){flex:1;min-height:0}
+
+/* cursor and ripples (stage coordinates) */
+.tour-cur{position:absolute;left:0;top:0;z-index:8;width:0;height:0;pointer-events:none;opacity:0;transform-origin:0 0}
+.tour-cur svg{position:absolute;left:-1px;top:-1px;overflow:visible;filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.35)) drop-shadow(0 3px 6px rgba(0,0,0,.12))}
+.tour-cur .tour-arrow path{fill:#141312;stroke:#fff;stroke-width:1.3}
+.tour-cur .tour-hand{left:-8px;top:-2px}
+.tour-cur .tour-hand path{fill:#fff;stroke:#141312;stroke-width:1.1}
+.tour-cur .tour-beam{left:-5px;top:-12px}
+.tour-cur .tour-beam path{stroke:#141312;stroke-width:1.6;paint-order:stroke}
+.tour-cur[data-look=light] .tour-arrow path{fill:#fff;stroke:#141312;stroke-width:1.1}
+.tour-ring{position:absolute;left:0;top:0;z-index:7;width:46px;height:46px;margin:-23px 0 0 -23px;border-radius:50%;border:2.5px solid var(--tour-ring);background:color-mix(in srgb,var(--tour-ring) 18%,transparent);pointer-events:none;opacity:0}
+/* pointer:'touch': a fingertip (44 window px, it zooms with the screen) instead of the arrow; tour.js sets its opacity and size */
+.tour-touch{display:none;position:absolute;left:-22px;top:-22px;width:44px;height:44px;border-radius:50%;background:var(--tour-touch,rgba(112,112,120,.36));
+  box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.62),0 0 0 1px rgba(20,19,18,.1),0 3px 12px -3px rgba(20,19,18,.32)}
+.tour-cur.is-down .tour-touch{background:var(--tour-touch-down,rgba(92,92,100,.48));box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.7),0 0 0 1px rgba(20,19,18,.12),0 1px 5px -1px rgba(20,19,18,.3)}
+.is-touch .tour-touch{display:block}
+.is-touch .tour-cur svg{display:none!important}
+.is-touch .tour-ring{width:44px;height:44px;margin:-22px 0 0 -22px;border:1.5px solid rgba(112,112,120,.55);background:none}
+/* more than one pointer (steps with { by: 'agent' }): its own colour (--tour-agent) and a label tag; the person's
+   cursor gets a tag too when pointers.main.label is set */
+.tour-cur[data-look=agent] .tour-arrow path{fill:var(--tour-agent,#3b4bc8);stroke:#fff;stroke-width:1.4}
+.tour-cur[data-look=agent] svg{filter:drop-shadow(0 1px 1.5px rgba(0,0,0,.25)) drop-shadow(0 0 7px color-mix(in srgb,var(--tour-agent,#3b4bc8) 45%,transparent))}
+.tour-tag{position:absolute;left:13px;top:21px;display:flex;align-items:center;gap:6px;height:22px;padding:0 8px;border-radius:6px;background:var(--ink,#191816);color:#fff;
+  font:600 11.5px/1 var(--sans,system-ui);letter-spacing:.01em;white-space:nowrap;box-shadow:0 4px 12px -4px rgba(0,0,0,.35)}
+.tour-tag span{font:500 11px/1 var(--mono,ui-monospace,monospace);opacity:.82}
+.tour-tag span[hidden]{display:none}
+.tour-cur[data-look=agent] .tour-tag{background:var(--tour-agent,#3b4bc8)}
+.tour-ring[data-who]:not([data-who=main]){--tour-ring:var(--tour-agent,#3b4bc8)}
+
+/* chapter card: "02 / 05", a title with one italic word, one line */
+.tour-card{position:absolute;z-index:6;left:var(--gutter,32px);bottom:var(--gutter,32px);width:min(calc(var(--su)*44),calc(100% - 2 * var(--gutter,32px)));
+  padding:calc(var(--su)*1.8) calc(var(--su)*2.1) calc(var(--su)*2);background:var(--ph,#fff);box-shadow:0 0 0 1px var(--ph-line,#e3dfd7),0 20px 44px -24px rgba(25,24,22,.45);
+  opacity:0;transform:translateY(calc((1 - var(--o,0)) * 10px));pointer-events:none}
+.tour-card-n{font:500 max(10.5px,calc(var(--su)*1.15))/1 var(--sans,system-ui);letter-spacing:.14em;color:var(--ink-3,#9c968c)}
+.tour-card h3{margin:calc(var(--su)*1) 0 calc(var(--su)*.75);font:400 max(25px,calc(var(--su)*3.7))/1 var(--serif,Georgia,serif);letter-spacing:-.018em;color:var(--ink,#191816)}
+.tour-card h3 em{font-style:italic}
+.tour-card p{margin:0;font:400 max(13.5px,calc(var(--su)*1.7))/1.45 var(--sans,system-ui);color:var(--ink-2,#5f5a53)}
+.tour-card,.tour-cap{transition:translate .55s cubic-bezier(.2,.7,.2,1)}
+.tour-card[data-dodge=hide]{opacity:0!important}
+.tour-card[data-dodge=off]{display:none}
+.tour-card-x{position:absolute;top:calc(var(--su)*.9);right:calc(var(--su)*.9);width:max(26px,calc(var(--su)*2.8));height:max(26px,calc(var(--su)*2.8));display:grid;place-items:center;
+  padding:0;border:0;border-radius:50%;background:transparent;color:var(--ink-3,#9c968c);font:400 max(16px,calc(var(--su)*1.9))/1 var(--sans,system-ui);cursor:pointer;pointer-events:auto;opacity:.7}
+.tour-card-x:hover{opacity:1;background:var(--ph-line,#e3dfd7);color:var(--ink,#191816)}
+.tour-card-x:focus-visible{outline:2px solid var(--tour-ring,#c2643f);outline-offset:2px;opacity:1}
+.is-stack .tour-card{left:4%;right:4%;width:auto;bottom:auto;top:var(--card-top);padding:calc(var(--su)*2) calc(var(--su)*2.4)}
+[data-tour-root].is-play:not(.is-stack) .tour-card{bottom:calc(var(--gutter,32px) + 46px)}
+
+/* caption line: burned into recordings, because X autoplays muted */
+.tour-cap{position:absolute;z-index:7;left:50%;bottom:calc(var(--su)*4);margin:0;max-width:min(calc(var(--su)*72),calc(100% - 2 * var(--gutter,32px)));width:max-content;
+  padding:calc(var(--su)*1.05) calc(var(--su)*1.9);border-radius:calc(var(--su)*.6);background:var(--tour-cap-bg);color:var(--tour-cap-ink);
+  font:500 max(14px,calc(var(--su)*2.35))/1.3 var(--sans,system-ui);letter-spacing:-.005em;text-align:center;opacity:0;transform:translate(-50%,calc((1 - var(--o,0)) * 8px));pointer-events:none;text-wrap:balance}
+.is-stack .tour-cap{bottom:calc(var(--su)*5)}
+.is-stack.is-tall .tour-cap{bottom:auto;top:var(--cap-top)}
+[data-tour-root].is-play .tour-cap{bottom:calc(var(--su)*4 + 46px)}
+
+/* key caps */
+.tour-keys{position:absolute;z-index:7;display:flex;gap:calc(var(--su)*.6);transform:translate(-50%,calc((1 - var(--o,0)) * 8px));opacity:0;pointer-events:none}
+.tour-keys kbd{min-width:calc(var(--su)*5.4);height:calc(var(--su)*5.4);padding:0 calc(var(--su)*1.2);display:grid;place-items:center;border-radius:calc(var(--su)*.9);
+  background:var(--ph,#fff);box-shadow:0 0 0 1px var(--ph-line,#e3dfd7),0 calc(var(--su)*.35) 0 var(--ph-line,#e3dfd7),0 14px 30px -16px rgba(25,24,22,.5);
+  font:500 calc(var(--su)*2.4)/1 var(--sans,system-ui);color:var(--ink,#191816)}
+
+/* play driver: one quiet bar */
+.tour-ctl{position:absolute;z-index:9;left:50%;bottom:14px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;width:min(620px,calc(100% - 28px));
+  padding:7px 14px 7px 7px;border-radius:999px;background:color-mix(in srgb,var(--ph,#fff) 92%,transparent);box-shadow:0 0 0 1px var(--ph-line,#e3dfd7),0 12px 30px -18px rgba(25,24,22,.5);
+  font:500 11.5px/1 var(--mono,ui-monospace,monospace);color:var(--ink-2,#5f5a53)}
+.tour-pp{flex:none;width:32px;height:32px;border:0;border-radius:50%;display:grid;place-items:center;background:var(--ink,#191816);color:var(--page,#f5f3ef);cursor:pointer}
+.tour-pp svg{width:13px;height:13px;fill:currentColor}
+.tour-pp:focus-visible,.tour-scrub input:focus-visible{outline:2px solid var(--note,#c2643f);outline-offset:3px}
+.tour-scrub{position:relative;flex:1;height:20px;display:flex;align-items:center}
+.tour-scrub::before{content:"";position:absolute;left:0;right:0;height:2px;background:var(--ph-line,#e3dfd7)}
+.tour-scrub::after{content:"";position:absolute;left:0;height:2px;width:calc(var(--v,0) * 100%);background:var(--ink,#191816)}
+.tour-scrub i{position:absolute;top:5px;width:1px;height:10px;background:var(--ink-3,#9c968c)}
+.tour-scrub input{position:relative;z-index:1;width:100%;margin:0;background:none;-webkit-appearance:none;appearance:none;cursor:pointer;height:20px}
+.tour-scrub input::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--ink,#191816)}
+.tour-scrub input::-moz-range-thumb{width:12px;height:12px;border:0;border-radius:50%;background:var(--ink,#191816)}
+.tour-time{flex:none;min-width:84px;text-align:right}
+[data-tour-root]:not(.is-begun) .tour-ctl{opacity:0;pointer-events:none}
+.tour-ctl{transition:opacity .4s ease}
+.is-stack .tour-time{display:none}
+
+/* scroll driver: the auto-play switch, the only way to take over while it plays itself */
+.tour-drift{position:absolute;z-index:9;right:var(--gutter,16px);bottom:16px;display:flex;align-items:center;gap:10px;padding:7px 8px 7px 14px;border-radius:999px;
+  background:color-mix(in srgb,var(--ph,#fff) 88%,transparent);box-shadow:0 0 0 1px var(--ph-line,#e3dfd7),0 10px 26px -14px rgba(25,24,22,.45);
+  font:500 12px/1 var(--sans,system-ui);color:var(--ink,#191816);cursor:pointer;user-select:none;transition:opacity .5s ease,transform .5s cubic-bezier(.2,.7,.2,1)}
+.tour-drift input{position:absolute;opacity:0;pointer-events:none}
+.tour-drift > i{position:relative;width:34px;height:20px;border-radius:999px;background:var(--ink,#191816);transition:background-color .25s}
+.tour-drift > i::after{content:"";position:absolute;top:3px;left:17px;width:14px;height:14px;border-radius:50%;background:var(--page,#f5f3ef);transition:left .3s cubic-bezier(.2,.7,.2,1)}
+.tour-drift:has(input:not(:checked)) > i{background:var(--rule,#d8d3c9)}
+.tour-drift:has(input:not(:checked)) > i::after{left:3px}
+.tour-drift:has(input:focus-visible){outline:2px solid var(--note,#c2643f);outline-offset:3px}
+.tour-drift.is-gone{opacity:0;transform:translateY(8px);pointer-events:none}
+.tour-say{position:absolute;right:0;bottom:calc(100% + 10px);width:max-content;max-width:min(260px,calc(100vw - 32px));padding:9px 12px;border-radius:8px;background:var(--ink,#191816);color:var(--page,#f5f3ef);
+  font:500 12px/1.35 var(--sans,system-ui);opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .3s,transform .4s cubic-bezier(.2,.7,.2,1)}
+.tour-drift.is-saying .tour-say{opacity:1;transform:none}
+.tour-drift.is-saying{box-shadow:0 0 0 1px var(--ph-line,#e3dfd7),0 0 0 4px color-mix(in srgb,var(--note,#c2643f) 35%,transparent)}
+
+/* ?record: a clean stage of the chosen ratio, centred in the browser window, for Monet Shot to record */
+html.tour-record,html.tour-record body{height:100%;overflow:hidden;background:#0e0e0d}
+html.tour-record body :not([data-tour-root].is-record,[data-tour-root].is-record *,:has([data-tour-root].is-record)){display:none!important}   /* everything but the film (which may sit inside another section) */
+html.tour-record .sf-note,html.tour-record .sf-spec,html.tour-record [data-tour-gate],html.tour-record [data-tour-hide-on-record]{display:none!important}
+html.tour-record [data-tour-root].is-record{position:fixed;left:50%;top:50%;width:var(--rw);height:var(--rh)!important;transform:translate(-50%,-50%);z-index:2147483000;cursor:none}
+html.tour-record .is-record [data-tour-stage]{position:absolute;inset:0;height:auto}
+
+@media (prefers-reduced-motion:reduce){.tour-drift,.tour-drift *,.tour-say{transition:none}}

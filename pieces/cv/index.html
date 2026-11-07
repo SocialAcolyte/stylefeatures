@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<script src="./backdrop/backdrop.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CV: the one-page CV that opens</title>
+<script>document.documentElement.classList.remove("no-js")</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+<link rel="stylesheet" href="./kit/scaffold.css">
+<link rel="stylesheet" href="./cv/section.css">
+</head>
+<body>
+<section class="demo-cv" data-tpl="demo/cv" id="top" data-tour-root data-driver="manual" aria-label="Your Name: curriculum vitae">
+  <div class="cv-stage" data-tour-stage>
+
+    <!-- The desk the sheet lies on. tour.js fits the window to this frame and keeps every push-in inside it
+         (data-tour-frame). Its shape follows the stage: a wide desk (1600 × 900), a square one (960 × 960), a tall
+         one (680 × 1209, 9:16); on a phone, just the sheet, reflowed into one narrow column (section.js). -->
+    <div class="cv-frame" data-tour-frame aria-hidden="true"></div>
+
+    <div class="tour-rig">
+      <div class="cv-win" data-tour-window data-chrome="none" data-size="1600x900">
+        <div class="cv-desk">
+
+          <!-- THE SHEET: one A4 page, 600 × 848 design px. Every line is a hinge: it opens a fold under itself with the
+               evidence (a small window of the work, one sentence of what changed). Hooks the script points at are
+               data-tour="…" (written '@…' in script.js). Fill it from the person's real CV (AGENT.md). -->
+          <article class="cv-sheet" data-tour="sheet">
+            <header class="cv-head">
+              <h1 class="cv-name">Your <em>Name</em></h1>
+              <p class="cv-one">What you do, and for whom, in one sentence.</p>
+              <p class="cv-contact"><span>City, Country</span><span>hello@yourname.com</span><span>yourname.com</span></p>
+            </header>
+
+            <section class="cv-sec">
+              <h2 class="cv-label">Experience</h2>
+              <ol class="cv-lines">
+                <li class="cv-line" data-tour="line-1">
+                  <div class="cv-row" data-tour="row-1" role="button" tabindex="0" aria-expanded="false"><i class="cv-hinge"></i>
+                    <span class="cv-what"><b>Your current title</b><span class="cv-org">Organisation</span></span><span class="cv-lead"></span><span class="cv-when">2024 – now</span></div>
+                  <div class="cv-fold" data-tour-grow><div class="cv-fold-in">
+                    <!-- EVIDENCE 1: the product they work on, a click that does something real in it -->
+                    <div class="cv-win-s" data-tour="ev1">
+                      <div class="cv-bar"><i></i><i></i><i></i><span class="cv-url">app.organisation.com</span></div>
+                      <div class="cv-app">
+                        <div class="cv-app-side"><i class="cv-dot"></i><i></i><i></i><i></i><i class="is-short"></i></div>
+                        <div class="cv-app-main">
+                          <div class="cv-app-top"><span class="cv-sk" style="--w:34%"></span><span class="cv-app-btn" data-tour="ev1-go" role="button">Publish</span></div>
+                          <div class="cv-app-row" data-tour="ev1-row"><span class="ph is-bare cv-thumb"></span><span class="cv-sk2"><i style="--w:62%"></i><i style="--w:38%"></i></span><span class="cv-pill"><b class="a">Draft</b><b class="b">Live</b></span></div>
+                          <div class="cv-app-row"><span class="ph is-bare cv-thumb"></span><span class="cv-sk2"><i style="--w:54%"></i><i style="--w:30%"></i></span><span class="cv-pill is-live"><b class="b">Live</b></span></div>
+                          <div class="cv-app-row"><span class="ph is-bare cv-thumb"></span><span class="cv-sk2"><i style="--w:70%"></i><i style="--w:44%"></i></span><span class="cv-pill is-live"><b class="b">Live</b></span></div>
+                          <span class="cv-toast" data-tour="ev1-toast"><svg viewBox="0 0 12 12"><path d="m2.6 6.3 2.2 2.2 4.6-4.9"/></svg>Published</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="cv-say"><p class="cv-said">One sentence on what changed because you were there.</p>
+                      <p class="cv-meta"><span>Your part in it, in a few words</span><span class="cv-link">organisation.com</span></p></div>
+                  </div></div>
+                </li>
+                <li class="cv-line" data-tour="line-2">
+                  <div class="cv-row" data-tour="row-2" role="button" tabindex="0" aria-expanded="false"><i class="cv-hinge"></i>
+                    <span class="cv-what"><b>The role before</b><span class="cv-org">Organisation</span></span><span class="cv-lead"></span><span class="cv-when">2021 – 2024</span></div>
+                  <div class="cv-fold" data-tour-grow><div class="cv-fold-in">
+                    <!-- EVIDENCE 2: before and after. The same screen, the way it was and the way they left it -->
+                    <div class="cv-win-s cv-ba" data-tour="ev2">
+                      <div class="cv-bar"><i></i><i></i><i></i><span class="cv-seg"><span class="cv-seg-k"></span><b>Before</b><b data-tour="ev2-after" role="button">After</b></span></div>
+                      <div class="cv-ba-in">
+                        <div class="cv-ba-was"><span class="cv-sk" style="--w:46%"></span><span class="cv-sk" style="--w:80%"></span><span class="cv-grid9"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span><span class="cv-sk" style="--w:66%"></span><span class="cv-sk" style="--w:72%"></span><span class="cv-sk" style="--w:40%"></span></div>
+                        <div class="cv-ba-now"><figure class="ph" style="--r:16/9" data-ph="After · 16:9"></figure><span class="cv-sk2"><i style="--w:58%"></i><i style="--w:36%"></i></span></div>
+                      </div>
+                    </div>
+                    <div class="cv-say"><p class="cv-said">The way it was, the way you left it, and why it mattered.</p>
+                      <p class="cv-meta"><span>Team, scope, how long</span><span class="cv-link">a case study, if public</span></p></div>
+                  </div></div>
+                </li>
+                <li class="cv-line" data-tour="line-3">
+                  <div class="cv-row" data-tour="row-3" role="button" tabindex="0" aria-expanded="false"><i class="cv-hinge"></i>
+                    <span class="cv-what"><b>An earlier role</b><span class="cv-org">Organisation</span></span><span class="cv-lead"></span><span class="cv-when">2019 – 2021</span></div>
+                  <div class="cv-fold" data-tour-grow><div class="cv-fold-in">
+                    <figure class="ph cv-ph" style="--r:16/10" data-ph="Screen · 16:10" data-hint="The work you did in this role"></figure>
+                    <div class="cv-say"><p class="cv-said">What you were trusted with, in one sentence.</p><p class="cv-meta"><span>Your part in it</span></p></div>
+                  </div></div>
+                </li>
+                <li class="cv-line" data-tour="line-4">
+                  <div class="cv-row" data-tour="row-4" role="button" tabindex="0" aria-expanded="false"><i class="cv-hinge"></i>
+                    <span class="cv-what"><b>First job or internship</b><span class="cv-org">Organisation</span></span><span class="cv-lead"></span><span class="cv-when">2018</span></div>
+                  <div class="cv-fold" data-tour-grow><div class="cv-fold-in">
+                    <figure class="ph cv-ph" style="--r:16/10" data-ph="Screen · 16:10" data-hint="Something you made there"></figure>
+                    <div class="cv-say"><p class="cv-said">What you learned there that you still use.</p><p class="cv-meta"><span>Your part in it</span></p></div>
+                  </div></div>
+                </li>
+              </ol>
+            </section>
+
+            <section class="cv-sec">
+              <h2 class="cv-label">Projects</h2>
+              <ol class="cv-lines">
+                <li class="cv-line" data-tour="line-5">
+                  <div class="cv-row" data-tour="row-5" role="button" tabindex="0" aria-expanded="false"><i class="cv-hinge"></i>
+                    <span class="cv-what"><b>A thing you built</b><span class="cv-org">What it is, in four words</span></span><span class="cv-lead"></span><span class="cv-when">2025</span></div>
+                  <div class="cv-fold" data-tour-grow><div class="cv-fold-in">
+                    <!-- EVIDENCE 3: the project's own page, scrolled -->
+                    <div class="cv-win-s" data-tour="ev3">
+                      <div class="cv-bar"><i></i><i></i><i></i><span class="cv-url">yourproject.com</span></div>
+                      <div class="cv-site" data-tour="ev3-page">
+                        <div class="cv-site-hero"><span class="cv-site-t">A thing you built</span><span class="cv-sk" style="--w:58%"></span><figure class="ph" style="--r:16/9" data-ph="Its first screen"></figure></div>
+                        <div class="cv-site-cards"><span class="ph is-bare"></span><span class="ph is-bare"></span><span class="ph is-bare"></span></div>
+                        <span class="cv-sk" style="--w:84%"></span><span class="cv-sk" style="--w:70%"></span><span class="cv-sk" style="--w:46%"></span>
+                        <figure class="ph" style="--r:16/7" data-ph="Another part of it"></figure>
+                        <span class="cv-sk" style="--w:62%"></span><span class="cv-sk" style="--w:36%"></span>
+                      </div>
+                    </div>
+                    <div class="cv-say"><p class="cv-said">Why you built it, and who uses it now.</p>
+                      <p class="cv-meta"><span>Made alone, or with whom</span><span class="cv-link">yourproject.com</span></p></div>
+                  </div></div>
+                </li>
+                <li class="cv-line" data-tour="line-6">
+                  <div class="cv-row" data-tour="row-6" role="button" tabindex="0" aria-expanded="false"><i class="cv-hinge"></i>
+                    <span class="cv-what"><b>Something people used</b><span class="cv-org">What it is</span></span><span class="cv-lead"></span><span class="cv-when">2023</span></div>
+                  <div class="cv-fold" data-tour-grow><div class="cv-fold-in">
+                    <figure class="ph cv-ph" style="--r:16/10" data-ph="Screen · 16:10" data-hint="The project, as people saw it"></figure>
+                    <div class="cv-say"><p class="cv-said">What it did, for whom, in one sentence.</p><p class="cv-meta"><span class="cv-link">a link to it</span></p></div>
+                  </div></div>
+                </li>
+                <li class="cv-line" data-tour="line-7">
+                  <div class="cv-row" data-tour="row-7" role="button" tabindex="0" aria-expanded="false"><i class="cv-hinge"></i>
+                    <span class="cv-what"><b>A talk, a paper or a launch</b><span class="cv-org">Where</span></span><span class="cv-lead"></span><span class="cv-when">2022</span></div>
+                  <div class="cv-fold" data-tour-grow><div class="cv-fold-in">
+                    <figure class="ph cv-ph" style="--r:16/10" data-ph="Still · 16:10" data-hint="A frame of the talk, a page of the paper"></figure>
+                    <div class="cv-say"><p class="cv-said">What it was about, in one sentence.</p><p class="cv-meta"><span class="cv-link">the recording or the PDF</span></p></div>
+                  </div></div>
+                </li>
+              </ol>
+            </section>
+
+            <section class="cv-sec">
+              <h2 class="cv-label">Education</h2>
+              <ol class="cv-lines">
+                <li class="cv-line" data-tour="line-8">
+                  <div class="cv-row" data-tour="row-8" role="button" tabindex="0" aria-expanded="false"><i class="cv-hinge"></i>
+                    <span class="cv-what"><b>Degree, subject</b><span class="cv-org">University</span></span><span class="cv-lead"></span><span class="cv-when">2014 – 2018</span></div>
+                  <div class="cv-fold" data-tour-grow><div class="cv-fold-in">
+                    <!-- the thesis or final project: its first page, one sentence marked -->
+                    <div class="cv-win-s cv-doc"><div class="cv-page"><span class="cv-sk is-c" style="--w:70%"></span><span class="cv-sk is-c" style="--w:44%"></span><span class="cv-sk is-c is-dim" style="--w:30%"></span>
+                      <span class="cv-sk" style="--w:96%"></span><span class="cv-sk is-mark" style="--w:88%"></span><span class="cv-sk" style="--w:92%"></span><span class="cv-sk" style="--w:54%"></span></div></div>
+                    <div class="cv-say"><p class="cv-said">Your thesis or final project, and what it found.</p><p class="cv-meta"><span>Grade, only if it helps</span></p></div>
+                  </div></div>
+                </li>
+                <li class="cv-line" data-tour="line-9">
+                  <div class="cv-row" data-tour="row-9" role="button" tabindex="0" aria-expanded="false"><i class="cv-hinge"></i>
+                    <span class="cv-what"><b>A course that mattered</b><span class="cv-org">Where</span></span><span class="cv-lead"></span><span class="cv-when">2020</span></div>
+                  <div class="cv-fold" data-tour-grow><div class="cv-fold-in">
+                    <figure class="ph cv-ph" style="--r:16/10" data-ph="Proof · 16:10" data-hint="The certificate, or what you made in it"></figure>
+                    <div class="cv-say"><p class="cv-said">What it taught you that you use now.</p></div>
+                  </div></div>
+                </li>
+              </ol>
+            </section>
+
+            <section class="cv-sec">
+              <h2 class="cv-label">Skills</h2>
+              <ol class="cv-lines">
+                <li class="cv-line" data-tour="line-10">
+                  <div class="cv-row" data-tour="row-10" role="button" tabindex="0" aria-expanded="false"><i class="cv-hinge"></i>
+                    <span class="cv-what"><b>Craft</b><span class="cv-org">What you are best at, in five words</span></span></div>
+                  <div class="cv-fold" data-tour-grow><div class="cv-fold-in is-proof">
+                    <span class="cv-proofs"><figure class="ph" style="--r:1/1" data-ph="Proof"></figure><figure class="ph" style="--r:1/1" data-ph="Proof"></figure><figure class="ph" style="--r:1/1" data-ph="Proof"></figure></span>
+                    <div class="cv-say"><p class="cv-said">Where you used it, pointing back to a line above.</p></div>
+                  </div></div>
+                </li>
+                <li class="cv-line" data-tour="line-11">
+                  <div class="cv-row" data-tour="row-11" role="button" tabindex="0" aria-expanded="false"><i class="cv-hinge"></i>
+                    <span class="cv-what"><b>Tools</b><span class="cv-org">The ones you use every day</span></span></div>
+                  <div class="cv-fold" data-tour-grow><div class="cv-fold-in is-proof">
+                    <span class="cv-proofs"><figure class="ph" style="--r:1/1" data-ph="Proof"></figure><figure class="ph" style="--r:1/1" data-ph="Proof"></figure><figure class="ph" style="--r:1/1" data-ph="Proof"></figure></span>
+                    <div class="cv-say"><p class="cv-said">Something you made with them, and where it lives.</p></div>
+                  </div></div>
+                </li>
+                <li class="cv-line" data-tour="line-12">
+                  <div class="cv-row" data-tour="row-12" role="button" tabindex="0" aria-expanded="false"><i class="cv-hinge"></i>
+                    <span class="cv-what"><b>Languages</b><span class="cv-org">Spoken, and how well</span></span></div>
+                  <div class="cv-fold" data-tour-grow><div class="cv-fold-in is-proof">
+                    <span class="cv-proofs"><figure class="ph" style="--r:1/1" data-ph="Proof"></figure><figure class="ph" style="--r:1/1" data-ph="Proof"></figure><figure class="ph" style="--r:1/1" data-ph="Proof"></figure></span>
+                    <div class="cv-say"><p class="cv-said">Where you have worked in each one.</p></div>
+                  </div></div>
+                </li>
+              </ol>
+            </section>
+
+            <footer class="cv-foot"><span>yourname.com</span><span>Updated November 2026</span><span class="cv-num">1 / 1</span></footer>
+          </article>
+
+          <!-- THE MARGIN: notes beside the sheet, and the one-pager to take away -->
+          <aside class="cv-margin">
+            <p class="cv-eyebrow">Curriculum vitae</p>
+            <p class="cv-hint"><svg viewBox="0 0 40 12" aria-hidden="true"><path d="M39 6H2m4-4L2 6l4 4"/></svg><span><em>Every line opens.</em><small>Click a role, a project or a degree to see the work behind it.</small></span></p>
+            <div class="cv-pdf" data-tour="pdf-block">
+              <span class="cv-mini" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+              <span class="cv-pdf-act">
+                <a class="cv-pdf-btn" data-tour="pdf" href="#print"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.5v6.8M3.2 5.6 6 8.4l2.8-2.8M2 10.5h8"/></svg><span>Download the PDF</span></a>
+                <small>One page · A4</small>
+              </span>
+              <span class="cv-file" data-tour="pdf-file"><svg viewBox="0 0 12 12" aria-hidden="true"><path d="m2.6 6.3 2.2 2.2 4.6-4.9"/></svg><b>Your-Name-CV.pdf</b><small>1 page</small></span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <!-- The film's control on the page (never in ?record): watch it open, skip, watch again -->
+    <div class="cv-ctl" data-tour-hide-on-record>
+      <button class="cv-ctl-btn" type="button"><svg class="i-play" viewBox="0 0 10 10" aria-hidden="true"><path d="M2.2 1.2v7.6L8.6 5z"/></svg><svg class="i-skip" viewBox="0 0 10 10" aria-hidden="true"><path d="M1.6 1.6v6.8L6 5zM7.4 1.6v6.8"/></svg><span class="cv-ctl-say">Watch it open</span></button>
+      <span class="cv-ctl-bar"><i></i></span>
+      <span class="sf-note">The CV plays itself once: a cursor opens a few lines and the work inside plays. Then every line is the visitor's to open.</span>
+    </div>
+
+    <!-- Closing frame (?record): the address, set in the margin -->
+    <footer class="cv-end-frame" data-tour-end>
+      <p class="cv-end-k">Write to me</p>
+      <p class="cv-end-mail">hello@yourname.com</p>
+      <p class="cv-end-site">yourname.com</p>
+    </footer>
+  </div>
+
+  <!-- THE ENDING on the page: the one-pager to take away, then the address -->
+  <div class="cv-end">
+    <div class="cv-end-pdf">
+      <div class="cv-proof" aria-hidden="true"></div>
+      <div class="cv-end-say">
+        <p class="cv-eyebrow">The one-pager</p>
+        <h2 class="cv-end-h">Take it <em>with you.</em></h2>
+        <p class="cv-end-p">The same sheet, without the film: one page, ready to print or forward.</p>
+        <p class="cv-end-act"><a class="sf-btn cv-print" href="#print"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M6 1.5v6.8M3.2 5.6 6 8.4l2.8-2.8M2 10.5h8" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg>Download the PDF</a><span class="cv-end-meta">One page · A4</span></p>
+        <span class="sf-note">Without a cv.pdf beside the page the button prints the sheet (the print stylesheet sets it as the exact one-pager). AGENT.md has the one command that makes the PDF.</span>
+      </div>
+    </div>
+    <div class="cv-end-addr">
+      <p class="cv-eyebrow">Write to me</p>
+      <a class="cv-end-big" href="mailto:hello@yourname.com">hello@yourname.com</a>
+      <ul class="cv-end-links">
+        <li><a href="#">yourname.com</a></li>
+        <li><a href="#">Where your code lives</a></li>
+        <li><a href="#">Your professional profile</a></li>
+        <li><span>City, Country</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script type="module" src="./kit/scaffold.js"></script>
+<script type="module">
+import s0 from "./cv/section.js";
+for (const [k, f] of [["demo/cv",s0]]) document.querySelectorAll(`[data-tpl="${k}"]`).forEach((el) => f(el));
+</script>
+</body>
+</html>

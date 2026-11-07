@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<script src="./backdrop/backdrop.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Changelog: a person&#x27;s release notes</title>
+<script>document.documentElement.classList.remove("no-js")</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+<link rel="stylesheet" href="./kit/scaffold.css">
+<link rel="stylesheet" href="./changelog/section.css">
+</head>
+<body>
+<article class="demo-changelog" data-tpl="demo/changelog" id="top" aria-labelledby="cl-name">
+
+  <!-- 0. The top line: the name, small. The page is the log, so the name doesn't need to shout. -->
+  <header class="cl-top">
+    <a class="cl-name" id="cl-name" href="#now">Your Name</a>
+    <nav class="cl-nav" aria-label="Elsewhere">
+      <a href="#log">Log</a>
+      <a href="#">GitHub</a>
+      <a href="feed.xml">RSS</a>
+      <a href="#next">Write to me</a>
+    </nav>
+  </header>
+
+  <!-- 2. THE LOG (Now sits at its head, beside the rail): their life as release notes, newest first. One release per year (or chapter), each entry tagged
+          Shipped / Joined / Moved / Learned / Wrote. Shipped entries carry a small film that plays as it reaches the
+          middle of the screen (section.js). The rail beside it is a contribution strip: one row per release, one cell
+          per week, the entries marked on it; it follows the scroll. -->
+  <section class="cl-log" id="log" aria-label="Changelog">
+
+    <aside class="cl-rail" aria-label="Releases">
+      <p class="cl-rail-h"><b>Changelog</b><span>Newest first</span></p>
+      <ol class="cl-years">
+        <li class="cl-yr cl-yr-next" data-year="next"><a href="#next"><b>Next</b><span>Unreleased</span></a><i class="cl-wk" aria-hidden="true"></i></li>
+        <!-- section.js adds one row per .cl-release below, with its 52 weeks -->
+      </ol>
+      <p class="cl-rail-key" aria-hidden="true"><i class="is-ship"></i>Shipped <i></i>Everything else</p>
+    </aside>
+
+    <div class="cl-releases">
+
+      <!-- 1. NOW: what they're doing this month, dated. The first thing a visitor reads, and the newest thing on the page. -->
+      <section class="cl-now" id="now" aria-labelledby="cl-now-h">
+        <p class="cl-now-kick"><span class="cl-now-dot" aria-hidden="true"></span><b>Now</b><time datetime="">Updated Month Year</time></p>
+        <h1 class="cl-now-line" id="cl-now-h">What you’re <em>making</em> this month, and for whom, in one plain sentence.</h1>
+        <dl class="cl-now-list">
+          <div><dt>Building</dt><dd>The project taking most of your days, and the one thing it does</dd></div>
+          <div><dt>Learning</dt><dd>What you’re getting properly good at, and where from</dd></div>
+          <div><dt>Reading</dt><dd>A book, a paper or a codebase you keep going back to</dd></div>
+          <div><dt>Based in</dt><dd>City · open to the kind of work you want next</dd></div>
+        </dl>
+        <span class="sf-note">Write this like a /now page: present tense, this month, true today. Change the date every time you change a line (AGENT.md §2).</span>
+      </section>
+
+      <!-- ── a release: one per year. data-weeks (optional): 52 activity levels 0–4 from their real commit history. ── -->
+      <section class="cl-release" id="v5" data-year="2026" data-version="v5" aria-labelledby="v5-h">
+        <header class="cl-ver">
+          <h2 id="v5-h"><span class="cl-v">v5</span><span class="cl-y">2026</span></h2>
+          <p>The year so far, in one line: the thing it was about.</p>
+        </header>
+        <ol class="cl-list">
+          <li class="cl-entry" data-tag="shipped" data-date="2026-03">
+            <time class="cl-date" datetime="2026-03">Mar</time>
+            <span class="cl-tag">Shipped</span>
+            <div class="cl-body">
+              <h3>Your command-line tool <span>what it does, in one line</span></h3>
+              <p>What changed for the people who use it: the job it took off their hands.</p>
+              <div class="cl-film" data-film="cli" aria-label="A short film of the tool running in a terminal">
+                <div class="cl-stage" data-tour-stage>
+                  <div class="cl-frame" data-tour-frame aria-hidden="true"></div>
+                  <div class="tour-rig">
+                    <div class="cl-win" data-tour-window data-chrome="terminal" data-title="~/project" data-size="720x450" data-size-square="440x440">
+                      <div class="clt">
+                        <p class="clt-l"><span class="clt-dir">~/project</span><span class="clt-ps">$</span><span class="clt-cmd" data-tour="cmd-1"></span></p>
+                        <p class="clt-o clt-o1"><span class="clt-ok">✓</span>Reads the project it’s run in</p>
+                        <p class="clt-o clt-o1"><span class="clt-ok">✓</span>Writes the one config file it needs</p>
+                        <p class="clt-o clt-o1 clt-dim">Ready. Run <b>your-tool</b> to start.</p>
+                        <p class="clt-l clt-o clt-o1"><span class="clt-dir">~/project</span><span class="clt-ps">$</span><span class="clt-cmd" data-tour="cmd-2"></span></p>
+                        <div class="clt-box clt-o clt-o2" data-tour="result">
+                          <p class="clt-bh"><span>your-tool</span><span class="clt-dim">the output it’s known for</span></p>
+                          <p class="clt-row clt-o clt-o2"><span class="clt-k">first</span><i style="--w:62%"></i><span class="clt-ok">done</span></p>
+                          <p class="clt-row clt-o clt-o2"><span class="clt-k">second</span><i style="--w:44%"></i><span class="clt-ok">done</span></p>
+                          <p class="clt-row clt-o clt-o2"><span class="clt-k">third</span><i style="--w:78%"></i><span class="clt-ok">done</span></p>
+                        </div>
+                        <p class="clt-o clt-o3 clt-dim">The last line your tool prints, verbatim.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="cl-meta"><a href="#">Repository</a><a href="#">Release notes</a><button type="button" class="cl-again" hidden>Play again</button></p>
+              <span class="sf-note">Rebuild the tool’s real first run: the command people copy from your README, its real output (AGENT.md §3).</span>
+            </div>
+          </li>
+          <li class="cl-entry" data-tag="wrote" data-date="2026-02">
+            <time class="cl-date" datetime="2026-02">Feb</time>
+            <span class="cl-tag">Wrote</span>
+            <div class="cl-body">
+              <h3>The title of a post <span>where it ran</span></h3>
+              <p>What it argued, in one sentence, the way you’d say it to a friend.</p>
+              <p class="cl-meta"><a href="#">Read it</a></p>
+            </div>
+          </li>
+          <li class="cl-entry" data-tag="learned" data-date="2026-01">
+            <time class="cl-date" datetime="2026-01">Jan</time>
+            <span class="cl-tag">Learned</span>
+            <div class="cl-body">
+              <h3>Something you learned properly <span>a language, a field, a craft</span></h3>
+              <p>How you learned it, and the first real thing you made with it.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="cl-release" id="v4" data-year="2025" data-version="v4" aria-labelledby="v4-h">
+        <header class="cl-ver">
+          <h2 id="v4-h"><span class="cl-v">v4</span><span class="cl-y">2025</span></h2>
+          <p>The year in one line.</p>
+        </header>
+        <ol class="cl-list">
+          <li class="cl-entry" data-tag="shipped" data-date="2025-10">
+            <time class="cl-date" datetime="2025-10">Oct</time>
+            <span class="cl-tag">Shipped</span>
+            <div class="cl-body">
+              <h3>A library, version one <span>what it’s for</span></h3>
+              <p>Who depends on it now, said plainly (a number only if it’s on its public page).</p>
+              <div class="cl-film" data-film="repo" aria-label="A short film of the project's page: install, then the release notes">
+                <div class="cl-stage" data-tour-stage>
+                  <div class="cl-frame" data-tour-frame aria-hidden="true"></div>
+                  <div class="tour-rig">
+                    <div class="cl-win" data-tour-window data-chrome="browser" data-url="yourname.dev/project" data-size="720x450" data-size-square="440x440">
+                      <div class="clr">
+                        <header class="clr-head"><span class="clr-mark" aria-hidden="true"></span><span class="clr-owner">yourname</span><span class="clr-sl">/</span><b>project</b><span class="clr-tagv">v1.0.0</span></header>
+                        <div class="clr-grid">
+                          <div class="clr-readme">
+                            <h4>project</h4>
+                            <p class="clr-lead">The first line of your README: what it is.</p>
+                            <div class="clr-install"><code><span class="clr-dim">$</span> npm install project</code><button type="button" data-tour="copy"><span data-tour="copy-l">Copy</span></button></div>
+                            <p class="clr-h5">Usage</p>
+                            <div class="clr-code"><i style="--w:46%"></i><i style="--w:72%;--x:1"></i><i style="--w:58%;--x:1"></i><i style="--w:30%"></i></div>
+                          </div>
+                          <aside class="clr-side">
+                            <p class="clr-sh">Releases</p>
+                            <a class="clr-rel" data-tour="rel"><b>v1.0.0</b><span>Latest</span></a>
+                            <p class="clr-sh">About</p>
+                            <p class="ph-text" style="--n:3"></p>
+                          </aside>
+                        </div>
+                        <section class="clr-notes" data-tour="notes">
+                          <p class="clr-nk"><b>v1.0.0</b><span>Latest</span></p>
+                          <h4>The release’s own title</h4>
+                          <p class="clr-nh">Added</p>
+                          <ul><li class="clr-li"><i style="--w:70%"></i></li><li class="clr-li"><i style="--w:52%"></i></li></ul>
+                          <p class="clr-nh">Changed</p>
+                          <ul><li class="clr-li"><i style="--w:62%"></i></li></ul>
+                          <p class="clr-nh">Fixed</p>
+                          <ul><li class="clr-li"><i style="--w:40%"></i></li></ul>
+                        </section>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="cl-meta"><a href="#">Repository</a><a href="#">Docs</a><button type="button" class="cl-again" hidden>Play again</button></p>
+            </div>
+          </li>
+          <li class="cl-entry" data-tag="joined" data-date="2025-06">
+            <time class="cl-date" datetime="2025-06">Jun</time>
+            <span class="cl-tag">Joined</span>
+            <div class="cl-body">
+              <h3>Company or team <span>your role there</span></h3>
+              <p>What you work on, in the words you’d use at a dinner, not on a CV.</p>
+            </div>
+          </li>
+          <li class="cl-entry" data-tag="wrote" data-date="2025-03">
+            <time class="cl-date" datetime="2025-03">Mar</time>
+            <span class="cl-tag">Wrote</span>
+            <div class="cl-body">
+              <h3>A talk or a long post <span>event or publication</span></h3>
+              <p>The idea in one line. Link the recording or the text.</p>
+              <p class="cl-meta"><a href="#">Watch</a><a href="#">Slides</a></p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="cl-release" id="v3" data-year="2024" data-version="v3" aria-labelledby="v3-h">
+        <header class="cl-ver">
+          <h2 id="v3-h"><span class="cl-v">v3</span><span class="cl-y">2024</span></h2>
+          <p>The year in one line.</p>
+        </header>
+        <ol class="cl-list">
+          <li class="cl-entry" data-tag="moved" data-date="2024-11">
+            <time class="cl-date" datetime="2024-11">Nov</time>
+            <span class="cl-tag">Moved</span>
+            <div class="cl-body">
+              <h3>From one city <span>to another</span></h3>
+              <p>Why, if you want to say. Many people don’t, and that’s fine.</p>
+            </div>
+          </li>
+          <li class="cl-entry" data-tag="shipped" data-date="2024-07">
+            <time class="cl-date" datetime="2024-07">Jul</time>
+            <span class="cl-tag">Shipped</span>
+            <div class="cl-body">
+              <h3>An app <span>who it’s for</span></h3>
+              <p>The one thing it lets people do that they couldn’t before.</p>
+              <div class="cl-film" data-film="app" aria-label="A short film of the app: a new item, then its page">
+                <div class="cl-stage" data-tour-stage>
+                  <div class="cl-frame" data-tour-frame aria-hidden="true"></div>
+                  <div class="tour-rig">
+                    <div class="cl-win" data-tour-window data-chrome="app" data-title="App name" data-size="720x450" data-size-square="440x440">
+                      <div class="cla">
+                        <aside class="cla-side">
+                          <p class="cla-app"><i aria-hidden="true"></i>App name</p>
+                          <p class="cla-nav is-on">All items</p><p class="cla-nav">Shared</p><p class="cla-nav">Archive</p>
+                        </aside>
+                        <main class="cla-main">
+                          <header class="cla-bar"><b>All items</b><button type="button" class="cla-new" data-tour="new">+ New</button></header>
+                          <div class="cla-list">
+                            <div class="cla-row cla-row-new" data-tour="row-new"><span class="cla-dot"></span><span class="cla-name" data-tour="new-name" data-tour-cursor="text"></span><span class="cla-when">now</span></div>
+                            <div class="cla-row"><span class="cla-dot"></span><i style="--w:46%"></i><span class="cla-when"></span></div>
+                            <div class="cla-row"><span class="cla-dot"></span><i style="--w:62%"></i><span class="cla-when"></span></div>
+                            <div class="cla-row"><span class="cla-dot"></span><i style="--w:38%"></i><span class="cla-when"></span></div>
+                            <div class="cla-row"><span class="cla-dot"></span><i style="--w:54%"></i><span class="cla-when"></span></div>
+                            <div class="cla-row"><span class="cla-dot"></span><i style="--w:42%"></i><span class="cla-when"></span></div>
+                            <div class="cla-row"><span class="cla-dot"></span><i style="--w:58%"></i><span class="cla-when"></span></div>
+                          </div>
+                        </main>
+                        <section class="cla-detail" data-tour="detail">
+                          <figure class="ph is-tone" style="--r:16/9" data-ph="The app's main view"></figure>
+                          <p class="cla-dh" data-tour="detail-h">The new item</p>
+                          <p class="ph-text" style="--n:2"></p>
+                        </section>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p class="cl-meta"><a href="#">Download</a><a href="#">The story behind it</a><button type="button" class="cl-again" hidden>Play again</button></p>
+            </div>
+          </li>
+          <li class="cl-entry" data-tag="learned" data-date="2024-02">
+            <time class="cl-date" datetime="2024-02">Feb</time>
+            <span class="cl-tag">Learned</span>
+            <div class="cl-body">
+              <h3>A course, a mentor, a hard lesson <span>where</span></h3>
+              <p>One sentence. Learned entries are what make a log read like a person.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="cl-release" id="v2" data-year="2022" data-version="v2" aria-labelledby="v2-h">
+        <header class="cl-ver">
+          <h2 id="v2-h"><span class="cl-v">v2</span><span class="cl-y">2022</span></h2>
+          <p>Skip the quiet years. A gap in the log is honest.</p>
+        </header>
+        <ol class="cl-list">
+          <li class="cl-entry" data-tag="joined" data-date="2022-09">
+            <time class="cl-date" datetime="2022-09">Sep</time>
+            <span class="cl-tag">Joined</span>
+            <div class="cl-body">
+              <h3>Your first real team <span>the role</span></h3>
+              <p>What you shipped there, if you can say.</p>
+            </div>
+          </li>
+          <li class="cl-entry" data-tag="shipped" data-date="2022-04">
+            <time class="cl-date" datetime="2022-04">Apr</time>
+            <span class="cl-tag">Shipped</span>
+            <div class="cl-body">
+              <h3>A small side project <span>a weekend that stuck</span></h3>
+              <p>Not every release needs a film: a still says enough.</p>
+              <figure class="ph cl-still" style="--r:16/9" data-ph="Screenshot · 16:9" data-hint="the project as it looked then"></figure>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="cl-release" id="v1" data-year="2019" data-version="v1" aria-labelledby="v1-h">
+        <header class="cl-ver">
+          <h2 id="v1-h"><span class="cl-v">v1</span><span class="cl-y">2019</span></h2>
+          <p>The year in one line.</p>
+        </header>
+        <ol class="cl-list">
+          <li class="cl-entry" data-tag="learned" data-date="2019-06">
+            <time class="cl-date" datetime="2019-06">Jun</time>
+            <span class="cl-tag">Learned</span>
+            <div class="cl-body">
+              <h3>A degree, a bootcamp, or a year of building alone <span>where</span></h3>
+              <p>What it gave you that you still use.</p>
+            </div>
+          </li>
+          <li class="cl-entry" data-tag="wrote" data-date="2019-01">
+            <time class="cl-date" datetime="2019-01">Jan</time>
+            <span class="cl-tag">Wrote</span>
+            <div class="cl-body">
+              <h3>The first thing you published <span>anywhere</span></h3>
+              <p>Old posts are fine. They show the line you’ve travelled.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <section class="cl-release cl-release-first" id="v0" data-year="2016" data-version="v0.1" aria-labelledby="v0-h">
+        <header class="cl-ver">
+          <h2 id="v0-h"><span class="cl-v">v0.1</span><span class="cl-y">2016</span></h2>
+          <p>Where it starts.</p>
+        </header>
+        <ol class="cl-list">
+          <li class="cl-entry" data-tag="learned" data-date="2016-08">
+            <time class="cl-date" datetime="2016-08">Aug</time>
+            <span class="cl-tag">Learned</span>
+            <div class="cl-body">
+              <h3>Initial commit <span>the first program you remember writing</span></h3>
+              <p>What it did, and why you wanted it to.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- 3. UNRELEASED: the entry at the top of the future. In the film a cursor drafts its line and releases it, and
+              the address appears. The draft line is theirs to write (AGENT.md §5). -->
+      <section class="cl-next" id="next" aria-labelledby="cl-next-h">
+        <header class="cl-ver">
+          <h2 id="cl-next-h"><span class="cl-v">Unreleased</span><span class="cl-y">next</span></h2>
+          <p>The next entry is still a draft.</p>
+        </header>
+        <div class="cl-film cl-film-next" data-film="next" aria-label="The next entry being drafted: Working with you">
+          <div class="cl-stage" data-tour-stage>
+            <div class="cl-frame" data-tour-frame aria-hidden="true"></div>
+            <div class="tour-rig">
+              <div class="cl-win" data-tour-window data-chrome="none" data-size="760x220" data-size-square="360x316">
+                <div class="cln">
+                  <span class="cln-date">Next</span>
+                  <span class="cln-tag" data-tour="tag"><b class="cln-t0">Unreleased</b><b class="cln-t1">v6</b></span>
+                  <div class="cln-body">
+                    <p class="cln-field" data-tour="field" data-tour-cursor="text"><span class="cln-ph">Draft the next entry…</span><span class="cln-typed" data-tour="line"></span></p>
+                    <p class="cln-sub">Shipped with you. The rest of the entry is yours to write.</p>
+                    <div class="cln-act"><span class="cln-hint">Draft</span><button type="button" class="cln-rel" data-tour="release">Release</button></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="cl-addr">
+          <a class="cl-mail" href="mailto:hello@yourname.com">hello@yourname.com</a>
+          <p class="cl-addr-more"><a href="#">GitHub</a><a href="feed.xml">Follow the log (RSS)</a><span>yourname.com</span></p>
+        </div>
+        <span class="sf-note">The line the cursor types is the work you want next: “Working with you on …”. Keep it one line.</span>
+      </section>
+
+    </div>
+  </section>
+
+  <footer class="cl-foot">
+    <p>Your Name · this log is kept by hand · last entry Month Year</p>
+  </footer>
+</article>
+
+<script type="module" src="./kit/scaffold.js"></script>
+<script type="module">
+import s0 from "./changelog/section.js";
+for (const [k, f] of [["demo/changelog",s0]]) document.querySelectorAll(`[data-tpl="${k}"]`).forEach((el) => f(el));
+</script>
+</body>
+</html>

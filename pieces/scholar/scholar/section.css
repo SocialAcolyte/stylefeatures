@@ -1,0 +1,447 @@
+@import url("../tour/tour.css");
+/* demo/scholar: the paper. A researcher's site set like the first page of a paper: their name is the title, the
+   abstract is their bio, the keywords are their fields, and the first numbered section is their selected papers. The
+   film reads it: a figure reference enlarges Fig. 1 where it sits, a citation [1] points at its paper, Cite opens the
+   BibTeX and copies it, PDF opens a preview to the abstract and one sentence is highlighted, and the asterisk on the
+   name leads to the correspondence footnote. Below the title page the paper goes on (publications by year, talks,
+   teaching, students, the CV) with sidenotes in the margin and a running head; it ends on its final footnote.
+
+   Typography: Newsreader for the paper, Inter Tight for apparatus. Newsreader has neither old-style figures nor small
+   caps, so: old-style digits come from "Scholar Figures" (Literata's, OFL, ten glyphs, fonts/README.txt) put ahead of
+   Newsreader with unicode-range; small caps are set from capitals at a smaller optical size (.sc-sc).
+
+   The stage is the page. Its shape follows the stage (classes tour.js sets before it measures): wide 1600 × 900
+   (.demo-scholar), square 960 × 960 (.is-square), tall 680 × 1209, 9:16 (.is-tall); on a phone (.is-narrow, set by
+   section.js) the title page alone in a 400-wide column, as tall as it is. --fw/--fh/--fx/--fy are the frame's box on
+   the stage and --u one design px, so the page and the three recording ratios share one set of overlay rules. */
+
+@font-face{font-family:'Scholar Figures';src:url(fonts/scholar-figures.woff2) format('woff2');font-weight:200 900;font-style:normal;unicode-range:U+0030-0039;font-display:swap}
+@font-face{font-family:'Scholar Figures';src:url(fonts/scholar-figures-italic.woff2) format('woff2');font-weight:200 900;font-style:italic;unicode-range:U+0030-0039;font-display:swap}
+
+@property --sc-yb{syntax:'<number>';inherits:true;initial-value:0}
+@property --sc-yc{syntax:'<number>';inherits:true;initial-value:0}
+@property --sc-yp{syntax:'<number>';inherits:true;initial-value:0}
+@property --sc-yhl{syntax:'<number>';inherits:true;initial-value:0}
+@property --sc-ycp{syntax:'<number>';inherits:true;initial-value:0}
+@property --sc-ylit{syntax:'<number>';inherits:true;initial-value:0}
+
+.demo-scholar{--tour-stage:var(--page);--sc-serif:'Scholar Figures',var(--serif);--sc-accent:#8e2f22;--sc-accent-soft:rgba(142,47,34,.1);
+  --sc-hl:rgba(236,196,72,.5);--sc-card:#fbf9f5;--sc-ease:cubic-bezier(.2,.7,.2,1);
+  position:relative;background:var(--page);color:var(--ink)}
+.demo-scholar .sc-num{font-family:var(--sc-serif)}
+/* small caps from capitals: a smaller size picks Newsreader's sturdier optical size, which is what true small caps do */
+.sc-sc{text-transform:uppercase;font-size:.74em;letter-spacing:.085em;font-weight:500}
+
+/* ── the stage ─────────────────────────────────────────────────────────────────────────────────────────────── */
+.demo-scholar .sc-stage{position:relative;height:100svh;min-height:520px;container-type:size;--dw:1600;--dh:900;
+  --fw:min(100cqw,calc(100cqh * var(--dw) / var(--dh)));--fh:calc(var(--fw) * var(--dh) / var(--dw));
+  --fx:calc(50cqw - var(--fw) / 2);--fy:calc(50cqh - var(--fh) / 2);--u:calc(var(--fw) / var(--dw));--uu:calc(var(--u) * var(--t,1));
+  overflow:hidden;margin-bottom:var(--grow,0px)}
+.demo-scholar.is-square .sc-stage{--dw:960;--dh:960}
+.demo-scholar.is-tall .sc-stage{--dw:680;--dh:1209}
+.demo-scholar.is-narrow .sc-stage{--dw:400;--dh:var(--nh,1400);height:calc(64px + (100vw - 16px) * var(--nh,1400) / 400);min-height:0;
+  --fw:calc(100cqw - 16px);--fx:8px;--fy:64px;overflow:visible}
+.demo-scholar.is-record .sc-stage{min-height:0;--t:1.2}
+.sc-frame{position:absolute;left:var(--fx);top:var(--fy);width:var(--fw);height:var(--fh);pointer-events:none}
+.demo-scholar .sc-win{background:transparent;box-shadow:none;border-radius:0;overflow:hidden}
+.demo-scholar.is-narrow .sc-win{overflow:visible}
+.demo-scholar.is-narrow:not(.is-record) .tour-rig{clip-path:none!important}
+.demo-scholar.is-measuring .sc-bib{max-height:0!important}
+
+/* ── the title page ────────────────────────────────────────────────────────────────────────────────────────── */
+.sc-page{position:absolute;inset:0;overflow:hidden;background:var(--page);font-family:var(--sc-serif);color:var(--ink);
+  font-kerning:normal;text-rendering:optimizeLegibility}
+.demo-scholar.is-narrow .sc-page{position:relative;inset:auto;overflow:visible}
+
+/* the running head: the name on the left, the paper's sections on the right, numbered */
+.sc-rh{display:flex;align-items:baseline;justify-content:space-between;margin:0 300px;padding:26px 0 12px;border-bottom:1px solid var(--rule)}
+.sc-rh-l{font-size:13.5px;letter-spacing:.11em;color:var(--ink)}
+.sc-rh-r{display:flex;gap:26px;font:400 13px/1 var(--sans);color:var(--ink-2)}
+.sc-rh-r a{text-decoration:none}
+.sc-rh-r a:hover{color:var(--ink);box-shadow:inset 0 -1px 0 currentColor}
+.sc-rh-r i{margin-right:6px;font:italic 400 14px/1 var(--sc-serif);color:var(--sc-accent)}
+
+.sc-tp{position:relative;display:grid;grid-template-columns:300px 640px 60px 300px 1fr;
+  grid-template-areas:". kind . . ." ". title title title ." ". sub . . ." ". aff . sn1 ." ". ids . sn1 ." ". abs . mg ." ". kw . mg ." ". sel . mg ." ". foot . . .";
+  align-items:start;padding:34px 0 34px}
+.sc-kind{grid-area:kind;margin:0;font-size:14px;color:var(--ink-3)}
+.sc-kind span{margin:0 .5em;color:var(--ph-mark)}
+.sc-title{grid-area:title;margin:10px 0 0;font:400 88px/.95 var(--sc-serif);letter-spacing:-.028em;font-variation-settings:'opsz' 72}
+.sc-star{position:relative;top:-.62em;margin-left:.06em;font:400 .44em/1 var(--sc-serif);color:var(--sc-accent);text-decoration:none;cursor:pointer;
+  padding:0 .08em;border-radius:3px}
+.sc-star:is(:hover,.is-hover){background:var(--sc-accent-soft)}
+.sc-star.is-press{background:rgba(142,47,34,.2)}
+.sc-sub{grid-area:sub;margin:14px 0 0;font:italic 400 26px/1.25 var(--sc-serif);color:var(--ink-2);letter-spacing:-.008em;text-wrap:balance}
+.sc-aff{grid-area:aff;margin:24px 0 0;font:400 15px/1.45 var(--sans);color:var(--ink);letter-spacing:-.004em}
+.sc-ids{grid-area:ids;display:flex;flex-wrap:wrap;gap:4px 0;margin:7px 0 0;font:400 13px/1.45 var(--sans);color:var(--ink-3)}
+.sc-ids > * + *::before{content:"·";display:inline-block;margin:0 .7em;color:var(--ph-mark)}
+.sc-ids b{font-weight:400;color:var(--ink-2);letter-spacing:.02em}
+.sc-ids a{color:var(--ink-2);text-decoration:underline 1px var(--rule);text-underline-offset:3px}
+.sc-ids a:hover{text-decoration-color:currentColor}
+
+/* references in running text: the figure reference, the citation, the footnote marks */
+.sc-ref,.sc-cite,.sc-fn{position:relative;color:var(--sc-accent);text-decoration:none;cursor:pointer;border-radius:2px}
+.sc-ref::after,.sc-cite::after,.sc-fn::after{content:"";position:absolute;inset:-1px -3px;border-radius:3px;background:var(--sc-accent-soft);opacity:0;transition:opacity .2s}
+:is(.sc-ref,.sc-cite,.sc-fn):is(:hover,.is-hover,:focus-visible,.is-lit)::after{opacity:1}
+:is(.sc-ref,.sc-cite,.sc-fn).is-press::after{opacity:1;background:rgba(142,47,34,.2)}
+:is(.sc-ref,.sc-cite,.sc-fn):focus-visible{outline:none}
+.sc-fn{display:inline-block;margin-left:1px;font:500 .62em/1 var(--sc-serif);vertical-align:.62em;padding:0 1px}
+.sc-cite{font-variant-numeric:normal}
+
+.sc-abs{grid-area:abs;margin-top:24px}
+.sc-abs p{margin:0;font:400 17.5px/1.54 var(--sc-serif);text-align:justify;hyphens:auto;-webkit-hyphens:auto;letter-spacing:-.002em;text-wrap:pretty}
+.sc-runin{margin-right:.3em;font-size:.76em;letter-spacing:.11em;color:var(--ink)}
+.sc-kw{grid-area:kw;margin:10px 0 0;font:400 15px/1.5 var(--sc-serif);color:var(--ink-2)}
+.sc-kw em{color:var(--ink);margin-right:.25em}
+.sc-kw span{margin:0 .45em;color:var(--ph-mark)}
+
+/* sidenotes: in the margin, beside the line that calls them; numbered like the marks */
+.sc-sn{margin:0;font:400 13px/1.5 var(--sans);color:var(--ink-2);text-wrap:pretty;transition:color .25s}
+.sc-sn > i{display:inline-block;min-width:1.1em;margin-right:4px;font:italic 500 13.5px/1 var(--sc-serif);color:var(--sc-accent)}
+.sc-sn.is-lit{color:var(--ink)}
+.sc-tp .sc-sn-1{grid-area:sn1;margin-top:25px}
+.sc-mg{grid-area:mg;position:relative;margin-top:28px;display:flex;flex-direction:column;gap:24px}
+
+/* Fig. 1: it enlarges where it sits. --B is the film's --big or the visitor's --sc-yb; it widens leftwards over the
+   text (which a paper-coloured veil quiets), and a negative margin keeps the notes under it where they were */
+.sc-fig{--B:max(var(--big,0),var(--sc-yb));--grow:380px;position:relative;z-index:3;margin:0;width:calc(100% + var(--B) * var(--grow));
+  margin-left:calc(var(--B) * var(--grow) * -1);margin-top:calc(var(--B) * -64px);margin-bottom:calc(var(--B) * (var(--grow) * -.6667 + 64px - 6px));
+  padding:calc(var(--B) * 14px);background:color-mix(in srgb,var(--sc-card) calc(var(--B) * 100%),transparent);border-radius:3px;
+  box-shadow:0 0 0 calc(var(--B) * 1px) rgba(25,24,22,.07),0 calc(var(--B) * 24px) calc(var(--B) * 50px) calc(var(--B) * -26px) rgba(25,24,22,.32);cursor:zoom-in}
+.sc-fig.is-big{cursor:zoom-out}
+.sc-fig-box .ph{border-radius:2px}
+.sc-fig figcaption{margin-top:calc(9px + var(--B) * 4px);font:400 calc(12.5px + var(--B) * 2.5px)/1.45 var(--sans);color:var(--ink-2);text-wrap:pretty}
+.sc-fig figcaption b{font-weight:600;color:var(--ink)}
+.sc-from{color:var(--ink-3)}
+.sc-veil{position:absolute;inset:0;z-index:2;background:var(--page);pointer-events:none;
+  opacity:calc(max(var(--v,0),var(--sc-yb),var(--sc-yp)) * .8)}
+.demo-scholar.is-yours .sc-veil.is-on{pointer-events:auto;cursor:zoom-out}
+
+/* §1 Selected papers: numbered section, hanging numeral in the margin */
+.sc-sel{grid-area:sel;position:relative;margin-top:22px}
+.sc-h{position:relative;margin:0 0 6px;font:400 22px/1.2 var(--sc-serif);letter-spacing:-.01em}
+.sc-n{position:absolute;right:100%;margin-right:22px;font:400 22px/1.2 var(--sc-serif);color:var(--sc-accent)}
+.sc-refs{list-style:none;margin:0;padding:0}
+.sc-pub{--C:max(var(--bib,0),var(--sc-yc));--L:max(var(--cited,0),var(--sc-ylit));position:relative;display:grid;grid-template-columns:38px 1fr;padding:6px 0}
+.sc-pub::before{content:"";position:absolute;left:-14px;right:-14px;top:2px;bottom:2px;border-radius:3px;background:var(--sc-accent-soft);opacity:var(--L);pointer-events:none}
+.sc-pn{font:400 15px/1.45 var(--sc-serif);color:var(--ink-3)}
+.sc-pub .sc-pn{color:color-mix(in srgb,var(--sc-accent) calc(var(--L) * 100%),var(--ink-3))}
+.sc-pb{min-width:0}
+.sc-pt{margin:0;font:400 17px/1.4 var(--sc-serif);letter-spacing:-.004em;text-wrap:pretty}
+.sc-pa{margin:2px 0 0;font:400 14.5px/1.45 var(--sc-serif);color:var(--ink-2)}
+.sc-pa b{font-weight:600;color:var(--ink)}
+.sc-pa i{font-style:italic}
+.sc-pl{display:flex;flex-wrap:wrap;align-items:center;gap:4px 16px;margin:5px 0 0}
+.sc-act{position:relative;padding:0;border:0;background:none;font:500 11.5px/1.6 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);
+  text-decoration:none;cursor:pointer}
+.sc-act::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:currentColor;opacity:.25;transition:opacity .2s}
+.sc-act:is(:hover,.is-hover,:focus-visible){color:var(--sc-accent)}
+.sc-act:is(:hover,.is-hover,:focus-visible)::after{opacity:1}
+.sc-act.is-press{transform:translateY(.5px)}
+.sc-act:focus-visible{outline:none}
+.sc-pub[data-open] .sc-act[data-cite],.sc-pub .sc-act[data-cite].is-on{color:var(--sc-accent)}
+.sc-tag{font:italic 400 13px/1 var(--sc-serif);color:var(--ink-3)}
+
+/* the BibTeX: a fold under the entry (height from --h, data-tour-grow), opened by --C; Copy washes the text as a
+   selection and says so */
+.sc-bib{overflow:hidden;max-height:max(calc(var(--C) * var(--h,240px)),calc((var(--C) - .999) * 1e7px));opacity:min(1,calc(var(--C) * 1.6))}
+.sc-bib-in{--S:max(var(--sel,0),var(--sc-ycp));position:relative;margin:10px 0 4px;padding:14px 18px 15px;border-radius:3px;background:var(--sc-card);
+  box-shadow:inset 0 0 0 1px var(--ph-line)}
+.sc-tex{position:relative;margin:0;font:400 12.5px/1.62 var(--mono);color:var(--ink);white-space:pre-wrap;overflow-wrap:anywhere;tab-size:2}
+.sc-tex b{font-weight:500;color:var(--sc-accent)}
+.sc-tex i{font-style:normal;color:var(--ink)}
+.sc-tex u{text-decoration:none;color:var(--ink-3)}
+.sc-sel-wash{position:absolute;left:-4px;top:-2px;bottom:-2px;width:calc(var(--S) * (100% + 8px));border-radius:2px;background:rgba(142,47,34,.12);pointer-events:none}
+.sc-copy{position:absolute;z-index:1;right:10px;top:10px;display:grid;padding:5px 10px;border:0;border-radius:3px;background:var(--page);color:var(--ink);
+  box-shadow:inset 0 0 0 1px var(--rule);font:500 11.5px/1.2 var(--sans);cursor:pointer}
+.sc-copy > span{grid-area:1/1;display:inline-flex;align-items:center;gap:5px;justify-content:center;transition:none}
+.sc-copy .a{opacity:calc(1 - var(--done,var(--S)))}
+.sc-copy .b{opacity:var(--done,var(--S));color:var(--sc-accent)}
+.sc-copy svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.sc-copy:is(:hover,.is-hover){box-shadow:inset 0 0 0 1px var(--ink-3)}
+.sc-copy.is-press{transform:translateY(.5px)}
+
+/* the first page's footnote and its folio */
+.sc-foot{grid-area:foot;position:relative;margin:18px 0 0;padding-top:12px;font:400 13px/1.5 var(--sans);color:var(--ink-2)}
+.sc-foot::before{content:"";position:absolute;left:0;top:0;width:120px;height:1px;background:var(--ink-3)}
+.sc-foot-in{--F:max(var(--lit,0),var(--sc-ylit));padding:2px 6px;margin-left:-6px;border-radius:3px;background:rgba(142,47,34,calc(var(--F) * .1))}
+.sc-foot i{margin-right:5px;font:400 15px/1 var(--sc-serif);color:var(--sc-accent)}
+.sc-foot-mail{color:var(--ink)}
+.sc-folio{position:absolute;left:300px;width:640px;bottom:16px;text-align:center;font:400 14px/1 var(--sc-serif);color:var(--ink-3)}
+
+/* ── the PDF preview: a reader window on the paper (no dark scrim), the paper's first page, one sentence marked ── */
+.sc-pdf{--P:max(var(--in,0),var(--sc-yp));position:absolute;z-index:5;left:470px;top:58px;width:660px;height:800px;display:flex;flex-direction:column;
+  border-radius:8px;background:var(--sc-card);overflow:hidden;
+  box-shadow:0 0 0 1px rgba(25,24,22,.09),0 2px 4px rgba(25,24,22,.04),0 30px 60px -28px rgba(25,24,22,.4),0 70px 120px -70px rgba(25,24,22,.4);
+  opacity:min(1,calc(var(--P) * 2));transform:translateY(calc((1 - var(--P)) * 60px)) scale(calc(.97 + var(--P) * .03));transform-origin:50% 100%;
+  visibility:visible;pointer-events:none}
+.demo-scholar:not(.is-pdf-open) .sc-pdf{pointer-events:none}
+.demo-scholar.is-pdf-open .sc-pdf{pointer-events:auto}
+.sc-pdf-bar{flex:none;display:flex;align-items:center;gap:12px;height:44px;padding:0 10px 0 16px;border-bottom:1px solid var(--ph-line);font:400 12.5px/1 var(--sans);color:var(--ink-2)}
+.sc-pdf-ic{width:12px;height:14px;fill:none;stroke:var(--ink-3);stroke-width:1;stroke-linejoin:round}
+.sc-pdf-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink)}
+.sc-pdf-pg{color:var(--ink-3)}
+.sc-pdf-pg b{font-weight:400;color:var(--ink)}
+.sc-pdf-open{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:4px;color:var(--ink);text-decoration:none;box-shadow:inset 0 0 0 1px var(--rule)}
+.sc-pdf-open svg{width:9px;height:9px;fill:none;stroke:currentColor;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round}
+.sc-pdf-open:hover{box-shadow:inset 0 0 0 1px var(--ink-3)}
+.sc-pdf-x{display:grid;place-items:center;width:28px;height:28px;padding:0;border:0;border-radius:4px;background:none;color:var(--ink-2);cursor:pointer}
+.sc-pdf-x svg{width:10px;height:10px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round}
+.sc-pdf-x:is(:hover,.is-hover){background:var(--page-2);color:var(--ink)}
+.sc-pdf-x.is-press{background:var(--ph-line)}
+.sc-pdf-desk{flex:1;overflow:hidden;padding:26px 0 0;background:#ebe7df}
+.sc-pdf-page{width:560px;min-height:740px;margin:0 auto;padding:44px 50px;background:#fff;box-shadow:0 0 0 1px rgba(25,24,22,.06),0 10px 24px -14px rgba(25,24,22,.3);
+  font-family:var(--sc-serif);color:#1d1c1a}
+.sc-pp-head{display:flex;justify-content:space-between;margin:0 0 26px;padding-bottom:7px;border-bottom:.5px solid #cfcac0;font:italic 400 10.5px/1 var(--sc-serif);color:#77736b}
+.sc-pp-title{margin:0;font:400 23px/1.18 var(--sc-serif);text-align:center;letter-spacing:-.01em;text-wrap:balance}
+.sc-pp-auth{margin:14px 0 0;font:400 12px/1.4 var(--sc-serif);text-align:center}
+.sc-pp-auth b{font-weight:600}
+.sc-pp-aff{margin:3px 0 0;font:italic 400 10.5px/1.4 var(--sc-serif);text-align:center;color:#77736b}
+.sc-pp-abs{margin:22px 22px 0}
+.sc-pp-abs p{margin:0;font:400 11.5px/1.55 var(--sc-serif);text-align:justify;hyphens:auto;-webkit-hyphens:auto}
+.sc-pp-abs p + p{margin-top:3px}
+.sc-pp-k{text-align:center!important;margin-bottom:6px!important;font:600 10px/1 var(--sc-serif)!important;letter-spacing:.14em;text-transform:uppercase}
+/* the highlight: the drag sweeps --hl from the sentence's first letter to its last */
+.sc-hl{--H:max(var(--hl,0),var(--sc-yhl));position:relative;padding:1px 0;-webkit-box-decoration-break:clone;box-decoration-break:clone;
+  background:linear-gradient(var(--sc-hl),var(--sc-hl)) 0 0/calc(var(--H) * 100%) 100% no-repeat}
+.sc-hl-a,.sc-hl-b{display:inline-block;width:1px;height:1em;vertical-align:-.15em}
+.sc-pp-body{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:24px}
+.sc-pp-body > div{display:flex;flex-direction:column;gap:6px}
+.sc-pp-body i{display:block;height:5px;border-radius:1px;background:#e9e5de}
+.sc-pp-body i.s{width:62%}
+.sc-pp-h{margin:0 0 4px;font:600 11px/1 var(--sc-serif)}
+.sc-pp-cap{margin:2px 0 6px;font:italic 400 9.5px/1.3 var(--sc-serif);color:#77736b}
+
+/* ── square: the margin narrows, the title shrinks ── */
+.demo-scholar.is-square .sc-rh{margin:0 40px;padding-top:26px}
+.demo-scholar.is-square .sc-rh-r{gap:16px;font-size:12px}
+.demo-scholar.is-square .sc-rh-r a:last-child{display:none}
+.demo-scholar.is-square .sc-tp{grid-template-columns:40px 560px 40px 280px 1fr;padding-top:36px}
+.demo-scholar.is-square .sc-title{font-size:74px}
+.demo-scholar.is-square .sc-sub{font-size:22px;margin-top:14px}
+.demo-scholar.is-square .sc-aff{margin-top:22px;font-size:14px}
+.demo-scholar.is-square .sc-abs{margin-top:22px}
+.demo-scholar.is-square .sc-abs p{font-size:16.5px;line-height:1.52}
+.demo-scholar.is-square .sc-tp .sc-sn-1{margin-top:23px}
+.demo-scholar.is-square .sc-mg{margin-top:26px}
+.demo-scholar.is-square .sc-fig{--grow:330px}
+.demo-scholar.is-square .sc-sel{margin-top:22px}
+.demo-scholar.is-square .sc-n{position:static;margin-right:12px}
+.demo-scholar.is-square .sc-pub{padding:6px 0}
+.demo-scholar.is-square .sc-pub:nth-child(3){display:none}
+.demo-scholar.is-square .sc-folio{display:none}
+.demo-scholar.is-square .sc-pdf{left:150px;top:46px;width:660px;height:870px}
+
+/* ── tall (9:16) and a phone: one column; the figure sits in the text and grows across it; sidenotes become
+   footnotes at the foot of the page, as in print ── */
+.demo-scholar:is(.is-tall,.is-narrow) .sc-rh{margin:0 44px;padding-top:30px}
+.demo-scholar:is(.is-tall,.is-narrow) .sc-rh-r{display:none}
+.demo-scholar:is(.is-tall,.is-narrow) .sc-rh::after{content:attr(data-r);font:400 12px/1 var(--sans);color:var(--ink-3)}
+.demo-scholar:is(.is-tall,.is-narrow) .sc-tp{grid-template-columns:44px 1fr 44px;
+  grid-template-areas:". kind ." ". title ." ". sub ." ". aff ." ". ids ." ". abs ." ". fig ." ". kw ." ". sel ." ". notes ." ". notes2 ." ". foot .";padding:40px 0 60px}
+.demo-scholar:is(.is-tall,.is-narrow) .sc-mg{display:contents}
+.demo-scholar:is(.is-tall,.is-narrow) .sc-fig{grid-area:fig;--grow:0px;justify-self:end;width:calc(56% + var(--B) * 44%);margin:20px 0 0;padding:0;background:none;box-shadow:none}
+.demo-scholar:is(.is-tall,.is-narrow) .sc-fig figcaption{font-size:calc(12.5px + var(--B) * 1.5px)}
+.demo-scholar:is(.is-tall,.is-narrow) .sc-veil{display:none}
+.demo-scholar:is(.is-tall,.is-narrow) .sc-tp .sc-sn{grid-area:notes;margin-top:22px;padding-top:10px;border-top:1px solid var(--rule);font-size:12.5px}
+.demo-scholar:is(.is-tall,.is-narrow) .sc-tp .sc-sn-2{grid-area:notes2;margin-top:6px;padding-top:0;border:0}
+.demo-scholar:is(.is-tall,.is-narrow) .sc-n{position:static;margin-right:12px}
+.demo-scholar:is(.is-tall,.is-narrow) .sc-folio{left:0;width:100%}
+.demo-scholar.is-tall .sc-title{font-size:78px}
+.demo-scholar.is-tall .sc-tp{padding:26px 0 10px}
+.demo-scholar.is-tall .sc-abs p{font-size:17px}
+.demo-scholar.is-tall .sc-fig{width:calc(46% + var(--B) * 54%);margin-top:14px}
+.demo-scholar.is-tall .sc-sel{margin-top:16px}
+.demo-scholar.is-tall .sc-pub:nth-child(3),.demo-scholar.is-tall .sc-folio{display:none}
+.demo-scholar.is-tall .sc-tp .sc-sn-1{margin-top:14px;padding-top:8px}
+.demo-scholar.is-tall .sc-foot{margin-top:12px}
+.demo-scholar.is-tall .sc-pdf{left:24px;top:40px;width:632px;height:1000px}
+.demo-scholar.is-tall .sc-pdf-page{width:540px}
+
+.demo-scholar.is-narrow .sc-rh{margin:0 22px;padding-top:20px}
+.demo-scholar.is-narrow .sc-tp{grid-template-columns:22px 1fr 22px;padding:26px 0 48px}
+.demo-scholar.is-narrow .sc-kind{font-size:12.5px}
+.demo-scholar.is-narrow .sc-title{font-size:52px;margin-top:12px}
+.demo-scholar.is-narrow .sc-sub{font-size:20px;margin-top:12px}
+.demo-scholar.is-narrow .sc-aff{margin-top:20px;font-size:14px}
+.demo-scholar.is-narrow .sc-abs{margin-top:20px}
+.demo-scholar.is-narrow .sc-abs p{font-size:16.5px;line-height:1.55;text-align:left}
+.demo-scholar.is-narrow .sc-fig{width:calc(62% + var(--B) * 38%)}
+.demo-scholar.is-narrow .sc-pub{grid-template-columns:30px 1fr}
+.demo-scholar.is-narrow .sc-pt{font-size:16.5px}
+.demo-scholar.is-narrow .sc-tex{font-size:11px}
+.demo-scholar.is-narrow .sc-bib-in{padding:40px 12px 12px}
+.demo-scholar.is-narrow .sc-copy{left:12px;right:auto;top:10px}
+.demo-scholar.is-narrow .sc-folio{display:none}
+.demo-scholar.is-narrow .sc-pdf{position:fixed;left:8px;right:8px;top:8px;bottom:8px;width:auto;height:auto}
+.demo-scholar.is-narrow .sc-pdf-page{width:auto;margin:0 14px;padding:28px 22px}
+.demo-scholar.is-narrow .sc-pp-body{display:none}
+
+/* ── overlays on the stage: the chapter card and caption in the page's left margin, the closing frame, the control ── */
+.demo-scholar .tour-card,.demo-scholar.is-stack .tour-card{left:calc(var(--fx) + 40 * var(--u));right:auto;top:auto;bottom:calc(100cqh - var(--fy) - 860 * var(--u));width:calc(222 * var(--u));
+  padding:calc(12 * var(--uu)) calc(14 * var(--uu)) calc(13 * var(--uu)) calc(16 * var(--uu));border-radius:calc(2 * var(--u));background:var(--page);box-shadow:none;border-left:calc(1.5 * var(--u)) solid var(--sc-accent)}
+.demo-scholar .tour-card-x{display:none}
+.demo-scholar .tour-card-n{font:italic 400 max(11px,calc(14 * var(--uu)))/1 var(--sc-serif);letter-spacing:.02em;color:var(--sc-accent)}
+.demo-scholar .tour-card h3{margin:calc(10 * var(--uu)) 0 calc(8 * var(--uu));font:400 max(18px,calc(28 * var(--uu)))/1.06 var(--sc-serif);letter-spacing:-.018em;text-wrap:balance}
+.demo-scholar .tour-card p{font:400 max(11.5px,calc(13 * var(--uu)))/1.45 var(--sans);color:var(--ink-2);text-wrap:pretty}
+.demo-scholar.is-square .tour-card{left:calc(var(--fx) + 640 * var(--u));bottom:calc(100cqh - var(--fy) - 930 * var(--u));width:calc(270 * var(--u))}
+.demo-scholar.is-tall .tour-card{left:calc(var(--fx) + 44 * var(--u));bottom:calc(100cqh - var(--fy) - 1192 * var(--u));top:auto;width:calc(592 * var(--u));
+  padding:calc(14 * var(--u)) 0 calc(6 * var(--u));border-left:0;border-radius:0;border-top:calc(1.5 * var(--u)) solid var(--sc-accent)}
+.demo-scholar.is-tall .tour-card h3{font-size:calc(34 * var(--uu))}
+.demo-scholar.is-tall .tour-card p{font-size:calc(15 * var(--uu))}
+
+.demo-scholar .tour-cap{left:calc(var(--fx) + 44 * var(--u));bottom:calc(100cqh - var(--fy) - 680 * var(--u));max-width:calc(230 * var(--uu));text-align:left;
+  transform:translate(0,calc((1 - var(--o,0)) * 8px));font-size:max(12.5px,calc(15.5 * var(--uu)));padding:calc(9 * var(--uu)) calc(14 * var(--uu))}
+.demo-scholar.is-square .tour-cap{left:calc(var(--fx) + 640 * var(--u));bottom:calc(100cqh - var(--fy) - 770 * var(--u));max-width:calc(270 * var(--u));font-size:calc(17 * var(--u))}
+.demo-scholar.is-stack.is-tall .tour-cap{left:50%;bottom:auto;top:calc(var(--fy) + 16 * var(--u));transform:translate(-50%,calc((1 - var(--o,0)) * 8px));max-width:calc(560 * var(--u));text-align:center;font-size:calc(20 * var(--u))}
+
+.sc-end-frame{position:absolute;z-index:8;left:var(--fx);top:var(--fy);width:var(--fw);height:var(--fh);margin:0;display:flex;flex-direction:column;justify-content:center;
+  padding-left:calc(300 * var(--u));background:color-mix(in srgb,var(--page) calc(var(--in,0) * 97.5%),transparent);pointer-events:none}
+.sc-end-frame > *{opacity:var(--in,0);transform:translateY(calc((1 - var(--in,0)) * 14 * var(--u)))}
+.sc-end-frame p{margin:0}
+.sc-end-rule{display:block;width:calc(160 * var(--u));height:max(1px,calc(1 * var(--u)));background:var(--ink-3);margin-bottom:calc(26 * var(--u))}
+.sc-end-k{font:400 calc(22 * var(--uu))/1 var(--sc-serif);letter-spacing:.09em;text-transform:uppercase;font-size:calc(16 * var(--uu));color:var(--ink-2)}
+.sc-end-k i{margin-right:calc(8 * var(--u));font:400 calc(30 * var(--uu))/0 var(--sc-serif);letter-spacing:0;color:var(--sc-accent);vertical-align:calc(-6 * var(--u))}
+.sc-end-mail{margin-top:calc(20 * var(--uu))!important;font:italic 400 calc(64 * var(--uu))/1.04 var(--sc-serif);letter-spacing:-.022em;color:var(--ink);overflow-wrap:anywhere}
+.sc-end-at{margin-top:calc(18 * var(--uu))!important;font:400 calc(17 * var(--uu))/1.4 var(--sans);color:var(--ink-2)}
+.sc-end-at span{margin:0 .6em;color:var(--ph-mark)}
+.demo-scholar.is-square .sc-end-frame{padding-left:calc(60 * var(--u))}
+.demo-scholar.is-square .sc-end-mail{font-size:calc(52 * var(--uu))}
+.demo-scholar.is-tall .sc-end-frame{padding:0 calc(44 * var(--u))}
+.demo-scholar.is-tall .sc-end-mail{font-size:calc(50 * var(--uu))}
+.demo-scholar:not(.is-record) .sc-end-frame{display:none}
+
+.sc-ctl{position:absolute;z-index:9;left:calc(var(--fx) + 44 * var(--u));top:calc(var(--fy) + 136 * var(--u));display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.sc-ctl-btn{display:inline-flex;align-items:center;gap:9px;padding:0;border:0;background:none;font:500 13px/1 var(--sans);color:var(--ink);cursor:pointer}
+.sc-ctl-btn svg{width:10px;height:10px;fill:currentColor;stroke:currentColor;stroke-width:1;stroke-linejoin:round}
+.sc-ctl-btn .i-skip{display:none}
+.demo-scholar.is-playing .sc-ctl-btn .i-play{display:none}
+.demo-scholar.is-playing .sc-ctl-btn .i-skip{display:block}
+.sc-ctl-btn:hover .sc-ctl-say{box-shadow:inset 0 -1px 0 currentColor}
+.sc-ctl-btn:focus-visible{outline:2px solid var(--sc-accent);outline-offset:4px}
+.sc-ctl-bar{position:relative;width:120px;height:1px;background:var(--rule)}
+.sc-ctl-bar i{position:absolute;left:0;top:0;bottom:0;width:calc(var(--tour-p,0) * 100%);background:var(--sc-accent)}
+.demo-scholar.is-yours .sc-ctl-bar{opacity:0}
+.sc-ctl .sf-note{max-width:210px;margin-top:6px}
+.demo-scholar:is(.is-square,.is-tall) .sc-ctl{display:none}
+.demo-scholar.is-narrow .sc-ctl{display:flex;left:16px;right:16px;top:22px;flex-direction:row;align-items:center;justify-content:space-between}
+.demo-scholar.is-narrow .sc-ctl .sf-note{display:none}
+.demo-scholar.is-narrow .tour-card,.demo-scholar.is-narrow .tour-cap{display:none}
+
+/* ── the rest of the paper, on the page ───────────────────────────────────────────────────────────────────── */
+.sc-doc{--k:1;--main:calc(640px * var(--k));--gap:calc(60px * var(--k));--mgw:calc(300px * var(--k));position:relative;
+  padding:clamp(40px,7vh,90px) 0 0;font-family:var(--sc-serif)}
+.demo-scholar.is-record .sc-doc{display:none}
+.sc-s,.sc-corr{position:relative;width:calc(var(--main) + var(--gap) + var(--mgw));max-width:calc(100% - 2 * var(--gutter));margin:0 auto;padding-right:calc(var(--gap) + var(--mgw))}
+.sc-s{padding-top:clamp(56px,9vh,96px)}
+.sc-s:first-of-type{padding-top:0}
+.sc-doc .sc-h{margin-bottom:22px;font-size:30px}
+.sc-doc .sc-n{font-size:30px;margin-right:26px}
+.sc-p{margin:0 0 18px;font:400 18px/1.6 var(--sc-serif);color:var(--ink);text-wrap:pretty}
+/* sidenotes on the page: floated into the margin beside the paragraph that calls them */
+.sc-doc .sc-sn{display:block;float:right;clear:right;width:var(--mgw);margin:.3em calc(-1 * (var(--gap) + var(--mgw))) 0 0;font-style:normal;font-weight:400;text-align:left}
+.sc-doc .sc-pa .sc-sn{margin-top:.15em}
+.sc-doc .sc-sn.is-lit,.sc-tp .sc-sn.is-lit{color:var(--ink)}
+.sc-year{position:relative;display:block;margin-top:22px}
+.sc-y{position:absolute;right:100%;margin:12px 26px 0 0;font:italic 400 17px/1 var(--sc-serif);color:var(--ink-3)}
+.sc-doc .sc-pub{padding:11px 0;border-top:1px solid color-mix(in srgb,var(--rule) 60%,transparent)}
+.sc-doc .sc-year:first-of-type .sc-pub:first-child{border-top:0}
+.sc-doc .sc-pt{font-size:18px}
+.sc-doc .sc-pa{font-size:15.5px}
+
+.sc-list{list-style:none;margin:0;padding:0}
+.sc-list li{display:grid;grid-template-columns:96px 1fr auto;gap:18px;align-items:baseline;padding:13px 0;border-top:1px solid color-mix(in srgb,var(--rule) 60%,transparent)}
+.sc-list li:first-child{border-top:0}
+.sc-when{font:italic 400 16px/1.4 var(--sc-serif);color:var(--ink-3)}
+.sc-what b{font:400 18px/1.4 var(--sc-serif)}
+.sc-where{font:italic 400 16px/1.4 var(--sc-serif);color:var(--ink-2)}
+.sc-line{display:block;margin-top:3px;font:400 14px/1.5 var(--sans);color:var(--ink-2)}
+.sc-links{display:flex;gap:14px}
+.sc-links a{font:500 11.5px/1.6 var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);text-decoration:none;box-shadow:inset 0 -1px 0 var(--rule)}
+.sc-links a:hover{color:var(--sc-accent);box-shadow:inset 0 -1px 0 currentColor}
+.sc-courses .sc-when{font:500 11.5px/1.9 var(--sans);font-style:normal;letter-spacing:.06em;text-transform:uppercase}
+
+.sc-people{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:8px}
+.sc-k{margin:0 0 10px;padding-bottom:9px;border-bottom:1px solid var(--rule);font-size:12.5px;color:var(--ink-2)}
+.sc-people ul{list-style:none;margin:0;padding:0}
+.sc-people li{padding:7px 0}
+.sc-people b{display:block;font:400 17px/1.3 var(--sc-serif)}
+.sc-people li span{display:block;margin-top:2px;font:400 13.5px/1.4 var(--sans);color:var(--ink-3)}
+
+.sc-cv{display:grid;grid-template-columns:92px 1fr;gap:28px;align-items:center}
+.sc-cv-page{display:flex;flex-direction:column;gap:5px;aspect-ratio:210/297;padding:12px 10px;background:#fff;box-shadow:0 0 0 1px var(--ph-line)}
+.sc-cv-page i{display:block;height:3px;border-radius:1px;background:var(--page-2)}
+.sc-cv-page i:first-child{width:60%;height:5px;margin-bottom:4px;background:var(--ink-3)}
+.sc-cv-page i:nth-child(3n){width:70%}
+.sc-cv-page i:nth-child(4){margin-top:4px}
+.sc-cv-sheet{display:block;transform:rotate(-1.5deg);box-shadow:0 14px 26px -16px rgba(25,24,22,.35);transition:transform .4s var(--sc-ease)}
+.sc-cv-sheet:hover{transform:rotate(0) translateY(-2px)}
+.sc-cv-act{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin:4px 0 0}
+.sc-cv-meta{font:400 13px/1 var(--sans);color:var(--ink-3)}
+.sc-cv-meta span{margin:0 .4em}
+.sc-ack{margin:clamp(40px,6vh,64px) 0 0;font:400 15.5px/1.6 var(--sc-serif);color:var(--ink-2);text-wrap:pretty}
+
+/* the running head on the page: name, the section you are in, its folio. It appears once the title page has gone */
+.sc-run{position:sticky;top:0;z-index:20;display:flex;align-items:baseline;gap:18px;width:calc(var(--main) + var(--gap) + var(--mgw));max-width:calc(100% - 2 * var(--gutter));
+  margin:calc(-1 * clamp(40px,7vh,90px)) auto clamp(40px,7vh,90px);padding:16px 0 11px;border-bottom:1px solid var(--rule);background:var(--page);
+  box-shadow:0 0 0 100vw var(--page);clip-path:inset(0 -100vw 0);   /* paper the full width behind it, without widening the page */
+  opacity:var(--run,0);transform:translateY(calc((1 - var(--run,0)) * -6px));transition:opacity .35s,transform .35s var(--sc-ease);pointer-events:none}
+.sc-run-name{font-size:12.5px;color:var(--ink)}
+.sc-run-sec{flex:1;font:italic 400 15px/1 var(--sc-serif);color:var(--ink-2)}
+.sc-run-sec b{font-weight:400;font-style:normal;color:var(--sc-accent);margin-right:4px}
+.sc-run-folio{font:400 15px/1 var(--sc-serif);color:var(--ink-3)}
+
+/* THE ENDING: the paper's final footnote, set as the last thing on the page */
+.sc-corr{padding-top:clamp(80px,13vh,150px);padding-bottom:clamp(70px,11vh,120px)}
+.sc-corr-rule{display:block;width:160px;height:1px;background:var(--ink-3);margin-bottom:26px}
+.sc-corr-k{display:flex;align-items:baseline;gap:10px;margin:0;font-size:17px;color:var(--ink-2)}
+.sc-corr-k .sc-sc{font-size:13px;letter-spacing:.12em}
+.sc-corr-mark{font:400 30px/0 var(--sc-serif);color:var(--sc-accent);text-decoration:none;transform:translateY(6px)}
+.sc-corr-mail{display:inline-block;margin-top:20px;font:italic 400 clamp(36px,5.4vw,72px)/1.04 var(--sc-serif);letter-spacing:-.024em;color:var(--ink);text-decoration:none;overflow-wrap:anywhere;
+  background:linear-gradient(currentColor,currentColor) 0 100%/0 1px no-repeat;transition:background-size .6s var(--sc-ease)}
+.sc-corr-mail:hover{background-size:100% 1px}
+.sc-corr-dl{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:40px 0 0}
+.sc-corr-dl dt{margin:0 0 8px;font-size:11.5px;color:var(--ink-3)}
+.sc-corr-dl dd{margin:0;font:400 16px/1.5 var(--sc-serif);color:var(--ink)}
+.sc-corr-dl a{text-decoration:none;box-shadow:inset 0 -1px 0 var(--rule)}
+.sc-corr-dl a:hover{box-shadow:inset 0 -1px 0 currentColor}
+.sc-colophon{margin:56px 0 0;font:italic 400 14px/1.5 var(--sc-serif);color:var(--ink-3)}
+.sc-colophon span{margin:0 .5em;font-style:normal}
+.sc-corr .sf-note{margin-top:22px}
+.sc-corr.is-lit .sc-corr-mail{background-size:100% 1px}
+
+@media (max-width:1099px){
+  .sc-s,.sc-corr,.sc-run{width:auto;max-width:720px;padding-left:var(--gutter);padding-right:var(--gutter)}
+  .sc-run{margin-left:auto;margin-right:auto}
+  .sc-doc .sc-n,.sc-y,.sc-doc .sc-y{position:static;margin:0 12px 0 0}
+  .sc-y{display:block;margin:24px 0 2px}
+  /* sidenotes become notes that open under the paragraph when their mark is tapped */
+  .sc-doc .sc-sn{float:none;width:auto;margin:10px 0 6px;padding:10px 14px;border-left:1.5px solid var(--sc-accent);background:var(--sc-card);display:none}
+  .sc-doc .sc-sn.is-open{display:block}
+}
+@media (max-width:700px){
+  .sc-list li{grid-template-columns:1fr;gap:4px}
+  .sc-links{margin-top:4px}
+  .sc-people,.sc-corr-dl{grid-template-columns:1fr}
+  .sc-doc .sc-h{font-size:26px}
+  .sc-p{font-size:17px}
+}
+@media (prefers-reduced-motion:reduce){
+  .sc-fig,.sc-pub,.sc-pdf,.sc-veil,.sc-bib,.sc-hl,.sc-run{transition:none!important}
+}
+/* the visitor's states (after the film): registered properties, so they ease */
+.demo-scholar.is-yours .sc-fig{transition:--sc-yb .7s var(--sc-ease)}
+.demo-scholar.is-yours .sc-fig.is-big{--sc-yb:1}
+.demo-scholar.is-yours .sc-veil{transition:--sc-yb .7s var(--sc-ease),--sc-yp .5s var(--sc-ease)}
+.demo-scholar.is-yours.is-fig-big .sc-veil{--sc-yb:1}
+.demo-scholar.is-yours.is-pdf-open .sc-veil,.demo-scholar.is-yours.is-pdf-open .sc-pdf{--sc-yp:1}
+.demo-scholar.is-yours .sc-pdf{transition:--sc-yp .5s var(--sc-ease)}
+.demo-scholar.is-yours .sc-hl{transition:--sc-yhl .9s cubic-bezier(.5,0,.3,1) .45s}
+.demo-scholar.is-yours.is-pdf-open .sc-hl{--sc-yhl:1}
+.sc-pub{transition:--sc-yc .55s var(--sc-ease),--sc-ylit .4s}
+.sc-pub[data-open]{--sc-yc:1}
+.sc-pub.is-lit,.sc-foot-in.is-lit{--sc-ylit:1}
+.sc-foot-in{transition:--sc-ylit .4s}
+.sc-bib-in{transition:--sc-ycp .35s}
+.sc-bib-in.is-copied{--sc-ycp:1}
+.sc-doc .sc-bib{--C:var(--sc-yc);max-height:calc(var(--sc-yc) * 400px)}

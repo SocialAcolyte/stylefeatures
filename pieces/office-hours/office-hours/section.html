@@ -1,0 +1,271 @@
+<article class="demo-office-hours" data-tpl="demo/office-hours" data-tz="{{tz|}}" aria-labelledby="oh-name">
+
+  <!-- 1. The week. The first screen is a week of the diary: open times as quiet hairline boxes, busy time hatched, the
+          name and "I help … with …" in the margin. The film is a visitor booking: an offer picked, a slot lit, a slip
+          written in, and the invite card dropping into the week. After the film the diary is theirs: an open time
+          (or an offer) takes them to the booking at the end with it chosen (section.js). ?record films it once. -->
+  <section class="oh-hero" id="top">
+    <div class="oh-film" data-tour-root data-driver="play" data-captions="record" aria-label="A week of my diary, then a visitor booking a working session">
+      <div class="oh-stage" data-tour-stage>
+        <div class="oh-frame" data-tour-frame aria-hidden="true"></div>
+        <div class="tour-rig">
+          <!-- THE DIARY: 1200 × 740 design px on a wide stage, 800 × 700 on a square one (1:1), 480 × 800 on phones and in
+               9:16. One set of markup, three layouts in section.css. Days and dates fill in from the coming week. -->
+          <div class="oh-win" data-tour-window data-chrome="none" data-size="1200x740" data-size-square="800x700" data-size-tall="480x800">
+            <div class="oh-diary" data-tour="diary">
+              <i class="oh-ribbon" aria-hidden="true"></i>
+
+              <!-- the margin: who, what for, and the ways to work together -->
+              <aside class="oh-margin">
+                <div class="oh-who">
+                  <p class="oh-kick">Office hours</p>
+                  <p class="oh-name" id="oh-name">{{name|Your Name}}</p>
+                  <p class="oh-help">I help {{who|the people you serve}} with {{what|the problem you solve}}.</p>
+                </div>
+                <div class="oh-offers">
+                  <p class="oh-mh">Ways to work together</p>
+                  <ol class="oh-olist">
+                    <li class="oh-offer" role="button" data-tour="offer-1" data-len="20" data-name="{{o1|Intro call}}"><i></i><b>{{o1|Intro call}}</b><span>{{o1_len|20 min}}</span><small>{{o1_line|To see if we're a fit}}</small></li>
+                    <li class="oh-offer" role="button" data-tour="offer-2" data-len="45" data-name="{{o2|Working session}}"><i></i><b>{{o2|Working session}}</b><span>{{o2_len|45 min}}</span><small>{{o2_line|One problem, worked through together}}</small><em class="oh-offer-booked" data-tour="booked-note">Booked · <span data-oh-when="short">Thu 12, 10:00</span></em></li>
+                    <li class="oh-offer" role="button" data-tour="offer-3" data-len="180" data-name="{{o3|Half-day review}}"><i></i><b>{{o3|Half-day review}}</b><span>{{o3_len|3 h}}</span><small>{{o3_line|A deep look, and a written plan}}</small></li>
+                  </ol>
+                </div>
+                <div class="oh-month" aria-hidden="true">
+                  <p class="oh-mh" data-oh-month>November</p>
+                  <div class="oh-cal" data-tour="cal"></div>
+                </div>
+                <p class="oh-tz"><span>Times in</span> <b data-oh-tz>{{tz_label|your city's time}}</b></p>
+              </aside>
+
+              <!-- the week -->
+              <div class="oh-week" data-tour="week" data-len="">
+                <header class="oh-wk-head">
+                  <p class="oh-wk-title">The week of <span data-oh-weekof>9 November</span></p>
+                  <p class="oh-wk-key"><span class="oh-key-open">Open</span><span class="oh-key-busy">Busy</span><span class="oh-wk-no" data-oh-weekno>Week 46</span></p>
+                </header>
+                <div class="oh-days" aria-hidden="true">
+                  <span></span>
+                  <p class="oh-day" data-d="0"><small>Mon</small><b data-oh-date="0">9</b></p>
+                  <p class="oh-day" data-d="1"><small>Tue</small><b data-oh-date="1">10</b></p>
+                  <p class="oh-day" data-d="2"><small>Wed</small><b data-oh-date="2">11</b></p>
+                  <p class="oh-day" data-d="3"><small>Thu</small><b data-oh-date="3">12</b></p>
+                  <p class="oh-day" data-d="4"><small>Fri</small><b data-oh-date="4">13</b></p>
+                </div>
+                <div class="oh-grid">
+                  <ol class="oh-hours" aria-hidden="true"><li>9:00</li><li>10:00</li><li>11:00</li><li>12:00</li><li>13:00</li><li>14:00</li><li>15:00</li><li>16:00</li><li>17:00</li></ol>
+                  <!-- Each time: --s its start (hours, 13.5 = 13:30), --m its length (minutes). Open times are your real
+                       availability pattern; busy time is hatched and never labelled (AGENT.md §2). -->
+                  <div class="oh-cols">
+                    <div class="oh-col" data-d="0">
+                      <i class="oh-busy" style="--s:9;--m:180"></i>
+                      <span class="oh-slot" role="button" data-open data-m="30" style="--s:13;--m:30"><b>13:00</b><small>30 min</small><i class="oh-tick"></i></span>
+                      <span class="oh-slot" role="button" data-open data-m="60" style="--s:14.5;--m:60"><b>14:30</b><small>1 h</small><i class="oh-tick"></i></span>
+                      <i class="oh-busy" style="--s:16;--m:60"></i>
+                    </div>
+                    <div class="oh-col" data-d="1">
+                      <span class="oh-slot" role="button" data-open data-m="45" style="--s:9.5;--m:45"><b>9:30</b><small>45 min</small><i class="oh-tick"></i></span>
+                      <i class="oh-busy" style="--s:11;--m:120"></i>
+                      <span class="oh-slot" role="button" data-open data-m="90" style="--s:14;--m:90"><b>14:00</b><small>1 h 30</small><i class="oh-tick"></i></span>
+                    </div>
+                    <div class="oh-col" data-d="2">
+                      <i class="oh-busy" style="--s:9;--m:90"></i>
+                      <span class="oh-slot" role="button" data-open data-m="30" style="--s:11;--m:30"><b>11:00</b><small>30 min</small><i class="oh-tick"></i></span>
+                      <i class="oh-busy" style="--s:13;--m:240"></i>
+                    </div>
+                    <div class="oh-col" data-d="3">
+                      <!-- the time the film books: it lights, the slip opens beside it, the invite card lands on it -->
+                      <span class="oh-slot" role="button" data-open data-m="60" data-tour="slot-thu" style="--s:10;--m:60">
+                        <b>10:00</b><small>1 h</small><i class="oh-tick"></i>
+                        <i class="oh-zone" data-tour="zone"></i>   <!-- what the camera frames while the slip is written in -->
+                        <span class="oh-lit" data-tour="lit"><b>10:00 – 10:45</b></span>
+                        <span class="oh-entry" data-tour="entry"><b>{{o2|Working session}}</b><small>with <span data-tour="entry-who">Alex</span></small></span>
+
+                        <!-- the slip tucked into the diary: two lines written in, then Confirm -->
+                        <span class="oh-slip" data-tour="slip">
+                          <span class="oh-slip-when"><b data-oh-when="long">Thursday 12 November</b> · 10:00 – 10:45</span>
+                          <span class="oh-slip-what">{{o2|Working session}} · {{o2_len|45 min}}</span>
+                          <span class="oh-line" data-tour="f-name" data-tour-cursor="text"><small>Your name</small><span class="oh-ink" data-tour="v-name"></span></span>
+                          <span class="oh-line" data-tour="f-about" data-tour-cursor="text"><small>What's it about?</small><span class="oh-ink" data-tour="v-about"></span></span>
+                          <span class="oh-slip-act"><span class="oh-confirm" role="button" data-tour="confirm"><b data-tour="confirm-text">Confirm</b></span><small>The invite comes by email.</small></span>
+                        </span>
+
+                        <!-- the invite card: drops into the week and settles into the slot -->
+                        <span class="oh-invite" data-tour="invite" aria-hidden="true">
+                          <span class="oh-inv-top"><small>Invitation</small><svg viewBox="0 0 20 14"><path d="M1.5 1.5h17v11h-17zM1.5 1.5 10 8l8.5-6.5"/></svg></span>
+                          <b class="oh-inv-what">{{o2|Working session}}</b>
+                          <span class="oh-inv-when" data-oh-when="long">Thursday 12 November</span>
+                          <span class="oh-inv-time">10:00 – 10:45 · <span data-oh-tz>{{tz_label|your city's time}}</span></span>
+                          <span class="oh-inv-who">{{name|Your Name}} &amp; <span data-tour="inv-who">Alex</span></span>
+                          <span class="oh-inv-how">{{call_how|Video call · the link is in the invite}}</span>
+                        </span>
+                      </span>
+                      <i class="oh-busy" style="--s:12;--m:90"></i>
+                      <span class="oh-slot" role="button" data-open data-m="45" style="--s:15;--m:45"><b>15:00</b><small>45 min</small><i class="oh-tick"></i></span>
+                    </div>
+                    <div class="oh-col" data-d="4">
+                      <span class="oh-slot" role="button" data-open data-m="45" data-tour="slot-fri" style="--s:9;--m:45"><b>9:00</b><small>45 min</small><i class="oh-tick"></i><i class="oh-ghost"></i></span>
+                      <i class="oh-busy" style="--s:10.5;--m:90"></i>
+                      <p class="oh-hand">{{fri_note|No calls on Friday afternoons}}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The rail under the diary. On the page: the line, the play bar, the way to the booking. In ?record it opens the
+             film, carries the chapter and caption, and closes on the address. -->
+        <header class="oh-band" data-tour-band="css">
+          <div class="oh-band-who">
+            <p class="oh-band-kick"><i></i>Office hours · <span data-oh-tzline>times in {{tz_label|your city's time}}</span></p>
+            <h1 class="oh-band-title">{{band_title|Book a call with me}}</h1>
+            <p class="oh-band-line">{{band_line|Pick what you need, then a time that suits you. The invite lands in both our diaries.}}</p>
+          </div>
+          <div class="oh-band-act" data-tour-hide-on-record>
+            <a class="sf-btn" href="#book">Book a time</a>
+          </div>
+        </header>
+        <footer class="oh-end" data-tour-end>
+          <p class="oh-end-kick">Office hours</p>
+          <p class="oh-end-name">{{name|Your Name}}</p>
+          <p class="oh-end-url">{{book_url|yourname.com/book}} · {{email|hello@yourname.com}}</p>
+        </footer>
+      </div>
+    </div>
+    <p class="sf-wrap oh-hero-note"><span class="sf-note">Your real week, as a pattern: the hours you keep open for calls, the busy time as hatching (never what it is). The offers are the ones you sell, with the lengths you sell them at (AGENT.md §2).</span></p>
+  </section>
+
+  <!-- 2. The offers in detail. Each one drawn as a length of time on an hour rule, then what happens in it. -->
+  <section class="sf-wrap oh-sec oh-offs" id="offers" aria-labelledby="oh-offs-h">
+    <header class="oh-sec-head">
+      <p class="sf-eyebrow">Ways to work together</p>
+      <h2 class="oh-h2" id="oh-offs-h">{{offers_h|Three ways in}}</h2>
+      <p class="oh-sec-line">{{offers_line|Start small if you're not sure. Every one ends with something you can use.}}</p>
+    </header>
+    <ol class="oh-off-list">
+      <li class="oh-off" style="--m:20">
+        <div class="oh-off-len"><b>{{o1_n|20}}</b><span>{{o1_u|minutes}}</span></div>
+        <div class="oh-off-main">
+          <h3>{{o1|Intro call}}</h3>
+          <p>{{o1_more|What we cover, in one or two plain sentences, and what you'll know by the end of it.}}</p>
+          <p class="oh-off-for"><span>Good for</span>{{o1_for|Whoever this suits best, in a few words}}</p>
+        </div>
+        <div class="oh-off-side">
+          <div class="oh-rule" aria-hidden="true"><i></i></div>
+          <p class="oh-off-rate">{{o1_rate|Free}}</p>
+          <a class="oh-off-book" href="#book" data-offer="0">Book this</a>
+        </div>
+      </li>
+      <li class="oh-off" style="--m:45">
+        <div class="oh-off-len"><b>{{o2_n|45}}</b><span>{{o2_u|minutes}}</span></div>
+        <div class="oh-off-main">
+          <h3>{{o2|Working session}}</h3>
+          <p>{{o2_more|What we cover, in one or two plain sentences, and what you'll know by the end of it.}}</p>
+          <p class="oh-off-for"><span>Good for</span>{{o2_for|Whoever this suits best, in a few words}}</p>
+        </div>
+        <div class="oh-off-side">
+          <div class="oh-rule" aria-hidden="true"><i></i></div>
+          <p class="oh-off-rate">{{o2_rate|Your rate, if you publish it}}</p>
+          <a class="oh-off-book" href="#book" data-offer="1">Book this</a>
+        </div>
+      </li>
+      <li class="oh-off" style="--m:180">
+        <div class="oh-off-len"><b>{{o3_n|3}}</b><span>{{o3_u|hours}}</span></div>
+        <div class="oh-off-main">
+          <h3>{{o3|Half-day review}}</h3>
+          <p>{{o3_more|What we cover, in one or two plain sentences, and what you'll know by the end of it.}}</p>
+          <p class="oh-off-for"><span>Good for</span>{{o3_for|Whoever this suits best, in a few words}}</p>
+        </div>
+        <div class="oh-off-side">
+          <div class="oh-rule" aria-hidden="true"><i></i></div>
+          <p class="oh-off-rate">{{o3_rate|Your rate, if you publish it}}</p>
+          <a class="oh-off-book" href="#book" data-offer="2">Book this</a>
+        </div>
+      </li>
+    </ol>
+    <p class="oh-rule-key" aria-hidden="true"><span>0</span><span>1 h</span><span>2 h</span><span>3 h</span></p>
+    <span class="sf-note">Only offers you actually sell, at the lengths you sell them. A rate only if you already publish it; otherwise delete the line, don't guess one.</span>
+  </section>
+
+  <!-- 3. How it goes: three dated steps on one hairline, like entries across a week. -->
+  <section class="sf-wrap oh-sec oh-how" id="how" aria-labelledby="oh-how-h">
+    <header class="oh-sec-head is-row">
+      <p class="sf-eyebrow">How it goes</p>
+      <h2 class="oh-h2" id="oh-how-h">{{how_h|From the first call on}}</h2>
+    </header>
+    <ol class="oh-steps">
+      <li><span class="oh-step-when">{{s1_when|Before}}</span><h3>{{s1|You book a time}}</h3><p>{{s1_line|What you'll get in the invite, and anything worth sending ahead.}}</p></li>
+      <li><span class="oh-step-when">{{s2_when|On the call}}</span><h3>{{s2|We work on it}}</h3><p>{{s2_line|How the time is spent, in one plain sentence.}}</p></li>
+      <li><span class="oh-step-when">{{s3_when|After}}</span><h3>{{s3|You leave with something}}</h3><p>{{s3_line|What arrives afterwards: notes, a plan, a recording, and when.}}</p></li>
+    </ol>
+  </section>
+
+  <!-- 4. Proof, as placeholders: logos of people you've worked with (with permission), and one quote slot. -->
+  <section class="sf-wrap oh-sec oh-proof" id="proof" aria-labelledby="oh-proof-h">
+    <header class="oh-sec-head is-row">
+      <p class="sf-eyebrow">Worked with</p>
+      <h2 class="oh-h2 is-small" id="oh-proof-h">{{proof_h|Some of the people I've helped}}</h2>
+    </header>
+    <ul class="oh-logos">
+      <li class="ph" style="--r:3/1" data-ph="Logo"></li><li class="ph" style="--r:3/1" data-ph="Logo"></li><li class="ph" style="--r:3/1" data-ph="Logo"></li><li class="ph" style="--r:3/1" data-ph="Logo"></li><li class="ph" style="--r:3/1" data-ph="Logo"></li>
+    </ul>
+    <figure class="oh-quote">
+      <span class="oh-quote-tag">Quote slot</span>
+      <blockquote><p class="ph-text" style="--n:3;--last:55%"></p></blockquote>
+      <figcaption><span class="ph is-round is-bare" style="--r:1/1"></span><b>{{q_name|Their name}}</b><small>{{q_role|Their role, and where}}</small></figcaption>
+    </figure>
+    <span class="sf-note">Real words from a real client, with their permission, or nothing: delete the slot until you have one. Logos only where they've said yes.</span>
+  </section>
+
+  <!-- 5. A short FAQ. -->
+  <section class="sf-wrap oh-sec oh-faq" id="faq" aria-labelledby="oh-faq-h">
+    <header class="oh-sec-head is-row">
+      <p class="sf-eyebrow">Questions</p>
+      <h2 class="oh-h2 is-small" id="oh-faq-h">{{faq_h|Before you book}}</h2>
+    </header>
+    <div class="oh-qs">
+      <details><summary>{{f1|What happens after I book?}}</summary><p>{{f1_a|The answer, in two plain sentences.}}</p></details>
+      <details><summary>{{f2|Can I move the time?}}</summary><p>{{f2_a|How far ahead, and how: the link in the invite, or a reply.}}</p></details>
+      <details><summary>{{f3|Do you work across time zones?}}</summary><p>{{f3_a|Which hours you keep, and where you are.}}</p></details>
+      <details><summary>{{f4|How does paying work?}}</summary><p>{{f4_a|When and how you invoice, or that the first call is free.}}</p></details>
+    </div>
+  </section>
+
+  <!-- 6. The ending: the real booking. Your scheduler's embed in the slot (data-embed, AGENT.md §4), the time zones
+          side by side, and an email fallback that carries the offer and the time picked above. -->
+  <section class="oh-book" id="book" aria-labelledby="oh-book-h">
+    <div class="sf-wrap oh-book-in">
+      <div class="oh-book-side">
+        <p class="sf-eyebrow">Book a time</p>
+        <h2 class="oh-h2" id="oh-book-h">{{book_h|Find a time in my diary}}</h2>
+        <div class="oh-pick" role="radiogroup" aria-label="What you'd like to book">
+          <button type="button" role="radio" aria-checked="false" data-offer="0">{{o1|Intro call}} <span>{{o1_len|20 min}}</span></button>
+          <button type="button" role="radio" aria-checked="true" data-offer="1">{{o2|Working session}} <span>{{o2_len|45 min}}</span></button>
+          <button type="button" role="radio" aria-checked="false" data-offer="2">{{o3|Half-day review}} <span>{{o3_len|3 h}}</span></button>
+        </div>
+        <dl class="oh-zones">
+          <div><dt>Your time</dt><dd><b data-oh-now="you">--:--</b><span data-oh-zone="you">your time zone</span></dd></div>
+          <div><dt>Mine</dt><dd><b data-oh-now="me">--:--</b><span data-oh-zone="me">{{tz_label|your city's time}}</span></dd></div>
+        </dl>
+        <p class="oh-gap" data-oh-gap></p>
+        <p class="oh-chosen" data-oh-chosen hidden></p>
+      </div>
+      <div class="oh-sheet">
+        <!-- data-embed: your scheduler's booking URL for this offer (Cal.com, SavvyCal, TidyCal…). section.js puts it in
+             an iframe here and switches it when another offer is picked. Leave it empty to keep the email fallback. -->
+        <div class="oh-embed" data-embed="{{embed|}}" data-embed-0="{{embed_0|}}" data-embed-1="{{embed_1|}}" data-embed-2="{{embed_2|}}">
+          <figure class="ph" style="--r:4/3" data-ph="Your booking page" data-hint="Your scheduler's embed goes here (AGENT.md §4)"></figure>
+        </div>
+        <div class="oh-mail">
+          <p>{{mail_line|Rather write? Send two times that suit you and I'll confirm one.}}</p>
+          <a class="sf-btn" data-oh-mail href="mailto:{{email|hello@yourname.com}}">Write to {{email|hello@yourname.com}}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="sf-wrap oh-foot">
+    <span>{{name|Your Name}}</span><a href="mailto:{{email|hello@yourname.com}}">{{email|hello@yourname.com}}</a><a href="#top">Back to the week</a>
+  </footer>
+</article>

@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en" class="no-js">
+<head>
+<meta charset="utf-8">
+<script src="./backdrop/backdrop.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Speaker: book me to speak</title>
+<script>document.documentElement.classList.remove("no-js")</script>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,300..700;1,6..72,300..700&display=swap">
+<link rel="stylesheet" href="./kit/scaffold.css">
+<link rel="stylesheet" href="./speaker/section.css">
+</head>
+<body>
+<article class="demo-speaker" data-tpl="demo/speaker" id="speaker" aria-labelledby="sp-name">
+
+  <!-- 0. The event page's top line: the name, three ways in, and the one button organisers came for. -->
+  <header class="sf-wrap sp-top">
+    <a class="sp-mark" href="#top" id="sp-name">Your Name</a>
+    <nav class="sp-nav" aria-label="Sections"><a href="#talks">Talks</a><a href="#stages">Stages</a><a href="#press">Press kit</a></nav>
+    <a class="sf-btn sp-book" href="#book">Book me to speak</a>
+  </header>
+
+  <!-- 1. The talk is on. One broadcast playing on the page: the slides, the speaker camera, a lower third, a running
+          clock and the subtitle line. Half-way the organiser opens the press kit and the talk shrinks into it, still
+          playing. Scroll past and it docks in the corner and keeps going (section.js). ?record films it once. -->
+  <section class="sp-hero" id="top">
+    <div class="sp-film" data-tour-root data-driver="play" data-captions="record" aria-label="Your signature talk playing, then an organiser using the press kit">
+      <div class="sp-stage" data-tour-stage>
+        <div class="sp-frame" data-tour-frame aria-hidden="true"></div>
+        <div class="tour-rig">
+          <!-- THE BROADCAST: 1120 × 700 design px on a wide stage, 540 × 960 on phones and in 9:16 (one set of markup,
+               two layouts in section.css). The press kit sits underneath; the talk docks into its slot. -->
+          <div class="sp-win" data-tour-window data-chrome="none" data-size="1120x700" data-size-tall="540x960">
+            <div class="sp-tv" data-tour="tv">
+
+              <!-- the press kit, under the broadcast: the organiser's half of the film -->
+              <div class="sp-kit" data-tour="kit">
+                <header class="sp-kit-top"><span>Press kit</span><b>Your Name</b><small>For organisers</small></header>
+                <div class="sp-kit-slot" data-tour="slot"><span>The talk you give most often</span><small>Keynote · 45 min</small></div>
+
+                <section class="sp-kit-shots" data-tour="shots">
+                  <p class="sp-kit-h">Headshots</p>
+                  <div class="sp-kit-shotrow">
+                    <figure class="sp-kit-shot" data-tour="shot-p"><span class="ph is-bare" style="--r:4/5"></span><figcaption>Portrait</figcaption></figure>
+                    <figure class="sp-kit-shot" data-tour="shot-l"><span class="ph is-bare" style="--r:3/2"></span><figcaption>Landscape</figcaption></figure>
+                  </div>
+                  <span class="sp-kit-dl" role="button" data-tour="dl"><svg viewBox="0 0 16 16"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13h10"/></svg><b data-tour="dl-text">Download</b><i data-tour="dl-bar"></i></span>
+                </section>
+
+                <section class="sp-kit-bio" data-tour="bio" data-len="25">
+                  <p class="sp-kit-h">Bio</p>
+                  <div class="sp-kit-tabs"><span role="tab" data-tour="tab-25" class="is-on">25 words</span><span role="tab" data-tour="tab-50">50</span><span role="tab" data-tour="tab-100">100</span></div>
+                  <div class="sp-kit-bios">
+                    <div class="sp-kit-b" data-b="25"><p><b>Your Name</b> is what you do, in four words, and what you're known for.</p><p class="ph-text" style="--n:2;--last:40%"></p></div>
+                    <div class="sp-kit-b" data-b="50"><p><b>Your Name</b> is what you do and what you're known for, then the proof people recognise.</p><p class="ph-text" style="--n:4;--last:62%"></p></div>
+                    <div class="sp-kit-b" data-b="100"><p><b>Your Name</b> is the whole introduction a host reads aloud.</p><p class="ph-text" style="--n:8;--last:50%"></p></div>
+                  </div>
+                  <span class="sp-kit-copy" role="button" data-tour="copy"><svg viewBox="0 0 16 16"><path d="M5.5 5.5h7v7h-7zM3.5 10.5v-7h7"/></svg><b data-tour="copy-text">Copy bio</b></span>
+                </section>
+
+                <section class="sp-kit-req" data-tour="req">
+                  <p class="sp-kit-h">Ask for a date</p>
+                  <label class="sp-kit-f" data-tour="f-date" data-tour-cursor="text"><small>Date</small><span data-tour="v-date" data-ph="When is it?"></span></label>
+                  <label class="sp-kit-f" data-tour="f-event" data-tour-cursor="text"><small>Event</small><span data-tour="v-event" data-ph="Name and city"></span></label>
+                  <label class="sp-kit-f" data-tour="f-aud" data-tour-cursor="text"><small>Audience</small><span data-tour="v-aud" data-ph="How many, and who"></span></label>
+                  <div class="sp-kit-fmt"><span class="is-on" data-tour="fmt-1">Keynote</span><span data-tour="fmt-2">Workshop</span><span>Panel</span></div>
+                  <span class="sp-kit-send" role="button" data-tour="send"><b data-tour="send-text">Send request</b></span>
+                  <div class="sp-kit-sent" data-tour="sent"><svg viewBox="0 0 16 16"><path d="m3.5 8.5 3 3 6-7"/></svg><b>Request sent</b><small>A reply from me within a few days.</small></div>
+                </section>
+              </div>
+
+              <!-- the broadcast: the talk as people saw it -->
+              <div class="sp-air" data-tour="air">
+                <div class="sp-pic">
+                  <div class="sp-slides" data-tour="slides">
+                    <!-- One slide each: export your deck as images and put them in place of these (AGENT.md §3). -->
+                    <div class="sp-slide is-title" data-tour="slide-1"><small>Event name · City · Year</small><b>The talk you give most often</b><span>Your Name</span></div>
+                    <div class="sp-slide is-big" data-tour="slide-2"><b>One idea, set large.</b></div>
+                    <div class="sp-slide is-pic" data-tour="slide-3"><span class="ph" style="--r:16/9" data-ph="Slide · 16:9" data-hint="The picture people remember from the talk"></span></div>
+                    <div class="sp-slide is-three" data-tour="slide-4"><span><i>01</i><p class="ph-text" style="--n:3;--last:70%"></p></span><span><i>02</i><p class="ph-text" style="--n:3;--last:45%"></p></span><span><i>03</i><p class="ph-text" style="--n:3;--last:60%"></p></span></div>
+                    <div class="sp-slide is-big is-end" data-tour="slide-5"><b>The line you want repeated.</b><small>yourname.com</small></div>
+                  </div>
+                  <figure class="sp-cam ph" data-tour="cam" data-ph="Speaker camera" data-hint="A still or a clip from your recording"></figure>
+                  <div class="sp-l3" data-tour="l3">
+                    <i class="sp-l3-bar"></i>
+                    <div class="sp-l3-who"><b>Your Name</b><span>The talk you give most often</span></div>
+                    <small class="sp-l3-ev">Event name · City</small>
+                    <span class="sp-clock"><i></i>On stage <b data-tour="clock" data-start="18:04">18:04</b></span>
+                    <span class="sp-l3-btn" role="button" data-tour="kit-btn">Press kit<svg viewBox="0 0 16 16"><path d="M4 8h8M8.5 4.5 12 8l-3.5 3.5"/></svg></span>
+                  </div>
+                </div>
+                <div class="sp-subs" aria-hidden="true">
+                  <!-- the subtitle line: the transcript's turning points, one at a time (script.js times them) -->
+                  <p class="sp-sub" data-tour="sub-1">The first thing you say on stage, word for word.</p>
+                  <p class="sp-sub" data-tour="sub-2">Then the question the whole talk answers.</p>
+                  <p class="sp-sub" data-tour="sub-3">The idea, said once, plainly.</p>
+                  <p class="sp-sub" data-tour="sub-4">A story, and the picture where it lands.</p>
+                  <p class="sp-sub" data-tour="sub-5">The turn: what most people in the room had missed.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The rail under the broadcast. On the page it's the session line and the play bar; in ?record it opens the
+             film with the name, carries the chapter and caption, and closes on the address. -->
+        <header class="sp-band" data-tour-band="css">
+          <div class="sp-band-who">
+            <p class="sp-band-kick"><i></i>Now playing · Keynote · 45 min · Event name, City, Year</p>
+            <h1 class="sp-band-talk">The talk you give most often</h1>
+            <p class="sp-band-name">What the talk argues, in one sentence, the way a host would introduce it.</p>
+          </div>
+          <div class="sp-band-act" data-tour-hide-on-record>
+            <a class="sf-btn sf-btn--ghost" href="#press">Press kit</a>
+          </div>
+        </header>
+        <footer class="sp-end" data-tour-end>
+          <p class="sp-end-kick">Book me to speak</p>
+          <p class="sp-end-name">Your Name</p>
+          <p class="sp-end-url">talks@yourname.com · yourname.com</p>
+        </footer>
+        <!-- docked: the talk keeps playing in the corner while the page is read (section.js) -->
+        <div class="sp-dock" data-tour-hide-on-record>
+          <button type="button" class="sp-dock-back"><i></i>On stage · back to the talk</button>
+          <button type="button" class="sp-dock-x" aria-label="Close the player">×</button>
+        </div>
+      </div>
+    </div>
+    <p class="sf-wrap sp-hero-note"><span class="sf-note">The talk you're booked for most: its recording in the camera slot, its slides as images, its transcript's turning points as the subtitle line (AGENT.md §3).</span></p>
+  </section>
+
+  <!-- 2. The programme: the talks you give, set like a conference booklet. Format and length on the left. -->
+  <section class="sf-wrap sp-sec sp-prog" id="talks" aria-labelledby="sp-prog-h">
+    <header class="sp-sec-head">
+      <p class="sf-eyebrow">Talks</p>
+      <h2 class="sp-h2" id="sp-prog-h">What I speak about</h2>
+      <p class="sp-sec-line">Each one comes as a keynote, and most as a workshop or a panel.</p>
+    </header>
+    <ol class="sp-prog-list">
+      <li class="sp-talk">
+        <div class="sp-talk-slot"><b>45<small>min</small></b><span>Keynote</span></div>
+        <div class="sp-talk-main">
+          <h3>The talk you give most often</h3>
+          <p>What it argues, in one sentence, the way a host would introduce it.</p>
+          <p class="sp-talk-for"><span>For</span>Who it's for: the room it works best in</p>
+          <ul class="sp-talk-fmts"><li>Keynote · 45 min</li><li>Workshop · half day</li><li>Fireside · 30 min</li></ul>
+        </div>
+        <figure class="ph sp-talk-pic" style="--r:16/9" data-ph="Title slide · 16:9"></figure>
+        <div class="sp-talk-links"><a href="#">Watch</a><a href="#">Slides</a></div>
+      </li>
+      <li class="sp-talk">
+        <div class="sp-talk-slot"><b>3<small>h</small></b><span>Workshop</span></div>
+        <div class="sp-talk-main">
+          <h3>The workshop people leave with something made</h3>
+          <p>What the room does, and what they take home.</p>
+          <p class="sp-talk-for"><span>For</span>Teams of about a size, at a level</p>
+          <ul class="sp-talk-fmts"><li>Workshop · 3 h</li><li>Masterclass · 90 min</li></ul>
+        </div>
+        <figure class="ph sp-talk-pic" style="--r:16/9" data-ph="Title slide · 16:9"></figure>
+        <div class="sp-talk-links"><a href="#">Outline</a></div>
+      </li>
+      <li class="sp-talk">
+        <div class="sp-talk-slot"><b>60<small>min</small></b><span>Panel</span></div>
+        <div class="sp-talk-main">
+          <h3>The conversation you're asked to host</h3>
+          <p>Panels you moderate or sit on, and the questions you bring.</p>
+          <p class="sp-talk-for"><span>For</span>Conferences, launches, internal all-hands</p>
+          <ul class="sp-talk-fmts"><li>Panel · 60 min</li><li>Moderator</li><li>Host / MC</li></ul>
+        </div>
+        <figure class="ph sp-talk-pic" style="--r:16/9" data-ph="On stage · 16:9"></figure>
+        <div class="sp-talk-links"><a href="#">Watch</a></div>
+      </li>
+    </ol>
+    <span class="sf-note">Only talks you'd give again. Formats and lengths as you actually offer them; a link only where a recording or the slides are public.</span>
+  </section>
+
+  <!-- 3. Past stages: a quiet list. Event, city, year, the recording. -->
+  <section class="sf-wrap sp-sec sp-stages" id="stages" aria-labelledby="sp-st-h">
+    <header class="sp-sec-head is-row">
+      <p class="sf-eyebrow">Stages</p>
+      <h2 class="sp-h2" id="sp-st-h">Where I've spoken</h2>
+    </header>
+    <ol class="sp-st-list">
+      <li><time>Year</time><b>Event name</b><span>City</span><small>Keynote</small><a href="#">Recording</a></li>
+      <li><time>Year</time><b>Event name</b><span>City</span><small>Workshop</small><a href="#">Recording</a></li>
+      <li><time>Year</time><b>Event name</b><span>City</span><small>Panel, as host</small><span class="sp-st-none"></span></li>
+      <li><time>Year</time><b>Event name</b><span>City</span><small>Keynote</small><a href="#">Recording</a></li>
+      <li><time>Year</time><b>Event name</b><span>City</span><small>Fireside</small><span class="sp-st-none"></span></li>
+      <li><time>Year</time><b>Event name</b><span>City</span><small>Keynote</small><a href="#">Recording</a></li>
+    </ol>
+    <span class="sf-note">Real events only, newest first, from your CV, event pages and recordings. Leave the link off where there's no public recording.</span>
+  </section>
+
+  <!-- 4. The press kit: the organiser's journey, for real. Bio in three lengths, headshots, what you need on the day,
+          then the request. The page ends when it's sent. -->
+  <section class="sp-press" id="press" aria-labelledby="sp-press-h">
+    <div class="sf-wrap">
+      <header class="sp-sec-head">
+        <p class="sf-eyebrow">Press kit</p>
+        <h2 class="sp-h2" id="sp-press-h">For organisers</h2>
+        <p class="sp-sec-line">Everything you need to put me on the programme, ready to copy.</p>
+      </header>
+
+      <div class="sp-pk">
+        <section class="sp-pk-bio" aria-label="Bio">
+          <div class="sp-pk-tabs" role="tablist" aria-label="Bio length">
+            <button type="button" role="tab" aria-selected="true" data-len="25">25 words</button>
+            <button type="button" role="tab" aria-selected="false" data-len="50">50 words</button>
+            <button type="button" role="tab" aria-selected="false" data-len="100">100 words</button>
+          </div>
+          <div class="sp-pk-texts">
+            <!-- Each bio is the person's own, at that length (AGENT.md §2). Count the words. -->
+            <div class="sp-pk-text" role="tabpanel" data-len="25"><p>Your Name is what you do, in four words, and what you're known for.</p><p class="ph-text" style="--n:1;--last:62%"></p></div>
+            <div class="sp-pk-text" role="tabpanel" data-len="50" hidden><p>Your Name is what you do and what you're known for, then the proof people recognise.</p><p class="ph-text" style="--n:3;--last:48%"></p></div>
+            <div class="sp-pk-text" role="tabpanel" data-len="100" hidden><p>Your Name is the whole introduction a host reads aloud.</p><p class="ph-text" style="--n:6;--last:70%"></p></div>
+          </div>
+          <div class="sp-pk-bioact">
+            <button type="button" class="sf-btn sp-pk-copy"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M5.5 5.5h7v7h-7zM3.5 10.5v-7h7"/></svg><span>Copy bio</span></button>
+            <span class="sp-pk-count" aria-live="polite"></span>
+          </div>
+          <span class="sf-note">Three real bios at three lengths: a programme listing, a website, the host's introduction. Written in the third person, as organisers print them.</span>
+        </section>
+
+        <section class="sp-pk-shots" aria-label="Headshots">
+          <figure><span class="ph" style="--r:4/5" data-ph="Portrait · 4:5" data-hint="Headshot, high-res"></span>
+            <figcaption><a class="sp-pk-dl" href="assets/headshot-portrait.jpg" download>Portrait<small>JPG · 4:5</small></a></figcaption></figure>
+          <figure><span class="ph" style="--r:3/2" data-ph="Landscape · 3:2" data-hint="Room for a title beside you"></span>
+            <figcaption><a class="sp-pk-dl" href="assets/headshot-landscape.jpg" download>Landscape<small>JPG · 3:2</small></a></figcaption></figure>
+          <p class="sp-pk-credit">Photo: Photographer's name. Free to use for your event.</p>
+        </section>
+
+        <section class="sp-pk-day" aria-label="On the day">
+          <p class="sp-pk-h">On the day</p>
+          <dl>
+            <dt>Slides</dt><dd>16:9, from my own laptop or yours</dd>
+            <dt>Sound</dt><dd>A lapel or headset mic</dd>
+            <dt>Travel</dt><dd>From City; happy to speak remotely</dd>
+            <dt>Languages</dt><dd>The languages you speak in</dd>
+          </dl>
+        </section>
+      </div>
+
+      <section class="sp-ask" id="book" aria-labelledby="sp-ask-h">
+        <div class="sp-ask-side">
+          <h3 class="sp-h3" id="sp-ask-h">Ask for a date</h3>
+          <p>Tell me when, where and who'll be in the room. I read every request myself.</p>
+          <p class="sp-ask-mail">or write to <a href="mailto:talks@yourname.com">talks@yourname.com</a></p>
+        </div>
+        <form class="sp-form" action="#" method="post">
+          <!-- action="#" only shows the note. Point it at your form service (Formspree, Basin, Netlify) or your own endpoint. -->
+          <label><span>Date</span><input class="sf-field" name="date" placeholder="When is it?" autocomplete="off" required></label>
+          <label><span>Event</span><input class="sf-field" name="event" placeholder="Name and city" required></label>
+          <label><span>Audience</span><input class="sf-field" name="audience" placeholder="How many, and who"></label>
+          <label><span>Format</span><select class="sf-field" name="format"><option>Keynote</option><option>Workshop</option><option>Panel</option><option>Host / MC</option><option>Not sure yet</option></select></label>
+          <label class="is-wide"><span>Your email</span><input class="sf-field" name="email" type="email" placeholder="So I can reply" required></label>
+          <div class="sp-form-act"><button class="sf-btn" type="submit">Send request</button></div>
+        </form>
+        <div class="sp-sent" hidden tabindex="-1">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3.5 8.5 3 3 6-7"/></svg>
+          <div><b>Request sent</b><p>A reply from me within a few days.</p></div>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <footer class="sf-wrap sp-foot">
+    <span>Your Name</span><a href="mailto:talks@yourname.com">talks@yourname.com</a><a href="#top">Back to the talk</a>
+  </footer>
+</article>
+
+<script type="module" src="./kit/scaffold.js"></script>
+<script type="module">
+import s0 from "./speaker/section.js";
+for (const [k, f] of [["demo/speaker",s0]]) document.querySelectorAll(`[data-tpl="${k}"]`).forEach((el) => f(el));
+</script>
+</body>
+</html>
