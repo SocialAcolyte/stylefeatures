@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>jubako</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@400;500&family=Shippori+Mincho:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="jubako.css">
+<style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#9a3b22;
+    --serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--ja:'Shippori Mincho','Hiragino Mincho ProN',serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  a{color:inherit}
+  [lang="ja"]{font-family:var(--ja)}
+  .tag{margin:0;font:500 10.5px/1.3 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  .bar{max-width:1240px;margin:0 auto;padding:18px var(--gutter);display:flex;align-items:baseline;justify-content:space-between;gap:16px}
+  .brand{font-size:21px;font-weight:500;text-decoration:none;white-space:nowrap}
+  .brand span{font-size:15px;margin-left:.5em;color:var(--ink-2)}
+  .nav{display:flex;gap:clamp(12px,2.4vw,28px);font:400 13px/1 var(--sans);color:var(--ink-2)}
+  .nav a{text-decoration:none}.nav a[aria-current]{color:var(--ink)}
+  @media (max-width:520px){.nav .wide{display:none}}
+  main{max-width:1240px;margin:0 auto;padding:0 var(--gutter) 120px}
+  .hero{display:grid;gap:16px;max-width:34em}
+  .jb-aside .hero{margin-bottom:clamp(36px,6svh,64px)}
+  .jb-list .hero{margin-bottom:6px}
+  .tiers{padding-top:clamp(28px,6svh,72px)}
+  .hero h1{margin:0;font-weight:300;font-size:clamp(42px,5vw,76px);line-height:.98;letter-spacing:-.01em}
+  .hero h1 em{font-weight:300}
+  .lede{margin:0;font-size:clamp(19px,1.6vw,22px);line-height:1.55;color:var(--ink-2);text-wrap:pretty;max-width:34em}
+  .tiers{padding-bottom:clamp(48px,8svh,96px);border-bottom:1px solid var(--rule)}
+  /* the panels: a tier's name, then what it holds, then a print */
+  .jb-panel{font-size:clamp(18px,1.4vw,20px);line-height:1.55;color:var(--ink-2);max-width:31em}
+  .jb-panel p{margin:0 0 .8em;text-wrap:pretty}
+  .tname{display:flex;align-items:baseline;gap:.7em;margin:0 0 .35em;color:var(--ink)}
+  .tname [lang="ja"]{font-size:1.6em;letter-spacing:.06em;color:var(--accent)}
+  .tname i{font-size:1.05em;color:var(--ink-3)}
+  .say{font-size:1.28em;line-height:1.35;color:var(--ink);font-weight:400;margin:0 0 .9em}
+  .dishes{margin:0 0 1.2em;display:grid;grid-template-columns:max-content 1fr;gap:0 22px}
+  .dishes dt,.dishes dd{margin:0;padding:8px 0;border-top:1px solid var(--rule)}
+  .dishes dt{color:var(--ink);font-weight:500}
+  .dishes dt i{display:block;font-weight:400;font-size:.82em;color:var(--ink-3)}
+  .dishes dd{font-size:.95em}
+  @media (max-width:480px){.dishes{grid-template-columns:1fr}.dishes dd{border-top:0;padding-top:0}}
+  .print{display:block;width:100%;max-width:440px;height:auto;margin-top:6px;border-radius:2px;box-shadow:0 1px 0 rgba(20,19,18,.06),0 10px 30px -18px rgba(20,19,18,.35)}
+  .order{padding:clamp(48px,8svh,96px) 0 0;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,27em);gap:clamp(32px,6vw,96px);align-items:start}
+  @media (max-width:860px){.order{grid-template-columns:1fr}}
+  .order h2{margin:.3em 0 .5em;font-weight:300;font-size:clamp(32px,3.6vw,48px);line-height:1}
+  .price{display:flex;align-items:baseline;gap:14px;margin:22px 0 18px;font-size:30px}
+  .price small{font:400 13px/1.4 var(--sans);color:var(--ink-3)}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .sel{appearance:none;border:1px solid var(--rule);border-radius:999px;background:transparent;font:400 14px/1 var(--sans);color:var(--ink);height:46px;padding:0 38px 0 18px;background-image:linear-gradient(45deg,transparent 50%,var(--ink-2) 50%),linear-gradient(135deg,var(--ink-2) 50%,transparent 50%);background-position:calc(100% - 20px) 21px,calc(100% - 15px) 21px;background-size:5px 5px;background-repeat:no-repeat}
+  .add{appearance:none;border:0;border-radius:999px;background:var(--ink);color:var(--paper);font:500 14px/1 var(--sans);padding:0 26px;height:46px;cursor:pointer;letter-spacing:.02em}
+  .add:focus-visible,.sel:focus-visible{outline:2px solid var(--ink-2);outline-offset:3px}
+  .fine{margin:14px 0 0;font:400 12.5px/1.55 var(--sans);color:var(--ink-3);max-width:34em}
+  .card{border:1px solid var(--rule);border-radius:16px;padding:22px 22px 24px;background:color-mix(in srgb,var(--paper) 55%,#fff)}
+  .card .tag{margin-bottom:14px}
+  .card .jb{--jb-box-s:92px}
+  .card .jb-panel{font-size:17.5px;line-height:1.55;max-width:none}
+  .card .jb-panel p{margin:0}
+  .card .jb-tab{font-size:16.5px;min-height:34px}
+</style></head><body>
+<header class="bar">
+  <a class="brand" href="#">Yūzuki<span>Kyoto</span></a>
+  <nav class="nav" aria-label="Restaurant"><a href="#" class="wide">Kaiseki</a><a href="#" aria-current="page">Osechi</a><a href="#order">Order</a></nav>
+</header>
+<main>
+  <section class="tiers" aria-labelledby="title">
+    <section class="jb" data-jubako aria-label="The five tiers">
+      <div class="jb-stage">
+        <div class="jb-box" aria-hidden="true">
+          <img class="jb-shadow" src="assets/shadow.webp" width="826" height="369" alt="" style="--x:-2;--y:675;--w:826">
+          <img class="jb-tier" src="assets/tier-5.webp" width="750" height="540" alt="" style="--x:45;--y:479;--w:750">
+          <img class="jb-tier" src="assets/tier-4.webp" width="771" height="499" alt="" style="--x:34;--y:351;--w:771">
+          <img class="jb-tier" src="assets/tier-3.webp" width="789" height="484" alt="" style="--x:25;--y:218;--w:789">
+          <img class="jb-tier" src="assets/tier-2.webp" width="803" height="464" alt="" style="--x:15;--y:82;--w:803">
+          <img class="jb-tier" src="assets/tier-1.webp" width="813" height="383" alt="" style="--x:8;--y:2;--w:813">
+        </div>
+      </div>
+      <div class="jb-panels">
+        <header class="jb-title hero">
+          <p class="tag">New Year 2027 · osechi ryōri</p>
+          <h1 id="title">Five tiers for the first <em>three days</em></h1>
+          <p class="lede">Osechi is cooked before the year turns, so that no fire need be lit for the first three days. It comes packed in a jūbako, a box of stacked tiers, because good things should pile up.</p>
+        </header>
+        <section class="jb-panel" id="ichi">
+          <h3 class="jb-head"><span lang="ja">一の重</span> Celebration</h3>
+          <p class="tname"><span lang="ja">一の重</span> <i>ichi-no-jū</i></p>
+          <p class="say">The small things that make it a celebration, eaten first, with the first sake.</p>
+          <dl class="dishes">
+            <dt>Kuromame <i>black soybeans</i></dt><dd><i>Mame</i>: to be hard-working, and well.</dd>
+            <dt>Kazunoko <i>herring roe</i></dt><dd>Thousands of eggs: many children.</dd>
+            <dt>Tazukuri <i>candied sardines</i></dt><dd>Once spread on the rice fields: a good harvest.</dd>
+            <dt>Datemaki <i>rolled omelette</i></dt><dd>Rolled like a scroll: learning.</dd>
+            <dt>Kurikinton <i>chestnut and sweet potato</i></dt><dd>Gold: a prosperous year.</dd>
+          </dl>
+          <img class="print" src="assets/prints/medetai.webp" width="1200" height="826" alt="" aria-hidden="true" loading="lazy">
+        </section>
+        <section class="jb-panel" id="ni">
+          <h3 class="jb-head"><span lang="ja">二の重</span> From the grill</h3>
+          <p class="tname"><span lang="ja">二の重</span> <i>ni-no-jū</i></p>
+          <p class="say">Fish and prawns from the grill, cooked the day before and eaten cool.</p>
+          <dl class="dishes">
+            <dt>Tai <i>sea bream</i></dt><dd><i>Medetai</i>: joyful.</dd>
+            <dt>Ebi <i>prawns</i></dt><dd>Long whiskers and a bent back: to live until bent with age.</dd>
+            <dt>Buri <i>yellowtail</i></dt><dd>A fish that changes its name as it grows: to rise in the world.</dd>
+          </dl>
+          <img class="print" src="assets/prints/ise-ebi.webp" width="1200" height="837" alt="" aria-hidden="true" loading="lazy">
+        </section>
+        <section class="jb-panel" id="san">
+          <h3 class="jb-head"><span lang="ja">三の重</span> Simmered</h3>
+          <p class="tname"><span lang="ja">三の重</span> <i>san-no-jū</i></p>
+          <p class="say">Roots and shoots simmered together in one pot, so that a family stays together.</p>
+          <dl class="dishes">
+            <dt>Renkon <i>lotus root</i></dt><dd>Holes to see the year ahead through.</dd>
+            <dt>Satoimo <i>taro</i></dt><dd>Small corms around a mother: many children.</dd>
+            <dt>Gobō <i>burdock</i></dt><dd>A root that goes deep: a family settled.</dd>
+            <dt>Takenoko <i>bamboo shoots</i></dt><dd>Growing fast and straight.</dd>
+          </dl>
+          <img class="print" src="assets/prints/kurodai-takenoko.webp" width="1200" height="838" alt="" aria-hidden="true" loading="lazy">
+        </section>
+        <section class="jb-panel" id="yo">
+          <h3 class="jb-head"><span lang="ja">与の重</span> Vinegared</h3>
+          <p class="tname"><span lang="ja">与の重</span> <i>yo-no-jū</i></p>
+          <p class="say">Never “the fourth”: four is <i>shi</i>, which also says death. This tier is <i>yo</i>, and holds the sharp, clean things.</p>
+          <dl class="dishes">
+            <dt>Kōhaku namasu <i>daikon and carrot</i></dt><dd>Red and white, like the cord on a gift.</dd>
+            <dt>Kikka kabu <i>turnip</i></dt><dd>Cut into a chrysanthemum.</dd>
+          </dl>
+          <img class="print" src="assets/prints/renkon.webp" width="1200" height="918" alt="" aria-hidden="true" loading="lazy">
+        </section>
+        <section class="jb-panel" id="go">
+          <h3 class="jb-head"><span lang="ja">五の重</span> Kept empty</h3>
+          <p class="tname"><span lang="ja">五の重</span> <i>go-no-jū</i></p>
+          <p class="say">The last tier is left empty: room for the good things the year will bring.</p>
+          <p>Ours comes empty too, lacquered and clean. Fill it with what your family likes, or leave it as it is.</p>
+        </section>
+      </div>
+    </section>
+  </section>
+
+  <section class="order" id="order" aria-labelledby="otitle">
+    <div>
+      <p class="tag">Order by 26 December</p>
+      <h2 id="otitle">For four, in a lacquered box</h2>
+      <p class="lede">Packed on the morning of 31 December. The box is lent with the food, wrapped in a furoshiki.</p>
+      <div class="price">¥54,000 <small>for four · tax included</small></div>
+      <div class="row">
+        <label class="tag" for="size" style="position:absolute;left:-9999px">Size</label>
+        <select class="sel" id="size"><option>For four</option><option>For two</option><option>For six</option></select>
+        <button class="add" type="button">Reserve a box</button>
+      </div>
+      <p class="fine" id="note" aria-live="polite">A deposit of ¥10,000 holds your box. The rest is paid when you collect it.</p>
+    </div>
+    <div class="card">
+      <p class="tag">Collecting it</p>
+      <section class="jb" data-jubako data-layout="list" aria-label="Collecting the box">
+        <div class="jb-stage">
+          <div class="jb-box" aria-hidden="true">
+            <img class="jb-shadow" src="assets/shadow.webp" width="826" height="369" alt="" style="--x:-2;--y:675;--w:826">
+            <img class="jb-tier" src="assets/tier-5.webp" width="750" height="540" alt="" style="--x:45;--y:479;--w:750">
+            <img class="jb-tier" src="assets/tier-4.webp" width="771" height="499" alt="" style="--x:34;--y:351;--w:771">
+            <img class="jb-tier" src="assets/tier-3.webp" width="789" height="484" alt="" style="--x:25;--y:218;--w:789">
+            <img class="jb-tier" src="assets/tier-2.webp" width="803" height="464" alt="" style="--x:15;--y:82;--w:803">
+            <img class="jb-tier" src="assets/tier-1.webp" width="813" height="383" alt="" style="--x:8;--y:2;--w:813">
+          </div>
+        </div>
+        <div class="jb-panels">
+          <section class="jb-panel" id="collect">
+            <h3 class="jb-head">Collect</h3>
+            <p>31 December, 9:00 to 15:00, at the side door on Tominokōji. Bring your reservation number.</p>
+          </section>
+          <section class="jb-panel" id="deliver">
+            <h3 class="jb-head">Delivery</h3>
+            <p>Within Kyoto city, ¥2,200, between 10:00 and 14:00 on the 31st.</p>
+          </section>
+          <section class="jb-panel" id="return">
+            <h3 class="jb-head">Returning the box</h3>
+            <p>By 15 January, washed by hand and dried, never soaked. The furoshiki is yours to keep.</p>
+          </section>
+        </div>
+      </section>
+    </div>
+  </section>
+</main>
+<script type="module" src="jubako.js"></script>
+<script>
+  // the page around it (not part of the component)
+  document.querySelector('.add').addEventListener('click', () => {
+    document.getElementById('note').textContent = `Held: one box, ${document.getElementById('size').value.toLowerCase()}. We will write to confirm the deposit.`;
+  });
+</script>
+</body></html>

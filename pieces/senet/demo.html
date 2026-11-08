@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>senet</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="senet.css">
+<style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;
+    --serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  main{max-width:1180px;margin:0 auto;padding:clamp(48px,10svh,112px) var(--gutter) 120px;display:grid;gap:clamp(36px,6svh,64px)}
+  .tag{margin:0;font:500 10.5px/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  .head{display:grid;gap:14px;justify-items:center;text-align:center}
+  .head h1{margin:0;font-weight:300;font-style:italic;font-size:clamp(34px,5vw,58px);line-height:1.02;text-wrap:balance}
+  .prose{width:min(100%,34em);margin:0 auto;font-size:clamp(18px,1.6vw,20.5px);line-height:1.55;color:var(--ink-2);text-wrap:pretty}
+  .prose p{margin:0 0 .9em}.prose p:last-child{margin:0}
+
+  /* the catalogue: twelve to a page */
+  .cat{display:grid;gap:22px}
+  .cat-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--rule);padding-bottom:10px}
+  .cat-head h2{margin:0;font-weight:400;font-size:clamp(22px,2.4vw,28px)}
+  .cat-where{font:500 11px/1.3 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-variant-numeric:tabular-nums}
+  .cat-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,2.4vw,30px) clamp(14px,2vw,26px)}
+  @media (max-width:900px){.cat-list{grid-template-columns:repeat(3,minmax(0,1fr))}}
+  @media (max-width:620px){.cat-list{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  .obj{display:grid;gap:8px;align-content:start}
+  .obj a{color:inherit;text-decoration:none;display:grid;gap:8px}
+  .obj figure{margin:0;aspect-ratio:1;background:#2a2826;border-radius:3px;overflow:hidden}
+  .obj img{width:100%;height:100%;object-fit:cover;display:block}
+  .obj h3{margin:0;font-weight:500;font-size:clamp(16px,1.35vw,18px);line-height:1.22;text-wrap:pretty}
+  .obj a:hover h3{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+  .obj p{margin:0;font:400 12px/1.45 var(--sans);color:var(--ink-3)}
+  .obj p span{display:block}
+  .cat-list[aria-busy="true"]{opacity:.55}
+  .cat-list{transition:opacity .2s}
+
+  .pager{padding-top:clamp(18px,3vw,36px)}
+
+  /* the notes: a short series, with the small board as its footer */
+  .notes{border-top:1px solid var(--rule);padding-top:clamp(40px,7svh,72px);display:grid;gap:26px;justify-items:center}
+  .note{width:min(100%,32em);min-height:9.5em;font-size:clamp(18px,1.55vw,20px);line-height:1.55;color:var(--ink-2);text-wrap:pretty}
+  .note h3{margin:0 0 .4em;font-weight:400;font-style:italic;font-size:1.25em;color:var(--ink)}
+  .note p{margin:0}
+  .notes footer{width:min(100%,32em);border-top:1px solid var(--rule);padding-top:18px;display:grid}
+  @media (prefers-reduced-motion:reduce){.cat-list{transition:none}}
+</style></head><body>
+<main>
+  <header class="head">
+    <span class="tag">pagination</span>
+    <h1>Twelve centuries of Egypt, twelve at a time</h1>
+  </header>
+
+  <div class="prose">
+    <p>A handlist of the Cleveland Museum of Art's Egyptian objects from the New Kingdom to the Late Period, 1550 to 332 BCE, oldest first. Its pages are counted on a senet board: faience squares from a tomb at Abydos, made in the reign of Thutmose III, with one of the board's own pieces standing on the page you are reading.</p>
+  </div>
+
+  <section class="cat" aria-labelledby="cat-title">
+    <div class="cat-head">
+      <h2 id="cat-title">Handlist</h2>
+      <span class="cat-where" id="cat-where">Page 1 of 41 · objects 1–12 of 483</span>
+    </div>
+    <ol class="cat-list" id="cat-list" start="1">
+<!-- page-1 -->
+      <li class="obj"><a href="https://clevelandart.org/art/1914.566" rel="noopener" target="_blank">
+        <figure><img src="assets/catalogue/1914.566.webp" width="225" height="300" alt="" loading="lazy" decoding="async"></figure>
+        <h3>Unguent Bottle (Amphoriskos)</h3></a>
+        <p><span>1549–1296 BCE · Dynasties 18–19</span><span>glass</span></p></li>
+      <li class="obj"><a href="https://clevelandart.org/art/1914.538" rel="noopener" target="_blank">
+        <figure><img src="assets/catalogue/1914.538.webp" width="300" height="216" alt="" loading="lazy" decoding="async"></figure>
+        <h3>Tray with Pond Scene</h3></a>
+        <p><span>1540–1296 BCE · Dynasty 18</span><span>steatite</span></p></li>
+      <li class="obj"><a href="https://clevelandart.org/art/1914.568" rel="noopener" target="_blank">
+        <figure><img src="assets/catalogue/1914.568.webp" width="300" height="240" alt="" loading="lazy" decoding="async"></figure>
+        <h3>Recumbent Calf Amulet</h3></a>
+        <p><span>1540–1296 BCE · Dynasty 18</span><span>carnelian</span></p></li>
+      <li class="obj"><a href="https://clevelandart.org/art/1914.569" rel="noopener" target="_blank">
+        <figure><img src="assets/catalogue/1914.569.webp" width="300" height="239" alt="" loading="lazy" decoding="async"></figure>
+        <h3>Sleeping Duck Amulet</h3></a>
+        <p><span>1540–1295 BCE · Dynasty 18</span><span>feldspar</span></p></li>
+      <li class="obj"><a href="https://clevelandart.org/art/1914.570" rel="noopener" target="_blank">
+        <figure><img src="assets/catalogue/1914.570.webp" width="300" height="253" alt="" loading="lazy" decoding="async"></figure>
+        <h3>Frog Amulet</h3></a>
+        <p><span>c. 1540–1296 BCE · Dynasty 18</span><span>carnelian</span></p></li>
+      <li class="obj"><a href="https://clevelandart.org/art/1914.614" rel="noopener" target="_blank">
+        <figure><img src="assets/catalogue/1914.614.webp" width="300" height="239" alt="" loading="lazy" decoding="async"></figure>
+        <h3>Marsh Bowl</h3></a>
+        <p><span>1540–1350 BCE · Dynasty 18</span><span>blue faience with purple decoration</span></p></li>
+      <li class="obj"><a href="https://clevelandart.org/art/1914.615" rel="noopener" target="_blank">
+        <figure><img src="assets/catalogue/1914.615.webp" width="300" height="210" alt="" loading="lazy" decoding="async"></figure>
+        <h3>Fragment of Statue Base (?)</h3></a>
+        <p><span>1540–1069 BCE</span><span>turquoise faience with purple-black painted decoration</span></p></li>
+      <li class="obj"><a href="https://clevelandart.org/art/1914.620" rel="noopener" target="_blank">
+        <figure><img src="assets/catalogue/1914.620.webp" width="240" height="300" alt="" loading="lazy" decoding="async"></figure>
+        <h3>Vessel in the Form of an Ostrich Egg</h3></a>
+        <p><span>c. 1540–1296 BCE · Dynasty 18</span><span>travertine</span></p></li>
+      <li class="obj"><a href="https://clevelandart.org/art/1914.630" rel="noopener" target="_blank">
+        <figure><img src="assets/catalogue/1914.630.webp" width="220" height="300" alt="" loading="lazy" decoding="async"></figure>
+        <h3>Canopic Jar with Lid</h3></a>
+        <p><span>1540–1296 BCE · Dynasty 18</span><span>limestone</span></p></li>
+      <li class="obj"><a href="https://clevelandart.org/art/1914.630.a" rel="noopener" target="_blank">
+        <figure><img src="assets/catalogue/1914.630.a.webp" width="233" height="300" alt="" loading="lazy" decoding="async"></figure>
+        <h3>Canopic Jar with Lid</h3></a>
+        <p><span>1540–1296 BCE · Dynasty 18</span><span>limestone</span></p></li>
+      <li class="obj"><a href="https://clevelandart.org/art/1914.630.b" rel="noopener" target="_blank">
+        <figure><img src="assets/catalogue/1914.630.b.webp" width="300" height="269" alt="" loading="lazy" decoding="async"></figure>
+        <h3>Canopic Jar with Lid (lid)</h3></a>
+        <p><span>1540–1296 BCE · Dynasty 18</span><span>limestone</span></p></li>
+      <li class="obj"><a href="https://clevelandart.org/art/1914.631" rel="noopener" target="_blank">
+        <figure><img src="assets/catalogue/1914.631.webp" width="194" height="300" alt="" loading="lazy" decoding="async"></figure>
+        <h3>Canopic Jar with Lid</h3></a>
+        <p><span>1540–1296 BCE · Dynasty 18</span><span>limestone</span></p></li>
+<!-- /page-1 -->
+    </ol>
+
+    <nav class="sn pager" id="handlist-pages" data-senet data-pages="41" data-page="1" data-href="?page={n}" data-param="page" aria-label="Handlist pages">
+      <div class="sn-board" aria-hidden="true">
+        <img class="sn-art" src="assets/board.webp" srcset="assets/board-1200.webp 1200w, assets/board.webp 2400w"
+             sizes="(max-width: 1100px) calc(100vw - 32px), 1040px" width="2400" height="755" alt="" decoding="async">
+        <img class="sn-piece" src="assets/cone.webp" width="192" height="192" alt="" style="--x:.0605;--y:.1895">
+      </div>
+      <ol class="sn-pages">
+        <li class="sn-step sn-prev"><span class="sn-off" aria-disabled="true"><span aria-hidden="true">‹ </span><span class="sn-word">Previous</span></span></li>
+        <li><a href="?page=1" aria-current="page">1</a></li>
+        <li><a href="?page=2">2</a></li>
+        <li><a href="?page=3">3</a></li>
+        <li class="sn-gap" aria-hidden="true">…</li>
+        <li><a href="?page=41">41</a></li>
+        <li class="sn-step sn-next"><a href="?page=2" rel="next" aria-label="Next page"><span class="sn-word">Next</span><span aria-hidden="true"> ›</span></a></li>
+      </ol>
+    </nav>
+  </section>
+
+  <section class="notes" aria-labelledby="notes-title">
+    <span class="tag" id="notes-title">The game, in six notes</span>
+    <article class="note" id="note" aria-live="polite">
+      <h3>Passing</h3>
+      <p>Senet means “passing”. It was played in Egypt for some three thousand years, from before the first dynasties to the Roman period: thirty squares in three rows of ten, two players, a handful of pieces each.</p>
+    </article>
+    <footer>
+      <nav class="sn sn-compact" id="notes-pages" data-senet data-pages="6" data-page="1" data-href="?note={n}" data-param="note" data-label="Note" aria-label="Notes">
+        <div class="sn-board" aria-hidden="true">
+          <img class="sn-art" src="assets/board-1200.webp" width="1200" height="378" alt="" decoding="async">
+          <img class="sn-piece sn-spool" src="assets/spool.webp" width="195" height="195" alt="" style="--x:.0605;--y:.1895">
+        </div>
+        <ol class="sn-pages">
+          <li class="sn-step sn-prev"><span class="sn-off" aria-disabled="true"><span aria-hidden="true">‹ </span><span class="sn-word">Previous</span></span></li>
+          <li class="sn-count"><a href="?note=1" aria-current="page" aria-label="Note 1 of 6">1</a><span aria-hidden="true"> / 6</span></li>
+          <li class="sn-step sn-next"><a href="?note=2" rel="next" aria-label="Next page"><span class="sn-word">Next</span><span aria-hidden="true"> ›</span></a></li>
+        </ol>
+      </nav>
+    </footer>
+  </section>
+</main>
+
+<script type="module">
+  import './senet.js';
+
+  // ---- the handlist ----
+  const PER = 12;
+  const data = await fetch('assets/catalogue.json').then((r) => r.json());
+  const items = data.items, total = items.length, pages = Math.ceil(total / PER);
+  const list = document.getElementById('cat-list'), where = document.getElementById('cat-where');
+  const nav = document.getElementById('handlist-pages');
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  function show(page) {
+    const a = (page - 1) * PER, part = items.slice(a, a + PER);
+    list.start = a + 1;
+    list.innerHTML = part.map((o) => `<li class="obj"><a href="${esc(o.url)}" rel="noopener" target="_blank">
+      <figure><img src="assets/${esc(o.img)}" width="${o.w}" height="${o.h}" alt="" loading="lazy" decoding="async"></figure>
+      <h3>${esc(o.title)}</h3></a>
+      <p><span>${esc(o.date)}${o.dynasty ? ' · ' + esc(o.dynasty) : ''}</span><span>${esc(o.medium)}</span></p></li>`).join('');
+    where.textContent = `Page ${page} of ${pages} · objects ${a + 1}–${a + part.length} of ${total}`;
+  }
+  const pager = nav.senet;
+  if (pager.pages !== pages) pager.setPages(pages);
+  show(pager.page);
+  let pending = false;
+  nav.addEventListener('senet:change', (e) => { show(e.detail.page); pending = true; });
+  // once the piece is down, bring the top of the list back into view
+  nav.addEventListener('senet:settle', () => {
+    if (!pending) return; pending = false;
+    const top = document.querySelector('.cat').getBoundingClientRect().top;
+    if (top < 0) document.querySelector('.cat').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  });
+
+  // ---- the notes ----
+  const NOTES = [
+    ['Passing', 'Senet means “passing”. It was played in Egypt for some three thousand years, from before the first dynasties to the Roman period: thirty squares in three rows of ten, two players, a handful of pieces each.'],
+    ['The throw', 'Moves were cast with four throw sticks, flat on one face and rounded on the other, or with knucklebones. Counting the flat faces that land up gives one to four; in most modern reconstructions, none up counts five.'],
+    ['The way round', 'The pieces run in an S: along the top row, back along the middle, along the bottom, the way an ox ploughs a field. A move never cuts across from one row to the next.'],
+    ['The last squares', 'The end of the board is marked. Square 26 carries three <i>nefer</i> signs, the house of beauty; 27 is water, and in most reconstructions a piece that falls in goes back; the last three squares lead off the board.'],
+    ['A game against no one', 'By the New Kingdom the game was also the passage of the soul. Spell 17 of the Book of the Dead is illustrated with the dead seated alone at a board, playing an opponent who is never painted.'],
+    ['This board', 'Faience squares from Abydos, of the reign of Thutmose III, set into a modern box, with its cones and spools of blue faience marbled in black. The Metropolitan Museum of Art, 01.4.1a–p, photographed from above.'],
+  ];
+  const note = document.getElementById('note'), notesNav = document.getElementById('notes-pages');
+  const showNote = (n) => { const [h, p] = NOTES[n - 1]; note.innerHTML = `<h3>${h}</h3><p>${p}</p>`; };
+  const notes = notesNav.senet;
+  showNote(notes.page);
+  notesNav.addEventListener('senet:change', (e) => showNote(e.detail.page));
+</script>
+</body></html>

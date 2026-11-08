@@ -1,0 +1,64 @@
+{
+ "component": "senet",
+ "note": "Every part of the board is a real photograph of a real object, cut out rigidly: a crop, a matte, a uniform scale. Nothing is redrawn, recoloured or warped. The board and its pieces are one object (Met 01.4.1a-p) from one documentation campaign (EGDP0136xx), all straight down. The piece is scaled against the board's tiles by the ratio measured on the Met's three-quarter view DP310299, where the same pieces stand on the same board.",
+ "parts": [
+  {
+   "file": "board.webp, board-1200.webp",
+   "what": "the senet face of the board, straight down: 30 faience tiles (ancient) in a modern wooden box",
+   "object": "Gameboard and Gaming Pieces",
+   "date": "ca. 1479-1425 BCE (New Kingdom, Dynasty 18, reign of Thutmose III)",
+   "place": "Egypt, Northern Upper Egypt, Abydos, Cemetery D, Tomb D99 (Egypt Exploration Fund excavations)",
+   "collection": "The Metropolitan Museum of Art, New York",
+   "credit": "Gift of Egypt Exploration Fund, 1901",
+   "licence": "CC0 (Open Access)",
+   "object_url": "https://www.metmuseum.org/art/collection/search/544775",
+   "accession": "01.4.1a",
+   "medium": "Faience, modern wood",
+   "dimensions": "Restored box: L. 43 cm; W. 13.5 cm; H. 9 cm",
+   "image": "https://images.metmuseum.org/CRDImages/eg/original/01.4.1a_EGDP013652.jpg",
+   "how": "tools/cut.py: crop to the box top, alpha along its four fitted straight edges (1 px inside, 4x supersampled), scaled to 2400 and 1200 px wide"
+  },
+  {
+   "file": "cone.webp",
+   "what": "one conical gaming piece of the same set, seen from straight above: blue faience marbled in black",
+   "object": "Gameboard and Gaming Pieces",
+   "date": "ca. 1479-1425 BCE (New Kingdom, Dynasty 18, reign of Thutmose III)",
+   "place": "Egypt, Northern Upper Egypt, Abydos, Cemetery D, Tomb D99 (Egypt Exploration Fund excavations)",
+   "collection": "The Metropolitan Museum of Art, New York",
+   "credit": "Gift of Egypt Exploration Fund, 1901",
+   "licence": "CC0 (Open Access)",
+   "object_url": "https://www.metmuseum.org/art/collection/search/544775",
+   "accession": "01.4.1n / 01.4.1p / 01.4.1i (one of 'Eight Conical Gaming Pieces')",
+   "medium": "Faience",
+   "image": "https://images.metmuseum.org/CRDImages/eg/original/01.4.1n-01.4.1p-01.4.1i_EGDP013665.jpg",
+   "how": "crop 900,1400-1900,2400; BiRefNet matte (tools/engine/stages/matte_worker.py) with the engine's refine (edge colour, 1.5 px pull); scaled so its diameter is half a tile"
+  },
+  {
+   "file": "spool.webp",
+   "what": "one spool-shaped gaming piece of the same set, seen from straight above",
+   "object": "Gameboard and Gaming Pieces",
+   "date": "ca. 1479-1425 BCE (New Kingdom, Dynasty 18, reign of Thutmose III)",
+   "place": "Egypt, Northern Upper Egypt, Abydos, Cemetery D, Tomb D99 (Egypt Exploration Fund excavations)",
+   "collection": "The Metropolitan Museum of Art, New York",
+   "credit": "Gift of Egypt Exploration Fund, 1901",
+   "licence": "CC0 (Open Access)",
+   "object_url": "https://www.metmuseum.org/art/collection/search/544775",
+   "accession": "01.4.3d / 01.4.1h / 01.4.1c / 01.4.1l (one of 'Seven Spool-Shaped Gaming Pieces')",
+   "medium": "Faience",
+   "image": "https://images.metmuseum.org/CRDImages/eg/original/01.4.3d-01.4.1h-01.4.1c-01.4.1l_EGDP013659.jpg",
+   "how": "crop 900,300-1900,1300; matte and scale as the cone"
+  },
+  {
+   "file": "catalogue/*.webp, catalogue.json",
+   "what": "the demo's handlist: 483 Egyptian objects, New Kingdom to Late Period (dated 1550-332 BCE), 300 px thumbnails of each object's web image",
+   "collection": "The Cleveland Museum of Art",
+   "licence": "CC0 (Open Access)",
+   "source": "https://openaccess-api.clevelandart.org/api/artworks/ (department=Egyptian and Ancient Near Eastern Art, cc0=1, has_image=1)",
+   "how": "tools/catalogue.py; each entry keeps its title, date, medium, accession number and the museum's object URL"
+  }
+ ],
+ "code": {
+  "physics": "own (springs and gravity at 240 Hz)",
+  "libraries": "none"
+ }
+}

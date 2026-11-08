@@ -1,0 +1,133 @@
+{
+ "note": "Every pixel of the frieze is from one photograph. Nothing is drawn: the tiles are cut along their own joints, the shadow is the photograph's own.",
+ "assets": {
+  "frieze.webp": {
+   "what": "The bottom row of a panel of Kashan lustre star and cross tiles (five stars, four crosses), cut out along the tiles' joints from one photograph, with the photograph's own cast shadow. 2400 x 766, RGBA.",
+   "source": "The Metropolitan Museum of Art, photograph DP231256, published with object 444459 (accession 91.1.106) and its panel group",
+   "source_url": "https://images.metmuseum.org/CRDImages/is/original/DP231256.jpg",
+   "object_url": "https://www.metmuseum.org/art/collection/search/444459",
+   "licence": "CC0 1.0 (The Met Open Access)",
+   "original_size": "4000 x 2211"
+  },
+  "frieze-tiles.png": {
+   "what": "Derived data at the same size: normal (R,G), tile id and lustre density (B). Made by tools/bake.py from the photograph above.",
+   "licence": "CC0 1.0"
+  }
+ },
+ "panel": {
+  "assembled": "The panel was put together by The Met from tiles of several accessions; the Met's own key ('tile panel key', 'Final version, checked with cards and pinned, 10 1974') names each position.",
+  "key_url": "https://images.metmuseum.org/CRDImages/is/original/tile%20panel%20key.JPG"
+ },
+ "tiles": [
+  {
+   "position": "star 1",
+   "title": "Star-Shaped Tile",
+   "accession": "41.165.20",
+   "date": "13th–14th century",
+   "medium": "Stonepaste; inglaze painted in blue and turquoise and luster-painted on opaque white glaze",
+   "dimensions": "H. 8 in. (20.3 cm)\r",
+   "credit": "H.O. Havemeyer Collection, Gift of Horace Havemeyer, 1941",
+   "url": "https://www.metmuseum.org/art/collection/search/450436",
+   "publicDomain": true
+  },
+  {
+   "position": "star 2",
+   "title": "Star-Shaped Tile",
+   "accession": "41.165.23",
+   "date": "13th–14th century",
+   "medium": "Stonepaste; inglaze painted in blue and turquoise and luster-painted on opaque white glaze",
+   "dimensions": "H. 8 in. (20.3 cm)\r",
+   "credit": "H.O. Havemeyer Collection, Gift of Horace Havemeyer, 1941",
+   "url": "https://www.metmuseum.org/art/collection/search/450439",
+   "publicDomain": true
+  },
+  {
+   "position": "star 3",
+   "title": "Star-Shaped Tile",
+   "accession": "41.165.18",
+   "date": "13th–14th century",
+   "medium": "Stonepaste; inglaze painted in blue and turquoise and luster-painted on opaque white glaze",
+   "dimensions": "H. 8 in. (20.3 cm)\r",
+   "credit": "H.O. Havemeyer Collection, Gift of Horace Havemeyer, 1941",
+   "url": "https://www.metmuseum.org/art/collection/search/450434",
+   "publicDomain": true
+  },
+  {
+   "position": "star 4",
+   "title": "Star-Shaped Tile",
+   "accession": "41.165.11",
+   "date": "13th–14th century",
+   "medium": "Stonepaste; inglaze painted in blue and turquoise and luster-painted on opaque white glaze",
+   "dimensions": "H. 8 in. (20.3 cm)\r",
+   "credit": "H.O. Havemeyer Collection, Gift of Horace Havemeyer, 1941",
+   "url": "https://www.metmuseum.org/art/collection/search/450427",
+   "publicDomain": true
+  },
+  {
+   "position": "star 5",
+   "title": "Star-Shaped Tile",
+   "accession": "41.165.13",
+   "date": "13th–14th century",
+   "medium": "Stonepaste; inglaze painted in blue and turquoise and luster-painted on opaque white glaze",
+   "dimensions": "H. 8 in. (20.3 cm)\r",
+   "credit": "H.O. Havemeyer Collection, Gift of Horace Havemeyer, 1941",
+   "url": "https://www.metmuseum.org/art/collection/search/450429",
+   "publicDomain": true
+  },
+  {
+   "position": "cross between stars 1 and 2",
+   "title": "Cross-Shaped Tile",
+   "accession": "41.165.37",
+   "date": "13th century",
+   "medium": "Stonepaste; inglaze painted in blue and turquoise and luster-painted on opaque white glaze",
+   "dimensions": "H. 8 in. (20.3 cm)\r",
+   "credit": "H.O. Havemeyer Collection, Gift of Horace Havemeyer, 1941",
+   "url": "https://www.metmuseum.org/art/collection/search/450453",
+   "publicDomain": true
+  },
+  {
+   "position": "cross between stars 2 and 3",
+   "title": "Cross-Shaped Tile",
+   "accession": "41.165.32",
+   "date": "13th century",
+   "medium": "Stonepaste; inglaze painted in blue and turquoise and luster-painted on opaque white glaze",
+   "dimensions": "H. 8 in. (20.3 cm)\r",
+   "credit": "H.O. Havemeyer Collection, Gift of Horace Havemeyer, 1941",
+   "url": "https://www.metmuseum.org/art/collection/search/450448",
+   "publicDomain": true
+  },
+  {
+   "position": "cross between stars 3 and 4",
+   "title": "Cross-Shaped Tile",
+   "accession": "41.165.33",
+   "date": "13th century",
+   "medium": "Stonepaste; inglaze painted in blue and turquoise and luster-painted on opaque white glaze",
+   "dimensions": "H. 8 in. (20.3 cm)\r",
+   "credit": "H.O. Havemeyer Collection, Gift of Horace Havemeyer, 1941",
+   "url": "https://www.metmuseum.org/art/collection/search/450449",
+   "publicDomain": true
+  },
+  {
+   "position": "cross between stars 4 and 5",
+   "title": "Cross-Shaped Tile",
+   "accession": "41.165.39",
+   "date": "13th century",
+   "medium": "Stonepaste; inglaze painted in blue and turquoise and luster-painted on opaque white glaze",
+   "dimensions": "H. 8 in. (20.3 cm)\r",
+   "credit": "H.O. Havemeyer Collection, Gift of Horace Havemeyer, 1941",
+   "url": "https://www.metmuseum.org/art/collection/search/450455",
+   "publicDomain": true
+  }
+ ],
+ "references_not_shipped": [
+  {
+   "what": "Low-angle photographs of the same tiles, used to judge how the lustre catches at a grazing angle (gold and copper on the film, a silvery blue sheen)",
+   "urls": [
+    "https://images.metmuseum.org/CRDImages/is/original/wbtemp41.165.13.JPG",
+    "https://images.metmuseum.org/CRDImages/is/original/DP-37179-001.jpg",
+    "https://images.metmuseum.org/CRDImages/is/original/wbtemp41.165.32.JPG"
+   ],
+   "licence": "CC0 1.0"
+  }
+ ]
+}

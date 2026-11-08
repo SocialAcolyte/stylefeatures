@@ -1,0 +1,163 @@
+/* ─── jubako — tabs that are the tiers of a 17th-century Japanese food box ───────────────────────────────────────
+   The box is five rigid cut-outs from the Met's own photographs of one jūbako (40343), taken apart a tier at a
+   time from one camera. Choosing a tab (or lifting a tier by hand) lifts the tiers above; the chosen tier stands
+   open and its panel comes out beside it. Prefix: .jb-
+
+   Geometry is in the box's frame px (823 × 1042, half the Met crop's scale). Each part carries its place:
+     --x --y --w  the part's left, top and width in frame px (its height follows from its width and height attributes)
+     --jb-lift    the room kept above the box for the lifted tiers, frame px (set by the JS; 0 without it)
+     --jb-box     the box's width in the layout                                                                     */
+
+.jb {
+  --jb-lift: 0;
+  --jb-fw: 823;                            /* the frame, from assets/geometry.json */
+  --jb-fh: 1042;
+  --jb-box: clamp(280px, 31vw, 440px);
+  --jb-gutter: 13.5em;                    /* the room beside the box for the tabs (aside layout) */
+  --jb-ink: var(--ink, #141312);
+  --jb-ink-2: var(--ink-2, #4a4744);
+  --jb-ink-3: var(--ink-3, #8a857d);
+  --jb-rule: var(--rule, #cfcac0);
+  --jb-accent: var(--accent, #9a3b22);
+  position: relative;
+  display: grid;
+  gap: clamp(20px, 3vw, 40px);
+  color: var(--jb-ink);
+  font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
+}
+
+/* the box: a room as tall as the box and its lift, every part placed in it */
+.jb-box {
+  position: relative;
+  width: var(--jb-box);
+  max-width: 100%;
+  aspect-ratio: var(--jb-fw) / calc(var(--jb-fh) + var(--jb-lift));
+  line-height: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.jb-box img {
+  position: absolute;
+  left: calc(var(--x) / var(--jb-fw) * 100%);
+  top: calc((var(--y) + var(--jb-lift)) / (var(--jb-fh) + var(--jb-lift)) * 100%);
+  width: calc(var(--w) / var(--jb-fw) * 100%);
+  height: auto;
+  max-width: none;
+  pointer-events: none;
+  will-change: transform;
+}
+.jb-shadow { opacity: .9; }
+.jb-js .jb-box { touch-action: pan-y; }     /* a swipe scrolls; a finger that rests first holds a tier (the JS) */
+.jb-held .jb-box { cursor: grabbing !important; }
+
+/* without JS: the box, then every panel under its own heading */
+.jb-head {
+  margin: 0 0 .5em;
+  font: 500 11px/1.3 var(--sans, Inter, system-ui, sans-serif);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--jb-ink-3);
+}
+.jb:not(.jb-js) .jb-panel + .jb-panel { margin-top: 2.2em; padding-top: 1.6em; border-top: 1px solid var(--jb-rule); }
+
+/* with JS the heading is the tab: kept for screen readers, out of sight */
+.jb-js .jb-head {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+.jb-panel[hidden] { display: none; }
+.jb-panel { outline: none; min-width: 0; }
+.jb-panel:focus-visible { box-shadow: 0 0 0 2px var(--paper, #f3f0e8), 0 0 0 3.5px var(--jb-ink-2); border-radius: 2px; }
+.jb-panel.jb-in { animation: jb-in .5s cubic-bezier(.2, .7, .2, 1) both; }
+@keyframes jb-in { from { opacity: 0; transform: translateX(-28px); } }   /* out of the box's side */
+.jb-list .jb-panel.jb-in { animation-name: jb-up; }
+@keyframes jb-up { from { opacity: 0; transform: translateY(-10px); } }
+
+/* ── the tabs ───────────────────────────────────────────────────────────────────────────────────────────── */
+.jb-tabs { display: none; }
+.jb-js .jb-tabs { display: block; }
+.jb-tab {
+  appearance: none;
+  border: 0;
+  background: none;
+  padding: 0;
+  margin: 0;
+  color: var(--jb-ink-3);
+  font: 400 17px/1 var(--serif, 'Cormorant Garamond', Georgia, serif);
+  letter-spacing: .01em;
+  cursor: pointer;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: color .2s;
+}
+.jb-tab:hover { color: var(--jb-ink-2); }
+.jb-tab[aria-selected="true"] { color: var(--jb-ink); }
+.jb-tab:focus { outline: none; }
+.jb-tab:focus-visible .jb-tab-text { box-shadow: 0 0 0 2px var(--paper, #f3f0e8), 0 0 0 3.5px var(--jb-ink-2); border-radius: 2px; }
+.jb-tab-text { display: inline-block; padding: 2px 1px; }
+.jb-tab-text [lang="ja"] { font-family: var(--jb-ja, 'Shippori Mincho', 'Hiragino Mincho ProN', serif); font-size: .82em; margin-right: .55em; letter-spacing: .04em; }
+
+/* aside: each tab beside its own tier, riding up with it */
+.jb-aside {
+  grid-template-columns: calc(var(--jb-box) + var(--jb-gutter)) minmax(0, 1fr);
+  align-items: start;
+}
+.jb-aside .jb-stage { position: relative; width: calc(var(--jb-box) + var(--jb-gutter)); }
+.jb-aside .jb-tabs {
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 0;
+}
+.jb-aside .jb-tab {
+  position: absolute;
+  top: 0;
+  left: calc(var(--jb-tabs-x, var(--jb-box)) + 14px);
+  height: 30px;
+  margin-top: -15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  will-change: transform;
+}
+.jb-aside .jb-tab::before {              /* a short rule from the tier to its tab: the chosen one in the accent */
+  content: '';
+  width: 14px;
+  height: 1px;
+  background: var(--jb-rule);
+  transition: background .2s, width .25s;
+}
+.jb-aside .jb-tab[aria-selected="true"]::before { width: 22px; background: var(--jb-accent); }
+.jb-aside .jb-panels { padding-top: 4px; }
+
+/* an optional title for the whole group (.jb-title, first in .jb-panels): over the panel when they sit beside the
+   box, so the room the tiers lift into is not left empty; first of all in a list */
+.jb-title { margin: 0 0 1.1em; }
+.jb-list .jb-panels { display: contents; }
+.jb-list .jb-title { order: -1; margin: 0; }
+
+/* list: a narrow room (a phone, a card). The box small at the left, the tabs listed beside it in the tiers'
+   order, the panel under both */
+.jb-list .jb-stage {
+  display: grid;
+  grid-template-columns: var(--jb-box-s, clamp(104px, 40%, 184px)) minmax(0, 1fr);
+  align-items: center;
+  gap: clamp(14px, 4vw, 28px);
+}
+.jb-list .jb-box { width: 100%; }
+.jb-list .jb-tabs { display: grid; justify-items: start; }
+.jb-list .jb-tab { min-height: 40px; display: flex; align-items: center; gap: 10px; }
+.jb-list .jb-tab::before {
+  content: '';
+  width: 12px;
+  height: 1px;
+  background: var(--jb-rule);
+  transition: background .2s, width .25s;
+}
+.jb-list .jb-tab[aria-selected="true"]::before { width: 20px; background: var(--jb-accent); }
+
+@media (prefers-reduced-motion: reduce) {
+  .jb-panel.jb-in { animation: none; }
+  .jb-tab, .jb-tab::before { transition: none; }
+}

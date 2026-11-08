@@ -1,0 +1,32 @@
+[
+  {
+    "files": ["fan.webp", "sticks.webp", "fan.json"],
+    "what": "Fan with Poetic Verses. Iran, Tehran, dated 1301 AH / 1883-84 CE. Wood; painted, gilded, and lacquered. H. 23.5 cm, W. open 47 cm.",
+    "source": "The Metropolitan Museum of Art, New York. The Moses Lazarus Collection, Gift of Josephine and Sarah Lazarus, in memory of their father, 1888-95. Accession 90.2.65, object 443577. Photograph DP155256.",
+    "url": "https://www.metmuseum.org/art/collection/search/443577",
+    "original": "https://images.metmuseum.org/CRDImages/is/original/DP155256.jpg",
+    "license": "CC0 (Met Open Access, isPublicDomain: true)",
+    "made": "cut by components/badbezan/tools from the 3907 x 2749 original (kept at tools/engine/jobs/fan-src/443577-0.jpg), at half size; nothing drawn",
+    "references": [
+      "https://images.metmuseum.org/CRDImages/is/original/sf90-2-65b.jpg (the same fan, half closed: checks the stacking order)",
+      "https://images.metmuseum.org/CRDImages/is/original/sf90-2-65a.jpg (the back: black lacquer with gilt sprays)",
+      "https://commons.wikimedia.org/wiki/File:Fan_with_Hafiz_poetic_verses,_Iran,_Tehran,_Qajar_period,_dated_AH_1301,_1883-1884_AD,_wood,_painted,_gilded,_and_lacquered,_90.2.65_-_Metropolitan_Museum_of_Art_-_New_York_City_-_DSC07311.jpg (gallery photograph by Daderot; its title gives the label's 'Hafiz poetic verses')"
+    ]
+  },
+  {
+    "files": ["nightingale.m4a"],
+    "what": "Common Nightingale (Luscinia megarhynchos), song. Demo only (the player's recording).",
+    "source": "Marie-Lan Taÿ Pamart, xeno-canto XC473316, via Wikimedia Commons",
+    "url": "https://commons.wikimedia.org/wiki/File:Luscinia_megarhynchos_-_Common_Nightingale_XC473316.mp3",
+    "license": "CC BY-SA 4.0",
+    "clip": "0.3-40.3 s of the original (135 s), 1.5 s fade in, 2.5 s fade out, loudness-normalised (ffmpeg loudnorm I=-20), AAC 112k mono",
+    "check": "earshot rank: best of five nightingale recordings for 'a nightingale singing clearly at night, close' (z +6.8); describe: Chirp, tweet 0.88 / Bird vocalization 0.86, noise floor -58.6 dBFS; realness p_real 0.91, no window leans synthesized"
+  },
+  {
+    "files": ["demo.html (the verse)"],
+    "what": "Hafiz, ghazal VIII, the first two stanzas, in Gertrude Lowthian Bell's translation",
+    "source": "Poems from the Divan of Hafiz, translated by Gertrude Lowthian Bell, London: Heinemann, 1897. Project Gutenberg eBook 74883.",
+    "url": "https://www.gutenberg.org/ebooks/74883",
+    "license": "public domain"
+  }
+]

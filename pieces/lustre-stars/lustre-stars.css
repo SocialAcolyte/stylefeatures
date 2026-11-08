@@ -1,0 +1,102 @@
+/* ─── lustre-stars // a rating made of Kashan lustre tiles that catch the light ───
+   A real radio group. The picture is one photograph of nine tiles (five stars, four crosses)
+   cut along their own joints; each label lies over its star. With WebGL the tiles are relit
+   (lustre-stars.js). Without it the photograph stays and the stars past the choice stand in
+   a quiet shade, cut to each star's own outline. Namespace: .ls- */
+
+.ls {
+  --ls-ink: var(--ink, #141312);
+  --ls-ink-3: var(--ink-3, #8a857d);
+  border: 0; margin: 0; padding: 0; min-width: 0;
+}
+.ls-legend {
+  padding: 0; margin: 0 0 .5em;
+  font: inherit;
+}
+
+/* the frieze: the image sets the size; everything else lies over it */
+.ls-frieze {
+  position: relative;
+  width: 100%;
+  margin-bottom: 14px;          /* room for the focus mark under a star */
+  -webkit-tap-highlight-color: transparent;
+}
+.ls-img { display: block; width: 100%; height: auto; user-select: none; -webkit-user-drag: none; }
+.ls-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%; display: block;
+  pointer-events: none;
+}
+.ls.is-live .ls-img { opacity: 0; }
+
+/* the radios: real, focusable, in the tree; each lies on its own star so a
+   magnifier follows focus to the right tile */
+.ls-in {
+  position: absolute; margin: 0; width: 1px; height: 1px; opacity: 0;
+  pointer-events: none;
+}
+.ls-in:nth-of-type(1) { left: 10.5%; top: 64%; }
+.ls-in:nth-of-type(2) { left: 30.4%; top: 65%; }
+.ls-in:nth-of-type(3) { left: 50.2%; top: 64%; }
+.ls-in:nth-of-type(4) { left: 69.7%; top: 66%; }
+.ls-in:nth-of-type(5) { left: 89.4%; top: 67%; }
+
+/* each label is the box of its star (measured: tools/bake.py, geometry.json) */
+.ls-t { position: absolute; cursor: pointer; z-index: 1; }
+.ls-t > span {             /* the words, for screen readers (and forced colours) */
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip-path: inset(50%); white-space: nowrap;
+}
+.ls-t:nth-of-type(1) { left: 0.63%; top: 32.48%; width: 20.07%; height: 62.31%; --ls-clip: polygon(50.1% 1.2%, 64.4% 16.1%, 85.2% 16.4%, 84.6% 37.1%, 98.9% 52.0%, 83.7% 66.5%, 83.0% 87.3%, 62.2% 87.0%, 47.1% 101.5%, 32.8% 86.7%, 12.0% 86.4%, 12.6% 65.7%, -1.7% 50.8%, 13.5% 36.3%, 14.2% 15.5%, 35.0% 15.7%); }
+.ls-t:nth-of-type(2) { left: 20.39%; top: 34.05%; width: 20.34%; height: 63.22%; --ls-clip: polygon(52.0% -0.2%, 65.7% 14.6%, 86.3% 14.8%, 85.1% 35.7%, 98.8% 50.5%, 83.3% 65.2%, 82.1% 86.1%, 61.5% 86.0%, 46.0% 100.7%, 32.3% 85.9%, 11.7% 85.8%, 12.9% 64.9%, -0.8% 50.0%, 14.7% 35.3%, 15.9% 14.4%, 36.5% 14.5%); }
+.ls-t:nth-of-type(3) { left: 40.39%; top: 31.49%; width: 20.26%; height: 65.62%; --ls-clip: polygon(48.9% -0.2%, 63.6% 14.5%, 84.4% 14.1%, 84.2% 35.4%, 98.8% 50.1%, 84.0% 65.3%, 83.8% 86.5%, 63.0% 86.9%, 48.2% 102.2%, 33.6% 87.4%, 12.8% 87.8%, 12.9% 66.6%, -1.7% 51.8%, 13.1% 36.6%, 13.3% 15.4%, 34.1% 15.0%); }
+.ls-t:nth-of-type(4) { left: 59.93%; top: 33.14%; width: 19.57%; height: 64.30%; --ls-clip: polygon(51.1% 1.2%, 65.5% 15.8%, 86.6% 15.6%, 85.9% 36.4%, 100.3% 51.0%, 84.9% 65.7%, 84.2% 86.5%, 63.1% 86.6%, 47.8% 101.4%, 33.4% 86.9%, 12.4% 87.0%, 13.1% 66.3%, -1.3% 51.7%, 14.0% 36.9%, 14.8% 16.2%, 35.8% 16.0%); }
+.ls-t:nth-of-type(5) { left: 79.11%; top: 35.12%; width: 20.26%; height: 62.89%; --ls-clip: polygon(50.3% -0.3%, 64.9% 14.4%, 85.4% 14.0%, 85.5% 35.0%, 100.1% 49.7%, 85.7% 64.8%, 85.8% 85.8%, 65.4% 86.2%, 51.0% 101.3%, 36.4% 86.7%, 15.9% 87.0%, 15.8% 66.0%, 1.1% 51.4%, 15.6% 36.2%, 15.4% 15.2%, 35.9% 14.8%); }
+
+/* without WebGL: the stars past the choice stand in shade, cut to their own outline */
+.ls-t::before {
+  content: ''; position: absolute; inset: 0;
+  clip-path: var(--ls-clip);
+  background: rgba(38, 28, 18, 0);
+  transition: background-color .35s ease;
+}
+.ls-in:checked + .ls-t ~ .ls-t::before { background: rgba(38, 28, 18, .42); }
+.ls.is-live .ls-t::before { display: none; }
+
+/* focus: a short ink rule under the star, never on the tile itself */
+.ls-t::after {
+  content: ''; position: absolute; left: 32%; right: 32%; bottom: -10px; height: 2px;
+  background: var(--ls-ink); border-radius: 1px; opacity: 0;
+}
+.ls-in:focus-visible + .ls-t::after { opacity: 1; }
+
+/* the stated value */
+.ls-say {
+  display: block; min-height: 1.5em;
+  font-family: var(--sans, system-ui, sans-serif); font-size: 13px; letter-spacing: .02em;
+  color: var(--ls-ink-3);
+}
+
+/* read-only display: the same frieze, no radios */
+.ls-read { display: block; }
+.ls-read .ls-frieze { margin-bottom: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .ls-t::before { transition: none; }
+}
+
+/* forced colours: the real radios, in a row under the picture */
+@media (forced-colors: active) {
+  .ls.is-live .ls-img { opacity: 1; }
+  .ls-canvas { display: none; }
+  .ls-frieze { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: center; }
+  .ls-img { flex: 0 0 100%; }
+  .ls-in { position: static; width: auto; height: auto; opacity: 1; pointer-events: auto; }
+  .ls-t { position: static; width: auto; height: auto; }
+  .ls-t > span { position: static; width: auto; height: auto; clip-path: none; }
+  .ls-t::before, .ls-t::after { display: none; }
+}
+
+@media print {
+  .ls-canvas { display: none; }
+  .ls.is-live .ls-img { opacity: 1; }
+}

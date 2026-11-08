@@ -1,0 +1,87 @@
+{
+  "object": {
+    "title": "Food Box with Striped Decoration and Chinese Figures",
+    "culture": "Japan, Edo period (1615–1868)",
+    "date": "17th century",
+    "medium": "Lacquered wood with gold and silver hiramaki-e, lead, and mother-of-pearl inlay on black ground",
+    "dimensions": "H. 27 cm, W. 19.5 cm, D. 21 cm",
+    "museum": "The Metropolitan Museum of Art, New York",
+    "accession": "2015.500.2.31a–f",
+    "credit_line": "Gift of Florence and Herbert Irving, 2015",
+    "url": "https://www.metmuseum.org/art/collection/search/40343",
+    "licence": "CC0 (Met Open Access, isPublicDomain: true)"
+  },
+  "files": {
+    "tier-1.webp": {
+      "from": "https://images.metmuseum.org/CRDImages/as/original/L1996_47_86_O2_sf.jpg",
+      "state": "all five tiers; tier 1 open on top",
+      "made": "registered (identity), matted (BiRefNet), cut along seam 1|2, half scale"
+    },
+    "tier-2.webp": {
+      "from": "https://images.metmuseum.org/CRDImages/as/original/L1996_47_86_O3_sf.jpg",
+      "state": "tier 1 taken off",
+      "made": "registered to O2 (translation 0.4 px), matted, cut along seam 2|3, half scale"
+    },
+    "tier-3.webp": {
+      "from": "https://images.metmuseum.org/CRDImages/as/original/L1996_47_86_O4_sf.jpg",
+      "state": "tiers 1-2 taken off",
+      "made": "registered to O2 (translation 0.8 px), matted, cut along seam 3|4, half scale"
+    },
+    "tier-4.webp": {
+      "from": "https://images.metmuseum.org/CRDImages/as/original/L1996_47_86_O5_sf.jpg",
+      "state": "tiers 1-3 taken off",
+      "made": "registered to O2 (affine, 3 px, 0.13 deg), matted, cut along seam 4|5, half scale"
+    },
+    "tier-5.webp": {
+      "from": "https://images.metmuseum.org/CRDImages/as/original/L1996_47_86_O6_sf.jpg",
+      "state": "the bottom tier alone",
+      "made": "registered to O2 (affine, 18 px, 0.6 deg at 4000 px), matted, whole, half scale"
+    },
+    "shadow.webp": {
+      "from": "https://images.metmuseum.org/CRDImages/as/original/L1996_47_86_O2_sf.jpg",
+      "made": "the photograph divided by a quadratic fit of the Met's backdrop, under the foot only, as alpha"
+    },
+    "geometry.json": {
+      "made": "tools/cut.py: frame, part boxes, the rim, four seams and the foot as lines to two vanishing points"
+    }
+  },
+  "tools": {
+    "matte": "tools/engine/stages/matte.py (BiRefNet via rembg), this repo",
+    "registration": "OpenCV findTransformECC on the bottom tier"
+  },
+  "sound": "none",
+  "prints": {
+    "prints/medetai.webp": {
+      "title": "Medetai Fish and Sasaki Bamboo, from the series Uozukushi (Every Variety of Fish)",
+      "artist": "Utagawa Hiroshige",
+      "museum": "The Metropolitan Museum of Art (DP123587)",
+      "licence": "CC0",
+      "source": "https://commons.wikimedia.org/wiki/File:%E9%AD%9A%E3%81%A5%E3%81%8F%E3%81%97-Medetai_Fush_and_Sasaki_Bamboo,_from_the_series_Uozukushi_(Every_Variety_of_Fish)_MET_DP123587.jpg",
+      "made": "resized to 1200 px, webp"
+    },
+    "prints/ise-ebi.webp": {
+      "title": "Ise-ebi and Shiba-ebi, from the series Uozukushi (Every Variety of Fish)",
+      "artist": "Utagawa Hiroshige",
+      "museum": "The Metropolitan Museum of Art (DP123581)",
+      "licence": "CC0",
+      "source": "https://commons.wikimedia.org/wiki/File:%E9%AD%9A%E3%81%A5%E3%81%8F%E3%81%97_%E4%BC%8A%E5%8B%A2%E6%B5%B7%E8%80%81_%E8%8A%9D%E8%9D%A6-Ise-ebi_and_Shiba-ebi,_from_the_series_Uozukushi_(Every_Variety_of_Fish)_MET_DP123581.jpg",
+      "made": "resized to 1200 px, webp"
+    },
+    "prints/kurodai-takenoko.webp": {
+      "title": "Kurodai and Kodai Fish with Bamboo Shoots and Berries, from the series Uozukushi (Every Variety of Fish)",
+      "artist": "Utagawa Hiroshige",
+      "museum": "The Metropolitan Museum of Art (DP123580)",
+      "licence": "CC0",
+      "source": "https://commons.wikimedia.org/wiki/File:%E9%AD%9A%E3%81%A5%E3%81%8F%E3%81%97_%E9%BB%92%E9%AF%9B_%E5%B0%8F%E9%AF%9B%E3%81%AB%E5%B1%B1%E6%A4%92-Kurodai_and_Kodai_Fish_with_Bamboo_Shoots_and_Berries,_from_the_series_Uozukushi_(Every_Variety_of_Fish)_MET_DP123580.jpg",
+      "made": "resized to 1200 px, webp"
+    },
+    "prints/renkon.webp": {
+      "title": "Basket of Lotus Root and Single String Chin (surimono)",
+      "artist": "Japan, 19th century (unattributed)",
+      "museum": "Los Angeles County Museum of Art, M.79.152.573, Julian C. Wright Bequest",
+      "licence": "Public domain",
+      "source": "https://commons.wikimedia.org/wiki/File:Basket_of_Lotus_Root_and_Single_String_Chin_LACMA_M.79.152.573.jpg",
+      "made": "resized to 1200 px, webp"
+    }
+  }
+}

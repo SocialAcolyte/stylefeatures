@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>badbezan</title><link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="badbezan.css">
+<style>
+  :root{--paper:#f3f0e8;--paper-2:#e9e5da;--ink:#141312;--ink-2:#4a4744;--ink-3:#8a857d;--rule:#cfcac0;--accent:#c96f4a;
+    --serif:'Cormorant Garamond',Georgia,serif;--sans:Inter,system-ui,sans-serif;--gutter:clamp(16px,3vw,32px)}
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%;background:var(--paper)}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--serif);overflow-x:hidden}
+  main{max-width:1120px;margin:0 auto;padding:clamp(48px,10svh,120px) var(--gutter) 120px;display:grid;gap:clamp(44px,7svh,80px)}
+  .tag{margin:0;font:500 10.5px/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3)}
+  .head{display:grid;gap:14px;justify-items:center;text-align:center}
+  .head h1{margin:0;font-weight:300;font-style:italic;font-size:clamp(34px,5vw,58px);line-height:1}
+  .prose{width:min(100%,34em);margin:0 auto;font-size:clamp(18px,1.6vw,20.5px);line-height:1.55;color:var(--ink-2);text-wrap:pretty}
+  .prose p{margin:0 0 .9em}.prose p:last-child{margin:0}
+
+  /* the large fan sets the size of the verse under it */
+  .reading{display:grid;gap:clamp(36px,6svh,64px);justify-items:center}
+  .bz-hero{--bz-width:min(100%,660px);--bz-size:30px;width:100%}
+  .verse{position:relative;width:fit-content;max-width:100%;margin:0 auto;padding:clamp(28px,5vw,48px) clamp(18px,4vw,44px);
+    border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);font-size:calc(var(--verse,21px) * var(--size,1));
+    line-height:1.5;color:var(--ink);transition:font-size .0s}
+  @media (max-width:640px){.verse{--verse:16.5px}}
+  .verse::before{content:"";position:absolute;inset:0;background:#e9b66e;mix-blend-mode:multiply;opacity:var(--lamp,0);pointer-events:none}
+  .verse p{margin:0 0 1.1em;padding-left:1.4em;text-indent:-1.4em}
+  .verse p:last-of-type{margin:0}
+  .verse span{display:block}
+  .verse .num{display:block;margin:0 0 1em;text-indent:0;padding:0;font:500 10.5px/1.2 var(--sans);letter-spacing:.16em;color:var(--ink-3)}
+
+  /* two things a page has: a small player and a reading-settings card, one above the other */
+  .row{display:grid;gap:16px;width:min(100%,560px);margin:0 auto}
+  .card{border:1px solid var(--rule);border-radius:14px;background:color-mix(in srgb,var(--paper) 60%,#fff);padding:18px 20px}
+  .player{display:flex;align-items:center;gap:14px}
+  .play{flex:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--ink);background:transparent;color:var(--ink);
+    display:grid;place-items:center;cursor:pointer;padding:0}
+  .play:hover{background:var(--ink);color:var(--paper)}
+  .play:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .play svg{width:14px;height:14px}
+  .play .pause{display:none}.playing .play .pause{display:block}.playing .play .tri{display:none}
+  .track{flex:1;min-width:0;display:grid;gap:3px}
+  .track b{font-weight:500;font-size:19px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .track small{font:400 12px/1.2 var(--sans);color:var(--ink-3);font-variant-numeric:tabular-nums}
+  .player .bz-compact{--bz-size:15px}
+  .player .bz-label{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+  .settings{display:grid;gap:6px}
+  .settings .bz{--bz-width:min(62%,230px);--bz-size:24px;display:flex;align-items:flex-end;justify-content:center;gap:clamp(16px,5vw,40px);width:100%}
+  .settings .bz-face{flex-direction:column;align-items:flex-start;gap:6px;padding-bottom:4px}
+</style></head><body>
+<main>
+  <header class="head">
+    <span class="tag">range</span>
+    <h1>Twenty sticks on one pin</h1>
+  </header>
+
+  <div class="prose">
+    <p>A fan from Tehran, dated 1301 of the Hijra, 1883 to 1884. It has no leaf: each of its twenty sticks is a slip of wood, painted, gilded and lacquered, and each carries its own panels of verse. A red silk ribbon runs through slots in every stick and holds them in their order on a single brass pin.</p>
+  </div>
+
+  <section class="reading">
+    <div class="bz bz-hero" data-badbezan data-format="{value}%" id="size-fan">
+      <div class="bz-fan"><img class="bz-img" src="assets/fan.webp" width="1690" height="913"
+        alt="A Persian brisé fan, fully open: twenty paddle-shaped sticks of lacquered wood, painted in gold, red and green with cartouches of calligraphy, threaded with a red ribbon and pinned at the base."></div>
+      <div class="bz-face"><label class="bz-label" for="size">Text size</label><output class="bz-out" for="size">100%</output></div>
+      <input class="bz-input" id="size" type="range" min="80" max="150" step="5" value="115">
+    </div>
+
+    <article class="verse" id="verse">
+      <span class="num">VIII</span>
+      <p><span>The rose has flushed red, the bud has burst,</span><span>And drunk with joy is the nightingale—</span><span>Hail, Sufis! lovers of wine, all hail!</span><span>For wine is proclaimed to a world athirst.</span><span>Like a rock your repentance seemed to you;</span><span>Behold the marvel! of what avail</span><span>Was your rock, for a goblet has cleft it in two!</span></p>
+      <p><span>Bring wine for the king and the slave at the gate!</span><span>Alike for all is the banquet spread,</span><span>And drunk and sober are warmed and fed.</span><span>When the feast is done and the night grows late,</span><span>And the second door of the tavern gapes wide,</span><span>The low and the mighty must bow the head</span><span>’Neath the archway of Life, to meet what ... outside?</span></p>
+    </article>
+  </section>
+
+  <div class="row">
+    <div class="card player" id="player">
+      <button class="play" type="button" aria-label="Play the nightingale" aria-pressed="false">
+        <svg class="tri" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5v11l9.5-5.5z" fill="currentColor"/></svg>
+        <svg class="pause" viewBox="0 0 14 14" aria-hidden="true"><path d="M3 1.5h3v11H3zM8 1.5h3v11H8z" fill="currentColor"/></svg>
+      </button>
+      <div class="track"><b>Nightingale</b><small>after dark · <span id="t">0:00</span> / 0:40</small></div>
+      <div class="bz bz-compact" data-badbezan>
+        <div class="bz-fan"><img class="bz-img" src="assets/fan.webp" width="1690" height="913" alt=""></div>
+        <div class="bz-face"><label class="bz-label" for="vol">Volume</label><output class="bz-out" for="vol">70</output></div>
+        <input class="bz-input" id="vol" type="range" min="0" max="100" step="1" value="70">
+      </div>
+      <audio id="song" src="assets/nightingale.m4a" preload="none" loop></audio>
+    </div>
+
+    <div class="card settings">
+      <span class="tag">Reading</span>
+      <div class="bz" data-badbezan data-format="{value}%">
+        <div class="bz-fan"><img class="bz-img" src="assets/fan.webp" width="1690" height="913" alt=""></div>
+        <div class="bz-face"><label class="bz-label" for="lamp">Lamplight</label><output class="bz-out" for="lamp">45%</output></div>
+        <input class="bz-input" id="lamp" type="range" min="0" max="100" step="5" value="45">
+      </div>
+    </div>
+  </div>
+</main>
+<script type="module">
+  import './badbezan.js';
+  const verse = document.getElementById('verse');
+  const size = document.getElementById('size'), lamp = document.getElementById('lamp'), vol = document.getElementById('vol');
+  const song = document.getElementById('song'), player = document.getElementById('player'), btn = player.querySelector('.play');
+  const t = document.getElementById('t');
+  const apply = () => {
+    verse.style.setProperty('--size', size.value / 100);
+    verse.style.setProperty('--lamp', (lamp.value / 100) * .55);
+    song.volume = vol.value / 100;
+  };
+  [size, lamp, vol].forEach((i) => i.addEventListener('input', apply));
+  apply();
+  btn.addEventListener('click', () => { if (song.paused) song.play(); else song.pause(); });
+  song.addEventListener('play', () => { player.classList.add('playing'); btn.setAttribute('aria-pressed', 'true'); btn.setAttribute('aria-label', 'Pause the nightingale'); });
+  song.addEventListener('pause', () => { player.classList.remove('playing'); btn.setAttribute('aria-pressed', 'false'); btn.setAttribute('aria-label', 'Play the nightingale'); });
+  song.addEventListener('timeupdate', () => { const s = Math.floor(song.currentTime); t.textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; });
+</script>
+</body></html>
