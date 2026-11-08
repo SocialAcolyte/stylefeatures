@@ -5,7 +5,7 @@
   <br>
   <p><b>Living web components, drawn from paintings, plates, water, cloth and stone.</b></p>
 <!-- count -->
-<p>86 pieces, 18 demo sites and 10 personal sites. Each one downloads as a folder you drop into a page.</p>
+<p>87 pieces, 18 demo sites and 10 personal sites. Each one downloads as a folder you drop into a page.</p>
 <!-- /count -->
   <a href="https://socialacolyte.github.io/stylefeatures/"><img alt="Live: the collection" src="https://img.shields.io/badge/live-the%20collection%20%E2%86%97-141312?style=for-the-badge&labelColor=141312"></a>
   <img alt="No build step" src="https://img.shields.io/badge/build%20step-none-141312?style=for-the-badge&labelColor=141312">
@@ -188,7 +188,7 @@ Words set, sewn, poured and assembled.
 </tr>
 </table>
 
-### Controls & forms <sub>7</sub>
+### Controls & forms <sub>8</sub>
 
 Buttons and fields that behave like the real thing.
 
@@ -205,7 +205,7 @@ Buttons and fields that behave like the real thing.
 </tr>
 <tr>
 <td width="33%" valign="top"><a href="https://socialacolyte.github.io/stylefeatures/#/senet"><img src=".github/readme/pieces/senet.webp" alt="senet"></a><br><a href="https://socialacolyte.github.io/stylefeatures/#/senet"><b>senet</b></a><br><sub>Pagination on a senet board. The control is a real &lt;nav&gt;&lt;ol&gt; of page links.</sub></td>
-<td width="33%"></td>
+<td width="33%" valign="top"><a href="https://socialacolyte.github.io/stylefeatures/#/tamra-nuat"><img src=".github/readme/pieces/tamra-nuat.webp" alt="tamra-nuat"></a><br><a href="https://socialacolyte.github.io/stylefeatures/#/tamra-nuat"><b>tamra-nuat</b></a><br><sub>An accordion that is a Thai folding book.</sub></td>
 <td width="33%"></td>
 </tr>
 </table>
