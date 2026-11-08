@@ -1,0 +1,43 @@
+[
+  {
+    "files": [
+      "fan.webp",
+      "sticks.webp",
+      "fan.json"
+    ],
+    "what": "Kunstnerviften (the Artists' Fan), Kristiania (Oslo), 1898. A brisé fan of eighteen painted wooden sticks with a black lacquered guard and a brass bail; each stick painted by a different artist (Gerhard Munthe, Jacob Bratland, Fredrik Kolstø, Karl Uchermann, Otto Sinding, Asta Nørregaard, Thorolf Holmboe, Elisabeth Sinding, Christian Skredsvig, Christian Krohg, Amaldus Nielsen, Gustav Lærum, Carl Sundt-Hansen, Axel Ender, Severin Segelcke, Hans Gude, Hans Heyerdahl, Eilif Peterssen), with a peacock painted across the gorge.",
+    "source": "Nasjonalmuseet for kunst, arkitektur og design, Oslo, NG.M.04483; the museum's photograph via Wikimedia Commons",
+    "url": "https://commons.wikimedia.org/wiki/File:Hans_Heyerdahl,_Thorolf_Holmboe,_Fredrik_Kolst%C3%B8_and_others_-_Kunstnerviften_-_NG.M.04483_-_National_Museum_of_Art,_Architecture_and_Design.jpg",
+    "license": "public domain (PD-old-100, CC-PD-Mark)",
+    "made": "cut by components/kongque/tools from the 10661 x 5931 original (kept at tools/engine/jobs/fan-peacock2-src/kunstnerviften-full.jpg, worked at 5330 px, shipped at 2599 px); matte by BiRefNet refined against the linen's colour; nothing drawn",
+    "reference": "https://commons.wikimedia.org/wiki/Category:Kunstnerviften_(Nasjonalmuseet,_NG.M.04483) (Sailko's oblique views, CC BY-SA 4.0, not shipped)"
+  },
+  {
+    "files": [
+      "room/mural.webp",
+      "room/mural-1400.webp",
+      "room/fireplace.webp",
+      "room/shutters.webp",
+      "room/mural-gold.png",
+      "room/mural-1400-gold.png",
+      "room/fireplace-gold.png",
+      "room/shutters-gold.png"
+    ],
+    "what": "James McNeill Whistler, Harmony in Blue and Gold: The Peacock Room, 1876-77. The south wall (Art and Money; or, The Story of the Room), the north wall with La Princesse du pays de la porcelaine, and the shutters. Demo only.",
+    "source": "Freer Gallery of Art, Smithsonian Institution, Gift of Charles Lang Freer, F1904.61; photographs via Wikimedia Commons (FS-F1904.61 028, 006, 043), fetched at 3840 px",
+    "url": "https://commons.wikimedia.org/wiki/File:Whistler_-_Harmony_in_Blue_and_Gold_The_Peacock_Room,_FS-F1904.61_028.jpg",
+    "license": "public domain (Commons); Smithsonian Open Access CC0",
+    "made": "the -gold.png light data (gold mask from colour, normal from the photograph's own relief) baked from these photographs by components/kongque/tools/gold_bake.py"
+  },
+  {
+    "files": [
+      "peacock.m4a"
+    ],
+    "what": "Indian peafowl (Pavo cristatus), a male calling, Denver Zoo, 4 July 2009. Demo only.",
+    "source": "Ke4roh, via Wikimedia Commons",
+    "url": "https://commons.wikimedia.org/wiki/File:Pavo_cristatus_(call).ogg",
+    "license": "public domain",
+    "clip": "the whole recording (8.8 s), 0.3 s fade in, 1 s fade out, loudness-normalised (ffmpeg loudnorm I=-20), AAC 112k mono",
+    "check": "earshot rank: best of five peafowl recordings for 'a peacock calling outdoors, clear loud cries' (z +5.1); realness p_real 0.86, no window leans synthesized"
+  }
+]

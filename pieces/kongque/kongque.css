@@ -1,0 +1,108 @@
+/* ─── kongque — Kunstnerviften, a brisé fan with a peacock (Kristiania, 1898) as a range input ───────────────
+   The fan is an <img>: the Nasjonalmuseet's photograph, cut off its linen. While it is turned, a canvas over it draws the
+   eighteen photographed sticks turned about the pin; fully open and at rest, what you see is the <img>.
+   The control is a real <input type="range">, with its <label> and an <output>. Prefix: .kq- */
+
+.kq {
+  position: relative;
+  display: grid;
+  gap: var(--kq-gap, 14px);
+  justify-items: center;
+  color: var(--ink, #141312);
+  font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
+}
+
+/* the fan's box: the photograph (2599 × 1406) plus what the closed fan reaches past it (8 px left, 16 px below) */
+.kq-fan {
+  position: relative;
+  width: var(--kq-width, min(100%, 640px));
+  aspect-ratio: 2603 / 1422;
+  line-height: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+.kq-img {
+  position: absolute;
+  top: 0;
+  left: 0.3073%;          /* 8 / 2603 */
+  width: 99.8463%;       /* 2599 / 2603 */
+  height: auto;
+  /* painted wood lying on the page: a tight contact shadow and a soft one along its outline */
+  filter: var(--kq-shadow, drop-shadow(0 .5px .8px rgba(40, 26, 10, .28)) drop-shadow(0 6px 14px rgba(40, 26, 10, .14)));
+}
+.kq-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+  pointer-events: none;
+  filter: var(--kq-shadow, drop-shadow(0 .5px .8px rgba(40, 26, 10, .28)) drop-shadow(0 6px 14px rgba(40, 26, 10, .14)));
+}
+.kq-moving .kq-canvas { display: block; }
+.kq-moving .kq-img { visibility: hidden; }
+
+/* handled: the fan is the slider's thumb and track. Vertical swipes still scroll the page; a sideways drag or a
+   tap sets the value */
+.kq-ready .kq-fan { cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.kq-grabbing .kq-fan { cursor: grabbing; }
+.kq:not(.kq-pointer):has(.kq-input:focus-visible) .kq-fan {
+  outline: 2px solid var(--accent, #c96f4a);
+  outline-offset: 6px;
+  border-radius: 6px;
+}
+
+/* the words: label and output on one line */
+.kq-face {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: .9em;
+}
+.kq-label {
+  font: 500 11px/1.2 var(--sans, Inter, system-ui, sans-serif);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink-3, #8a857d);
+}
+.kq-out {
+  font-family: var(--serif, 'Cormorant Garamond', Georgia, serif);
+  font-size: var(--kq-size, 26px);
+  line-height: 1;
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--ink, #141312);
+  min-width: 3ch;
+}
+
+/* the input: a native slider until the script is ready; then the fan is its picture and the input stays in the
+   accessibility tree (focusable, the keys work) but out of sight */
+.kq-input { width: var(--kq-width, min(100%, 640px)); accent-color: var(--accent, #c96f4a); }
+.kq-ready .kq-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* compact: a small fan in a row (about 44 px tall), its words beside it */
+.kq-compact {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  --kq-width: calc(var(--kq-height, 44px) * 2603 / 1422);
+  --kq-size: 17px;
+  --kq-shadow: drop-shadow(0 .5px .6px rgba(40, 26, 10, .3));
+}
+.kq-compact .kq-fan { flex: none; }
+.kq-compact .kq-face { gap: .6em; }
+.kq-compact .kq-input { width: 120px; }
+.kq-compact.kq-ready .kq-input { width: 1px; }
+
+@media (forced-colors: active) {
+  .kq-moving .kq-canvas { display: none; }
+  .kq-moving .kq-img { visibility: visible; }
+}

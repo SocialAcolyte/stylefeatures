@@ -5,7 +5,7 @@
   <br>
   <p><b>Living web components, drawn from paintings, plates, water, cloth and stone.</b></p>
 <!-- count -->
-<p>87 pieces, 18 demo sites and 10 personal sites. Each one downloads as a folder you drop into a page.</p>
+<p>88 pieces, 18 demo sites and 10 personal sites. Each one downloads as a folder you drop into a page.</p>
 <!-- /count -->
   <a href="https://socialacolyte.github.io/stylefeatures/"><img alt="Live: the collection" src="https://img.shields.io/badge/live-the%20collection%20%E2%86%97-141312?style=for-the-badge&labelColor=141312"></a>
   <img alt="No build step" src="https://img.shields.io/badge/build%20step-none-141312?style=for-the-badge&labelColor=141312">
@@ -188,7 +188,7 @@ Words set, sewn, poured and assembled.
 </tr>
 </table>
 
-### Controls & forms <sub>8</sub>
+### Controls & forms <sub>9</sub>
 
 Buttons and fields that behave like the real thing.
 
@@ -201,12 +201,12 @@ Buttons and fields that behave like the real thing.
 <tr>
 <td width="33%" valign="top"><a href="https://socialacolyte.github.io/stylefeatures/#/lustre-stars"><img src=".github/readme/pieces/lustre-stars.webp" alt="lustre-stars"></a><br><a href="https://socialacolyte.github.io/stylefeatures/#/lustre-stars"><b>lustre-stars</b></a><br><sub>A rating made of real Kashan lustre tiles.</sub></td>
 <td width="33%" valign="top"><a href="https://socialacolyte.github.io/stylefeatures/#/badbezan"><img src=".github/readme/pieces/badbezan.webp" alt="badbezan"></a><br><a href="https://socialacolyte.github.io/stylefeatures/#/badbezan"><b>badbezan</b></a><br><sub>A range input that is a Persian brisé fan.</sub></td>
-<td width="33%" valign="top"><a href="https://socialacolyte.github.io/stylefeatures/#/jubako"><img src=".github/readme/pieces/jubako.webp" alt="jubako"></a><br><a href="https://socialacolyte.github.io/stylefeatures/#/jubako"><b>jubako</b></a><br><sub>Tabs that are the tiers of a Japanese food box.</sub></td>
+<td width="33%" valign="top"><a href="https://socialacolyte.github.io/stylefeatures/#/kongque"><img src=".github/readme/pieces/kongque.webp" alt="kongque"></a><br><a href="https://socialacolyte.github.io/stylefeatures/#/kongque"><b>kongque</b></a><br><sub>A range input that is a brisé fan with a peacock at its heart: Kunstnerviften, the Artists' Fan.</sub></td>
 </tr>
 <tr>
+<td width="33%" valign="top"><a href="https://socialacolyte.github.io/stylefeatures/#/jubako"><img src=".github/readme/pieces/jubako.webp" alt="jubako"></a><br><a href="https://socialacolyte.github.io/stylefeatures/#/jubako"><b>jubako</b></a><br><sub>Tabs that are the tiers of a Japanese food box.</sub></td>
 <td width="33%" valign="top"><a href="https://socialacolyte.github.io/stylefeatures/#/senet"><img src=".github/readme/pieces/senet.webp" alt="senet"></a><br><a href="https://socialacolyte.github.io/stylefeatures/#/senet"><b>senet</b></a><br><sub>Pagination on a senet board. The control is a real &lt;nav&gt;&lt;ol&gt; of page links.</sub></td>
 <td width="33%" valign="top"><a href="https://socialacolyte.github.io/stylefeatures/#/tamra-nuat"><img src=".github/readme/pieces/tamra-nuat.webp" alt="tamra-nuat"></a><br><a href="https://socialacolyte.github.io/stylefeatures/#/tamra-nuat"><b>tamra-nuat</b></a><br><sub>An accordion that is a Thai folding book.</sub></td>
-<td width="33%"></td>
 </tr>
 </table>
 
