@@ -3,7 +3,8 @@
   <a href="https://socialacolyte.github.io/stylefeatures/"><img alt="StyleFeatures" src=".github/readme/wordmark.svg" width="560"></a>
   <br>
   <br>
-  <p><b>Living web components, drawn from paintings, plates, water, cloth and stone.</b></p>
+  <h3>Tasteful components</h3>
+  <p>Living web components, drawn from paintings, plates, water, cloth and stone.</p>
 <!-- count -->
 <p>88 pieces, 18 demo sites and 10 personal sites. Each one downloads as a folder you drop into a page.</p>
 <!-- /count -->
