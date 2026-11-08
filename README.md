@@ -5,9 +5,6 @@
   <br>
   <h3>Tasteful components</h3>
   <p>Living web components, drawn from paintings, plates, water, cloth and stone.</p>
-<!-- count -->
-<p>88 pieces, 18 demo sites and 10 personal sites. Each one downloads as a folder you drop into a page.</p>
-<!-- /count -->
   <a href="https://socialacolyte.github.io/stylefeatures/"><img alt="Live: the collection" src="https://img.shields.io/badge/live-the%20collection%20%E2%86%97-141312?style=for-the-badge&labelColor=141312"></a>
   <img alt="No build step" src="https://img.shields.io/badge/build%20step-none-141312?style=for-the-badge&labelColor=141312">
   <img alt="Plain ES modules" src="https://img.shields.io/badge/plain-ES%20modules-141312?style=for-the-badge&logo=javascript&logoColor=f3f0e8&labelColor=141312">

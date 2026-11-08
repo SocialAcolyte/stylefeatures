@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Rebuild the README's piece count and gallery from the site's own catalogue.
+"""Rebuild the README's gallery from the site's own catalogue.
 
 Reads the DATA object in index.html, makes a small thumbnail per piece in
-.github/readme/pieces/ (from thumbs/, with cwebp), and rewrites the blocks
-between the <!-- count --> and <!-- gallery --> markers in README.md.
+.github/readme/pieces/ (from thumbs/, with cwebp), and rewrites the block
+between the <!-- gallery --> markers in README.md.
 
     python3 .github/readme/build.py
 """
@@ -117,12 +117,10 @@ def main():
     n_personal = sum(1 for p in pieces if p.get('family') == 'personal')
     n_pieces = len(pieces) - len(templates)
     n_demo = len(templates) - n_personal
-    count = (f'<p>{n_pieces} pieces, {n_demo} demo sites and {n_personal} personal sites. '
-             'Each one downloads as a folder you drop into a page.</p>')
 
     path = os.path.join(ROOT, 'README.md')
     md = open(path, encoding='utf-8').read()
-    for name, body in (('count', count), ('gallery', gallery)):
+    for name, body in (('gallery', gallery),):
         pat = re.compile(rf'(<!-- {name} -->).*?(<!-- /{name} -->)', re.S)
         if not pat.search(md):
             sys.exit(f'README.md has no <!-- {name} --> block')
