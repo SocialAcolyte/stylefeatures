@@ -1,0 +1,31 @@
+{
+  "object": {
+    "title": "[Tamra nuat] (a manual of massage)",
+    "shelfmark": "Wellcome Collection, MS Thai 801",
+    "date": "19th century",
+    "place": "Thailand (Siam)",
+    "format": "samut khoi: a folding book of khoi paper, lacquered boards; written and drawn in black and red ink, Thai script",
+    "work": "https://wellcomecollection.org/works/acfue4kf",
+    "iiif_manifest": "https://iiif.wellcomecollection.org/presentation/v2/b20589463",
+    "photographs": "Wellcome Collection imaging, 86 frames (EP_000636_0001-0086)",
+    "license": "Public Domain Mark 1.0",
+    "license_url": "http://creativecommons.org/publicdomain/mark/1.0/",
+    "attribution": "Wellcome Collection"
+  },
+  "files": {
+    "cover.webp, cover-s.webp": "frame 41 (the board lying above panel B1), cut from the black ground",
+    "back.webp, back-s.webp": "frame 80 (the board at the far end of side B), cut from the black ground",
+    "edge.webp": "frame 82 (the folded stack's long edge, every fold one line)",
+    "tamra-nuat.json": "measured by tools/cut.py from the same frames: paper edges, creases, free space, crease profile, ink colour",
+    "p/aNN.webp, p/bNN.webp (and -s.webp)": "the six openings A5-A8, A47-A48, A65-A70, A75-A76, B5-B8, and side B's blank panels B9-B44, each from the frame where it lies in a middle row: side A frame (k+3-r)/2, side B frame (k+83-r)/2, r = 2 for odd k, 1 for even (frames 3-5, 24-25, 33-36, 38-39, 44-63)"
+  },
+  "tools": {
+    "fetch": "tools/fetch.py (IIIF image API, 2400 px wide)",
+    "cut": "tools/cut.py"
+  },
+  "code": {
+    "pretext": "vendor/pretext: @chenglou/pretext v0.0.8, MIT (Cheng Lou), unmodified, copied from components/canon-tables/vendor/pretext"
+  },
+  "fonts": "EB Garamond, Cormorant Garamond, Inter, Noto Serif Thai (Google Fonts, SIL Open Font License), loaded by the demo",
+  "generated": "nothing: no Midjourney, no drawn or modelled part"
+}

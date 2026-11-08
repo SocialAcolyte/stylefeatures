@@ -1,0 +1,172 @@
+/* ─── tamra-nuat — an accordion that is a Thai folding book (samut khoi) ────────────────────────────────────────
+   Markup: a container [data-tamra-nuat] holding <details> sections, each a <summary> and its answer.
+   Without the script it is a plain, quiet accordion. With it (.tn-on) the questions stand in a column and the book
+   stands beside them: the front board, the section's panels (pleated when closed, flat when open), the back board.
+   Prefix: .tn-                                                                                                     */
+
+.tn {
+  --tn-paper: var(--paper, #f3f0e8);
+  --tn-rule: var(--rule, #cfcac0);
+  --tn-q: var(--ink, #141312);
+  --tn-q2: var(--ink-2, #4a4744);
+  --tn-q3: var(--ink-3, #8a857d);
+  --tn-accent: var(--accent, #c96f4a);
+  --tn-font: "EB Garamond", "Noto Serif Thai", Georgia, serif;
+  position: relative;
+  color: var(--tn-q);
+  font-family: var(--serif, "EB Garamond", Georgia, serif);
+}
+
+/* ─── without the script: a quiet accordion ─────────────────────────────────────────────────────────────────── */
+.tn > details { border-top: 1px solid var(--tn-rule); }
+.tn > details:last-of-type { border-bottom: 1px solid var(--tn-rule); }
+.tn summary {
+  display: flex;
+  gap: .7em;
+  align-items: baseline;
+  padding: .85em 0;
+  list-style: none;
+  cursor: pointer;
+  font-size: clamp(17px, 1.6vw, 20px);
+  line-height: 1.3;
+  color: var(--tn-q2);
+  -webkit-tap-highlight-color: transparent;
+}
+.tn summary::-webkit-details-marker { display: none; }
+.tn summary::marker { content: ''; }
+.tn details[open] > summary { color: var(--tn-q); }
+.tn summary:hover, .tn details.tn-hot > summary { color: var(--tn-q); }
+.tn summary > :not(.tn-n) { flex: 1 1 auto; }
+/* the open/closed mark: a plus whose upright folds away when the section is open */
+.tn summary::after {
+  content: '';
+  flex: none;
+  align-self: center;
+  width: .62em; height: .62em;
+  margin-left: auto;
+  background:
+    linear-gradient(currentColor, currentColor) center / 100% 1.5px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 1.5px 100% no-repeat;
+  opacity: .7;
+  transition: transform .35s cubic-bezier(.3, 0, .2, 1), background-size .35s cubic-bezier(.3, 0, .2, 1), opacity .2s;
+}
+.tn details[open] > summary::after { background-size: 100% 1.5px, 1.5px 0%; transform: rotate(180deg); }
+.tn summary:hover::after, .tn details.tn-hot > summary::after { opacity: 1; }
+@media (prefers-reduced-motion: reduce) { .tn summary::after { transition: none; } }
+.tn summary:focus-visible { outline: 2px solid var(--tn-accent); outline-offset: 3px; border-radius: 2px; }
+.tn-n {
+  flex: none;
+  min-width: 1.4em;
+  font-size: .8em;
+  color: var(--tn-q3);
+  font-family: "Noto Serif Thai", "Thonburi", var(--tn-font);
+}
+.tn details[open] .tn-n { color: var(--tn-accent); }
+.tn details > :not(summary):not(.tn-room) { margin: 0 0 1.1em 2.1em; color: var(--tn-q2); line-height: 1.55; font-size: 17px; }
+.tn details > :not(summary):not(.tn-room) p { margin: 0 0 .7em; }
+.tn-room { display: block; }
+
+.tn-live {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+/* ─── with the script: the questions beside the book ────────────────────────────────────────────────────────── */
+.tn.tn-on {
+  padding-top: var(--tn-top, 0);
+  padding-bottom: var(--tn-bottom, 0);
+}
+.tn.tn-on > details {
+  position: relative;
+  box-sizing: border-box;
+  width: var(--tn-qw);
+  border: 0;
+  overflow: visible;
+}
+.tn.tn-on > details::before {                 /* the hairline from the question to its crease */
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: calc(100% + var(--tn-gap));
+  height: 1px;
+  background: var(--tn-rule);
+}
+.tn.tn-on > details:first-of-type::before { display: none; }
+.tn.tn-on summary {
+  position: sticky;            /* an open question stays beside its panels while they scroll past */
+  top: var(--tn-stick, 14px);
+  padding: .55em 0 .6em;
+  font-size: var(--tn-sum, clamp(15px, 1.5vw, 19px));
+}
+/* the answer is written in the book: its real text stays in the page for readers, find-in-page and print */
+.tn.tn-on > details.tn-drawn > :not(summary):not(.tn-room) {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
+.tn-book {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--tn-bw);
+  pointer-events: none;
+  filter: drop-shadow(0 1px 1px rgba(40, 30, 20, .18)) drop-shadow(0 6px 14px rgba(40, 30, 20, .10));
+}
+.tn-cover, .tn-board, .tn-p, .tn-edge {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  display: block;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.tn-cover, .tn-board { height: auto; }
+.tn-board { will-change: transform; }
+.tn-p {
+  pointer-events: auto;
+  cursor: pointer;
+  backface-visibility: hidden;
+  will-change: transform;
+}
+.tn-p > img { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.tn-cr { position: absolute; left: .6%; right: .6%; pointer-events: none; }
+.tn-tx { position: absolute; inset: 0; pointer-events: none; }
+.tn-tx { font-family: var(--tn-font); }
+.tn-l {
+  position: absolute;
+  white-space: pre;
+  font-family: var(--tn-font);
+  font-size: inherit;
+  line-height: inherit;
+  color: var(--tn-ink, #4f4034);
+  font-kerning: normal;
+}
+.tn-edge { overflow: hidden; }
+.tn-edge > img { width: 100%; height: auto; display: block; transform-origin: 0 0; }
+
+/* narrow: each question above its own pleats, the answer in the page's type under its opening */
+.tn.tn-on.tn-narrow > details { width: 100%; }
+.tn.tn-on.tn-narrow > details::before { width: 100%; }
+.tn.tn-on.tn-narrow > details:first-of-type::before { display: none; }
+.tn.tn-on.tn-narrow summary { position: static; flex-wrap: wrap; font-size: var(--tn-sum, 17px); padding: .7em 0 .5em; }
+.tn.tn-on.tn-narrow .tn-room { flex: 0 0 100%; order: 99; margin-top: .55em; }
+.tn.tn-on:not(.tn-narrow) .tn-room { display: none; }
+.tn.tn-on.tn-narrow > details > :not(summary):not(.tn-room) {
+  margin: .9em 0 1.3em;
+  font-size: 16.5px;
+  line-height: 1.55;
+  animation: tn-in .6s .15s both cubic-bezier(.3, 0, .2, 1);
+}
+@keyframes tn-in { from { opacity: 0; transform: translateY(-6px); } }
+
+@media (prefers-reduced-motion: reduce) {
+  .tn-p, .tn-board { will-change: auto; }
+  .tn.tn-on.tn-narrow > details > :not(summary):not(.tn-room) { animation: none; }
+}
+@media print {
+  .tn-book { display: none; }
+  .tn.tn-on { padding: 0; }
+  .tn.tn-on > details { width: auto; height: auto !important; }
+  .tn-room { display: none; }
+  .tn.tn-on > details.tn-drawn > :not(summary) { position: static; width: auto; height: auto; clip: auto; white-space: normal; margin: 0 0 1em 2.1em; }
+}
